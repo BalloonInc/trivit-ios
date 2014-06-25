@@ -12,7 +12,7 @@
 
 -(void) addTally
 {
-    self.counter++;
+    self.counter++; // add extra tally mark
 }
 
 @end
