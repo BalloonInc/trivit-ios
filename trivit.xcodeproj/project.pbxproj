@@ -13,6 +13,8 @@
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
+		6CF1A23E195B762D00B83A6F /* Counter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Counter.m */; };
+		6CF1A242195B7B6700B83A6F /* CounterList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A241195B7B6700B83A6F /* CounterList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,10 @@
 		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C0B4195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
+		6CF1A23C195B762D00B83A6F /* Counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Counter.h; sourceTree = "<group>"; };
+		6CF1A23D195B762D00B83A6F /* Counter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Counter.m; sourceTree = "<group>"; };
+		6CF1A240195B7B6700B83A6F /* CounterList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounterList.h; sourceTree = "<group>"; };
+		6CF1A241195B7B6700B83A6F /* CounterList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounterList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +85,7 @@
 		6C69C09B195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXGroup;
 			children = (
-				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
-				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
+				6CF1A23F195B765600B83A6F /* Model */,
 				6C69C0A3195B6F4E002A3F53 /* ViewController.h */,
 				6C69C0A4195B6F4E002A3F53 /* ViewController.m */,
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
@@ -93,6 +98,8 @@
 		6C69C09C195B6F4E002A3F53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
+				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
 				6C69C09D195B6F4E002A3F53 /* Info.plist */,
 				6C69C09E195B6F4E002A3F53 /* main.m */,
 			);
@@ -114,6 +121,17 @@
 				6C69C0B4195B6F4E002A3F53 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CF1A23F195B765600B83A6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CF1A23C195B762D00B83A6F /* Counter.h */,
+				6CF1A23D195B762D00B83A6F /* Counter.m */,
+				6CF1A240195B7B6700B83A6F /* CounterList.h */,
+				6CF1A241195B7B6700B83A6F /* CounterList.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +233,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CF1A23E195B762D00B83A6F /* Counter.m in Sources */,
 				6C69C0A5195B6F4E002A3F53 /* ViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
+				6CF1A242195B7B6700B83A6F /* CounterList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +424,7 @@
 				6C69C0BB195B6F4E002A3F53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6C69C0BC195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivitTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +433,7 @@
 				6C69C0BE195B6F4E002A3F53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
