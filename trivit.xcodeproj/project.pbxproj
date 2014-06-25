@@ -15,6 +15,7 @@
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
 		6CF1A23E195B762D00B83A6F /* Counter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Counter.m */; };
 		6CF1A242195B7B6700B83A6F /* CounterList.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A241195B7B6700B83A6F /* CounterList.m */; };
+		EC42CFDC195B85A400AB567D /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EC42CFDB195B85A400AB567D /* TestClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		6CF1A23D195B762D00B83A6F /* Counter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Counter.m; sourceTree = "<group>"; };
 		6CF1A240195B7B6700B83A6F /* CounterList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounterList.h; sourceTree = "<group>"; };
 		6CF1A241195B7B6700B83A6F /* CounterList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounterList.m; sourceTree = "<group>"; };
+		EC42CFDA195B85A400AB567D /* TestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestClass.h; sourceTree = "<group>"; };
+		EC42CFDB195B85A400AB567D /* TestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 				6CF1A23D195B762D00B83A6F /* Counter.m */,
 				6CF1A240195B7B6700B83A6F /* CounterList.h */,
 				6CF1A241195B7B6700B83A6F /* CounterList.m */,
+				EC42CFDA195B85A400AB567D /* TestClass.h */,
+				EC42CFDB195B85A400AB567D /* TestClass.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC42CFDC195B85A400AB567D /* TestClass.m in Sources */,
 				6CF1A23E195B762D00B83A6F /* Counter.m in Sources */,
 				6C69C0A5195B6F4E002A3F53 /* ViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
