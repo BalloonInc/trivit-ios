@@ -22,7 +22,7 @@
 - (IBAction)increaseTellyCounter:(UIButton *)sender
 {
     [self.testCounter addTally];
-    NSLog(@"count: %i", self.testCounter.counter);
+    NSLog(@"count: %li", (long)self.testCounter.counter);
     [self updateUI];
 }
 
