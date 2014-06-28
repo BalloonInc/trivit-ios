@@ -15,4 +15,14 @@
     self.counter++; // add extra tally mark
 }
 
+-(void) deleteTally
+{
+    self.counter--; // remove a tally mark
+}
+
+-(void) resetTally
+{
+    self.counter = 0; // reset tally marks
+}
+
 @end
