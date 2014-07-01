@@ -14,5 +14,7 @@
 @property (nonatomic) NSInteger counter;
 
 -(void) addTally;
+-(void) deleteTally;
+-(void) resetTally;
 
 @end
