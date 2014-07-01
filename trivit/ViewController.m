@@ -19,9 +19,23 @@
 
 @implementation ViewController
 
-- (IBAction)increaseTellyCounter:(UIButton *)sender
+- (IBAction)increaseTallyCounter:(UIButton *)sender
 {
     [self.testCounter addTally];
+    NSLog(@"count: %li", (long)self.testCounter.counter);
+    [self updateUI];
+}
+
+- (IBAction)resetTallyCounter:(UISwipeGestureRecognizer *)sender
+{
+    [self.testCounter resetTally];
+    NSLog(@"count: %li", (long)self.testCounter.counter);
+    [self updateUI];
+}
+
+- (IBAction)decreaseTallyCounter:(UISwipeGestureRecognizer *)sender
+{
+    [self.testCounter decreaseTally];
     NSLog(@"count: %li", (long)self.testCounter.counter);
     [self updateUI];
 }
@@ -30,7 +44,7 @@
 {
     NSMutableString *buttonLabelText;
     buttonLabelText = [[NSMutableString alloc] initWithString:@""];
-    for (int i = 0; i<self.testCounter.counter; i++) {
+    for (int i = 0; i<=self.testCounter.counter; i++) {
         [buttonLabelText appendString:@"|"];
         [self.testButton setTitle:buttonLabelText forState:UIControlStateNormal];
     }
@@ -39,6 +53,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.testCounter = [[Counter alloc] init];
+    
+    UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(resetTallyCounter:)];
+    
+    [_testButton addGestureRecognizer:rightSwipe];
+    
+    UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(decreaseTallyCounter:)];
+    
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [_testButton addGestureRecognizer:leftSwipe];
     
     // Do any additional setup after loading the view, typically from a nib.
 }

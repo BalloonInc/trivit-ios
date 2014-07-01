@@ -15,7 +15,7 @@
     self.counter++; // add extra tally mark
 }
 
--(void) deleteTally
+-(void) decreaseTally
 {
     self.counter--; // remove a tally mark
 }
