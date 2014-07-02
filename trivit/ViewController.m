@@ -28,6 +28,8 @@
 
 - (IBAction)resetTallyCounter:(UISwipeGestureRecognizer *)sender
 {
+    // TODO: add: "are you sure?" warning
+    
     [self.testCounter resetTally];
     NSLog(@"count: %li", (long)self.testCounter.counter);
     [self updateUI];
