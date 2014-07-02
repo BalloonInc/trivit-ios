@@ -28,8 +28,7 @@
 
 - (IBAction)resetTallyCounter:(UISwipeGestureRecognizer *)sender
 {
-    // TODO: add: "are you sure?" warning
-    
+    if ([self sureYouWantToReset])
     [self.testCounter resetTally];
     NSLog(@"count: %li", (long)self.testCounter.counter);
     [self updateUI];
@@ -40,6 +39,19 @@
     [self.testCounter decreaseTally];
     NSLog(@"count: %li", (long)self.testCounter.counter);
     [self updateUI];
+}
+
+-(bool)sureYouWantToReset
+{
+    //TODO: make buttons responsive :)
+    
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this TriVit?"
+												   delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+	[alert show];
+	[alert release];
+    
+    
+    return true;
 }
 
 -(void) updateUI
