@@ -17,7 +17,7 @@
 
 -(void) decreaseTally
 {
-    self.counter--; // remove a tally mark
+    if (self.counter>0) self.counter--; // remove a tally mark
 }
 
 -(void) resetTally
