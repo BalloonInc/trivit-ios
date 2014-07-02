@@ -29,9 +29,11 @@
 - (IBAction)resetTallyCounter:(UISwipeGestureRecognizer *)sender
 {
     if ([self sureYouWantToReset])
-    [self.testCounter resetTally];
-    NSLog(@"count: %li", (long)self.testCounter.counter);
-    [self updateUI];
+    {
+        [self.testCounter resetTally];
+        NSLog(@"count: %li", (long)self.testCounter.counter);
+        [self updateUI];
+    }
 }
 
 - (IBAction)decreaseTallyCounter:(UISwipeGestureRecognizer *)sender
