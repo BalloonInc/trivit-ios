@@ -4,11 +4,11 @@ Trivit is an mobile application that allows to create lists of tally marks. Triv
 
 ### Available gestures (current) ###
 
-Swipe right to reset counter value
-Swipe left to decrease counter value
-Tap to increase the counter value
+- Swipe right to reset counter value
+- Swipe left to decrease counter value
+- Tap to increase the counter value
 
 ### Who do I talk to? ###
 
-* Wouter Devriendt
-* Pieterjan Criel
+* Wouter Devriendt (wouterdevriendt@gmail.com)
+* Pieterjan Criel (crielpieterjan@gmail.com)
