@@ -50,12 +50,7 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this TriVit?"
 												   delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
 	[alert show];
-<<<<<<< HEAD
-	//[alert release];
-=======
 //	[alert release];
->>>>>>> fe8639fbbf6f976532afca9ab8f826d5df3c2f35
-    
     
     return true;
 }
