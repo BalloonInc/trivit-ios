@@ -11,7 +11,7 @@
 @interface Counter : NSObject
 
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic) NSInteger counter;
+@property (nonatomic) NSInteger countForTally;
 
 -(void) addTally;
 -(void) decreaseTally;

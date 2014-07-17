@@ -6,23 +6,21 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "CounterList.h"
+#import "OldViewController.h"
 #import "Counter.h"
 
 
-@interface ViewController ()
+@interface OldViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
-@property (nonatomic,strong) CounterList* counterlist;
 @property (nonatomic,strong) Counter* testCounter;
 @end
 
-@implementation ViewController
+@implementation OldViewController
 
 - (IBAction)increaseTallyCounter:(UIButton *)sender
 {
     [self.testCounter addTally];
-    NSLog(@"count: %li", (long)self.testCounter.counter);
+    NSLog(@"count: %li", (long)self.testCounter.countForTally);
     [self updateUI];
 }
 
@@ -31,7 +29,7 @@
     if ([self sureYouWantToReset])
     {
         [self.testCounter resetTally];
-        NSLog(@"count: %li", (long)self.testCounter.counter);
+        NSLog(@"count: %li", (long)self.testCounter.countForTally);
         [self updateUI];
     }
 }
@@ -39,7 +37,7 @@
 - (IBAction)decreaseTallyCounter:(UISwipeGestureRecognizer *)sender
 {
     [self.testCounter decreaseTally];
-    NSLog(@"count: %li", (long)self.testCounter.counter);
+    NSLog(@"count: %li", (long)self.testCounter.countForTally);
     [self updateUI];
 }
 
@@ -59,7 +57,7 @@
 {
     NSMutableString *buttonLabelText;
     buttonLabelText = [[NSMutableString alloc] initWithString:@""];
-    for (int i = 0; i<=self.testCounter.counter; i++) {
+    for (int i = 0; i<=self.testCounter.countForTally; i++) {
         [buttonLabelText appendString:@"|"];
         [self.testButton setTitle:buttonLabelText forState:UIControlStateNormal];
     }

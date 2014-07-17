@@ -12,17 +12,17 @@
 
 -(void) addTally
 {
-    self.counter++; // add extra tally mark
+    self.countForTally++; // add extra tally mark
 }
 
 -(void) decreaseTally
 {
-    if (self.counter>0) self.counter--; // remove a tally mark
+    if (self.countForTally>0) self.countForTally--; // remove a tally mark
 }
 
 -(void) resetTally
 {
-    self.counter = 0; // reset tally marks
+    self.countForTally = 0; // reset tally marks
 }
 
 @end
