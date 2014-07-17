@@ -36,6 +36,9 @@
         [rect addClip];
         [[UIColor orangeColor] setFill];
         [rect fill];
+        UILabel *titleForTally = [[UILabel alloc] initWithFrame:self.bounds];
+        titleForTally.text = self.counter.title;
+        
     }
     else{
         

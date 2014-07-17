@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0wd-hH-vZU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="S2I-U5-7B5">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
         <!--Old View Controller-->
@@ -48,49 +47,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="634" y="214"/>
+            <point key="canvasLocation" x="320" y="-172"/>
         </scene>
         <!--Main List View Controller-->
         <scene sceneID="AE1-sN-ndI">
             <objects>
-                <tableViewController id="S2I-U5-7B5" customClass="MainListViewController" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="S2I-U5-7B5" customClass="MainListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MYX-di-0hZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" id="5wQ-Wd-77p">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5wQ-Wd-77p" id="uXa-PY-q3o">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QN8-Xy-W8T">
-                                            <rect key="frame" x="8" y="-1" width="320" height="44"/>
-                                            <items>
-                                                <barButtonItem title="Item" id="bHA-rX-ZzN"/>
-                                            </items>
-                                        </toolbar>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="S2I-U5-7B5" id="aNk-xT-6HN"/>
                             <outlet property="delegate" destination="S2I-U5-7B5" id="EfU-jZ-cUF"/>
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="tableView" destination="MYX-di-0hZ" id="Vgv-Kb-pt6"/>
+                        <outlet property="tableView" destination="MYX-di-0hZ" id="lVy-xU-K8c"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFV-6k-WBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="267"/>
+            <point key="canvasLocation" x="676" y="234"/>
         </scene>
-        <!--View Controller-->
+        <!--Main List View Controller-->
         <scene sceneID="F8e-gv-cta">
             <objects>
-                <viewController id="0wd-hH-vZU" sceneMemberID="viewController">
+                <viewController id="0wd-hH-vZU" customClass="MainListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2mI-dv-uk0"/>
                         <viewControllerLayoutGuide type="bottom" id="Abx-rd-2Yj"/>
@@ -99,13 +82,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SXP-BG-AqV" customClass="MainListViewController">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SXP-BG-AqV">
                                 <rect key="frame" x="0.0" y="20" width="320" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="SXP-BG-AqV" id="n5E-Ll-7gG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StU-PV-QYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -115,9 +101,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination">
-            <size key="portraitSize" width="320" height="480"/>
-            <size key="landscapeSize" width="480" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

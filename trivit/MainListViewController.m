@@ -23,7 +23,7 @@
     self.ourFirstTrivitCellTableViewCellObjectJustToTest = [[TrivitCellTableViewCell alloc] init];
     self.ourFirstTrivitCellTableViewCellObjectJustToTest.counter.title = @"testTally";
     [self.tallies addObject:self.ourFirstTrivitCellTableViewCellObjectJustToTest];
-    //[self.tableView reloadData];
+    [self.tableView reloadData];
     // Do any additional setup after loading the view.
 }
 
