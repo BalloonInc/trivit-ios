@@ -37,8 +37,8 @@
         [[UIColor orangeColor] setFill];
         [rect fill];
         UILabel *titleForTally = [[UILabel alloc] initWithFrame:self.bounds];
-        titleForTally.text = self.counter.title;
-        
+        titleForTally.text = self.counter.title; // Changing this line to = @"STRING" works. so self.counter.title returns NIL (which I do not understand)
+        [self addSubview: titleForTally];
     }
     else{
         

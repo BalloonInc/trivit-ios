@@ -10,7 +10,7 @@
 #import "TrivitCellTableViewCell.h"
 
 @interface MainListViewController ()
-@property (strong, nonatomic) TrivitCellTableViewCell *ourFirstTrivitCellTableViewCellObjectJustToTest;
+@property (strong, nonatomic) TrivitCellTableViewCell *firstCell;
 @end
 
 @implementation MainListViewController
@@ -20,16 +20,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tallies = [NSMutableArray new];
-    self.ourFirstTrivitCellTableViewCellObjectJustToTest = [[TrivitCellTableViewCell alloc] init];
-    self.ourFirstTrivitCellTableViewCellObjectJustToTest.counter.title = @"testTally";
-    [self.tallies addObject:self.ourFirstTrivitCellTableViewCellObjectJustToTest];
+    self.firstCell = [[TrivitCellTableViewCell alloc] init];
+    self.firstCell.counter.title = @"testTally";
+    
+    [self.tallies addObject:self.firstCell];
     [self.tableView reloadData];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    _tableView.delegate=self;
+    _tableView.delegate=self; // I had to use _NAME, even if I synthesized this variable.
     _tableView.dataSource=self;
     [super viewWillAppear:YES];
 }
