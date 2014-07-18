@@ -14,7 +14,7 @@
 @end
 
 @implementation MainListViewController
-
+@synthesize tableView = _tableView;
 
 
 - (void)viewDidLoad {
@@ -25,6 +25,13 @@
     [self.tallies addObject:self.ourFirstTrivitCellTableViewCellObjectJustToTest];
     [self.tableView reloadData];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    _tableView.delegate=self;
+    _tableView.dataSource=self;
+    [super viewWillAppear:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

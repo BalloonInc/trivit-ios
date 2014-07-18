@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainListViewController : UIViewController
+@interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell
 
