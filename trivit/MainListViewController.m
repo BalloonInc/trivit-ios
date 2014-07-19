@@ -22,6 +22,7 @@
     self.tallies = [NSMutableArray new];
     self.firstCell = [[TrivitCellTableViewCell alloc] init];
     self.firstCell.counter.title = @"testTally";
+    self.firstCell.number = 5; // test with some integer
     
     [self.tallies addObject:self.firstCell];
     [self.tableView reloadData];

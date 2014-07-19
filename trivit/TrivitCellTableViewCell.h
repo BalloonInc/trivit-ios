@@ -11,5 +11,6 @@
 
 @interface TrivitCellTableViewCell : UITableViewCell
 @property (strong, nonatomic) Counter *counter;
+@property int number; // testing with some integer
 @property (nonatomic) BOOL isCollapsed;
 @end
