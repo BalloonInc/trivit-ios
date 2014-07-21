@@ -8,6 +8,12 @@
 
 #import "TrivitCellTableViewCell.h"
 
+@interface TrivitCellTableViewCell()
+@property (strong,nonatomic) UILabel *titleForTally;
+@property (strong,nonatomic) UILabel *counterForTally;
+
+@end
+
 @implementation TrivitCellTableViewCell
 
 
@@ -16,6 +22,82 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 
+-(UIColor *) randomColor{
+    switch (arc4random()%5){
+        case 0: return [UIColor greenColor];
+        case 1: return [UIColor blueColor];
+        case 2: return [UIColor orangeColor];
+        case 3: return [UIColor redColor];
+        case 4: return [UIColor purpleColor];
+    }
+    // should not happen
+    return [UIColor blackColor];
+}
+
+-(instancetype) init{
+    // overload init, to set backgroundcolor
+    self = [super init];
+    
+    if (self){
+        self.cellBackColor = [self randomColor];
+    }
+    return self;
+    
+}
+
+#pragma mark - update tally functions
+
+- (void)increaseTallyCounter
+{
+    [self.counter addTally];
+    NSLog(@"count: %li", (long)self.counter.countForTally);
+    [self updateTallyString];
+    [self setNeedsDisplay];
+}
+
+- (void)resetTallyCounter
+{
+    if ([self sureYouWantToReset])
+    {
+        [self.counter resetTally];
+        NSLog(@"count: %li", (long)self.counter.countForTally);
+        [self updateTallyString];
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)decreaseTallyCounter
+{
+    [self.counter decreaseTally];
+    NSLog(@"count: %li", (long)self.counter.countForTally);
+    [self updateTallyString];
+    [self setNeedsDisplay];
+}
+
+-(bool)sureYouWantToReset
+{
+    //TODO: make buttons responsive :)
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this TriVit?"
+                                                   delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+    //	[alert release];
+    
+    return true;
+}
+
+-(void) updateTallyString
+{
+    NSMutableString *buttonLabelText;
+    buttonLabelText = [[NSMutableString alloc] initWithString:@""];
+    for (int i = 0; i<=self.counter.countForTally; i++) {
+        [buttonLabelText appendString:@"|"];
+    }
+    self.counterString = buttonLabelText;
+}
+
+#pragma mark -
+
 -(void) setIsCollapsed:(BOOL)isCollapsed
 {
     _isCollapsed = isCollapsed;
@@ -23,7 +105,7 @@
 }
 
 
--(Counter*)Counter{
+-(Counter*)counter{
     if (!_counter){_counter = [[Counter alloc] init];}
     return _counter;
 }
@@ -31,59 +113,35 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [self.titleForTally removeFromSuperview];
+    [self.counterForTally removeFromSuperview];
+
+    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];
+    [recta addClip];
+    [[self cellBackColor] setFill];
+    [recta fill];
     if (self.isCollapsed){
-        UIBezierPath *rect = [UIBezierPath bezierPathWithRect:self.bounds];
-        [rect addClip];
-        [[UIColor orangeColor] setFill];
-        [rect fill];
-        UILabel *titleForTally = [[UILabel alloc] initWithFrame:self.bounds];
-        titleForTally.text = [NSString stringWithFormat:@"%i", self.number]; // Changing this line to = @"STRING" works. so self.counter.title returns NIL (which I do not understand) // additional tests with integer ...
-        [self addSubview: titleForTally];
+
+        self.titleForTally = [[UILabel alloc] initWithFrame:self.bounds];
+        self.titleForTally.text = self.counter.title; //@PJ, you can remove this comment: the text didn't show because self.counter was nil. The issue was the function above. It was called 'Counter', and it should be 'counter'. Because it was wrong, self.counter was never initialized
+        [self addSubview: self.titleForTally];
     }
     else{
-        
+        self.counterForTally = [[UILabel alloc] initWithFrame:self.bounds];
+        self.counterForTally.text = self.counterString;
+        [self addSubview: self.counterForTally];
+
     }
 
-    /*
-    // Drawing code
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:[self cornerRadius]];
-    [roundedRect addClip];
-    [[UIColor whiteColor] setFill];
-    UIRectFill(self.bounds);
-    
-    [[UIColor blackColor] setStroke];
-    roundedRect.lineWidth = 2.0;
-    [roundedRect stroke];
-    
-    if (self.faceUp)
-    {
-        NSString *cardString = [NSString stringWithFormat:@"%@%@",[self rankAsString], self.suit];
-        NSLog(@"%@",cardString);
-        
-        UIImage *faceImage = [UIImage imageNamed:cardString];
-        
-        if (faceImage)
-        {
-            CGRect imageRect = CGRectInset(self.bounds, self.bounds.size.width * (1.0-self.faceCardScaleFactor), self.bounds.size.height * (1.0-self.faceCardScaleFactor));
-            [faceImage drawInRect:imageRect];
-        }
-        else
-            [self drawPips];
-        [self drawCorners];
-    }
-    else{
-        [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
-    }
-    */
 }
 
 
 
 -(void) setup
 {
-    self.backgroundColor = nil;
-    self.opaque = false;
-    self.contentMode = UIViewContentModeRedraw;
+    //self.backgroundColor = nil;
+    //self.opaque = false;
+    //self.contentMode = UIViewContentModeRedraw;
 }
 
 

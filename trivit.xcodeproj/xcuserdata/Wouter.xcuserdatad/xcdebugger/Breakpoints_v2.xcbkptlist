@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "trivit/TrivitCellTableViewCell.m"
-            timestampString = "427322761.613111"
+            filePath = "trivit/MainListViewController.m"
+            timestampString = "427652871.820948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "-setIsCollapsed:"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "trivit/MainListViewController.m"
-            timestampString = "427325568.578528"
+            filePath = "trivit/TrivitCellTableViewCell.m"
+            timestampString = "427654618.899278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "-drawRect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
