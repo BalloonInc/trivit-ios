@@ -7,6 +7,7 @@
 //
 
 #import "TrivitCellTableViewCell.h"
+#import "Colors.h"
 
 @interface TrivitCellTableViewCell()
 @property (strong,nonatomic) UILabel *titleForTally;
@@ -23,28 +24,18 @@
 // An empty implementation adversely affects performance during animation.
 
 -(UIColor*)cellBackColor{
-    if (!_cellBackColor){_cellBackColor=[self randomColor];}
+    if (!_cellBackColor){_cellBackColor=[Colors randomColor];}
     return _cellBackColor;
 }
 
--(UIColor *) randomColor{
-    switch (arc4random()%5){
-        case 0: return [UIColor greenColor];
-        case 1: return [UIColor blueColor];
-        case 2: return [UIColor orangeColor];
-        case 3: return [UIColor redColor];
-        case 4: return [UIColor purpleColor];
-    }
-    // should not happen
-    return [UIColor blackColor];
-}
+
 
 -(instancetype) init{
     // overload init, to set backgroundcolor
     self = [super init];
     
     if (self){
-        self.cellBackColor = [self randomColor];
+        self.cellBackColor = [Colors randomColor];
     }
     return self;
     
