@@ -29,18 +29,6 @@
 }
 
 
-
--(instancetype) init{
-    // overload init, to set backgroundcolor
-    self = [super init];
-    
-    if (self){
-        self.cellBackColor = [Colors randomColor];
-    }
-    return self;
-    
-}
-
 #pragma mark - update tally functions
 
 - (void)increaseTallyCounter

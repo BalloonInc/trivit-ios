@@ -133,20 +133,56 @@
 
 #pragma mark - Magic to make the tableview datasource working
 
+/*
+ *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object
+ *   is delegate for several tableViews it can identify which one is asking for a cell),
+ *   and an idexPath which determines which row and section the cell is returned for.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    /*
+     *   This is an important bit, it asks the table view if it has any available cells
+     *   already created which it is not using (if they are offscreen), so that it can
+     *   reuse them (saving the time of alloc/init/load from xib a new cell ).
+     *   The identifier is there to differentiate between different types of cells
+     *   (you can display different types of cells in the same table view)
+     */
+    static NSString *CellIdentifier = @"trivitCell";
     
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    /*
+     *   If the cell is nil it means no cell was available for reuse and that we should
+     *   create a new one.
+     */
     if (cell == nil) {
-        cell = [[TrivitCellTableViewCell alloc] init];
+        /*
+         *   Actually create a new cell (with an identifier so that it can be dequeued).
+         */
+        //cell = [[TrivitCellTableViewCell alloc] init];
+        cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"trivitCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         cell.isCollapsed = true;
     }
     
-    // Configure the cell...
+    /*
+     *   Now that we have a cell we can configure it to display the data corresponding to
+     *   this row/section
+     */
+    
+    /*
+     NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
+     cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
+     cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
+     NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
+     UIImage *theImage = [UIImage imageWithContentsOfFile:path];
+     cell.imageView.image = theImage;
+     */
+    
     cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
     cell.counter.title = [[self.tallies[indexPath.row] counter] title];
     
+    /* Now that the cell is configured we return it to the table view so that it can display it */
     return cell;
 }
 
