@@ -32,13 +32,20 @@
     // add gestures
     UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
     UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTitleTap:)];
+    // Double tap to open/close: not really convenient
+    //UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
+    //doubleTap.numberOfTapsRequired=2;
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyIncrease:)];
+
     
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     
     [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:tap];
+    //[self.tableView addGestureRecognizer:doubleTap];
+    [self.tableView addGestureRecognizer:longPress];
 }
 
 -(NSMutableArray*) tallies{
@@ -87,7 +94,8 @@
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    [swipedCell resetTallyCounter];
+    if(!swipedCell.isCollapsed)
+        [swipedCell resetTallyCounter];
     
 }
 
@@ -96,7 +104,8 @@
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    [swipedCell increaseTallyCounter];
+    if(!swipedCell.isCollapsed)
+        [swipedCell increaseTallyCounter];
     
 }
 
@@ -105,18 +114,22 @@
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    [swipedCell decreaseTallyCounter];
+    if(!swipedCell.isCollapsed)
+        [swipedCell decreaseTallyCounter];
     
 }
 
--(void) handleTitleTap: (UIGestureRecognizer *)recognizer
+-(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
 {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     swipedCell.isCollapsed = ! swipedCell.isCollapsed;
+    }
     
 }
+
 
 #pragma mark - Magic to make the tableview datasource working
 
