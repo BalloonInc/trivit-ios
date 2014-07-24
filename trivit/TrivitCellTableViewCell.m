@@ -22,6 +22,11 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 
+-(UIColor*)cellBackColor{
+    if (!_cellBackColor){_cellBackColor=[self randomColor];}
+    return _cellBackColor;
+}
+
 -(UIColor *) randomColor{
     switch (arc4random()%5){
         case 0: return [UIColor greenColor];

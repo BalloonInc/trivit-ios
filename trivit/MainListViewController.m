@@ -18,9 +18,17 @@
 
 # pragma mark - Loading
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
+    [self configureTableView];
+    // add test tally
+    [self addItemWithTitle:@"testTally"];
+    
+}
+
+- (void) configureTableView{
     // add gestures
     UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
     UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
@@ -31,15 +39,12 @@
     [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:tap];
+}
+
+-(NSMutableArray*) tallies{
     
-    self.tallies = [NSMutableArray new];
-    self.firstCell = [[TrivitCellTableViewCell alloc] init];
-    self.firstCell.counter.title = @"testTally";
-    self.firstCell.number = 5; // test with some integer
-    
-    [self.tallies addObject:self.firstCell];
-    [self.tableView reloadData];
-    // Do any additional setup after loading the view.
+    if(!_tallies){_tallies=[[NSMutableArray alloc ]init];}
+    return _tallies;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -47,6 +52,32 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [super viewWillAppear:animated];
+}
+
+#pragma mark - add item
+
+-(IBAction) addButtonPressed
+{
+    [self addItem];
+}
+
+-(void) addItem
+{
+    [self addItemWithTitle:@"newTally"];
+}
+
+-(void) addItemWithTitle:(NSString*)title
+{
+    [self addItemWithTitle:title andCount:0];
+}
+
+-(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
+{
+    TrivitCellTableViewCell *newCell = [[TrivitCellTableViewCell alloc] init];
+    newCell.counter.title = title;
+    newCell.counter.countForTally = count;
+    [self.tallies addObject:newCell];
+    [self.tableView reloadData];
 }
 
 # pragma mark - selectors for gestures
