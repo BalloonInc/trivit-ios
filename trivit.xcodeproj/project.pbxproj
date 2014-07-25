@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
 		6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */; };
-		6C69C0A5195B6F4E002A3F53 /* OldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A4195B6F4E002A3F53 /* OldViewController.m */; };
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
@@ -35,8 +34,6 @@
 		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6C69C0A3195B6F4E002A3F53 /* OldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OldViewController.h; sourceTree = "<group>"; };
-		6C69C0A4195B6F4E002A3F53 /* OldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OldViewController.m; sourceTree = "<group>"; };
 		6C69C0A7195B6F4E002A3F53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C69C0A9195B6F4E002A3F53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				6CF1A23F195B765600B83A6F /* Model */,
-				6C69C0A3195B6F4E002A3F53 /* OldViewController.h */,
-				6C69C0A4195B6F4E002A3F53 /* OldViewController.m */,
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
 				6C8FBB511978627F00C1D381 /* TrivitCellTableViewCell.h */,
 				6C8FBB521978627F00C1D381 /* TrivitCellTableViewCell.m */,
@@ -246,7 +241,6 @@
 				6CF1A23E195B762D00B83A6F /* Counter.m in Sources */,
 				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
-				6C69C0A5195B6F4E002A3F53 /* OldViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
 				6C8FBB531978627F00C1D381 /* TrivitCellTableViewCell.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
@@ -367,7 +361,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -382,7 +376,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -163,20 +163,6 @@
         cell.isCollapsed = true;
     }
     
-    /*
-     *   Now that we have a cell we can configure it to display the data corresponding to
-     *   this row/section
-     */
-    
-    /*
-     NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
-     cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
-     cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
-     NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
-     UIImage *theImage = [UIImage imageWithContentsOfFile:path];
-     cell.imageView.image = theImage;
-     */
-    
     cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
     cell.counter.title = [[self.tallies[indexPath.row] counter] title];
     
