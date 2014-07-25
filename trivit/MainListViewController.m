@@ -31,21 +31,20 @@
 - (void) configureTableView{
     // add gestures
     UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     // Double tap to open/close: not really convenient
     //UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
     //doubleTap.numberOfTapsRequired=2;
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyIncrease:)];
 
-    
-    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:rightSwipe];
-    [self.tableView addGestureRecognizer:tap];
+    [self.tableView addGestureRecognizer:leftSwipe];
     //[self.tableView addGestureRecognizer:doubleTap];
     [self.tableView addGestureRecognizer:longPress];
+    [self.tableView addGestureRecognizer:tap];
 }
 
 -(NSMutableArray*) tallies{
@@ -129,7 +128,6 @@
     }
     
 }
-
 
 #pragma mark - Magic to make the tableview datasource working
 
