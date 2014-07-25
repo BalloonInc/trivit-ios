@@ -48,7 +48,6 @@
 }
 
 -(NSMutableArray*) tallies{
-    
     if(!_tallies){_tallies=[[NSMutableArray alloc ]init];}
     return _tallies;
 }

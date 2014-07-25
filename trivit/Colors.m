@@ -10,8 +10,6 @@
 
 @implementation Colors
 
-
-
 +(NSArray *)iOSColors
 {
       return @[
@@ -41,12 +39,8 @@
 {
     NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
     
-    // String should be 6 or 8 characters
-    if ([cString length] < 6) return [UIColor grayColor];
-    
     // strip 0X if it appears
     if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-    
     if ([cString length] != 6) return  [UIColor grayColor];
     
     // Separate into r, g, b substrings
@@ -86,7 +80,6 @@
 +(UIColor *) randomColorUsingColorSet: (NSArray *)colorSet
 {
     return [self colorWithIndex:(int)arc4random() usingColorSet:colorSet];
-
 }
 
 +(UIColor *) colorWithIndex:(int)index usingColorSet: (NSArray *)colorSet
@@ -98,7 +91,6 @@
     index = (int)index % [colorSet count];
     NSString* hexColorString = colorSet[index];
     return [self colorWithHexString:hexColorString];
-
 }
 
 @end

@@ -17,11 +17,7 @@
 
 @implementation TrivitCellTableViewCell
 
-
-
 #pragma mark - Initialization
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 
 -(UIColor*)cellBackColor{
     if (!_cellBackColor){
@@ -34,7 +30,6 @@
     }
     return _cellBackColor;
 }
-
 
 #pragma mark - update tally functions
 
@@ -101,7 +96,6 @@
     return _counter;
 }
 
-
 - (void)drawRect:(CGRect)rect
 {
     [self.titleForTally removeFromSuperview];
@@ -127,7 +121,6 @@
     }
 
 }
-
 
 
 -(void) setup

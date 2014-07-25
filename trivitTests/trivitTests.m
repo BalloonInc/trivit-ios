@@ -7,6 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <UIKit/UIKit.h>
+#import "MainListViewController.h"
 
 @interface trivitTests : XCTestCase
 
@@ -33,6 +35,10 @@
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        [sb instantiateInitialViewController];
+        
     }];
 }
 
