@@ -10,7 +10,20 @@
 #import <UIKit/UIKit.h>
 @interface Colors : NSObject
 
+// predefined colorsets
++(NSArray*) iOSColors;
++(NSArray*) trivitColors;
+
+//takes as input a hex formatted color and returns UIColor
 +(UIColor*) colorWithHexString:(NSString*)hex;
+//returns random color using default colorset;
 +(UIColor*) randomColor;
+//returns color with certain index using default colorset
++(UIColor*) colorWithIndex:(int)index;
+//returns random color from a certain colorset
++(UIColor*) randomColorUsingColorSet:(NSArray*)colorSet;
+//returns a color with certain index with certain colorset
++(UIColor*) colorWithIndex:(int)index
+             usingColorSet:(NSArray*)colorSet;
 
 @end

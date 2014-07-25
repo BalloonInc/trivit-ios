@@ -10,8 +10,8 @@
 #import "Colors.h"
 
 @interface TrivitCellTableViewCell()
-@property (strong,nonatomic) UILabel *titleForTally;
-@property (strong,nonatomic) UILabel *counterForTally;
+@property (strong, nonatomic) UILabel *titleForTally;
+@property (strong, nonatomic) UILabel *counterForTally;
 
 @end
 
@@ -24,7 +24,14 @@
 // An empty implementation adversely affects performance during animation.
 
 -(UIColor*)cellBackColor{
-    if (!_cellBackColor){_cellBackColor=[Colors randomColor];}
+    if (!_cellBackColor){
+        //random color for every cell
+        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
+        
+        //permutated color for every cell
+        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors iOSColors]];
+
+    }
     return _cellBackColor;
 }
 
@@ -62,7 +69,7 @@
 {
     //TODO: make buttons responsive :)
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this TriVit?"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?"
                                                    delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
     //	[alert release];
@@ -74,7 +81,7 @@
 {
     NSMutableString *buttonLabelText;
     buttonLabelText = [[NSMutableString alloc] initWithString:@""];
-    for (int i = 0; i<=self.counter.countForTally; i++) {
+    for (int i = 0; i<self.counter.countForTally; i++) {
         [buttonLabelText appendString:@"|"];
     }
     self.counterString = buttonLabelText;

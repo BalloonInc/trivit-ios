@@ -10,6 +10,33 @@
 
 @implementation Colors
 
+
+
++(NSArray *)iOSColors
+{
+      return @[
+          @"E0272E", // Red
+		  @"459E20", // Green
+		  @"3D96BE", // Blue
+		  @"EI2A64", // Heavy pink
+		  @"E65F2E", // Orange
+		  @"A22CBE", // Purple
+          @"201DC2", // Dark blue
+		  @"261897" // Very dark blue
+		  ];
+}
+
++(NSArray *)trivitColors
+{
+        return @[
+          @"77CBBE", // AppleBlueSeaGreen
+          @"FBAB1B", // Orangish
+          @"F05F64", // Non-flashing Pink
+          @"45C5F2", // Gay Blue
+          @"3AB775", // Green
+          ];
+}
+
 +(UIColor*)colorWithHexString:(NSString*)hex
 {
     NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
@@ -46,26 +73,32 @@
                            alpha:1.0f];
 }
 
++(UIColor*) randomColor
+{
+    return [self randomColorUsingColorSet:nil];
+}
 
-+(UIColor *) randomColor{
-      switch (arc4random() % 8){
-//        case 0: return [self colorWithHexString:@"77CBBE"];
-//        case 1: return [self colorWithHexString:@"FBAB1B"];
-//        case 2: return [self colorWithHexString:@"F05F64"];
-//        case 3: return [self colorWithHexString:@"45C5F2"];
-//        case 4: return [self colorWithHexString:@"
-        // IOS8 colors (taken from some screenshots)
-        case 0: return [self colorWithHexString:@"E0272E"]; // Red
-        case 1: return [self colorWithHexString:@"459E20"]; // Green
-        case 2: return [self colorWithHexString:@"3D96BE"]; // Blue
-        case 3: return [self colorWithHexString:@"EI2A64"]; // Heavy pink
-        case 4: return [self colorWithHexString:@"E65F2E"]; // Orange
-        case 5: return [self colorWithHexString:@"A22CBE"]; // Purple
-        case 6: return [self colorWithHexString:@"201DC2"]; // Dark blue
-        case 7: return [self colorWithHexString:@"261897"]; // Very dark blue
-    }
-    // should not happen
-    return [UIColor blackColor];
++(UIColor*) colorWithIndex:(int)index
+{
+    return [self colorWithIndex:index usingColorSet:nil];
+}
+
++(UIColor *) randomColorUsingColorSet: (NSArray *)colorSet
+{
+    return [self colorWithIndex:(int)arc4random() usingColorSet:colorSet];
+
+}
+
++(UIColor *) colorWithIndex:(int)index usingColorSet: (NSArray *)colorSet
+{
+    //By Default, use iOSColors
+    if (!colorSet)
+        colorSet = [self iOSColors];
+    
+    index = (int)index % [colorSet count];
+    NSString* hexColorString = colorSet[index];
+    return [self colorWithHexString:hexColorString];
+
 }
 
 @end

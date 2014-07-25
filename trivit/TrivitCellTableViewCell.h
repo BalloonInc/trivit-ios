@@ -12,6 +12,7 @@
 @interface TrivitCellTableViewCell : UITableViewCell
 @property (strong, nonatomic) Counter *counter;
 @property (strong, nonatomic) NSString *counterString;
+@property (nonatomic) int cellIdentifier;
 @property (nonatomic) BOOL isCollapsed;
 @property (nonatomic,strong) UIColor *cellBackColor;
 

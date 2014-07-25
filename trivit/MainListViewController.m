@@ -64,7 +64,8 @@
 
 -(IBAction) addButtonPressed
 {
-    [self addItem];
+    // add random identifier to tallies
+    [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%d",[self.tallies count]]];
 }
 
 -(void) addItem
@@ -145,7 +146,8 @@
      *   The identifier is there to differentiate between different types of cells
      *   (you can display different types of cells in the same table view)
      */
-    static NSString *CellIdentifier = @"trivitCell";
+    
+    NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%d", indexPath.row];
     
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     /*
@@ -156,15 +158,19 @@
         /*
          *   Actually create a new cell (with an identifier so that it can be dequeued).
          */
-        //cell = [[TrivitCellTableViewCell alloc] init];
-        cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"trivitCell"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSLog(CellIdentifier,nil);
         cell.isCollapsed = true;
+        cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
+        cell.counter.title = [[self.tallies[indexPath.row] counter] title];
+        cell.cellIdentifier = indexPath.row;
+
+    }
+    else{
+        NSLog(@"%@ existed!",CellIdentifier);
     }
     
-    cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
-    cell.counter.title = [[self.tallies[indexPath.row] counter] title];
     
     /* Now that the cell is configured we return it to the table view so that it can display it */
     return cell;
