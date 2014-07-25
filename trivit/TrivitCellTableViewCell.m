@@ -104,15 +104,17 @@
     [recta addClip];
     [[self cellBackColor] setFill];
     [recta fill];
+    CGRect bounds = CGRectMake(10, 0, self.frame.size.width-10, self.frame.size.height);
     if (self.isCollapsed){
-
-        self.titleForTally = [[UILabel alloc] initWithFrame:self.bounds];
-        self.titleForTally.text = self.counter.title; //@PJ, you can remove this comment: the text didn't show because self.counter was nil. The issue was the function above. It was called 'Counter', and it should be 'counter'. Because it was wrong, self.counter was never initialized
+        self.titleForTally = [[UILabel alloc] initWithFrame:bounds];
+        self.titleForTally.text = self.counter.title;
+        self.titleForTally.textColor = [UIColor whiteColor]; // whiteColor text
         [self addSubview: self.titleForTally];
     }
     else{
-        self.counterForTally = [[UILabel alloc] initWithFrame:self.bounds];
+        self.counterForTally = [[UILabel alloc] initWithFrame:bounds];
         self.counterForTally.text = self.counterString;
+        self.counterForTally.textColor = [UIColor whiteColor];
         [self addSubview: self.counterForTally];
 
     }

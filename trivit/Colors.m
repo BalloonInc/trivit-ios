@@ -48,12 +48,21 @@
 
 
 +(UIColor *) randomColor{
-    switch (arc4random()%5){
-        case 0: return [self colorWithHexString:@"77CBBE"];
-        case 1: return [self colorWithHexString:@"FBAB1B"];
-        case 2: return [self colorWithHexString:@"F05F64"];
-        case 3: return [self colorWithHexString:@"45C5F2"];
-        case 4: return [self colorWithHexString:@"3AB775"];
+      switch (arc4random() % 8){
+//        case 0: return [self colorWithHexString:@"77CBBE"];
+//        case 1: return [self colorWithHexString:@"FBAB1B"];
+//        case 2: return [self colorWithHexString:@"F05F64"];
+//        case 3: return [self colorWithHexString:@"45C5F2"];
+//        case 4: return [self colorWithHexString:@"
+        // IOS8 colors (taken from some screenshots)
+        case 0: return [self colorWithHexString:@"E0272E"]; // Red
+        case 1: return [self colorWithHexString:@"459E20"]; // Green
+        case 2: return [self colorWithHexString:@"3D96BE"]; // Blue
+        case 3: return [self colorWithHexString:@"EI2A64"]; // Heavy pink
+        case 4: return [self colorWithHexString:@"E65F2E"]; // Orange
+        case 5: return [self colorWithHexString:@"A22CBE"]; // Purple
+        case 6: return [self colorWithHexString:@"201DC2"]; // Dark blue
+        case 7: return [self colorWithHexString:@"261897"]; // Very dark blue
     }
     // should not happen
     return [UIColor blackColor];
