@@ -13,6 +13,8 @@
 // predefined colorsets
 +(NSArray*) iOSColors;
 +(NSArray*) trivitColors;
++(NSArray*) flatDesignColorsLight;
++(NSArray*) flatDesignColorsDark;
 
 //takes as input a hex formatted color and returns UIColor
 +(UIColor*) colorWithHexString:(NSString*)hex;

@@ -25,7 +25,7 @@
         //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
         
         //permutated color for every cell
-        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors iOSColors]];
+        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsLight]];
 
     }
     return _cellBackColor;

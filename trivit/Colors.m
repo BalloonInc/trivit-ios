@@ -20,7 +20,7 @@
 		  @"E65F2E", // Orange
 		  @"A22CBE", // Purple
           @"201DC2", // Dark blue
-		  @"261897" // Very dark blue
+		  @"261897"  // Very dark blue
 		  ];
 }
 
@@ -31,7 +31,31 @@
           @"FBAB1B", // Orangish
           @"F05F64", // Non-flashing Pink
           @"45C5F2", // Gay Blue
-          @"3AB775", // Green
+          @"3AB775"  // Green
+          ];
+}
+
++(NSArray *)flatDesignColorsLight
+{
+        return @[
+          @"1ABC9C", // Turquoise
+          @"2ECC71", // Emerald
+          @"3498DB", // Petermann River
+          @"F1C40F", // Sun Flower
+          @"E67E22", // Carrot
+          @"E74C3C"  // Alizarin
+          ];
+}
+
++(NSArray *)flatDesignColorsDark
+{
+        return @[
+          @"16A085", // Green Sea
+          @"27AE60", // Nephritis
+          @"2980B9", // Belize Hole
+          @"F39C12", // Orange
+          @"D35400", // Pumpkin
+          @"C0392B"  // Pomegranate
           ];
 }
 
