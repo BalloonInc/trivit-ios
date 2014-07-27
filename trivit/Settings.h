@@ -10,4 +10,6 @@
 
 @interface Settings : NSObject
 
+@property (nonatomic) NSInteger colorSet;
+
 @end

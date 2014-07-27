@@ -17,19 +17,6 @@
 
 @implementation TrivitCellTableViewCell
 
-#pragma mark - Initialization
-
--(UIColor*)cellBackColor{
-    if (!_cellBackColor){
-        //random color for every cell
-        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
-        
-        //permutated color for every cell
-        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsLight]];
-
-    }
-    return _cellBackColor;
-}
 
 #pragma mark - update tally functions
 
@@ -82,7 +69,7 @@
     self.counterString = buttonLabelText;
 }
 
-#pragma mark -
+#pragma mark - lazy instantiators
 
 -(void) setIsCollapsed:(BOOL)isCollapsed
 {
@@ -90,6 +77,29 @@
     [self setNeedsDisplay];
 }
 
+@synthesize cellBackColor = _cellBackColor;
+
+-(UIColor*)cellBackColor
+{
+    if (!_cellBackColor){
+        //random color for every cell
+        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
+        
+        //permutated color for every cell
+        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: self.colorset];
+        
+    }
+    return _cellBackColor;
+}
+
+-(void) setCellBackColor:(UIColor *)cellBackColor
+{
+    if (_cellBackColor!=cellBackColor) {
+        _cellBackColor = cellBackColor;
+        [self setNeedsDisplay];
+    }
+
+}
 
 -(Counter*)counter{
     if (!_counter){_counter = [[Counter alloc] init];}
@@ -103,6 +113,7 @@
 
     UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];
     [recta addClip];
+    self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
     [[self cellBackColor] setFill];
     [recta fill];
     CGRect bounds = CGRectMake(10, 0, self.frame.size.width-10, self.frame.size.height);
@@ -120,6 +131,11 @@
 
     }
 
+}
+
+-(void) resetColor
+{
+    self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
 }
 
 

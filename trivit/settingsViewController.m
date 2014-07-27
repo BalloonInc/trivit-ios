@@ -9,6 +9,7 @@
 #import "settingsViewController.h"
 
 @interface settingsViewController ()
+@property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
 
 @end
 
@@ -22,6 +23,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.colorPicker.selectedSegmentIndex = self.appSettings.colorSet;
+    
+    [super viewWillAppear:animated];
+    [self.colorPicker addTarget:self
+                         action:@selector(updateColorSet:)
+               forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)updateColorSet:(id)sender
+{
+    self.appSettings.colorSet=self.colorPicker.selectedSegmentIndex;
 }
 
 /*

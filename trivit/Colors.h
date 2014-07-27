@@ -27,5 +27,7 @@
 //returns a color with certain index with certain colorset
 +(UIColor*) colorWithIndex:(int)index
              usingColorSet:(NSArray*)colorSet;
-
+//returns a colorset, based on an index
+//TODO: make a dictionary instead, so we can return based on name
++(NSArray*) colorsetWithIndex:(int)index;
 @end

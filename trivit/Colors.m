@@ -117,4 +117,28 @@
     return [self colorWithHexString:hexColorString];
 }
 
++(NSArray*) colorsetWithIndex:(int)index
+{
+    NSArray *colorSetArray;
+    
+    switch (index) {
+        case 0:
+            colorSetArray = [Colors iOSColors];
+            break;
+        case 1:
+            colorSetArray = [Colors trivitColors];
+            break;
+        case 2:
+            colorSetArray = [Colors flatDesignColorsDark];
+            break;
+        case 3:
+            colorSetArray = [Colors flatDesignColorsLight];
+            break;
+        default:
+            [Colors iOSColors];
+    }
+    return colorSetArray;
+}
+
+
 @end

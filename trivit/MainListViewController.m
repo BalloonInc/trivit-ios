@@ -8,6 +8,8 @@
 
 #import "MainListViewController.h"
 #import "TrivitCellTableViewCell.h"
+#import "settingsViewController.h"
+#import "Colors.h"
 
 @interface MainListViewController ()
 @property (strong, nonatomic) TrivitCellTableViewCell *firstCell;
@@ -15,48 +17,22 @@
 
 @implementation MainListViewController
 
-
-# pragma mark - Loading
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self configureTableView];
-    // add test tally
-    [self addItemWithTitle:@"testTally"];
-    
-}
-
-- (void) configureTableView{
-    // add gestures
-    UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
-    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
-    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    // Double tap to open/close: not really convenient
-    //UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
-    //doubleTap.numberOfTapsRequired=2;
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyIncrease:)];
-
-    [self.tableView addGestureRecognizer:rightSwipe];
-    [self.tableView addGestureRecognizer:leftSwipe];
-    //[self.tableView addGestureRecognizer:doubleTap];
-    [self.tableView addGestureRecognizer:longPress];
-    [self.tableView addGestureRecognizer:tap];
-}
-
+#pragma mark - lazy instantiatiors
 -(NSMutableArray*) tallies{
     if(!_tallies){_tallies=[[NSMutableArray alloc ]init];}
     return _tallies;
 }
 
--(void)viewWillAppear:(BOOL)animated
+@synthesize appSettings=_appSettings;
+
+-(Settings*) appSettings{
+    if(!_appSettings){_appSettings=[[Settings alloc ]init];}
+    return _appSettings;
+}
+
+-(void) setAppSettings:(Settings *)appSettings
 {
-    self.tableView.delegate=self;
-    self.tableView.dataSource=self;
-    [super viewWillAppear:animated];
+    _appSettings=appSettings;
 }
 
 #pragma mark - add item
@@ -64,7 +40,7 @@
 -(IBAction) addButtonPressed
 {
     // add random identifier to tallies
-    [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%d",[self.tallies count]]];
+    [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)[self.tallies count]]];
 }
 
 -(void) addItem
@@ -146,7 +122,7 @@
      *   (you can display different types of cells in the same table view)
      */
     
-    NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%d", indexPath.row];
+    NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
     
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     /*
@@ -163,7 +139,8 @@
         cell.isCollapsed = true;
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
-        cell.cellIdentifier = indexPath.row;
+        cell.cellIdentifier = (int)indexPath.row;
+        cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
 
     }
     else{
@@ -188,6 +165,77 @@
     return [self.tallies count];
 }
 
+#pragma mark - view load stuff
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self configureTableView];
+    // add test tally
+    [self addItemWithTitle:@"testTally"];
+    
+}
+
+- (void) configureTableView{
+    // add gestures
+    UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
+    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
+    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    // Double tap to open/close: not really convenient
+    //UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
+    //doubleTap.numberOfTapsRequired=2;
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyIncrease:)];
+    
+    [self.tableView addGestureRecognizer:rightSwipe];
+    [self.tableView addGestureRecognizer:leftSwipe];
+    //[self.tableView addGestureRecognizer:doubleTap];
+    [self.tableView addGestureRecognizer:longPress];
+    [self.tableView addGestureRecognizer:tap];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowSettingsForTrivit"])
+    {
+        if ([segue.destinationViewController isKindOfClass:[settingsViewController class]])
+        {
+            settingsViewController *svc = (settingsViewController *) segue.destinationViewController;
+            svc.appSettings = self.appSettings;
+            
+        }
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    //hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    [self resetColors];
+    [super viewWillAppear:animated];
+    
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    //show navigation bar when segueing for a smooth transition
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - more functions
+-(void) resetColors
+{
+    for (TrivitCellTableViewCell* cell in self.tallies) {
+        cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
+        [cell resetColor];
+    }
+}
 
 /*
 #pragma mark - Navigation

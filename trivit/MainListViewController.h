@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Settings.h"
 @interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell
+@property (strong, nonatomic) Settings *appSettings;
 
 @end

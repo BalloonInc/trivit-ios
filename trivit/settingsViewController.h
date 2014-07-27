@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Settings.h"
 
 @interface settingsViewController : UIViewController
+@property (strong, nonatomic) Settings *appSettings;
 
 @end
