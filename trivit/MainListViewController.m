@@ -138,7 +138,8 @@
         return 84.0f; // Full height
     }
     else {
-        return 30.0f; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
+//        return 30.0f; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
+        return 84.0f;
     }
     
 }
