@@ -64,7 +64,6 @@
         <!--Settings View Controller-->
         <scene sceneID="PsH-CW-h89">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y7N-QB-Yu5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="0Vr-vX-FSL" customClass="settingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tva-rd-wdJ"/>
@@ -101,6 +100,7 @@
                         <outlet property="colorPicker" destination="VwX-bd-ZzG" id="qVf-dS-CZs"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y7N-QB-Yu5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2056" y="139"/>
         </scene>

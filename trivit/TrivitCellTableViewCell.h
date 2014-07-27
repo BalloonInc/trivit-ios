@@ -15,11 +15,18 @@
 @property (nonatomic) int cellIdentifier;
 @property (nonatomic) BOOL isCollapsed;
 @property (nonatomic,strong) UIColor *cellBackColor;
-@property (nonatomic,strong) NSArray *colorset;
+@property (nonatomic,strong) UIColor *cellBackColorDark;
+
+@property (strong, nonatomic) UILabel *titleLabelForTally;
+@property (strong, nonatomic) UILabel *counterLabelForTally;
+
+//colorset_func
+//@property (nonatomic,strong) NSArray *colorset;
 
 - (void)decreaseTallyCounter;
 - (void)increaseTallyCounter;
 - (void)resetTallyCounter;
-- (void) resetColor;
+//colorset_func
+//- (void) resetColor;
 
 @end

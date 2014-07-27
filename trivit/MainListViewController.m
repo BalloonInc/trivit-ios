@@ -59,6 +59,7 @@
     newCell.counter.title = title;
     newCell.counter.countForTally = count;
     [self.tallies addObject:newCell];
+    
     [self.tableView reloadData];
 }
 
@@ -76,6 +77,7 @@
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)recognizer
 {
+    NSLog(@"handleTallyIncrease");
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
@@ -96,16 +98,70 @@
 
 -(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
 {
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     swipedCell.isCollapsed = ! swipedCell.isCollapsed;
+}
+
+-(void)handleTap: (UIGestureRecognizer *)recognizer
+{
+    CGPoint tapLocation = [recognizer locationInView:self.tableView];
+    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+    TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
+    if (tappedView==tappedCell.titleLabelForTally){
+        [self handleTallyCollapse:recognizer];
+    }
+    else if(tappedView==tappedCell.counterLabelForTally){
+        [self handleTallyIncrease:recognizer];
+    }
+    else{
+        NSLog(@"You tapped on a very weird spot");
+    }
+}
+
+#pragma mark - Magic to make the tableview datasource working
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    TrivitCellTableViewCell *cell = (TrivitCellTableViewCell*)self.tallies[indexPath.row];
+    if (cell.isCollapsed) {
+        return 84.0f; // Full height
+    }
+    else {
+//        return 30.0f; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
+        return 84.0f;
     }
     
 }
 
-#pragma mark - Magic to make the tableview datasource working
+- (void)addOrRemoveSelectedIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.selectedTallies) {
+        self.selectedTallies = [NSMutableArray new];
+    }
+    
+    BOOL containsIndexPath = [self.selectedTallies containsObject:indexPath];
+    
+    if (containsIndexPath) {
+        [self.selectedTallies removeObject:indexPath];
+    }else{
+        [self.selectedTallies addObject:indexPath];
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self addOrRemoveSelectedIndexPath:indexPath];
+    
+}
 
 /*
  *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object
@@ -140,11 +196,13 @@
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
         cell.cellIdentifier = (int)indexPath.row;
-        cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
+        //colorset_func
+        //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
 
     }
     else{
         NSLog(@"%@ existed!",CellIdentifier);
+        NSLog(@"%i",self.selectedTallies.count);
     }
     
     
@@ -183,17 +241,12 @@
     rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    // Double tap to open/close: not really convenient
-    //UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
-    //doubleTap.numberOfTapsRequired=2;
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyCollapse:)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyIncrease:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];
-    //[self.tableView addGestureRecognizer:doubleTap];
-    [self.tableView addGestureRecognizer:longPress];
     [self.tableView addGestureRecognizer:tap];
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -215,7 +268,8 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    [self resetColors];
+    //colorset_func
+    //[self resetColors];
     [super viewWillAppear:animated];
     
 }
@@ -229,6 +283,8 @@
 }
 
 #pragma mark - more functions
+//colorset_func
+/*
 -(void) resetColors
 {
     for (TrivitCellTableViewCell* cell in self.tallies) {
@@ -236,7 +292,7 @@
         [cell resetColor];
     }
 }
-
+*/
 /*
 #pragma mark - Navigation
 

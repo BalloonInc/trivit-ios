@@ -10,13 +10,10 @@
 #import "Colors.h"
 
 @interface TrivitCellTableViewCell()
-@property (strong, nonatomic) UILabel *titleForTally;
-@property (strong, nonatomic) UILabel *counterForTally;
 
 @end
 
 @implementation TrivitCellTableViewCell
-
 
 #pragma mark - update tally functions
 
@@ -77,7 +74,10 @@
     [self setNeedsDisplay];
 }
 
-@synthesize cellBackColor = _cellBackColor;
+
+//colorset_func
+/*
+ @synthesize cellBackColor = _cellBackColor;
 
 -(UIColor*)cellBackColor
 {
@@ -91,15 +91,36 @@
     }
     return _cellBackColor;
 }
+ 
+ -(void) setCellBackColor:(UIColor *)cellBackColor
+ {
+ if (_cellBackColor!=cellBackColor) {
+ _cellBackColor = cellBackColor;
+ [self setNeedsDisplay];
+ }
+ 
+ }
 
--(void) setCellBackColor:(UIColor *)cellBackColor
+*/
+-(UIColor*)cellBackColor
 {
-    if (_cellBackColor!=cellBackColor) {
-        _cellBackColor = cellBackColor;
-        [self setNeedsDisplay];
+    if (!_cellBackColor){
+        //random color for every cell
+        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
+        
+        //permutated color for every cell
+        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsLight]];
+        
     }
-
+    return _cellBackColor;
 }
+-(UIColor*)cellBackColorDark {
+    if (!_cellBackColorDark){
+        _cellBackColorDark = [Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsDark]];
+    }
+    return _cellBackColorDark;
+}
+
 
 -(Counter*)counter{
     if (!_counter){_counter = [[Counter alloc] init];}
@@ -108,36 +129,59 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self.titleForTally removeFromSuperview];
-    [self.counterForTally removeFromSuperview];
+    [self.titleLabelForTally removeFromSuperview];
+    [self.counterLabelForTally removeFromSuperview];
 
-    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];
+    int hs1 = 30.0; // height first section (sloppy code)
+    
+    CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, hs1);
+    CGRect boundsCountLabel = CGRectMake(10, hs1, self.frame.size.width-10, self.frame.size.height-hs1);
+    CGRect boundsSecondSection = CGRectMake(0, hs1, self.frame.size.width, self.frame.size.height-hs1);
+    
+    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];   
     [recta addClip];
-    self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
+    //colorset_func
+    //self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
     [[self cellBackColor] setFill];
     [recta fill];
-    CGRect bounds = CGRectMake(10, 0, self.frame.size.width-10, self.frame.size.height);
-    if (self.isCollapsed){
-        self.titleForTally = [[UILabel alloc] initWithFrame:bounds];
-        self.titleForTally.text = self.counter.title;
-        self.titleForTally.textColor = [UIColor whiteColor]; // whiteColor text
-        [self addSubview: self.titleForTally];
-    }
-    else{
-        self.counterForTally = [[UILabel alloc] initWithFrame:bounds];
-        self.counterForTally.text = self.counterString;
-        self.counterForTally.textColor = [UIColor whiteColor];
-        [self addSubview: self.counterForTally];
+    
+    self.titleLabelForTally = [[UILabel alloc] initWithFrame:boundsTitleLabel];
+    self.titleLabelForTally.text = self.counter.title;
+    self.titleLabelForTally.textColor = [UIColor whiteColor]; // whiteColor text
+    //test tap gesture on subview
+    self.titleLabelForTally.userInteractionEnabled = true;
+    [self addSubview: self.titleLabelForTally];
+
+    if (!self.isCollapsed){
+        UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
+        [[self cellBackColorDark] setFill];
+        [recta2 fill];
+        
+        UIBezierPath *aPath = [UIBezierPath bezierPath];
+        [aPath moveToPoint:CGPointMake(10.0, 0.0+hs1)];
+        [aPath addLineToPoint:CGPointMake(20.0, 10.0+hs1)];
+        [aPath addLineToPoint:CGPointMake(30.0, 0.0+hs1)];
+        [aPath closePath];
+        [[self cellBackColor] setFill];
+        [aPath fill];
+
+        self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
+        self.counterLabelForTally.text = self.counterString;
+        self.counterLabelForTally.textColor = [UIColor whiteColor];
+        //test tap gesture on subview
+        self.counterLabelForTally.userInteractionEnabled=true;
+        [self addSubview: self.counterLabelForTally];
 
     }
 
 }
-
+//colorset_func
+/*
 -(void) resetColor
 {
     self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
 }
-
+*/
 
 -(void) setup
 {
