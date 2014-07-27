@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell
+//@property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
 
 @end

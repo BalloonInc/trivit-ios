@@ -15,6 +15,7 @@
 @property (nonatomic) int cellIdentifier;
 @property (nonatomic) BOOL isCollapsed;
 @property (nonatomic,strong) UIColor *cellBackColor;
+@property (nonatomic,strong) UIColor *cellBackColorDark;
 
 - (void)decreaseTallyCounter;
 - (void)increaseTallyCounter;

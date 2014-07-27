@@ -131,6 +131,45 @@
 
 #pragma mark - Magic to make the tableview datasource working
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    BOOL isSelected = [self.selectedTallies containsObject:indexPath];
+    if (isSelected) {
+        return 84.0f; // Full height
+    }
+    else {
+        return 30.0f; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
+    }
+    
+}
+
+- (void)addOrRemoveSelectedIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.selectedTallies) {
+        self.selectedTallies = [NSMutableArray new];
+    }
+    
+    BOOL containsIndexPath = [self.selectedTallies containsObject:indexPath];
+    
+    if (containsIndexPath) {
+        [self.selectedTallies removeObject:indexPath];
+    }else{
+        [self.selectedTallies addObject:indexPath];
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self addOrRemoveSelectedIndexPath:indexPath];
+    
+}
+
 /*
  *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object
  *   is delegate for several tableViews it can identify which one is asking for a cell),
@@ -164,10 +203,10 @@
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
         cell.cellIdentifier = indexPath.row;
-
     }
     else{
         NSLog(@"%@ existed!",CellIdentifier);
+        NSLog(@"%i",self.selectedTallies.count);
     }
     
     
@@ -187,7 +226,6 @@
     // Return the number of rows in the section.
     return [self.tallies count];
 }
-
 
 /*
 #pragma mark - Navigation
