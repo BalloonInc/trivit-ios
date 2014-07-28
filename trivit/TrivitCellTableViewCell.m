@@ -179,7 +179,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         int mod = self.counter.countForTally % 5;
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
-        self.modImage.frame = CGRectMake(10, CELL_HEIGHT_SECTION1+10, 32, 32);
+        self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
         [self addSubview:self.modImage];
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];

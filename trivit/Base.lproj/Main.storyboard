@@ -16,16 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SXP-BG-AqV">
-                                <rect key="frame" x="0.0" y="20" width="320" height="504"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SXP-BG-AqV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SXP-BG-AqV" firstAttribute="top" secondItem="W3N-yY-37a" secondAttribute="top" constant="20" symbolic="YES" id="2yC-BZ-2db"/>
-                            <constraint firstItem="SXP-BG-AqV" firstAttribute="leading" secondItem="W3N-yY-37a" secondAttribute="leading" id="b1o-wU-Wkz"/>
-                            <constraint firstAttribute="trailing" secondItem="SXP-BG-AqV" secondAttribute="trailing" id="spa-Of-vac"/>
+                            <constraint firstAttribute="trailing" secondItem="SXP-BG-AqV" secondAttribute="trailing" id="AnK-mh-ZlW"/>
+                            <constraint firstItem="SXP-BG-AqV" firstAttribute="top" secondItem="W3N-yY-37a" secondAttribute="top" id="End-xr-PnB"/>
+                            <constraint firstAttribute="bottom" secondItem="SXP-BG-AqV" secondAttribute="bottom" id="crx-0Y-Hsp"/>
+                            <constraint firstItem="SXP-BG-AqV" firstAttribute="leading" secondItem="W3N-yY-37a" secondAttribute="leading" id="lZA-FR-J4Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Trivit" id="Obg-Ql-Sqf">
