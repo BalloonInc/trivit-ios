@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Counter.h"
 
-@interface TrivitCellTableViewCell : UITableViewCell
+@interface TrivitCellTableViewCell : UITableViewCell <UICollectionViewDataSource, UICollectionViewDelegate>
 
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;
@@ -21,6 +21,8 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic,strong) UIColor *cellBackColor;
 @property (nonatomic,strong) UIColor *cellBackColorDark;
 @property (nonatomic,strong) UIImageView *modImage;
+@property (nonatomic,strong) UICollectionView *images;
+
 @property (strong, nonatomic) UILabel *titleLabelForTally;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 

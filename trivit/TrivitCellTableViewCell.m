@@ -134,7 +134,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     [self.titleLabelForTally removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
-    [self.modImage removeFromSuperview];
+    [self.images removeFromSuperview];
     
     CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
     CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
@@ -168,12 +168,25 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [aPath fill];
         
         // Image tally marks
+        
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection collectionViewLayout:layout];
+        [self.images setDataSource:self];
+        [self.images setDelegate:self];
+        [self.images setBackgroundColor:nil];
+        [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+        [self addSubview:self.images];
+        
+        
+        
         self.modImage = [[UIImageView alloc] init];
-        int fullTally = self.counter.countForTally/5;
+        long fullTally = self.counter.countForTally/5;
+        
         if(fullTally>0){
-            UIImage *myimg = [UIImage imageNamed:@"tally_%5"];
             for (int i=0; i<fullTally; i++) {
-                
+                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
+                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
+                [gridcell addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tally_5"]]];
             }
         }
         int mod = self.counter.countForTally % 5;
@@ -199,6 +212,22 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
 }
 */
+
+#pragma mark - Magic to make the UICollectionview datasource work
+
+-(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 150;
+    return self.counter.countForTally/5+1;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
+    //gridcell.backgroundColor = [Colors colorWithHexString:@"BADA55"];
+
+    return gridcell;
+}
 
 -(void) setup
 {
