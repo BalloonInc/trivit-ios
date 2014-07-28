@@ -277,21 +277,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     //hide navigation bar
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     //colorset_func
     //[self resetColors];
     [super viewWillAppear:animated];
     
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated {
-    //show navigation bar when segueing for a smooth transition
-    self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - more functions

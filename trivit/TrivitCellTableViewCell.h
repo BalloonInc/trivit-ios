@@ -20,7 +20,7 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic) BOOL isCollapsed;
 @property (nonatomic,strong) UIColor *cellBackColor;
 @property (nonatomic,strong) UIColor *cellBackColorDark;
-
+@property (nonatomic,strong) UIImageView *modImage;
 @property (strong, nonatomic) UILabel *titleLabelForTally;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 

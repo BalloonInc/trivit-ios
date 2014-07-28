@@ -134,6 +134,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     [self.titleLabelForTally removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
+    [self.modImage removeFromSuperview];
     
     CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
     CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
@@ -167,7 +168,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [aPath fill];
         
         // Image tally marks
-        UIImageView *imageview = [[UIImageView alloc] init];
+        self.modImage = [[UIImageView alloc] init];
         int fullTally = self.counter.countForTally/5;
         if(fullTally>0){
             UIImage *myimg = [UIImage imageNamed:@"tally_%5"];
@@ -177,9 +178,9 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         }
         int mod = self.counter.countForTally % 5;
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
-        imageview.image=myimg;
-        imageview.frame = CGRectMake(10, CELL_HEIGHT_SECTION1+10, 32, 32);
-        [self addSubview:imageview];
+        self.modImage.image=myimg;
+        self.modImage.frame = CGRectMake(10, CELL_HEIGHT_SECTION1+10, 32, 32);
+        [self addSubview:self.modImage];
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
 //        self.counterLabelForTally.text = self.counterString;
