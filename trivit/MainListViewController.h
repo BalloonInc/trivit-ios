@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) Settings *appSettings;
+@property (strong, nonatomic) NSMutableArray *expandedTrivits; // of NSIndexPath
 //@property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
 
 @end

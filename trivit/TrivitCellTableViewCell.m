@@ -15,16 +15,8 @@
 
 @implementation TrivitCellTableViewCell
 
-- (NSArray *)tallyImages
-{
-    return @[
-             @"tally_1",
-             @"tally_2",
-             @"tally_3",
-             @"tally_4",
-             @"tally_5"
-             ];
-}
+float const CELL_HEIGHT_SECTION1 = 44.0;
+float const CELL_HEIGHT_SECTION2 = 88.0;
 
 #pragma mark - update tally functions
 
@@ -142,12 +134,10 @@
 {
     [self.titleLabelForTally removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
-
-    int hs1 = 30.0; // height first section (sloppy code)
     
-    CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, hs1);
-    CGRect boundsCountLabel = CGRectMake(10, hs1, self.frame.size.width-10, self.frame.size.height-hs1);
-    CGRect boundsSecondSection = CGRectMake(0, hs1, self.frame.size.width, self.frame.size.height-hs1);
+    CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
+    CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
+    CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
     
     UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];   
     [recta addClip];
@@ -169,19 +159,26 @@
         [recta2 fill];
         
         UIBezierPath *aPath = [UIBezierPath bezierPath];
-        [aPath moveToPoint:CGPointMake(10.0, 0.0+hs1)];
-        [aPath addLineToPoint:CGPointMake(20.0, 10.0+hs1)];
-        [aPath addLineToPoint:CGPointMake(30.0, 0.0+hs1)];
+        [aPath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
+        [aPath addLineToPoint:CGPointMake(20.0, 10.0+CELL_HEIGHT_SECTION1)];
+        [aPath addLineToPoint:CGPointMake(30.0, 0.0+CELL_HEIGHT_SECTION1)];
         [aPath closePath];
         [[self cellBackColor] setFill];
         [aPath fill];
         
         // Image tally marks
         UIImageView *imageview = [[UIImageView alloc] init];
+        int fullTally = self.counter.countForTally/5;
+        if(fullTally>0){
+            UIImage *myimg = [UIImage imageNamed:@"tally_%5"];
+            for (int i=0; i<fullTally; i++) {
+                
+            }
+        }
         int mod = self.counter.countForTally % 5;
-        UIImage *myimg = [UIImage imageNamed:[self.tallyImages objectAtIndex: mod ] ];
+        UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         imageview.image=myimg;
-        imageview.frame = CGRectMake(10, hs1+10, 32, 32);
+        imageview.frame = CGRectMake(10, CELL_HEIGHT_SECTION1+10, 32, 32);
         [self addSubview:imageview];
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];

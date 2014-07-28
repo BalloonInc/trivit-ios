@@ -10,6 +10,10 @@
 #import "Counter.h"
 
 @interface TrivitCellTableViewCell : UITableViewCell
+
+extern float const CELL_HEIGHT_SECTION1;
+extern float const CELL_HEIGHT_SECTION2;
+
 @property (strong, nonatomic) Counter *counter;
 @property (strong, nonatomic) NSString *counterString;
 @property (nonatomic) int cellIdentifier;
@@ -19,9 +23,6 @@
 
 @property (strong, nonatomic) UILabel *titleLabelForTally;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
-
-// predefined tally images
-@property (nonatomic,strong) NSArray *tallyImages;
 
 //colorset_func
 //@property (nonatomic,strong) NSArray *colorset;

@@ -18,7 +18,15 @@
 @implementation MainListViewController
 
 #pragma mark - lazy instantiatiors
--(NSMutableArray*) tallies{
+
+-(NSMutableArray*) expandedTrivits
+{
+    if(!_expandedTrivits){_expandedTrivits = [[NSMutableArray alloc] init];}
+    return _expandedTrivits;
+}
+
+-(NSMutableArray*) tallies
+{
     if(!_tallies){_tallies=[[NSMutableArray alloc ]init];}
     return _tallies;
 }
@@ -101,7 +109,12 @@
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    swipedCell.isCollapsed = ! swipedCell.isCollapsed;
+    swipedCell.isCollapsed = !swipedCell.isCollapsed;
+    if (!swipedCell.isCollapsed)
+        [self.expandedTrivits addObject:swipedIndexPath];
+    else
+        [self.expandedTrivits removeObject:swipedIndexPath];
+    [self.tableView reloadData];
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
@@ -112,6 +125,7 @@
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     if (tappedView==tappedCell.titleLabelForTally){
         [self handleTallyCollapse:recognizer];
+        
     }
     else if(tappedView==tappedCell.counterLabelForTally){
         [self handleTallyIncrease:recognizer];
@@ -125,17 +139,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    TrivitCellTableViewCell *cell = (TrivitCellTableViewCell*)self.tallies[indexPath.row];
-    if (cell.isCollapsed) {
-        return 84.0f; // Full height
+    
+    if ([self.expandedTrivits containsObject:indexPath]) {
+        return CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2; // Full height
     }
     else {
-//        return 30.0f; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
-        return 84.0f;
+        return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
     }
     
 }
-
+/*
 - (void)addOrRemoveSelectedIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.selectedTallies) {
@@ -155,6 +168,7 @@
     
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -162,6 +176,7 @@
     [self addOrRemoveSelectedIndexPath:indexPath];
     
 }
+*/
 
 /*
  *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object
@@ -179,8 +194,9 @@
      */
     
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
-    
+
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
     /*
      *   If the cell is nil it means no cell was available for reuse and that we should
      *   create a new one.
@@ -193,19 +209,15 @@
         //cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(CellIdentifier,nil);
         cell.isCollapsed = true;
+        [self.tableView reloadData];
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
         cell.cellIdentifier = (int)indexPath.row;
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
+    }
+    NSLog(@"cellForRowAtIndexPath: cell_%i is now: %@",cell.cellIdentifier,cell.isCollapsed?@"collapsed":@"expanded");
 
-    }
-    else{
-        NSLog(@"%@ existed!",CellIdentifier);
-        NSLog(@"%i",self.selectedTallies.count);
-    }
-    
-    
     /* Now that the cell is configured we return it to the table view so that it can display it */
     return cell;
 }
