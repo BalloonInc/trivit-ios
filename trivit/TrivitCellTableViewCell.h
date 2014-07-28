@@ -20,6 +20,9 @@
 @property (strong, nonatomic) UILabel *titleLabelForTally;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 
+// predefined tally images
+@property (nonatomic,strong) NSArray *tallyImages;
+
 //colorset_func
 //@property (nonatomic,strong) NSArray *colorset;
 

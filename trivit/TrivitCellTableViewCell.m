@@ -15,6 +15,17 @@
 
 @implementation TrivitCellTableViewCell
 
+- (NSArray *)tallyImages
+{
+    return @[
+             @"tally_1",
+             @"tally_2",
+             @"tally_3",
+             @"tally_4",
+             @"tally_5"
+             ];
+}
+
 #pragma mark - update tally functions
 
 - (void)increaseTallyCounter
@@ -164,9 +175,17 @@
         [aPath closePath];
         [[self cellBackColor] setFill];
         [aPath fill];
-
+        
+        // Image tally marks
+        UIImageView *imageview = [[UIImageView alloc] init];
+        int mod = self.counter.countForTally % 5;
+        UIImage *myimg = [UIImage imageNamed:[self.tallyImages objectAtIndex: mod ] ];
+        imageview.image=myimg;
+        imageview.frame = CGRectMake(10, hs1+10, 32, 32);
+        [self addSubview:imageview];
+        
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
-        self.counterLabelForTally.text = self.counterString;
+//        self.counterLabelForTally.text = self.counterString;
         self.counterLabelForTally.textColor = [UIColor whiteColor];
         //test tap gesture on subview
         self.counterLabelForTally.userInteractionEnabled=true;
