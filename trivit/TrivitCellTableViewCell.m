@@ -135,6 +135,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self.titleLabelForTally removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
     [self.images removeFromSuperview];
+    [self.modImage removeFromSuperview];
     
     CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
     CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
