@@ -36,6 +36,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="settings_button" id="uvv-K8-j9p">
+                            <color key="tintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="0Vr-vX-FSL" kind="push" identifier="ShowSettingsForTrivit" id="VxN-z7-0KD"/>
                             </connections>
@@ -111,11 +112,12 @@
     </scenes>
     <resources>
         <image name="add_button" width="14" height="15"/>
-        <image name="settings_button" width="22" height="22"/>
+        <image name="settings_button" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
 </document>
