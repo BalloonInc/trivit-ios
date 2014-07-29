@@ -121,10 +121,6 @@
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
 //    [self.tableView reloadData]; // reloadData is superfluous is beginUpdates and endUpdates are used
-    
-    // After expanding the tableView shuold scrolls to the bottom of the expanded cell
-    if (self.tallies.count > 0)
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
