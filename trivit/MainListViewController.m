@@ -67,7 +67,6 @@
     newCell.counter.title = title;
     newCell.counter.countForTally = count;
     [self.tallies addObject:newCell];
-    
     [self.tableView reloadData];
 }
 
@@ -114,7 +113,9 @@
         [self.expandedTrivits addObject:swipedIndexPath];
     else
         [self.expandedTrivits removeObject:swipedIndexPath];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
+    [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
+//    [self.tableView reloadData]; // reloadData is superfluous is beginUpdates and endUpdates are used
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
@@ -148,35 +149,6 @@
     }
     
 }
-/*
-- (void)addOrRemoveSelectedIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.selectedTallies) {
-        self.selectedTallies = [NSMutableArray new];
-    }
-    
-    BOOL containsIndexPath = [self.selectedTallies containsObject:indexPath];
-    
-    if (containsIndexPath) {
-        [self.selectedTallies removeObject:indexPath];
-    }else{
-        [self.selectedTallies addObject:indexPath];
-    }
-    
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationFade];
-    
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    [self addOrRemoveSelectedIndexPath:indexPath];
-    
-}
-*/
 
 /*
  *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object

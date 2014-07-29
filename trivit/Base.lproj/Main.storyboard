@@ -111,7 +111,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add_button" width="14" height="15"/>
+        <image name="add_button" width="25" height="25"/>
         <image name="settings_button" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
