@@ -151,16 +151,11 @@
     else if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"long press on tableview at row %tu", indexPath.row);
         TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        if (tappedCell.titleLabelForTally.hidden) {
-            [tappedCell.titleLabelForTally setHidden:NO];
-            [tappedCell.titleLabelTextField setHidden:YES];
-        }
-        else {
-            [tappedCell.titleLabelForTally setHidden:YES];
-            [tappedCell.titleLabelTextField setHidden:NO];
-            [tappedCell.titleLabelTextField becomeFirstResponder];
-        }
         
+        // only disappear using the LongPress gesture, reappearing is handled by end of editing
+        [tappedCell.titleLabelForTally setHidden:YES];
+        [tappedCell.titleLabelTextField setHidden:NO];
+        [tappedCell.titleLabelTextField becomeFirstResponder];
     }
 }
 

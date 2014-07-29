@@ -181,6 +181,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
     [self.titleLabelTextField setHidden:YES];
     self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
+    self.titleLabelTextField.delegate = self;
     [self addSubview: self.titleLabelTextField];
 
     if (!self.isCollapsed){
@@ -296,14 +297,12 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     // Configure the view for the selected state
 }
 
-
 // function testing
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     if (textField == self.titleLabelTextField) {
         return textField.text;
-        
     }
     return YES;    
 }
@@ -311,8 +310,11 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.titleLabelTextField) {
-        NSLog(@"you're here");
         [textField resignFirstResponder];
+        self.counter.title = textField.text;
+        self.titleLabelForTally.text = textField.text; // This one also needs to be updated, bad code, should be dealt with in the background.
+        [self.titleLabelTextField setHidden:YES];
+        [self.titleLabelForTally setHidden:NO];
     }
     return YES;
 }
