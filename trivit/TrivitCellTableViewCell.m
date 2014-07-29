@@ -51,11 +51,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     //TODO: make buttons responsive :)
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?"
-                                                   delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
-    //	[alert release];
-    
     return true;
 }
 

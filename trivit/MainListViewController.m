@@ -141,6 +141,26 @@
     }
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer * )recognizer
+{
+    CGPoint tapLocation = [recognizer locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+    if(indexPath == nil) {
+        NSLog(@"long press but were?");
+    }
+    else if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"long press on tableview at row %tu", indexPath.row);
+        TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+        if (tappedCell.titleLabelForTally.hidden) {
+            [tappedCell.titleLabelForTally setHidden:NO];
+        }
+        else {
+            [tappedCell.titleLabelForTally setHidden:YES];
+        }
+        
+    }
+}
+
 #pragma mark - Magic to make the tableview datasource working
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -234,9 +254,14 @@
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     
+    UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longTap.minimumPressDuration = 1.0;
+    longTap.delegate = self;
+    
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:tap];
+    [self.tableView addGestureRecognizer:longTap];
     
     // background working on all devices
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]]; // init UIImageView with background image (30x30@2x)
