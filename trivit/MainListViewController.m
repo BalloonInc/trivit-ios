@@ -120,7 +120,7 @@
         [self.expandedTrivits removeObject:swipedIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
-//    [self.tableView reloadData]; // reloadData is superfluous is beginUpdates and endUpdates are used
+    
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
@@ -220,7 +220,9 @@
     
     [self configureTableView];
     // add test tally
-    [self addItemWithTitle:@"testTally"];
+    [self addItemWithTitle:@"Drinks"];
+    [self addItemWithTitle:@"Days without smoking"];
+    [self addItemWithTitle:@"Went swimming this year"];
     
 }
 

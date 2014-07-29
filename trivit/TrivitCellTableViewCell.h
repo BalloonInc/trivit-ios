@@ -25,6 +25,7 @@ extern float const CELL_HEIGHT_SECTION2;
 
 @property (strong, nonatomic) UILabel *titleLabelForTally;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
+@property (strong, nonatomic) UILabel *countLabel;
 
 //colorset_func
 //@property (nonatomic,strong) NSArray *colorset;

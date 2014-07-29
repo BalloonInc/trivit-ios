@@ -134,13 +134,16 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     [self.titleLabelForTally removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
+    [self.countLabel removeFromSuperview];
     [self.images removeFromSuperview];
     [self.modImage removeFromSuperview];
     
+    // Bounds
     CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
     CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
     CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
     
+    // first section
     UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];   
     [recta addClip];
     //colorset_func
@@ -148,14 +151,26 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [[self cellBackColor] setFill];
     [recta fill];
     
+    // Label in first section
     self.titleLabelForTally = [[UILabel alloc] initWithFrame:boundsTitleLabel];
     self.titleLabelForTally.text = self.counter.title;
     self.titleLabelForTally.textColor = [UIColor whiteColor]; // whiteColor text
     //test tap gesture on subview
     self.titleLabelForTally.userInteractionEnabled = true;
     [self addSubview: self.titleLabelForTally];
+    
+    self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+    [[self cellBackColorDark] setFill];
+    self.countLabel.backgroundColor = _cellBackColorDark;
+    self.countLabel.text = [NSString stringWithFormat:@"%i", self.counter.countForTally];
+    self.countLabel.textAlignment = 1;
+    self.countLabel.textColor = [UIColor whiteColor];
+    [self.countLabel.layer setCornerRadius:8.0];
+    [self.countLabel.layer setMasksToBounds:YES];
+    [self setAccessoryView:self.countLabel];
 
     if (!self.isCollapsed){
+        
         UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
         [[self cellBackColorDark] setFill];
         [recta2 fill];
@@ -178,18 +193,18 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self addSubview:self.images];
         
-        
+        self.accessoryView = nil;
         
         self.modImage = [[UIImageView alloc] init];
         long fullTally = self.counter.countForTally/5;
         
-        if(fullTally>0){
-            for (int i=0; i<fullTally; i++) {
-                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
-                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
-                [gridcell addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tally_5"]]];
-            }
-        }
+//        if(fullTally>0){
+//            for (int i=0; i<fullTally; i++) {
+//                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
+//                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
+//                [gridcell addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tally_5"]]];
+//            }
+//        }
         int mod = self.counter.countForTally % 5;
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
