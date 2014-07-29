@@ -162,11 +162,17 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
     [[self cellBackColorDark] setFill];
     self.countLabel.backgroundColor = _cellBackColorDark;
-    self.countLabel.text = [NSString stringWithFormat:@"%i", self.counter.countForTally];
+    self.countLabel.text = @(self.counter.countForTally).stringValue;
     self.countLabel.textAlignment = 1;
     self.countLabel.textColor = [UIColor whiteColor];
     [self.countLabel.layer setCornerRadius:8.0];
     [self.countLabel.layer setMasksToBounds:YES];
+    self.countLabel.alpha = 0;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDelegate:self];
+    self.countLabel.alpha = 1.0;
+    [UIView commitAnimations];
     [self setAccessoryView:self.countLabel];
 
     if (!self.isCollapsed){
@@ -196,7 +202,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         self.accessoryView = nil;
         
         self.modImage = [[UIImageView alloc] init];
-        long fullTally = self.counter.countForTally/5;
+//        long fullTally = self.counter.countForTally/5;
         
 //        if(fullTally>0){
 //            for (int i=0; i<fullTally; i++) {
