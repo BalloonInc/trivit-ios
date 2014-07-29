@@ -153,9 +153,11 @@
         TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         if (tappedCell.titleLabelForTally.hidden) {
             [tappedCell.titleLabelForTally setHidden:NO];
+            [tappedCell.titleLabelTextField setHidden:YES];
         }
         else {
             [tappedCell.titleLabelForTally setHidden:YES];
+            [tappedCell.titleLabelTextField setHidden:NO];
         }
         
     }
@@ -256,7 +258,6 @@
     
     UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longTap.minimumPressDuration = 1.0;
-    longTap.delegate = self;
     
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];

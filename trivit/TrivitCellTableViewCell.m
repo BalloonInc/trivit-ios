@@ -156,6 +156,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.titleLabelForTally.userInteractionEnabled = true;
     [self addSubview: self.titleLabelForTally];
     
+    // countlabel (only in collapsed view)
     self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
     [[self cellBackColorDark] setFill];
     self.countLabel.backgroundColor = _cellBackColorDark;
@@ -171,6 +172,12 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.countLabel.alpha = 1.0;
     [UIView commitAnimations];
     [self setAccessoryView:self.countLabel];
+    
+    self.titleLabelTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
+    self.titleLabelTextField.text =  self.counter.title;
+    self.titleLabelTextField.textColor = [UIColor whiteColor];
+    [self.titleLabelTextField setHidden:YES];
+    [self addSubview: self.titleLabelTextField];
 
     if (!self.isCollapsed){
         
@@ -196,7 +203,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self addSubview:self.images];
         
-        self.accessoryView = nil;
+        self.accessoryView = nil; // no accessoryView in expanded mode
         
         self.modImage = [[UIImageView alloc] init];
 //        long fullTally = self.counter.countForTally/5;
