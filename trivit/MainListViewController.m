@@ -49,6 +49,10 @@
 {
     // add random identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)[self.tallies count]]];
+    
+    // After being pressed to create a new cell the tableView scrolls to the new object
+    if (self.tallies.count > 0)
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(void) addItem
@@ -67,6 +71,7 @@
     newCell.counter.title = title;
     newCell.counter.countForTally = count;
     [self.tallies addObject:newCell];
+    
     [self.tableView reloadData];
 }
 
@@ -116,6 +121,10 @@
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
 //    [self.tableView reloadData]; // reloadData is superfluous is beginUpdates and endUpdates are used
+    
+    // After expanding the tableView shuold scrolls to the bottom of the expanded cell
+    if (self.tallies.count > 0)
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
