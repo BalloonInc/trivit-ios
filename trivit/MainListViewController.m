@@ -158,6 +158,7 @@
         else {
             [tappedCell.titleLabelForTally setHidden:YES];
             [tappedCell.titleLabelTextField setHidden:NO];
+            [tappedCell.titleLabelTextField becomeFirstResponder];
         }
         
     }
@@ -212,6 +213,7 @@
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
         cell.cellIdentifier = (int)indexPath.row;
+        cell.titleLabelTextField.delegate = self;
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
     }

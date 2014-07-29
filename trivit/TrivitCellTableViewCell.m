@@ -173,10 +173,14 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [UIView commitAnimations];
     [self setAccessoryView:self.countLabel];
     
+    // title UITextField settings
     self.titleLabelTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
     self.titleLabelTextField.text =  self.counter.title;
     self.titleLabelTextField.textColor = [UIColor whiteColor];
+    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
+    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
     [self.titleLabelTextField setHidden:YES];
+    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
     [self addSubview: self.titleLabelTextField];
 
     if (!self.isCollapsed){
@@ -291,5 +295,27 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
     // Configure the view for the selected state
 }
+
+
+// function testing
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField == self.titleLabelTextField) {
+        return textField.text;
+        
+    }
+    return YES;    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.titleLabelTextField) {
+        NSLog(@"you're here");
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
 
 @end

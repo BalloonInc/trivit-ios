@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Settings.h"
 
-@interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
