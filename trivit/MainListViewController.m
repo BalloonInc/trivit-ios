@@ -230,7 +230,13 @@
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:tap];
-
+    
+    // background working on all devices
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]]; // init UIImageView with background image (30x30@2x)
+    imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
+    self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
+    self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
