@@ -102,6 +102,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
  }
 
 */
+
 -(UIColor*)cellBackColor
 {
     if (!_cellBackColor){
@@ -114,15 +115,17 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     }
     return _cellBackColor;
 }
--(UIColor*)cellBackColorDark {
+
+-(UIColor*)cellBackColorDark
+{
     if (!_cellBackColorDark){
         _cellBackColorDark = [Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsDark]];
     }
     return _cellBackColorDark;
 }
 
-
--(Counter*)counter{
+-(Counter*)counter
+{
     if (!_counter){_counter = [[Counter alloc] init];}
     return _counter;
 }
@@ -136,16 +139,30 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.countLabel.textColor = [UIColor whiteColor];
     [self.countLabel.layer setCornerRadius:8.0];
     [self.countLabel.layer setMasksToBounds:YES];
-    self.countLabel.alpha = 0;
     
     self.countLabel.text = @(integer).stringValue;
     
+    //Animation
+    self.countLabel.alpha = 0;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationDelegate:self];
     self.countLabel.alpha = 1.0;
     [UIView commitAnimations];
     [self setAccessoryView:self.countLabel];
+}
+
+- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
+{
+    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
+    self.titleLabelTextField.text =  self.counter.title;
+    self.titleLabelTextField.textColor = [UIColor whiteColor];
+    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
+    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
+    [self.titleLabelTextField setHidden:YES];
+    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
+    self.titleLabelTextField.delegate = self;
+    [self addSubview: self.titleLabelTextField];
 }
 
 - (void)drawRect:(CGRect)rect
@@ -180,17 +197,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     
     [self configureCountLabelWithInteger:self.counter.countForTally];
     
+    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
     
-    // title UITextField settings
-    self.titleLabelTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
-    self.titleLabelTextField.text =  self.counter.title;
-    self.titleLabelTextField.textColor = [UIColor whiteColor];
-    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
-    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
-    [self.titleLabelTextField setHidden:YES];
-    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
-    self.titleLabelTextField.delegate = self;
-    [self addSubview: self.titleLabelTextField];
 
     if (!self.isCollapsed){
         
@@ -275,8 +283,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     //self.contentMode = UIViewContentModeRedraw;
 }
 
-
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -286,8 +292,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     return self;
 }
 
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -295,26 +301,19 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     return self;
 }
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     [self setup];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
-// function testing
-
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    if (textField == self.titleLabelTextField) {
-        return textField.text;
-    }
-    return YES;    
-}
-
+// Editing of the label (UITextField)
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.titleLabelTextField) {
