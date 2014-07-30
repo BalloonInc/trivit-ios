@@ -49,10 +49,8 @@
 {
     // add random identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)[self.tallies count]]];
-    
-    // After being pressed to create a new cell the tableView scrolls to the new object
-    if (self.tallies.count > 0)
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 -(void) addItem
@@ -161,6 +159,11 @@
 
 #pragma mark - Magic to make the tableview datasource working
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.view.userInteractionEnabled = NO;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
@@ -238,7 +241,7 @@
     [super viewDidLoad];
     
     [self configureTableView];
-    // add test tally
+    
     [self addItemWithTitle:@"Drinks"];
     [self addItemWithTitle:@"Days without smoking"];
     [self addItemWithTitle:@"Went swimming this year"];
@@ -252,17 +255,16 @@
     UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    
     UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longTap.minimumPressDuration = 1.0;
+    longTap.minimumPressDuration = 0.8;
     
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:tap];
     [self.tableView addGestureRecognizer:longTap];
     
-    // background working on all devices
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]]; // init UIImageView with background image (30x30@2x)
+    // add background
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]];
     imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
     self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
     self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
@@ -284,13 +286,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //hide navigation bar
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     //colorset_func
     //[self resetColors];
     [super viewWillAppear:animated];
-    
 }
 
 #pragma mark - more functions
