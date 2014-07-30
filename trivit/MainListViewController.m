@@ -127,15 +127,23 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
-    if (tappedView==tappedCell.titleLabelForTally){
-        [self handleTallyCollapse:recognizer];
+    NSLog(@"tap %@",tappedCell.counter.title);
+    NSLog(@"tap %d",recognizer.numberOfTouches);
+
+    if(recognizer.numberOfTouches == 1) {
+        if(tappedView==tappedCell.counterLabelForTally){
+            [self handleTallyIncrease:recognizer];
+        }
         
-    }
-    else if(tappedView==tappedCell.counterLabelForTally){
-        [self handleTallyIncrease:recognizer];
-    }
-    else{
-        NSLog(@"You tapped on a very weird spot");
+        else if (CGRectContainsPoint(tappedCell.frame, tapLocation)){
+            [self handleTallyCollapse:recognizer];
+            
+        }
+        else{
+            NSLog(@"You tapped on a very weird spot");
+            //[self handleTallyCollapse:recognizer];
+            
+        }
     }
 }
 
@@ -149,13 +157,18 @@
     else if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"long press on tableview at row %tu", indexPath.row);
         TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        
+        NSLog(@"long press %@",tappedCell.counter.title);
         // only disappear using the LongPress gesture, reappearing is handled by end of editing
-        [tappedCell.titleLabelForTally setHidden:YES];
-        [tappedCell.titleLabelTextField setHidden:NO];
-        [tappedCell.titleLabelTextField becomeFirstResponder];
+        tappedCell.titleTextField.enabled = YES;
+        [tappedCell.titleTextField becomeFirstResponder];
     }
 }
+
+// to make the tap also valid on UITextview
+//-(BOOL)gestureRecognizer:(UITapGestureRecognizer *)tapG shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    return YES;
+//}
 
 #pragma mark - Magic to make the tableview datasource working
 
@@ -204,14 +217,14 @@
          *   Actually create a new cell (with an identifier so that it can be dequeued).
          */
         cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(CellIdentifier,nil);
         cell.isCollapsed = true;
         [self.tableView reloadData];
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
         cell.counter.title = [[self.tallies[indexPath.row] counter] title];
         cell.cellIdentifier = (int)indexPath.row;
-        cell.titleLabelTextField.delegate = self;
+        cell.titleTextField.delegate = self;
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
     }

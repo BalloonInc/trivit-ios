@@ -23,11 +23,11 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic,strong) UIImageView *modImage;
 @property (nonatomic,strong) UICollectionView *images;
 
-@property (strong, nonatomic) UILabel *titleLabelForTally;
+@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
 
-@property (strong, nonatomic) IBOutlet UITextField *titleLabelTextField;
+//@property (strong, nonatomic) IBOutlet UITextField *titleLabelTextField;
 
 //colorset_func
 //@property (nonatomic,strong) NSArray *colorset;

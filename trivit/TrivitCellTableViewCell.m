@@ -153,22 +153,22 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self setAccessoryView:self.countLabel];
 }
 
-- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
-{
-    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
-    self.titleLabelTextField.text =  self.counter.title;
-    self.titleLabelTextField.textColor = [UIColor whiteColor];
-    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
-    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
-    [self.titleLabelTextField setHidden:YES];
-    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
-    self.titleLabelTextField.delegate = self;
-    [self addSubview: self.titleLabelTextField];
-}
+//- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
+//{
+//    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
+//    self.titleLabelTextField.text =  self.counter.title;
+//    self.titleLabelTextField.textColor = [UIColor whiteColor];
+//    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
+//    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
+//    [self.titleLabelTextField setHidden:YES];
+//    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
+//    self.titleLabelTextField.delegate = self;
+//    [self addSubview: self.titleLabelTextField];
+//}
 
 - (void)drawRect:(CGRect)rect
 {
-    [self.titleLabelForTally removeFromSuperview];
+    [self.titleTextField removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
     [self.countLabel removeFromSuperview];
     [self.images removeFromSuperview];
@@ -188,22 +188,26 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [recta fill];
     
     // Label in first section
-    self.titleLabelForTally = [[UILabel alloc] initWithFrame:boundsTitleLabel];
+    self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.firstLineHeadIndent = 10;
     NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.counter.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
-    self.titleLabelForTally.attributedText = attributedTitle;
-//    self.titleLabelForTally.text = self.counter.title;
-    self.titleLabelForTally.textColor = [UIColor whiteColor]; // whiteColor text
-    //test tap gesture on subview
-    self.titleLabelForTally.userInteractionEnabled = true;
-    self.titleLabelForTally.backgroundColor = self.cellBackColor;
-    [self addSubview: self.titleLabelForTally];
+    self.titleTextField.attributedText = attributedTitle;
+    self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
+    self.titleTextField.userInteractionEnabled = true;
+    self.titleTextField.backgroundColor = self.cellBackColor;
+    self.titleTextField.enabled = NO;
+    self.titleTextField.returnKeyType = UIReturnKeyDone;
+    self.titleTextField.keyboardType = UIKeyboardAppearanceDefault;
+    self.titleTextField.tintColor = [UIColor lightTextColor]; // white Carret
+    self.titleTextField.delegate = self;
+    self.titleTextField.gestureRecognizers = nil;
+    [self addSubview: self.titleTextField];
     
     
     [self configureCountLabelWithInteger:self.counter.countForTally];
     
-    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
+//    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
     
 
     if (!self.isCollapsed){
@@ -312,12 +316,12 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 // Editing of the label (UITextField)
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.titleLabelTextField) {
+    if (textField == self.titleTextField) {
         [textField resignFirstResponder];
         self.counter.title = textField.text;
-        self.titleLabelForTally.text = textField.text; // This one also needs to be updated, bad code, should be dealt with in the background.
-        [self.titleLabelTextField setHidden:YES];
-        [self.titleLabelForTally setHidden:NO];
+        self.titleTextField.text = textField.text;
+        self.titleTextField.enabled = NO;
+        
     }
     return YES;
 }
