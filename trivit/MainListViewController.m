@@ -256,7 +256,7 @@
     [self configureTableView];
     
     [self addItemWithTitle:@"Drinks"];
-    [self addItemWithTitle:@"Days without smoking" andCount:555];
+    [self addItemWithTitle:@"Days without smoking" andCount:10];
     [self addItemWithTitle:@"Went swimming this year" andCount:2];
     
 }

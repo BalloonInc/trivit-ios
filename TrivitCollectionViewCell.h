@@ -13,4 +13,6 @@
 @property (nonatomic) NSInteger count;
 @property (nonatomic) int countForTally;
 
+//-(void) drawRect:(CGRect)rect
+
 @end

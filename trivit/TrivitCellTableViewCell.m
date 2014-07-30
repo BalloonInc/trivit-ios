@@ -232,20 +232,27 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images setDelegate:self];
         [self.images setBackgroundColor:nil];
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+        self.images.delegate = self;
         [self addSubview:self.images];
         
         self.accessoryView = nil; // no accessoryView in expanded mode
         
         self.modImage = [[UIImageView alloc] init];
-//        long fullTally = self.counter.countForTally/5;
         
-//        if(fullTally>0){
-//            for (int i=0; i<fullTally; i++) {
-//                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
-//                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
-//                [gridcell addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tally_5"]]];
-//            }
-//        }
+        long fullTally = self.counter.countForTally/5;
+        
+        if(fullTally>0){
+            for (int i=0; i<fullTally; i++) {
+                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
+                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
+                UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
+                [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
+                [gridcell addSubview:tallyImage];
+                
+                [self.images reloadData];
+
+            }
+        }
         int mod = self.counter.countForTally % 5;
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
@@ -281,11 +288,45 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 -(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    //gridcell.backgroundColor = [Colors colorWithHexString:@"BADA55"];
+    
+    if(gridcell == nil)
+    {
+        gridcell = [[UICollectionViewCell alloc] init];
+    }
+    
+    gridcell.backgroundColor = [Colors colorWithIndex:indexPath.row];
+    gridcell.frame = CGRectMake(gridcell.bounds.origin.x, gridcell.bounds.origin.y, 32, 32);
+    NSLog(@"x: %i", gridcell.bounds.origin.x);
+    NSLog(@"y: %i", gridcell.frame.origin.y);
+
+    UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
+    [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
+    [gridcell addSubview:tallyImage];
     
     return gridcell;
 }
 
+#pragma mark Collection view layout things
+// Layout: Set cell size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize mElementSize = CGSizeMake(32, 32);
+    return mElementSize;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+// Layout: Set Edges
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
