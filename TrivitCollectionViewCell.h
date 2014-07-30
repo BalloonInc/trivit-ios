@@ -10,4 +10,7 @@
 
 @interface TrivitCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic) NSInteger count;
+@property (nonatomic) int countForTally;
+
 @end

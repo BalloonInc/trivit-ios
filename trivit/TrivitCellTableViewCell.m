@@ -206,13 +206,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [[self cellBackColorDark] setFill];
         [recta2 fill];
         
-        UIBezierPath *aPath = [UIBezierPath bezierPath];
-        [aPath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
-        [aPath addLineToPoint:CGPointMake(20.0, 10.0+CELL_HEIGHT_SECTION1)];
-        [aPath addLineToPoint:CGPointMake(30.0, 0.0+CELL_HEIGHT_SECTION1)];
-        [aPath closePath];
+        UIBezierPath *trianglePath = [UIBezierPath bezierPath];
+        [trianglePath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
+        [trianglePath addLineToPoint:CGPointMake(20.0, 10.0+CELL_HEIGHT_SECTION1)];
+        [trianglePath addLineToPoint:CGPointMake(30.0, 0.0+CELL_HEIGHT_SECTION1)];
+        [trianglePath closePath];
         [[self cellBackColor] setFill];
-        [aPath fill];
+        [trianglePath fill];
         
         // Image tally marks
         
@@ -260,28 +260,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 */
 
-#pragma mark - Magic to make the UICollectionview datasource work
-
--(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 150;
-    return self.counter.countForTally/5+1;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    //gridcell.backgroundColor = [Colors colorWithHexString:@"BADA55"];
-
-    return gridcell;
-}
-
--(void) setup
-{
-    //self.backgroundColor = nil;
-    //self.opaque = false;
-    //self.contentMode = UIViewContentModeRedraw;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -301,10 +279,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     return self;
 }
 
-- (void)awakeFromNib
-{
-    [self setup];
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
