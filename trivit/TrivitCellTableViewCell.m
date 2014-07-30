@@ -140,6 +140,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self.countLabel.layer setCornerRadius:8.0];
     [self.countLabel.layer setMasksToBounds:YES];
     
+    
     self.countLabel.text = @(integer).stringValue;
     
     //Animation
@@ -174,7 +175,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self.modImage removeFromSuperview];
     
     // Bounds
-    CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-10, CELL_HEIGHT_SECTION1);
+    CGRect boundsTitleLabel = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
     CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
     CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
     
@@ -188,10 +189,15 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     
     // Label in first section
     self.titleLabelForTally = [[UILabel alloc] initWithFrame:boundsTitleLabel];
-    self.titleLabelForTally.text = self.counter.title;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.firstLineHeadIndent = 10;
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.counter.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
+    self.titleLabelForTally.attributedText = attributedTitle;
+//    self.titleLabelForTally.text = self.counter.title;
     self.titleLabelForTally.textColor = [UIColor whiteColor]; // whiteColor text
     //test tap gesture on subview
     self.titleLabelForTally.userInteractionEnabled = true;
+    self.titleLabelForTally.backgroundColor = self.cellBackColor;
     [self addSubview: self.titleLabelForTally];
     
     
@@ -259,6 +265,22 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
 }
 */
+
+#pragma mark - Magic to make the UICollectionview datasource work
+
+-(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 150;
+    return self.counter.countForTally/5+1;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
+    //gridcell.backgroundColor = [Colors colorWithHexString:@"BADA55"];
+    
+    return gridcell;
+}
 
 
 - (instancetype)initWithFrame:(CGRect)frame

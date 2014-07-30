@@ -118,7 +118,7 @@
         [self.expandedTrivits removeObject:swipedIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
-    
+//    [self.tableView reloadData];
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
