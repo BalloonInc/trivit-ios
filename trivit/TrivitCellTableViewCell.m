@@ -153,19 +153,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self setAccessoryView:self.countLabel];
 }
 
-//- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
-//{
-//    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
-//    self.titleLabelTextField.text =  self.counter.title;
-//    self.titleLabelTextField.textColor = [UIColor whiteColor];
-//    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
-//    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
-//    [self.titleLabelTextField setHidden:YES];
-//    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
-//    self.titleLabelTextField.delegate = self;
-//    [self addSubview: self.titleLabelTextField];
-//}
-
 - (void)drawRect:(CGRect)rect
 {
     [self.titleTextField removeFromSuperview];
@@ -206,9 +193,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     
     
     [self configureCountLabelWithInteger:(int)self.counter.countForTally];
-    
-//    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
-    
 
     if (!self.isCollapsed){
         
@@ -240,6 +224,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self.images reloadData];
+        self.images.clipsToBounds = YES;
         
         [self addSubview:self.images];
         
@@ -332,13 +317,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGSize mElementSize = CGSizeMake(30, 30);
+    CGSize mElementSize = CGSizeMake(32, 32);
     return mElementSize;
 }
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(10,0,0,0);
+    return UIEdgeInsetsMake(15,5,0,0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
