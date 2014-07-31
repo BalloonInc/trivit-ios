@@ -163,7 +163,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     
     // Bounds
     CGRect boundsTitleLabel = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
-    CGRect boundsCountLabel = CGRectMake(10, CELL_HEIGHT_SECTION1, self.frame.size.width-10, self.frame.size.height-CELL_HEIGHT_SECTION1);
+    CGRect boundsCountLabel = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
     CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
     
     // first section
@@ -224,7 +224,16 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self.images reloadData];
-        self.images.clipsToBounds = YES;
+        
+        
+        
+        self.images.alpha = 0;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDelay:0.1];
+        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDelegate:self];
+        self.images.alpha = 1.0;
+        [UIView commitAnimations];
         
         [self addSubview:self.images];
         
@@ -232,8 +241,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         self.counterLabelForTally.textColor = [UIColor whiteColor];
         self.counterLabelForTally.userInteractionEnabled=true;
         [self addSubview: self.counterLabelForTally];
-        
-
         
     }
 
