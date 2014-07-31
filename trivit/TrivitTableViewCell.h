@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Counter.h"
 
-@interface TrivitCellTableViewCell : UITableViewCell <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
+@interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
 
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;

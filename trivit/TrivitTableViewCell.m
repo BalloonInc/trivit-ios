@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "TrivitCellTableViewCell.h"
+#import "TrivitTableViewCell.h"
 #import "Colors.h"
 
-@interface TrivitCellTableViewCell()
+@interface TrivitTableViewCell()
 
 @end
 
-@implementation TrivitCellTableViewCell
+@implementation TrivitTableViewCell
 
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
@@ -153,19 +153,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self setAccessoryView:self.countLabel];
 }
 
-//- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
-//{
-//    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
-//    self.titleLabelTextField.text =  self.counter.title;
-//    self.titleLabelTextField.textColor = [UIColor whiteColor];
-//    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
-//    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
-//    [self.titleLabelTextField setHidden:YES];
-//    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
-//    self.titleLabelTextField.delegate = self;
-//    [self addSubview: self.titleLabelTextField];
-//}
-
 - (void)drawRect:(CGRect)rect
 {
     [self.titleTextField removeFromSuperview];
@@ -243,21 +230,27 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         
         if(fullTally>0){
             for (int i=0; i<fullTally; i++) {
-                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
+                
+                /*NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
                 UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
                 UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
                 [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
-                [gridcell addSubview:tallyImage];
+                //[gridcell addSubview:tallyImage];*/
                 
-                [self.images reloadData];
 
             }
         }
+        
         int mod = self.counter.countForTally % 5;
+        NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:self.counter.countForTally/5];
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
+        UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
+        
         self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
-        [self addSubview:self.modImage];
+        //[self addSubview:self.modImage];
+        
+        
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
 //        self.counterLabelForTally.text = self.counterString;
@@ -281,7 +274,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 -(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 150;
+    //return 150;
     return self.counter.countForTally/5+1;
 }
 
@@ -289,21 +282,31 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
     
-    if(gridcell == nil)
+    /*if(gridcell == nil)
     {
         gridcell = [[UICollectionViewCell alloc] init];
-    }
+    }*/
     
-    gridcell.backgroundColor = [Colors colorWithIndex:indexPath.row];
-    gridcell.frame = CGRectMake(gridcell.bounds.origin.x, gridcell.bounds.origin.y, 32, 32);
-    NSLog(@"x: %i", gridcell.bounds.origin.x);
-    NSLog(@"y: %i", gridcell.frame.origin.y);
+    //gridcell.backgroundColor = [Colors colorWithIndex:indexPath.row];
+    
+    gridcell.bounds = CGRectMake(gridcell.frame.origin.x, gridcell.frame.origin.y-7, 32, 32);
 
     UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
-    [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
+    [tallyImage setImage:[self imageAtLocation:indexPath.row]];
     [gridcell addSubview:tallyImage];
     
     return gridcell;
+}
+
+-(UIImage*) imageAtLocation: (NSInteger) index
+{
+    int div = self.counter.countForTally / 5;
+    int mod = self.counter.countForTally % 5;
+    if (index < div)
+        return [UIImage imageNamed:@"tally_5"];
+    
+    
+    return [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
 }
 
 #pragma mark Collection view layout things

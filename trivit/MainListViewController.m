@@ -7,12 +7,12 @@
 //
 
 #import "MainListViewController.h"
-#import "TrivitCellTableViewCell.h"
+#import "TrivitTableViewCell.h"
 #import "settingsViewController.h"
 #import "Colors.h"
 
 @interface MainListViewController ()
-@property (strong, nonatomic) TrivitCellTableViewCell *firstCell;
+@property (strong, nonatomic) TrivitTableViewCell *firstCell;
 @end
 
 @implementation MainListViewController
@@ -65,7 +65,7 @@
 
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
-    TrivitCellTableViewCell *newCell = [[TrivitCellTableViewCell alloc] init];
+    TrivitTableViewCell *newCell = [[TrivitTableViewCell alloc] init];
     newCell.counter.title = title;
     newCell.counter.countForTally = count;
     [self.tallies addObject:newCell];
@@ -79,7 +79,7 @@
 {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
         [swipedCell resetTallyCounter];
     
@@ -87,10 +87,9 @@
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)recognizer
 {
-    NSLog(@"handleTallyIncrease");
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
         [swipedCell increaseTallyCounter];
     
@@ -100,7 +99,7 @@
 {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
         [swipedCell decreaseTallyCounter];
     
@@ -110,7 +109,7 @@
 {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     swipedCell.isCollapsed = !swipedCell.isCollapsed;
     if (!swipedCell.isCollapsed)
         [self.expandedTrivits addObject:swipedIndexPath];
@@ -125,10 +124,8 @@
 {
     CGPoint tapLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
-    NSLog(@"tap %@",tappedCell.counter.title);
-    NSLog(@"tap %d",recognizer.numberOfTouches);
 
     if(recognizer.numberOfTouches == 1) {
         if(tappedView==tappedCell.counterLabelForTally){
@@ -152,12 +149,10 @@
     CGPoint tapLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     if(indexPath == nil) {
-        NSLog(@"long press but were?");
+        NSLog(@"long press but where?");
     }
     else if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"long press on tableview at row %tu", indexPath.row);
-        TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"long press %@",tappedCell.counter.title);
+        TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         // only disappear using the LongPress gesture, reappearing is handled by end of editing
         tappedCell.titleTextField.enabled = YES;
         [tappedCell.titleTextField becomeFirstResponder];
@@ -206,7 +201,7 @@
     
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
 
-    TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     /*
      *   If the cell is nil it means no cell was available for reuse and that we should
@@ -216,7 +211,7 @@
         /*
          *   Actually create a new cell (with an identifier so that it can be dequeued).
          */
-        cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(CellIdentifier,nil);
         cell.isCollapsed = true;
@@ -228,7 +223,6 @@
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
     }
-    NSLog(@"cellForRowAtIndexPath: cell_%i is now: %@",cell.cellIdentifier,cell.isCollapsed?@"collapsed":@"expanded");
 
     /* Now that the cell is configured we return it to the table view so that it can display it */
     return cell;
@@ -256,7 +250,7 @@
     [self configureTableView];
     
     [self addItemWithTitle:@"Drinks"];
-    [self addItemWithTitle:@"Days without smoking" andCount:10];
+    [self addItemWithTitle:@"Days without smoking" andCount:9];
     [self addItemWithTitle:@"Went swimming this year" andCount:2];
     
 }
@@ -279,7 +273,7 @@
     // add background
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]];
     imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
-    self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
+    //self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
     self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
     
 }
