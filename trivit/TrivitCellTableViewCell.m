@@ -303,6 +303,11 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 18) ? NO : YES;
+}
+
 #pragma mark - Magic to make the UICollectionview datasource work
 
 -(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
