@@ -205,7 +205,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self addSubview: self.titleTextField];
     
     
-    [self configureCountLabelWithInteger:self.counter.countForTally];
+    [self configureCountLabelWithInteger:(int)self.counter.countForTally];
     
 //    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
     
@@ -233,38 +233,29 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images setBackgroundColor:nil];
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         self.images.delegate = self;
-        [self addSubview:self.images];
         
         self.accessoryView = nil; // no accessoryView in expanded mode
         
         self.modImage = [[UIImageView alloc] init];
         
-        long fullTally = self.counter.countForTally/5;
+        [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+        [self.images reloadData];
         
-        if(fullTally>0){
-            for (int i=0; i<fullTally; i++) {
-                NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
-                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
-                UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
-                [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
-                [gridcell addSubview:tallyImage];
-                
-                [self.images reloadData];
+        [self addSubview:self.images];
 
-            }
-        }
+        if(NO) {
         int mod = self.counter.countForTally % 5;
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
         self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
         [self addSubview:self.modImage];
+        }
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
-//        self.counterLabelForTally.text = self.counterString;
         self.counterLabelForTally.textColor = [UIColor whiteColor];
-        //test tap gesture on subview
         self.counterLabelForTally.userInteractionEnabled=true;
         [self addSubview: self.counterLabelForTally];
+        
 
     }
 
@@ -277,56 +268,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 */
 
-#pragma mark - Magic to make the UICollectionview datasource work
 
--(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 150;
-    return self.counter.countForTally/5+1;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    
-    if(gridcell == nil)
-    {
-        gridcell = [[UICollectionViewCell alloc] init];
-    }
-    
-    gridcell.backgroundColor = [Colors colorWithIndex:indexPath.row];
-    gridcell.frame = CGRectMake(gridcell.bounds.origin.x, gridcell.bounds.origin.y, 32, 32);
-    NSLog(@"x: %i", gridcell.bounds.origin.x);
-    NSLog(@"y: %i", gridcell.frame.origin.y);
-
-    UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
-    [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
-    [gridcell addSubview:tallyImage];
-    
-    return gridcell;
-}
-
-#pragma mark Collection view layout things
-// Layout: Set cell size
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGSize mElementSize = CGSizeMake(32, 32);
-    return mElementSize;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
-}
-
-// Layout: Set Edges
-- (UIEdgeInsets)collectionView:
-(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -347,10 +289,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 
 
+#pragma mark TextField closings
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -366,6 +311,57 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     }
     return YES;
 }
+
+#pragma mark - Magic to make the UICollectionview datasource work
+
+-(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.counter.countForTally/5+1;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
+    int tmp = self.counter.countForTally % 5;
+//    if(indexPath.item > self.counter.countForTally/5+1) {
+//        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
+//    }
+//    else {
+//        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
+//    }
+    gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
+    for (int i=0; i < indexPath.item; i++) {
+        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
+    }
+    
+    
+    return gridcell;
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize mElementSize = CGSizeMake(30, 30);
+    return mElementSize;
+}
+
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
 
 
 @end
