@@ -225,17 +225,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self.images reloadData];
         
-        
-        
-        self.images.alpha = 0;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDelay:0.1];
-        [UIView setAnimationDuration:0.3];
-        [UIView setAnimationDelegate:self];
-        self.images.alpha = 1.0;
-        [UIView commitAnimations];
+        if(self.loadAnimation) {
+            [self onLoadAnimation];
+            self.loadAnimation = NO;
+        }
         
         [self addSubview:self.images];
+        
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
@@ -253,6 +249,16 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 */
 
+-(void) onLoadAnimation
+{
+    self.images.alpha = 0;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.1];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDelegate:self];
+    self.images.alpha = 1.0;
+    [UIView commitAnimations];
+}
 
 
 - (instancetype)initWithFrame:(CGRect)frame

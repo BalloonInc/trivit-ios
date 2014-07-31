@@ -111,14 +111,16 @@
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    
     swipedCell.isCollapsed = !swipedCell.isCollapsed;
+    swipedCell.loadAnimation = YES;
     if (!swipedCell.isCollapsed)
         [self.expandedTrivits addObject:swipedIndexPath];
     else
         [self.expandedTrivits removeObject:swipedIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
-//    [self.tableView reloadData];
+    
 }
 
 -(void)handleTap: (UIGestureRecognizer *)recognizer
@@ -127,8 +129,6 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
-    NSLog(@"tap %@",tappedCell.counter.title);
-    NSLog(@"tap %d",recognizer.numberOfTouches);
 
     if(recognizer.numberOfTouches == 1) {
         if(tappedView==tappedCell.counterLabelForTally){

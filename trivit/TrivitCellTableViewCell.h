@@ -23,6 +23,7 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic,strong) UIColor *cellBackColorDark;
 @property (nonatomic,strong) UIImageView *modImage;
 @property (nonatomic,strong) UICollectionView *images;
+@property (nonatomic) BOOL loadAnimation;
 
 @property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
@@ -36,6 +37,9 @@ extern float const CELL_HEIGHT_SECTION2;
 - (void)decreaseTallyCounter;
 - (void)increaseTallyCounter;
 - (void)resetTallyCounter;
+
+- (void) onLoadAnimation;
+
 //colorset_func
 //- (void) resetColor;
 
