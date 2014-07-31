@@ -242,14 +242,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images reloadData];
         
         [self addSubview:self.images];
-
-        if(NO) {
-        int mod = self.counter.countForTally % 5;
-        UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
-        self.modImage.image=myimg;
-        self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
-        [self addSubview:self.modImage];
-        }
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
@@ -346,7 +338,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0,0,0,0);
+    return UIEdgeInsetsMake(10,0,0,0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
