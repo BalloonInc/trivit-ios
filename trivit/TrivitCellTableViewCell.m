@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "TrivitTableViewCell.h"
+#import "TrivitCellTableViewCell.h"
 #import "Colors.h"
 
-@interface TrivitTableViewCell()
+@interface TrivitCellTableViewCell()
 
 @end
 
-@implementation TrivitTableViewCell
+@implementation TrivitCellTableViewCell
 
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
@@ -153,6 +153,19 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self setAccessoryView:self.countLabel];
 }
 
+//- (void) configureTitleLabelTextFieldWithBounds: (CGRect*) bounds
+//{
+//    self.titleLabelTextField = [[UITextField alloc] initWithFrame:*bounds];
+//    self.titleLabelTextField.text =  self.counter.title;
+//    self.titleLabelTextField.textColor = [UIColor whiteColor];
+//    self.titleLabelTextField.returnKeyType = UIReturnKeyDone;
+//    self.titleLabelTextField.keyboardType = UIKeyboardAppearanceDefault;
+//    [self.titleLabelTextField setHidden:YES];
+//    self.titleLabelTextField.tintColor = [UIColor lightTextColor]; // white Carret
+//    self.titleLabelTextField.delegate = self;
+//    [self addSubview: self.titleLabelTextField];
+//}
+
 - (void)drawRect:(CGRect)rect
 {
     [self.titleTextField removeFromSuperview];
@@ -228,40 +241,15 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self.images reloadData];
         
-<<<<<<< HEAD:trivit/TrivitTableViewCell.m
-        if(fullTally>0){
-            for (int i=0; i<fullTally; i++) {
-                
-                /*NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:i];
-                UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
-                UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
-                [tallyImage setImage:[UIImage imageNamed:@"tally_5"]];
-                //[gridcell addSubview:tallyImage];*/
-                
-
-            }
-        }
-        
-=======
         [self addSubview:self.images];
 
         if(NO) {
->>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
         int mod = self.counter.countForTally % 5;
-        NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:self.counter.countForTally/5];
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
         self.modImage.image=myimg;
-        UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
-        
         self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
-<<<<<<< HEAD:trivit/TrivitTableViewCell.m
-        //[self addSubview:self.modImage];
-        
-        
-=======
         [self addSubview:self.modImage];
         }
->>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
@@ -280,55 +268,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 */
 
-<<<<<<< HEAD:trivit/TrivitTableViewCell.m
-#pragma mark - Magic to make the UICollectionview datasource work
-
--(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    //return 150;
-    return self.counter.countForTally/5+1;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    
-    /*if(gridcell == nil)
-    {
-        gridcell = [[UICollectionViewCell alloc] init];
-    }*/
-    
-    //gridcell.backgroundColor = [Colors colorWithIndex:indexPath.row];
-    
-    gridcell.bounds = CGRectMake(gridcell.frame.origin.x, gridcell.frame.origin.y-7, 32, 32);
-
-    UIImageView *tallyImage = [[UIImageView alloc] initWithFrame:gridcell.frame];
-    [tallyImage setImage:[self imageAtLocation:indexPath.row]];
-    [gridcell addSubview:tallyImage];
-    
-    return gridcell;
-}
-
--(UIImage*) imageAtLocation: (NSInteger) index
-{
-    int div = self.counter.countForTally / 5;
-    int mod = self.counter.countForTally % 5;
-    if (index < div)
-        return [UIImage imageNamed:@"tally_5"];
-    
-    
-    return [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
-}
-
-#pragma mark Collection view layout things
-// Layout: Set cell size
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGSize mElementSize = CGSizeMake(32, 32);
-    return mElementSize;
-}
-=======
->>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
 
 
 - (instancetype)initWithFrame:(CGRect)frame
