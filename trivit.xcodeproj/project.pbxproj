@@ -13,7 +13,7 @@
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
 		6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB4F1978610400C1D381 /* MainListViewController.m */; };
-		6C8FBB531978627F00C1D381 /* TrivitCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB521978627F00C1D381 /* TrivitCellTableViewCell.m */; };
+		6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */; };
 		6C9025BC1984588300BB11FC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BB1984588300BB11FC /* Settings.m */; };
 		6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BE198458A500BB11FC /* settingsViewController.m */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
@@ -44,8 +44,8 @@
 		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
 		6C8FBB4E1978610400C1D381 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
 		6C8FBB4F1978610400C1D381 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
-		6C8FBB511978627F00C1D381 /* TrivitCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitCellTableViewCell.h; sourceTree = "<group>"; };
-		6C8FBB521978627F00C1D381 /* TrivitCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitCellTableViewCell.m; sourceTree = "<group>"; };
+		6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitTableViewCell.h; sourceTree = "<group>"; };
+		6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitTableViewCell.m; sourceTree = "<group>"; };
 		6C9025BA1984588300BB11FC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		6C9025BB1984588300BB11FC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		6C9025BD198458A500BB11FC /* settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsViewController.h; sourceTree = "<group>"; };
@@ -101,8 +101,8 @@
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
 				EC268A54198910B500944106 /* TrivitCollectionViewCell.h */,
 				EC268A55198910B500944106 /* TrivitCollectionViewCell.m */,
-				6C8FBB511978627F00C1D381 /* TrivitCellTableViewCell.h */,
-				6C8FBB521978627F00C1D381 /* TrivitCellTableViewCell.m */,
+				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
+				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
 				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
 				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
 				6C9025BD198458A500BB11FC /* settingsViewController.h */,
@@ -259,7 +259,7 @@
 				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
 				EC268A56198910B500944106 /* TrivitCollectionViewCell.m in Sources */,
-				6C8FBB531978627F00C1D381 /* TrivitCellTableViewCell.m in Sources */,
+				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
 				6C9025BC1984588300BB11FC /* Settings.m in Sources */,
 			);
