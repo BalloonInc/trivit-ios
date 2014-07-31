@@ -192,7 +192,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [self addSubview: self.titleTextField];
     
     
-    [self configureCountLabelWithInteger:self.counter.countForTally];
+    [self configureCountLabelWithInteger:(int)self.counter.countForTally];
     
 //    [self configureTitleLabelTextFieldWithBounds:&boundsTitleLabel];
     
@@ -220,14 +220,15 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self.images setBackgroundColor:nil];
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         self.images.delegate = self;
-        [self addSubview:self.images];
         
         self.accessoryView = nil; // no accessoryView in expanded mode
         
         self.modImage = [[UIImageView alloc] init];
         
-        long fullTally = self.counter.countForTally/5;
+        [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+        [self.images reloadData];
         
+<<<<<<< HEAD:trivit/TrivitTableViewCell.m
         if(fullTally>0){
             for (int i=0; i<fullTally; i++) {
                 
@@ -241,6 +242,11 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
             }
         }
         
+=======
+        [self addSubview:self.images];
+
+        if(NO) {
+>>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
         int mod = self.counter.countForTally % 5;
         NSIndexPath *indexpath = [[NSIndexPath alloc] initWithIndex:self.counter.countForTally/5];
         UIImage *myimg = [UIImage imageNamed:[NSString stringWithFormat:@"tally_%i",mod]];
@@ -248,16 +254,20 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         UICollectionViewCell *gridcell = [self.images cellForItemAtIndexPath:indexpath];
         
         self.modImage.frame = CGRectMake(10, 10.+CELL_HEIGHT_SECTION1, 32, 32);
+<<<<<<< HEAD:trivit/TrivitTableViewCell.m
         //[self addSubview:self.modImage];
         
         
+=======
+        [self addSubview:self.modImage];
+        }
+>>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
-//        self.counterLabelForTally.text = self.counterString;
         self.counterLabelForTally.textColor = [UIColor whiteColor];
-        //test tap gesture on subview
         self.counterLabelForTally.userInteractionEnabled=true;
         [self addSubview: self.counterLabelForTally];
+        
 
     }
 
@@ -270,6 +280,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 */
 
+<<<<<<< HEAD:trivit/TrivitTableViewCell.m
 #pragma mark - Magic to make the UICollectionview datasource work
 
 -(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
@@ -316,20 +327,9 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     CGSize mElementSize = CGSizeMake(32, 32);
     return mElementSize;
 }
+=======
+>>>>>>> 417f0efdbf383b56f9c69174e241ea62b97acf75:trivit/TrivitCellTableViewCell.m
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
-}
-
-// Layout: Set Edges
-- (UIEdgeInsets)collectionView:
-(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -350,10 +350,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 }
 
 
+#pragma mark TextField closings
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -369,6 +372,57 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     }
     return YES;
 }
+
+#pragma mark - Magic to make the UICollectionview datasource work
+
+-(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.counter.countForTally/5+1;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
+    int tmp = self.counter.countForTally % 5;
+//    if(indexPath.item > self.counter.countForTally/5+1) {
+//        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
+//    }
+//    else {
+//        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
+//    }
+    gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
+    for (int i=0; i < indexPath.item; i++) {
+        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
+    }
+    
+    
+    return gridcell;
+}
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize mElementSize = CGSizeMake(30, 30);
+    return mElementSize;
+}
+
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
 
 
 @end

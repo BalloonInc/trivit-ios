@@ -11,8 +11,7 @@
 @interface TrivitCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic) NSInteger count;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) int countForTally;
-
-//-(void) drawRect:(CGRect)rect
 
 @end
