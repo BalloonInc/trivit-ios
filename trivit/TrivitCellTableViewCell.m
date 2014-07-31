@@ -257,6 +257,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [self addSubview: self.counterLabelForTally];
         
 
+        
     }
 
 }
