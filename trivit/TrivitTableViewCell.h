@@ -10,7 +10,7 @@
 #import "Counter.h"
 #import "TrivitCollectionViewCell.h"
 
-@interface TrivitCellTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
+@interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
 
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;
@@ -25,11 +25,9 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic,strong) UICollectionView *images;
 @property (nonatomic) BOOL loadAnimation;
 
-@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
+@property (strong, nonatomic) UITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
-
-//@property (strong, nonatomic) IBOutlet UITextField *titleLabelTextField;
 
 //colorset_func
 //@property (nonatomic,strong) NSArray *colorset;

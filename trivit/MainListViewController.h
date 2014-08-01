@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Settings.h"
-#import "TrivitCellTableViewCell.h"
+#import "TrivitTableViewCell.h"
 
 @interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-@property (strong, nonatomic) TrivitCellTableViewCell *cellBeingEdited;
+@property (strong, nonatomic) TrivitTableViewCell *cellBeingEdited;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell

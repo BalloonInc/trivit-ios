@@ -6,17 +6,19 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "TrivitCellTableViewCell.h"
+#import "TrivitTableViewCell.h"
 #import "Colors.h"
 
-@interface TrivitCellTableViewCell()
+@interface TrivitTableViewCell()
 
 @end
 
-@implementation TrivitCellTableViewCell
+@implementation TrivitTableViewCell
 
+#pragma mark - Constants
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
+
 
 #pragma mark - update tally functions
 
@@ -63,6 +65,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.counterString = buttonLabelText;
 }
 
+
 #pragma mark - lazy instantiators
 
 -(void) setIsCollapsed:(BOOL)isCollapsed
@@ -70,7 +73,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     _isCollapsed = isCollapsed;
     [self setNeedsDisplay];
 }
-
 
 //colorset_func
 /*
@@ -96,9 +98,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
  [self setNeedsDisplay];
  }
  
- }
-
-*/
+ }*/
 
 -(UIColor*)cellBackColor
 {
@@ -188,7 +188,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.titleTextField.gestureRecognizers = nil;
     [self addSubview: self.titleTextField];
     
-    
     [self configureCountLabelWithInteger:(int)self.counter.countForTally];
 
     if (!self.isCollapsed){
@@ -206,7 +205,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         [trianglePath fill];
         
         // Image tally marks
-        
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection collectionViewLayout:layout];
         [self.images setDataSource:self];
@@ -226,17 +224,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
             [self onLoadAnimation];
             self.loadAnimation = NO;
         }
-        
         [self addSubview:self.images];
-        
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
         self.counterLabelForTally.userInteractionEnabled=true;
         [self addSubview: self.counterLabelForTally];
-        
     }
-
 }
 //colorset_func
 /*
@@ -256,7 +250,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.images.alpha = 1.0;
     [UIView commitAnimations];
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -278,7 +271,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 
 #pragma mark TextField closings
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -324,9 +316,9 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     if (indexPath.item > self.counter.countForTally/5-1) {
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
     }
-    
     return gridcell;
 }
+
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 

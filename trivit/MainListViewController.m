@@ -7,12 +7,12 @@
 //
 
 #import "MainListViewController.h"
-#import "TrivitCellTableViewCell.h"
+#import "TrivitTableViewCell.h"
 #import "settingsViewController.h"
 #import "Colors.h"
 
 @interface MainListViewController ()
-@property (strong, nonatomic) TrivitCellTableViewCell *firstCell;
+@property (strong, nonatomic) TrivitTableViewCell *firstCell;
 @end
 
 @implementation MainListViewController
@@ -66,7 +66,7 @@
 
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
-    TrivitCellTableViewCell *newCell = [[TrivitCellTableViewCell alloc] init];
+    TrivitTableViewCell *newCell = [[TrivitTableViewCell alloc] init];
     newCell.counter.title = title;
     newCell.counter.countForTally = count;
     [self.tallies addObject:newCell];
@@ -85,7 +85,7 @@
 
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
         [swipedCell resetTallyCounter];
     
@@ -95,7 +95,7 @@
 {
     CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *increasedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *increasedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!increasedCell.isCollapsed)
         [increasedCell increaseTallyCounter];
     
@@ -109,7 +109,7 @@
 
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
         [swipedCell decreaseTallyCounter];
     
@@ -119,7 +119,7 @@
 {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *collapseIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *collapseCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
+    TrivitTableViewCell *collapseCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
     
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     collapseCell.loadAnimation = YES;
@@ -140,7 +140,7 @@
     
     CGPoint tapLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *tappedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
+    TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     
     if(tappedView==tappedCell.counterLabelForTally){
@@ -164,7 +164,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"long press on tableview at row %tu", indexPath.row);
-        TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+        TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         
         if (self.cellBeingEdited)
             self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
@@ -203,12 +203,11 @@
 {
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
     
-    TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSLog(CellIdentifier,nil);
         cell.isCollapsed = true;
         [self.tableView reloadData];
         cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
@@ -300,7 +299,9 @@
     [super viewWillAppear:animated];
 }
 
-#pragma mark - more functions
+
+#pragma mark - settings
+
 //colorset_func
 /*
  -(void) resetColors
@@ -311,15 +312,7 @@
  }
  }
  */
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 #pragma mark - view resize on keyboard show
 
