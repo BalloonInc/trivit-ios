@@ -23,7 +23,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 - (void)increaseTallyCounter
 {
     [self.counter addTally];
-    NSLog(@"count: %li", (long)self.counter.countForTally);
     [self updateTallyString];
     [self setNeedsDisplay];
 }
@@ -33,7 +32,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     if ([self sureYouWantToReset])
     {
         [self.counter resetTally];
-        NSLog(@"count: %li", (long)self.counter.countForTally);
         [self updateTallyString];
         [self setNeedsDisplay];
     }
@@ -42,7 +40,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 - (void)decreaseTallyCounter
 {
     [self.counter decreaseTally];
-    NSLog(@"count: %li", (long)self.counter.countForTally);
     [self updateTallyString];
     [self setNeedsDisplay];
 }

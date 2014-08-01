@@ -151,6 +151,8 @@
 {
     CGPoint tapLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+    //save indexPath to show after keyboard hides
+    self.activeCellIndexPath = indexPath;
     if(indexPath == nil) {
         NSLog(@"long press but were?");
     }
@@ -181,6 +183,7 @@
 {
     
     if ([self.expandedTrivits containsObject:indexPath]) {
+        
         return CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2; // Full height
     }
     else {
@@ -189,33 +192,13 @@
     
 }
 
-/*
- *   the cellForRowAtIndexPath takes for argument the tableView (so if the same object
- *   is delegate for several tableViews it can identify which one is asking for a cell),
- *   and an idexPath which determines which row and section the cell is returned for.
- */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-     *   This is an important bit, it asks the table view if it has any available cells
-     *   already created which it is not using (if they are offscreen), so that it can
-     *   reuse them (saving the time of alloc/init/load from xib a new cell ).
-     *   The identifier is there to differentiate between different types of cells
-     *   (you can display different types of cells in the same table view)
-     */
-    
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
 
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    /*
-     *   If the cell is nil it means no cell was available for reuse and that we should
-     *   create a new one.
-     */
     if (cell == nil) {
-        /*
-         *   Actually create a new cell (with an identifier so that it can be dequeued).
-         */
         cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(CellIdentifier,nil);
@@ -228,9 +211,7 @@
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
     }
-    NSLog(@"cellForRowAtIndexPath: cell_%i is now: %@",cell.cellIdentifier,cell.isCollapsed?@"collapsed":@"expanded");
 
-    /* Now that the cell is configured we return it to the table view so that it can display it */
     return cell;
 }
 
@@ -258,6 +239,10 @@
     [self addItemWithTitle:@"Drinks"];
     [self addItemWithTitle:@"Days without smoking" andCount:10];
     [self addItemWithTitle:@"Went swimming this year" andCount:2];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     
 }
 
@@ -326,5 +311,117 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - view resize on keyboard show
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    if(self.keyboardShown)
+        return;
+    
+    self.keyboardShown = YES;
+    
+    // Get the keyboard size
+    UIScrollView *tableView;
+    if([self.tableView.superview isKindOfClass:[UIScrollView class]])
+        tableView = (UIScrollView *)self.tableView.superview;
+    else
+        tableView = self.tableView;
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [tableView.superview convertRect:[aValue CGRectValue] fromView:nil];
+    
+    // Get the keyboard's animation details
+    NSTimeInterval animationDuration;
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    UIViewAnimationCurve animationCurve;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    
+    // Determine how much overlap exists between tableView and the keyboard
+    CGRect tableFrame = tableView.frame;
+    CGFloat tableLowerYCoord = tableFrame.origin.y + tableFrame.size.height;
+    self.keyboardOverlap = tableLowerYCoord - keyboardRect.origin.y;
+    if(self.inputAccessoryView && self.keyboardOverlap>0)
+    {
+        CGFloat accessoryHeight = self.inputAccessoryView.frame.size.height;
+        self.keyboardOverlap -= accessoryHeight;
+        
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, accessoryHeight, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, accessoryHeight, 0);
+    }
+    
+    if(self.keyboardOverlap < 0)
+        self.keyboardOverlap = 0;
+    
+    if(self.keyboardOverlap != 0)
+    {
+        tableFrame.size.height -= self.keyboardOverlap;
+        
+        NSTimeInterval delay = 0;
+        if(keyboardRect.size.height)
+        {
+            delay = (1 - self.keyboardOverlap/keyboardRect.size.height)*animationDuration;
+            animationDuration = animationDuration * self.keyboardOverlap/keyboardRect.size.height;
+        }
+        
+        [UIView animateWithDuration:animationDuration delay:delay
+                            options:UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{ tableView.frame = tableFrame; }
+                         completion:^(BOOL finished){ [self tableAnimationEnded:nil finished:nil contextInfo:nil]; }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+    if(!self.keyboardShown)
+        return;
+    
+    self.keyboardShown = NO;
+    
+    UIScrollView *tableView;
+    if([self.tableView.superview isKindOfClass:[UIScrollView class]])
+        tableView = (UIScrollView *)self.tableView.superview;
+    else
+        tableView = self.tableView;
+    if(self.inputAccessoryView)
+    {
+        tableView.contentInset = UIEdgeInsetsZero;
+        tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    }
+    
+    if(self.keyboardOverlap == 0)
+        return;
+    
+    // Get the size & animation details of the keyboard
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [tableView.superview convertRect:[aValue CGRectValue] fromView:nil];
+    
+    NSTimeInterval animationDuration;
+    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+    UIViewAnimationCurve animationCurve;
+    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+    
+    CGRect tableFrame = tableView.frame;
+    tableFrame.size.height += self.keyboardOverlap;
+    
+    if(keyboardRect.size.height)
+        animationDuration = animationDuration * self.keyboardOverlap/keyboardRect.size.height;
+    
+    [UIView animateWithDuration:animationDuration delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{ tableView.frame = tableFrame; }
+                     completion:nil];
+}
+
+- (void) tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context
+{
+    // Scroll to the active cell
+    if(self.activeCellIndexPath)
+    {
+        [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
 
 @end
