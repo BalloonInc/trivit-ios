@@ -12,7 +12,7 @@
 
 @interface MainListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-@property (strong, nonatomic) TrivitCellTableViewCell *cellPrototype;
+@property (strong, nonatomic) TrivitCellTableViewCell *cellBeingEdited;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
 @property (strong, nonatomic) NSMutableArray *selectedTallies; // of TrivitCellTableViewCell

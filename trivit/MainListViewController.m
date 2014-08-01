@@ -43,13 +43,14 @@
     _appSettings=appSettings;
 }
 
+
 #pragma mark - add item
 
 -(IBAction) addButtonPressed
 {
     // add random identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)[self.tallies count]]];
-
+    
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
@@ -73,11 +74,16 @@
     [self.tableView reloadData];
 }
 
+
 # pragma mark - selectors for gestures
 
--(void) handleTallyReset: (UIGestureRecognizer *)recognizer
+-(void) handleTallyReset: (UIGestureRecognizer *)leftSwipeRecognizer
 {
-    CGPoint swipeLocation = [recognizer locationInView:self.tableView];
+    // if a cell title is being edited don't process taps
+    if (self.cellBeingEdited)
+        return;
+
+    CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
@@ -85,20 +91,23 @@
     
 }
 
--(void) handleTallyIncrease: (UIGestureRecognizer *)recognizer
+-(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
 {
-    NSLog(@"handleTallyIncrease");
-    CGPoint swipeLocation = [recognizer locationInView:self.tableView];
+    CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!swipedCell.isCollapsed)
-        [swipedCell increaseTallyCounter];
+    TrivitCellTableViewCell *increasedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    if(!increasedCell.isCollapsed)
+        [increasedCell increaseTallyCounter];
     
 }
 
--(void) handleTallyDecrease: (UIGestureRecognizer *)recognizer
+-(void) handleTallyDecrease: (UIGestureRecognizer *)leftSwipeRecognizer
 {
-    CGPoint swipeLocation = [recognizer locationInView:self.tableView];
+    // if a cell title is being edited don't process taps
+    if (self.cellBeingEdited)
+        return;
+
+    CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed)
@@ -109,41 +118,43 @@
 -(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
 {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
-    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitCellTableViewCell *swipedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    NSIndexPath *collapseIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+    TrivitCellTableViewCell *collapseCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
     
-    swipedCell.isCollapsed = !swipedCell.isCollapsed;
-    swipedCell.loadAnimation = YES;
-    if (!swipedCell.isCollapsed)
-        [self.expandedTrivits addObject:swipedIndexPath];
+    collapseCell.isCollapsed = !collapseCell.isCollapsed;
+    collapseCell.loadAnimation = YES;
+    if (!collapseCell.isCollapsed)
+        [self.expandedTrivits addObject:collapseIndexPath];
     else
-        [self.expandedTrivits removeObject:swipedIndexPath];
+        [self.expandedTrivits removeObject:collapseIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
     
 }
 
--(void)handleTap: (UIGestureRecognizer *)recognizer
+-(void)handleTap: (UIGestureRecognizer *)singletapRecognizer
 {
-    CGPoint tapLocation = [recognizer locationInView:self.tableView];
-    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    // if a cell title is being edited don't process taps
+    if (self.cellBeingEdited)
+        return;
+    
+    CGPoint tapLocation = [singletapRecognizer locationInView:self.tableView];
+    NSIndexPath *tappedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
+    TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
-
-    if(recognizer.numberOfTouches == 1) {
-        if(tappedView==tappedCell.counterLabelForTally){
-            [self handleTallyIncrease:recognizer];
-        }
+    
+    if(tappedView==tappedCell.counterLabelForTally){
+        [self handleTallyIncrease:singletapRecognizer];
+    }
+    
+    else if (CGRectContainsPoint(tappedCell.frame, tapLocation)){
+        [self handleTallyCollapse:singletapRecognizer];
         
-        else if (CGRectContainsPoint(tappedCell.frame, tapLocation)){
-            [self handleTallyCollapse:recognizer];
-            
-        }
-        else{
-            NSLog(@"You tapped on a very weird spot");
-            //[self handleTallyCollapse:recognizer];
-            
-        }
+    }
+    else{
+        NSLog(@"You tapped on a very weird spot");
+        //[self handleTallyCollapse:recognizer];
+        
     }
 }
 
@@ -151,26 +162,22 @@
 {
     CGPoint tapLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    //save indexPath to show after keyboard hides
-    self.activeCellIndexPath = indexPath;
-    if(indexPath == nil) {
-        NSLog(@"long press but were?");
-    }
-    else if (recognizer.state == UIGestureRecognizerStateBegan) {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
         NSLog(@"long press on tableview at row %tu", indexPath.row);
         TrivitCellTableViewCell *tappedCell = (TrivitCellTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"long press %@",tappedCell.counter.title);
+        
+        if (self.cellBeingEdited)
+            self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
+        self.cellBeingEdited = tappedCell; //Save cell being edited
+        
+        self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
+        
         // only disappear using the LongPress gesture, reappearing is handled by end of editing
         tappedCell.titleTextField.enabled = YES;
         [tappedCell.titleTextField becomeFirstResponder];
     }
 }
 
-// to make the tap also valid on UITextview
-//-(BOOL)gestureRecognizer:(UITapGestureRecognizer *)tapG shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-//{
-//    return YES;
-//}
 
 #pragma mark - Magic to make the tableview datasource working
 
@@ -195,9 +202,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
-
+    
     TrivitCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    
     if (cell == nil) {
         cell = [[TrivitCellTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -211,7 +218,7 @@
         //colorset_func
         //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
     }
-
+    
     return cell;
 }
 
@@ -228,6 +235,7 @@
     return [self.tallies count];
 }
 
+
 #pragma mark - view load stuff
 
 - (void)viewDidLoad
@@ -240,9 +248,10 @@
     [self addItemWithTitle:@"Days without smoking" andCount:10];
     [self addItemWithTitle:@"Went swimming this year" andCount:2];
     
+    // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
+    
     
 }
 
@@ -254,7 +263,7 @@
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longTap.minimumPressDuration = 0.8;
+    longTap.minimumPressDuration = 0.5;
     
     [self.tableView addGestureRecognizer:rightSwipe];
     [self.tableView addGestureRecognizer:leftSwipe];
@@ -294,23 +303,23 @@
 #pragma mark - more functions
 //colorset_func
 /*
--(void) resetColors
-{
-    for (TrivitCellTableViewCell* cell in self.tallies) {
-        cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
-        [cell resetColor];
-    }
-}
-*/
+ -(void) resetColors
+ {
+ for (TrivitCellTableViewCell* cell in self.tallies) {
+ cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
+ [cell resetColor];
+ }
+ }
+ */
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - view resize on keyboard show
 
@@ -373,6 +382,7 @@
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+    self.cellBeingEdited = nil;
     if(!self.keyboardShown)
         return;
     
@@ -422,6 +432,7 @@
         [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
+    self.activeCellIndexPath = nil;
 }
 
 @end
