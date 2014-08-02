@@ -172,9 +172,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     [recta fill];
     
     // Label in first section
-    self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
+    self.titleTextField = [[PaddingUITextField alloc] initWithFrame:boundsTitleLabel];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.firstLineHeadIndent = 10;
     NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.counter.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.titleTextField.attributedText = attributedTitle;
     self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
@@ -186,6 +185,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     self.titleTextField.tintColor = [UIColor lightTextColor]; // white Carret
     self.titleTextField.delegate = self;
     self.titleTextField.gestureRecognizers = nil;
+    
     [self addSubview: self.titleTextField];
     
     [self configureCountLabelWithInteger:(int)self.counter.countForTally];
@@ -290,11 +290,6 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
         
     }
     return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    return (newLength > 25) ? NO : YES;
 }
 
 #pragma mark - Magic to make the UICollectionview datasource work
