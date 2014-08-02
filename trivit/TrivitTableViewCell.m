@@ -20,6 +20,14 @@ float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
 
 
+-(float) cellHeigth
+{
+    float tallyCount = ceil((self.counter.countForTally / 5.));
+    float divisor = self.frame.size.width / 34.;
+    int rows = ceil(tallyCount/divisor);
+    return CELL_HEIGHT_SECTION1 + rows*34;
+}
+
 #pragma mark - update tally functions
 
 - (void)increaseTallyCounter

@@ -190,8 +190,8 @@
 {
     
     if ([self.expandedTrivits containsObject:indexPath]) {
-        
-        return CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2; // Full height
+        TrivitTableViewCell *cell = [self.tallies objectAtIndex: indexPath.row];
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+cell.cellHeigth); // Full height
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
@@ -244,7 +244,7 @@
     [self configureTableView];
     
     [self addItemWithTitle:@"Drinks"];
-    [self addItemWithTitle:@"Days without smoking" andCount:10];
+    [self addItemWithTitle:@"Days without smoking" andCount:110];
     [self addItemWithTitle:@"Went swimming this year" andCount:2];
     
     // subscribe to notifications for keyboard show and hide, used for changing view size
