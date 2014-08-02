@@ -32,7 +32,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (void)increaseTallyCounter
 {
-    [self.counter addTally];
+    [self.tally addTally];
     [self updateTallyString];
     [self setNeedsDisplay];
 }
@@ -41,7 +41,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     if ([self sureYouWantToReset])
     {
-        [self.counter resetTally];
+        [self.tally resetTally];
         [self updateTallyString];
         [self setNeedsDisplay];
     }
@@ -49,7 +49,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (void)decreaseTallyCounter
 {
-    [self.counter decreaseTally];
+    [self.tally decreaseTally];
     [self updateTallyString];
     [self setNeedsDisplay];
 }
@@ -67,7 +67,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     NSMutableString *buttonLabelText;
     buttonLabelText = [[NSMutableString alloc] initWithString:@""];
-    for (int i = 0; i<self.counter.countForTally; i++) {
+    for (int i = 0; i<self.tally.counter; i++) {
         [buttonLabelText appendString:@"|"];
     }
     self.counterString = buttonLabelText;
@@ -129,10 +129,10 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     return _cellBackColorDark;
 }
 
--(Counter*)counter
+-(Tally*)tally
 {
-    if (!_counter){_counter = [[Counter alloc] init];}
-    return _counter;
+    if (!_tally){_tally = [[Tally alloc] init];}
+    return _tally;
 }
 
 - (void) configureCountLabelWithInteger:(int) integer
@@ -182,7 +182,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     // Label in first section
     self.titleTextField = [[PaddingUITextField alloc] initWithFrame:boundsTitleLabel];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.counter.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
+    paragraphStyle.firstLineHeadIndent = 10;
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.tally.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.titleTextField.attributedText = attributedTitle;
     self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
     self.titleTextField.userInteractionEnabled = true;
@@ -196,7 +197,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     
     [self addSubview: self.titleTextField];
     
-    [self configureCountLabelWithInteger:(int)self.counter.countForTally];
+    [self configureCountLabelWithInteger:(int)self.tally.counter];
 
     if (!self.isCollapsed){
         
@@ -292,7 +293,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 {
     if (textField == self.titleTextField) {
         [textField resignFirstResponder];
-        self.counter.title = textField.text;
+        self.tally.title = textField.text;
         self.titleTextField.text = textField.text;
         self.titleTextField.enabled = NO;
         
@@ -304,7 +305,7 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 -(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.counter.countForTally/5+1;
+    return self.tally.counter/5+1;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
@@ -313,10 +314,10 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    int tmp = self.counter.countForTally % 5;
+    int tmp = self.tally.counter % 5;
 
     gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
-    if (indexPath.item > self.counter.countForTally/5-1) {
+    if (indexPath.item > self.tally.counter/5-1) {
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
     }
     return gridcell;

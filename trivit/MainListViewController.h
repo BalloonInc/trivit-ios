@@ -26,4 +26,6 @@
 // used when changing title, cell should be in view when view resizes
 @property (nonatomic, strong) NSIndexPath *activeCellIndexPath;
 
+// Core Data
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

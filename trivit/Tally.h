@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Counter : NSObject
+@interface Tally : NSObject
 
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic) NSInteger countForTally;
+@property (nonatomic) NSInteger counter;
 
 -(void) addTally;
 -(void) decreaseTally;

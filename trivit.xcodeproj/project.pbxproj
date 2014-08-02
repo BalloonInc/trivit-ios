@@ -16,8 +16,9 @@
 		6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */; };
 		6C9025BC1984588300BB11FC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BB1984588300BB11FC /* Settings.m */; };
 		6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BE198458A500BB11FC /* settingsViewController.m */; };
+		6C923EB5198C645D00833188 /* trivitDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivitDataModel.xcdatamodeld */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
-		6CF1A23E195B762D00B83A6F /* Counter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Counter.m */; };
+		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC268A56198910B500944106 /* TrivitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC268A55198910B500944106 /* TrivitCollectionViewCell.m */; };
 		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
 /* End PBXBuildFile section */
@@ -51,10 +52,11 @@
 		6C9025BB1984588300BB11FC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		6C9025BD198458A500BB11FC /* settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsViewController.h; sourceTree = "<group>"; };
 		6C9025BE198458A500BB11FC /* settingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsViewController.m; sourceTree = "<group>"; };
+		6C923EB4198C645D00833188 /* trivitDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivitDataModel.xcdatamodel; sourceTree = "<group>"; };
 		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
-		6CF1A23C195B762D00B83A6F /* Counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Counter.h; sourceTree = "<group>"; };
-		6CF1A23D195B762D00B83A6F /* Counter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Counter.m; sourceTree = "<group>"; };
+		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
+		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
 		EC268A54198910B500944106 /* TrivitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrivitCollectionViewCell.h; path = ../TrivitCollectionViewCell.h; sourceTree = "<group>"; };
 		EC268A55198910B500944106 /* TrivitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrivitCollectionViewCell.m; path = ../TrivitCollectionViewCell.m; sourceTree = "<group>"; };
 		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
 				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
 				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
+				6C923EB3198C645D00833188 /* trivitDataModel.xcdatamodeld */,
 				6C9025BD198458A500BB11FC /* settingsViewController.h */,
 				6C9025BE198458A500BB11FC /* settingsViewController.m */,
 				6C69C0A9195B6F4E002A3F53 /* Images.xcassets */,
@@ -149,8 +152,8 @@
 		6CF1A23F195B765600B83A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6CF1A23C195B762D00B83A6F /* Counter.h */,
-				6CF1A23D195B762D00B83A6F /* Counter.m */,
+				6CF1A23C195B762D00B83A6F /* Tally.h */,
+				6CF1A23D195B762D00B83A6F /* Tally.m */,
 				6CA449391980D8E00049F34D /* Colors.h */,
 				6CA4493A1980D8E00049F34D /* Colors.m */,
 				6C9025BA1984588300BB11FC /* Settings.h */,
@@ -258,7 +261,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CF1A23E195B762D00B83A6F /* Counter.m in Sources */,
+				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,
+				6C923EB5198C645D00833188 /* trivitDataModel.xcdatamodeld in Sources */,
 				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
 				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
@@ -476,6 +480,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6C923EB3198C645D00833188 /* trivitDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6C923EB4198C645D00833188 /* trivitDataModel.xcdatamodel */,
+			);
+			currentVersion = 6C923EB4198C645D00833188 /* trivitDataModel.xcdatamodel */;
+			path = trivitDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6C69C091195B6F4E002A3F53 /* Project object */;
 }
