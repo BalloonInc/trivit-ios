@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Tally.h"
 #import "TrivitCollectionViewCell.h"
+#import "PaddingUITextField.h"
 
 @interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -25,7 +26,7 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (nonatomic,strong) UICollectionView *images;
 @property (nonatomic) BOOL loadAnimation;
 
-@property (strong, nonatomic) UITextField *titleTextField;
+@property (strong, nonatomic) PaddingUITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
 

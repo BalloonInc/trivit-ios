@@ -20,6 +20,7 @@
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC268A56198910B500944106 /* TrivitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC268A55198910B500944106 /* TrivitCollectionViewCell.m */; };
+		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
 		EC268A54198910B500944106 /* TrivitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrivitCollectionViewCell.h; path = ../TrivitCollectionViewCell.h; sourceTree = "<group>"; };
 		EC268A55198910B500944106 /* TrivitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrivitCollectionViewCell.m; path = ../TrivitCollectionViewCell.m; sourceTree = "<group>"; };
+		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
+		EC37AD89198D10A000C37610 /* PaddingUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingUITextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,8 @@
 			children = (
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
+				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
+				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
 				EC268A54198910B500944106 /* TrivitCollectionViewCell.h */,
 				EC268A55198910B500944106 /* TrivitCollectionViewCell.m */,
 				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
@@ -262,6 +267,7 @@
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
 				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
+				EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */,
 				EC268A56198910B500944106 /* TrivitCollectionViewCell.m in Sources */,
 				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
