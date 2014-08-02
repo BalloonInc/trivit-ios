@@ -67,8 +67,8 @@
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
     TrivitTableViewCell *newCell = [[TrivitTableViewCell alloc] init];
-    newCell.counter.title = title;
-    newCell.counter.countForTally = count;
+    newCell.tally.title = title;
+    newCell.tally.counter = count;
     [self.tallies addObject:newCell];
     
     [self.tableView reloadData];
@@ -123,8 +123,13 @@
     
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     collapseCell.loadAnimation = YES;
-    if (!collapseCell.isCollapsed)
+    if (!collapseCell.isCollapsed){
         [self.expandedTrivits addObject:collapseIndexPath];
+        NSLog(@"%d",collapseIndexPath.row);
+        //[self.tableView scrollToRowAtIndexPath:collapseIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tallies count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    }
     else
         [self.expandedTrivits removeObject:collapseIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
@@ -210,8 +215,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.isCollapsed = true;
         [self.tableView reloadData];
-        cell.counter.countForTally = [[self.tallies[indexPath.row] counter] countForTally];
-        cell.counter.title = [[self.tallies[indexPath.row] counter] title];
+        cell.tally.counter = [[self.tallies[indexPath.row] tally] counter];
+        cell.tally.title = [[self.tallies[indexPath.row] tally] title];
         cell.cellIdentifier = (int)indexPath.row;
         cell.titleTextField.delegate = self;
         //colorset_func
@@ -427,5 +432,9 @@
     }
     self.activeCellIndexPath = nil;
 }
+
+
+#pragma mark - Core Data
+
 
 @end

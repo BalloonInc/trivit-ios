@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Counter.h"
+#import "Tally.h"
 #import "TrivitCollectionViewCell.h"
 
 @interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
@@ -15,7 +15,7 @@
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;
 
-@property (strong, nonatomic) Counter *counter;
+@property (strong, nonatomic) Tally *tally;
 @property (strong, nonatomic) NSString *counterString;
 @property (nonatomic) int cellIdentifier;
 @property (nonatomic) BOOL isCollapsed;
