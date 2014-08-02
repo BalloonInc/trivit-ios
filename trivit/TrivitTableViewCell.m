@@ -18,7 +18,7 @@
 #pragma mark - Constants
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
-
+ 
 
 -(float) cellHeigth
 {
