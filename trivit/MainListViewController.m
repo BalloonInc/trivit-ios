@@ -212,6 +212,8 @@
     
     TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    //TrivitTableViewCell *cell = nil;
+    
     if (cell == nil) {
         cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
