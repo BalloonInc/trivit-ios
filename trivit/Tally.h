@@ -16,5 +16,5 @@
 -(void) addTally;
 -(void) decreaseTally;
 -(void) resetTally;
-
+-(float) cellHeigthWithFrameWidth: (float) width andSectionHeight: (float) sectionHeight; // values are based on trial and error
 @end

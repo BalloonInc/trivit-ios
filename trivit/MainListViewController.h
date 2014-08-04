@@ -14,11 +14,10 @@
 
 @property (strong, nonatomic) TrivitTableViewCell *cellBeingEdited;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *tallies; // of TrivitCellTableViewCell
+@property (strong, nonatomic) NSMutableArray *tallies; // of Tally
 
 @property (strong, nonatomic) Settings *appSettings;
 @property (strong, nonatomic) NSMutableArray *expandedTrivits; // of NSIndexPath
-//@property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
 
 // is keyboard shown or not
 @property (nonatomic) bool keyboardShown;

@@ -48,7 +48,7 @@
 
 -(IBAction) addButtonPressed
 {
-    // add random identifier to tallies
+    // add consequent identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)[self.tallies count]]];
     
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.tallies.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -66,10 +66,11 @@
 
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
-    TrivitTableViewCell *newCell = [[TrivitTableViewCell alloc] init];
-    newCell.tally.title = title;
-    newCell.tally.counter = count;
-    [self.tallies addObject:newCell];
+    Tally *newTally = [[Tally alloc] init];
+    newTally.title = title;
+    newTally.counter = count;
+    
+    [self.tallies addObject:newTally];
     
     [self.tableView reloadData];
 }
@@ -96,9 +97,11 @@
     CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *increasedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!increasedCell.isCollapsed)
+    if(!increasedCell.isCollapsed){
         [increasedCell increaseTallyCounter];
-    
+        [self.tallies[swipedIndexPath.row] setCounter:[self.tallies[swipedIndexPath.row] counter]+1];
+        [self.tableView setNeedsDisplay];
+    }
 }
 
 -(void) handleTallyDecrease: (UIGestureRecognizer *)leftSwipeRecognizer
@@ -110,8 +113,11 @@
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!swipedCell.isCollapsed)
+    if(!swipedCell.isCollapsed){
         [swipedCell decreaseTallyCounter];
+        [self.tallies[swipedIndexPath.row] setCounter:[self.tallies[swipedIndexPath.row] counter]-1];
+
+    }
     
 }
 
@@ -133,7 +139,7 @@
         [self.expandedTrivits removeObject:collapseIndexPath];
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
-    
+
 }
 
 -(void)handleTap: (UIGestureRecognizer *)singletapRecognizer
@@ -194,11 +200,10 @@
 {
     
     if ([self.expandedTrivits containsObject:indexPath]) {
-        TrivitTableViewCell *cell = [self.tallies objectAtIndex: indexPath.row];
-        NSLog(@"count: %tu",cell.tally.counter);
+        Tally *tally = [self.tallies objectAtIndex: indexPath.row];
+        NSLog(@"count: %tu",tally.counter);
         NSLog(@"numbder of tallies: %tu", self.tallies.count);
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+cell.cellHeigth); // Full
-        
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[tally cellHeigthWithFrameWidth:self.view.frame.size.width andSectionHeight:CELL_HEIGHT_SECTION1]); // Full
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
@@ -209,18 +214,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
-    
+  
     TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    //TrivitTableViewCell *cell = nil;
-    
+
     if (cell == nil) {
-        cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[TrivitTableViewCell alloc] init];
+        //cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.isCollapsed = true;
-        [self.tableView reloadData];
-        cell.tally.counter = [[self.tallies[indexPath.row] tally] counter];
-        cell.tally.title = [[self.tallies[indexPath.row] tally] title];
+        cell.tally.counter = [self.tallies[indexPath.row] counter];
+        NSLog(@"cell count in cellForRowAtIndexPath: %d", cell.tally.counter);
+        cell.tally.title = [self.tallies[indexPath.row] title];
+        NSLog(@"cell title in cellForRowAtIndexPath %@", cell.tally.title);
+
         cell.cellIdentifier = (int)indexPath.row;
         cell.titleTextField.delegate = self;
         //colorset_func
