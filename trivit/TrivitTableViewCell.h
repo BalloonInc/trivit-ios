@@ -15,6 +15,7 @@
 
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;
+extern NSString const *TALLY_TYPE;
 
 @property (strong, nonatomic) Tally *tally;
 @property (strong, nonatomic) NSString *counterString;
@@ -29,6 +30,7 @@ extern float const CELL_HEIGHT_SECTION2;
 @property (strong, nonatomic) PaddingUITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
+
 
 @property (nonatomic) float cellHeigth;
 

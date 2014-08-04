@@ -18,9 +18,11 @@
 #pragma mark - Constants
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
+//NSString const *TALLY_TYPE = @"";
+NSString const *TALLY_TYPE = @"ch_";
  
 
--(float) cellHeigth
+-(float) cellHeigth // values are based on trial and error
 {
     float tallyCount = ceil((self.tally.counter / 5.));
     float divisor = self.frame.size.width / 34.;
@@ -316,9 +318,10 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
     TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
     int tmp = self.tally.counter % 5;
 
-    gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", 5]]];
+    gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, TALLY_TYPE]]];
     if (indexPath.item > self.tally.counter/5-1) {
-        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%tu", tmp]]];
+        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, TALLY_TYPE]]];
+        NSLog([NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, TALLY_TYPE]);
     }
     return gridcell;
 }

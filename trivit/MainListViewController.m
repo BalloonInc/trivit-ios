@@ -125,7 +125,6 @@
     collapseCell.loadAnimation = YES;
     if (!collapseCell.isCollapsed){
         [self.expandedTrivits addObject:collapseIndexPath];
-        NSLog(@"%d",collapseIndexPath.row);
         //[self.tableView scrollToRowAtIndexPath:collapseIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tallies count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
@@ -196,7 +195,10 @@
     
     if ([self.expandedTrivits containsObject:indexPath]) {
         TrivitTableViewCell *cell = [self.tallies objectAtIndex: indexPath.row];
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+cell.cellHeigth); // Full height
+        NSLog(@"count: %tu",cell.tally.counter);
+        NSLog(@"numbder of tallies: %tu", self.tallies.count);
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+cell.cellHeigth); // Full
+        
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
