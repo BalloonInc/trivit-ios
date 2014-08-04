@@ -69,6 +69,7 @@
     Tally *newTally = [[Tally alloc] init];
     newTally.title = title;
     newTally.counter = count;
+    newTally.isCollapsed=true;
     
     [self.tallies addObject:newTally];
     
@@ -87,8 +88,13 @@
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!swipedCell.isCollapsed)
+    if(!swipedCell.isCollapsed){
         [swipedCell resetTallyCounter];
+        [self.tallies[swipedIndexPath.row] setCounter:0];
+
+        [self.tableView beginUpdates]; // necessary for the animation of the cell growth
+        [self.tableView endUpdates]; // necessary for the animation of the cell growth
+    }
     
 }
 
@@ -100,7 +106,12 @@
     if(!increasedCell.isCollapsed){
         [increasedCell increaseTallyCounter];
         [self.tallies[swipedIndexPath.row] setCounter:[self.tallies[swipedIndexPath.row] counter]+1];
-        [self.tableView setNeedsDisplay];
+        
+        // if new image ==> redraw cell height
+        if ([self.tallies[swipedIndexPath.row] counter]%5==1){
+        [self.tableView beginUpdates]; // necessary for the animation of the cell growth
+        [self.tableView endUpdates]; // necessary for the animation of the cell growth
+        }
     }
 }
 
@@ -116,6 +127,11 @@
     if(!swipedCell.isCollapsed){
         [swipedCell decreaseTallyCounter];
         [self.tallies[swipedIndexPath.row] setCounter:[self.tallies[swipedIndexPath.row] counter]-1];
+        // if image got removed ==> redraw cell height
+        if ([self.tallies[swipedIndexPath.row] counter]%5==0){
+            [self.tableView beginUpdates]; // necessary for the animation of the cell growth
+            [self.tableView endUpdates]; // necessary for the animation of the cell growth
+        }
 
     }
     
@@ -128,6 +144,8 @@
     TrivitTableViewCell *collapseCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
     
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
+    [self.tallies[collapseIndexPath.row] setIsCollapsed:collapseCell.isCollapsed];
+
     collapseCell.loadAnimation = YES;
     if (!collapseCell.isCollapsed){
         [self.expandedTrivits addObject:collapseIndexPath];
@@ -135,8 +153,9 @@
         //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tallies count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
     }
-    else
+    else{
         [self.expandedTrivits removeObject:collapseIndexPath];
+    }
     [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
     [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
 
@@ -188,6 +207,16 @@
     }
 }
 
+#pragma mark - cell height calculation
+
+-(float) cellHeigthForTallyCount: (int) tallyCount // values are based on trial and error
+{
+    tallyCount = (int) ceil((tallyCount / 5.));
+    float divisor = self.view.frame.size.width / 34.;
+    int rows = ceil(tallyCount/divisor);
+    return CELL_HEIGHT_SECTION1 + rows*34;
+}
+
 
 #pragma mark - Magic to make the tableview datasource working
 
@@ -203,7 +232,7 @@
         Tally *tally = [self.tallies objectAtIndex: indexPath.row];
         NSLog(@"count: %tu",tally.counter);
         NSLog(@"numbder of tallies: %tu", self.tallies.count);
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[tally cellHeigthWithFrameWidth:self.view.frame.size.width andSectionHeight:CELL_HEIGHT_SECTION1]); // Full
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:tally.counter]); // Full
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
@@ -216,12 +245,13 @@
     NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
   
     TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //TrivitTableViewCell *cell = nil;
 
     if (cell == nil) {
         cell = [[TrivitTableViewCell alloc] init];
         //cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.isCollapsed = true;
+        cell.isCollapsed = [self.tallies[indexPath.row] isCollapsed];
         cell.tally.counter = [self.tallies[indexPath.row] counter];
         NSLog(@"cell count in cellForRowAtIndexPath: %d", cell.tally.counter);
         cell.tally.title = [self.tallies[indexPath.row] title];
@@ -253,7 +283,7 @@
     
     [self addItemWithTitle:@"Drinks"];
     [self addItemWithTitle:@"Days without smoking" andCount:110];
-    [self addItemWithTitle:@"Went swimming this year" andCount:2];
+    [self addItemWithTitle:@"Went swimming this year" andCount:44];
     
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -438,6 +468,8 @@
 
 
 #pragma mark - Core Data
+
+#pragma mark -
 
 
 @end

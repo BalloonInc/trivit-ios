@@ -25,12 +25,4 @@
     self.counter = 0; // reset tally marks
 }
 
--(float) cellHeigthWithFrameWidth: (float) width andSectionHeight: (float) sectionHeight // values are based on trial and error
-{
-    float tallyCount = ceil((self.counter / 5.));
-    float divisor = width / 34.;
-    int rows = ceil(tallyCount/divisor);
-    return sectionHeight + rows*34;
-}
-
 @end
