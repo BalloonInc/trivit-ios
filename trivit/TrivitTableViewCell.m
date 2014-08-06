@@ -18,15 +18,10 @@
 #pragma mark - Constants
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
+float const TALLY_IMAGE_DIMENSION = 32.;
+float const COLLECTIONVIEW_HORIZONTAL_SPACING = 15.;
+float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 
-
--(float) cellHeigth // values are based on trial and error
-{
-    float tallyCount = ceil((self.tally.counter / 5.));
-    float divisor = self.frame.size.width / 34.;
-    int rows = ceil(tallyCount/divisor);
-    return CELL_HEIGHT_SECTION1 + rows*34;
-}
 
 #pragma mark - update tally functions
 
@@ -333,13 +328,13 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGSize mElementSize = CGSizeMake(32, 32);
+    CGSize mElementSize = CGSizeMake(TALLY_IMAGE_DIMENSION, TALLY_IMAGE_DIMENSION);
     return mElementSize;
 }
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(15,5,0,0);
+    return UIEdgeInsetsMake(COLLECTIONVIEW_HORIZONTAL_SPACING,COLLECTIONVIEW_VERTICAL_SPACING,0,0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

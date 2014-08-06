@@ -27,14 +27,14 @@
 
 -(NSMutableArray*) tallies
 {
-    if(!_tallies){_tallies=[[NSMutableArray alloc ]init];}
+    if(!_tallies){_tallies=[[NSMutableArray alloc ] init];}
     return _tallies;
 }
 
 @synthesize appSettings=_appSettings;
 
 -(Settings*) appSettings{
-    if(!_appSettings){_appSettings=[[Settings alloc ]init];}
+    if(!_appSettings){_appSettings=[[Settings alloc ] init];}
     return _appSettings;
 }
 
@@ -104,11 +104,20 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *increasedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!increasedCell.isCollapsed){
+        
         [increasedCell increaseTallyCounter];
         [self.tallies[swipedIndexPath.row] setCounter:[self.tallies[swipedIndexPath.row] counter]+1];
         
         // if new image ==> redraw cell height
         if ([self.tallies[swipedIndexPath.row] counter]%5==1){
+
+            [UIView animateWithDuration:1.0  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                [self.tableView beginUpdates];
+                [self.tableView endUpdates];
+                
+             } completion:^(BOOL finished){}];
+            
         [self.tableView beginUpdates]; // necessary for the animation of the cell growth
         [self.tableView endUpdates]; // necessary for the animation of the cell growth
         }
@@ -209,12 +218,16 @@
 
 #pragma mark - cell height calculation
 
+
 -(float) cellHeigthForTallyCount: (int) tallyCount // values are based on trial and error
 {
-    tallyCount = (int) ceil((tallyCount / 5.));
-    float divisor = self.view.frame.size.width / 34.;
-    int rows = ceil(tallyCount/divisor);
-    return CELL_HEIGHT_SECTION1 + rows*34;
+    float tally_image_Count = ceil(tallyCount / 5.);
+    float imagesPerRow = floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING)+1);
+    int rows = ceil(tally_image_Count/imagesPerRow);
+    if (rows <2)
+        return CELL_HEIGHT_SECTION1+TALLY_IMAGE_DIMENSION;
+    else
+        return CELL_HEIGHT_SECTION1 + rows*(TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING);
 }
 
 
