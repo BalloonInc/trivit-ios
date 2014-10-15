@@ -286,6 +286,24 @@
 }
 
 
+// remove logic
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // row can be deleted if tally is collapsed
+    return [self.tallies[indexPath.row] isCollapsed];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove the deleted object from your data source.
+        //If your data source is an NSMutableArray, do this
+        [self.tallies removeObjectAtIndex:indexPath.row];
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]    withRowAnimation:UITableViewRowAnimationFade];
+        
+        //[tableView reloadData]; // tell table to refresh now
+    }
+}
+
 #pragma mark - view load stuff
 
 - (void)viewDidLoad
