@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic) NSInteger counter;
 @property (nonatomic) bool isCollapsed;
+@property (nonatomic) NSInteger colorIndex;
 -(void) addTally;
 -(void) decreaseTally;
 -(void) resetTally;

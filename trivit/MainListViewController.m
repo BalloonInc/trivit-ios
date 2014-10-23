@@ -71,6 +71,15 @@
     newTally.counter = count;
     newTally.isCollapsed=true;
     
+    NSInteger colorIndex;
+    
+    // Color index: last tally in the aray +1
+    if (self.tallies.count > 0)
+        colorIndex = [self.tallies[self.tallies.count-1] colorIndex] +1;
+    else
+        colorIndex = 0;
+    newTally.colorIndex = colorIndex;
+    
     [self.tallies addObject:newTally];
     
     [self.tableView reloadData];
@@ -245,7 +254,7 @@
         Tally *tally = [self.tallies objectAtIndex: indexPath.row];
         NSLog(@"count: %tu",tally.counter);
         NSLog(@"numbder of tallies: %tu", self.tallies.count);
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:tally.counter]); // Full
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:(int)tally.counter]); // Full
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
@@ -266,7 +275,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.isCollapsed = [self.tallies[indexPath.row] isCollapsed];
         cell.tally.counter = [self.tallies[indexPath.row] counter];
-        NSLog(@"cell count in cellForRowAtIndexPath: %d", cell.tally.counter);
+        cell.tally.colorIndex = [self.tallies[indexPath.row] colorIndex];
+        NSLog(@"cell count in cellForRowAtIndexPath: %d", (int)cell.tally.counter);
         cell.tally.title = [self.tallies[indexPath.row] title];
         NSLog(@"cell title in cellForRowAtIndexPath %@", cell.tally.title);
 

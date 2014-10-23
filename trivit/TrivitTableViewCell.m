@@ -110,7 +110,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
         
         //permutated color for every cell
-        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsLight]];
+        _cellBackColor=[Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors flatDesignColorsLight]];
         
     }
     return _cellBackColor;
@@ -119,7 +119,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 -(UIColor*)cellBackColorDark
 {
     if (!_cellBackColorDark){
-        _cellBackColorDark = [Colors colorWithIndex:self.cellIdentifier usingColorSet: [Colors flatDesignColorsDark]];
+        _cellBackColorDark = [Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors flatDesignColorsDark]];
     }
     return _cellBackColorDark;
 }

@@ -21,13 +21,13 @@
 //returns random color using default colorset;
 +(UIColor*) randomColor;
 //returns color with certain index using default colorset
-+(UIColor*) colorWithIndex:(int)index;
++(UIColor*) colorWithIndex:(NSInteger)index;
 //returns random color from a certain colorset
 +(UIColor*) randomColorUsingColorSet:(NSArray*)colorSet;
 //returns a color with certain index with certain colorset
-+(UIColor*) colorWithIndex:(int)index
++(UIColor*) colorWithIndex:(NSInteger)index
              usingColorSet:(NSArray*)colorSet;
 //returns a colorset, based on an index
 //TODO: make a dictionary instead, so we can return based on name
-+(NSArray*) colorsetWithIndex:(int)index;
++(NSArray*) colorsetWithIndex:(NSInteger)index;
 @end

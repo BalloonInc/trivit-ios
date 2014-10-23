@@ -96,17 +96,17 @@
     return [self randomColorUsingColorSet:nil];
 }
 
-+(UIColor*) colorWithIndex:(int)index
++(UIColor*) colorWithIndex:(NSInteger)index
 {
     return [self colorWithIndex:index usingColorSet:nil];
 }
 
 +(UIColor *) randomColorUsingColorSet: (NSArray *)colorSet
 {
-    return [self colorWithIndex:(int)arc4random() usingColorSet:colorSet];
+    return [self colorWithIndex:(NSInteger)arc4random() usingColorSet:colorSet];
 }
 
-+(UIColor *) colorWithIndex:(int)index usingColorSet: (NSArray *)colorSet
++(UIColor *) colorWithIndex:(NSInteger)index usingColorSet: (NSArray *)colorSet
 {
     //By Default, use iOSColors
     if (!colorSet)
@@ -117,7 +117,7 @@
     return [self colorWithHexString:hexColorString];
 }
 
-+(NSArray*) colorsetWithIndex:(int)index
++(NSArray*) colorsetWithIndex:(NSInteger)index
 {
     NSArray *colorSetArray;
     
