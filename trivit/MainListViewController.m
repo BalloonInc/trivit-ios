@@ -76,22 +76,15 @@
 
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
-    
-    Tally *newTally = [[Tally alloc] init];
-    newTally.title = title;
-    newTally.counter = count;
-    newTally.isCollapsed=true;
     // Color index: last tally in the aray +1
     NSInteger colorIndex;
-    
-    NSArray *results = [self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL];
 
     if (self.trivitCount==0)
         colorIndex=0;
     else{
+        NSArray *results = [self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL];
         colorIndex = [[[results objectAtIndex:self.trivitCount-1] valueForKey:@"color"] integerValue]+1;
     }
-    newTally.colorIndex = colorIndex;
     
     // Create Entity
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tally" inManagedObjectContext:self.managedObjectContext];
@@ -101,8 +94,8 @@
 
     // Populate Record
     [record setValue:title forKey:@"title"];
-    [record setValue:[NSNumber numberWithInt:count] forKey:@"counter"];
-    [record setValue:[NSNumber numberWithInt:colorIndex] forKey:@"color"];
+    [record setValue:[NSNumber numberWithInteger:count] forKey:@"counter"];
+    [record setValue:[NSNumber numberWithInteger:colorIndex] forKey:@"color"];
 
     [record setValue:[NSDate date] forKey:@"createdAt"];
     
@@ -119,8 +112,6 @@
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
     }
-    
-    //[self.tableView reloadData];
 }
 
 
@@ -155,7 +146,7 @@
         
         [increasedCell increaseTallyCounter];
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        NSInteger currentCount = (NSInteger)[record valueForKey:@"counter"]+1;
+        NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]+1;
         [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
 
         // if new image ==> redraw cell height
@@ -163,14 +154,9 @@
         if (currentCount%5==1){
 
             [UIView animateWithDuration:1.0  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
-                
              } completion:^(BOOL finished){}];
-        
-        [self.tableView beginUpdates]; // necessary for the animation of the cell growth
-        [self.tableView endUpdates]; // necessary for the animation of the cell growth
         }
     }
 }
@@ -188,7 +174,7 @@
         [swipedCell decreaseTallyCounter];
         
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        NSInteger currentCount = (NSInteger)[record valueForKey:@"counter"]-1;
+        NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]-1;
         [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
 
         // if image got removed ==> redraw cell height
@@ -209,8 +195,7 @@
     
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
-    bool currentCollapse = (bool)[record valueForKey:@"isCollapsed"];
-    [record setValue: [NSNumber numberWithBool:(!currentCollapse)] forKey:@"isCollapsed"];
+    [record setValue: [NSNumber numberWithBool:collapseCell.isCollapsed] forKey:@"isCollapsed"];
 
     collapseCell.loadAnimation = YES;
     if (!collapseCell.isCollapsed){
@@ -298,12 +283,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
-    if ([self.expandedTrivits containsObject:indexPath]) {
+    //if ([self.expandedTrivits containsObject:indexPath]) {
+    bool isCollapsed = [[[self.fetchedResultsController objectAtIndexPath:indexPath] valueForKey:@"isCollapsed"] boolValue];
+
+    if (!isCollapsed) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
         //NSLog(@"count: %tu",tally.counter);
         //NSLog(@"numbder of tallies: %tu", self.tallies.count);
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:(int)[record valueForKey:@"counter"]]); // Full
+        //return 4*CELL_HEIGHT_SECTION1;
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[[record valueForKey:@"counter"] integerValue]]); // Full
     }
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
@@ -313,34 +302,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat: @"trivitCell_%ld", (long)indexPath.row];
-  
-    TrivitTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //TrivitTableViewCell *cell = nil;
-    cell = [[TrivitTableViewCell alloc] init];
-
+    TrivitTableViewCell *cell = [[TrivitTableViewCell alloc] init];
     [self configureCell:cell atIndexPath:indexPath];
-    
-    /*
-    if (cell == nil) {
-        cell = [[TrivitTableViewCell alloc] init];
-        //cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.isCollapsed = [self.tallies[indexPath.row] isCollapsed];
-        cell.tally.counter = [self.tallies[indexPath.row] counter];
-        cell.tally.colorIndex = [self.tallies[indexPath.row] colorIndex];
-        NSLog(@"cell count in cellForRowAtIndexPath: %d", (int)cell.tally.counter);
-        cell.tally.title = [self.tallies[indexPath.row] title];
-        NSLog(@"cell title in cellForRowAtIndexPath %@", cell.tally.title);
-
-        cell.cellIdentifier = (int)indexPath.row;
-        cell.titleTextField.delegate = self;
-     
-        
-        //colorset_func
-        //cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
-    }
-    */
     
     return cell;
 }
@@ -374,7 +337,12 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // row can be deleted if tally is collapsed
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    return (bool)[record valueForKey:@"isCollapsed"];
+    
+    TrivitTableViewCell *cell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+
+    
+    //return cell.isCollapsed;
+    return [[record valueForKey:@"isCollapsed"] boolValue];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -436,8 +404,6 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
     // Configure Fetched Results Controller
-    NSLog(@"%d tallies saved",self.trivitCount);
-    
     [self.fetchedResultsController setDelegate:self];
     
     // Perform Fetch
@@ -493,7 +459,8 @@
         {
             settingsViewController *svc = (settingsViewController *) segue.destinationViewController;
             svc.appSettings = self.appSettings;
-            
+            [svc setManagedObjectContext:self.managedObjectContext];
+
         }
     }
 }

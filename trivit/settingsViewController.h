@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Settings.h"
+#import <CoreData/CoreData.h>
 
 @interface settingsViewController : UIViewController
 @property (strong, nonatomic) Settings *appSettings;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

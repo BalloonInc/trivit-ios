@@ -40,6 +40,23 @@
     self.appSettings.colorSet=self.colorPicker.selectedSegmentIndex;
 }
 
+
+- (IBAction)deleteAllTrivits:(id)sender {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
+    [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    NSError *error;
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *object in fetchedObjects)
+    {
+        [self.managedObjectContext deleteObject:object];
+    }
+    
+    error = nil;
+    [self.managedObjectContext save:&error];
+
+}
+
 /*
 #pragma mark - Navigation
 
