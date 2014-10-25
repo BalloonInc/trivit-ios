@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainListViewController.h"
 #import <CoreData/CoreData.h>
 
 @interface AppDelegate ()
@@ -22,7 +23,22 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Fetch Main Storyboard
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    
+    // Instantiate Root Navigation Controller
+    UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
+    
+    // Configure View Controller
+    MainListViewController *viewController = (MainListViewController *)[rootNavigationController topViewController];
+    
+    if ([viewController isKindOfClass:[MainListViewController class]]) {
+        [viewController setManagedObjectContext:self.managedObjectContext];
+    }
+    
+    // Configure Window
+    [self.window setRootViewController:rootNavigationController];
+    
     return YES;
 }
 
@@ -34,6 +50,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self saveManagedObjectContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -46,6 +63,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self saveManagedObjectContext];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -92,6 +110,18 @@
     }
     
     return _persistentStoreCoordinator;
+}
+
+#pragma mark Helper Methods
+- (void)saveManagedObjectContext {
+    NSError *error = nil;
+    
+    if (![self.managedObjectContext save:&error]) {
+        if (error) {
+            NSLog(@"Unable to save changes.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
+    }
 }
 
 @end
