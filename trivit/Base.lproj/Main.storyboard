@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Trivit-->
@@ -55,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="1638" y="139"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="PsH-CW-h89">
             <objects>
                 <viewController id="0Vr-vX-FSL" customClass="settingsViewController" sceneMemberID="viewController">
@@ -67,33 +68,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jun-Et-cuT">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jun-Et-cuT">
                                 <rect key="frame" x="86" y="80" width="149" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzH-cF-dFF">
-                                <rect key="frame" x="65" y="296" width="191" height="30"/>
-                                <state key="normal" title="Reset all trivits">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="ltd-Dt-UEZ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vibration feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-tB-kuh">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
+                                <rect key="frame" x="18" y="119" width="285" height="29"/>
+                                <segments>
+                                    <segment title="Flat"/>
+                                    <segment title="iOS"/>
+                                    <segment title="Trivit"/>
+                                </segments>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-tB-kuh">
                                 <rect key="frame" x="18" y="190" width="219" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqb-t6-NN3">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqb-t6-NN3">
                                 <rect key="frame" x="254" y="185" width="51" height="31"/>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-TY-nIb">
-                                <rect key="frame" x="65" y="362" width="191" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-TY-nIb">
+                                <rect key="frame" x="65" y="518" width="191" height="30"/>
                                 <state key="normal" title="Delete all trivits">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,25 +102,53 @@
                                     <action selector="deleteAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="6xR-bT-hjE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7r-dg-LWB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzH-cF-dFF">
+                                <rect key="frame" x="65" y="458" width="191" height="30"/>
+                                <state key="normal" title="Reset all trivits">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="ltd-Dt-UEZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jun-Et-cuT" firstAttribute="top" secondItem="Tva-rd-wdJ" secondAttribute="bottom" constant="16" id="28c-nn-s1N"/>
+                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="top" secondItem="Jun-Et-cuT" secondAttribute="bottom" constant="18" id="4pe-Qv-NQ0"/>
+                            <constraint firstItem="rqb-t6-NN3" firstAttribute="leading" secondItem="OX9-tB-kuh" secondAttribute="trailing" constant="17" id="BQN-ng-Eyr"/>
+                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="2" id="D2B-uh-HZx"/>
+                            <constraint firstItem="BzH-cF-dFF" firstAttribute="centerX" secondItem="VwX-bd-ZzG" secondAttribute="centerX" id="D7p-2P-Ux4"/>
+                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="leading" secondItem="OX9-tB-kuh" secondAttribute="leading" id="EVT-m9-IXI"/>
+                            <constraint firstItem="Jun-Et-cuT" firstAttribute="centerX" secondItem="VwX-bd-ZzG" secondAttribute="centerX" id="LvK-rV-9o8"/>
+                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="trailing" secondItem="rqb-t6-NN3" secondAttribute="trailing" id="TjS-3m-YrZ"/>
+                            <constraint firstItem="Jun-Et-cuT" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="70" id="Vnr-Aa-Oaa"/>
+                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="centerX" secondItem="V1C-fU-VpZ" secondAttribute="centerX" id="YBN-vL-Ex7"/>
+                            <constraint firstItem="BzH-cF-dFF" firstAttribute="trailing" secondItem="vUk-TY-nIb" secondAttribute="trailing" id="ayV-gs-OKR"/>
+                            <constraint firstItem="rqb-t6-NN3" firstAttribute="centerY" secondItem="OX9-tB-kuh" secondAttribute="centerY" id="doh-Nj-Wxy"/>
+                            <constraint firstAttribute="bottom" secondItem="vUk-TY-nIb" secondAttribute="bottom" constant="20" symbolic="YES" id="taf-2q-bh4"/>
+                            <constraint firstItem="vUk-TY-nIb" firstAttribute="top" secondItem="BzH-cF-dFF" secondAttribute="bottom" constant="30" id="tkN-tQ-vGS"/>
+                            <constraint firstItem="rqb-t6-NN3" firstAttribute="top" secondItem="VwX-bd-ZzG" secondAttribute="bottom" constant="38" id="vO4-Qt-l5F"/>
+                            <constraint firstItem="BzH-cF-dFF" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="49" id="vSk-ZD-XfB"/>
+                            <constraint firstItem="vUk-TY-nIb" firstAttribute="leading" secondItem="BzH-cF-dFF" secondAttribute="leading" id="y4W-Vx-z3c"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="KbO-jp-vHF">
+                        <barButtonItem key="rightBarButtonItem" id="m8I-Cf-vgn">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="I7r-dg-LWB">
                                 <rect key="frame" x="149" y="526" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <color key="titleColor" red="1" green="0.97339306299999995" blue="0.52542349970000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="iLb-YV-FG3" kind="push" identifier="showAbout" id="qwV-7H-c7Z"/>
+                                </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
-                                <rect key="frame" x="18" y="117" width="285" height="29"/>
-                                <segments>
-                                    <segment title="Flat"/>
-                                    <segment title="iOS 8"/>
-                                    <segment title="Trivit"/>
-                                </segments>
-                            </segmentedControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="KbO-jp-vHF"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="colorPicker" destination="VwX-bd-ZzG" id="qVf-dS-CZs"/>
@@ -130,6 +158,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7N-QB-Yu5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2056" y="139"/>
+        </scene>
+        <!--About Trivit-->
+        <scene sceneID="3Rq-kr-EYf">
+            <objects>
+                <viewController id="iLb-YV-FG3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qr7-aX-bz5"/>
+                        <viewControllerLayoutGuide type="bottom" id="0xW-cL-oli"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zki-TK-Fdh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://en.wikipedia.org/wiki/Tally_marks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zos-oM-Mq1">
+                                <rect key="frame" x="20" y="297" width="280" height="17"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSn-QR-jwc">
+                                <rect key="frame" x="20" y="72" width="280" height="217"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brought to you by Balloon.Inc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtX-4S-3Hp">
+                                <rect key="frame" x="20" y="543" width="280" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zos-oM-Mq1" firstAttribute="top" secondItem="TSn-QR-jwc" secondAttribute="bottom" constant="8" symbolic="YES" id="ByA-VG-7cY"/>
+                            <constraint firstAttribute="trailing" secondItem="zos-oM-Mq1" secondAttribute="trailing" constant="20" symbolic="YES" id="Ehg-ve-elO"/>
+                            <constraint firstItem="OtX-4S-3Hp" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="WJa-pq-7vW"/>
+                            <constraint firstItem="0xW-cL-oli" firstAttribute="top" secondItem="OtX-4S-3Hp" secondAttribute="bottom" constant="8" symbolic="YES" id="Zrn-Xn-Xwy"/>
+                            <constraint firstAttribute="trailing" secondItem="OtX-4S-3Hp" secondAttribute="trailing" constant="20" symbolic="YES" id="h7a-Oj-apY"/>
+                            <constraint firstItem="TSn-QR-jwc" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="iVB-86-PDz"/>
+                            <constraint firstItem="zos-oM-Mq1" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="oaq-Tw-F3u"/>
+                            <constraint firstItem="TSn-QR-jwc" firstAttribute="top" secondItem="qr7-aX-bz5" secondAttribute="bottom" constant="8" symbolic="YES" id="szI-zE-jiL"/>
+                            <constraint firstAttribute="trailing" secondItem="TSn-QR-jwc" secondAttribute="trailing" constant="20" symbolic="YES" id="x20-AQ-pkY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="About Trivit" id="aNY-hB-Hrp"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a3U-jv-DCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2471" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wOj-S8-Fv5">
