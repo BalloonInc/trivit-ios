@@ -23,6 +23,11 @@
 
 @implementation MainListViewController
 
+#pragma mark - Constants
+int const CELL_TAP = 0;
+int const TITLE_TAP = 1;
+int const OUTSIDE_TAP = 2;
+
 #pragma mark - lazy instantiatiors
 
 -(NSInteger) trivitCount
@@ -191,12 +196,16 @@
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!swipedCell.isCollapsed){
+    
+    NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:leftSwipeRecognizer];
+    
+    if(!swipedCell.isCollapsed && tappedViewIdentifier==CELL_TAP){
         [swipedCell decreaseTallyCounter];
         
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]-1;
-        [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
+        if (currentCount >= 0)
+            [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
 
         // if image got removed ==> redraw cell height
         if (currentCount%5==0){
@@ -226,23 +235,35 @@
     if (self.cellBeingEdited)
         return;
     
-    CGPoint tapLocation = [singletapRecognizer locationInView:self.tableView];
+    NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:singletapRecognizer];
+    if(tappedViewIdentifier==CELL_TAP){
+        [self handleTallyIncrease:singletapRecognizer];
+    }
+    
+    else if (tappedViewIdentifier==TITLE_TAP){
+        [self handleTallyCollapse:singletapRecognizer];
+        
+    }
+}
+
+-(NSInteger)tappedViewforGestureRecognizer: (UIGestureRecognizer *)gestureRecognizer
+{
+    CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
     NSIndexPath *tappedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     
     if(tappedView==tappedCell.counterLabelForTally){
-        [self handleTallyIncrease:singletapRecognizer];
+        return CELL_TAP;
     }
     
     else if (CGRectContainsPoint(tappedCell.frame, tapLocation)){
-        [self handleTallyCollapse:singletapRecognizer];
+        return TITLE_TAP;
         
     }
     else{
         NSLog(@"You tapped on a very weird spot");
-        //[self handleTallyCollapse:recognizer];
-        
+        return OUTSIDE_TAP;
     }
 }
 
@@ -250,7 +271,10 @@
 {
     CGPoint tapLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
+    
+    NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:recognizer];
+
+    if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
         NSLog(@"long press on tableview at row %tu", indexPath.row);
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         
