@@ -50,7 +50,6 @@
     [defaults setObject:[NSNumber numberWithInteger:self.colorPicker.selectedSegmentIndex] forKey:@"selectedColorSet"];
     
     [defaults synchronize];
-
 }
 
 
@@ -65,6 +64,11 @@
     [alert show];
 
 }
+- (IBAction)resetAllTrivits:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset all Trivits" message:@"Are you sure you want to reset all counts to 0?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+
+}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -75,10 +79,15 @@
         
         NSError *error;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        for (NSManagedObject *object in fetchedObjects)
-        {
-            [self.managedObjectContext deleteObject:object];
+        if([alertView.title isEqualToString:@"Delete all Trivits"]){
+            for (NSManagedObject *record in fetchedObjects)
+                [self.managedObjectContext deleteObject:record];
         }
+        if([alertView.title isEqualToString:@"Reset all Trivits"]){
+            for (NSManagedObject *record in fetchedObjects)
+                [record setValue: [NSNumber numberWithInteger:0] forKey:@"counter"];
+        }
+
         
         error = nil;
         [self.managedObjectContext save:&error];
