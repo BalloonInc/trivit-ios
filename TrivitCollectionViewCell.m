@@ -10,7 +10,6 @@
 
 @implementation TrivitCollectionViewCell
 
-
 - (instancetype)initWithFrame:(CGRect)frameRect
 {
     self = [super initWithFrame:frameRect];

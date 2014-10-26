@@ -21,7 +21,6 @@ float const TALLY_IMAGE_DIMENSION = 32.;
 float const COLLECTIONVIEW_HORIZONTAL_SPACING = 15.;
 float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 
-
 #pragma mark - update tally functions
 
 - (void)increaseTallyCounter
@@ -45,41 +44,10 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     //[self setNeedsDisplay];
 }
 
-//colorset_func
-/*
- @synthesize cellBackColor = _cellBackColor;
-
 -(UIColor*)cellBackColor
 {
     if (!_cellBackColor){
-        //random color for every cell
-        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
-        
-        //permutated color for every cell
-        _cellBackColor=[Colors colorWithIndex:self.cellIdentifier usingColorSet: self.colorset];
-        
-    }
-    return _cellBackColor;
-}
- 
- -(void) setCellBackColor:(UIColor *)cellBackColor
- {
- if (_cellBackColor!=cellBackColor) {
- _cellBackColor = cellBackColor;
- [self setNeedsDisplay];
- }
- 
- }*/
-
--(UIColor*)cellBackColor
-{
-    if (!_cellBackColor){
-        //random color for every cell
-        //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
-        
-        //permutated color for every cell
         _cellBackColor=[Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors colorsetWithIndex:self.appSettings.selectedColorSet*2]];
-        
     }
     return _cellBackColor;
 }
@@ -137,8 +105,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     // first section
     UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];   
     [recta addClip];
-    //colorset_func
-    //self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
+
     [[self cellBackColor] setFill];
     [recta fill];
     
@@ -204,13 +171,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         [self addSubview: self.counterLabelForTally];
     }
 }
-//colorset_func
-/*
--(void) resetColor
-{
-    self.cellBackColor = [Colors colorWithIndex:self.cellIdentifier usingColorSet:self.colorset];
-}
-*/
 
 -(void) onLoadAnimation
 {
@@ -241,14 +201,11 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     return self;
 }
 
-
 #pragma mark TextField closings
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 // Editing of the label (UITextField)
@@ -290,7 +247,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     return gridcell;
 }
 
-
 #pragma mark – UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -311,7 +267,5 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 2.0;
 }
-
-
 
 @end

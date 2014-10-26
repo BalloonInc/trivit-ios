@@ -22,6 +22,7 @@
 -(NSString*) sureToDeleteTitle{
     return @"Delete all Trivits";
 }
+
 -(NSString*) sureToResetTitle{
     return @"Reset all Trivits";
 }
@@ -31,12 +32,10 @@
     // Do any additional setup after loading the view.
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -97,11 +96,8 @@
             for (NSManagedObject *record in fetchedObjects)
                 [record setValue: [NSNumber numberWithInteger:0] forKey:@"counter"];
         }
-
-        
         error = nil;
         [self.managedObjectContext save:&error];
-        
     }
 }
 

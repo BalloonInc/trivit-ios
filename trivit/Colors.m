@@ -45,7 +45,6 @@
     return colorSetArray;
 }
 
-
 +(NSArray *)flatDesignColorsLight
 {
         return @[
@@ -177,8 +176,5 @@
     NSString* hexColorString = colorSet[index];
     return [self colorWithHexString:hexColorString];
 }
-
-
-
 
 @end

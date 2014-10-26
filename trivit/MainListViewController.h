@@ -14,13 +14,12 @@
 
 @property (strong, nonatomic) TrivitTableViewCell *cellBeingEdited;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-//@property (strong, nonatomic) NSMutableArray *tallies; // of Tally
-
 @property (strong, nonatomic) Settings *appSettings;
 
 // is keyboard shown or not
 @property (nonatomic) bool keyboardShown;
 @property (nonatomic) CGFloat keyboardOverlap;
+
 // used when changing title, cell should be in view when view resizes
 @property (nonatomic, strong) NSIndexPath *activeCellIndexPath;
 

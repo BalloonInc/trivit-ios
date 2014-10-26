@@ -48,7 +48,6 @@ int const OUTSIDE_TAP = 2;
     _appSettings=appSettings;
 }
 
-
 #pragma mark - add item
 
 -(IBAction) addButtonPressed
@@ -97,18 +96,13 @@ int const OUTSIDE_TAP = 2;
     // Save Record
     NSError *error = nil;
     
-    if ([self.managedObjectContext save:&error]) {
-        // Dismiss View Controller
-        NSLog(@"Saved record");
-
-    } else {
+    if (![self.managedObjectContext save:&error]) {
         if (error) {
             NSLog(@"Unable to save record.");
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
     }
 }
-
 
 # pragma mark - selectors for gestures
 
@@ -146,7 +140,6 @@ int const OUTSIDE_TAP = 2;
     }
     
 }
-
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
 {
@@ -288,7 +281,6 @@ int const OUTSIDE_TAP = 2;
 
 #pragma mark - cell height calculation
 
-
 -(float) cellHeigthForTallyCount: (int) tallyCount // values are based on trial and error
 {
     float tally_image_Count = ceil(tallyCount / 5.);
@@ -310,10 +302,7 @@ int const OUTSIDE_TAP = 2;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    
-    //if ([self.expandedTrivits containsObject:indexPath]) {
     bool isCollapsed = [[[self.fetchedResultsController objectAtIndexPath:indexPath] valueForKey:@"isCollapsed"] boolValue];
-
     if (!isCollapsed) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
         return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[[record valueForKey:@"counter"] integerValue]]); // Full
@@ -321,7 +310,6 @@ int const OUTSIDE_TAP = 2;
     else {
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
     }
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -367,9 +355,8 @@ int const OUTSIDE_TAP = 2;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (record) {
+        if (record)
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
-        }
     }
 }
 
@@ -409,7 +396,6 @@ int const OUTSIDE_TAP = 2;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self configureTableView];
     
     // load Settings from NSUserDefaults
@@ -418,7 +404,6 @@ int const OUTSIDE_TAP = 2;
     self.appSettings.vibrationFeedback = [[defaults objectForKey:@"vibrationFeedback"] boolValue];
     self.appSettings.selectedColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
 
-    
     // Initialize Fetch Request
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
     
@@ -439,19 +424,15 @@ int const OUTSIDE_TAP = 2;
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
     // if empty: add some
     if (self.trivitCount == 0){
         [self addItemWithTitle:@"Drinks"];
         [self addItemWithTitle:@"Days without smoking" andCount:110];
         [self addItemWithTitle:@"Went swimming this year" andCount:44];
     }
-    
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-    
 }
 
 - (void) configureTableView{
@@ -474,7 +455,6 @@ int const OUTSIDE_TAP = 2;
     imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
     self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
     self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -486,12 +466,9 @@ int const OUTSIDE_TAP = 2;
             settingsViewController *svc = (settingsViewController *) segue.destinationViewController;
             svc.appSettings = self.appSettings;
             [svc setManagedObjectContext:self.managedObjectContext];
-
         }
     }
 }
-
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -500,7 +477,6 @@ int const OUTSIDE_TAP = 2;
     [self.tableView reloadData];
     [super viewWillAppear:animated];
 }
-
 
 #pragma mark - view resize on keyboard show
 
@@ -563,7 +539,6 @@ int const OUTSIDE_TAP = 2;
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
-    // save title
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
 
     [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
@@ -588,8 +563,6 @@ int const OUTSIDE_TAP = 2;
     
     if(self.keyboardOverlap == 0)
         return;
-    
-
     
     // Get the size & animation details of the keyboard
     NSDictionary *userInfo = [aNotification userInfo];
@@ -622,7 +595,5 @@ int const OUTSIDE_TAP = 2;
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
-
-
 
 @end

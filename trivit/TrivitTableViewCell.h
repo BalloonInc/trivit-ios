@@ -35,18 +35,10 @@ extern NSString const *TALLY_TYPE;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
 
-
 @property (nonatomic) float cellHeigth;
-
-//colorset_func
-//@property (nonatomic,strong) NSArray *colorset;
 
 - (void)decreaseTallyCounter;
 - (void)increaseTallyCounter;
-
 - (void) onLoadAnimation;
-
-//colorset_func
-//- (void) resetColor;
 
 @end
