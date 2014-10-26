@@ -11,10 +11,20 @@
 @interface settingsViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
 @property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitch;
-
+@property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
+@property (strong,nonatomic, readonly) NSString *sureToResetTitle;
 @end
 
 @implementation settingsViewController
+
+#pragma mark - Lazy instantiators
+
+-(NSString*) sureToDeleteTitle{
+    return @"Delete all Trivits";
+}
+-(NSString*) sureToResetTitle{
+    return @"Reset all Trivits";
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,12 +70,12 @@
 
 
 - (IBAction)deleteAllTrivits:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete all Trivits" message:@"Are you sure you want to delete all trivits?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToDeleteTitle message:@"Are you sure you want to delete all trivits?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
 
 }
 - (IBAction)resetAllTrivits:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset all Trivits" message:@"Are you sure you want to reset all counts to 0?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToResetTitle message:@"Are you sure you want to reset all counts to 0?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
 
 }
@@ -79,11 +89,11 @@
         
         NSError *error;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if([alertView.title isEqualToString:@"Delete all Trivits"]){
+        if([alertView.title isEqualToString:self.sureToDeleteTitle]){
             for (NSManagedObject *record in fetchedObjects)
                 [self.managedObjectContext deleteObject:record];
         }
-        if([alertView.title isEqualToString:@"Reset all Trivits"]){
+        if([alertView.title isEqualToString:self.sureToResetTitle]){
             for (NSManagedObject *record in fetchedObjects)
                 [record setValue: [NSNumber numberWithInteger:0] forKey:@"counter"];
         }
