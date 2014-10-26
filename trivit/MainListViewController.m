@@ -11,9 +11,9 @@
 #import "settingsViewController.h"
 #import "Colors.h"
 #import <CoreData/CoreData.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface MainListViewController ()<NSFetchedResultsControllerDelegate>
-@property (strong, nonatomic) TrivitTableViewCell *firstCell;
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic, readonly) NSInteger trivitCount;
 @property (strong, nonatomic) NSFetchRequest *fetchRequest;
@@ -22,18 +22,6 @@
 @implementation MainListViewController
 
 #pragma mark - lazy instantiatiors
-
--(NSMutableArray*) expandedTrivits
-{
-    if(!_expandedTrivits){_expandedTrivits = [[NSMutableArray alloc] init];}
-    return _expandedTrivits;
-}
-
-//-(NSMutableArray*) tallies
-//{
-//    if(!_tallies){_tallies=[[NSMutableArray alloc ] init];}
-//    return _tallies;
-//}
 
 -(NSInteger) trivitCount
 {
@@ -148,12 +136,24 @@
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]+1;
         [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
-
-        // if new image ==> redraw cell height
         
+        if (self.appSettings.vibrate){
+        NSMutableArray* arr = [NSMutableArray arrayWithObjects:
+                               [NSNumber numberWithBool:YES],
+                               [NSNumber numberWithInt:50], nil];
+        
+        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              arr,@"VibePattern",
+                              [NSNumber numberWithFloat:.80],@"Intensity",nil];
+        
+        int AudioServicesPlaySystemSoundWithVibration();
+
+        AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
+        }
+        // if new image ==> redraw cell height
         if (currentCount%5==1){
 
-            [UIView animateWithDuration:1.0  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
              } completion:^(BOOL finished){}];
@@ -196,19 +196,6 @@
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
     [record setValue: [NSNumber numberWithBool:collapseCell.isCollapsed] forKey:@"isCollapsed"];
-
-    collapseCell.loadAnimation = YES;
-    if (!collapseCell.isCollapsed){
-        [self.expandedTrivits addObject:collapseIndexPath];
-        //[self.tableView scrollToRowAtIndexPath:collapseIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tallies count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-
-    }
-    else{
-        [self.expandedTrivits removeObject:collapseIndexPath];
-    }
-    [self.tableView beginUpdates]; // necessary for the animation of the tableViewCell
-    [self.tableView endUpdates]; // necessary for the animation of the tableViewCell
 
 }
 
@@ -338,10 +325,6 @@
     // row can be deleted if tally is collapsed
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    TrivitTableViewCell *cell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-
-    
-    //return cell.isCollapsed;
     return [[record valueForKey:@"isCollapsed"] boolValue];
 }
 

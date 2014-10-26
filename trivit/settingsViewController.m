@@ -10,6 +10,7 @@
 
 @interface settingsViewController ()
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
+@property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitch;
 
 @end
 
@@ -20,20 +21,27 @@
     // Do any additional setup after loading the view.
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.colorPicker.selectedSegmentIndex = self.appSettings.colorSet;
+    self.vibrationSwitch.on = self.appSettings.vibrate;
     
     [super viewWillAppear:animated];
     [self.colorPicker addTarget:self
                          action:@selector(updateColorSet:)
                forControlEvents:UIControlEventValueChanged];
+    [self.vibrationSwitch addTarget:self
+                         action:@selector(vibrationChanged:)
+               forControlEvents:UIControlEventValueChanged];
 }
+
 
 - (void)updateColorSet:(id)sender
 {
@@ -57,14 +65,9 @@
 
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)vibrationChanged:(id)sender {
+    self.appSettings.vibrate = self.vibrationSwitch.isOn;
 }
-*/
 
 @end

@@ -17,7 +17,6 @@
 //@property (strong, nonatomic) NSMutableArray *tallies; // of Tally
 
 @property (strong, nonatomic) Settings *appSettings;
-@property (strong, nonatomic) NSMutableArray *expandedTrivits; // of NSIndexPath
 
 // is keyboard shown or not
 @property (nonatomic) bool keyboardShown;
