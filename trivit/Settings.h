@@ -10,7 +10,7 @@
 
 @interface Settings : NSObject
 
-@property (nonatomic) NSInteger colorSet;
-@property(nonatomic) bool vibrate;
+@property (nonatomic) NSInteger selectedColorSet;
+@property (nonatomic) bool vibrationFeedback;
 
 @end

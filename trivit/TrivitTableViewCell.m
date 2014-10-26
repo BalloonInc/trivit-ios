@@ -32,16 +32,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     [self setNeedsDisplay];
 }
 
-- (void)resetTallyCounter
-{
-    if ([self sureYouWantToReset])
-    {
-        [self.tally resetTally];
-        [self updateTallyString];
-        [self setNeedsDisplay];
-    }
-}
-
 - (void)decreaseTallyCounter
 {
     [self.tally decreaseTally];
@@ -49,14 +39,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     [self setNeedsDisplay];
 }
 
--(bool)sureYouWantToReset
-{
-    //TODO: make buttons responsive :)
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    [alert show];
-    return true;
-}
 
 -(void) updateTallyString
 {

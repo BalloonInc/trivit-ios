@@ -13,10 +13,12 @@
 #import <CoreData/CoreData.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface MainListViewController ()<NSFetchedResultsControllerDelegate>
+@interface MainListViewController ()<NSFetchedResultsControllerDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(strong, nonatomic) NSFetchedResultsController *fetchedResultsControllerSetup;
 @property(nonatomic, readonly) NSInteger trivitCount;
 @property (strong, nonatomic) NSFetchRequest *fetchRequest;
+@property (strong, nonatomic) NSFetchRequest *fetchRequestSetup;
 @end
 
 @implementation MainListViewController
@@ -115,15 +117,33 @@
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed){
-        [swipedCell resetTallyCounter];
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
+        self.activeCellIndexPath = swipedIndexPath;
+        [self sureYouWantToReset];
+    }
+    
+}
 
+-(void)sureYouWantToReset
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"%d", _tmpIndexPath.row);
+    if(buttonIndex == 1)
+    {
+        //NSLog(@"%d", _tmpIndexPath.row);
+        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
+        [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
+        
         [self.tableView beginUpdates]; // necessary for the animation of the cell growth
         [self.tableView endUpdates]; // necessary for the animation of the cell growth
     }
     
 }
+
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
 {
@@ -137,18 +157,19 @@
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]+1;
         [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
         
-        if (self.appSettings.vibrate){
-        NSMutableArray* arr = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:YES],
-                               [NSNumber numberWithInt:50], nil];
-        
-        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              arr,@"VibePattern",
-                              [NSNumber numberWithFloat:.80],@"Intensity",nil];
-        
-        int AudioServicesPlaySystemSoundWithVibration();
+        if (self.appSettings.vibrationFeedback){
+            NSMutableArray* arr = [NSMutableArray arrayWithObjects:
+                                   [NSNumber numberWithBool:YES],
+                                   [NSNumber numberWithInt:50], nil];
+            
+            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  arr,@"VibePattern",
+                                  [NSNumber numberWithFloat:.85],@"Intensity",nil];
+            
+            //declare function before usage
+            int AudioServicesPlaySystemSoundWithVibration();
 
-        AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
+            AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
         }
         // if new image ==> redraw cell height
         if (currentCount%5==1){
@@ -275,10 +296,6 @@
 
     if (!isCollapsed) {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-        //NSLog(@"count: %tu",tally.counter);
-        //NSLog(@"numbder of tallies: %tu", self.tallies.count);
-        //return 4*CELL_HEIGHT_SECTION1;
         return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[[record valueForKey:@"counter"] integerValue]]); // Full
     }
     else {
@@ -301,7 +318,6 @@
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     // Update Cell
-    //cell = [[TrivitTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
     cell.tally.counter = [[record valueForKey:@"counter"] integerValue];
@@ -377,6 +393,13 @@
     
     [self configureTableView];
     
+    // load Settings from NSUserDefaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    self.appSettings.vibrationFeedback = [[defaults objectForKey:@"vibrationFeedback"] boolValue];
+    self.appSettings.selectedColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
+
+    
     // Initialize Fetch Request
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
     
@@ -398,6 +421,7 @@
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
+    // if empty: add some
     if (self.trivitCount == 0){
         [self addItemWithTitle:@"Drinks"];
         [self addItemWithTitle:@"Days without smoking" andCount:110];
@@ -447,6 +471,8 @@
         }
     }
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -531,6 +557,15 @@
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+    // save title
+    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
+    NSString *title = [record valueForKey:@"title"] ;
+    NSLog(@"cell at %d had old title: %@",self.activeCellIndexPath.row,title);
+    NSLog(@"      new title: %@",self.cellBeingEdited.titleTextField.text);
+
+    [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
+    self.activeCellIndexPath = nil;
+    
     self.cellBeingEdited = nil;
     if(!self.keyboardShown)
         return;
@@ -550,6 +585,8 @@
     
     if(self.keyboardOverlap == 0)
         return;
+    
+
     
     // Get the size & animation details of the keyboard
     NSDictionary *userInfo = [aNotification userInfo];
@@ -581,7 +618,6 @@
         [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
-    self.activeCellIndexPath = nil;
 }
 
 

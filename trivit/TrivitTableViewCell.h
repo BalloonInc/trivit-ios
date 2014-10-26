@@ -42,7 +42,6 @@ extern NSString const *TALLY_TYPE;
 
 - (void)decreaseTallyCounter;
 - (void)increaseTallyCounter;
-- (void)resetTallyCounter;
 
 - (void) onLoadAnimation;
 
