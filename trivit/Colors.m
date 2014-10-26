@@ -10,30 +10,41 @@
 
 @implementation Colors
 
-+(NSArray *)iOSColors
+// All colors are defined below
+// To add a color, add a *Light and *Dark array and add them in the colorsetWithIndex function below
+// they should be
+//      case 2n   --> light version
+//      case 2n+1 --> dark version
+
++(NSArray*) colorsetWithIndex:(NSInteger)index
 {
-      return @[
-          @"E0272E", // Red
-		  @"459E20", // Green
-		  @"3D96BE", // Blue
-		  @"EI2A64", // Heavy pink
-		  @"E65F2E", // Orange
-		  @"A22CBE", // Purple
-          @"201DC2", // Dark blue
-		  @"261897"  // Very dark blue
-		  ];
+    NSArray *colorSetArray;
+    
+    switch (index) {
+        case 0:
+            colorSetArray = [Colors flatDesignColorsLight];
+            break;
+        case 1:
+            colorSetArray = [Colors flatDesignColorsDark];
+            break;
+        case 2:
+            colorSetArray = [Colors iOSColorsLight];
+            break;
+        case 3:
+            colorSetArray = [Colors iOSColorsDark];
+            break;
+        case 4:
+            colorSetArray = [Colors trivitColorsLight];
+            break;
+        case 5:
+            colorSetArray = [Colors trivitColorsDark];
+            break;
+        default:
+            colorSetArray = [Colors iOSColorsLight];
+    }
+    return colorSetArray;
 }
 
-+(NSArray *)trivitColors
-{
-        return @[
-          @"77CBBE", // AppleBlueSeaGreen
-          @"FBAB1B", // Orangish
-          @"F05F64", // Non-flashing Pink
-          @"45C5F2", // Gay Blue
-          @"3AB775"  // Green
-          ];
-}
 
 +(NSArray *)flatDesignColorsLight
 {
@@ -57,6 +68,56 @@
           @"D35400", // Pumpkin
           @"C0392B"  // Pomegranate
           ];
+}
+
++(NSArray *)iOSColorsLight
+{
+    return @[
+             @"FC2C34", // Red
+             @"51BA26", // Green
+             @"46ADDB", // Blue
+             @"FC2F70", // Heavy pink
+             @"FF6933", // Orange
+             @"BB33DB", // Purple
+             //@"2521DE", // Dark blue
+             @"2D1CB3"  // Very dark blue
+             ];
+}
+
++(NSArray *)iOSColorsDark
+{
+    return @[
+             @"E0272E", // Red
+             @"459E20", // Green
+             @"3D96BE", // Blue
+             @"E12A64", // Heavy pink
+             @"E65F2E", // Orange
+             @"A22CBE", // Purple
+             //@"201DC2", // Dark blue
+             @"221587"  // Very dark blue
+             ];
+}
+
++(NSArray *)trivitColorsLight
+{
+    return @[
+             @"88E8D9", // AppleBlueSeaGreen
+             @"FFB736", // Orangish
+             @"FF7075", // Non-flashing Pink
+             @"54D3FF", // Gay Blue
+             @"43D487"  // Green
+             ];
+}
+
++(NSArray *)trivitColorsDark
+{
+    return @[
+             @"77CBBE", // AppleBlueSeaGreen
+             @"FBAB1B", // Orangish
+             @"F05F64", // Non-flashing Pink
+             @"45C5F2", // Gay Blue
+             @"3AB775"  // Green
+             ];
 }
 
 +(UIColor*)colorWithHexString:(NSString*)hex
@@ -110,35 +171,14 @@
 {
     //By Default, use iOSColors
     if (!colorSet)
-        colorSet = [self iOSColors];
+        colorSet = [self iOSColorsLight];
     
     index = (int)index % [colorSet count];
     NSString* hexColorString = colorSet[index];
     return [self colorWithHexString:hexColorString];
 }
 
-+(NSArray*) colorsetWithIndex:(NSInteger)index
-{
-    NSArray *colorSetArray;
-    
-    switch (index) {
-        case 0:
-            colorSetArray = [Colors iOSColors];
-            break;
-        case 1:
-            colorSetArray = [Colors trivitColors];
-            break;
-        case 2:
-            colorSetArray = [Colors flatDesignColorsDark];
-            break;
-        case 3:
-            colorSetArray = [Colors flatDesignColorsLight];
-            break;
-        default:
-            [Colors iOSColors];
-    }
-    return colorSetArray;
-}
+
 
 
 @end

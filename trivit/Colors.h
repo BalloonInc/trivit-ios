@@ -11,8 +11,10 @@
 @interface Colors : NSObject
 
 // predefined colorsets
-+(NSArray*) iOSColors;
-+(NSArray*) trivitColors;
++(NSArray*) iOSColorsLight;
++(NSArray*) iOSColorsDark;
++(NSArray*) trivitColorsLight;
++(NSArray*) trivitColorsDark;
 +(NSArray*) flatDesignColorsLight;
 +(NSArray*) flatDesignColorsDark;
 

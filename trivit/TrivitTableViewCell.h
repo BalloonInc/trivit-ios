@@ -10,6 +10,7 @@
 #import "Tally.h"
 #import "TrivitCollectionViewCell.h"
 #import "PaddingUITextField.h"
+#import "Settings.h"
 
 @interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -21,9 +22,9 @@ extern float const COLLECTIONVIEW_VERTICAL_SPACING;
 extern NSString const *TALLY_TYPE;
 
 @property (strong, nonatomic) Tally *tally;
-@property (strong, nonatomic) NSString *counterString;
 @property (nonatomic) int cellIdentifier;
 @property (nonatomic) BOOL isCollapsed;
+@property (strong, nonatomic) Settings *appSettings;
 @property (nonatomic,strong) UIColor *cellBackColor;
 @property (nonatomic,strong) UIColor *cellBackColorDark;
 @property (nonatomic,strong) UIImageView *modImage;

@@ -136,10 +136,8 @@ int const OUTSIDE_TAP = 2;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //NSLog(@"%d", _tmpIndexPath.row);
     if(buttonIndex == 1)
     {
-        //NSLog(@"%d", _tmpIndexPath.row);
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
         
@@ -262,7 +260,6 @@ int const OUTSIDE_TAP = 2;
         
     }
     else{
-        NSLog(@"You tapped on a very weird spot");
         return OUTSIDE_TAP;
     }
 }
@@ -275,7 +272,6 @@ int const OUTSIDE_TAP = 2;
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:recognizer];
 
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
-        NSLog(@"long press on tableview at row %tu", indexPath.row);
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         
         if (self.cellBeingEdited)
@@ -338,11 +334,11 @@ int const OUTSIDE_TAP = 2;
 
 - (void)configureCell:(TrivitTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Fetch Record
-    NSLog(@"indexpath: %d",indexPath.row);
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     // Update Cell
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.appSettings = self.appSettings;
     cell.isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
     cell.tally.counter = [[record valueForKey:@"counter"] integerValue];
     cell.tally.colorIndex = [[record valueForKey:@"color"] integerValue];
@@ -412,7 +408,6 @@ int const OUTSIDE_TAP = 2;
 
 - (void)viewDidLoad
 {
-    NSLog(@"%@", self.managedObjectContext);
     [super viewDidLoad];
     
     [self configureTableView];
@@ -500,24 +495,11 @@ int const OUTSIDE_TAP = 2;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //colorset_func
-    //[self resetColors];
+    // reload data in case the color would have changed
+    // TODO: check if appSettings.selectedColorSet has changed
+    [self.tableView reloadData];
     [super viewWillAppear:animated];
 }
-
-
-#pragma mark - settings
-
-//colorset_func
-/*
- -(void) resetColors
- {
- for (TrivitCellTableViewCell* cell in self.tallies) {
- cell.colorset = [Colors colorsetWithIndex:self.appSettings.colorSet];
- [cell resetColor];
- }
- }
- */
 
 
 #pragma mark - view resize on keyboard show
@@ -583,9 +565,6 @@ int const OUTSIDE_TAP = 2;
 {
     // save title
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
-    NSString *title = [record valueForKey:@"title"] ;
-    NSLog(@"cell at %d had old title: %@",self.activeCellIndexPath.row,title);
-    NSLog(@"      new title: %@",self.cellBeingEdited.titleTextField.text);
 
     [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
     self.activeCellIndexPath = nil;

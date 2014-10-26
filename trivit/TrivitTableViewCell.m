@@ -10,7 +10,6 @@
 #import "Colors.h"
 
 @interface TrivitTableViewCell()
-
 @end
 
 @implementation TrivitTableViewCell
@@ -28,35 +27,22 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 - (void)increaseTallyCounter
 {
     [self.tally addTally];
-    [self updateTallyString];
     [self setNeedsDisplay];
 }
 
 - (void)decreaseTallyCounter
 {
+
     [self.tally decreaseTally];
-    [self updateTallyString];
     [self setNeedsDisplay];
 }
-
-
--(void) updateTallyString
-{
-    NSMutableString *buttonLabelText;
-    buttonLabelText = [[NSMutableString alloc] initWithString:@""];
-    for (int i = 0; i<self.tally.counter; i++) {
-        [buttonLabelText appendString:@"|"];
-    }
-    self.counterString = buttonLabelText;
-}
-
 
 #pragma mark - lazy instantiators
 
 -(void) setIsCollapsed:(BOOL)isCollapsed
 {
     _isCollapsed = isCollapsed;
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
 }
 
 //colorset_func
@@ -92,7 +78,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         //_cellBackColor=[Colors randomColorUsingColorSet: [Colors iOSColors]];
         
         //permutated color for every cell
-        _cellBackColor=[Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors flatDesignColorsLight]];
+        _cellBackColor=[Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors colorsetWithIndex:self.appSettings.selectedColorSet*2]];
         
     }
     return _cellBackColor;
@@ -101,7 +87,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 -(UIColor*)cellBackColorDark
 {
     if (!_cellBackColorDark){
-        _cellBackColorDark = [Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors flatDesignColorsDark]];
+        _cellBackColorDark = [Colors colorWithIndex:self.tally.colorIndex usingColorSet: [Colors colorsetWithIndex:self.appSettings.selectedColorSet*2+1]];
     }
     return _cellBackColorDark;
 }
@@ -300,7 +286,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, tally_type]]];
     if (indexPath.item > self.tally.counter/5-1) {
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, tally_type]]];
-        NSLog(@"tally_%2$@%1$tu", tmp, tally_type);
     }
     return gridcell;
 }

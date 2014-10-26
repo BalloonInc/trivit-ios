@@ -73,15 +73,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
-                                <rect key="frame" x="18" y="117" width="285" height="29"/>
-                                <segments>
-                                    <segment title="iOS 8"/>
-                                    <segment title="Trivit"/>
-                                    <segment title="Flat 1"/>
-                                    <segment title="Flat 2"/>
-                                </segments>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzH-cF-dFF">
                                 <rect key="frame" x="65" y="296" width="191" height="30"/>
                                 <state key="normal" title="Reset all trivits">
@@ -111,6 +102,21 @@
                                     <action selector="deleteAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="6xR-bT-hjE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7r-dg-LWB">
+                                <rect key="frame" x="149" y="526" width="22" height="22"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="1" green="0.97339306299999995" blue="0.52542349970000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
+                                <rect key="frame" x="18" y="117" width="285" height="29"/>
+                                <segments>
+                                    <segment title="Flat"/>
+                                    <segment title="iOS 8"/>
+                                    <segment title="Trivit"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
