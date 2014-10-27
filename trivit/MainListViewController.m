@@ -397,7 +397,7 @@ int const OUTSIDE_TAP = 2;
 {
     [super viewDidLoad];
     [self configureTableView];
-    
+
     // load Settings from NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -594,6 +594,12 @@ int const OUTSIDE_TAP = 2;
         [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
+}
+
+// Do not hide status bar
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
 }
 
 @end

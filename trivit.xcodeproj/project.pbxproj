@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1C91B119FEC93B00447874 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B019FEC93B00447874 /* SettingsTableViewController.m */; };
 		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
 		6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */; };
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C1C91AF19FEC93B00447874 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		6C1C91B019FEC93B00447874 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C09D195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 			children = (
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
+				6C1C91AF19FEC93B00447874 /* SettingsTableViewController.h */,
+				6C1C91B019FEC93B00447874 /* SettingsTableViewController.m */,
 				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
 				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
 				EC268A54198910B500944106 /* TrivitCollectionViewCell.h */,
@@ -261,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C1C91B119FEC93B00447874 /* SettingsTableViewController.m in Sources */,
 				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,
 				6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */,
 				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,

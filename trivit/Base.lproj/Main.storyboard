@@ -36,6 +36,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Trivit" id="Obg-Ql-Sqf">
                         <barButtonItem key="leftBarButtonItem" image="add_button" id="c0b-Ht-gFS">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addButtonPressed" destination="0wd-hH-vZU" id="Tw0-tj-RLY"/>
                             </connections>
@@ -43,7 +44,7 @@
                         <barButtonItem key="rightBarButtonItem" image="settings_button" id="uvv-K8-j9p">
                             <color key="tintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="0Vr-vX-FSL" kind="push" identifier="ShowSettingsForTrivit" id="VxN-z7-0KD"/>
+                                <segue destination="cSh-TX-9co" kind="push" identifier="ShowSettingsForTrivit" id="iNJ-th-YU6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -57,107 +58,173 @@
             <point key="canvasLocation" x="1638" y="139"/>
         </scene>
         <!--Settings-->
-        <scene sceneID="PsH-CW-h89">
+        <scene sceneID="lGH-Dr-cOz">
             <objects>
-                <viewController id="0Vr-vX-FSL" customClass="settingsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Tva-rd-wdJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="GAs-6F-ZWt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="V1C-fU-VpZ">
+                <tableViewController id="cSh-TX-9co" customClass="settingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FOw-tH-I73">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jun-Et-cuT">
-                                <rect key="frame" x="86" y="80" width="149" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
-                                <rect key="frame" x="18" y="119" width="285" height="29"/>
-                                <segments>
-                                    <segment title="Flat"/>
-                                    <segment title="iOS"/>
-                                    <segment title="Trivit"/>
-                                </segments>
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-tB-kuh">
-                                <rect key="frame" x="18" y="190" width="219" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqb-t6-NN3">
-                                <rect key="frame" x="254" y="185" width="51" height="31"/>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUk-TY-nIb">
-                                <rect key="frame" x="65" y="518" width="191" height="30"/>
-                                <state key="normal" title="Delete all trivits">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="6xR-bT-hjE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzH-cF-dFF">
-                                <rect key="frame" x="65" y="458" width="191" height="30"/>
-                                <state key="normal" title="Reset all trivits">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetAllTrivits:" destination="0Vr-vX-FSL" eventType="touchUpInside" id="ltd-Dt-UEZ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Jun-Et-cuT" firstAttribute="top" secondItem="Tva-rd-wdJ" secondAttribute="bottom" constant="16" id="28c-nn-s1N"/>
-                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="top" secondItem="Jun-Et-cuT" secondAttribute="bottom" constant="18" id="4pe-Qv-NQ0"/>
-                            <constraint firstItem="rqb-t6-NN3" firstAttribute="leading" secondItem="OX9-tB-kuh" secondAttribute="trailing" constant="17" id="BQN-ng-Eyr"/>
-                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="2" id="D2B-uh-HZx"/>
-                            <constraint firstItem="BzH-cF-dFF" firstAttribute="centerX" secondItem="VwX-bd-ZzG" secondAttribute="centerX" id="D7p-2P-Ux4"/>
-                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="leading" secondItem="OX9-tB-kuh" secondAttribute="leading" id="EVT-m9-IXI"/>
-                            <constraint firstItem="Jun-Et-cuT" firstAttribute="centerX" secondItem="VwX-bd-ZzG" secondAttribute="centerX" id="LvK-rV-9o8"/>
-                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="trailing" secondItem="rqb-t6-NN3" secondAttribute="trailing" id="TjS-3m-YrZ"/>
-                            <constraint firstItem="Jun-Et-cuT" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="70" id="Vnr-Aa-Oaa"/>
-                            <constraint firstItem="VwX-bd-ZzG" firstAttribute="centerX" secondItem="V1C-fU-VpZ" secondAttribute="centerX" id="YBN-vL-Ex7"/>
-                            <constraint firstItem="BzH-cF-dFF" firstAttribute="trailing" secondItem="vUk-TY-nIb" secondAttribute="trailing" id="ayV-gs-OKR"/>
-                            <constraint firstItem="rqb-t6-NN3" firstAttribute="centerY" secondItem="OX9-tB-kuh" secondAttribute="centerY" id="doh-Nj-Wxy"/>
-                            <constraint firstAttribute="bottom" secondItem="vUk-TY-nIb" secondAttribute="bottom" constant="20" symbolic="YES" id="taf-2q-bh4"/>
-                            <constraint firstItem="vUk-TY-nIb" firstAttribute="top" secondItem="BzH-cF-dFF" secondAttribute="bottom" constant="30" id="tkN-tQ-vGS"/>
-                            <constraint firstItem="rqb-t6-NN3" firstAttribute="top" secondItem="VwX-bd-ZzG" secondAttribute="bottom" constant="38" id="vO4-Qt-l5F"/>
-                            <constraint firstItem="BzH-cF-dFF" firstAttribute="leading" secondItem="V1C-fU-VpZ" secondAttribute="leadingMargin" constant="49" id="vSk-ZD-XfB"/>
-                            <constraint firstItem="vUk-TY-nIb" firstAttribute="leading" secondItem="BzH-cF-dFF" secondAttribute="leading" id="y4W-Vx-z3c"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Settings" id="KbO-jp-vHF">
-                        <barButtonItem key="rightBarButtonItem" id="m8I-Cf-vgn">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="I7r-dg-LWB">
-                                <rect key="frame" x="149" y="526" width="22" height="22"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="OMY-pf-u8d">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="segmentCell" rowHeight="81" id="lwR-6w-lXb">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lwR-6w-lXb" id="UBg-0V-VKl">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-bd-ZzG">
+                                                    <rect key="frame" x="18" y="44" width="285" height="29"/>
+                                                    <segments>
+                                                        <segment title="Flat"/>
+                                                        <segment title="iOS"/>
+                                                        <segment title="Trivit"/>
+                                                    </segments>
+                                                    <color key="tintColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                                </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color Set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQ0-IB-Nat">
+                                                    <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VwX-bd-ZzG" firstAttribute="bottom" secondItem="UBg-0V-VKl" secondAttribute="bottomMargin" id="Da0-Te-Skb"/>
+                                                <constraint firstItem="UQ0-IB-Nat" firstAttribute="centerX" secondItem="VwX-bd-ZzG" secondAttribute="centerX" id="PL2-8l-JWo"/>
+                                                <constraint firstItem="UQ0-IB-Nat" firstAttribute="top" secondItem="UBg-0V-VKl" secondAttribute="topMargin" id="awy-oZ-6u1"/>
+                                                <constraint firstItem="UQ0-IB-Nat" firstAttribute="trailing" secondItem="UBg-0V-VKl" secondAttribute="trailingMargin" id="r7Y-Hz-jAn"/>
+                                                <constraint firstItem="VwX-bd-ZzG" firstAttribute="leading" secondItem="UBg-0V-VKl" secondAttribute="leadingMargin" constant="10" id="uhP-yw-2GY"/>
+                                                <constraint firstItem="UQ0-IB-Nat" firstAttribute="leading" secondItem="UBg-0V-VKl" secondAttribute="leadingMargin" id="zw5-4M-yRc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="q91-IF-bhZ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchCell" id="8HV-N1-Mx9">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8HV-N1-Mx9" id="i0I-bf-hBb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0M-cP-BDR">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIL-Af-Scs">
+                                                    <rect key="frame" x="8" y="11" width="223" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPo-bM-MFe">
+                                                    <rect key="frame" x="8" y="7" width="247" height="30"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="invisibleSwitchButtonPressed:" destination="cSh-TX-9co" eventType="touchUpInside" id="Mh0-ox-61g"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uPo-bM-MFe" firstAttribute="bottom" secondItem="L0M-cP-BDR" secondAttribute="bottom" id="0qF-Kv-e2k"/>
+                                                <constraint firstItem="zIL-Af-Scs" firstAttribute="leading" secondItem="uPo-bM-MFe" secondAttribute="leading" id="5Ih-w4-zSn"/>
+                                                <constraint firstItem="L0M-cP-BDR" firstAttribute="leading" secondItem="zIL-Af-Scs" secondAttribute="trailing" constant="32" id="9ti-sk-z2r"/>
+                                                <constraint firstItem="uPo-bM-MFe" firstAttribute="leading" secondItem="i0I-bf-hBb" secondAttribute="leadingMargin" id="Hig-OO-YYF"/>
+                                                <constraint firstItem="L0M-cP-BDR" firstAttribute="leading" secondItem="uPo-bM-MFe" secondAttribute="trailing" constant="8" id="Sob-s1-pGg"/>
+                                                <constraint firstItem="L0M-cP-BDR" firstAttribute="top" secondItem="i0I-bf-hBb" secondAttribute="topMargin" constant="-2" id="Uon-lX-MPc"/>
+                                                <constraint firstItem="L0M-cP-BDR" firstAttribute="trailing" secondItem="i0I-bf-hBb" secondAttribute="trailingMargin" id="WgW-2X-Zw2"/>
+                                                <constraint firstItem="zIL-Af-Scs" firstAttribute="centerY" secondItem="L0M-cP-BDR" secondAttribute="centerY" id="cHF-sb-NdL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="sWZ-1k-A84">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="ckI-IY-ujN">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ckI-IY-ujN" id="5cz-AX-MPr">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oe-9h-6Ea">
+                                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
+                                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Reset all trivits">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="resetAllTrivits:" destination="cSh-TX-9co" eventType="touchUpInside" id="0wM-vz-4ei"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0oe-9h-6Ea" firstAttribute="top" secondItem="5cz-AX-MPr" secondAttribute="topMargin" id="K4i-gP-Z5d"/>
+                                                <constraint firstItem="0oe-9h-6Ea" firstAttribute="leading" secondItem="5cz-AX-MPr" secondAttribute="leadingMargin" id="biu-Ra-WZg"/>
+                                                <constraint firstItem="0oe-9h-6Ea" firstAttribute="trailing" secondItem="5cz-AX-MPr" secondAttribute="trailingMargin" id="h15-zH-PfP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchCell" id="I8N-h0-6xY">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I8N-h0-6xY" id="njf-7f-nQb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKb-qz-c9Q">
+                                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
+                                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Delete all trivits">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteAllTrivits:" destination="cSh-TX-9co" eventType="touchUpInside" id="OyX-6C-rzx"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cKb-qz-c9Q" firstAttribute="trailing" secondItem="njf-7f-nQb" secondAttribute="trailingMargin" id="N9g-xP-gPa"/>
+                                                <constraint firstItem="cKb-qz-c9Q" firstAttribute="top" secondItem="njf-7f-nQb" secondAttribute="topMargin" id="bww-Qs-IkH"/>
+                                                <constraint firstItem="cKb-qz-c9Q" firstAttribute="leading" secondItem="njf-7f-nQb" secondAttribute="leadingMargin" id="rSl-Nt-btr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="cSh-TX-9co" id="TZp-Bc-yHw"/>
+                            <outlet property="delegate" destination="cSh-TX-9co" id="UfJ-Yn-erx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="798-Ww-cFl">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="FWS-9I-Qpz">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="4Wt-3l-T8g">
+                                <rect key="frame" x="258" y="7" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
-                                    <color key="titleColor" red="1" green="0.97339306299999995" blue="0.52542349970000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="iLb-YV-FG3" kind="push" identifier="showAbout" id="qwV-7H-c7Z"/>
+                                    <segue destination="iLb-YV-FG3" kind="push" id="WTZ-V2-fzm"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="colorPicker" destination="VwX-bd-ZzG" id="qVf-dS-CZs"/>
-                        <outlet property="vibrationSwitch" destination="rqb-t6-NN3" id="scI-IV-Rxx"/>
+                        <outlet property="colorPicker" destination="VwX-bd-ZzG" id="HQs-r1-hTM"/>
+                        <outlet property="invisibleSwitchButton" destination="uPo-bM-MFe" id="b1o-fE-eNL"/>
+                        <outlet property="vibrationSwitch" destination="L0M-cP-BDR" id="4Yf-C6-DaF"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y7N-QB-Yu5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOZ-WG-i5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056" y="139"/>
+            <point key="canvasLocation" x="2048" y="137"/>
         </scene>
         <!--About Trivit-->
         <scene sceneID="3Rq-kr-EYf">
@@ -210,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3U-jv-DCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2471" y="133"/>
+            <point key="canvasLocation" x="2439" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wOj-S8-Fv5">

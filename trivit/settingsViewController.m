@@ -11,6 +11,7 @@
 @interface settingsViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
 @property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *invisibleSwitchButton;
 @property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
 @property (strong,nonatomic, readonly) NSString *sureToResetTitle;
 @end
@@ -67,6 +68,11 @@
     self.appSettings.selectedColorSet=self.colorPicker.selectedSegmentIndex;
 }
 
+- (IBAction)invisibleSwitchButtonPressed:(id)sender {
+    bool newState = !self.vibrationSwitch.isOn;
+    [self.vibrationSwitch setOn:newState animated:YES];
+    self.appSettings.vibrationFeedback = newState;
+}
 
 - (IBAction)deleteAllTrivits:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToDeleteTitle message:@"Are you sure you want to delete all trivits?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
@@ -106,4 +112,8 @@
     self.appSettings.vibrationFeedback = self.vibrationSwitch.isOn;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
+}
 @end
