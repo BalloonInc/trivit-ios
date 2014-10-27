@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainListViewController.h"
+#import "TutMasterViewController.h"
 #import <CoreData/CoreData.h>
 
 @interface AppDelegate ()
@@ -24,19 +25,25 @@
     // Fetch Main Storyboard
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
-    // Instantiate Root Navigation Controller
-    UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
-    
-    // Configure View Controller
-    MainListViewController *viewController = (MainListViewController *)[rootNavigationController topViewController];
-    
-    if ([viewController isKindOfClass:[MainListViewController class]]) {
-        [viewController setManagedObjectContext:self.managedObjectContext];
+    if(false){
+        UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
+        [self.window setRootViewController:rootNavigationController];
     }
     
-    // Configure Window
-    [self.window setRootViewController:rootNavigationController];
-    
+    else{
+        // Instantiate Root Navigation Controller
+        UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
+
+        // Configure View Controller
+        MainListViewController *mainViewController = (MainListViewController *)[rootNavigationController topViewController];
+        
+        if ([mainViewController isKindOfClass:[MainListViewController class]]) {
+            [mainViewController setManagedObjectContext:self.managedObjectContext];
+        }
+        
+        // Configure Window
+        [self.window setRootViewController:rootNavigationController];
+    }
     return YES;
 }
 

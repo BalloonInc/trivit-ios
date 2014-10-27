@@ -12,6 +12,7 @@
 #import "Colors.h"
 #import <CoreData/CoreData.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "AppDelegate.h"
 
 @interface MainListViewController ()<NSFetchedResultsControllerDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -401,8 +402,8 @@ int const OUTSIDE_TAP = 2;
     // load Settings from NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    self.appSettings.vibrationFeedback = [[defaults objectForKey:@"vibrationFeedback"] boolValue];
-    self.appSettings.selectedColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
+
+    
 
     // Initialize Fetch Request
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
@@ -424,12 +425,24 @@ int const OUTSIDE_TAP = 2;
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    // if empty: add some
-    if (self.trivitCount == 0){
-        [self addItemWithTitle:@"Drinks"];
-        [self addItemWithTitle:@"Days without smoking" andCount:110];
-        [self addItemWithTitle:@"Went swimming this year" andCount:44];
+    
+    if (![[defaults objectForKey:@"tutorialShown"] boolValue]){
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
+        [self presentViewController:tutorialVC animated:YES completion:^{}];
+        // if empty: add some trivits
+        if (self.trivitCount == 0){
+            [self addItemWithTitle:@"Drinks"];
+            [self addItemWithTitle:@"Days without smoking" andCount:110];
+            [self addItemWithTitle:@"Went swimming this year" andCount:44];
+        }
     }
+    else
+    {
+        self.appSettings.vibrationFeedback = [[defaults objectForKey:@"vibrationFeedback"] boolValue];
+        self.appSettings.selectedColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
+    }
+    
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
