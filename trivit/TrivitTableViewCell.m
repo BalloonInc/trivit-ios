@@ -41,7 +41,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 -(void) setIsCollapsed:(BOOL)isCollapsed
 {
     _isCollapsed = isCollapsed;
-    //[self setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 -(UIColor*)cellBackColor
@@ -225,7 +225,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 
 -(NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.tally.counter/5+1;
+    return (self.tally.counter-1)/5+1;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {

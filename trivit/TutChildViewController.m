@@ -35,7 +35,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
-
 }];
 }
 

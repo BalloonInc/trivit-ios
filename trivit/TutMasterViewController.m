@@ -11,6 +11,7 @@
 
 @interface TutMasterViewController ()
 @property (strong,nonatomic) UIStoryboard *mainStoryboard;
+@property (nonatomic) NSUInteger numberOfPages;
 @end
 
 @implementation TutMasterViewController
@@ -18,6 +19,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    //set number of pages in the tutorial
+    self.numberOfPages=3;
+
     self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
 
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -34,14 +39,12 @@
     [self addChildViewController:self.pageController];
     [[self view] addSubview:[self.pageController view]];
     [self.pageController didMoveToParentViewController:self];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
 }
 
 - (TutChildViewController *)viewControllerAtIndex:(NSUInteger)index {
@@ -64,7 +67,6 @@
     }
     childViewController.index=index;
     return childViewController;
-    
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
@@ -78,7 +80,6 @@
     index--;
     
     return [self viewControllerAtIndex:index];
-    
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -87,16 +88,14 @@
     
     index++;
     
-    if (index == 3)
+    if (index == self.numberOfPages)
         return nil;
-    
     return [self viewControllerAtIndex:index];
-    
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     // The number of items reflected in the page indicator.
-    return 3;
+    return self.numberOfPages;
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
@@ -104,5 +103,9 @@
     return 0;
 }
 
+// For the tutorial, only allow portrait mode
+-(NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 @end
