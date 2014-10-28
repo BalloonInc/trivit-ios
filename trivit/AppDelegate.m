@@ -44,6 +44,12 @@
         // Configure Window
         [self.window setRootViewController:rootNavigationController];
     }
+    // set colors for page controllers (tutorial)
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+    pageControl.backgroundColor = [UIColor lightGrayColor];
+
     return YES;
 }
 
