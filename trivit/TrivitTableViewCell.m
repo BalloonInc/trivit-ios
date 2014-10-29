@@ -68,22 +68,27 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 
 - (void) configureCountLabelWithInteger:(int) integer
 {
-    self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
-    [[self cellBackColorDark] setFill];
-    self.countLabel.backgroundColor = self.cellBackColorDark;
-    self.countLabel.textAlignment = 1;
-    self.countLabel.textColor = [UIColor whiteColor];
-    [self.countLabel.layer setCornerRadius:8.0];
-    [self.countLabel.layer setMasksToBounds:YES];
+    if (!self.countLabel){
+        self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
+        [[self cellBackColorDark] setFill];
+        self.countLabel.backgroundColor = self.cellBackColorDark;
+        self.countLabel.textAlignment = 1;
+        self.countLabel.textColor = [UIColor whiteColor];
+        [self.countLabel.layer setCornerRadius:8.0];
+        [self.countLabel.layer setMasksToBounds:YES];
+    }
     self.countLabel.text = @(integer).stringValue;
+
+    //Animation only if loadanimation is set (e.g. when expanding)
+    if (self.loadAnimation){
+        self.countLabel.alpha = 0;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:1.3];
+        [UIView setAnimationDelegate:self];
+        self.countLabel.alpha = 1.0;
+        [UIView commitAnimations];
+    }
     
-    //Animation
-    self.countLabel.alpha = 0;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.3];
-    [UIView setAnimationDelegate:self];
-    self.countLabel.alpha = 1.0;
-    [UIView commitAnimations];
     [self setAccessoryView:self.countLabel];
 }
 
@@ -158,7 +163,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         [self.images reloadData];
 
         if(self.loadAnimation){
-            [self onLoadAnimation];
+            [self showTalliesWithDelay];
         }
        [self addSubview:self.images];
         
@@ -169,7 +174,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     }
 }
 
--(void) onLoadAnimation
+-(void) showTalliesWithDelay
 {
     self.images.alpha = 0;
     [UIView beginAnimations:nil context:nil];

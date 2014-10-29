@@ -179,12 +179,10 @@ int const OUTSIDE_TAP = 2;
             AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
         }
         // if new image ==> redraw cell height
-        if (currentCount%5==1){
+        if (currentCount%(5*self.imagesPerRow)==1){
             // if new row, prepare for scrolling the cell:
-            if (currentCount%(5*self.imagesPerRow)==1){
-                [self scrollToExpandedCell:swipedIndexPath];
-                self.shouldScrollOnTallyIncreaseOrDecrease=true;
-            }
+            [self scrollToExpandedCell:swipedIndexPath];
+            self.shouldScrollOnTallyIncreaseOrDecrease=true;
             
             [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 [self.tableView beginUpdates];
@@ -216,17 +214,13 @@ int const OUTSIDE_TAP = 2;
             [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
         
         // if image got removed ==> redraw cell height
-        if (currentCount%5==0){
-            
-            // if row is removed, prepare for scrolling the cell:
-            if (currentCount%(5*self.imagesPerRow)==0){
-                [self scrollToExpandedCell:swipedIndexPath];
-                self.shouldScrollOnTallyIncreaseOrDecrease=true;
-            }
+        if (currentCount%(5*self.imagesPerRow)==0){
+            [self scrollToExpandedCell:swipedIndexPath];
+            self.shouldScrollOnTallyIncreaseOrDecrease=true;
             
             [self.tableView beginUpdates]; // necessary for the animation of the cell growth
             [self.tableView endUpdates]; // necessary for the animation of the cell growth
-                    }
+        }
     }
 }
 
@@ -662,7 +656,6 @@ int const OUTSIDE_TAP = 2;
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
 }
-
 
 // Do not hide status bar
 - (BOOL)prefersStatusBarHidden

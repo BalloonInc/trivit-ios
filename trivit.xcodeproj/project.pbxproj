@@ -124,16 +124,13 @@
 				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
 				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
 				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
-				EC268A54198910B500944106 /* TrivitCollectionViewCell.h */,
-				EC268A55198910B500944106 /* TrivitCollectionViewCell.m */,
-				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
-				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
+				6C8E3C231A01AE5E0001616E /* CelsTableview/Collection view */,
 				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
 				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
 				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
-				6C9025BD198458A500BB11FC /* settingsViewController.h */,
-				6C9025BE198458A500BB11FC /* settingsViewController.m */,
+				6C8E3C211A01AE0B0001616E /* Settings view */,
 				6C69C0A9195B6F4E002A3F53 /* Images.xcassets */,
+				6C8E3C221A01AE2C0001616E /* AppDelegate */,
 				6C69C09C195B6F4E002A3F53 /* Supporting Files */,
 			);
 			path = trivit;
@@ -142,8 +139,6 @@
 		6C69C09C195B6F4E002A3F53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
-				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
 				6C69C09D195B6F4E002A3F53 /* Info.plist */,
 				6C69C09E195B6F4E002A3F53 /* main.m */,
 			);
@@ -165,6 +160,35 @@
 				6C69C0B4195B6F4E002A3F53 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C8E3C211A01AE0B0001616E /* Settings view */ = {
+			isa = PBXGroup;
+			children = (
+				6C9025BD198458A500BB11FC /* settingsViewController.h */,
+				6C9025BE198458A500BB11FC /* settingsViewController.m */,
+			);
+			name = "Settings view";
+			sourceTree = "<group>";
+		};
+		6C8E3C221A01AE2C0001616E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
+				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6C8E3C231A01AE5E0001616E /* CelsTableview/Collection view */ = {
+			isa = PBXGroup;
+			children = (
+				EC268A54198910B500944106 /* TrivitCollectionViewCell.h */,
+				EC268A55198910B500944106 /* TrivitCollectionViewCell.m */,
+				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
+				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
+			);
+			name = "CelsTableview/Collection view";
 			sourceTree = "<group>";
 		};
 		6CF1A23F195B765600B83A6F /* Model */ = {
