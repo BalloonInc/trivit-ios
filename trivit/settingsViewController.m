@@ -92,7 +92,6 @@
 
 }
 
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
@@ -114,7 +113,6 @@
         [self.managedObjectContext save:&error];
     }
 }
-
 
 - (void)vibrationChanged:(id)sender {
     self.appSettings.vibrationFeedback = self.vibrationSwitch.isOn;

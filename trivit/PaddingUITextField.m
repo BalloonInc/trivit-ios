@@ -10,15 +10,6 @@
 
 @implementation PaddingUITextField
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
 //    return CGRectInset(bounds, 50.0f, 0);

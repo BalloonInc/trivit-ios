@@ -630,15 +630,17 @@ int const OUTSIDE_TAP = 2;
                      completion:nil];
 }
 
+/*
 - (void) tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context
 {
     // Scroll to the active cell
     if(self.activeCellIndexPath)
     {
         [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
 }
+ */
 
 // Do not hide status bar
 - (BOOL)prefersStatusBarHidden

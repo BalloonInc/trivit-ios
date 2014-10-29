@@ -180,42 +180,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     [UIView commitAnimations];
 }
 
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-//
-// Wouter 29/10/2014
-// commented out for now, since I think all of these are default and should not be overriden
-// to be restored if necessary
-//
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-/*
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-#pragma mark TextField closings
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-}
-*/
-
 // Editing of the label (UITextField)
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
