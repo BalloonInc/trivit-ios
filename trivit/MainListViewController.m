@@ -630,17 +630,18 @@ int const OUTSIDE_TAP = 2;
                      completion:nil];
 }
 
-/*
+
+// TODO: figure out this stuff below. It has somthing to do with resizing of the current view when the keyboard will be shown
 - (void) tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context
 {
     // Scroll to the active cell
     if(self.activeCellIndexPath)
     {
-        [self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        //[self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
         [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
 }
- */
+
 
 // Do not hide status bar
 - (BOOL)prefersStatusBarHidden
