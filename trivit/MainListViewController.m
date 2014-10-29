@@ -21,6 +21,9 @@
 @property (strong, nonatomic) NSFetchRequest *fetchRequest;
 @property (strong, nonatomic) NSFetchRequest *fetchRequestSetup;
 @property (strong,nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
+@property (nonatomic) bool shouldScrollOnTallyIncreaseOrDecrease;
+
+@property (nonatomic) NSInteger imagesPerRow;
 @end
 
 @implementation MainListViewController
@@ -36,6 +39,10 @@ int const OUTSIDE_TAP = 2;
 {
     NSError *err;
     return [self.managedObjectContext countForFetchRequest:self.fetchRequest error:&err];
+}
+-(NSInteger) imagesPerRow{
+    return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING)+1);
+    
 }
 
 @synthesize appSettings=_appSettings;
@@ -74,7 +81,7 @@ int const OUTSIDE_TAP = 2;
 {
     // Color index: last tally in the aray +1
     NSInteger colorIndex;
-
+    
     if (self.trivitCount==0)
         colorIndex=0;
     else{
@@ -87,12 +94,12 @@ int const OUTSIDE_TAP = 2;
     
     // Initialize Record
     NSManagedObject *record = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-
+    
     // Populate Record
     [record setValue:title forKey:@"title"];
     [record setValue:[NSNumber numberWithInteger:count] forKey:@"counter"];
     [record setValue:[NSNumber numberWithInteger:colorIndex] forKey:@"color"];
-
+    
     [record setValue:[NSDate date] forKey:@"createdAt"];
     
     // Save Record
@@ -113,7 +120,7 @@ int const OUTSIDE_TAP = 2;
     // if a cell title is being edited don't process taps
     if (self.cellBeingEdited)
         return;
-
+    
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
@@ -149,7 +156,7 @@ int const OUTSIDE_TAP = 2;
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *increasedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     increasedCell.loadAnimation = NO;
-
+    
     if(!increasedCell.isCollapsed){
         
         [increasedCell increaseTallyCounter];
@@ -168,16 +175,21 @@ int const OUTSIDE_TAP = 2;
             
             //declare function before usage
             int AudioServicesPlaySystemSoundWithVibration();
-
+            
             AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
         }
         // if new image ==> redraw cell height
         if (currentCount%5==1){
-
+            // if new row, prepare for scrolling the cell:
+            if (currentCount%(5*self.imagesPerRow)==1){
+                [self scrollToExpandedCell:swipedIndexPath];
+                self.shouldScrollOnTallyIncreaseOrDecrease=true;
+            }
+            
             [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
-             } completion:^(BOOL finished){}];
+            } completion:^(BOOL finished){}];
         }
     }
 }
@@ -187,12 +199,12 @@ int const OUTSIDE_TAP = 2;
     // if a cell title is being edited don't process taps
     if (self.cellBeingEdited)
         return;
-
+    
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     swipedCell.loadAnimation = NO;
-
+    
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:leftSwipeRecognizer];
     
     if(!swipedCell.isCollapsed && tappedViewIdentifier==CELL_TAP){
@@ -202,12 +214,19 @@ int const OUTSIDE_TAP = 2;
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]-1;
         if (currentCount >= 0)
             [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
-
+        
         // if image got removed ==> redraw cell height
         if (currentCount%5==0){
+            
+            // if row is removed, prepare for scrolling the cell:
+            if (currentCount%(5*self.imagesPerRow)==0){
+                [self scrollToExpandedCell:swipedIndexPath];
+                self.shouldScrollOnTallyIncreaseOrDecrease=true;
+            }
+            
             [self.tableView beginUpdates]; // necessary for the animation of the cell growth
             [self.tableView endUpdates]; // necessary for the animation of the cell growth
-        }
+                    }
     }
 }
 
@@ -218,7 +237,7 @@ int const OUTSIDE_TAP = 2;
     TrivitTableViewCell *collapseCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
     // delay for showing trivits
     collapseCell.loadAnimation = YES;
-
+    
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
     [record setValue: [NSNumber numberWithBool:collapseCell.isCollapsed] forKey:@"isCollapsed"];
@@ -262,11 +281,11 @@ int const OUTSIDE_TAP = 2;
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:recognizer];
-
+    
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         tappedCell.loadAnimation = NO;
-
+        
         if (self.cellBeingEdited)
             self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
         self.cellBeingEdited = tappedCell; //Save cell being edited
@@ -284,8 +303,8 @@ int const OUTSIDE_TAP = 2;
 -(float) cellHeigthForTallyCount: (NSInteger) tallyCount // values are based on trial and error
 {
     float tally_image_Count = ceil(tallyCount / 5.);
-    float imagesPerRow = floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING)+1);
-    int rows = ceil(tally_image_Count/imagesPerRow);
+    
+    int rows = ceil(1.*tally_image_Count/self.imagesPerRow);
     if (rows <2)
         return CELL_HEIGHT_SECTION1+TALLY_IMAGE_DIMENSION;
     else
@@ -381,6 +400,7 @@ int const OUTSIDE_TAP = 2;
     TrivitTableViewCell *lastVisibleCell = [visibleRows lastObject];
     NSIndexPath *lastIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
     
+    
     //initialize previous last cell in the current view, only fill this one in case 2 below
     TrivitTableViewCell *oneButLastVisibleCell;
     
@@ -390,17 +410,18 @@ int const OUTSIDE_TAP = 2;
             self.shouldScrollToCellAtIndexPath = indexPath;
             break;
         case 1:
-            if(lastVisibleCell.isCollapsed)
+            if(lastVisibleCell.isCollapsed && !self.shouldScrollOnTallyIncreaseOrDecrease)
                 self.shouldScrollToCellAtIndexPath = indexPath;
             break;
         case 2:
             oneButLastVisibleCell = [[visibleRows subarrayWithRange:NSMakeRange(([visibleRows count]-2), 1)] firstObject];
-            if(lastVisibleCell.isCollapsed && oneButLastVisibleCell.isCollapsed)
+            if(lastVisibleCell.isCollapsed && oneButLastVisibleCell.isCollapsed && !self.shouldScrollOnTallyIncreaseOrDecrease)
                 self.shouldScrollToCellAtIndexPath = indexPath;
             break;
         default:
             break;
     }
+    self.shouldScrollOnTallyIncreaseOrDecrease=false;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -431,7 +452,7 @@ int const OUTSIDE_TAP = 2;
 {
     [super viewDidLoad];
     [self configureTableView];
-
+    
     // load Settings from NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -584,7 +605,7 @@ int const OUTSIDE_TAP = 2;
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
-
+    
     [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
     self.activeCellIndexPath = nil;
     
