@@ -75,14 +75,12 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     self.countLabel.textColor = [UIColor whiteColor];
     [self.countLabel.layer setCornerRadius:8.0];
     [self.countLabel.layer setMasksToBounds:YES];
-    
-    
     self.countLabel.text = @(integer).stringValue;
     
     //Animation
     self.countLabel.alpha = 0;
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDuration:0.3];
     [UIView setAnimationDelegate:self];
     self.countLabel.alpha = 1.0;
     [UIView commitAnimations];
@@ -158,12 +156,11 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         
         [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         [self.images reloadData];
-        
-        if(self.loadAnimation) {
+
+        if(self.loadAnimation){
             [self onLoadAnimation];
-            self.loadAnimation = NO;
         }
-        [self addSubview:self.images];
+       [self addSubview:self.images];
         
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
@@ -177,12 +174,22 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     self.images.alpha = 0;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDelay:0.1];
-    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:0.2];
     [UIView setAnimationDelegate:self];
     self.images.alpha = 1.0;
     [UIView commitAnimations];
 }
 
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//
+// Wouter 29/10/2014
+// commented out for now, since I think all of these are default and should not be overriden
+// to be restored if necessary
+//
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+/*
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -207,6 +214,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 {
     [super setSelected:selected animated:animated];
 }
+*/
 
 // Editing of the label (UITextField)
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

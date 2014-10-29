@@ -20,6 +20,7 @@
 @property(nonatomic, readonly) NSInteger trivitCount;
 @property (strong, nonatomic) NSFetchRequest *fetchRequest;
 @property (strong, nonatomic) NSFetchRequest *fetchRequestSetup;
+@property (strong,nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
 @end
 
 @implementation MainListViewController
@@ -147,6 +148,8 @@ int const OUTSIDE_TAP = 2;
     CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *increasedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+    increasedCell.loadAnimation = NO;
+
     if(!increasedCell.isCollapsed){
         
         [increasedCell increaseTallyCounter];
@@ -188,7 +191,8 @@ int const OUTSIDE_TAP = 2;
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    
+    swipedCell.loadAnimation = NO;
+
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:leftSwipeRecognizer];
     
     if(!swipedCell.isCollapsed && tappedViewIdentifier==CELL_TAP){
@@ -204,9 +208,7 @@ int const OUTSIDE_TAP = 2;
             [self.tableView beginUpdates]; // necessary for the animation of the cell growth
             [self.tableView endUpdates]; // necessary for the animation of the cell growth
         }
-
     }
-    
 }
 
 -(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
@@ -214,11 +216,16 @@ int const OUTSIDE_TAP = 2;
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *collapseIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *collapseCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:collapseIndexPath];
-    
+    // delay for showing trivits
+    collapseCell.loadAnimation = YES;
+
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
     [record setValue: [NSNumber numberWithBool:collapseCell.isCollapsed] forKey:@"isCollapsed"];
-
+    
+    // in case of an expansion, potentially scroll down to show expanded cell
+    if(!collapseCell.isCollapsed)
+        [self scrollToExpandedCell:collapseIndexPath];
 }
 
 -(void)handleTap: (UIGestureRecognizer *)singletapRecognizer
@@ -228,14 +235,10 @@ int const OUTSIDE_TAP = 2;
         return;
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:singletapRecognizer];
-    if(tappedViewIdentifier==CELL_TAP){
+    if(tappedViewIdentifier==CELL_TAP)
         [self handleTallyIncrease:singletapRecognizer];
-    }
-    
-    else if (tappedViewIdentifier==TITLE_TAP){
+    else if (tappedViewIdentifier==TITLE_TAP)
         [self handleTallyCollapse:singletapRecognizer];
-        
-    }
 }
 
 -(NSInteger)tappedViewforGestureRecognizer: (UIGestureRecognizer *)gestureRecognizer
@@ -245,17 +248,12 @@ int const OUTSIDE_TAP = 2;
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     
-    if(tappedView==tappedCell.counterLabelForTally){
+    if(tappedView==tappedCell.counterLabelForTally)
         return CELL_TAP;
-    }
-    
-    else if (CGRectContainsPoint(tappedCell.frame, tapLocation)){
+    else if (CGRectContainsPoint(tappedCell.frame, tapLocation))
         return TITLE_TAP;
-        
-    }
-    else{
+    else
         return OUTSIDE_TAP;
-    }
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer * )recognizer
@@ -267,7 +265,8 @@ int const OUTSIDE_TAP = 2;
 
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        
+        tappedCell.loadAnimation = NO;
+
         if (self.cellBeingEdited)
             self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
         self.cellBeingEdited = tappedCell; //Save cell being edited
@@ -282,7 +281,7 @@ int const OUTSIDE_TAP = 2;
 
 #pragma mark - cell height calculation
 
--(float) cellHeigthForTallyCount: (int) tallyCount // values are based on trial and error
+-(float) cellHeigthForTallyCount: (NSInteger) tallyCount // values are based on trial and error
 {
     float tally_image_Count = ceil(tallyCount / 5.);
     float imagesPerRow = floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING)+1);
@@ -292,7 +291,6 @@ int const OUTSIDE_TAP = 2;
     else
         return CELL_HEIGHT_SECTION1 + rows*(TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING);
 }
-
 
 #pragma mark - Magic to make the tableview datasource working
 
@@ -365,9 +363,44 @@ int const OUTSIDE_TAP = 2;
     [self.tableView beginUpdates];
 }
 
-
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    // if necessary, scroll to show cell
+    // the scroll logic is here to ensure it is executed after the cell is expanded
+    if(self.shouldScrollToCellAtIndexPath)
+        [self.tableView scrollToRowAtIndexPath:self.shouldScrollToCellAtIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    // on next GUI update, do not scroll anymore
+    self.shouldScrollToCellAtIndexPath=nil;
+}
+
+-(void) scrollToExpandedCell: (NSIndexPath *)indexPath
+{
+    NSArray *visibleRows = [self.tableView visibleCells];
+    
+    // get last cell visible in the current view
+    TrivitTableViewCell *lastVisibleCell = [visibleRows lastObject];
+    NSIndexPath *lastIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
+    
+    //initialize previous last cell in the current view, only fill this one in case 2 below
+    TrivitTableViewCell *oneButLastVisibleCell;
+    
+    self.shouldScrollToCellAtIndexPath = nil;
+    switch (lastIndexPath.row-indexPath.row) {
+        case 0:
+            self.shouldScrollToCellAtIndexPath = indexPath;
+            break;
+        case 1:
+            if(lastVisibleCell.isCollapsed)
+                self.shouldScrollToCellAtIndexPath = indexPath;
+            break;
+        case 2:
+            oneButLastVisibleCell = [[visibleRows subarrayWithRange:NSMakeRange(([visibleRows count]-2), 1)] firstObject];
+            if(lastVisibleCell.isCollapsed && oneButLastVisibleCell.isCollapsed)
+                self.shouldScrollToCellAtIndexPath = indexPath;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -402,9 +435,6 @@ int const OUTSIDE_TAP = 2;
     // load Settings from NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-
-    
-
     // Initialize Fetch Request
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
     
@@ -486,7 +516,8 @@ int const OUTSIDE_TAP = 2;
 -(void)viewWillAppear:(BOOL)animated
 {
     // reload data in case the color would have changed
-    // TODO: check if appSettings.selectedColorSet has changed
+    // TODO: check if appSettings.selectedColorSet has changed and only refresh if it is true
+    // we should make a NSNumber number with boolean and pass it in the prepareforsegue (nsnumber is passed by reference)
     [self.tableView reloadData];
     [super viewWillAppear:animated];
 }
