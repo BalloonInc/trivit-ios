@@ -126,14 +126,14 @@ int const OUTSIDE_TAP = 2;
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
     if(!swipedCell.isCollapsed){
         self.activeCellIndexPath = swipedIndexPath;
-        [self sureYouWantToReset];
+        [self sureYouWantToReset: swipedCell.tally.title];
     }
     
 }
 
--(void)sureYouWantToReset
+-(void)sureYouWantToReset: (NSString *) trivitTitle
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:@"Are you sure you want to reset this trivit?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:[NSString stringWithFormat:@"Are you sure you want to reset \"%@\"?", trivitTitle]  delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
 }
 
