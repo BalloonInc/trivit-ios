@@ -24,13 +24,13 @@
     
     switch (self.index) {
         case 0:
-            self.tutorialText = @"Tap to add tallies";
+            self.tutorialText = NSLocalizedString(@"Tap to add tallies", @"tutorial");
             break;
         case 1:
-            self.tutorialText = @"Tap and hold to edit title";
+            self.tutorialText = NSLocalizedString(@"Tap and hold to edit title", @"tutorial");
             break;
         case 2:
-            self.tutorialText = @"Swipe left to remove";
+            self.tutorialText = NSLocalizedString(@"Swipe left to remove", @"tutorial");
             break;
         case 3:
             self.tutorialText = @"";
@@ -38,7 +38,7 @@
             self.getStartedButton.hidden=false;
             break;
         default:
-            self.tutorialText = @"oops, that went wrong!";
+            self.tutorialText = NSLocalizedString(@"oops, that went wrong!", @"tutorial error");
             break;
     }
     self.textLabel.text = self.tutorialText;
