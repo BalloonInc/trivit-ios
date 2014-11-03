@@ -121,13 +121,9 @@
 			children = (
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
-				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
-				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
-				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
+				6C92EC051A06D3A800D2A8DC /* Overloaded views */,
 				6C8E3C231A01AE5E0001616E /* CelsTableview/Collection view */,
-				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
-				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
-				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
+				6C92EC061A06D3E100D2A8DC /* Main */,
 				6C8E3C211A01AE0B0001616E /* Settings view */,
 				6C69C0A9195B6F4E002A3F53 /* Images.xcassets */,
 				6C8E3C221A01AE2C0001616E /* AppDelegate */,
@@ -191,6 +187,25 @@
 			name = "CelsTableview/Collection view";
 			sourceTree = "<group>";
 		};
+		6C92EC051A06D3A800D2A8DC /* Overloaded views */ = {
+			isa = PBXGroup;
+			children = (
+				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
+				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
+			);
+			name = "Overloaded views";
+			sourceTree = "<group>";
+		};
+		6C92EC061A06D3E100D2A8DC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
+				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
+				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 		6CF1A23F195B765600B83A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +215,7 @@
 				6CA4493A1980D8E00049F34D /* Colors.m */,
 				6C9025BA1984588300BB11FC /* Settings.h */,
 				6C9025BB1984588300BB11FC /* Settings.m */,
+				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";

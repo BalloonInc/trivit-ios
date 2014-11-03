@@ -11,6 +11,7 @@
 @interface TutChildViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
+@property (weak, nonatomic) IBOutlet UIImageView *tutorialImage;
 
 @end
 
@@ -18,12 +19,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.textLabel.text = self.tutorialText;
-    // if last page, show done button, ontherwise hide it
-    if (self.index !=2){
-        self.getStartedButton.hidden=true;
+    
+    self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
+    
+    switch (self.index) {
+        case 0:
+            self.tutorialText = @"Tap to add tallies";
+            break;
+        case 1:
+            self.tutorialText = @"Tap and hold to edit title";
+            break;
+        case 2:
+            self.tutorialText = @"Swipe left to remove";
+            break;
+        case 3:
+            self.tutorialText = @"";
+            // last page: show done button
+            self.getStartedButton.hidden=false;
+            break;
+        default:
+            self.tutorialText = @"oops, that went wrong!";
+            break;
     }
-    // Do any additional setup after loading the view.
+    self.textLabel.text = self.tutorialText;
 }
 
 - (void)didReceiveMemoryWarning {

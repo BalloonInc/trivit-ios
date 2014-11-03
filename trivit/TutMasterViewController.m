@@ -19,26 +19,17 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     //set number of pages in the tutorial
-    self.numberOfPages=3;
-
-    self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    self.numberOfPages=4;
     
-    self.pageController.dataSource = self;
-    [[self.pageController view] setFrame:[[self view] bounds]];
+    self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    self.dataSource=self;
+    [[self view] setFrame:[[self view] bounds]];
     
     TutChildViewController *initialViewController = [self viewControllerAtIndex:0];
-    
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
     
-    [self.pageController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    [self addChildViewController:self.pageController];
-    [[self view] addSubview:[self.pageController view]];
-    [self.pageController didMoveToParentViewController:self];
+    [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,21 +41,6 @@
 - (TutChildViewController *)viewControllerAtIndex:(NSUInteger)index {
     
     TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
-        
-    switch (index) {
-        case 0:
-            childViewController.tutorialText = @"This will be a tutorial";
-            break;
-        case 1:
-            childViewController.tutorialText = @"We scroll through some images";
-            break;
-        case 2:
-            childViewController.tutorialText = @"And now it is done";
-            break;
-        default:
-            childViewController.tutorialText = @"oops, that went wrong!";
-            break;
-    }
     childViewController.index=index;
     return childViewController;
 }
@@ -72,22 +48,17 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     
     NSUInteger index = [(TutChildViewController *)viewController index];
-    
     if (index == 0)
         return nil;
-    
     // Decrease the index by 1 to return
     index--;
-    
     return [self viewControllerAtIndex:index];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
     NSUInteger index = [(TutChildViewController *)viewController index];
-    
     index++;
-    
     if (index == self.numberOfPages)
         return nil;
     return [self viewControllerAtIndex:index];
@@ -108,4 +79,26 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+//Function to make the bottom bar transparent
+-(void)viewDidLayoutSubviews {
+    
+    if( [self.view.subviews count] == 2 ) {
+        UIScrollView* scrollView = nil;
+        UIPageControl* pageControl = nil;
+        for( UIView* subView in self.view.subviews ) {
+            if( [subView isKindOfClass:[UIScrollView class]])
+                scrollView = (UIScrollView*)subView;
+            else if( [subView isKindOfClass:[UIPageControl class]] )
+                pageControl = (UIPageControl*)subView;
+                
+            if( scrollView != nil && pageControl != nil ) {
+                // expand scroll view to fit entire view
+                scrollView.frame = self.view.bounds;
+                // put page control in front
+                [self.view bringSubviewToFront:pageControl];
+            }
+        }
+        [super viewDidLayoutSubviews];
+    }
+}
 @end

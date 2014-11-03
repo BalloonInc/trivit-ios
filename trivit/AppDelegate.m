@@ -24,32 +24,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Fetch Main Storyboard
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+
+    // Instantiate Root Navigation Controller
+    UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
+
+    // Configure View Controller
+    MainListViewController *mainViewController = (MainListViewController *)[rootNavigationController topViewController];
     
-    if(false){
-        UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
-        [self.window setRootViewController:rootNavigationController];
+    if ([mainViewController isKindOfClass:[MainListViewController class]]) {
+        [mainViewController setManagedObjectContext:self.managedObjectContext];
     }
     
-    else{
-        // Instantiate Root Navigation Controller
-        UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
-
-        // Configure View Controller
-        MainListViewController *mainViewController = (MainListViewController *)[rootNavigationController topViewController];
-        
-        if ([mainViewController isKindOfClass:[MainListViewController class]]) {
-            [mainViewController setManagedObjectContext:self.managedObjectContext];
-        }
-        
-        // Configure Window
-        [self.window setRootViewController:rootNavigationController];
-    }
-    // set colors for page controllers (tutorial)
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor grayColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
-    pageControl.backgroundColor = [UIColor lightGrayColor];
-
+    // Configure Window
+    [self.window setRootViewController:rootNavigationController];
+    
     return YES;
 }
 

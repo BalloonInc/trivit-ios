@@ -10,6 +10,4 @@
 
 @interface TutMasterViewController : UIPageViewController <UIPageViewControllerDataSource>
 
-@property (strong, nonatomic) UIPageViewController *pageController;
-
 @end

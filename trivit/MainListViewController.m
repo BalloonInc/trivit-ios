@@ -128,7 +128,6 @@ int const OUTSIDE_TAP = 2;
         self.activeCellIndexPath = swipedIndexPath;
         [self sureYouWantToReset: swipedCell.tally.title];
     }
-    
 }
 
 -(void)sureYouWantToReset: (NSString *) trivitTitle
@@ -147,7 +146,6 @@ int const OUTSIDE_TAP = 2;
         [self.tableView beginUpdates]; // necessary for the animation of the cell growth
         [self.tableView endUpdates]; // necessary for the animation of the cell growth
     }
-    
 }
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
