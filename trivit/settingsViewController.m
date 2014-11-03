@@ -21,11 +21,11 @@
 #pragma mark - Lazy instantiators
 
 -(NSString*) sureToDeleteTitle{
-    return @"Delete all Trivits";
+    return NSLocalizedString(@"Delete all Trivits",@"Message box title");
 }
 
 -(NSString*) sureToResetTitle{
-    return @"Reset all Trivits";
+    return NSLocalizedString(@"Reset all Trivits", @"Message box title");
 }
 
 - (void)viewDidLoad {
@@ -75,12 +75,20 @@
 }
 
 - (IBAction)deleteAllTrivits:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToDeleteTitle message:@"Are you sure you want to delete all trivits?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToDeleteTitle
+                                                    message:NSLocalizedString(@"Are you sure you want to delete all trivits?",@"Message box content")
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"No",@"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];
     [alert show];
 
 }
 - (IBAction)resetAllTrivits:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToResetTitle message:@"Are you sure you want to reset all counts to 0?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToResetTitle
+                                                    message:NSLocalizedString(@"Are you sure you want to reset all counts to 0?", @"Message box content")
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"No",@"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];
     [alert show];
 
 }

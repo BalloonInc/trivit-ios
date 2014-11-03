@@ -19,6 +19,9 @@
 		6C9025BC1984588300BB11FC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BB1984588300BB11FC /* Settings.m */; };
 		6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BE198458A500BB11FC /* settingsViewController.m */; };
 		6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivits.xcdatamodeld */; };
+		6C92EC0C1A07629E00D2A8DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC0E1A07629E00D2A8DC /* Localizable.strings */; };
+		6C92EC111A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC131A07629F00D2A8DC /* InfoPlist.strings */; };
+		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC268A56198910B500944106 /* TrivitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC268A55198910B500944106 /* TrivitCollectionViewCell.m */; };
@@ -59,6 +62,10 @@
 		6C9025BD198458A500BB11FC /* settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsViewController.h; sourceTree = "<group>"; };
 		6C9025BE198458A500BB11FC /* settingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsViewController.m; sourceTree = "<group>"; };
 		6C923EB4198C645D00833188 /* trivits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits.xcdatamodel; sourceTree = "<group>"; };
+		6C92EC0D1A07629E00D2A8DC /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C92EC121A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C92EC141A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		6C92EC181A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
@@ -135,6 +142,8 @@
 		6C69C09C195B6F4E002A3F53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C92EC131A07629F00D2A8DC /* InfoPlist.strings */,
+				6C92EC0E1A07629E00D2A8DC /* Localizable.strings */,
 				6C69C09D195B6F4E002A3F53 /* Info.plist */,
 				6C69C09E195B6F4E002A3F53 /* main.m */,
 			);
@@ -153,6 +162,7 @@
 		6C69C0B3195B6F4E002A3F53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C92EC191A07629F00D2A8DC /* InfoPlist.strings */,
 				6C69C0B4195B6F4E002A3F53 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -301,6 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */,
+				6C92EC111A07629F00D2A8DC /* InfoPlist.strings in Resources */,
+				6C92EC0C1A07629E00D2A8DC /* Localizable.strings in Resources */,
 				6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +371,33 @@
 			isa = PBXVariantGroup;
 			children = (
 				6C69C0A7195B6F4E002A3F53 /* Base */,
+				6C92EC141A07629F00D2A8DC /* fr */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6C92EC0E1A07629E00D2A8DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC0D1A07629E00D2A8DC /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6C92EC131A07629F00D2A8DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC121A07629F00D2A8DC /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6C92EC191A07629F00D2A8DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC181A07629F00D2A8DC /* fr */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

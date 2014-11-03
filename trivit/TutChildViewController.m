@@ -35,7 +35,8 @@
         case 3:
             self.tutorialText = @"";
             // last page: show done button
-            self.getStartedButton.hidden=false;
+            self.getStartedButton.hidden = false;
+            self.getStartedButton.titleLabel.text = NSLocalizedString(@"Get started!", @"Get started button");
             break;
         default:
             self.tutorialText = NSLocalizedString(@"oops, that went wrong!", @"tutorial error");

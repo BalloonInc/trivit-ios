@@ -132,7 +132,12 @@ int const OUTSIDE_TAP = 2;
 
 -(void)sureYouWantToReset: (NSString *) trivitTitle
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reset Trivit" message:[NSString stringWithFormat:@"Are you sure you want to reset \"%@\"?", trivitTitle]  delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reset Trivit",@"messagebox title")
+                                                    message:
+                          [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to reset \"%@\"?", @"messagebox text, parameter is title of tally"), trivitTitle]
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"No",@"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];
     [alert show];
 }
 
@@ -475,9 +480,9 @@ int const OUTSIDE_TAP = 2;
         [self presentViewController:tutorialVC animated:YES completion:^{}];
         // if empty: add some trivits
         if (self.trivitCount == 0){
-            [self addItemWithTitle:@"Drinks"];
-            [self addItemWithTitle:@"Days without smoking" andCount:110];
-            [self addItemWithTitle:@"Went swimming this year" andCount:44];
+            [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
+            [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:110];
+            [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
         }
     }
     else
