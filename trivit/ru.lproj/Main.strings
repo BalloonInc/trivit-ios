@@ -1,0 +1,30 @@
+/* Class = "IBUIButton"; normalTitle = "Show tutorial"; ObjectID = "0oe-9h-6Ea"; */
+"0oe-9h-6Ea.normalTitle" = "Показать вступление";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "798-Ww-cFl"; */
+"798-Ww-cFl.title" = "Настройки";
+
+/* Class = "IBUIButton"; normalTitle = "Reset all trivits"; ObjectID = "DO0-kr-C6k"; */
+"DO0-kr-C6k.normalTitle" = "Сбросить все тривиты";
+
+/* Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
+"Obg-Ql-Sqf.title" = "Тривит";
+
+/* Class = "IBUILabel"; text = "Color Set"; ObjectID = "UQ0-IB-Nat"; */
+"UQ0-IB-Nat.text" = "Настройки цвета";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[2] = "Trivit"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[2]" = "Тривит";
+
+/* Class = "IBUINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp"; */
+"aNY-hB-Hrp.title" = "О программе";
+
+/* Class = "IBUIButton"; normalTitle = "Delete all trivits"; ObjectID = "g6q-aW-cpu"; */
+"g6q-aW-cpu.normalTitle" = "Удалить все тривиты";
+
+/* Class = "IBUIButton"; normalTitle = "Get started!"; ObjectID = "jiI-xk-2f7"; */
+"jiI-xk-2f7.normalTitle" = "Начать!";
+
+/* Class = "IBUILabel"; text = "Vibration Feedback"; ObjectID = "zIL-Af-Scs"; */
+"zIL-Af-Scs.text" = "Вибрация";
+

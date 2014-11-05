@@ -53,6 +53,10 @@
 		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C0B4195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
+		6C89B0D21A0ABD7E00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C89B0D31A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C89B0D41A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6C89B0D51A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C8FBB4E1978610400C1D381 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
 		6C8FBB4F1978610400C1D381 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
 		6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitTableViewCell.h; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 				6C69C0A7195B6F4E002A3F53 /* Base */,
 				6C92EC141A07629F00D2A8DC /* fr */,
 				6C92EC221A09A50500D2A8DC /* nl */,
+				6C89B0D41A0ABD7F00CCE22C /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 			children = (
 				6C92EC0D1A07629E00D2A8DC /* fr */,
 				6C92EC201A09A50500D2A8DC /* nl */,
+				6C89B0D21A0ABD7E00CCE22C /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 			children = (
 				6C92EC121A07629F00D2A8DC /* fr */,
 				6C92EC211A09A50500D2A8DC /* nl */,
+				6C89B0D31A0ABD7F00CCE22C /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -404,6 +411,7 @@
 			children = (
 				6C92EC181A07629F00D2A8DC /* fr */,
 				6C92EC231A09A50600D2A8DC /* nl */,
+				6C89B0D51A0ABD7F00CCE22C /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
