@@ -1,0 +1,48 @@
+/* messagebox text, parameter is title of tally */
+"Are you sure you want to reset \"%@\"?" = "Bent u zeker dat u de teller van \"%@\" op 0 wilt zetten ?";
+
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "Bent u zeker dat u alle trivits wilt verwijderen?";
+
+/* Message box content */
+"Are you sure you want to reset all counts to 0?" = "Bent u zeker dat u alle tellers naar 0 wilt resetten?";
+
+/* Tally example */
+"Days without smoking" = "Dagen zonder roken";
+
+/* Message box title */
+"Delete all Trivits" = "Verwijder alle Trivits";
+
+/* Tally example */
+"Drinks" = "Drankjes";
+
+/* Get started button */
+"Get started!" = "Aan de slag!";
+
+/* No comment provided by engineer. */
+"No" = "Nee";
+
+/* messagebox title */
+"Reset Trivit" = "Reset Trivit";
+
+/* Message box title */
+"Reset all Trivits" = "Reset alle Trivits";
+
+/* tutorial */
+"Swipe left to remove" = "Veeg naar links om te verwijderen";
+
+/* tutorial */
+"Tap and hold to edit title" = "Tik en houd om de titel te bewerken";
+
+/* tutorial */
+"Tap to add tallies" = "Tik om te turven";
+
+/* Tally example */
+"Went swimming this year" = "Zwemmen dit jaar";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* tutorial error */
+"oops, that went wrong!" = "Oeps, dat mis ging!";
+

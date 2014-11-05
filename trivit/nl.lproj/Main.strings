@@ -1,0 +1,48 @@
+/* Class = "IBUIButton"; normalTitle = "Show tutorial"; ObjectID = "0oe-9h-6Ea"; */
+"0oe-9h-6Ea.normalTitle" = "Toon tutorial";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "798-Ww-cFl"; */
+"798-Ww-cFl.title" = "Instellingen";
+
+/* Class = "IBUIButton"; normalTitle = "Reset all trivits"; ObjectID = "DO0-kr-C6k"; */
+"DO0-kr-C6k.normalTitle" = "Reset alle trivits";
+
+/* Class = "IBUILabel"; text = "This will be a tutorial"; ObjectID = "Nmf-lp-UYK"; */
+"Nmf-lp-UYK.text" = "Dit wordt de tutorial";
+
+/* Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
+"Obg-Ql-Sqf.title" = "Trivit";
+
+/* Class = "IBUILabel"; text = "Brought to you by Balloon.Inc"; ObjectID = "OtX-4S-3Hp"; */
+"OtX-4S-3Hp.text" = "Een creatie van Balloon Inc.";
+
+/* Class = "IBUITextView"; text = "Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose."; ObjectID = "TSn-QR-jwc"; */
+"TSn-QR-jwc.text" = "Turven is het tellen door streepjes per vijf te groeperen; de eerst vier evenwijdig staand en het vijfde er diagonaal doorheen.\nTurven wordt onder meer in de vinkensport en bij manuele statistiek uitgeoefend.\nHet woord is afgeleid van turf omdat de blokjes daar enigszins op lijken. Ook is het mogelijk dat een dergelijke wijze van tellen werd gebruikt bij het tellen van een hoeveelheid turf.\n";
+
+/* Class = "IBUILabel"; text = "Color Set"; ObjectID = "UQ0-IB-Nat"; */
+"UQ0-IB-Nat.text" = "Kleurset";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[0] = "Flat"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[0]" = "Flat";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[1] = "iOS"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[1]" = "iOS";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[2] = "Trivit"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[2]" = "Trivit";
+
+/* Class = "IBUINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp"; */
+"aNY-hB-Hrp.title" = "Over Trivit";
+
+/* Class = "IBUIButton"; normalTitle = "Delete all trivits"; ObjectID = "g6q-aW-cpu"; */
+"g6q-aW-cpu.normalTitle" = "Verwijder alle trivits";
+
+/* Class = "IBUIButton"; normalTitle = "Get started!"; ObjectID = "jiI-xk-2f7"; */
+"jiI-xk-2f7.normalTitle" = "Aan de slag!";
+
+/* Class = "IBUILabel"; text = "Vibration Feedback"; ObjectID = "zIL-Af-Scs"; */
+"zIL-Af-Scs.text" = "Tril feedback";
+
+/* Class = "IBUILabel"; text = "http://en.wikipedia.org/wiki/Tally_marks"; ObjectID = "zos-oM-Mq1"; */
+"zos-oM-Mq1.text" = "http://nl.wikipedia.org/wiki/Turven";
+
