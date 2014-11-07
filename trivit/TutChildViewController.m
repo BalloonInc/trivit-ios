@@ -38,7 +38,7 @@
             self.getStartedButton.hidden = false;
             break;
         default:
-            self.tutorialText = NSLocalizedString(@"Oops, that went wrong!", @"tutorial error");
+            self.tutorialText = @"Oops, that went wrong!";
             break;
     }
     self.textLabel.text = self.tutorialText;
