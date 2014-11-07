@@ -41,6 +41,10 @@
 /* Begin PBXFileReference section */
 		6C0A914E1A0CDF5A006F2F87 /* TrivitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitCollectionViewCell.h; sourceTree = "<group>"; };
 		6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitCollectionViewCell.m; sourceTree = "<group>"; };
+		6C0A91511A0CE92E006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6C0A91521A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6C0A91531A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		6C0A91541A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
 		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
 		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
@@ -382,6 +386,7 @@
 				6C92EC141A07629F00D2A8DC /* fr */,
 				6C92EC221A09A50500D2A8DC /* nl */,
 				6C89B0D41A0ABD7F00CCE22C /* ru */,
+				6C0A91531A0CE92F006F2F87 /* zh-CN */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				6C92EC0D1A07629E00D2A8DC /* fr */,
 				6C92EC201A09A50500D2A8DC /* nl */,
 				6C89B0D21A0ABD7E00CCE22C /* ru */,
+				6C0A91511A0CE92E006F2F87 /* zh-CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				6C92EC121A07629F00D2A8DC /* fr */,
 				6C92EC211A09A50500D2A8DC /* nl */,
 				6C89B0D31A0ABD7F00CCE22C /* ru */,
+				6C0A91521A0CE92F006F2F87 /* zh-CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -412,6 +419,7 @@
 				6C92EC181A07629F00D2A8DC /* fr */,
 				6C92EC231A09A50600D2A8DC /* nl */,
 				6C89B0D51A0ABD7F00CCE22C /* ru */,
+				6C0A91541A0CE92F006F2F87 /* zh-CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

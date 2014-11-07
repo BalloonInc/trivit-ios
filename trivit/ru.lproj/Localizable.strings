@@ -1,11 +1,11 @@
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "Вы уверены, что Вы хотите удалить все тривиты?";
+
 /* messagebox text, parameter is title of tally */
-"Are you sure you want to reset \"%@\"?" = "Вы уверены, что вы хотите сбросить \"%@\"";
+"Are you sure you want to reset '%@'?" = "Вы уверены, что Вы хотите сбросить '%@'?";
 
 /* Message box content */
-"Are you sure you want to delete all trivits?" = "Вы уверены, что вы хотите удалить все тривиты?";
-
-/* Message box content */
-"Are you sure you want to reset all counts to 0?" = "Вы уверены, что вы хотите сбросить все подсчеты до 0?";
+"Are you sure you want to reset all counts to 0?" = "Вы уверены, что Вы хотите сбросить все подсчеты до 0?";
 
 /* Tally example */
 "Days without smoking" = "Дни без сигарет";
@@ -15,9 +15,6 @@
 
 /* Tally example */
 "Drinks" = "Напитки";
-
-/* (No Commment) */
-"Get started!" = "Начать!";
 
 /* No comment provided by engineer. */
 "No" = "Нет";
@@ -35,14 +32,11 @@
 "Tap and hold to edit title" = "Нажмите и удерживайте для редактирования заголовка";
 
 /* tutorial */
-"Tap to add tallies" = "Нажмите чтобы добавить новый символ";
+"Tap to add tallies" = "Нажмите, чтобы добавить новый символ";
 
 /* Tally example */
 "Went swimming this year" = "Плавал в этом году";
 
 /* No comment provided by engineer. */
 "Yes" = "Да";
-
-/* (No Commment) */
-"oops, that went wrong!" = "Упс, что-то пошло не так";
 

@@ -1,5 +1,5 @@
 /* Class = "IBUIButton"; normalTitle = "Show tutorial"; ObjectID = "0oe-9h-6Ea"; */
-"0oe-9h-6Ea.normalTitle" = "Показать вступление";
+"0oe-9h-6Ea.normalTitle" = "Инструкция по пользованию";
 
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "798-Ww-cFl"; */
 "798-Ww-cFl.title" = "Настройки";
@@ -10,8 +10,17 @@
 /* Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
 "Obg-Ql-Sqf.title" = "Тривит";
 
+/* Class = "IBUILabel"; text = "Brought to you by Balloon.Inc"; ObjectID = "OtX-4S-3Hp"; */
+"OtX-4S-3Hp.text" = "Привлечены к вам Balloon.Inc";
+
 /* Class = "IBUILabel"; text = "Color Set"; ObjectID = "UQ0-IB-Nat"; */
 "UQ0-IB-Nat.text" = "Настройки цвета";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[0] = "Flat"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[0]" = "Простой";
+
+/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[1] = "iOS"; ObjectID = "VwX-bd-ZzG"; */
+"VwX-bd-ZzG.segmentTitles[1]" = "iOS";
 
 /* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[2] = "Trivit"; ObjectID = "VwX-bd-ZzG"; */
 "VwX-bd-ZzG.segmentTitles[2]" = "Тривит";
