@@ -12,3 +12,4 @@ Trivit is an mobile application that allows to create lists of tally marks. Triv
 
 * Wouter Devriendt (wouterdevriendt@gmail.com)
 * Pieterjan Criel (crielpieterjan@gmail.com)
+* Balloon Inc support (support@ballooninc.be)
