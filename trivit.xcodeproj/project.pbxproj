@@ -137,7 +137,7 @@
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
 				6C92EC051A06D3A800D2A8DC /* Overloaded views */,
-				6C8E3C231A01AE5E0001616E /* CelsTableview/Collection view */,
+				6C8E3C231A01AE5E0001616E /* Cells: TableView/CollectionView */,
 				6C92EC061A06D3E100D2A8DC /* Main */,
 				6C8E3C211A01AE0B0001616E /* Settings view */,
 				6C69C0A9195B6F4E002A3F53 /* Images.xcassets */,
@@ -194,7 +194,7 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		6C8E3C231A01AE5E0001616E /* CelsTableview/Collection view */ = {
+		6C8E3C231A01AE5E0001616E /* Cells: TableView/CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
@@ -202,7 +202,7 @@
 				6C0A914E1A0CDF5A006F2F87 /* TrivitCollectionViewCell.h */,
 				6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */,
 			);
-			name = "CelsTableview/Collection view";
+			name = "Cells: TableView/CollectionView";
 			sourceTree = "<group>";
 		};
 		6C92EC051A06D3A800D2A8DC /* Overloaded views */ = {

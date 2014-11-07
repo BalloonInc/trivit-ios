@@ -134,7 +134,7 @@ int const OUTSIDE_TAP = 2;
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reset Trivit",@"messagebox title")
                                                     message:
-                          [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to reset \"%@\"?", @"messagebox text, parameter is title of tally"), trivitTitle]
+                          [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to reset '%@'?", @"messagebox text, parameter is title of tally"), trivitTitle]
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"No",@"")
                                           otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];

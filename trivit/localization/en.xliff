@@ -85,13 +85,13 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
     </header>
     <body>
-      <trans-unit id="?">
-        <source>Are you sure you want to reset \</source>
-        <note>messagebox text, parameter is title of tally</note>
-      </trans-unit>
       <trans-unit id="Are you sure you want to delete all trivits?">
         <source>Are you sure you want to delete all trivits?</source>
         <note>Message box content</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to reset '%@'?">
+        <source>Are you sure you want to reset '%@'?</source>
+        <note>messagebox text, parameter is title of tally</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to reset all counts to 0?">
         <source>Are you sure you want to reset all counts to 0?</source>
