@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6C0A91501A0CDF5A006F2F87 /* TrivitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */; };
+		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
+		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
+		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
+		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
+		6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91601A0D10EA006F2F87 /* libz.dylib */; };
 		6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B419FEF2DF00447874 /* TutChildViewController.m */; };
 		6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */; };
 		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
@@ -45,6 +50,12 @@
 		6C0A91521A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C0A91531A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
 		6C0A91541A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6C0A915E1A0D10DD006F2F87 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6C0A91601A0D10EA006F2F87 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
 		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
 		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
@@ -93,6 +104,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */,
+				6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */,
+				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
+				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
+				6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +122,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C0A91551A0D0FB6006F2F87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C0A91601A0D10EA006F2F87 /* libz.dylib */,
+				6C0A915E1A0D10DD006F2F87 /* libc++.dylib */,
+				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
+				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
+				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
+				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6C1C91B219FEF2A700447874 /* tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +167,7 @@
 		6C69C09B195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXGroup;
 			children = (
+				6C0A91551A0D0FB6006F2F87 /* Frameworks */,
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
 				6C92EC051A06D3A800D2A8DC /* Overloaded views */,
@@ -252,6 +282,7 @@
 				6C69C095195B6F4E002A3F53 /* Sources */,
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
+				6C0A91631A0D193D006F2F87 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -338,6 +369,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C0A91631A0D193D006F2F87 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n/bin/sh \"${SCRIPT}\" \"AA43b587cebdfd56414d8d452c9b4b034a0f7f300a\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6C69C095195B6F4E002A3F53 /* Sources */ = {
@@ -510,6 +557,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/trivit",
+				);
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -526,6 +578,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/trivit",
+				);
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

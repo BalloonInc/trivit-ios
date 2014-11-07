@@ -290,6 +290,39 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="GLD-H5-ugj">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="GEg-NW-FEw">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GEg-NW-FEw" id="kHa-45-bOf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3s-2Q-atB">
+                                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
+                                                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Simulate crash">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="simulateCrash:" destination="cSh-TX-9co" eventType="touchUpInside" id="qc3-ia-EWv"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="f3s-2Q-atB" firstAttribute="top" secondItem="kHa-45-bOf" secondAttribute="topMargin" id="LGk-yx-f7p"/>
+                                                <constraint firstItem="f3s-2Q-atB" firstAttribute="leading" secondItem="kHa-45-bOf" secondAttribute="leadingMargin" id="Woz-kI-ioC"/>
+                                                <constraint firstItem="f3s-2Q-atB" firstAttribute="trailing" secondItem="kHa-45-bOf" secondAttribute="trailingMargin" id="jJm-bc-gta"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchCell" id="7TG-Ww-8aB">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7TG-Ww-8aB" id="84e-KW-1D8">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="cSh-TX-9co" id="TZp-Bc-yHw"/>

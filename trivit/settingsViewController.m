@@ -130,4 +130,11 @@
 {
     return NO;
 }
+- (IBAction)simulateCrash:(id)sender {
+    abort();
+}
+
+
+
+
 @end
