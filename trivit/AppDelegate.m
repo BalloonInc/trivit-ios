@@ -24,6 +24,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //New Relic analytics
+    //temporary disable NewRelic Crash reporting
+    //[NewRelic enableCrashReporting:NO];
+    
     [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 
     // Fetch Main Storyboard

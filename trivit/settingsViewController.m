@@ -131,7 +131,9 @@
     return NO;
 }
 - (IBAction)simulateCrash:(id)sender {
-    abort();
+    NSArray *crashArray = [[NSArray alloc] initWithObjects:@"firstObject", @"secondObject",nil];
+    // log a non existing object
+    NSLog(@"%@",[crashArray objectAtIndex:2]);
 }
 
 
