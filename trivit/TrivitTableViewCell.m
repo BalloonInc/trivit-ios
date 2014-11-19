@@ -214,7 +214,7 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     int tmp = self.tally.counter % 5;
     
     NSString *tally_type = @"";
-    if (self.tally.title.length > 0 && [[self.tally.title substringToIndex:1]  isEqual: @"_"])
+    if ([[self.tally.title substringToIndex:1]  isEqual: @"_"])
         tally_type = @"ch_";
     
     gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, tally_type]]];

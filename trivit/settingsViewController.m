@@ -40,7 +40,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     self.colorPicker.selectedSegmentIndex = self.appSettings.selectedColorSet;
     self.vibrationSwitch.on = self.appSettings.vibrationFeedback;
     
@@ -137,13 +136,7 @@
     NSLog(@"%@",[crashArray objectAtIndex:2]);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    
-    NSInteger numberOfSections = [super numberOfSectionsInTableView: tableView];     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![[defaults objectForKey:@"DevDevice"] boolValue])
-        numberOfSections--;
-    return numberOfSections;
-}
+
+
 
 @end
