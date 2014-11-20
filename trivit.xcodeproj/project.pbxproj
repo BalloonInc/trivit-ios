@@ -15,6 +15,7 @@
 		6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91601A0D10EA006F2F87 /* libz.dylib */; };
 		6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B419FEF2DF00447874 /* TutChildViewController.m */; };
 		6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */; };
+		6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */; };
 		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
 		6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */; };
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
@@ -29,6 +30,14 @@
 		6C92EC111A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC131A07629F00D2A8DC /* InfoPlist.strings */; };
 		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
+		6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */; };
+		6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */; };
+		6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */; };
+		6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */; };
+		6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; };
+		6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */; };
+		6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
+		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
 /* End PBXBuildFile section */
@@ -41,7 +50,35 @@
 			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
 			remoteInfo = trivit;
 		};
+		6CE4BBE41A1D609D005E9BCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE4BBE11A1D609D005E9BCD;
+			remoteInfo = "trivit Watch App";
+		};
+		6CE4BBED1A1D609D005E9BCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE4BBCF1A1D609B005E9BCD;
+			remoteInfo = "trivit WatchKit Extension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6C0A914E1A0CDF5A006F2F87 /* TrivitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitCollectionViewCell.h; sourceTree = "<group>"; };
@@ -60,6 +97,8 @@
 		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
 		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
 		6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutMasterViewController.m; sourceTree = "<group>"; };
+		6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTableVIewRowController.h; sourceTree = "<group>"; };
+		6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTableVIewRowController.m; sourceTree = "<group>"; };
 		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C09D195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,6 +132,19 @@
 		6C92EC231A09A50600D2A8DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "trivit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
+		6CE4BBD61A1D609C005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
+		6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trivit Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4BBE81A1D609D005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
 		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
 		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
@@ -116,6 +168,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBCD1A1D609B005E9BCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +211,9 @@
 			children = (
 				6C69C09B195B6F4E002A3F53 /* trivit */,
 				6C69C0B2195B6F4E002A3F53 /* trivitTests */,
+				6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */,
+				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
+				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
 				6C69C09A195B6F4E002A3F53 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,6 +223,8 @@
 			children = (
 				6C69C099195B6F4E002A3F53 /* trivit.app */,
 				6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */,
+				6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */,
+				6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,6 +323,56 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		6CE4BBD11A1D609C005E9BCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */,
+				6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */,
+				6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */,
+				6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */,
+				6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */,
+				6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */,
+				6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */,
+				6CE4BBD51A1D609C005E9BCD /* Supporting Files */,
+			);
+			path = "trivit WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		6CE4BBD51A1D609C005E9BCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD61A1D609C005E9BCD /* Info.plist */,
+				6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CE4BBE61A1D609D005E9BCD /* trivit Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */,
+				6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */,
+				6CE4BBE71A1D609D005E9BCD /* Supporting Files */,
+			);
+			path = "trivit Watch App";
+			sourceTree = "<group>";
+		};
+		6CE4BBE71A1D609D005E9BCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBE81A1D609D005E9BCD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6CF1A23F195B765600B83A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,10 +398,12 @@
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
 				6C0A91631A0D193D006F2F87 /* ShellScript */,
+				6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6CE4BBEE1A1D609D005E9BCD /* PBXTargetDependency */,
 			);
 			name = trivit;
 			productName = trivit;
@@ -311,6 +428,39 @@
 			productReference = 6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4BBF31A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit WatchKit Extension" */;
+			buildPhases = (
+				6CE4BBCC1A1D609B005E9BCD /* Sources */,
+				6CE4BBCD1A1D609B005E9BCD /* Frameworks */,
+				6CE4BBCE1A1D609B005E9BCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CE4BBE51A1D609D005E9BCD /* PBXTargetDependency */,
+			);
+			name = "trivit WatchKit Extension";
+			productName = "trivit WatchKit Extension";
+			productReference = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		6CE4BBE11A1D609D005E9BCD /* trivit Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */;
+			buildPhases = (
+				6CE4BBE01A1D609D005E9BCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "trivit Watch App";
+			productName = "trivit Watch App";
+			productReference = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -322,10 +472,18 @@
 				TargetAttributes = {
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = JRS568U6JT;
 					};
 					6C69C0AE195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
+					};
+					6CE4BBCF1A1D609B005E9BCD = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = JRS568U6JT;
+					};
+					6CE4BBE11A1D609D005E9BCD = {
+						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -344,6 +502,8 @@
 			targets = (
 				6C69C098195B6F4E002A3F53 /* trivit */,
 				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
+				6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */,
+				6CE4BBE11A1D609D005E9BCD /* trivit Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -365,6 +525,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBCE1A1D609B005E9BCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */,
+				6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBE01A1D609D005E9BCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */,
+				6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +593,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CE4BBCC1A1D609B005E9BCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
+				6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */,
+				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -422,6 +610,16 @@
 			isa = PBXTargetDependency;
 			target = 6C69C098195B6F4E002A3F53 /* trivit */;
 			targetProxy = 6C69C0B0195B6F4E002A3F53 /* PBXContainerItemProxy */;
+		};
+		6CE4BBE51A1D609D005E9BCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE4BBE11A1D609D005E9BCD /* trivit Watch App */;
+			targetProxy = 6CE4BBE41A1D609D005E9BCD /* PBXContainerItemProxy */;
+		};
+		6CE4BBEE1A1D609D005E9BCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */;
+			targetProxy = 6CE4BBED1A1D609D005E9BCD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -563,7 +761,7 @@
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -584,7 +782,7 @@
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -628,6 +826,74 @@
 			};
 			name = Release;
 		};
+		6CE4BBF11A1D609E005E9BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = trivit_WatchKit_Extension;
+				INFOPLIST_FILE = "trivit Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		6CE4BBF21A1D609E005E9BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				IBSC_MODULE = trivit_WatchKit_Extension;
+				INFOPLIST_FILE = "trivit Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		6CE4BBF41A1D609E005E9BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6CE4BBF51A1D609E005E9BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -654,6 +920,24 @@
 			buildConfigurations = (
 				6C69C0BD195B6F4E002A3F53 /* Debug */,
 				6C69C0BE195B6F4E002A3F53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4BBF11A1D609E005E9BCD /* Debug */,
+				6CE4BBF21A1D609E005E9BCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CE4BBF31A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4BBF41A1D609E005E9BCD /* Debug */,
+				6CE4BBF51A1D609E005E9BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
