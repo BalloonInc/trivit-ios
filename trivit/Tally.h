@@ -14,6 +14,7 @@
 @property (nonatomic) NSInteger counter;
 @property (nonatomic) bool isCollapsed;
 @property (nonatomic) NSInteger colorIndex;
+@property (nonatomic,strong) NSString *type;
 
 -(void) addTally;
 -(void) decreaseTally;

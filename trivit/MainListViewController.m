@@ -26,12 +26,14 @@
 @property (nonatomic) NSInteger imagesPerRow;
 @end
 
+
 @implementation MainListViewController
 
 #pragma mark - Constants
 int const CELL_TAP = 0;
 int const TITLE_TAP = 1;
-int const OUTSIDE_TAP = 2;
+int const MINUSBUTTON_TAP = 2;
+int const OUTSIDE_TAP = 3;
 
 #pragma mark - lazy instantiatiors
 
@@ -99,6 +101,7 @@ int const OUTSIDE_TAP = 2;
     [record setValue:title forKey:@"title"];
     [record setValue:[NSNumber numberWithInteger:count] forKey:@"counter"];
     [record setValue:[NSNumber numberWithInteger:colorIndex] forKey:@"color"];
+    [record setValue:[[title substringToIndex:1] isEqual:@"_" ]?@"ch_":@"" forKey:@"type"];
     
     [record setValue:[NSDate date] forKey:@"createdAt"];
     
@@ -115,18 +118,20 @@ int const OUTSIDE_TAP = 2;
 
 # pragma mark - selectors for gestures
 
--(void) handleTallyReset: (UIGestureRecognizer *)leftSwipeRecognizer
+-(void) handleTallyReset: (UIGestureRecognizer *)rightSwipeRecognizer
 {
     // if a cell title is being edited don't process taps
     if (self.cellBeingEdited)
         return;
-    
-    CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
-    NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    if(!swipedCell.isCollapsed){
-        self.activeCellIndexPath = swipedIndexPath;
-        [self sureYouWantToReset: swipedCell.tally.title];
+    NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:rightSwipeRecognizer];
+    if(tappedViewIdentifier!=OUTSIDE_TAP){
+        CGPoint swipeLocation = [rightSwipeRecognizer locationInView:self.tableView];
+        NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+        TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
+        if(!swipedCell.isCollapsed){
+            self.activeCellIndexPath = swipedIndexPath;
+            [self sureYouWantToReset: swipedCell.tally.title];
+        }
     }
 }
 
@@ -147,10 +152,7 @@ int const OUTSIDE_TAP = 2;
     {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
-        
-        [self.tableView beginUpdates]; // necessary for the animation of the cell growth
-        [self.tableView endUpdates]; // necessary for the animation of the cell growth
-    }
+        }
 }
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
@@ -187,7 +189,7 @@ int const OUTSIDE_TAP = 2;
             [self scrollToExpandedCell:swipedIndexPath];
             self.shouldScrollOnTallyIncreaseOrDecrease=true;
             
-            [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionAllowAnimatedContent animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
             } completion:^(BOOL finished){}];
@@ -204,11 +206,12 @@ int const OUTSIDE_TAP = 2;
     CGPoint swipeLocation = [leftSwipeRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    swipedCell.loadAnimation = NO;
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:leftSwipeRecognizer];
-    
-    if(!swipedCell.isCollapsed && tappedViewIdentifier==CELL_TAP){
+    swipedCell.loadAnimation = NO;
+
+   
+    if(!swipedCell.isCollapsed && (tappedViewIdentifier==CELL_TAP||tappedViewIdentifier==MINUSBUTTON_TAP)){
         [swipedCell decreaseTallyCounter];
         
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
@@ -255,6 +258,9 @@ int const OUTSIDE_TAP = 2;
         [self handleTallyIncrease:singletapRecognizer];
     else if (tappedViewIdentifier==TITLE_TAP)
         [self handleTallyCollapse:singletapRecognizer];
+    else if (tappedViewIdentifier==MINUSBUTTON_TAP)
+        [self handleTallyDecrease:singletapRecognizer];
+
 }
 
 -(NSInteger)tappedViewforGestureRecognizer: (UIGestureRecognizer *)gestureRecognizer
@@ -264,10 +270,21 @@ int const OUTSIDE_TAP = 2;
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     
+    
     if(tappedView==tappedCell.counterLabelForTally)
         return CELL_TAP;
     else if (CGRectContainsPoint(tappedCell.frame, tapLocation))
-        return TITLE_TAP;
+    {
+        CGPoint tapLocationInCell = [gestureRecognizer locationInView:tappedCell];
+        //button press can be kind of next to the button as well (x pixels from each side, x=fuzzyButtonPressExtension
+        float fuzzyButtonPressExtension = 20.;
+        CGRect buttonZone= CGRectMake(tappedCell.minusButton.frame.origin.x-fuzzyButtonPressExtension, tappedCell.minusButton.frame.origin.y-fuzzyButtonPressExtension, tappedCell.minusButton.frame.size.width+2*fuzzyButtonPressExtension, tappedCell.minusButton.frame.size.height+2*fuzzyButtonPressExtension);
+        
+        if(!tappedCell.isCollapsed && CGRectContainsPoint(buttonZone, tapLocationInCell))
+            return MINUSBUTTON_TAP;
+        else
+            return TITLE_TAP;
+    }
     else
         return OUTSIDE_TAP;
 }
@@ -283,8 +300,10 @@ int const OUTSIDE_TAP = 2;
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
         tappedCell.loadAnimation = NO;
         
-        if (self.cellBeingEdited)
+        if (self.cellBeingEdited){
+            self.doNotResizeViewBecauseAnotherCellWillBeEditedNow = true;
             self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
+        }
         self.cellBeingEdited = tappedCell; //Save cell being edited
         
         self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
@@ -330,6 +349,7 @@ int const OUTSIDE_TAP = 2;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TrivitTableViewCell *cell = [[TrivitTableViewCell alloc] init];
+
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
@@ -337,15 +357,20 @@ int const OUTSIDE_TAP = 2;
 
 - (void)configureCell:(TrivitTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Fetch Record
+    
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     // Update Cell
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.appSettings = self.appSettings;
-    cell.isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
+    bool isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
+    if (cell.isCollapsed!=isCollapsed)
+        cell.isCollapsed = isCollapsed;
+    cell.isCollapsed = isCollapsed;
     cell.tally.counter = [[record valueForKey:@"counter"] integerValue];
     cell.tally.colorIndex = [[record valueForKey:@"color"] integerValue];
     cell.tally.title = [record valueForKey:@"title"];
+    cell.tally.type = [record valueForKey:@"type"];
     
     cell.cellIdentifier = (int)indexPath.row;
     cell.titleTextField.delegate = self;
@@ -451,7 +476,7 @@ int const OUTSIDE_TAP = 2;
     [self configureTableView];
     
     // load Settings from NSUserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.defaults = [NSUserDefaults standardUserDefaults];
     
     // Initialize Fetch Request
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
@@ -474,7 +499,7 @@ int const OUTSIDE_TAP = 2;
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
-    if (![[defaults objectForKey:@"tutorialShown"] boolValue]){
+    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
         UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
         [self presentViewController:tutorialVC animated:YES completion:^{}];
@@ -487,8 +512,8 @@ int const OUTSIDE_TAP = 2;
     }
     else
     {
-        self.appSettings.vibrationFeedback = [[defaults objectForKey:@"vibrationFeedback"] boolValue];
-        self.appSettings.selectedColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
+        self.appSettings.vibrationFeedback = [[self.defaults objectForKey:@"vibrationFeedback"] boolValue];
+        self.appSettings.selectedColorSet = [[self.defaults objectForKey:@"selectedColorSet"] integerValue];
     }
     
     // subscribe to notifications for keyboard show and hide, used for changing view size
@@ -549,6 +574,12 @@ int const OUTSIDE_TAP = 2;
     
     self.keyboardShown = YES;
     
+    if(self.doNotResizeViewBecauseAnotherCellWillBeEditedNow){
+        self.doNotResizeViewBecauseAnotherCellWillBeEditedNow=false;
+        return;
+    }
+    
+    
     // Get the keyboard size
     UIScrollView *tableView;
     if([self.tableView.superview isKindOfClass:[UIScrollView class]])
@@ -595,7 +626,9 @@ int const OUTSIDE_TAP = 2;
         [UIView animateWithDuration:animationDuration delay:delay
                             options:UIViewAnimationOptionBeginFromCurrentState
                          animations:^{ tableView.frame = tableFrame; }
-                         completion:^(BOOL finished){ [self tableAnimationEnded:nil finished:nil contextInfo:nil]; }];
+                         completion:^(BOOL finished){
+                             if(finished)[self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                         }];
     }
 }
 
@@ -603,10 +636,21 @@ int const OUTSIDE_TAP = 2;
 {
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
     
-    [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
-    self.activeCellIndexPath = nil;
+    //Set dev device or not
+    if([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsADevDevice"])
+        [self.defaults setObject:[NSNumber numberWithBool:true] forKey:@"DevDevice"];
+
+    else if([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsNoDevDeviceNoMore"])
+        [self.defaults setObject:[NSNumber numberWithBool:false] forKey:@"DevDevice"];
+
     
+    [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
+    NSString *tallyType = [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
+    [record setValue:tallyType forKey:@"type"];
+
+    self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
+    
     if(!self.keyboardShown)
         return;
     
@@ -623,7 +667,7 @@ int const OUTSIDE_TAP = 2;
         tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
     }
     
-    if(self.keyboardOverlap == 0)
+    if(self.keyboardOverlap == 0 || self.doNotResizeViewBecauseAnotherCellWillBeEditedNow)
         return;
     
     // Get the size & animation details of the keyboard
@@ -646,18 +690,7 @@ int const OUTSIDE_TAP = 2;
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{ tableView.frame = tableFrame; }
                      completion:nil];
-}
-
-
-// TODO: figure out this stuff below. It has somthing to do with resizing of the current view when the keyboard will be shown
-- (void) tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context
-{
-    // Scroll to the active cell
-    if(self.activeCellIndexPath)
-    {
-        //[self.tableView scrollToRowAtIndexPath:self.activeCellIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
-        [self.tableView selectRowAtIndexPath:self.activeCellIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    }
+    
 }
 
 // Do not hide status bar

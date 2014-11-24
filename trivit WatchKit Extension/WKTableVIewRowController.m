@@ -25,7 +25,7 @@
     [self.completeCell setBackgroundColor:color];
 }
 - (void)setCounter:(NSInteger)count{
-    [self.itemCountButton setTitle:[NSString stringWithFormat:@"%ld",count ]];
+    [self.itemCountButton setTitle:[NSString stringWithFormat:@"%ld",(long)count ]];
 }
 
 @end

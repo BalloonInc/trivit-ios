@@ -18,6 +18,7 @@
 
 // is keyboard shown or not
 @property (nonatomic) bool keyboardShown;
+@property (nonatomic) bool doNotResizeViewBecauseAnotherCellWillBeEditedNow;
 @property (nonatomic) CGFloat keyboardOverlap;
 
 // used when changing title, cell should be in view when view resizes
@@ -25,4 +26,5 @@
 
 // Core Data
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic)NSUserDefaults *defaults;
 @end

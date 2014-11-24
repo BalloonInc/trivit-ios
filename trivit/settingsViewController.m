@@ -137,6 +137,13 @@
 }
 
 
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    NSInteger numberOfSections = [super numberOfSectionsInTableView: tableView];     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![[defaults objectForKey:@"DevDevice"] boolValue])
+        numberOfSections--;
+    return numberOfSections;
+}
 
 @end

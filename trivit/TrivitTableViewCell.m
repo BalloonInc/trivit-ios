@@ -20,6 +20,8 @@ float const CELL_HEIGHT_SECTION2 = 88.0;
 float const TALLY_IMAGE_DIMENSION = 32.;
 float const COLLECTIONVIEW_HORIZONTAL_SPACING = 15.;
 float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
+float const COUNTLABEL_HEIGHT = 30.;
+float const COUNTLABEL_WIDTH = 40.;
 
 #pragma mark - update tally functions
 
@@ -31,7 +33,6 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
 
 - (void)decreaseTallyCounter
 {
-
     [self.tally decreaseTally];
     [self setNeedsDisplay];
 }
@@ -66,30 +67,63 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     return _tally;
 }
 
-- (void) configureCountLabelWithInteger:(int) integer
+- (void) configureCountLabelWithInteger:(int) integer forCollapsedTrivit:(BOOL)collapsed
 {
-    if (!self.countLabel){
-        self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
-        [[self cellBackColorDark] setFill];
-        self.countLabel.backgroundColor = self.cellBackColorDark;
-        self.countLabel.textAlignment = 1;
-        self.countLabel.textColor = [UIColor whiteColor];
-        [self.countLabel.layer setCornerRadius:8.0];
-        [self.countLabel.layer setMasksToBounds:YES];
+    if (collapsed){
+        //TODO: can be removed?
+        self.countLabel=nil;
+        if (!self.countLabel){
+            self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
+            self.countLabel.backgroundColor = self.cellBackColorDark;
+            self.countLabel.textAlignment = 1;
+            self.countLabel.textColor = [UIColor whiteColor];
+            [self.countLabel.layer setCornerRadius:8.0];
+            [self.countLabel.layer setMasksToBounds:YES];
+        }
+        self.countLabel.text = @(integer).stringValue;
+        
+        //Animation only if loadanimation is set (e.g. when expanding)
+        if (self.loadAnimation){
+            self.countLabel.alpha = 0;
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:1.3];
+            [UIView setAnimationDelegate:self];
+            self.countLabel.alpha = 1.0;
+            [UIView commitAnimations];
+        }
+        
+        [self setAccessoryView:self.countLabel];
     }
-    self.countLabel.text = @(integer).stringValue;
+    else{
+        //TODO: can be removed?
+        self.minusButton=nil;
 
-    //Animation only if loadanimation is set (e.g. when expanding)
-    if (self.loadAnimation){
-        self.countLabel.alpha = 0;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:1.3];
-        [UIView setAnimationDelegate:self];
-        self.countLabel.alpha = 1.0;
-        [UIView commitAnimations];
+        if(!self.minusButton){
+            self.minusButton = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
+            self.minusButton.backgroundColor = [UIColor whiteColor];
+
+            self.minusButton.textAlignment = 1;
+            [self.minusButton.layer setCornerRadius:8.0];
+            [self.minusButton.layer setMasksToBounds:YES];
+            //self.countLabel.textColor = self.cellBackColorDark;
+            
+            self.minusButton.textColor =self.cellBackColorDark;
+
+            self.minusButton.text = @"-";
     }
-    
-    [self setAccessoryView:self.countLabel];
+        
+        //Animation only if loadanimation is set (e.g. when expanding)
+        if (self.loadAnimation){
+            self.minusButton.alpha = 0;
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:1.3];
+            [UIView setAnimationDelegate:self];
+            self.minusButton.alpha = 1.0;
+            [UIView commitAnimations];
+        }
+        [self setAccessoryView:self.minusButton];
+        
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -97,43 +131,45 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     [self.titleTextField removeFromSuperview];
     [self.counterLabelForTally removeFromSuperview];
     [self.countLabel removeFromSuperview];
-    [self.images removeFromSuperview];
-    [self.modImage removeFromSuperview];
-    
-    // Bounds
-    CGRect boundsTitleLabel = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
-    CGRect boundsCountLabel = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
-    CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
+    //[self.images removeFromSuperview];
     
     // first section
-    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];   
+    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];
     [recta addClip];
-
+    
     [[self cellBackColor] setFill];
     [recta fill];
     
-    // Label in first section
-    self.titleTextField = [[PaddingUITextField alloc] initWithFrame:boundsTitleLabel];
+    // only re-add if it is not yet there
+    if (![self.subviews containsObject:self.titleTextField])
+    {
+        CGRect boundsTitleLabel = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
+        self.titleTextField = [[PaddingUITextField alloc] initWithFrame:boundsTitleLabel];
+        self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
+        self.titleTextField.userInteractionEnabled = true;
+        self.titleTextField.backgroundColor = self.cellBackColor;
+        self.titleTextField.enabled = NO;
+        self.titleTextField.returnKeyType = UIReturnKeyDone;
+        self.titleTextField.keyboardType = UIKeyboardAppearanceDefault;
+        self.titleTextField.tintColor = [UIColor lightTextColor]; // white Carret
+        self.titleTextField.delegate = self;
+        self.titleTextField.gestureRecognizers = nil;
+        
+        [self addSubview: self.titleTextField];
+    }
+    // update title
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.firstLineHeadIndent = 10;
     NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.tally.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.titleTextField.attributedText = attributedTitle;
-    self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
-    self.titleTextField.userInteractionEnabled = true;
-    self.titleTextField.backgroundColor = self.cellBackColor;
-    self.titleTextField.enabled = NO;
-    self.titleTextField.returnKeyType = UIReturnKeyDone;
-    self.titleTextField.keyboardType = UIKeyboardAppearanceDefault;
-    self.titleTextField.tintColor = [UIColor lightTextColor]; // white Carret
-    self.titleTextField.delegate = self;
-    self.titleTextField.gestureRecognizers = nil;
     
-    [self addSubview: self.titleTextField];
     
-    [self configureCountLabelWithInteger:(int)self.tally.counter];
-
-    if (!self.isCollapsed){
-        
+    [self configureCountLabelWithInteger:(int)self.tally.counter forCollapsedTrivit:self.isCollapsed];
+    if (self.isCollapsed)
+        [self.images removeFromSuperview];
+    
+    else{
+        CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
         UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
         [[self cellBackColorDark] setFill];
         [recta2 fill];
@@ -147,26 +183,39 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         [trianglePath fill];
         
         // Image tally marks
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection collectionViewLayout:layout];
-        [self.images setDataSource:self];
-        [self.images setDelegate:self];
-        [self.images setBackgroundColor:nil];
-        [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
-        self.images.delegate = self;
+        if (true){
+            //if(![self.subviews containsObject:self.images]){
+            
+            [self.images removeFromSuperview];
+            self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection
+                                             collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+            [self.images setDataSource:self];
+            [self.images setDelegate:self];
+            [self.images setBackgroundColor:nil];
+            [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+            
+        }
         
-        self.accessoryView = nil; // no accessoryView in expanded mode
+        /*
+         self.images.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+         self.images.frame = boundsSecondSection;
+         [self.images setDataSource:self];
+         [self.images setDelegate:self];
+         [self.images setBackgroundColor:nil];
+         */
         
-        self.modImage = [[UIImageView alloc] init];
+        //[self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
         
-        [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
-        [self.images reloadData];
-
+        //update images
+        [self.images setNeedsDisplay];
+        //[self.images removeFromSuperview];
+        [self addSubview:self.images];
+        
         if(self.loadAnimation){
             [self showTalliesWithDelay];
         }
-       [self addSubview:self.images];
         
+        CGRect boundsCountLabel = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
         self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
         self.counterLabelForTally.textColor = [UIColor whiteColor];
         self.counterLabelForTally.userInteractionEnabled=true;
@@ -193,10 +242,18 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
         self.tally.title = textField.text;
         self.titleTextField.text = textField.text;
         self.titleTextField.enabled = NO;
-        
     }
     return YES;
 }
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGRect accessoryViewFrame = self.accessoryView.frame;
+    accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1-COUNTLABEL_HEIGHT)/2;
+    self.accessoryView.frame = accessoryViewFrame;
+}
+
 
 #pragma mark - Magic to make the UICollectionview datasource work
 
@@ -213,13 +270,11 @@ float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
     TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
     int tmp = self.tally.counter % 5;
     
-    NSString *tally_type = @"";
-    if ([[self.tally.title substringToIndex:1]  isEqual: @"_"])
-        tally_type = @"ch_";
-    
-    gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, tally_type]]];
     if (indexPath.item > self.tally.counter/5-1) {
-        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, tally_type]]];
+        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, self.tally.type]]];
+    }
+    else{
+        gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, self.tally.type]]];
     }
     return gridcell;
 }
