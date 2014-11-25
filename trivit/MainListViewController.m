@@ -311,6 +311,8 @@ int const OUTSIDE_TAP = 3;
         // only disappear using the LongPress gesture, reappearing is handled by end of editing
         tappedCell.titleTextField.enabled = YES;
         [tappedCell.titleTextField becomeFirstResponder];
+        [tappedCell.titleTextField selectAll:nil];
+
     }
 }
 
@@ -449,6 +451,26 @@ int const OUTSIDE_TAP = 3;
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {
+            // trying to immediately edit title as new trivit is added
+            /*
+            [CATransaction begin];
+            [self.tableView beginUpdates];
+            
+            [CATransaction setCompletionBlock: ^{
+                NSIndexPath *indexPathNewCell = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
+
+                TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPathNewCell];
+                tappedCell.loadAnimation = NO;
+                self.cellBeingEdited = tappedCell; //Save cell being edited
+                self.activeCellIndexPath = indexPathNewCell;     //save indexPath to show after keyboard hides
+                tappedCell.titleTextField.enabled = YES;
+                [tappedCell.titleTextField becomeFirstResponder];
+            }];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            [CATransaction commit];
+             */
+            
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
@@ -645,7 +667,7 @@ int const OUTSIDE_TAP = 3;
 
     
     [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
-    NSString *tallyType = [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
+    NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length>0)&&[[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
     [record setValue:tallyType forKey:@"type"];
 
     self.activeCellIndexPath = nil;
