@@ -473,7 +473,7 @@ int const OUTSIDE_TAP = 3;
             } completion:^(BOOL finished) {
                 // TODO: do something with this ugly afterDelay ...
                 // check out: I haven't tried myself, but maybe this could do it, with some index path handling: - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath
-                //from: http://stackoverflow.com/questions/3832474/uitableview-row-animation-duration-and-completion-callback
+                //from: http://stackoverflow.com/q/3832474
                 // comment on question
                 [self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:0.2];
             }];
