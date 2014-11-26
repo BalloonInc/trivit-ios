@@ -63,6 +63,17 @@ int const OUTSIDE_TAP = 3;
 
 -(IBAction) addButtonPressed
 {
+    if(self.cellBeingEdited){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add",@"messagebox title")
+                                                        message:
+                               NSLocalizedString(@"Please finish editing the title first", @"messagebox text, adding a trivit not possible since you are editing the title of another trivit")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Got it.",@"OK button")
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     // add consequent identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)self.trivitCount]];
     
@@ -297,23 +308,26 @@ int const OUTSIDE_TAP = 3;
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:recognizer];
     
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
-        TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-        tappedCell.loadAnimation = NO;
-        
         if (self.cellBeingEdited){
             self.doNotResizeViewBecauseAnotherCellWillBeEditedNow = true;
             self.cellBeingEdited.titleTextField.enabled=NO; // disable previous editing
         }
-        self.cellBeingEdited = tappedCell; //Save cell being edited
-        
-        self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
-        
-        // only disappear using the LongPress gesture, reappearing is handled by end of editing
-        tappedCell.titleTextField.enabled = YES;
-        [tappedCell.titleTextField becomeFirstResponder];
-        [tappedCell.titleTextField selectAll:nil];
-
+        [self editTrivitTitleAtIndexPath:indexPath];
     }
+}
+
+-(void) editTrivitTitleAtIndexPath: (NSIndexPath *) indexPath{
+    if (!indexPath)
+        indexPath = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
+    
+    TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    tappedCell.loadAnimation = NO;
+    self.cellBeingEdited = tappedCell; //Save cell being edited
+    self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
+    tappedCell.titleTextField.enabled = YES;
+    [tappedCell.titleTextField becomeFirstResponder];
+    [tappedCell.titleTextField selectAll: nil];
+    
 }
 
 #pragma mark - cell height calculation
@@ -451,27 +465,18 @@ int const OUTSIDE_TAP = 3;
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {
-            // trying to immediately edit title as new trivit is added
-            /*
-            [CATransaction begin];
-            [self.tableView beginUpdates];
-            
-            [CATransaction setCompletionBlock: ^{
-                NSIndexPath *indexPathNewCell = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
+            [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-                TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPathNewCell];
-                tappedCell.loadAnimation = NO;
-                self.cellBeingEdited = tappedCell; //Save cell being edited
-                self.activeCellIndexPath = indexPathNewCell;     //save indexPath to show after keyboard hides
-                tappedCell.titleTextField.enabled = YES;
-                [tappedCell.titleTextField becomeFirstResponder];
+                [self.tableView endUpdates];
+            } completion:^(BOOL finished) {
+                // TODO: do something with this ugly afterDelay ...
+                // check out: I haven't tried myself, but maybe this could do it, with some index path handling: - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath
+                //from: http://stackoverflow.com/questions/3832474/uitableview-row-animation-duration-and-completion-callback
+                // comment on question
+                [self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:0.2];
             }];
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView endUpdates];
-            [CATransaction commit];
-             */
-            
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
         case NSFetchedResultsChangeDelete: {
