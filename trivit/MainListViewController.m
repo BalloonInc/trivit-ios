@@ -412,7 +412,7 @@ int const OUTSIDE_TAP = 3;
     // row can be deleted if tally is collapsed
     NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    return [[record valueForKey:@"isCollapsed"] boolValue];
+    return [[record valueForKey:@"isCollapsed"] boolValue]&&!self.cellBeingEdited;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
