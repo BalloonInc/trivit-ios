@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="iLb-YV-FG3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -364,38 +364,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://en.wikipedia.org/wiki/Tally_marks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zos-oM-Mq1">
-                                <rect key="frame" x="20" y="297" width="280" height="17"/>
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSn-QR-jwc">
-                                <rect key="frame" x="20" y="72" width="280" height="217"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brought to you by Balloon.Inc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtX-4S-3Hp">
                                 <rect key="frame" x="20" y="543" width="280" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="http://www.ballooninc.be" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8x-yf-RaW">
+                                <rect key="frame" x="72" y="100" width="176" height="28"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Visit us at:" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j93-iK-2Gu">
+                                <rect key="frame" x="72" y="72" width="176" height="28"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o0T-Kr-WYU">
+                                <rect key="frame" x="16" y="136" width="288" height="399"/>
+                                <connections>
+                                    <segue destination="HOl-N5-kxW" kind="embed" id="d4V-bb-8B5"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zos-oM-Mq1" firstAttribute="top" secondItem="TSn-QR-jwc" secondAttribute="bottom" constant="8" symbolic="YES" id="ByA-VG-7cY"/>
-                            <constraint firstAttribute="trailing" secondItem="zos-oM-Mq1" secondAttribute="trailing" constant="20" symbolic="YES" id="Ehg-ve-elO"/>
                             <constraint firstItem="OtX-4S-3Hp" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="WJa-pq-7vW"/>
                             <constraint firstItem="0xW-cL-oli" firstAttribute="top" secondItem="OtX-4S-3Hp" secondAttribute="bottom" constant="8" symbolic="YES" id="Zrn-Xn-Xwy"/>
                             <constraint firstAttribute="trailing" secondItem="OtX-4S-3Hp" secondAttribute="trailing" constant="20" symbolic="YES" id="h7a-Oj-apY"/>
-                            <constraint firstItem="TSn-QR-jwc" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="iVB-86-PDz"/>
-                            <constraint firstItem="zos-oM-Mq1" firstAttribute="leading" secondItem="Zki-TK-Fdh" secondAttribute="leading" constant="20" symbolic="YES" id="oaq-Tw-F3u"/>
-                            <constraint firstItem="TSn-QR-jwc" firstAttribute="top" secondItem="qr7-aX-bz5" secondAttribute="bottom" constant="8" symbolic="YES" id="szI-zE-jiL"/>
-                            <constraint firstAttribute="trailing" secondItem="TSn-QR-jwc" secondAttribute="trailing" constant="20" symbolic="YES" id="x20-AQ-pkY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About Trivit" id="aNY-hB-Hrp"/>
@@ -403,7 +402,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3U-jv-DCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2519" y="139"/>
+            <point key="canvasLocation" x="2720" y="151"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="LLG-XD-aJr">
+            <objects>
+                <tableViewController id="HOl-N5-kxW" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Rj1-yV-ukk">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="399"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <sections>
+                            <tableViewSection id="SvR-Vw-qYT">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3mY-JE-XaN">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3mY-JE-XaN" id="y1i-rI-uh0">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsS-3c-MiN">
+                                                    <rect key="frame" x="8" y="8" width="272" height="37"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="165" id="I0o-h1-lhT">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I0o-h1-lhT" id="KLM-4G-ZPk">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="I7J-gi-fd0">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2BR-zo-i53">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2BR-zo-i53" id="Ve7-Qp-sC5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="HOl-N5-kxW" id="OTK-eF-mYI"/>
+                            <outlet property="delegate" destination="HOl-N5-kxW" id="qVV-BO-MUy"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6gB-JN-yaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3120" y="148.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wOj-S8-Fv5">

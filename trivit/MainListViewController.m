@@ -77,7 +77,10 @@ int const OUTSIDE_TAP = 3;
     // add consequent identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)self.trivitCount]];
     
+    
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:0.2];
+
 }
 
 -(void) addItem
@@ -307,6 +310,10 @@ int const OUTSIDE_TAP = 3;
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:recognizer];
     
+    if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == MINUSBUTTON_TAP)
+        [self handleTallyReset:recognizer];
+
+    
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP) {
         if (self.cellBeingEdited){
             self.doNotResizeViewBecauseAnotherCellWillBeEditedNow = true;
@@ -475,7 +482,8 @@ int const OUTSIDE_TAP = 3;
                 // check out: I haven't tried myself, but maybe this could do it, with some index path handling: - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath
                 //from: http://stackoverflow.com/q/3832474
                 // comment on question
-                [self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:0.2];
+                //[self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:0.1];
+                //[self performSelectorOnMainThread:@selector(editTrivitTitleAtIndexPath:) withObject:nil waitUntilDone:true];
             }];
             break;
         }
@@ -550,16 +558,10 @@ int const OUTSIDE_TAP = 3;
 
 - (void) configureTableView{
     // add gestures
-    UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyReset:)];
-    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTallyDecrease:)];
-    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longTap.minimumPressDuration = 0.5;
+    longTap.minimumPressDuration = 0.3;
     
-    [self.tableView addGestureRecognizer:rightSwipe];
-    [self.tableView addGestureRecognizer:leftSwipe];
     [self.tableView addGestureRecognizer:tap];
     [self.tableView addGestureRecognizer:longTap];
     
@@ -572,6 +574,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    self.cellBeingEdited = nil;
     if ([segue.identifier isEqualToString:@"ShowSettingsForTrivit"])
     {
         if ([segue.destinationViewController isKindOfClass:[settingsViewController class]])
