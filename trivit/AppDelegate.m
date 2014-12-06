@@ -11,6 +11,7 @@
 #import "TutMasterViewController.h"
 #import <CoreData/CoreData.h>
 #import <NewRelicAgent/NewRelic.h>
+#import <RestKit/RestKit.h>
 
 @interface AppDelegate ()
 

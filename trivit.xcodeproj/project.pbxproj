@@ -1,2516 +1,1037 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>1E1CC032CAC5713DD485F0E3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4D6C2AF5C61A5B5B25CD7983</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3CB2913BF429DC23D4A713D0</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>4D6C2AF5C61A5B5B25CD7983</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>60A83E13815D5585EFF94F48</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>6C0A914E1A0CDF5A006F2F87</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TrivitCollectionViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A914F1A0CDF5A006F2F87</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TrivitCollectionViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91501A0CDF5A006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A914F1A0CDF5A006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A91511A0CE92E006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>zh-CN</string>
-			<key>path</key>
-			<string>zh-CN.lproj/Localizable.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91521A0CE92F006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>zh-CN</string>
-			<key>path</key>
-			<string>zh-CN.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91531A0CE92F006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>zh-CN</string>
-			<key>path</key>
-			<string>zh-CN.lproj/Main.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91541A0CE92F006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>zh-CN</string>
-			<key>path</key>
-			<string>zh-CN.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91551A0D0FB6006F2F87</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C0A91601A0D10EA006F2F87</string>
-				<string>6C0A915E1A0D10DD006F2F87</string>
-				<string>6C0A915C1A0D10CF006F2F87</string>
-				<string>6C0A915A1A0D10BD006F2F87</string>
-				<string>6C0A91581A0D10B4006F2F87</string>
-				<string>6C0A91561A0D0FE0006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91561A0D0FE0006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>path</key>
-			<string>NewRelicAgent.framework</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C0A91571A0D0FE0006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A91561A0D0FE0006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A91581A0D10B4006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreTelephony.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreTelephony.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6C0A91591A0D10B4006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A91581A0D10B4006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A915A1A0D10BD006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6C0A915C1A0D10CF006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>SystemConfiguration.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/SystemConfiguration.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6C0A915D1A0D10CF006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A915C1A0D10CF006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A915E1A0D10DD006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>compiled.mach-o.dylib</string>
-			<key>name</key>
-			<string>libc++.dylib</string>
-			<key>path</key>
-			<string>usr/lib/libc++.dylib</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6C0A915F1A0D10DD006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A915E1A0D10DD006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A91601A0D10EA006F2F87</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>compiled.mach-o.dylib</string>
-			<key>name</key>
-			<string>libz.dylib</string>
-			<key>path</key>
-			<string>usr/lib/libz.dylib</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6C0A91611A0D10EA006F2F87</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C0A91601A0D10EA006F2F87</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C0A91631A0D193D006F2F87</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>SCRIPT=`/usr/bin/find "${SRCROOT}" -name newrelic_postbuild.sh | head -n 1`
-/bin/sh "${SCRIPT}" "AA43b587cebdfd56414d8d452c9b4b034a0f7f300a"</string>
-		</dict>
-		<key>6C1C91B219FEF2A700447874</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C1C91B319FEF2DF00447874</string>
-				<string>6C1C91B419FEF2DF00447874</string>
-				<string>6C1C91B619FEF2FF00447874</string>
-				<string>6C1C91B719FEF2FF00447874</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>tutorial</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C1C91B319FEF2DF00447874</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TutChildViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C1C91B419FEF2DF00447874</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TutChildViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C1C91B519FEF2DF00447874</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C1C91B419FEF2DF00447874</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C1C91B619FEF2FF00447874</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TutMasterViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C1C91B719FEF2FF00447874</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TutMasterViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C1C91B819FEF2FF00447874</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C1C91B719FEF2FF00447874</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C3980C91A1D759700B43888</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>WKTableVIewRowController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C3980CA1A1D759700B43888</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>WKTableVIewRowController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C3980CB1A1D759700B43888</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C3980CA1A1D759700B43888</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C090195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C09B195B6F4E002A3F53</string>
-				<string>6C69C0B2195B6F4E002A3F53</string>
-				<string>6CE4BBD41A1D609C005E9BCD</string>
-				<string>6CE4BBE61A1D609D005E9BCD</string>
-				<string>6CE4BBD11A1D609C005E9BCD</string>
-				<string>6C69C09A195B6F4E002A3F53</string>
-				<string>7917BB946B05BB8BB619F87F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C091195B6F4E002A3F53</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0600</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Balloon Inc.</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>6C69C098195B6F4E002A3F53</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.0</string>
-						<key>DevelopmentTeam</key>
-						<string>JRS568U6JT</string>
-					</dict>
-					<key>6C69C0AE195B6F4E002A3F53</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.0</string>
-						<key>TestTargetID</key>
-						<string>6C69C098195B6F4E002A3F53</string>
-					</dict>
-					<key>6CE4BBCF1A1D609B005E9BCD</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.2</string>
-						<key>DevelopmentTeam</key>
-						<string>JRS568U6JT</string>
-					</dict>
-					<key>6CE4BBE11A1D609D005E9BCD</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>6.2</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>6C69C094195B6F4E002A3F53</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>6C69C090195B6F4E002A3F53</string>
-			<key>productRefGroup</key>
-			<string>6C69C09A195B6F4E002A3F53</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>6C69C098195B6F4E002A3F53</string>
-				<string>6C69C0AE195B6F4E002A3F53</string>
-				<string>6CE4BBCF1A1D609B005E9BCD</string>
-				<string>6CE4BBE11A1D609D005E9BCD</string>
-			</array>
-		</dict>
-		<key>6C69C094195B6F4E002A3F53</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>6C69C0B7195B6F4E002A3F53</string>
-				<string>6C69C0B8195B6F4E002A3F53</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6C69C095195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C0A91501A0CDF5A006F2F87</string>
-				<string>6C1C91B519FEF2DF00447874</string>
-				<string>6CF1A23E195B762D00B83A6F</string>
-				<string>6C923EB5198C645D00833188</string>
-				<string>6C8FBB501978610400C1D381</string>
-				<string>6CA4493B1980D8E00049F34D</string>
-				<string>6C9025BF198458A500BB11FC</string>
-				<string>6C69C0A2195B6F4E002A3F53</string>
-				<string>EC37AD8A198D10A000C37610</string>
-				<string>6C8FBB531978627F00C1D381</string>
-				<string>6C1C91B819FEF2FF00447874</string>
-				<string>6C69C09F195B6F4E002A3F53</string>
-				<string>6C9025BC1984588300BB11FC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C096195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C0A91611A0D10EA006F2F87</string>
-				<string>6C0A915F1A0D10DD006F2F87</string>
-				<string>6C0A915D1A0D10CF006F2F87</string>
-				<string>6C0A91591A0D10B4006F2F87</string>
-				<string>6C0A91571A0D0FE0006F2F87</string>
-				<string>1E1CC032CAC5713DD485F0E3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C097195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C69C0A8195B6F4E002A3F53</string>
-				<string>6C92EC111A07629F00D2A8DC</string>
-				<string>6C92EC0C1A07629E00D2A8DC</string>
-				<string>6C69C0AA195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C098195B6F4E002A3F53</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>6C69C0B9195B6F4E002A3F53</string>
-			<key>buildPhases</key>
-			<array>
-				<string>3CB2913BF429DC23D4A713D0</string>
-				<string>6C69C095195B6F4E002A3F53</string>
-				<string>6C69C096195B6F4E002A3F53</string>
-				<string>6C69C097195B6F4E002A3F53</string>
-				<string>6C0A91631A0D193D006F2F87</string>
-				<string>6CE4BBF61A1D609E005E9BCD</string>
-				<string>60A83E13815D5585EFF94F48</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>6CE4BBEE1A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>trivit</string>
-			<key>productName</key>
-			<string>trivit</string>
-			<key>productReference</key>
-			<string>6C69C099195B6F4E002A3F53</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>6C69C099195B6F4E002A3F53</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>trivit.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>6C69C09A195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C099195B6F4E002A3F53</string>
-				<string>6C69C0AF195B6F4E002A3F53</string>
-				<string>6CE4BBD01A1D609B005E9BCD</string>
-				<string>6CE4BBE21A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C09B195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C0A91551A0D0FB6006F2F87</string>
-				<string>6CF1A23F195B765600B83A6F</string>
-				<string>6C1C91B219FEF2A700447874</string>
-				<string>6C92EC051A06D3A800D2A8DC</string>
-				<string>6C8E3C231A01AE5E0001616E</string>
-				<string>6C92EC061A06D3E100D2A8DC</string>
-				<string>6C8E3C211A01AE0B0001616E</string>
-				<string>6C69C0A9195B6F4E002A3F53</string>
-				<string>6C8E3C221A01AE2C0001616E</string>
-				<string>6C69C09C195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>trivit</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C09C195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C92EC131A07629F00D2A8DC</string>
-				<string>6C92EC0E1A07629E00D2A8DC</string>
-				<string>6C69C09D195B6F4E002A3F53</string>
-				<string>6C69C09E195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C09D195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C09E195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C09F195B6F4E002A3F53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C69C09E195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C0A0195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0A1195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>AppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0A2195B6F4E002A3F53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C69C0A1195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C0A6195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C0A7195B6F4E002A3F53</string>
-				<string>6C92EC141A07629F00D2A8DC</string>
-				<string>6C92EC221A09A50500D2A8DC</string>
-				<string>6C89B0D41A0ABD7F00CCE22C</string>
-				<string>6C0A91531A0CE92F006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0A7195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0A8195B6F4E002A3F53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C69C0A6195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C0A9195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0AA195B6F4E002A3F53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C69C0A9195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C0AB195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C69C0B6195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C0AC195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C0AD195B6F4E002A3F53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C92EC171A07629F00D2A8DC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6C69C0AE195B6F4E002A3F53</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>6C69C0BC195B6F4E002A3F53</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6C69C0AB195B6F4E002A3F53</string>
-				<string>6C69C0AC195B6F4E002A3F53</string>
-				<string>6C69C0AD195B6F4E002A3F53</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>6C69C0B1195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>trivitTests</string>
-			<key>productName</key>
-			<string>trivitTests</string>
-			<key>productReference</key>
-			<string>6C69C0AF195B6F4E002A3F53</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>6C69C0AF195B6F4E002A3F53</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>trivitTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>6C69C0B0195B6F4E002A3F53</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>6C69C091195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>6C69C098195B6F4E002A3F53</string>
-			<key>remoteInfo</key>
-			<string>trivit</string>
-		</dict>
-		<key>6C69C0B1195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>6C69C098195B6F4E002A3F53</string>
-			<key>targetProxy</key>
-			<string>6C69C0B0195B6F4E002A3F53</string>
-		</dict>
-		<key>6C69C0B2195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C0B5195B6F4E002A3F53</string>
-				<string>6C69C0B3195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>trivitTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0B3195B6F4E002A3F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C92EC191A07629F00D2A8DC</string>
-				<string>6C69C0B4195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0B4195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0B5195B6F4E002A3F53</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>trivitTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C69C0B6195B6F4E002A3F53</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C69C0B5195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C69C0B7195B6F4E002A3F53</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>METAL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>6C69C0B8195B6F4E002A3F53</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>METAL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>6C69C0B9195B6F4E002A3F53</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>6C69C0BA195B6F4E002A3F53</string>
-				<string>6C69C0BB195B6F4E002A3F53</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6C69C0BA195B6F4E002A3F53</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>C1E1D957F7A3337F9AB4C252</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>$(PROJECT_DIR)/trivit</string>
-				</array>
-				<key>GCC_PREFIX_HEADER</key>
-				<string></string>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>6C69C0BB195B6F4E002A3F53</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>92B594CAFC2090EBDD9428A5</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>$(PROJECT_DIR)/trivit</string>
-				</array>
-				<key>GCC_PREFIX_HEADER</key>
-				<string></string>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PROVISIONING_PROFILE</key>
-				<string></string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>6C69C0BC195B6F4E002A3F53</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>6C69C0BD195B6F4E002A3F53</string>
-				<string>6C69C0BE195B6F4E002A3F53</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6C69C0BD195B6F4E002A3F53</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/trivit.app/trivit</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>trivitTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>METAL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>6C69C0BE195B6F4E002A3F53</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/trivit.app/trivit</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>trivitTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>METAL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>6C89B0D21A0ABD7E00CCE22C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>ru</string>
-			<key>path</key>
-			<string>ru.lproj/Localizable.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C89B0D31A0ABD7F00CCE22C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>ru</string>
-			<key>path</key>
-			<string>ru.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C89B0D41A0ABD7F00CCE22C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>ru</string>
-			<key>path</key>
-			<string>ru.lproj/Main.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C89B0D51A0ABD7F00CCE22C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>ru</string>
-			<key>path</key>
-			<string>ru.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8E3C211A01AE0B0001616E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C9025BD198458A500BB11FC</string>
-				<string>6C9025BE198458A500BB11FC</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Settings view</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8E3C221A01AE2C0001616E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C0A0195B6F4E002A3F53</string>
-				<string>6C69C0A1195B6F4E002A3F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>AppDelegate</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8E3C231A01AE5E0001616E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C8FBB511978627F00C1D381</string>
-				<string>6C8FBB521978627F00C1D381</string>
-				<string>6C0A914E1A0CDF5A006F2F87</string>
-				<string>6C0A914F1A0CDF5A006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Cells: TableView/CollectionView</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8FBB4E1978610400C1D381</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>MainListViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8FBB4F1978610400C1D381</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>MainListViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8FBB501978610400C1D381</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C8FBB4F1978610400C1D381</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C8FBB511978627F00C1D381</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>TrivitTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8FBB521978627F00C1D381</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>TrivitTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C8FBB531978627F00C1D381</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C8FBB521978627F00C1D381</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C9025BA1984588300BB11FC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Settings.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C9025BB1984588300BB11FC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Settings.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C9025BC1984588300BB11FC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C9025BB1984588300BB11FC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C9025BD198458A500BB11FC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>settingsViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C9025BE198458A500BB11FC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>settingsViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C9025BF198458A500BB11FC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C9025BE198458A500BB11FC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C923EB3198C645D00833188</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C923EB4198C645D00833188</string>
-			</array>
-			<key>currentVersion</key>
-			<string>6C923EB4198C645D00833188</string>
-			<key>isa</key>
-			<string>XCVersionGroup</string>
-			<key>path</key>
-			<string>trivits.xcdatamodeld</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-			<key>versionGroupType</key>
-			<string>wrapper.xcdatamodel</string>
-		</dict>
-		<key>6C923EB4198C645D00833188</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.xcdatamodel</string>
-			<key>path</key>
-			<string>trivits.xcdatamodel</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C923EB5198C645D00833188</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C923EB3198C645D00833188</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C92EC051A06D3A800D2A8DC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC37AD88198D10A000C37610</string>
-				<string>EC37AD89198D10A000C37610</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Overloaded views</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC061A06D3E100D2A8DC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C69C0A6195B6F4E002A3F53</string>
-				<string>6C8FBB4E1978610400C1D381</string>
-				<string>6C8FBB4F1978610400C1D381</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Main</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC0C1A07629E00D2A8DC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C92EC0E1A07629E00D2A8DC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C92EC0D1A07629E00D2A8DC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>10</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>fr</string>
-			<key>path</key>
-			<string>fr.lproj/Localizable.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC0E1A07629E00D2A8DC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C92EC0D1A07629E00D2A8DC</string>
-				<string>6C92EC201A09A50500D2A8DC</string>
-				<string>6C89B0D21A0ABD7E00CCE22C</string>
-				<string>6C0A91511A0CE92E006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Localizable.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC111A07629F00D2A8DC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C92EC131A07629F00D2A8DC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C92EC121A07629F00D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>fr</string>
-			<key>path</key>
-			<string>fr.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC131A07629F00D2A8DC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C92EC121A07629F00D2A8DC</string>
-				<string>6C92EC211A09A50500D2A8DC</string>
-				<string>6C89B0D31A0ABD7F00CCE22C</string>
-				<string>6C0A91521A0CE92F006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC141A07629F00D2A8DC</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>10</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>fr</string>
-			<key>path</key>
-			<string>fr.lproj/Main.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC171A07629F00D2A8DC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6C92EC191A07629F00D2A8DC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6C92EC181A07629F00D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>fr</string>
-			<key>path</key>
-			<string>fr.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC191A07629F00D2A8DC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6C92EC181A07629F00D2A8DC</string>
-				<string>6C92EC231A09A50600D2A8DC</string>
-				<string>6C89B0D51A0ABD7F00CCE22C</string>
-				<string>6C0A91541A0CE92F006F2F87</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC201A09A50500D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>nl</string>
-			<key>path</key>
-			<string>nl.lproj/Localizable.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC211A09A50500D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>nl</string>
-			<key>path</key>
-			<string>nl.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC221A09A50500D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>nl</string>
-			<key>path</key>
-			<string>nl.lproj/Main.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C92EC231A09A50600D2A8DC</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>nl</string>
-			<key>path</key>
-			<string>nl.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CA449391980D8E00049F34D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Colors.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CA4493A1980D8E00049F34D</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Colors.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CA4493B1980D8E00049F34D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CA4493A1980D8E00049F34D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBCC1A1D609B005E9BCD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6C3980CB1A1D759700B43888</string>
-				<string>6CE4BBDD1A1D609C005E9BCD</string>
-				<string>6CE4BBDA1A1D609C005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6CE4BBCD1A1D609B005E9BCD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6CE4BBD31A1D609C005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6CE4BBCE1A1D609B005E9BCD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6CE4BBDF1A1D609C005E9BCD</string>
-				<string>6CE4BBE31A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6CE4BBCF1A1D609B005E9BCD</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>6CE4BBF31A1D609E005E9BCD</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6CE4BBCC1A1D609B005E9BCD</string>
-				<string>6CE4BBCD1A1D609B005E9BCD</string>
-				<string>6CE4BBCE1A1D609B005E9BCD</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>6CE4BBE51A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>trivit WatchKit Extension</string>
-			<key>productName</key>
-			<string>trivit WatchKit Extension</string>
-			<key>productReference</key>
-			<string>6CE4BBD01A1D609B005E9BCD</string>
-			<key>productType</key>
-			<string>com.apple.product-type.watchkit-extension</string>
-		</dict>
-		<key>6CE4BBD01A1D609B005E9BCD</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.app-extension</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>trivit WatchKit Extension.appex</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>6CE4BBD11A1D609C005E9BCD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CE4BBD21A1D609C005E9BCD</string>
-				<string>4D6C2AF5C61A5B5B25CD7983</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD21A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>WatchKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/WatchKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>6CE4BBD31A1D609C005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBD21A1D609C005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBD41A1D609C005E9BCD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CE4BBD81A1D609C005E9BCD</string>
-				<string>6CE4BBD91A1D609C005E9BCD</string>
-				<string>6CE4BBDB1A1D609C005E9BCD</string>
-				<string>6CE4BBDC1A1D609C005E9BCD</string>
-				<string>6CE4BBDE1A1D609C005E9BCD</string>
-				<string>6C3980C91A1D759700B43888</string>
-				<string>6C3980CA1A1D759700B43888</string>
-				<string>6CE4BBD51A1D609C005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>trivit WatchKit Extension</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD51A1D609C005E9BCD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CE4BBD61A1D609C005E9BCD</string>
-				<string>6CE4BBD71A1D609C005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD61A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD71A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.json</string>
-			<key>path</key>
-			<string>PushNotificationPayload.json</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD81A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>InterfaceController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBD91A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>InterfaceController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBDA1A1D609C005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBD91A1D609C005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBDB1A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>NotificationController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBDC1A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>NotificationController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBDD1A1D609C005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBDC1A1D609C005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBDE1A1D609C005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBDF1A1D609C005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBDE1A1D609C005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBE01A1D609D005E9BCD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6CE4BBEA1A1D609D005E9BCD</string>
-				<string>6CE4BBEC1A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6CE4BBE11A1D609D005E9BCD</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>6CE4BBF01A1D609E005E9BCD</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6CE4BBE01A1D609D005E9BCD</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>trivit Watch App</string>
-			<key>productName</key>
-			<string>trivit Watch App</string>
-			<key>productReference</key>
-			<string>6CE4BBE21A1D609D005E9BCD</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application.watchapp</string>
-		</dict>
-		<key>6CE4BBE21A1D609D005E9BCD</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>trivit Watch App.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>6CE4BBE31A1D609D005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBE21A1D609D005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBE41A1D609D005E9BCD</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>6C69C091195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>6CE4BBE11A1D609D005E9BCD</string>
-			<key>remoteInfo</key>
-			<string>trivit Watch App</string>
-		</dict>
-		<key>6CE4BBE51A1D609D005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>6CE4BBE11A1D609D005E9BCD</string>
-			<key>targetProxy</key>
-			<string>6CE4BBE41A1D609D005E9BCD</string>
-		</dict>
-		<key>6CE4BBE61A1D609D005E9BCD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CE4BBE91A1D609D005E9BCD</string>
-				<string>6CE4BBEB1A1D609D005E9BCD</string>
-				<string>6CE4BBE71A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>trivit Watch App</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBE71A1D609D005E9BCD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CE4BBE81A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBE81A1D609D005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBE91A1D609D005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>path</key>
-			<string>Interface.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBEA1A1D609D005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBE91A1D609D005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBEB1A1D609D005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CE4BBEC1A1D609D005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBEB1A1D609D005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CE4BBED1A1D609D005E9BCD</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>6C69C091195B6F4E002A3F53</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>6CE4BBCF1A1D609B005E9BCD</string>
-			<key>remoteInfo</key>
-			<string>trivit WatchKit Extension</string>
-		</dict>
-		<key>6CE4BBEE1A1D609D005E9BCD</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>6CE4BBCF1A1D609B005E9BCD</string>
-			<key>targetProxy</key>
-			<string>6CE4BBED1A1D609D005E9BCD</string>
-		</dict>
-		<key>6CE4BBEF1A1D609D005E9BCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CE4BBD01A1D609B005E9BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>RemoveHeadersOnCopy</string>
-				</array>
-			</dict>
-		</dict>
-		<key>6CE4BBF01A1D609E005E9BCD</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>6CE4BBF11A1D609E005E9BCD</string>
-				<string>6CE4BBF21A1D609E005E9BCD</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6CE4BBF11A1D609E005E9BCD</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>IBSC_MODULE</key>
-				<string>trivit_WatchKit_Extension</string>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit Watch App/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>4</string>
-				<key>TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]</key>
-				<string>1,4</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>6CE4BBF21A1D609E005E9BCD</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>IBSC_MODULE</key>
-				<string>trivit_WatchKit_Extension</string>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit Watch App/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>4</string>
-				<key>TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]</key>
-				<string>1,4</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>6CE4BBF31A1D609E005E9BCD</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>6CE4BBF41A1D609E005E9BCD</string>
-				<string>6CE4BBF51A1D609E005E9BCD</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>6CE4BBF41A1D609E005E9BCD</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit WatchKit Extension/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>${TARGET_NAME}</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>6CE4BBF51A1D609E005E9BCD</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY</key>
-				<string>iPhone Developer</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>INFOPLIST_FILE</key>
-				<string>trivit WatchKit Extension/Info.plist</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.2</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>${TARGET_NAME}</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>6CE4BBF61A1D609E005E9BCD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>dstPath</key>
-			<string></string>
-			<key>dstSubfolderSpec</key>
-			<string>13</string>
-			<key>files</key>
-			<array>
-				<string>6CE4BBEF1A1D609D005E9BCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXCopyFilesBuildPhase</string>
-			<key>name</key>
-			<string>Embed App Extensions</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6CF1A23C195B762D00B83A6F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Tally.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CF1A23D195B762D00B83A6F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Tally.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6CF1A23E195B762D00B83A6F</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6CF1A23D195B762D00B83A6F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6CF1A23F195B765600B83A6F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6CF1A23C195B762D00B83A6F</string>
-				<string>6CF1A23D195B762D00B83A6F</string>
-				<string>6CA449391980D8E00049F34D</string>
-				<string>6CA4493A1980D8E00049F34D</string>
-				<string>6C9025BA1984588300BB11FC</string>
-				<string>6C9025BB1984588300BB11FC</string>
-				<string>6C923EB3198C645D00833188</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Model</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7917BB946B05BB8BB619F87F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C1E1D957F7A3337F9AB4C252</string>
-				<string>92B594CAFC2090EBDD9428A5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>92B594CAFC2090EBDD9428A5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C1E1D957F7A3337F9AB4C252</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC37AD88198D10A000C37610</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PaddingUITextField.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC37AD89198D10A000C37610</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PaddingUITextField.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC37AD8A198D10A000C37610</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC37AD89198D10A000C37610</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>6C69C091195B6F4E002A3F53</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C2AF5C61A5B5B25CD7983 /* libPods.a */; };
+		6C0A91501A0CDF5A006F2F87 /* TrivitCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */; };
+		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
+		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
+		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
+		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
+		6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91601A0D10EA006F2F87 /* libz.dylib */; };
+		6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B419FEF2DF00447874 /* TutChildViewController.m */; };
+		6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */; };
+		6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */; };
+		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
+		6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */; };
+		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
+		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
+		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
+		6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB4F1978610400C1D381 /* MainListViewController.m */; };
+		6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */; };
+		6C9025BC1984588300BB11FC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BB1984588300BB11FC /* Settings.m */; };
+		6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BE198458A500BB11FC /* settingsViewController.m */; };
+		6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivits.xcdatamodeld */; };
+		6C92EC0C1A07629E00D2A8DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC0E1A07629E00D2A8DC /* Localizable.strings */; };
+		6C92EC111A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC131A07629F00D2A8DC /* InfoPlist.strings */; };
+		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
+		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
+		6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */; };
+		6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */; };
+		6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */; };
+		6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */; };
+		6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; };
+		6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */; };
+		6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
+		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
+		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6C69C0B0195B6F4E002A3F53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
+			remoteInfo = trivit;
+		};
+		6CE4BBE41A1D609D005E9BCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE4BBE11A1D609D005E9BCD;
+			remoteInfo = "trivit Watch App";
+		};
+		6CE4BBED1A1D609D005E9BCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CE4BBCF1A1D609B005E9BCD;
+			remoteInfo = "trivit WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4D6C2AF5C61A5B5B25CD7983 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C0A914E1A0CDF5A006F2F87 /* TrivitCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitCollectionViewCell.h; sourceTree = "<group>"; };
+		6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitCollectionViewCell.m; sourceTree = "<group>"; };
+		6C0A91511A0CE92E006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6C0A91521A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6C0A91531A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		6C0A91541A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6C0A915E1A0D10DD006F2F87 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6C0A91601A0D10EA006F2F87 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
+		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
+		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
+		6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutMasterViewController.m; sourceTree = "<group>"; };
+		6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTableVIewRowController.h; sourceTree = "<group>"; };
+		6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTableVIewRowController.m; sourceTree = "<group>"; };
+		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C69C09D195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6C69C0A7195B6F4E002A3F53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6C69C0A9195B6F4E002A3F53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C69C0B4195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
+		6C89B0D21A0ABD7E00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C89B0D31A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C89B0D41A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6C89B0D51A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8FBB4E1978610400C1D381 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
+		6C8FBB4F1978610400C1D381 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
+		6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitTableViewCell.h; sourceTree = "<group>"; };
+		6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitTableViewCell.m; sourceTree = "<group>"; };
+		6C9025BA1984588300BB11FC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		6C9025BB1984588300BB11FC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		6C9025BD198458A500BB11FC /* settingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsViewController.h; sourceTree = "<group>"; };
+		6C9025BE198458A500BB11FC /* settingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsViewController.m; sourceTree = "<group>"; };
+		6C923EB4198C645D00833188 /* trivits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits.xcdatamodel; sourceTree = "<group>"; };
+		6C92EC0D1A07629E00D2A8DC /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C92EC121A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C92EC141A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		6C92EC181A07629F00D2A8DC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C92EC201A09A50500D2A8DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C92EC211A09A50500D2A8DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C92EC221A09A50500D2A8DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
+		6C92EC231A09A50600D2A8DC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "trivit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
+		6CE4BBD61A1D609C005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
+		6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trivit Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CE4BBE81A1D609D005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
+		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
+		92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
+		EC37AD89198D10A000C37610 /* PaddingUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingUITextField.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C69C096195B6F4E002A3F53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */,
+				6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */,
+				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
+				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
+				6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */,
+				1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C69C0AC195B6F4E002A3F53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBCD1A1D609B005E9BCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C0A91551A0D0FB6006F2F87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C0A91601A0D10EA006F2F87 /* libz.dylib */,
+				6C0A915E1A0D10DD006F2F87 /* libc++.dylib */,
+				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
+				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
+				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
+				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6C1C91B219FEF2A700447874 /* tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				6C1C91B319FEF2DF00447874 /* TutChildViewController.h */,
+				6C1C91B419FEF2DF00447874 /* TutChildViewController.m */,
+				6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */,
+				6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */,
+			);
+			name = tutorial;
+			sourceTree = "<group>";
+		};
+		6C69C090195B6F4E002A3F53 = {
+			isa = PBXGroup;
+			children = (
+				6C69C09B195B6F4E002A3F53 /* trivit */,
+				6C69C0B2195B6F4E002A3F53 /* trivitTests */,
+				6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */,
+				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
+				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
+				6C69C09A195B6F4E002A3F53 /* Products */,
+				7917BB946B05BB8BB619F87F /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		6C69C09A195B6F4E002A3F53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C099195B6F4E002A3F53 /* trivit.app */,
+				6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */,
+				6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */,
+				6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6C69C09B195B6F4E002A3F53 /* trivit */ = {
+			isa = PBXGroup;
+			children = (
+				6C0A91551A0D0FB6006F2F87 /* Frameworks */,
+				6CF1A23F195B765600B83A6F /* Model */,
+				6C1C91B219FEF2A700447874 /* tutorial */,
+				6C92EC051A06D3A800D2A8DC /* Overloaded views */,
+				6C8E3C231A01AE5E0001616E /* Cells: TableView/CollectionView */,
+				6C92EC061A06D3E100D2A8DC /* Main */,
+				6C8E3C211A01AE0B0001616E /* Settings view */,
+				6C69C0A9195B6F4E002A3F53 /* Images.xcassets */,
+				6C8E3C221A01AE2C0001616E /* AppDelegate */,
+				6C69C09C195B6F4E002A3F53 /* Supporting Files */,
+			);
+			path = trivit;
+			sourceTree = "<group>";
+		};
+		6C69C09C195B6F4E002A3F53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C92EC131A07629F00D2A8DC /* InfoPlist.strings */,
+				6C92EC0E1A07629E00D2A8DC /* Localizable.strings */,
+				6C69C09D195B6F4E002A3F53 /* Info.plist */,
+				6C69C09E195B6F4E002A3F53 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C69C0B2195B6F4E002A3F53 /* trivitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C0B5195B6F4E002A3F53 /* trivitTests.m */,
+				6C69C0B3195B6F4E002A3F53 /* Supporting Files */,
+			);
+			path = trivitTests;
+			sourceTree = "<group>";
+		};
+		6C69C0B3195B6F4E002A3F53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C92EC191A07629F00D2A8DC /* InfoPlist.strings */,
+				6C69C0B4195B6F4E002A3F53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6C8E3C211A01AE0B0001616E /* Settings view */ = {
+			isa = PBXGroup;
+			children = (
+				6C9025BD198458A500BB11FC /* settingsViewController.h */,
+				6C9025BE198458A500BB11FC /* settingsViewController.m */,
+			);
+			name = "Settings view";
+			sourceTree = "<group>";
+		};
+		6C8E3C221A01AE2C0001616E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
+				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6C8E3C231A01AE5E0001616E /* Cells: TableView/CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
+				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
+				6C0A914E1A0CDF5A006F2F87 /* TrivitCollectionViewCell.h */,
+				6C0A914F1A0CDF5A006F2F87 /* TrivitCollectionViewCell.m */,
+			);
+			name = "Cells: TableView/CollectionView";
+			sourceTree = "<group>";
+		};
+		6C92EC051A06D3A800D2A8DC /* Overloaded views */ = {
+			isa = PBXGroup;
+			children = (
+				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
+				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
+			);
+			name = "Overloaded views";
+			sourceTree = "<group>";
+		};
+		6C92EC061A06D3E100D2A8DC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
+				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
+				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		6CE4BBD11A1D609C005E9BCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
+				4D6C2AF5C61A5B5B25CD7983 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */,
+				6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */,
+				6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */,
+				6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */,
+				6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */,
+				6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */,
+				6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */,
+				6CE4BBD51A1D609C005E9BCD /* Supporting Files */,
+			);
+			path = "trivit WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		6CE4BBD51A1D609C005E9BCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBD61A1D609C005E9BCD /* Info.plist */,
+				6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CE4BBE61A1D609D005E9BCD /* trivit Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */,
+				6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */,
+				6CE4BBE71A1D609D005E9BCD /* Supporting Files */,
+			);
+			path = "trivit Watch App";
+			sourceTree = "<group>";
+		};
+		6CE4BBE71A1D609D005E9BCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CE4BBE81A1D609D005E9BCD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CF1A23F195B765600B83A6F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CF1A23C195B762D00B83A6F /* Tally.h */,
+				6CF1A23D195B762D00B83A6F /* Tally.m */,
+				6CA449391980D8E00049F34D /* Colors.h */,
+				6CA4493A1980D8E00049F34D /* Colors.m */,
+				6C9025BA1984588300BB11FC /* Settings.h */,
+				6C9025BB1984588300BB11FC /* Settings.m */,
+				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7917BB946B05BB8BB619F87F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */,
+				92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6C69C098195B6F4E002A3F53 /* trivit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C69C0B9195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivit" */;
+			buildPhases = (
+				3CB2913BF429DC23D4A713D0 /* Check Pods Manifest.lock */,
+				6C69C095195B6F4E002A3F53 /* Sources */,
+				6C69C096195B6F4E002A3F53 /* Frameworks */,
+				6C69C097195B6F4E002A3F53 /* Resources */,
+				6C0A91631A0D193D006F2F87 /* ShellScript */,
+				6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */,
+				60A83E13815D5585EFF94F48 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CE4BBEE1A1D609D005E9BCD /* PBXTargetDependency */,
+			);
+			name = trivit;
+			productName = trivit;
+			productReference = 6C69C099195B6F4E002A3F53 /* trivit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6C69C0AE195B6F4E002A3F53 /* trivitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C69C0BC195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivitTests" */;
+			buildPhases = (
+				6C69C0AB195B6F4E002A3F53 /* Sources */,
+				6C69C0AC195B6F4E002A3F53 /* Frameworks */,
+				6C69C0AD195B6F4E002A3F53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C69C0B1195B6F4E002A3F53 /* PBXTargetDependency */,
+			);
+			name = trivitTests;
+			productName = trivitTests;
+			productReference = 6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4BBF31A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit WatchKit Extension" */;
+			buildPhases = (
+				6CE4BBCC1A1D609B005E9BCD /* Sources */,
+				6CE4BBCD1A1D609B005E9BCD /* Frameworks */,
+				6CE4BBCE1A1D609B005E9BCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CE4BBE51A1D609D005E9BCD /* PBXTargetDependency */,
+			);
+			name = "trivit WatchKit Extension";
+			productName = "trivit WatchKit Extension";
+			productReference = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		6CE4BBE11A1D609D005E9BCD /* trivit Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */;
+			buildPhases = (
+				6CE4BBE01A1D609D005E9BCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "trivit Watch App";
+			productName = "trivit Watch App";
+			productReference = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6C69C091195B6F4E002A3F53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Balloon Inc.";
+				TargetAttributes = {
+					6C69C098195B6F4E002A3F53 = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = JRS568U6JT;
+					};
+					6C69C0AE195B6F4E002A3F53 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 6C69C098195B6F4E002A3F53;
+					};
+					6CE4BBCF1A1D609B005E9BCD = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = JRS568U6JT;
+					};
+					6CE4BBE11A1D609D005E9BCD = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "trivit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6C69C090195B6F4E002A3F53;
+			productRefGroup = 6C69C09A195B6F4E002A3F53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6C69C098195B6F4E002A3F53 /* trivit */,
+				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
+				6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */,
+				6CE4BBE11A1D609D005E9BCD /* trivit Watch App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6C69C097195B6F4E002A3F53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */,
+				6C92EC111A07629F00D2A8DC /* InfoPlist.strings in Resources */,
+				6C92EC0C1A07629E00D2A8DC /* Localizable.strings in Resources */,
+				6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C69C0AD195B6F4E002A3F53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBCE1A1D609B005E9BCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */,
+				6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBE01A1D609D005E9BCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */,
+				6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CB2913BF429DC23D4A713D0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60A83E13815D5585EFF94F48 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C0A91631A0D193D006F2F87 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n/bin/sh \"${SCRIPT}\" \"AA43b587cebdfd56414d8d452c9b4b034a0f7f300a\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C69C095195B6F4E002A3F53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C0A91501A0CDF5A006F2F87 /* TrivitCollectionViewCell.m in Sources */,
+				6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */,
+				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,
+				6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */,
+				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,
+				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
+				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
+				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
+				EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */,
+				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
+				6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */,
+				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
+				6C9025BC1984588300BB11FC /* Settings.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C69C0AB195B6F4E002A3F53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CE4BBCC1A1D609B005E9BCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
+				6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */,
+				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6C69C0B1195B6F4E002A3F53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C69C098195B6F4E002A3F53 /* trivit */;
+			targetProxy = 6C69C0B0195B6F4E002A3F53 /* PBXContainerItemProxy */;
+		};
+		6CE4BBE51A1D609D005E9BCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE4BBE11A1D609D005E9BCD /* trivit Watch App */;
+			targetProxy = 6CE4BBE41A1D609D005E9BCD /* PBXContainerItemProxy */;
+		};
+		6CE4BBEE1A1D609D005E9BCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */;
+			targetProxy = 6CE4BBED1A1D609D005E9BCD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6C69C0A6195B6F4E002A3F53 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C69C0A7195B6F4E002A3F53 /* Base */,
+				6C92EC141A07629F00D2A8DC /* fr */,
+				6C92EC221A09A50500D2A8DC /* nl */,
+				6C89B0D41A0ABD7F00CCE22C /* ru */,
+				6C0A91531A0CE92F006F2F87 /* zh-CN */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6C92EC0E1A07629E00D2A8DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC0D1A07629E00D2A8DC /* fr */,
+				6C92EC201A09A50500D2A8DC /* nl */,
+				6C89B0D21A0ABD7E00CCE22C /* ru */,
+				6C0A91511A0CE92E006F2F87 /* zh-CN */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6C92EC131A07629F00D2A8DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC121A07629F00D2A8DC /* fr */,
+				6C92EC211A09A50500D2A8DC /* nl */,
+				6C89B0D31A0ABD7F00CCE22C /* ru */,
+				6C0A91521A0CE92F006F2F87 /* zh-CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6C92EC191A07629F00D2A8DC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C92EC181A07629F00D2A8DC /* fr */,
+				6C92EC231A09A50600D2A8DC /* nl */,
+				6C89B0D51A0ABD7F00CCE22C /* ru */,
+				6C0A91541A0CE92F006F2F87 /* zh-CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6C69C0B7195B6F4E002A3F53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6C69C0B8195B6F4E002A3F53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6C69C0BA195B6F4E002A3F53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/trivit",
+				);
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
+				INFOPLIST_FILE = trivit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6C69C0BB195B6F4E002A3F53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/trivit",
+				);
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
+				INFOPLIST_FILE = trivit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6C69C0BD195B6F4E002A3F53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/trivit.app/trivit";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = trivitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		6C69C0BE195B6F4E002A3F53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/trivit.app/trivit";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = trivitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+		6CE4BBF11A1D609E005E9BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = trivit_WatchKit_Extension;
+				INFOPLIST_FILE = "trivit Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		6CE4BBF21A1D609E005E9BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				IBSC_MODULE = trivit_WatchKit_Extension;
+				INFOPLIST_FILE = "trivit Watch App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		6CE4BBF41A1D609E005E9BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6CE4BBF51A1D609E005E9BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "trivit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C69C0B7195B6F4E002A3F53 /* Debug */,
+				6C69C0B8195B6F4E002A3F53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6C69C0B9195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C69C0BA195B6F4E002A3F53 /* Debug */,
+				6C69C0BB195B6F4E002A3F53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6C69C0BC195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C69C0BD195B6F4E002A3F53 /* Debug */,
+				6C69C0BE195B6F4E002A3F53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4BBF11A1D609E005E9BCD /* Debug */,
+				6CE4BBF21A1D609E005E9BCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CE4BBF31A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CE4BBF41A1D609E005E9BCD /* Debug */,
+				6CE4BBF51A1D609E005E9BCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6C923EB3198C645D00833188 /* trivits.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6C923EB4198C645D00833188 /* trivits.xcdatamodel */,
+			);
+			currentVersion = 6C923EB4198C645D00833188 /* trivits.xcdatamodel */;
+			path = trivits.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6C69C091195B6F4E002A3F53 /* Project object */;
+}
