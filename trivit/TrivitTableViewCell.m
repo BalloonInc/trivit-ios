@@ -10,6 +10,7 @@
 #import "Colors.h"
 
 @interface TrivitTableViewCell()
+@property int cellAddRemove;
 @end
 
 @implementation TrivitTableViewCell
@@ -28,12 +29,14 @@ float const COUNTLABEL_WIDTH = 40.;
 - (void)increaseTallyCounter
 {
     [self.tally addTally];
+    self.cellAddRemove = (self.tally.counter%5==1)?1:0; // if new cell should be drawn: 1
     [self setNeedsDisplay];
 }
 
 - (void)decreaseTallyCounter
 {
     [self.tally decreaseTally];
+    self.cellAddRemove = (self.tally.counter%5==0)?-1:0; // if last cell should be removed: -1
     [self setNeedsDisplay];
 }
 
@@ -99,17 +102,21 @@ float const COUNTLABEL_WIDTH = 40.;
         self.minusButton=nil;
 
         if(!self.minusButton){
-            self.minusButton = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
+            self.minusButton = [[UITextField alloc] initWithFrame:CGRectMake(0,0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
             self.minusButton.backgroundColor = [UIColor whiteColor];
 
-            self.minusButton.textAlignment = 1;
+            self.minusButton.textAlignment = NSTextAlignmentCenter;
             [self.minusButton.layer setCornerRadius:8.0];
             [self.minusButton.layer setMasksToBounds:YES];
-            //self.countLabel.textColor = self.cellBackColorDark;
-            
-            self.minusButton.textColor =self.cellBackColorDark;
 
-            self.minusButton.text = @"-";
+            // Don't touch this minus sign + font below, or spend half a day trying to center it vertically again
+            self.minusButton.font = [UIFont fontWithName:@"Georgia-Italic" size:25];
+            
+            self.minusButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+            
+            self.minusButton.textColor = self.cellBackColorDark;
+            self.minusButton.enabled=NO;
+            self.minusButton.text = @"−";
     }
         
         //Animation only if loadanimation is set (e.g. when expanding)
@@ -183,10 +190,8 @@ float const COUNTLABEL_WIDTH = 40.;
         [trianglePath fill];
         
         // Image tally marks
-        if (true){
-            //if(![self.subviews containsObject:self.images]){
-            
-            [self.images removeFromSuperview];
+        //if (true){
+        if(![self.subviews containsObject:self.images]){
             self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection
                                              collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
             [self.images setDataSource:self];
@@ -195,19 +200,11 @@ float const COUNTLABEL_WIDTH = 40.;
             [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
             
         }
-        
-        /*
-         self.images.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
-         self.images.frame = boundsSecondSection;
-         [self.images setDataSource:self];
-         [self.images setDelegate:self];
-         [self.images setBackgroundColor:nil];
-         */
-        
-        //[self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
+        else // always update the frame (in case of new lines / rotation of device)
+            self.images.frame = boundsSecondSection;
         
         //update images
-        [self.images setNeedsDisplay];
+        [self updateGridCells];
         //[self.images removeFromSuperview];
         [self addSubview:self.images];
         
@@ -220,6 +217,30 @@ float const COUNTLABEL_WIDTH = 40.;
         self.counterLabelForTally.textColor = [UIColor whiteColor];
         self.counterLabelForTally.userInteractionEnabled=true;
         [self addSubview: self.counterLabelForTally];
+    }
+}
+
+-(void) updateGridCells
+{
+    
+    // TODO: can this be cleaned up?
+    if (self.tally.counter == 0)
+    {
+        [self.images reloadData];
+        return;
+    }
+    // set the path, do not do -1 in case of add
+    NSIndexPath *path = [NSIndexPath indexPathForRow:[self.images numberOfItemsInSection:0] - ((self.cellAddRemove==1)?0:1) inSection:0];
+    switch(self.cellAddRemove){
+        case 1:
+            [self.images insertItemsAtIndexPaths:@[path]];
+            break;
+        case -1:
+            [self.images deleteItemsAtIndexPaths:@[path]];
+            break;
+        default:
+            [self.images reloadItemsAtIndexPaths:@[path]];
+            break;
     }
 }
 
@@ -268,14 +289,16 @@ float const COUNTLABEL_WIDTH = 40.;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
-    int tmp = self.tally.counter % 5;
     
+    int tmp = self.tally.counter % 5;
+    NSLog(@"IndexPath.item: %d",indexPath.item);
     if (indexPath.item > self.tally.counter/5-1) {
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, self.tally.type]]];
     }
     else{
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", 5, self.tally.type]]];
     }
+    
     return gridcell;
 }
 

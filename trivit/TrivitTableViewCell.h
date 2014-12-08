@@ -35,7 +35,7 @@ extern NSString const *TALLY_TYPE;
 @property (strong, nonatomic) PaddingUITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
-@property (strong, nonatomic) UILabel *minusButton;
+@property (strong, nonatomic) UITextField *minusButton;
 @property (nonatomic) float cellHeigth;
 
 @property (weak, nonatomic) UIView *parentView;
