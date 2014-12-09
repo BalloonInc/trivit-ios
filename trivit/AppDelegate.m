@@ -46,8 +46,41 @@
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
     
+    
+    NSDictionary *dict = @{
+                           @"value" : [NSNumber numberWithInt:5],
+                           @"description" : @"best app ever"
+                           };
+    
+    // create a JSON string from your NSDictionary
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] init];
+    if (!jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    
+    //RestKit
+    RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://ballooninc.be/api"]];
+    
+    NSLog(@"I am your RKObjectManager HTTPClient, use me : %@",objectManager.HTTPClient);
+    
+    //Setting a Route for a post method
+    [objectManager.router.routeSet addRoute:[RKRoute
+    routeWithClass:[UIActivity class]
+    pathPattern:@"/feedback"
+    method:RKRequestMethodPOST]] ;
+
+    [[RKObjectManager sharedManager] postObject:jsonData path:@"/feedback" parameters:nil success:nil failure:nil];
+
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
