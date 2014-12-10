@@ -65,14 +65,14 @@
     RKResponseDescriptor *responseDescriptor =
     [RKResponseDescriptor responseDescriptorWithMapping:objectMapping
                                                  method:RKRequestMethodPOST
-                                            pathPattern:@"feedback/"
+                                            pathPattern:@"feedback"
                                                 keyPath:nil
                                             statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:responseDescriptor];
     
-    [objectManager postObject:@"{\"feedbackMessage\": \"test\", \"deviceIdentifier\": \"iphone5S_pj\", \"softwareIdentifier\": \"8.2\", \"scaleValue\": 5}"
-                        path:@"feedback/"
+    [objectManager postObject:@"{\"feedbackMessage\": \"test\", \"deviceIdentifier\": \"iphone5S_Xcode\", \"softwareIdentifier\": \"8.2\", \"scaleValue\": 5}"
+                        path:@"feedback"
                   parameters:nil
                      success:nil
                      failure:nil];
