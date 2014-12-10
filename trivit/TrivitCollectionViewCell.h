@@ -14,4 +14,5 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) int countForTally;
 
+
 @end

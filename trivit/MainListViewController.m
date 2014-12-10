@@ -183,20 +183,7 @@ int const OUTSIDE_TAP = 3;
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]+1;
         [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
         
-        if (self.appSettings.vibrationFeedback){
-            NSMutableArray* arr = [NSMutableArray arrayWithObjects:
-                                   [NSNumber numberWithBool:YES],
-                                   [NSNumber numberWithInt:50], nil];
-            
-            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  arr,@"VibePattern",
-                                  [NSNumber numberWithFloat:.85],@"Intensity",nil];
-            
-            //declare function before usage
-            int AudioServicesPlaySystemSoundWithVibration();
-            
-            AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
-        }
+        [self buzzIt];
         // if new image ==> redraw cell height
         if (currentCount%(5*self.imagesPerRow)==1){
             // if new row, prepare for scrolling the cell:
@@ -232,7 +219,7 @@ int const OUTSIDE_TAP = 3;
         NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]-1;
         if (currentCount >= 0)
             [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
-        
+        [self buzzIt];
         // if image got removed ==> redraw cell height
         if (currentCount%(5*self.imagesPerRow)==0){
             [self scrollToExpandedCell:swipedIndexPath];
@@ -242,6 +229,24 @@ int const OUTSIDE_TAP = 3;
             [self.tableView endUpdates]; // necessary for the animation of the cell growth
         }
     }
+}
+-(void)buzzIt
+{
+    if (self.appSettings.vibrationFeedback){
+        NSMutableArray* arr = [NSMutableArray arrayWithObjects:
+                               [NSNumber numberWithBool:YES],
+                               [NSNumber numberWithInt:50], nil];
+        
+        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              arr,@"VibePattern",
+                              [NSNumber numberWithFloat:.85],@"Intensity",nil];
+        
+        //declare function before usage
+        int AudioServicesPlaySystemSoundWithVibration();
+        
+        AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
+    }
+
 }
 
 -(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
@@ -389,7 +394,6 @@ int const OUTSIDE_TAP = 3;
     bool isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
     if (cell.isCollapsed!=isCollapsed)
         cell.isCollapsed = isCollapsed;
-    cell.isCollapsed = isCollapsed;
     cell.tally.counter = [[record valueForKey:@"counter"] integerValue];
     cell.tally.colorIndex = [[record valueForKey:@"color"] integerValue];
     cell.tally.title = [record valueForKey:@"title"];
@@ -475,7 +479,6 @@ int const OUTSIDE_TAP = 3;
             [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-
                 [self.tableView endUpdates];
             } completion:^(BOOL finished) {
                 // TODO: do something with this ugly afterDelay ...
@@ -541,7 +544,7 @@ int const OUTSIDE_TAP = 3;
         // if empty: add some trivits
         if (self.trivitCount == 0){
             [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
-            [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:110];
+            [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:550];
             [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
         }
     }
@@ -560,7 +563,7 @@ int const OUTSIDE_TAP = 3;
     // add gestures
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     UILongPressGestureRecognizer * longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longTap.minimumPressDuration = 0.3;
+    longTap.minimumPressDuration = 0.2;
     
     [self.tableView addGestureRecognizer:tap];
     [self.tableView addGestureRecognizer:longTap];

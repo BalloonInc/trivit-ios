@@ -8,9 +8,11 @@
 
 #import "TrivitTableViewCell.h"
 #import "Colors.h"
+#import "TrivitFlowLayout.h"
 
 @interface TrivitTableViewCell()
 @property int cellAddRemove;
+@property (nonatomic, strong) TrivitFlowLayout *flowLayout;
 @end
 
 @implementation TrivitTableViewCell
@@ -192,8 +194,10 @@ float const COUNTLABEL_WIDTH = 40.;
         // Image tally marks
         //if (true){
         if(![self.subviews containsObject:self.images]){
+            self.flowLayout = [[TrivitFlowLayout alloc] init];
+            
             self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection
-                                             collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+                                             collectionViewLayout:self.flowLayout];
             [self.images setDataSource:self];
             [self.images setDelegate:self];
             [self.images setBackgroundColor:nil];
@@ -205,7 +209,7 @@ float const COUNTLABEL_WIDTH = 40.;
         
         //update images
         [self updateGridCells];
-        //[self.images removeFromSuperview];
+
         [self addSubview:self.images];
         
         if(self.loadAnimation){
@@ -224,23 +228,30 @@ float const COUNTLABEL_WIDTH = 40.;
 {
     
     // TODO: can this be cleaned up?
-    if (self.tally.counter == 0)
+    //if (true)
+    if (self.tally.counter < 6)
     {
         [self.images reloadData];
         return;
     }
     // set the path, do not do -1 in case of add
     NSIndexPath *path = [NSIndexPath indexPathForRow:[self.images numberOfItemsInSection:0] - ((self.cellAddRemove==1)?0:1) inSection:0];
-    switch(self.cellAddRemove){
-        case 1:
-            [self.images insertItemsAtIndexPaths:@[path]];
-            break;
-        case -1:
-            [self.images deleteItemsAtIndexPaths:@[path]];
-            break;
-        default:
-            [self.images reloadItemsAtIndexPaths:@[path]];
-            break;
+    
+    @try{
+        switch(self.cellAddRemove){
+            case 1:
+                [self.images insertItemsAtIndexPaths:@[path]];
+                break;
+            case -1:
+                [self.images deleteItemsAtIndexPaths:@[path]];
+                break;
+            default:
+                [self.images reloadItemsAtIndexPaths:@[path]];
+                break;
+        }
+    }
+    @catch(NSException * e) {
+        [self.images reloadData];
     }
 }
 
