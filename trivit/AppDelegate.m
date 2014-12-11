@@ -49,6 +49,9 @@
     
     
     
+    //added because default response type in CouchDB is text/plain
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"tapplication/json"];
+    
     // initialize AFNetworking HTTPClient
     NSURL *baseURL = [NSURL URLWithString:@"http://ballooninc.be/api/"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
@@ -70,8 +73,13 @@
                                             statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:responseDescriptor];
+    [objectManager setRequestSerializationMIMEType:RKMIMETypeJSON];
+    [objectManager setAcceptHeaderWithMIMEType:@"application/json"];
     
-    [objectManager postObject:@"{\"feedbackMessage\": \"test\", \"deviceIdentifier\": \"iphone5S_Xcode\", \"softwareIdentifier\": \"8.2\", \"scaleValue\": 5}"
+    NSString *post = [NSString stringWithFormat:@"{\"feedbackMessage\": \"test\", \"deviceIdentifier\": \"iphone5S_Xcode\", \"softwareIdentifier\": \"8.2\", \"scaleValue\": \"5\"}"];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    [objectManager postObject:postData
                         path:@"feedback"
                   parameters:nil
                      success:nil
