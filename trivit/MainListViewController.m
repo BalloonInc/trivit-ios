@@ -449,7 +449,6 @@ int const OUTSIDE_TAP = 3;
     TrivitTableViewCell *lastVisibleCell = [visibleRows lastObject];
     NSIndexPath *lastIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
     
-    
     //initialize previous last cell in the current view, only fill this one in case 2 below
     TrivitTableViewCell *oneButLastVisibleCell;
     
