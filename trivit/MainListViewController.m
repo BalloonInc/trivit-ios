@@ -506,6 +506,11 @@ int const OUTSIDE_TAP = 3;
     }
 }
 
+-(void) orientationChanged: (NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
+
 #pragma mark - view load stuff
 
 - (void)viewDidLoad
@@ -557,6 +562,13 @@ int const OUTSIDE_TAP = 3;
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    // subscribe to device rotation
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+
 }
 
 - (void) configureTableView{

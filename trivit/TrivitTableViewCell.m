@@ -8,11 +8,9 @@
 
 #import "TrivitTableViewCell.h"
 #import "Colors.h"
-#import "TrivitFlowLayout.h"
 
 @interface TrivitTableViewCell()
 @property int cellAddRemove;
-@property (nonatomic, strong) TrivitFlowLayout *flowLayout;
 @end
 
 @implementation TrivitTableViewCell
@@ -194,10 +192,9 @@ float const COUNTLABEL_WIDTH = 40.;
         // Image tally marks
         //if (true){
         if(![self.subviews containsObject:self.images]){
-            self.flowLayout = [[TrivitFlowLayout alloc] init];
             
             self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection
-                                             collectionViewLayout:self.flowLayout];
+                                             collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
             [self.images setDataSource:self];
             [self.images setDelegate:self];
             [self.images setBackgroundColor:nil];
@@ -236,7 +233,7 @@ float const COUNTLABEL_WIDTH = 40.;
     }
     // set the path, do not do -1 in case of add
     NSIndexPath *path = [NSIndexPath indexPathForRow:[self.images numberOfItemsInSection:0] - ((self.cellAddRemove==1)?0:1) inSection:0];
-    
+    [UIView setAnimationsEnabled:NO];
     @try{
         switch(self.cellAddRemove){
             case 1:
@@ -253,6 +250,7 @@ float const COUNTLABEL_WIDTH = 40.;
     @catch(NSException * e) {
         [self.images reloadData];
     }
+    [UIView setAnimationsEnabled:YES];
 }
 
 -(void) showTalliesWithDelay
@@ -302,7 +300,6 @@ float const COUNTLABEL_WIDTH = 40.;
     TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
     
     int tmp = self.tally.counter % 5;
-    NSLog(@"IndexPath.item: %d",indexPath.item);
     if (indexPath.item > self.tally.counter/5-1) {
         gridcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"tally_%2$@%1$tu", tmp, self.tally.type]]];
     }
