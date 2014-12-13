@@ -449,9 +449,6 @@ int const OUTSIDE_TAP = 3;
     TrivitTableViewCell *lastVisibleCell = [visibleRows lastObject];
     NSIndexPath *lastIndexPath = [self.tableView indexPathForCell:lastVisibleCell];
     
-    //initialize previous last cell in the current view, only fill this one in case 2 below
-    TrivitTableViewCell *oneButLastVisibleCell;
-    
     self.shouldScrollToCellAtIndexPath = nil;
     switch (lastIndexPath.row-indexPath.row) {
         case 0:
@@ -462,10 +459,12 @@ int const OUTSIDE_TAP = 3;
                 self.shouldScrollToCellAtIndexPath = indexPath;
             break;
         case 2:
-            oneButLastVisibleCell = [[visibleRows subarrayWithRange:NSMakeRange(([visibleRows count]-2), 1)] firstObject];
+        {
+            TrivitTableViewCell *oneButLastVisibleCell = [[visibleRows subarrayWithRange:NSMakeRange(([visibleRows count]-2), 1)] firstObject];
             if(lastVisibleCell.isCollapsed && oneButLastVisibleCell.isCollapsed && !self.shouldScrollOnTallyIncreaseOrDecrease)
                 self.shouldScrollToCellAtIndexPath = indexPath;
             break;
+        }
         default:
             break;
     }
@@ -507,7 +506,10 @@ int const OUTSIDE_TAP = 3;
 
 -(void) orientationChanged: (NSNotification *)notification
 {
-    [self.tableView reloadData];
+    for (TrivitTableViewCell *cell in [self.tableView visibleCells]) {
+        if (!cell.isCollapsed)
+            cell.reloadCompleteCell=true;
+    }
 }
 
 #pragma mark - view load stuff

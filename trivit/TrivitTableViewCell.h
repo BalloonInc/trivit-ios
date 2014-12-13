@@ -31,6 +31,7 @@ extern NSString const *TALLY_TYPE;
 
 @property (nonatomic,strong) UICollectionView *images;
 @property (nonatomic) BOOL loadAnimation;
+@property (nonatomic) BOOL reloadCompleteCell;
 
 @property (strong, nonatomic) PaddingUITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;

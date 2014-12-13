@@ -223,12 +223,10 @@ float const COUNTLABEL_WIDTH = 40.;
 
 -(void) updateGridCells
 {
-    
-    // TODO: can this be cleaned up?
-    //if (true)
-    if (self.tally.counter < 6)
+    if (self.tally.counter < 6 || self.reloadCompleteCell)
     {
         [self.images reloadData];
+        self.reloadCompleteCell = false;
         return;
     }
     // set the path, do not do -1 in case of add
