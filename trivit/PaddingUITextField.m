@@ -12,7 +12,6 @@
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-//    return CGRectInset(bounds, 50.0f, 0);
     return CGRectMake(10, 0, bounds.size.width-70, bounds.size.height);
 }
 

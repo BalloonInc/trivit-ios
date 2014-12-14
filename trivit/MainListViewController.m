@@ -689,11 +689,11 @@ int const OUTSIDE_TAP = 3;
     else if([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsNoDevDeviceNoMore"])
         [self.defaults setObject:[NSNumber numberWithBool:false] forKey:@"DevDevice"];
 
-    
-    [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
-    NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length>0)&&[[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
-    [record setValue:tallyType forKey:@"type"];
-
+    if (self.cellBeingEdited.titleTextField != nil){
+        [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
+        NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length>0)&&[[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
+        [record setValue:tallyType forKey:@"type"];
+    }
     self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
     
@@ -736,7 +736,6 @@ int const OUTSIDE_TAP = 3;
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{ tableView.frame = tableFrame; }
                      completion:nil];
-    
 }
 
 // Do not hide status bar

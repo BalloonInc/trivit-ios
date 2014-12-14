@@ -9,7 +9,6 @@
 #import "Tally.h"
 #import <UIKit/UIKit.h>
 
-#import "TrivitCollectionViewCell.h"
 #import "PaddingUITextField.h"
 #import "Settings.h"
 

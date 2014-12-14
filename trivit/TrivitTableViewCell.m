@@ -167,7 +167,9 @@ float const COUNTLABEL_WIDTH = 40.;
     // update title
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.firstLineHeadIndent = 10;
-    NSAttributedString *attributedTitle = [[NSAttributedString alloc ] initWithString:self.tally.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
+    //if (self.tally.title == nil)
+      //  self.tally.title = @"";
+    NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:self.tally.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.titleTextField.attributedText = attributedTitle;
     
     
@@ -295,7 +297,7 @@ float const COUNTLABEL_WIDTH = 40.;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TrivitCollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
+    UICollectionViewCell *gridcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridcell" forIndexPath:indexPath];
     
     int tmp = self.tally.counter % 5;
     if (indexPath.item > self.tally.counter/5-1) {
