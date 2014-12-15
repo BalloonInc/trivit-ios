@@ -9,7 +9,6 @@
 #import "Tally.h"
 #import <UIKit/UIKit.h>
 
-#import "PaddingUITextField.h"
 #import "Settings.h"
 
 @interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
@@ -32,7 +31,7 @@ extern NSString const *TALLY_TYPE;
 @property (nonatomic) BOOL loadAnimation;
 @property (nonatomic) BOOL reloadCompleteCell;
 
-@property (strong, nonatomic) PaddingUITextField *titleTextField;
+@property (strong, nonatomic) UITextField *titleTextField;
 @property (strong, nonatomic) UILabel *counterLabelForTally;
 @property (strong, nonatomic) UILabel *countLabel;
 @property (strong, nonatomic) UITextField *minusButton;

@@ -38,7 +38,6 @@
 		6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
 		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
-		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,8 +143,6 @@
 		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
 		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
-		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
-		EC37AD89198D10A000C37610 /* PaddingUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingUITextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +229,6 @@
 				6C0A91551A0D0FB6006F2F87 /* Frameworks */,
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
-				6C92EC051A06D3A800D2A8DC /* Overloaded views */,
 				6C8E3C231A01AE5E0001616E /* Cells: TableView */,
 				6C92EC061A06D3E100D2A8DC /* Main */,
 				6C8E3C211A01AE0B0001616E /* Settings view */,
@@ -297,15 +293,6 @@
 				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
 			);
 			name = "Cells: TableView";
-			sourceTree = "<group>";
-		};
-		6C92EC051A06D3A800D2A8DC /* Overloaded views */ = {
-			isa = PBXGroup;
-			children = (
-				EC37AD88198D10A000C37610 /* PaddingUITextField.h */,
-				EC37AD89198D10A000C37610 /* PaddingUITextField.m */,
-			);
-			name = "Overloaded views";
 			sourceTree = "<group>";
 		};
 		6C92EC061A06D3E100D2A8DC /* Main */ = {
@@ -571,7 +558,6 @@
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
 				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
-				EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */,
 				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
 				6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,

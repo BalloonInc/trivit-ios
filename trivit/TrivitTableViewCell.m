@@ -150,8 +150,8 @@ float const COUNTLABEL_WIDTH = 40.;
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField])
     {
-        CGRect boundsTitleLabel = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
-        self.titleTextField = [[PaddingUITextField alloc] initWithFrame:boundsTitleLabel];
+        CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-70, CELL_HEIGHT_SECTION1);
+        self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
         self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
         self.titleTextField.userInteractionEnabled = true;
         self.titleTextField.backgroundColor = self.cellBackColor;

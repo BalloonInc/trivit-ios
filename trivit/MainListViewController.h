@@ -18,8 +18,9 @@
 
 // is keyboard shown or not
 @property (nonatomic) bool keyboardShown;
-@property (nonatomic) bool doNotResizeViewBecauseAnotherCellWillBeEditedNow;
-@property (nonatomic) CGFloat keyboardOverlap;
+
+@property (nonatomic) UIEdgeInsets contentInset;
+@property (nonatomic) UIEdgeInsets scrollIndicatorInsets;
 
 // used when changing title, cell should be in view when view resizes
 @property (nonatomic, strong) NSIndexPath *activeCellIndexPath;
