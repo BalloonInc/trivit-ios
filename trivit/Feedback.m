@@ -15,26 +15,31 @@
 @synthesize softwareIdentifier;
 @synthesize scaleValue;
 
-- (NSDictionary*)elementToPropertyMappings {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"id", @"feedbackMessage",
-            @"name", @"deviceIdentifier",
-            @"about", @"softwareIdentifier",
-            @"photo", @"scaleValue", nil];
++(RKObjectMapping*)defineLoginRequestMapping {
+    
+    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[Feedback class]];
+    
+    [mapping addAttributeMappingsFromDictionary:@{
+                                                  @"feedbackMessage":   @"feedbackMessage",
+                                                  @"deviceIdentifier":   @"deviceIdentifier",
+                                                  @"softwareIdentifier":   @"softwareIdentifier",
+                                                  @"scaleValue":   @"scaleValue",
+                                                  }];
+    return mapping;
 }
 
--(id)initFeedbackWithMessage: (NSString *) new_feedbackMessage
-           withDeviceIdentifier: (NSString *) new_deviceIdentifier
-      withSoftwareIdentifier: (NSString *) new_softwareIdentifier
-          withScaleValue: (NSInteger) new_scaleValue {
-    if(self = [super init]){
-        feedbackMessage = new_feedbackMessage;
-        deviceIdentifier = new_deviceIdentifier;
-        softwareIdentifier = new_softwareIdentifier;
-        scaleValue = new_scaleValue;
-    }
-    return self;
-}
+//-(id)initFeedbackWithMessage: (NSString *) new_feedbackMessage
+//        withDeviceIdentifier: (NSString *) new_deviceIdentifier
+//      withSoftwareIdentifier: (NSString *) new_softwareIdentifier
+//              withScaleValue: (NSInteger) new_scaleValue {
+//    if(self = [super init]){
+//        feedbackMessage = new_feedbackMessage;
+//        deviceIdentifier = new_deviceIdentifier;
+//        softwareIdentifier = new_softwareIdentifier;
+//        scaleValue = new_scaleValue;
+//    }
+//    return self;
+//}
 
 @end
 

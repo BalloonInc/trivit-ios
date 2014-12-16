@@ -41,6 +41,7 @@
 		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC37AD8A198D10A000C37610 /* PaddingUITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EC37AD89198D10A000C37610 /* PaddingUITextField.m */; };
+		EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */; };
 		ECE857911A375A2B003C9612 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE857901A375A2B003C9612 /* Feedback.m */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +155,8 @@
 		C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EC37AD88198D10A000C37610 /* PaddingUITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingUITextField.h; sourceTree = "<group>"; };
 		EC37AD89198D10A000C37610 /* PaddingUITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingUITextField.m; sourceTree = "<group>"; };
+		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
+		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
 		ECE8578F1A375A2B003C9612 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		ECE857901A375A2B003C9612 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -395,6 +398,8 @@
 				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
 				ECE8578F1A375A2B003C9612 /* Feedback.h */,
 				ECE857901A375A2B003C9612 /* Feedback.m */,
+				EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */,
+				EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */,
 				6C0A91501A0CDF5A006F2F87 /* TrivitCollectionViewCell.m in Sources */,
 				6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */,
 				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,

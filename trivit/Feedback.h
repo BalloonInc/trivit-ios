@@ -7,24 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RKObjectMapping.h"
 
-@interface Feedback : NSObject {
-    NSString *feedbackMessage;
-    NSString *deviceIdentifier;
-    NSString *softwareIdentifier;
-    NSInteger scaleValue;
-}
-
-
+@interface Feedback : NSObject
     @property (nonatomic, strong) NSString* feedbackMessage;
     @property (nonatomic, strong) NSString* deviceIdentifier;
     @property (nonatomic, strong) NSString* softwareIdentifier;
     @property (nonatomic) NSInteger scaleValue;
 
-
--(id)initFeedbackWithMessage: (NSNumber *) feedbackMessage
-           withDeviceIdentifier: (NSString *) deviceIdentifier
-          withSoftwareIdentifier: (NSString *) softwareIdentifier
-          withScaleValue: (NSInteger) scaleValue;
++(RKObjectMapping*)defineLoginRequestMapping;
 
 @end

@@ -13,6 +13,7 @@
 #import <NewRelicAgent/NewRelic.h>
 #import <RestKit/RestKit.h>
 #import "Feedback.h"
+#import "FeedbackManager.h"
 
 @interface AppDelegate ()
 
@@ -47,43 +48,7 @@
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
     
-    
-    
-    //added because default response type in CouchDB is text/plain
-    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"tapplication/json"];
-    
-    // initialize AFNetworking HTTPClient
-    NSURL *baseURL = [NSURL URLWithString:@"http://ballooninc.be/api/"];
-    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-    
-    // initialize RestKit
-    RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
-    
-    //Setup object mapping
-    RKObjectMapping *objectMapping = [RKObjectMapping
-                                      mappingForClass:[Feedback class]];
-
-    [objectMapping addAttributeMappingsFromDictionary:@{ @"feedbackMessage": @"deviceIdentifier", @"softwareIdentifier": @"scaleValue" }];
-
-    RKResponseDescriptor *responseDescriptor =
-    [RKResponseDescriptor responseDescriptorWithMapping:objectMapping
-                                                 method:RKRequestMethodPOST
-                                            pathPattern:@"feedback"
-                                                keyPath:nil
-                                            statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    
-    [objectManager addResponseDescriptor:responseDescriptor];
-    [objectManager setRequestSerializationMIMEType:RKMIMETypeJSON];
-    [objectManager setAcceptHeaderWithMIMEType:@"application/json"];
-    
-    NSString *post = [NSString stringWithFormat:@"{\"feedbackMessage\": \"test\", \"deviceIdentifier\": \"iphone5S_Xcode\", \"softwareIdentifier\": \"8.2\", \"scaleValue\": \"5\"}"];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    [objectManager postObject:postData
-                        path:@"feedback"
-                  parameters:nil
-                     success:nil
-                     failure:nil];
+    [[FeedbackManager alloc] FeedbackWithMessage:@"This is an awesome app" rating:5];
     
     return YES;
 }
