@@ -17,6 +17,6 @@
 @property (nonatomic, strong) RKObjectManager *objectManager;
 @property (nonatomic, strong) AFHTTPClient * client;
 
--(void)FeedbackWithMessage:(NSString *)message rating:(NSInteger)rating;
+-(void)FeedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device;
 
 @end

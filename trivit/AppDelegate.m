@@ -48,7 +48,10 @@
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
     
-    [[FeedbackManager alloc] FeedbackWithMessage:@"This is an awesome app" rating:5];
+    
+    NSString * iOSVersion = [[UIDevice currentDevice] systemVersion];
+    NSString * modelDevice = [[UIDevice currentDevice] model];
+    [[FeedbackManager alloc] FeedbackWithMessage:@"This is an awesome app" rating:5 software:iOSVersion device:modelDevice];
     
     return YES;
 }
