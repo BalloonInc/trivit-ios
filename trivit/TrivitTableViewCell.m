@@ -73,8 +73,6 @@ float const COUNTLABEL_WIDTH = 40.;
 - (void) configureCountLabelWithInteger:(int) integer forCollapsedTrivit:(BOOL)collapsed
 {
     if (collapsed){
-        //TODO: can be removed?
-        self.countLabel=nil;
         if (!self.countLabel){
             self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
             self.countLabel.backgroundColor = self.cellBackColorDark;
@@ -85,11 +83,11 @@ float const COUNTLABEL_WIDTH = 40.;
         }
         self.countLabel.text = @(integer).stringValue;
         
-        //Animation only if loadanimation is set (e.g. when expanding)
-        if (self.loadAnimation){
+        //Animation only when accessoryView changes type is set (e.g. when expanding)
+        if (!self.accessoryView || self.accessoryView.class==[UITextField class]){
             self.countLabel.alpha = 0;
             [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:1.3];
+            [UIView setAnimationDuration:1.0];
             [UIView setAnimationDelegate:self];
             self.countLabel.alpha = 1.0;
             [UIView commitAnimations];
@@ -98,9 +96,6 @@ float const COUNTLABEL_WIDTH = 40.;
         [self setAccessoryView:self.countLabel];
     }
     else{
-        //TODO: can be removed?
-        self.minusButton=nil;
-
         if(!self.minusButton){
             self.minusButton = [[UITextField alloc] initWithFrame:CGRectMake(0,0, COUNTLABEL_WIDTH, COUNTLABEL_HEIGHT)];
             self.minusButton.backgroundColor = [UIColor whiteColor];
@@ -119,15 +114,16 @@ float const COUNTLABEL_WIDTH = 40.;
             self.minusButton.text = @"−";
     }
         
-        //Animation only if loadanimation is set (e.g. when expanding)
-        if (self.loadAnimation){
+        //Animation only when accessoryView changes type is set (e.g. when expanding)
+        if (!self.accessoryView || self.accessoryView.class==[UILabel class]){
             self.minusButton.alpha = 0;
             [UIView beginAnimations:nil context:nil];
-            [UIView setAnimationDuration:1.3];
+            [UIView setAnimationDuration:1.0];
             [UIView setAnimationDelegate:self];
             self.minusButton.alpha = 1.0;
             [UIView commitAnimations];
         }
+        
         [self setAccessoryView:self.minusButton];
         
     }
@@ -135,26 +131,31 @@ float const COUNTLABEL_WIDTH = 40.;
 
 - (void)drawRect:(CGRect)rect
 {
-    [self.titleTextField removeFromSuperview];
-    [self.counterLabelForTally removeFromSuperview];
-    [self.countLabel removeFromSuperview];
-    //[self.images removeFromSuperview];
+    // TODO: can this be removed? It appears not because user interaction is lost otherwise when closing/reopening trivit
+    [self.tallyImageZone removeFromSuperview];
     
     // first section
-    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:self.bounds];
-    [recta addClip];
-    
-    [[self cellBackColor] setFill];
-    [recta fill];
+    if (![self.subviews containsObject:self.backgroundViewForTitle]){
+        self.backgroundViewForTitle = [[UIView alloc] init];
+        self.backgroundViewForTitle.backgroundColor = [self cellBackColor];
+        [self addSubview: self.backgroundViewForTitle];
+    }
+    self.backgroundViewForTitle.frame = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
     
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField])
     {
+        CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
+
+        UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
+        [[self cellBackColorDark] setFill];
+        [recta2 fill];
+        
         CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-70, CELL_HEIGHT_SECTION1);
         self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
         self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
         self.titleTextField.userInteractionEnabled = true;
-        self.titleTextField.backgroundColor = self.cellBackColor;
+        self.titleTextField.backgroundColor = [UIColor clearColor];// self.cellBackColor;
         self.titleTextField.enabled = NO;
         self.titleTextField.returnKeyType = UIReturnKeyDone;
         self.titleTextField.keyboardType = UIKeyboardAppearanceDefault;
@@ -163,12 +164,12 @@ float const COUNTLABEL_WIDTH = 40.;
         self.titleTextField.gestureRecognizers = nil;
         
         [self addSubview: self.titleTextField];
+        //[self insertSubview:self.titleTextField aboveSubview:self.backgroundViewForTitle];
     }
     // update title
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.firstLineHeadIndent = 10;
-    //if (self.tally.title == nil)
-      //  self.tally.title = @"";
+
     NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:self.tally.title attributes:@{NSParagraphStyleAttributeName: paragraphStyle}];
     self.titleTextField.attributedText = attributedTitle;
     
@@ -179,10 +180,11 @@ float const COUNTLABEL_WIDTH = 40.;
     
     else{
         CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
+
         UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
         [[self cellBackColorDark] setFill];
         [recta2 fill];
-        
+         
         UIBezierPath *trianglePath = [UIBezierPath bezierPath];
         [trianglePath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
         [trianglePath addLineToPoint:CGPointMake(20.0, 10.0+CELL_HEIGHT_SECTION1)];
@@ -192,7 +194,6 @@ float const COUNTLABEL_WIDTH = 40.;
         [trianglePath fill];
         
         // Image tally marks
-        //if (true){
         if(![self.subviews containsObject:self.images]){
             
             self.images = [[UICollectionView alloc] initWithFrame:boundsSecondSection
@@ -201,25 +202,26 @@ float const COUNTLABEL_WIDTH = 40.;
             [self.images setDelegate:self];
             [self.images setBackgroundColor:nil];
             [self.images registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"gridcell"];
-            
+            [self addSubview:self.images];
         }
         else // always update the frame (in case of new lines / rotation of device)
             self.images.frame = boundsSecondSection;
         
         //update images
         [self updateGridCells];
-
-        [self addSubview:self.images];
         
         if(self.loadAnimation){
             [self showTalliesWithDelay];
         }
-        
-        CGRect boundsCountLabel = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
-        self.counterLabelForTally = [[UILabel alloc] initWithFrame:boundsCountLabel];
-        self.counterLabelForTally.textColor = [UIColor whiteColor];
-        self.counterLabelForTally.userInteractionEnabled=true;
-        [self addSubview: self.counterLabelForTally];
+
+        if (![self.subviews containsObject:self.tallyImageZone]){
+            self.tallyImageZone = [[UILabel alloc] init];
+            CGRect boundsCountLabel = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
+            self.tallyImageZone.frame= boundsCountLabel;
+            self.tallyImageZone.userInteractionEnabled=true;
+
+            [self addSubview: self.tallyImageZone];
+        }
     }
 }
 
@@ -250,6 +252,7 @@ float const COUNTLABEL_WIDTH = 40.;
     @catch(NSException * e) {
         [self.images reloadData];
     }
+    self.cellAddRemove=0;
     [UIView setAnimationsEnabled:YES];
 }
 

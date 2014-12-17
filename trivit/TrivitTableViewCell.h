@@ -31,8 +31,9 @@ extern NSString const *TALLY_TYPE;
 @property (nonatomic) BOOL loadAnimation;
 @property (nonatomic) BOOL reloadCompleteCell;
 
+@property (strong,nonatomic) UIView *backgroundViewForTitle;
 @property (strong, nonatomic) UITextField *titleTextField;
-@property (strong, nonatomic) UILabel *counterLabelForTally;
+@property (strong, nonatomic) UILabel *tallyImageZone;
 @property (strong, nonatomic) UILabel *countLabel;
 @property (strong, nonatomic) UITextField *minusButton;
 @property (nonatomic) float cellHeigth;

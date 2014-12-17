@@ -182,6 +182,7 @@ int const OUTSIDE_TAP = 3;
     {
         NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
+        [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay];
         }
 }
 
@@ -307,7 +308,7 @@ int const OUTSIDE_TAP = 3;
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
     
     
-    if(tappedView==tappedCell.counterLabelForTally)
+    if(tappedView==tappedCell.tallyImageZone)
         return CELL_TAP;
     else if (CGRectContainsPoint(tappedCell.frame, tapLocation))
     {
@@ -343,6 +344,9 @@ int const OUTSIDE_TAP = 3;
 -(void) editTrivitTitleAtIndexPath: (NSIndexPath *) indexPath{
     if (!indexPath)
         indexPath = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0]-1 inSection:0];
+    
+    if(self.cellBeingEdited)
+        self.cellBeingEdited.titleTextField.enabled = NO;
     
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
     tappedCell.loadAnimation = NO;
@@ -411,7 +415,8 @@ int const OUTSIDE_TAP = 3;
     cell.tally.type = [record valueForKey:@"type"];
     
     cell.cellIdentifier = (int)indexPath.row;
-    cell.titleTextField.delegate = self;
+    if (!cell.titleTextField.delegate)
+        cell.titleTextField.delegate = self;
     
 }
 
@@ -649,6 +654,10 @@ int const OUTSIDE_TAP = 3;
         NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length>0)&&[[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
         [record setValue:tallyType forKey:@"type"];
     }
+    
+//syntaxerror: I am working here
+    self.cellBeingEdited.titleTextField.enabled = NO;
+    [self.cellBeingEdited.titleTextField resignFirstResponder];
     self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
     
@@ -661,7 +670,6 @@ int const OUTSIDE_TAP = 3;
     //keyboard is no longer shown
     self.keyboardShown=false;
 }
-
 
 // Do not hide status bar
 - (BOOL)prefersStatusBarHidden
