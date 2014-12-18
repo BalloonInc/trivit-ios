@@ -7,6 +7,7 @@
 //
 
 #import "settingsViewController.h"
+#import "TallyModel.h"
 
 @interface settingsViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
@@ -62,7 +63,6 @@
     [defaults synchronize];
 }
 
-
 - (void)updateColorSet:(id)sender
 {
     self.appSettings.selectedColorSet=self.colorPicker.selectedSegmentIndex;
@@ -104,7 +104,7 @@
 {
     if(buttonIndex == 1)
     {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
         [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
         
         NSError *error;
@@ -113,10 +113,10 @@
             for (NSManagedObject *record in fetchedObjects)
                 [self.managedObjectContext deleteObject:record];
         }
-        if([alertView.title isEqualToString:self.sureToResetTitle]){
-            for (NSManagedObject *record in fetchedObjects)
-                [record setValue: [NSNumber numberWithInteger:0] forKey:@"counter"];
-        }
+        if([alertView.title isEqualToString:self.sureToResetTitle])
+            for (TallyModel *record in fetchedObjects)
+                record.counter = [NSNumber numberWithInteger:0];
+
         error = nil;
         [self.managedObjectContext save:&error];
     }

@@ -15,6 +15,7 @@
 		6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B419FEF2DF00447874 /* TutChildViewController.m */; };
 		6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */; };
 		6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */; };
+		6C41254D1A435FB800C2D4CA /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
 		6C69C09F195B6F4E002A3F53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C09E195B6F4E002A3F53 /* main.m */; };
 		6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */; };
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
@@ -83,7 +84,7 @@
 		6C0A91521A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C0A91531A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
 		6C0A91541A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = trivit/NewRelicAgent.framework; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -95,6 +96,8 @@
 		6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutMasterViewController.m; sourceTree = "<group>"; };
 		6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTableVIewRowController.h; sourceTree = "<group>"; };
 		6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTableVIewRowController.m; sourceTree = "<group>"; };
+		6C41254B1A435FB800C2D4CA /* TallyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TallyModel.h; sourceTree = "<group>"; };
+		6C41254C1A435FB800C2D4CA /* TallyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TallyModel.m; sourceTree = "<group>"; };
 		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C09D195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -176,19 +179,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6C0A91551A0D0FB6006F2F87 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6C0A91601A0D10EA006F2F87 /* libz.dylib */,
-				6C0A915E1A0D10DD006F2F87 /* libc++.dylib */,
-				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
-				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
-				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
-				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		6C1C91B219FEF2A700447874 /* tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,7 +216,6 @@
 		6C69C09B195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXGroup;
 			children = (
-				6C0A91551A0D0FB6006F2F87 /* Frameworks */,
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
 				6C8E3C231A01AE5E0001616E /* Cells: TableView */,
@@ -308,6 +297,12 @@
 		6CE4BBD11A1D609C005E9BCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C0A91601A0D10EA006F2F87 /* libz.dylib */,
+				6C0A915E1A0D10DD006F2F87 /* libc++.dylib */,
+				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
+				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
+				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
+				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
 				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
 			);
 			name = Frameworks;
@@ -360,6 +355,8 @@
 			children = (
 				6CF1A23C195B762D00B83A6F /* Tally.h */,
 				6CF1A23D195B762D00B83A6F /* Tally.m */,
+				6C41254B1A435FB800C2D4CA /* TallyModel.h */,
+				6C41254C1A435FB800C2D4CA /* TallyModel.m */,
 				6CA449391980D8E00049F34D /* Colors.h */,
 				6CA4493A1980D8E00049F34D /* Colors.m */,
 				6C9025BA1984588300BB11FC /* Settings.h */,
@@ -561,6 +558,7 @@
 				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
 				6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */,
 				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
+				6C41254D1A435FB800C2D4CA /* TallyModel.m in Sources */,
 				6C9025BC1984588300BB11FC /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

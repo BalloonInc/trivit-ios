@@ -13,6 +13,7 @@
 #import <CoreData/CoreData.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "AppDelegate.h"
+#import "TallyModel.h"
 
 @interface MainListViewController ()<NSFetchedResultsControllerDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -117,24 +118,23 @@ int const OUTSIDE_TAP = 3;
     if (self.trivitCount==0)
         colorIndex=0;
     else{
-        NSArray *results = [self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL];
-        colorIndex = [[[results objectAtIndex:self.trivitCount-1] valueForKey:@"color"] integerValue]+1;
+        TallyModel *lastResult = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL] objectAtIndex:self.trivitCount-1];
+        colorIndex = lastResult.color.integerValue+1;
     }
     
     // Create Entity
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tally" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
     
     // Initialize Record
-    NSManagedObject *record = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+    TallyModel *record = [[TallyModel alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
     
     // Populate Record
-    [record setValue:title forKey:@"title"];
-    [record setValue:[NSNumber numberWithInteger:count] forKey:@"counter"];
-    [record setValue:[NSNumber numberWithInteger:colorIndex] forKey:@"color"];
-    [record setValue:[[title substringToIndex:1] isEqual:@"_" ]?@"ch_":@"" forKey:@"type"];
-    
-    [record setValue:[NSDate date] forKey:@"createdAt"];
-    
+    record.title = title;
+    record.counter = [NSNumber numberWithInteger:count];
+    record.color = [NSNumber numberWithInteger:colorIndex];
+    record.type = [[title substringFromIndex:1] isEqualToString:@"_"]?@"ch_":@"";
+    record.createdAt = [NSDate date];
+
     // Save Record
     NSError *error = nil;
     
@@ -180,8 +180,9 @@ int const OUTSIDE_TAP = 3;
 {
     if(buttonIndex == 1)
     {
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
-        [record setValue:[NSNumber numberWithInt: 0] forKey:@"counter"];
+        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
+        record.counter = [NSNumber numberWithInt:0];
+
         [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay];
         }
 }
@@ -196,10 +197,10 @@ int const OUTSIDE_TAP = 3;
     if(!increasedCell.isCollapsed){
         
         [increasedCell increaseTallyCounter];
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]+1;
-        [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
-        
+        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+        NSInteger currentCount = [record.counter integerValue]+1;
+
+        record.counter = [NSNumber numberWithInteger:currentCount];
         [self buzzIt];
         // if new image ==> redraw cell height
         if (currentCount%(5*self.imagesPerRow)==1){
@@ -232,10 +233,10 @@ int const OUTSIDE_TAP = 3;
     if(!swipedCell.isCollapsed && (tappedViewIdentifier==CELL_TAP||tappedViewIdentifier==MINUSBUTTON_TAP)){
         [swipedCell decreaseTallyCounter];
         
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
-        NSInteger currentCount = [[record valueForKey:@"counter"] integerValue]-1;
+        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+        NSInteger currentCount = [record.counter integerValue]-1;
         if (currentCount >= 0)
-            [record setValue: [NSNumber numberWithInteger:(currentCount)] forKey:@"counter"];
+            record.counter = [NSNumber numberWithInteger:currentCount];
         [self buzzIt];
         // if image got removed ==> redraw cell height
         if (currentCount%(5*self.imagesPerRow)==0){
@@ -276,8 +277,8 @@ int const OUTSIDE_TAP = 3;
     collapseCell.loadAnimation = YES;
     
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
-    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
-    [record setValue: [NSNumber numberWithBool:collapseCell.isCollapsed] forKey:@"isCollapsed"];
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
+    record.isCollapsed = [NSNumber numberWithBool:collapseCell.isCollapsed];
     
     // in case of an expansion, potentially scroll down to show expanded cell
     if(!collapseCell.isCollapsed)
@@ -379,14 +380,12 @@ int const OUTSIDE_TAP = 3;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    bool isCollapsed = [[[self.fetchedResultsController objectAtIndexPath:indexPath] valueForKey:@"isCollapsed"] boolValue];
-    if (!isCollapsed) {
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[[record valueForKey:@"counter"] integerValue]]); // Full
-    }
-    else {
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    if (![record.isCollapsed boolValue])
+        return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[record.counter integerValue]]); // Full
+    else
         return CELL_HEIGHT_SECTION1; // Only first section of the cell (title UILabel) (if cell is not selected... seems always to be the case
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -401,18 +400,18 @@ int const OUTSIDE_TAP = 3;
 - (void)configureCell:(TrivitTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Fetch Record
     
-    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     // Update Cell
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.appSettings = self.appSettings;
-    bool isCollapsed = [[record valueForKey:@"isCollapsed"] boolValue];
+    bool isCollapsed = [record.isCollapsed boolValue];
     if (cell.isCollapsed!=isCollapsed)
         cell.isCollapsed = isCollapsed;
-    cell.tally.counter = [[record valueForKey:@"counter"] integerValue];
-    cell.tally.colorIndex = [[record valueForKey:@"color"] integerValue];
-    cell.tally.title = [record valueForKey:@"title"];
-    cell.tally.type = [record valueForKey:@"type"];
+    cell.tally.counter = [record.counter integerValue];
+    cell.tally.colorIndex = [record.color integerValue];
+    cell.tally.title = record.title;
+    cell.tally.type = record.type;
     
     cell.cellIdentifier = (int)indexPath.row;
     if (!cell.titleTextField.delegate)
@@ -430,14 +429,14 @@ int const OUTSIDE_TAP = 3;
 // remove logic
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // row can be deleted if tally is collapsed
-    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    return [[record valueForKey:@"isCollapsed"] boolValue]&&!self.keyboardShown;
+    return [record.isCollapsed boolValue]&&!self.keyboardShown;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
         if (record)
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
     }
@@ -528,7 +527,7 @@ int const OUTSIDE_TAP = 3;
     self.defaults = [NSUserDefaults standardUserDefaults];
     
     // Initialize Fetch Request
-    self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Tally"];
+    self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
     
     // Add Sort Descriptors
     [self.fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
@@ -574,7 +573,6 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-
 }
 
 - (void) configureTableView{
@@ -640,7 +638,7 @@ int const OUTSIDE_TAP = 3;
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    NSManagedObject *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
     
     //Set dev device or not
     if([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsADevDevice"])
@@ -650,14 +648,12 @@ int const OUTSIDE_TAP = 3;
         [self.defaults setObject:[NSNumber numberWithBool:false] forKey:@"DevDevice"];
     
     if (self.cellBeingEdited.titleTextField != nil){
-        [record setValue: self.cellBeingEdited.titleTextField.text forKey:@"title"];
+        record.title = self.cellBeingEdited.titleTextField.text;
         NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length>0)&&[[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual: @"_"]?@"ch_":@"";
-        [record setValue:tallyType forKey:@"type"];
+        record.type = tallyType;
     }
     
-//syntaxerror: I am working here
     self.cellBeingEdited.titleTextField.enabled = NO;
-    [self.cellBeingEdited.titleTextField resignFirstResponder];
     self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
     
