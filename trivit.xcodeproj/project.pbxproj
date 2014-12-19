@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C2AF5C61A5B5B25CD7983 /* libPods.a */; };
 		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
@@ -39,6 +40,8 @@
 		6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
 		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
+		EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */; };
+		ECE857911A375A2B003C9612 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE857901A375A2B003C9612 /* Feedback.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D6C2AF5C61A5B5B25CD7983 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C0A91511A0CE92E006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6C0A91521A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C0A91531A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -146,6 +150,12 @@
 		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
 		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
+		92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
+		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
+		ECE8578F1A375A2B003C9612 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
+		ECE857901A375A2B003C9612 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +168,7 @@
 				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
 				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
 				6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */,
+				1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +210,7 @@
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
 				6C69C09A195B6F4E002A3F53 /* Products */,
+				7917BB946B05BB8BB619F87F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -304,6 +316,7 @@
 				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
 				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
 				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
+				4D6C2AF5C61A5B5B25CD7983 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -362,8 +375,21 @@
 				6C9025BA1984588300BB11FC /* Settings.h */,
 				6C9025BB1984588300BB11FC /* Settings.m */,
 				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
+				ECE8578F1A375A2B003C9612 /* Feedback.h */,
+				ECE857901A375A2B003C9612 /* Feedback.m */,
+				EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */,
+				EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		7917BB946B05BB8BB619F87F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */,
+				92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,11 +399,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C69C0B9195B6F4E002A3F53 /* Build configuration list for PBXNativeTarget "trivit" */;
 			buildPhases = (
+				3CB2913BF429DC23D4A713D0 /* Check Pods Manifest.lock */,
 				6C69C095195B6F4E002A3F53 /* Sources */,
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
 				6C0A91631A0D193D006F2F87 /* ShellScript */,
 				6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */,
+				60A83E13815D5585EFF94F48 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -451,15 +479,16 @@
 				TargetAttributes = {
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = FM9J48C757;
 					};
 					6C69C0AE195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = FM9J48C757;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
 					6CE4BBCF1A1D609B005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = FM9J48C757;
 					};
 					6CE4BBE11A1D609D005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
@@ -528,6 +557,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3CB2913BF429DC23D4A713D0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60A83E13815D5585EFF94F48 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6C0A91631A0D193D006F2F87 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -548,11 +607,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */,
 				6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */,
 				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,
 				6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */,
 				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
+				ECE857911A375A2B003C9612 /* Feedback.m in Sources */,
 				6C9025BF198458A500BB11FC /* settingsViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
 				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
@@ -728,6 +789,7 @@
 		};
 		6C69C0BA195B6F4E002A3F53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -738,6 +800,19 @@
 					"$(PROJECT_DIR)/trivit",
 				);
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -749,6 +824,7 @@
 		};
 		6C69C0BB195B6F4E002A3F53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92B594CAFC2090EBDD9428A5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -759,6 +835,19 @@
 					"$(PROJECT_DIR)/trivit",
 				);
 				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/CoreData\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Network\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/ObjectMapping\"",
+					"\"${PODS_ROOT}/Headers/Public/RestKit/RestKit/Support\"",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

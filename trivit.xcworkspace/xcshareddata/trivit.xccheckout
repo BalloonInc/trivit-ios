@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F30A9A99-D6AF-4006-BD5C-236B3BC3C497</string>
+	<key>IDESourceControlProjectName</key>
+	<string>trivit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9F85BE2AF61D143FA1818B4E598CB36C7AA857EE</key>
+		<string>https://bitbucket.org/ballooninc/trivit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>trivit.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9F85BE2AF61D143FA1818B4E598CB36C7AA857EE</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/ballooninc/trivit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9F85BE2AF61D143FA1818B4E598CB36C7AA857EE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F85BE2AF61D143FA1818B4E598CB36C7AA857EE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>trivit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
