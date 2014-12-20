@@ -31,9 +31,7 @@
     
     RKObjectMapping *requestMapping =  [[Feedback defineLoginRequestMapping] inverseMapping];
     
-    [objectManager addRequestDescriptor: [RKRequestDescriptor
-                                          requestDescriptorWithMapping:requestMapping objectClass:[Feedback class] rootKeyPath:nil
-                                          ]];
+    [objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Feedback class] rootKeyPath:nil method:RKRequestMethodAny]];
     // what to print
     RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     RKLogConfigureByName("Restkit/Network", RKLogLevelDebug);

@@ -479,7 +479,7 @@
 				TargetAttributes = {
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = FM9J48C757;
+						DevelopmentTeam = JRS568U6JT;
 					};
 					6C69C0AE195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
@@ -488,7 +488,7 @@
 					};
 					6CE4BBCF1A1D609B005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = FM9J48C757;
+						DevelopmentTeam = JRS568U6JT;
 					};
 					6CE4BBE11A1D609D005E9BCD = {
 						CreatedOnToolsVersion = 6.2;

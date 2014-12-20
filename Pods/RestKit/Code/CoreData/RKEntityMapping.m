@@ -139,6 +139,7 @@ static BOOL entityIdentificationInferenceEnabled = YES;
 @implementation RKEntityMapping
 
 @synthesize identificationAttributes = _identificationAttributes;
+@synthesize objectClass = _objectClass;
 
 + (instancetype)mappingForClass:(Class)objectClass
 {

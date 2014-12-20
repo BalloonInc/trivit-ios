@@ -85,9 +85,9 @@ int const OUTSIDE_TAP = 3;
 
     NSArray * visibleRows =[self.tableView indexPathsForVisibleRows];
     
-    int rowIndexOfFirstVisibleCell = visibleRows?[[visibleRows objectAtIndex:0] row]:0;
-    int rowIndexOfLastVisibleCell = visibleRows?[[visibleRows lastObject] row ]:0;
-    int numberOfRows = [self.tableView numberOfRowsInSection:0];
+    NSInteger rowIndexOfFirstVisibleCell = visibleRows?[[visibleRows objectAtIndex:0] row]:0;
+    NSInteger rowIndexOfLastVisibleCell = visibleRows?[[visibleRows lastObject] row ]:0;
+    NSInteger numberOfRows = [self.tableView numberOfRowsInSection:0];
     float delay = ((rowIndexOfFirstVisibleCell==0 && rowIndexOfLastVisibleCell == numberOfRows-1))?0.1:0;
     
     [UIView animateWithDuration:0.2 delay:0

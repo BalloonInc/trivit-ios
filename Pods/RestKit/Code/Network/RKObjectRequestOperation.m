@@ -59,7 +59,8 @@ static NSString *RKLogTruncateString(NSString *string)
        (long) maxMessageLength];
 }
 
-static NSString *RKStringFromStreamStatus(NSStreamStatus streamStatus)
+// Unused for now
+/*static NSString *RKStringFromStreamStatus(NSStreamStatus streamStatus)
 {
     switch (streamStatus) {
         case NSStreamStatusNotOpen:     return @"Not Open";
@@ -74,18 +75,7 @@ static NSString *RKStringFromStreamStatus(NSStreamStatus streamStatus)
     }
     return nil;
 }
-
-static NSString *RKStringDescribingStream(NSStream *stream)
-{
-    NSString *errorDescription = ([stream streamStatus] == NSStreamStatusError) ? [NSString stringWithFormat:@", error=%@", [stream streamError]] : @"";
-    if ([stream isKindOfClass:[NSInputStream class]]) {
-        return [NSString stringWithFormat:@"<%@: %p hasBytesAvailable=%@, status='%@'%@>", [stream class], stream, [(NSInputStream *)stream hasBytesAvailable] ? @"YES" : @"NO", RKStringFromStreamStatus([stream streamStatus]), errorDescription];
-    } else if ([stream isKindOfClass:[NSOutputStream class]]) {
-        return [NSString stringWithFormat:@"<%@: %p hasSpaceAvailable=%@, status='%@'%@>", [stream class], stream, [(NSOutputStream *)stream hasSpaceAvailable] ? @"YES" : @"NO", RKStringFromStreamStatus([stream streamStatus]), errorDescription];
-    } else {
-        return [stream description];
-    }
-}
+ */
 
 @interface NSCachedURLResponse (RKLeakFix)
 
@@ -274,11 +264,6 @@ static void RKDecrementNetworkAcitivityIndicator()
     #if __IPHONE_OS_VERSION_MIN_REQUIRED
         [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
     #endif
-}
-
-static inline NSString *RKDescriptionForRequest(NSURLRequest *request)
-{
-    return [NSString stringWithFormat:@"%@ '%@'", request.HTTPMethod, [request.URL absoluteString]];
 }
 
 static NSIndexSet *RKAcceptableStatusCodesFromResponseDescriptors(NSArray *responseDescriptors)

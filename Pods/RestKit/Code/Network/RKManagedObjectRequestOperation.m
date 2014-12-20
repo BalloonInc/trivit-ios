@@ -419,7 +419,7 @@ BOOL RKDoesArrayOfResponseDescriptorsContainOnlyEntityMappings(NSArray *response
 @property (nonatomic, copy) NSManagedObjectID *targetObjectID;
 @property (nonatomic, strong) RKManagedObjectResponseMapperOperation *responseMapperOperation;
 @property (nonatomic, strong, readwrite) NSError *error;
-@property (nonatomic, strong, readwrite) RKMappingResult *mappingResult;
+//@property (nonatomic, strong, readwrite) RKMappingResult *mappingResult;
 @property (nonatomic, copy) id (^willMapDeserializedResponseBlock)(id deserializedResponseBody);
 @property (nonatomic, strong) NSDictionary *mappingInfo;
 @property (nonatomic, strong) NSCachedURLResponse *cachedResponse;
@@ -432,6 +432,8 @@ BOOL RKDoesArrayOfResponseDescriptorsContainOnlyEntityMappings(NSArray *response
 
 @dynamic willMapDeserializedResponseBlock;
 @synthesize canSkipMapping = _canSkipMapping;
+@synthesize error = _error;
+
 
 // Designated initializer
 - (id)initWithHTTPRequestOperation:(RKHTTPRequestOperation *)requestOperation responseDescriptors:(NSArray *)responseDescriptors
