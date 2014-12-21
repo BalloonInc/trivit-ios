@@ -11,9 +11,6 @@
 #import "TutMasterViewController.h"
 #import <CoreData/CoreData.h>
 #import <NewRelicAgent/NewRelic.h>
-#import <RestKit/RestKit.h>
-#import "Feedback.h"
-#import "FeedbackManager.h"
 
 @interface AppDelegate ()
 
@@ -47,12 +44,7 @@
     
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
-    
-    
-    NSString * iOSVersion = [[UIDevice currentDevice] systemVersion];
-    NSString * modelDevice = [[UIDevice currentDevice] model];
-    [[FeedbackManager alloc] FeedbackWithMessage:@"This is an awesome app" rating:5 software:iOSVersion device:modelDevice];
-    
+
     return YES;
 }
 
