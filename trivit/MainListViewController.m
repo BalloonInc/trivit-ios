@@ -64,7 +64,7 @@ int const OUTSIDE_TAP = 3;
 
 -(IBAction) addButtonPressed
 {
-    if(self.keyboardShown){
+    if(self.keyboardShown||self.trivitRecentlyAdded){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add",@"messagebox title")
                                                         message:
                                NSLocalizedString(@"Please finish editing the title first", @"messagebox text, adding a trivit not possible since you are editing the title of another trivit")
@@ -77,6 +77,8 @@ int const OUTSIDE_TAP = 3;
     
     // add consequent identifier to tallies
     [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)self.trivitCount]];
+    self.trivitRecentlyAdded=true;
+    [self performSelector:@selector(setTrivitRecentlyAdded:) withObject:false afterDelay:0.5];
     
     // decide on delay: if there are not enough cells to fill the view, add a 0.1 seconds delay
     // (this is to make sure editTrivitTitleAtIndexPath always works when adding a trivit)
@@ -151,7 +153,7 @@ int const OUTSIDE_TAP = 3;
 -(void) handleTallyReset: (UIGestureRecognizer *)tapRecognizer
 {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown)
+    if (self.keyboardShown||self.trivitRecentlyAdded)
         return;
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:tapRecognizer];
     if(tappedViewIdentifier!=OUTSIDE_TAP){
@@ -219,7 +221,7 @@ int const OUTSIDE_TAP = 3;
 -(void) handleTallyDecrease: (UIGestureRecognizer *)tapRecognizer
 {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown)
+    if (self.keyboardShown||self.trivitRecentlyAdded)
         return;
     
     CGPoint swipeLocation = [tapRecognizer locationInView:self.tableView];
@@ -288,7 +290,7 @@ int const OUTSIDE_TAP = 3;
 -(void)handleTap: (UIGestureRecognizer *)singletapRecognizer
 {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown)
+    if (self.keyboardShown|self.trivitRecentlyAdded)
         return;
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:singletapRecognizer];
@@ -665,6 +667,7 @@ int const OUTSIDE_TAP = 3;
     
     //keyboard is no longer shown
     self.keyboardShown=false;
+    self.trivitRecentlyAdded=false;
 }
 
 // Do not hide status bar

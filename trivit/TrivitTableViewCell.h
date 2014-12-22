@@ -41,8 +41,8 @@ extern NSString const *TALLY_TYPE;
 @property (weak, nonatomic) UIView *parentView;
 
 
-- (void)decreaseTallyCounter;
-- (void)increaseTallyCounter;
+- (void) decreaseTallyCounter;
+- (void) increaseTallyCounter;
 - (void) showTalliesWithDelay;
 
 @end
