@@ -175,16 +175,14 @@ float const COUNTLABEL_WIDTH = 40.;
     
     
     [self configureCountLabelWithInteger:(int)self.tally.counter forCollapsedTrivit:self.isCollapsed];
-    if (self.isCollapsed)
+    if (self.isCollapsed){
         [self.images removeFromSuperview];
-    
+        self.backgroundColor=self.cellBackColor;
+    }
     else{
+        self.backgroundColor=self.cellBackColorDark;
         CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
-
-        UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
-        [[self cellBackColorDark] setFill];
-        [recta2 fill];
-         
+        
         UIBezierPath *trianglePath = [UIBezierPath bezierPath];
         [trianglePath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
         [trianglePath addLineToPoint:CGPointMake(20.0, 10.0+CELL_HEIGHT_SECTION1)];
