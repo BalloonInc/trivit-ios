@@ -145,11 +145,6 @@ float const COUNTLABEL_WIDTH = 40.;
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField])
     {
-        CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
-
-        UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
-        [[self cellBackColorDark] setFill];
-        [recta2 fill];
         
         CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width-70, CELL_HEIGHT_SECTION1);
         self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
@@ -164,7 +159,6 @@ float const COUNTLABEL_WIDTH = 40.;
         self.titleTextField.gestureRecognizers = nil;
         
         [self addSubview: self.titleTextField];
-        //[self insertSubview:self.titleTextField aboveSubview:self.backgroundViewForTitle];
     }
     // update title
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -175,13 +169,17 @@ float const COUNTLABEL_WIDTH = 40.;
     
     
     [self configureCountLabelWithInteger:(int)self.tally.counter forCollapsedTrivit:self.isCollapsed];
-    if (self.isCollapsed){
+    self.backgroundColor=self.cellBackColorDark;
+
+    if (self.isCollapsed)
         [self.images removeFromSuperview];
-        self.backgroundColor=self.cellBackColor;
-    }
+    
     else{
-        self.backgroundColor=self.cellBackColorDark;
         CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height-CELL_HEIGHT_SECTION1);
+        UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
+        [[self cellBackColorDark] setFill];
+        [recta2 fill];
+
         
         UIBezierPath *trianglePath = [UIBezierPath bezierPath];
         [trianglePath moveToPoint:CGPointMake(10.0, 0.0+CELL_HEIGHT_SECTION1)];
