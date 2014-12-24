@@ -14,6 +14,8 @@
     @property (nonatomic, strong) NSString* deviceIdentifier;
     @property (nonatomic, strong) NSString* softwareIdentifier;
     @property (nonatomic) NSInteger scaleValue;
+    @property (nonatomic, strong) NSString* name;
+    @property (nonatomic, strong) NSString* email;
 
 +(RKObjectMapping*)defineLoginRequestMapping;
 

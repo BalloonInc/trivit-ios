@@ -100,7 +100,7 @@ int const SENDBUTTON = 1;
 {
     NSString * iOSVersion = [[UIDevice currentDevice] systemVersion];
     NSString * modelDevice = [[UIDevice currentDevice] model];
-    [[FeedbackManager alloc] FeedbackWithMessage:self.feedbackDetail.text rating:self.score software:iOSVersion device:modelDevice];
+    [[FeedbackManager alloc] FeedbackWithMessage:self.feedbackDetail.text rating:self.score software:iOSVersion device:modelDevice name:self.nameField.text email:self.emailField.text];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

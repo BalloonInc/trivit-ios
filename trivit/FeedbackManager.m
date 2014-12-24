@@ -14,14 +14,16 @@
 
 @implementation FeedbackManager
 
--(void)FeedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device {
+-(void)FeedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device name:(NSString *)name email:(NSString *)email {
     
     Feedback *dataObject = [[Feedback alloc] init];
     [dataObject setFeedbackMessage:message];
     [dataObject setScaleValue:rating];
     [dataObject setSoftwareIdentifier:software];
     [dataObject setDeviceIdentifier:device];
-    
+    [dataObject setName:name];
+    [dataObject setEmail:email];
+
     NSURL *baseURL = [NSURL URLWithString:@"http://ballooninc.be/api/"];
     
     AFHTTPClient * client = [AFHTTPClient clientWithBaseURL:baseURL];

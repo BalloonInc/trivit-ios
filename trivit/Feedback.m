@@ -24,6 +24,8 @@
                                                   @"deviceIdentifier":   @"deviceIdentifier",
                                                   @"softwareIdentifier":   @"softwareIdentifier",
                                                   @"scaleValue":   @"scaleValue",
+                                                  @"name":   @"name",
+                                                  @"email":   @"email"
                                                   }];
     return mapping;
 }
