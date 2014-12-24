@@ -122,7 +122,7 @@ int const SENDBUTTON = 1;
     
     NSString *imageName;
     for (UIButton* button in buttons) {
-        imageName = [NSString stringWithFormat:@"score_%@_%d",(score==button.tag)?@"sel":@"nosel",button.tag];
+        imageName = [NSString stringWithFormat:@"score_%@_%ld",(score==button.tag)?@"sel":@"nosel",(long)button.tag];
         [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     self.feedBackLabel.text = self.feedbackTexts[score];

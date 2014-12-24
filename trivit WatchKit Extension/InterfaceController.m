@@ -19,8 +19,8 @@
 @implementation InterfaceController
 #pragma mark - Initialization
 
-- (instancetype)initWithContext:(id)context {
-    self = [super initWithContext:context];
+- (instancetype)init {
+    self = [super init];
     
     if (self) {
         //NSAssert([context isKindOfClass:[AAPLListInfo class]], @"Expected class of `context` is AAPLListInfo.");
