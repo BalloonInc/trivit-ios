@@ -8,7 +8,7 @@
 
 #import "MainListViewController.h"
 #import "TrivitTableViewCell.h"
-#import "settingsViewController.h"
+#import "SettingsViewController.h"
 #import "Colors.h"
 #import <CoreData/CoreData.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -598,9 +598,9 @@ int const OUTSIDE_TAP = 3;
     self.cellBeingEdited = nil;
     if ([segue.identifier isEqualToString:@"ShowSettingsForTrivit"])
     {
-        if ([segue.destinationViewController isKindOfClass:[settingsViewController class]])
+        if ([segue.destinationViewController isKindOfClass:[SettingsViewController class]])
         {
-            settingsViewController *svc = (settingsViewController *) segue.destinationViewController;
+            SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
             svc.appSettings = self.appSettings;
             [svc setManagedObjectContext:self.managedObjectContext];
         }

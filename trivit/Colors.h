@@ -18,6 +18,8 @@
 +(NSArray*) flatDesignColorsLight;
 +(NSArray*) flatDesignColorsDark;
 
++(NSArray*) colorSetNames;
+
 //takes as input a hex formatted color and returns UIColor
 +(UIColor*) colorWithHexString:(NSString*)hex;
 //returns random color using default colorset;

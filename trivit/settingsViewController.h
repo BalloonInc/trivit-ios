@@ -10,7 +10,7 @@
 #import "Settings.h"
 #import <CoreData/CoreData.h>
 
-@interface settingsViewController : UITableViewController
+@interface SettingsViewController : UICollectionViewController
 @property (strong, nonatomic) Settings *appSettings;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

@@ -6,18 +6,28 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "settingsViewController.h"
+#import "SettingsViewController.h"
 #import "TallyModel.h"
+#import "SettingButtonCell.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "Colors.h"
 
-@interface settingsViewController () <UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UISegmentedControl *colorPicker;
-@property (weak, nonatomic) IBOutlet UISwitch *vibrationSwitch;
-@property (weak, nonatomic) IBOutlet UIButton *invisibleSwitchButton;
+@interface SettingsViewController () <UIAlertViewDelegate>
 @property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
 @property (strong,nonatomic, readonly) NSString *sureToResetTitle;
+
 @end
 
-@implementation settingsViewController
+@implementation SettingsViewController
+
+#pragma mark - Constants
+int const REMOVECELL = 0;
+int const COLORCELL = 1;
+int const TUTORIALCELL = 2;
+int const RESETCELL = 3;
+int const HELPCELL = 4;
+int const VIBRATIONCELL = 5;
+int const NUMBEROFCELLS = 6;
 
 #pragma mark - Lazy instantiators
 
@@ -29,49 +39,65 @@
     return NSLocalizedString(@"Reset all Trivits", @"Message box title");
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (NSString *) vibrationString:(BOOL)on{
+    NSString *yesOrNo = on?NSLocalizedString(@"On", @"Setting: on"):NSLocalizedString(@"Off", @"Setting: off");
+    ;
+    return [NSString stringWithFormat:NSLocalizedString(@"Vibration - %@", @"label for vibration setting"),yesOrNo];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    self.colorPicker.selectedSegmentIndex = self.appSettings.selectedColorSet;
-    self.vibrationSwitch.on = self.appSettings.vibrationFeedback;
-    
-    [super viewWillAppear:animated];
-    [self.colorPicker addTarget:self
-                         action:@selector(updateColorSet:)
-               forControlEvents:UIControlEventValueChanged];
-    [self.vibrationSwitch addTarget:self
-                         action:@selector(vibrationChanged:)
-               forControlEvents:UIControlEventValueChanged];
+- (NSString *) colorStringforIndex:(int)index{
+    NSString *color = [[Colors colorSetNames] objectAtIndex:index];
+    ;
+    return [NSString stringWithFormat:NSLocalizedString(@"Color - %@", @"label for vibration setting"),color];
 }
 
 -(void) viewWillDisappear:(BOOL)animated
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setObject:[NSNumber numberWithBool:self.vibrationSwitch.isOn] forKey:@"vibrationFeedback"];
-    [defaults setObject:[NSNumber numberWithInteger:self.colorPicker.selectedSegmentIndex] forKey:@"selectedColorSet"];
+    [defaults setObject:[NSNumber numberWithBool:self.appSettings.vibrationFeedback] forKey:@"vibrationFeedback"];
+    [defaults setObject:[NSNumber numberWithInteger:self.appSettings.selectedColorSet] forKey:@"selectedColorSet"];
     
     [defaults synchronize];
 }
-
-- (void)updateColorSet:(id)sender
+- (IBAction)toggleColorSet:(id)sender
 {
-    self.appSettings.selectedColorSet=self.colorPicker.selectedSegmentIndex;
+    self.appSettings.selectedColorSet=(self.appSettings.selectedColorSet+1)%[[Colors colorSetNames] count];
+    
+    [self updateBackgroundColor];
+    [self.collectionView reloadData];
 }
 
-- (IBAction)invisibleSwitchButtonPressed:(id)sender {
-    bool newState = !self.vibrationSwitch.isOn;
-    [self.vibrationSwitch setOn:newState animated:YES];
-    self.appSettings.vibrationFeedback = newState;
+-(void) updateBackgroundColor
+{
+    self.collectionView.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet]];
+}
+
+-(void) viewDidLoad
+{
+    [super viewDidLoad];
+    [self updateBackgroundColor];
+}
+
+- (IBAction)vibrationButtonPressed:(id)sender {
+    self.appSettings.vibrationFeedback = !self.appSettings.vibrationFeedback;
+    if(self.appSettings.vibrationFeedback){
+        NSMutableArray* arr = [NSMutableArray arrayWithObjects:
+                               [NSNumber numberWithBool:YES],
+                               [NSNumber numberWithInt:500], nil];
+        
+        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              arr,@"VibePattern",
+                              [NSNumber numberWithFloat:1.],@"Intensity",nil];
+        
+        //declare function before usage
+        int AudioServicesPlaySystemSoundWithVibration();
+        
+        AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
+        
+    }
+
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:VIBRATIONCELL inSection:0]]];
 }
 
 - (IBAction)deleteAllTrivits:(id)sender {
@@ -122,28 +148,34 @@
     }
 }
 
-- (void)vibrationChanged:(id)sender {
-    self.appSettings.vibrationFeedback = self.vibrationSwitch.isOn;
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return NO;
-}
-- (IBAction)simulateCrash:(id)sender {
-    NSArray *crashArray = [[NSArray alloc] initWithObjects:@"firstObject", @"secondObject",nil];
-    // log a non existing object
-    NSLog(@"%@",[crashArray objectAtIndex:2]);
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return NUMBEROFCELLS;
+}
+
+
+- (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%d",indexPath.item+1] forIndexPath:indexPath];
     
-    NSInteger numberOfSections = [super numberOfSectionsInTableView: tableView];     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![[defaults objectForKey:@"DevDevice"] boolValue])
-        numberOfSections--;
-    return numberOfSections;
+    // Configure the cell'
+
+    cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
+
+    
+    if(indexPath.item ==COLORCELL)
+        cell.buttonText = [self colorStringforIndex:self.appSettings.selectedColorSet];
+    
+    if (indexPath.item==VIBRATIONCELL)
+        cell.buttonText = [self vibrationString:self.appSettings.vibrationFeedback];
+    
+    
+    return cell;
 }
+
+
 
 @end
