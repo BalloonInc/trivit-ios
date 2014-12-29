@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6738" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6746" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Feedback" representedClassName="Feedback" syncable="YES">
+        <attribute name="deviceIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="feedbackMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scaleValue" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="softwareIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="TallyModel" representedClassName="TallyModel" syncable="YES">
         <attribute name="color" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="counter" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -9,6 +17,7 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TallyModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TallyModel" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Feedback" positionX="0" positionY="45" width="128" height="135"/>
     </elements>
 </model>

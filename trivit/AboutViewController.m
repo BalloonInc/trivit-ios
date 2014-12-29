@@ -98,9 +98,17 @@ int const SENDBUTTON = 1;
 
 - (void) sendFeedback
 {
-    NSString * iOSVersion = [[UIDevice currentDevice] systemVersion];
-    NSString * modelDevice = [[UIDevice currentDevice] model];
-    [[FeedbackManager alloc] FeedbackWithMessage:self.feedbackDetail.text rating:self.score software:iOSVersion device:modelDevice name:self.nameField.text email:self.emailField.text];
+    Feedback_old *dataObject = [[Feedback_old alloc] init];
+    [dataObject setFeedbackMessage:self.feedbackDetail.text];
+    [dataObject setScaleValue:self.score];
+    [dataObject setSoftwareIdentifier:[[UIDevice currentDevice] systemVersion]];
+    [dataObject setDeviceIdentifier:[[UIDevice currentDevice] model]];
+    [dataObject setName:self.nameField.text];
+    [dataObject setEmail:self.emailField.text];
+    
+    
+
+    [[FeedbackManager alloc] feedbackWithObject:dataObject];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

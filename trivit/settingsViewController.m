@@ -157,11 +157,11 @@ int const NUMBEROFCELLS = 6;
     return NUMBEROFCELLS;
 }
 
-
+ 
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%d",indexPath.item+1] forIndexPath:indexPath];
     
-    // Configure the cell'
+    // Configure the cell
 
     cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
 

@@ -43,7 +43,7 @@
 		6CE4BBEF1A1D609D005E9BCD /* trivit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */; };
-		ECE857911A375A2B003C9612 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE857901A375A2B003C9612 /* Feedback.m */; };
+		ECE857911A375A2B003C9612 /* Feedback_old.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE857901A375A2B003C9612 /* Feedback_old.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,8 +160,8 @@
 		C1E1D957F7A3337F9AB4C252 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
 		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
-		ECE8578F1A375A2B003C9612 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
-		ECE857901A375A2B003C9612 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
+		ECE8578F1A375A2B003C9612 /* Feedback_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback_old.h; sourceTree = "<group>"; };
+		ECE857901A375A2B003C9612 /* Feedback_old.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback_old.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,8 +385,8 @@
 				6C9025BA1984588300BB11FC /* Settings.h */,
 				6C9025BB1984588300BB11FC /* Settings.m */,
 				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
-				ECE8578F1A375A2B003C9612 /* Feedback.h */,
-				ECE857901A375A2B003C9612 /* Feedback.m */,
+				ECE8578F1A375A2B003C9612 /* Feedback_old.h */,
+				ECE857901A375A2B003C9612 /* Feedback_old.m */,
 				EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */,
 				EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */,
 			);
@@ -625,7 +625,7 @@
 				6C98EEB01A4771A500E12E25 /* AboutViewController.m in Sources */,
 				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
 				6C7CE6361A4F6889004EE27D /* SettingButtonCell.m in Sources */,
-				ECE857911A375A2B003C9612 /* Feedback.m in Sources */,
+				ECE857911A375A2B003C9612 /* Feedback_old.m in Sources */,
 				6C9025BF198458A500BB11FC /* SettingsViewController.m in Sources */,
 				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
 				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,

@@ -8,16 +8,11 @@
 
 #import "Feedback.h"
 
-@implementation Feedback
-
-@synthesize feedbackMessage;
-@synthesize deviceIdentifier;
-@synthesize softwareIdentifier;
-@synthesize scaleValue;
+@implementation Feedback (Mapping)
 
 +(RKObjectMapping*)defineLoginRequestMapping {
     
-    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[Feedback class]];
+    RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[Feedback_old class]];
     
     [mapping addAttributeMappingsFromDictionary:@{
                                                   @"feedbackMessage":   @"feedbackMessage",
