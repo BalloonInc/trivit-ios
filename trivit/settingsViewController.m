@@ -17,17 +17,18 @@
 @interface SettingsViewController () <UIAlertViewDelegate>
 @property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
 @property (strong,nonatomic, readonly) NSString *sureToResetTitle;
+@property (nonatomic) int cellHeight;
 
 @end
 
 @implementation SettingsViewController
 
 #pragma mark - Constants
-int const REMOVECELL = 0;
+int const TRASHCELL = 0;
 int const COLORCELL = 1;
 int const TUTORIALCELL = 2;
 int const RESETCELL = 3;
-int const HELPCELL = 4;
+int const FEEDBACKCELL = 4;
 int const VIBRATIONCELL = 5;
 int const NUMBEROFCELLS = 6;
 
@@ -47,7 +48,7 @@ int const NUMBEROFCELLS = 6;
     return [NSString stringWithFormat:NSLocalizedString(@"Vibration - %@", @"label for vibration setting"),yesOrNo];
 }
 
-- (NSString *) colorStringforIndex:(int)index{
+- (NSString *) colorStringforIndex:(NSInteger)index{
     NSString *color = [[Colors colorSetNames] objectAtIndex:index];
     ;
     return [NSString stringWithFormat:NSLocalizedString(@"Color - %@", @"label for vibration setting"),color];
@@ -79,6 +80,13 @@ int const NUMBEROFCELLS = 6;
 {
     [super viewDidLoad];
     [self updateBackgroundColor];
+    // subscribe to device rotation
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+    [self orientationChanged:nil];
+
 }
 
 - (IBAction)vibrationButtonPressed:(id)sender {
@@ -161,28 +169,32 @@ int const NUMBEROFCELLS = 6;
 
  
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%d",indexPath.item+1] forIndexPath:indexPath];
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%ld",indexPath.item+1] forIndexPath:indexPath];
     
     // Configure the cell
 
     cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
-    UIImage *test;
+
     switch (indexPath.item) {
-        case REMOVECELL:
+        case TRASHCELL:
+            cell.buttonImage = [SettingsIcons imageOfTrash];
             break;
         case COLORCELL:
+            cell.buttonImage = [SettingsIcons imageOfColor];
             cell.buttonText = [self colorStringforIndex:self.appSettings.selectedColorSet];
             break;
         case TUTORIALCELL:
-            test = [SettingsIcons imageWithImage:[SettingsIcons imageOfCanvas2] scaledToSize:cell.frame];
-            cell.buttonImage = test;
+            cell.buttonImage = [SettingsIcons imageOfTutorial];
             break;
         case RESETCELL:
+            cell.buttonImage = [SettingsIcons imageOfReset];
             break;
-        case HELPCELL:
+        case FEEDBACKCELL:
+            cell.buttonImage = [SettingsIcons imageOfFeedback];
             break;
         case VIBRATIONCELL:
             cell.buttonText = [self vibrationString:self.appSettings.vibrationFeedback];
+            cell.buttonImage = [SettingsIcons imageOfVibrate];
             break;
         default:
             break;
@@ -194,6 +206,8 @@ int const NUMBEROFCELLS = 6;
     
     return cell;
 }
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -207,5 +221,17 @@ int const NUMBEROFCELLS = 6;
     }
 }
 
+-(void) orientationChanged: (NSNotification *)notification
+{
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        self.cellHeight = 136;
+    }
+    
+    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
+        self.cellHeight = 120;
+    }
+}
 
 @end
