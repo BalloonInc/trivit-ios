@@ -14,6 +14,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "AppDelegate.h"
 #import "TallyModel.h"
+#import "FeedbackManager.h"
 
 @interface MainListViewController ()<NSFetchedResultsControllerDelegate,UIAlertViewDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -575,8 +576,37 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    
 }
 
+-(void) resendUnsentFeedback{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Feedback"];
+
+    // Add Sort Descriptors
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"scaleValue" ascending:YES]]];
+    
+    // Initialize Fetched Results Controller
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    // Configure Fetched Results Controller
+    [fetchedResultsController setDelegate:self];
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [fetchedResultsController performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+        return;
+    }
+    
+    for (Feedback *f in [fetchedResultsController fetchedObjects]) {
+        [[FeedbackManager alloc] feedbackWithObject:f managedObjectContext:self.managedObjectContext];
+
+    }
+
+}
 - (void) configureTableView{
     // add gestures
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -613,6 +643,7 @@ int const OUTSIDE_TAP = 3;
     // TODO: check if appSettings.selectedColorSet has changed and only refresh if it is true
     // we should make a NSNumber number with boolean and pass it in the prepareforsegue (nsnumber is passed by reference)
     [self.tableView reloadData];
+    [self resendUnsentFeedback];
     [super viewWillAppear:animated];
 }
 

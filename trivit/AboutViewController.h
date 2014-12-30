@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AboutViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

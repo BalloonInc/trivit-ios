@@ -11,6 +11,8 @@
 #import "SettingButtonCell.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "Colors.h"
+#import "AboutViewController.h"
+#import "SettingsIcons.h"
 
 @interface SettingsViewController () <UIAlertViewDelegate>
 @property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
@@ -164,18 +166,46 @@ int const NUMBEROFCELLS = 6;
     // Configure the cell
 
     cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
+    UIImage *test;
+    switch (indexPath.item) {
+        case REMOVECELL:
+            break;
+        case COLORCELL:
+            cell.buttonText = [self colorStringforIndex:self.appSettings.selectedColorSet];
+            break;
+        case TUTORIALCELL:
+            test = [SettingsIcons imageWithImage:[SettingsIcons imageOfCanvas2] scaledToSize:cell.frame];
+            cell.buttonImage = test;
+            break;
+        case RESETCELL:
+            break;
+        case HELPCELL:
+            break;
+        case VIBRATIONCELL:
+            cell.buttonText = [self vibrationString:self.appSettings.vibrationFeedback];
+            break;
+        default:
+            break;
+    }
+    [cell setImageAlpha:0.5];
+    
+    
 
-    
-    if(indexPath.item ==COLORCELL)
-        cell.buttonText = [self colorStringforIndex:self.appSettings.selectedColorSet];
-    
-    if (indexPath.item==VIBRATIONCELL)
-        cell.buttonText = [self vibrationString:self.appSettings.vibrationFeedback];
-    
     
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowFeedbackScreen"])
+    {
+        if ([segue.destinationViewController isKindOfClass:[AboutViewController class]])
+        {
+            SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
+            [svc setManagedObjectContext:self.managedObjectContext];
+        }
+    }
+}
 
 
 @end

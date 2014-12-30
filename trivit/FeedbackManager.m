@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Feedback_old.h"
 #import "FeedbackManager.h"
 #import "RKMIMETypeSerialization.h"
 #import "RKNSJSONSerialization.h"
@@ -16,66 +15,56 @@
 
 @implementation FeedbackManager
 
--(void)feedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device name:(NSString *)name email:(NSString *)email {
+-(void)feedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device name:(NSString *)name email:(NSString *)email managedObjectContext:(NSManagedObjectContext *)managedObjectContext{
     
-    Feedback_old *dataObject = [[Feedback_old alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:managedObjectContext];
+    
+    // Initialize Record
+    Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     [dataObject setFeedbackMessage:message];
-    [dataObject setScaleValue:rating];
+    [dataObject setScaleValue:[NSNumber numberWithInt:rating]];
     [dataObject setSoftwareIdentifier:software];
     [dataObject setDeviceIdentifier:device];
     [dataObject setName:name];
     [dataObject setEmail:email];
 
-    [self feedbackWithObject: dataObject];
+    [self feedbackWithObject: dataObject managedObjectContext:managedObjectContext];
 }
 
 
--(void)feedbackWithObject:(Feedback_old *) dataObject {
+-(void)feedbackWithObject:(Feedback *) dataObject managedObjectContext:(NSManagedObjectContext *)managedObjectContext{
     
     {
     
     [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
     
-    
     NSURL *baseURL = [NSURL URLWithString:@"http://ballooninc.be/api/"];
     
     AFHTTPClient * client = [AFHTTPClient clientWithBaseURL:baseURL];
-    [client setDefaultHeader:@"Accept" value:RKMIMETypeTextXML];
+    [client setDefaultHeader:@"Accept" value:RKMIMETypeJSON];
     
     RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
     
-    RKObjectMapping *requestMapping =  [[Feedback_old defineLoginRequestMapping] inverseMapping];
+    RKObjectMapping *requestMapping =  [[Feedback defineLoginRequestMapping] inverseMapping];
     
-    [objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Feedback_old class] rootKeyPath:nil method:RKRequestMethodAny]];
+    [objectManager addRequestDescriptor:[RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Feedback class] rootKeyPath:nil method:RKRequestMethodAny]];
     // what to print
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("Restkit/Network", RKLogLevelDebug);
     
-    RKObjectMapping *responseMapping = [Feedback_old defineLoginRequestMapping];
+    RKObjectMapping *responseMapping = [Feedback defineLoginRequestMapping];
     
     [objectManager addResponseDescriptor:[RKResponseDescriptor
                                           responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:@"feedback" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)
                                           
                                           ]];
-    
-    [objectManager postObject:dataObject path:@"feedback"
+        [objectManager setRequestSerializationMIMEType:RKMIMETypeJSON];
+        
+        [objectManager postObject:dataObject path:@"feedback"
                    parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                       NSLog(@"It Worked: %@", [mappingResult array]);
+                       [managedObjectContext deleteObject:dataObject];
+                       [managedObjectContext save:nil];
                        
                    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                       NSLog(@"It Failed: %@", error);
-                       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                       
-                       
-                       NSMutableArray *unsentFeedback = [defaults objectForKey:@"unsentFeedback"];
-                       
-                       if(!unsentFeedback)
-                           unsentFeedback = [[NSMutableArray alloc] init];
-                       
-                       [unsentFeedback addObject:dataObject];
-                       ;
-                       [defaults setObject:unsentFeedback forKey:@"unsentFeedback"];
-
+                       [managedObjectContext save:nil];
                    }];
     }
 }

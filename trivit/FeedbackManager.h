@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Feedback_old.h"
+#import "Feedback+Mapping.h"
 #import "RKObjectManager.h"
-#import "FeedbackManager.h"
+#import "Feedback+Mapping.h"
 
 @interface FeedbackManager : NSObject
 
-@property (nonatomic, strong) Feedback_old *dataObject;
+@property (nonatomic, strong) Feedback *dataObject;
 @property (nonatomic, strong) RKObjectManager *objectManager;
 @property (nonatomic, strong) AFHTTPClient * client;
 
--(void)feedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device name:(NSString *)name email:(NSString *)email;
--(void)feedbackWithObject:(Feedback_old *) dataObject;
+-(void)feedbackWithMessage:(NSString *)message rating:(NSInteger)rating software:(NSString * )software device:(NSString *)device name:(NSString *)name email:(NSString *)email managedObjectContext:(NSManagedObjectContext *) managedObjectContext;
+-(void)feedbackWithObject:(Feedback *) dataObject managedObjectContext:(NSManagedObjectContext *) managedObjectContext;
 @end

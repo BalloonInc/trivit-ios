@@ -10,4 +10,8 @@
 
 @interface SettingButtonCell : UICollectionViewCell
 @property (strong, nonatomic) NSString * buttonText;
+@property (strong, nonatomic) UIImage* buttonImage;
+
+-(void) setImageAlpha:(float) alpha;
+
 @end

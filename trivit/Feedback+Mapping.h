@@ -1,16 +1,15 @@
 //
-//  Feedback.h
+//  Feedback+Mapping.h
 //  trivit
 //
-//  Created by Pieterjan Criel on 9/12/14.
+//  Created by Wouter Devriendt on 29/12/14.
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Feedback.h"
 #import "RKObjectMapping.h"
 
 @interface Feedback (Mapping)
-
 +(RKObjectMapping*)defineLoginRequestMapping;
 
 @end

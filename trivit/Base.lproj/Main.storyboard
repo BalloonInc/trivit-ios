@@ -173,6 +173,7 @@
                                 <color key="backgroundColor" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="5Do-sB-vao" id="hZs-BT-U3G"/>
                                     <outlet property="cellLabel" destination="yln-wJ-3Cw" id="9nJ-N3-clo"/>
                                 </connections>
                             </collectionViewCell>
@@ -205,6 +206,7 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="uIa-SN-Rif" id="Sfj-QD-4v2"/>
                                     <outlet property="cellLabel" destination="bqM-wM-ulW" id="Rcc-sa-Hg7"/>
                                 </connections>
                             </collectionViewCell>
@@ -237,6 +239,7 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="rlN-Uj-KWj" id="rrU-ep-471"/>
                                     <outlet property="cellLabel" destination="Txb-zc-zGA" id="hUZ-2f-WN4"/>
                                 </connections>
                             </collectionViewCell>
@@ -269,6 +272,7 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="STI-Gs-rfR" id="CeK-7Y-LVF"/>
                                     <outlet property="cellLabel" destination="mzT-GO-pIe" id="T8E-WS-Vqy"/>
                                 </connections>
                             </collectionViewCell>
@@ -286,7 +290,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="iLb-YV-FG3" kind="push" id="cKb-bY-Pde"/>
+                                                <segue destination="iLb-YV-FG3" kind="push" identifier="ShowFeedbackScreen" id="cKb-bY-Pde"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DX-1G-Gff">
@@ -301,6 +305,7 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="pnG-gH-fAp" id="845-90-UI1"/>
                                     <outlet property="cellLabel" destination="8DX-1G-Gff" id="St9-HY-JCG"/>
                                 </connections>
                             </collectionViewCell>
@@ -333,6 +338,7 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
+                                    <outlet property="cellButton" destination="ywH-EQ-CLU" id="9B7-s6-Nrr"/>
                                     <outlet property="cellLabel" destination="Ksw-o9-V7f" id="cMp-n9-6n6"/>
                                 </connections>
                             </collectionViewCell>

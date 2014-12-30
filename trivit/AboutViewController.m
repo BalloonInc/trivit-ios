@@ -98,17 +98,20 @@ int const SENDBUTTON = 1;
 
 - (void) sendFeedback
 {
-    Feedback_old *dataObject = [[Feedback_old alloc] init];
-    [dataObject setFeedbackMessage:self.feedbackDetail.text];
-    [dataObject setScaleValue:self.score];
-    [dataObject setSoftwareIdentifier:[[UIDevice currentDevice] systemVersion]];
-    [dataObject setDeviceIdentifier:[[UIDevice currentDevice] model]];
-    [dataObject setName:self.nameField.text];
-    [dataObject setEmail:self.emailField.text];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:self.managedObjectContext];
+    
+    // Initialize Record
+    Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+    dataObject.FeedbackMessage = self.feedbackDetail.text;
+    dataObject.ScaleValue =[NSNumber numberWithInt:self.score];
+    dataObject.SoftwareIdentifier =[[UIDevice currentDevice] systemVersion];
+    dataObject.DeviceIdentifier =UIDevice.currentDevice.model;
+    dataObject.Name =self.nameField.text;
+    dataObject.Email =self.emailField.text;
     
     
 
-    [[FeedbackManager alloc] feedbackWithObject:dataObject];
+    [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:self.managedObjectContext];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
