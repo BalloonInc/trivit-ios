@@ -227,9 +227,7 @@ int const NUMBEROFCELLS = 6;
     // Configure the cell
 
     cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
-    NSLog(@"This is cell index: %d",indexPath.item);
     cell.buttonID = [self cellTypeForIndex:indexPath.item];
-    NSLog(@"we give a tag: %d",cell.buttonID);
 
     switch (cell.buttonID) {
         case TRASHCELL:
@@ -304,8 +302,16 @@ int const NUMBEROFCELLS = 6;
     if (UIInterfaceOrientationIsLandscape(self.currentOrientation))
         self.cellHeight = 128;
     
-    if (UIInterfaceOrientationIsPortrait(self.currentOrientation))
-        self.cellHeight = 136;
+    NSLog(@"screen height: %f",[[UIScreen mainScreen] bounds].size.height);
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)){
+        if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone &&
+           MAX([[UIScreen mainScreen] bounds].size.height,[[UIScreen mainScreen] bounds].size.width) < 567.9f)
+            // for iPhone 4S, smaller tiles in portrait
+            self.cellHeight = 124;
+        else
+            self.cellHeight = 136;
+
+    }
     
     self.cellWidth = 136;
     self.spacing = 10;
