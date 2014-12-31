@@ -16,7 +16,8 @@
 
 @implementation SettingButtonCell
 
--(void) setButtonText:(NSString *)buttonText{
+-(void) setButtonText:(NSString *)buttonText
+{
     _buttonText = buttonText;
     self.cellLabel.text = buttonText;
 }
@@ -28,9 +29,17 @@
     [self.cellButton setImage:buttonImage forState:UIControlStateNormal];
 }
 
--(void) setImageAlpha:(float)alpha
+-(void) setImageAplha:(float)imageAplha
 {
-    self.cellButton.alpha = alpha;
+    _imageAplha = imageAplha;
+    self.cellButton.alpha = imageAplha;
+}
+
+
+-(void) setButtonID:(NSInteger)buttonID
+{
+    _buttonID = buttonID;
+    self.cellButton.tag = buttonID;
 }
 
 @end

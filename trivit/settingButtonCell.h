@@ -11,7 +11,7 @@
 @interface SettingButtonCell : UICollectionViewCell
 @property (strong, nonatomic) NSString * buttonText;
 @property (strong, nonatomic) UIImage* buttonImage;
-
--(void) setImageAlpha:(float) alpha;
+@property (nonatomic) NSInteger buttonID;
+@property (nonatomic) float imageAplha;
 
 @end

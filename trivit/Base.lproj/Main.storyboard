@@ -158,7 +158,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="deleteAllTrivits:" destination="fou-ke-AL6" eventType="touchUpInside" id="EsX-aM-y1n"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="YdN-bU-8FN"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remove all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yln-wJ-3Cw">
@@ -191,7 +191,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="toggleColorSet:" destination="fou-ke-AL6" eventType="touchUpInside" id="4EC-SD-h6M"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="SxF-BX-5Wo"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color - Flat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqM-wM-ulW">
@@ -224,7 +224,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="showTutorial:" destination="fou-ke-AL6" eventType="touchUpInside" id="VEF-zw-Mth"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="XpB-Vb-woU"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show tutorial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txb-zc-zGA">
@@ -257,7 +257,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="resetAllTrivits:" destination="fou-ke-AL6" eventType="touchUpInside" id="YJH-fq-zG1"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="Aud-Ba-wNu"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reset all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzT-GO-pIe">
@@ -290,7 +290,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="iLb-YV-FG3" kind="push" identifier="ShowFeedbackScreen" id="cKb-bY-Pde"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="QLt-Pt-4wq"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Help!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DX-1G-Gff">
@@ -323,7 +323,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="vibrationButtonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="d8t-rK-gTO"/>
+                                                <action selector="buttonPressed:" destination="fou-ke-AL6" eventType="touchUpInside" id="pvC-6k-B2F"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vibration - Off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ksw-o9-V7f">
@@ -349,6 +349,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="JYG-xs-cHp"/>
+                    <connections>
+                        <segue destination="iLb-YV-FG3" kind="push" identifier="ShowFeedbackScreen" id="uID-TY-K2S"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCV-oU-k2L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
