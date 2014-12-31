@@ -576,7 +576,6 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    
 }
 
 -(void) resendUnsentFeedback{
@@ -642,9 +641,9 @@ int const OUTSIDE_TAP = 3;
     // reload data in case the color would have changed
     // TODO: check if appSettings.selectedColorSet has changed and only refresh if it is true
     // we should make a NSNumber number with boolean and pass it in the prepareforsegue (nsnumber is passed by reference)
+    [super viewWillAppear:animated];
     [self.tableView reloadData];
     [self resendUnsentFeedback];
-    [super viewWillAppear:animated];
 }
 
 #pragma mark - view resize on keyboard show

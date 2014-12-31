@@ -45,8 +45,6 @@ static UIImage* _imageOfColor9 = nil;
         CGContextTranslateCTM(context, 2.4, 11.4);
         CGContextScaleCTM(context, 0.5, 0.5);
         
-        
-        
         //// Bezier 2 Drawing
         UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
         [bezier2Path moveToPoint: CGPointMake(96.7, 102.2)];

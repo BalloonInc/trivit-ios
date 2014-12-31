@@ -13,5 +13,5 @@
 @interface SettingsViewController : UICollectionViewController
 @property (strong, nonatomic) Settings *appSettings;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
+ 
 @end

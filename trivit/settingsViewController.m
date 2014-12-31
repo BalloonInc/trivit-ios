@@ -18,7 +18,10 @@
 @property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
 @property (strong,nonatomic, readonly) NSString *sureToResetTitle;
 @property (nonatomic) int cellHeight;
+@property (nonatomic) int cellWidth;
+@property (nonatomic) int spacing;
 
+@property (nonatomic) UIDeviceOrientation currentOrientation;
 @end
 
 @implementation SettingsViewController
@@ -33,6 +36,17 @@ int const VIBRATIONCELL = 5;
 int const NUMBEROFCELLS = 6;
 
 #pragma mark - Lazy instantiators
+
+-(int) cellTypeAtIndex: (int) index{
+    if(UIInterfaceOrientationIsPortrait(self.currentOrientation))
+        return index;
+    else if (self.currentOrientation == UIInterfaceOrientationLandscapeLeft)
+        return 0;
+    else if(self.currentOrientation == UIInterfaceOrientationLandscapeRight)
+        return 0;
+    else // error!
+        return -1;
+}
 
 -(NSString*) sureToDeleteTitle{
     return NSLocalizedString(@"Delete all Trivits",@"Message box title");
@@ -62,6 +76,7 @@ int const NUMBEROFCELLS = 6;
     [defaults setObject:[NSNumber numberWithInteger:self.appSettings.selectedColorSet] forKey:@"selectedColorSet"];
     
     [defaults synchronize];
+    [super viewWillDisappear:animated];
 }
 - (IBAction)toggleColorSet:(id)sender
 {
@@ -82,10 +97,10 @@ int const NUMBEROFCELLS = 6;
     [self updateBackgroundColor];
     // subscribe to device rotation
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(orientationChanged:)
+                                             selector:@selector(redoLayout:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    [self orientationChanged:nil];
+    [self redoLayout:nil];
 
 }
 
@@ -169,7 +184,7 @@ int const NUMBEROFCELLS = 6;
 
  
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%ld",indexPath.item+1] forIndexPath:indexPath];
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%d",indexPath.item+1] forIndexPath:indexPath];
     
     // Configure the cell
 
@@ -199,14 +214,24 @@ int const NUMBEROFCELLS = 6;
         default:
             break;
     }
-    [cell setImageAlpha:0.5];
-    
-    
-
     
     return cell;
 }
 
+#pragma mark Collection view layout things
+// Layout: Set cell size
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGSize mElementSize = CGSizeMake(self.cellWidth,self.cellHeight);
+    return mElementSize;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return self.spacing;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return self.spacing;
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -221,16 +246,27 @@ int const NUMBEROFCELLS = 6;
     }
 }
 
--(void) orientationChanged: (NSNotification *)notification
+-(void) redoLayout: (NSNotification *)notification
 {
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-        self.cellHeight = 136;
-    }
+    self.currentOrientation = [[UIDevice currentDevice] orientation];
+    UIInterfaceOrientation cachedOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
-    if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-    {
+    if (!UIInterfaceOrientationIsLandscape(self.currentOrientation) && !UIInterfaceOrientationIsPortrait(self.currentOrientation))
+        self.currentOrientation = (UIDeviceOrientation)cachedOrientation;
+    
+    if (UIInterfaceOrientationIsLandscape(self.currentOrientation))
         self.cellHeight = 120;
+    
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation))
+        self.cellHeight = 136;
+    
+    NSLog(@"Orientation: %d",self.currentOrientation);
+    NSLog(@"Landscape left: %d",UIDeviceOrientationLandscapeLeft);
+    self.cellWidth = 136;
+    self.spacing = 10;
+    
+    if(notification){
+        [self.collectionView.collectionViewLayout invalidateLayout];
     }
 }
 
