@@ -131,11 +131,9 @@ int const SENDBUTTON = 1;
     // Array with all buttons
     NSArray *buttons = @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton];
     
-    NSString *imageName;
-    for (UIButton* button in buttons) {
-        imageName = [NSString stringWithFormat:@"score_%@_%ld",(score==button.tag)?@"sel":@"nosel",(long)button.tag];
-        [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    }
+    for (UIButton* button in buttons)
+        button.imageView.alpha=(score==button.tag)?1.:.5;
+    
     self.feedBackLabel.text = self.feedbackTexts[score];
     self.feedBackLabel.textColor=(score>0)?[UIColor darkGrayColor]:[UIColor blackColor];
 }

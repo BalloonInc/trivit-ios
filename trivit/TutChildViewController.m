@@ -22,6 +22,7 @@
     
     self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
     [self.tutorialImage setContentMode:UIViewContentModeScaleAspectFit];
+    self.view.backgroundColor = [UIColor colorWithRed:76./256 green:170./256 blue:138./256 alpha:1];
 
     switch (self.index) {
         case 0:

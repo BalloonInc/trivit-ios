@@ -21,7 +21,7 @@
     [super viewDidLoad];
     //set number of pages in the tutorial
     self.numberOfPages=6;
-    
+
     self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.dataSource=self;
     [[self view] setFrame:[[self view] bounds]];
