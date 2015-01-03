@@ -21,7 +21,8 @@
     [super viewDidLoad];
     
     self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
-    
+    [self.tutorialImage setContentMode:UIViewContentModeScaleAspectFit];
+
     switch (self.index) {
         case 0:
             self.tutorialText = NSLocalizedString(@"Tap the pen to add a new trivit", @"tutorial");
