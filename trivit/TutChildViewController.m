@@ -33,6 +33,12 @@
             self.tutorialText = NSLocalizedString(@"Swipe left to remove", @"tutorial");
             break;
         case 3:
+            self.tutorialText = NSLocalizedString(@"Swipe left to remove", @"tutorial");
+            break;
+        case 4:
+            self.tutorialText = NSLocalizedString(@"Swipe left to remove", @"tutorial");
+            break;
+        case 5:
             self.tutorialText = @"";
             // last page: show done button
             self.getStartedButton.hidden = false;

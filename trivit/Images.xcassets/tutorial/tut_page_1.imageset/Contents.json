@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "tut_page_2@1x.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "tut_page_2@2x.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "tut_page_2@3x.png"
+      "filename" : "02_focus.png"
     }
   ],
   "info" : {
