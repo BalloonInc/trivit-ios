@@ -11,7 +11,7 @@
 #import "SettingButtonCell.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "Colors.h"
-#import "AboutViewController.h"
+#import "FeedbackViewController.h"
 #import "SettingsIcons.h"
 
 @interface SettingsViewController () <UIAlertViewDelegate>
@@ -280,7 +280,7 @@ int const NUMBEROFCELLS = 6;
 {
     if ([segue.identifier isEqualToString:@"ShowFeedbackScreen"])
     {
-        if ([segue.destinationViewController isKindOfClass:[AboutViewController class]])
+        if ([segue.destinationViewController isKindOfClass:[FeedbackViewController class]])
         {
             SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
             [svc setManagedObjectContext:self.managedObjectContext];
