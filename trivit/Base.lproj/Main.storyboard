@@ -373,8 +373,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Visit us: www.trivit.be" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c8x-yf-RaW">
-                                        <rect key="frame" x="16" y="468" width="288" height="28"/>
-                                        <color key="tintColor" red="0.79616113318989223" green="0.79940489945625781" blue="0.80764678030303028" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="16" y="461" width="288" height="28"/>
+                                        <color key="tintColor" red="0.89727044331833339" green="0.90039325231198231" blue="0.90976167929292928" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="3Rx-Si-6Ai"/>
                                         </constraints>
@@ -384,12 +384,12 @@
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="John Smith (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f6g-ir-zuT">
-                                        <rect key="frame" x="16" y="345" width="284" height="30"/>
+                                        <rect key="frame" x="16" y="338" width="284" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your e-mail address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5z-qO-amF">
-                                        <rect key="frame" x="18" y="385" width="282" height="21"/>
+                                        <rect key="frame" x="18" y="378" width="282" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dhi-kS-2oa"/>
                                         </constraints>
@@ -397,7 +397,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let us know how you feel:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3c-5J-iQi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give us a score:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3c-5J-iQi">
                                         <rect key="frame" x="19" y="8" width="282" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="HeG-Xf-jvX"/>
@@ -407,61 +407,61 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john.smith@trivit.be (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kib-6f-LI5">
-                                        <rect key="frame" x="16" y="414" width="284" height="30"/>
+                                        <rect key="frame" x="16" y="407" width="284" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrt-Dp-vQe">
-                                        <rect key="frame" x="0.0" y="29" width="63.5" height="55"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrt-Dp-vQe">
+                                        <rect key="frame" x="0.0" y="29" width="63.5" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="NLq-gf-oca"/>
+                                            <constraint firstAttribute="height" constant="48" id="NLq-gf-oca"/>
                                         </constraints>
-                                        <state key="normal" image="score_1">
+                                        <state key="normal" backgroundImage="score_1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="PRJ-Dt-63o"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nx-t7-2cH">
-                                        <rect key="frame" x="193" y="29" width="63" height="55"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nx-t7-2cH">
+                                        <rect key="frame" x="193" y="29" width="63" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="gek-Qm-tbT"/>
+                                            <constraint firstAttribute="height" constant="48" id="gek-Qm-tbT"/>
                                         </constraints>
-                                        <state key="normal" image="score_4">
+                                        <state key="normal" backgroundImage="score_4">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="QgI-Ov-0ZE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
-                                        <rect key="frame" x="126" y="29" width="63" height="55"/>
-                                        <state key="normal" image="score_3">
+                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
+                                        <rect key="frame" x="126" y="29" width="63" height="48"/>
+                                        <state key="normal" backgroundImage="score_3">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="ug6-to-w7H"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-2c-a5D">
-                                        <rect key="frame" x="256" y="29" width="63.5" height="55"/>
+                                    <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-2c-a5D">
+                                        <rect key="frame" x="256" y="29" width="63.5" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="qFc-uS-eAL"/>
+                                            <constraint firstAttribute="height" constant="48" id="qFc-uS-eAL"/>
                                         </constraints>
-                                        <state key="normal" image="score_5">
+                                        <state key="normal" backgroundImage="score_5">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="7zl-MI-HBe"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-Yg-Y1X">
-                                        <rect key="frame" x="63" y="29" width="63" height="55"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="247" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-Yg-Y1X">
+                                        <rect key="frame" x="63" y="29" width="63" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="BN6-Fx-Unc"/>
+                                            <constraint firstAttribute="height" constant="48" id="BN6-Fx-Unc"/>
                                         </constraints>
-                                        <state key="normal" image="score_2">
+                                        <state key="normal" backgroundImage="score_2">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -469,7 +469,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Feedback (optional)" translatesAutoresizingMaskIntoConstraints="NO" id="38J-UG-1gr">
-                                        <rect key="frame" x="20" y="99" width="284" height="178"/>
+                                        <rect key="frame" x="20" y="92" width="284" height="178"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="178" id="oW3-AP-xjm"/>
@@ -477,8 +477,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk3-C4-X7U">
-                                        <rect key="frame" x="19" y="316" width="281" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk3-C4-X7U">
+                                        <rect key="frame" x="19" y="309" width="281" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="S6C-xG-QQp"/>
                                         </constraints>

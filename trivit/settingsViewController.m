@@ -222,7 +222,7 @@ int const NUMBEROFCELLS = 6;
 
  
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%d",indexPath.item+1] forIndexPath:indexPath];
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%i",indexPath.item+1] forIndexPath:indexPath];
     
     // Configure the cell
 
