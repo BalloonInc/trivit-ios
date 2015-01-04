@@ -52,12 +52,31 @@ int const SENDBUTTON = 1;
              ];
 }
 
+-(void) setScore:(NSInteger)score
+{
+    // Array with all buttons
+    NSArray *buttons = @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton];
+    
+    for (UIButton* button in buttons)
+    {
+        button.imageView.image = [UIImage imageNamed:@"score_1"];
+        button.imageView.alpha=(score==button.tag)?1.:.4;
+    }
+    self.feedBackLabel.text = self.feedbackTexts[score];
+    self.feedBackLabel.textColor=(score>0)?[UIColor darkGrayColor]:[UIColor blackColor];
+    _score = score;
+}
+
 #pragma mark viewDidLoad stuff
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setScoreActive:0];
+    
+    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
+        NSLog(@"Button %d tag: %f",button.tag, button.alpha);
+
     [self layoutViews];
+
     [self setPlaceHolderTextForTextView:self.feedbackDetail];
 
     self.rightBarButton.tag = SENDBUTTON;
@@ -69,6 +88,23 @@ int const SENDBUTTON = 1;
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
+        NSLog(@"1. Button %d alpha: %f",button.tag, button.alpha);
+
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.score=0;
+    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
+        NSLog(@"2. Button %d alpha: %f",button.tag, button.alpha);
+
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
+        NSLog(@"3. Button %d alpha: %f",button.tag, button.alpha);
 }
 
 -(void) layoutViews
@@ -122,21 +158,9 @@ int const SENDBUTTON = 1;
     [self doneEditingDetailTextView];
     UIButton *senderButton = (UIButton*) sender;
     
-    [self setScoreActive:senderButton.tag];
+    self.score = senderButton.tag;
 }
 
--(void) setScoreActive:(NSInteger)score
-{
-    self.score = score;
-    // Array with all buttons
-    NSArray *buttons = @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton];
-    
-    for (UIButton* button in buttons)
-        button.imageView.alpha=(score==button.tag)?1.:.5;
-    
-    self.feedBackLabel.text = self.feedbackTexts[score];
-    self.feedBackLabel.textColor=(score>0)?[UIColor darkGrayColor]:[UIColor blackColor];
-}
 
 // Dismiss keyboard for UITextView
 - (void)doneEditingDetailTextView
