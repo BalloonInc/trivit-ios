@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Balloon Inc. All rights reserved.
 //
 
-#import "AboutViewController.h"
+#import "FeedbackViewController.h"
 //#import <QuartzCore/QuartzCore.h>
 #import "FeedbackManager.h"
 
 
-@interface AboutViewController ()
+@interface FeedbackViewController ()
 // smiley button properties
 @property (weak, nonatomic) IBOutlet UIButton *highestScoreButton;
 @property (weak, nonatomic) IBOutlet UIButton *highScoreButton;
@@ -35,11 +35,9 @@
 
 @end
 
-@implementation AboutViewController
+@implementation FeedbackViewController
 
-#pragma mark - Constants
-int const DONEBUTTON = 0;
-int const SENDBUTTON = 1;
+#pragma mark - props
 
 -(NSArray *)feedbackTexts
 {
@@ -58,12 +56,10 @@ int const SENDBUTTON = 1;
     NSArray *buttons = @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton];
     
     for (UIButton* button in buttons)
-    {
-        button.imageView.image = [UIImage imageNamed:@"score_1"];
-        button.imageView.alpha=(score==button.tag)?1.:.4;
-    }
+        button.alpha=(score==button.tag)?1.:.4;
+
     self.feedBackLabel.text = self.feedbackTexts[score];
-    self.feedBackLabel.textColor=(score>0)?[UIColor darkGrayColor]:[UIColor blackColor];
+    self.feedBackLabel.alpha=(score>0)?.75:1;
     _score = score;
 }
 
@@ -71,15 +67,11 @@ int const SENDBUTTON = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
-        NSLog(@"Button %d tag: %f",button.tag, button.alpha);
+    self.score=0;
 
     [self layoutViews];
 
     [self setPlaceHolderTextForTextView:self.feedbackDetail];
-
-    self.rightBarButton.tag = SENDBUTTON;
     
     self.feedbackDetail.delegate = self;
     self.nameField.delegate = self;
@@ -88,24 +80,8 @@ int const SENDBUTTON = 1;
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
-        NSLog(@"1. Button %d alpha: %f",button.tag, button.alpha);
-
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.score=0;
-    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
-        NSLog(@"2. Button %d alpha: %f",button.tag, button.alpha);
-
-}
-
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    for (UIButton* button in @[self.highestScoreButton,self.highScoreButton,self.mediumScoreButton,self.lowScoreButton,self.lowestScoreButton])
-        NSLog(@"3. Button %d alpha: %f",button.tag, button.alpha);
-}
 
 -(void) layoutViews
 {
@@ -123,13 +99,7 @@ int const SENDBUTTON = 1;
 #pragma mark bar button behavior
 - (IBAction)barButtonPressed:(id)sender
 {
-    UIBarButtonItem *button = (UIBarButtonItem*) sender;
-    if (button.tag==DONEBUTTON)
-        [self doneEditingDetailTextView];
-    else if (button.tag==SENDBUTTON)
-        [self sendFeedback];
-    else
-        NSLog(@"error, button not correctly labeled");
+    [self sendFeedback];
 }
 
 - (void) sendFeedback
@@ -155,32 +125,19 @@ int const SENDBUTTON = 1;
 // logic concerning the smileys
 - (IBAction)scoreButtonPressed:(id)sender
 {
-    [self doneEditingDetailTextView];
     UIButton *senderButton = (UIButton*) sender;
     
     self.score = senderButton.tag;
 }
 
 
-// Dismiss keyboard for UITextView
-- (void)doneEditingDetailTextView
-{
-    [self.feedbackDetail resignFirstResponder];
-    [self.nameField resignFirstResponder];
-    [self.emailField resignFirstResponder];
-    
-    self.rightBarButton.title = NSLocalizedString(@"Send", @"Send button for feedback");
-    self.rightBarButton.tag = SENDBUTTON;
-}
-
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    self.rightBarButton.title = NSLocalizedString(@"Done", @"Done button right top when editing text view");
-    self.rightBarButton.tag = DONEBUTTON;
     if(textView.textColor==[UIColor grayColor]){
         textView.textColor=[UIColor blackColor];
         textView.text=@"";
     }
+
 }
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -191,13 +148,16 @@ int const SENDBUTTON = 1;
 -(void) setPlaceHolderTextForTextView: (UITextView *)textView
 {
     textView.textColor=[UIColor grayColor];
-    textView.text=NSLocalizedString(@"Your feedback", @"Placeholder text for feedback text");
+    textView.text=NSLocalizedString(@"Your feedback (optional)", @"Placeholder text for feedback text");
 }
 
-// Dismiss keyboard for UITextfields
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return NO;
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]){
+        [textView resignFirstResponder];
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 // resize view if keyboard is shown/hidden
