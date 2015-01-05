@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSFetchRequest *fetchRequestSetup;
 @property (strong,nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
 @property (nonatomic) bool shouldScrollOnTallyIncreaseOrDecrease;
+@property (strong, nonatomic) NSArray *fruits;
 
 @property (nonatomic) NSInteger imagesPerRow;
 @end
@@ -61,6 +62,14 @@ int const OUTSIDE_TAP = 3;
     _appSettings=appSettings;
 }
 
+-(NSString *) trivitExampleNameAtIndex: (NSInteger)index{
+    if (!self.fruits){
+        NSString *fruits = NSLocalizedString(@"Apples,Bananas,Clementines,Durians,Eggfruits,Figs,Grapefruits,Honeydews,Ita Palms,Jujubes,Kiwis,Limes,Mangoes,Nectarines,Olives,Papayas,Quinces,Rambutans,Starfruits,Tomatoes,Uglis,Voavangas,Watermelons,Xiguas,Yellow watermelons,Zucchinis", @"This should be a comma seperated list (no spaces) of fruits starting with each letter of the alphabet.");
+        self.fruits = [fruits componentsSeparatedByString:@","];
+    }
+    return self.fruits[index%self.fruits.count];
+}
+
 #pragma mark - add item
 
 -(IBAction) addButtonPressed
@@ -77,7 +86,7 @@ int const OUTSIDE_TAP = 3;
     }
     
     // add consequent identifier to tallies
-    [self addItemWithTitle:[NSString stringWithFormat:@"newTally_%lu",(unsigned long)self.trivitCount]];
+    [self addItemWithTitle:[self trivitExampleNameAtIndex:self.trivitCount]];
     self.trivitRecentlyAdded=true;
     [self performSelector:@selector(setTrivitRecentlyAdded:) withObject:false afterDelay:0.5];
     
