@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSFetchRequest *fetchRequestSetup;
 @property (strong,nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
 @property (nonatomic) bool shouldScrollOnTallyIncreaseOrDecrease;
-@property (strong, nonatomic) NSArray *fruits;
+@property (strong, nonatomic) NSArray *placeholderTrivitTitles;
 
 @property (nonatomic) NSInteger imagesPerRow;
 @end
@@ -46,7 +46,7 @@ int const OUTSIDE_TAP = 3;
     return [self.managedObjectContext countForFetchRequest:self.fetchRequest error:&err];
 }
 -(NSInteger) imagesPerRow{
-    return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_VERTICAL_SPACING)+1);
+    return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_HORIZONTAL_SPACING));
     
 }
 
@@ -63,11 +63,11 @@ int const OUTSIDE_TAP = 3;
 }
 
 -(NSString *) trivitExampleNameAtIndex: (NSInteger)index{
-    if (!self.fruits){
-        NSString *fruits = NSLocalizedString(@"Apples,Bananas,Clementines,Durians,Eggfruits,Figs,Grapefruits,Honeydews,Ita Palms,Jujubes,Kiwis,Limes,Mangoes,Nectarines,Olives,Papayas,Quinces,Rambutans,Starfruits,Tomatoes,Uglis,Voavangas,Watermelons,Xiguas,Yellow watermelons,Zucchinis", @"This should be a comma seperated list (no spaces) of fruits starting with each letter of the alphabet.");
-        self.fruits = [fruits componentsSeparatedByString:@","];
+    if (!self.placeholderTrivitTitles){
+        NSString *fruits = NSLocalizedString(@"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,",@"placeholder texts for newly added trivits");
+        self.placeholderTrivitTitles = [fruits componentsSeparatedByString:@","];
     }
-    return self.fruits[index%self.fruits.count];
+    return self.placeholderTrivitTitles[index%self.placeholderTrivitTitles.count];
 }
 
 #pragma mark - add item

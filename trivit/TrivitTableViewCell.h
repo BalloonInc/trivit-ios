@@ -16,8 +16,10 @@
 extern float const CELL_HEIGHT_SECTION1;
 extern float const CELL_HEIGHT_SECTION2;
 extern float const TALLY_IMAGE_DIMENSION;
-extern float const COLLECTIONVIEW_HORIZONTAL_SPACING;
+extern float const COLLECTIONVIEW_VERTICAL_INSET;
+extern float const COLLECTIONVIEW_HORIZONTAL_INSET;
 extern float const COLLECTIONVIEW_VERTICAL_SPACING;
+extern float const COLLECTIONVIEW_HORIZONTAL_SPACING;
 extern NSString const *TALLY_TYPE;
 
 @property (nonatomic, strong) Tally *tally;

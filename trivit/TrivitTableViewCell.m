@@ -18,9 +18,15 @@
 #pragma mark - Constants
 float const CELL_HEIGHT_SECTION1 = 44.0;
 float const CELL_HEIGHT_SECTION2 = 88.0;
+
 float const TALLY_IMAGE_DIMENSION = 32.;
-float const COLLECTIONVIEW_HORIZONTAL_SPACING = 15.;
-float const COLLECTIONVIEW_VERTICAL_SPACING = 5.;
+
+float const COLLECTIONVIEW_VERTICAL_INSET = 15.;
+float const COLLECTIONVIEW_HORIZONTAL_INSET = 5.;
+
+float const COLLECTIONVIEW_HORIZONTAL_SPACING = 2.;
+float const COLLECTIONVIEW_VERTICAL_SPACING = 2.;
+
 float const COUNTLABEL_HEIGHT = 30.;
 float const COUNTLABEL_WIDTH = 40.;
 
@@ -319,7 +325,7 @@ float const COUNTLABEL_WIDTH = 40.;
 
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(COLLECTIONVIEW_HORIZONTAL_SPACING,COLLECTIONVIEW_VERTICAL_SPACING,0,0);
+    return UIEdgeInsetsMake(COLLECTIONVIEW_VERTICAL_INSET,COLLECTIONVIEW_HORIZONTAL_INSET,0,0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

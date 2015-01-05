@@ -26,13 +26,13 @@
 
     switch (self.index) {
         case 0:
-            self.tutorialText = NSLocalizedString(@"Tap the pen to add a new trivit", @"tutorial");
+            self.tutorialText = NSLocalizedString(@"Tap the pen to add a new Trivit", @"tutorial");
             break;
         case 1:
-            self.tutorialText = NSLocalizedString(@"Give your trivit a name", @"tutorial");
+            self.tutorialText = NSLocalizedString(@"Give your Trivit a name", @"tutorial");
             break;
         case 2:
-            self.tutorialText = NSLocalizedString(@"Open or close your new trivit with a single tap", @"tutorial");
+            self.tutorialText = NSLocalizedString(@"Open or close your new Trivit with a single tap", @"tutorial");
             break;
         case 3:
             self.tutorialText = NSLocalizedString(@"Tap to increase the count", @"tutorial");
