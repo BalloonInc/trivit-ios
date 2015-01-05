@@ -302,7 +302,6 @@ int const NUMBEROFCELLS = 6;
     if (UIInterfaceOrientationIsLandscape(self.currentOrientation))
         self.cellHeight = 128;
     
-    NSLog(@"screen height: %f",[[UIScreen mainScreen] bounds].size.height);
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)){
         if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone &&
            MAX([[UIScreen mainScreen] bounds].size.height,[[UIScreen mainScreen] bounds].size.width) < 567.9f)

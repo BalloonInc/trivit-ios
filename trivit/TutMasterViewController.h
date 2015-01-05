@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TutChildViewController.h"
 
 @interface TutMasterViewController : UIPageViewController <UIPageViewControllerDataSource>
 
+-(void)pageFoward:(TutChildViewController*)previousViewController;
 @end

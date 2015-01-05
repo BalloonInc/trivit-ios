@@ -7,7 +7,7 @@
 //
 
 #import "TutChildViewController.h"
-
+#import "TutMasterViewController.h"
 @interface TutChildViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
@@ -50,6 +50,14 @@
             break;
     }
     self.textLabel.text = self.tutorialText;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    
+    [self.view addGestureRecognizer:tap];
+
+}
+
+-(void) handleTap:(UIGestureRecognizer*) tapRecognizer{
+    [self.masterVC pageFoward:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -70,7 +70,7 @@
     self.score=0;
 
     [self layoutViews];
-
+    
     [self setPlaceHolderTextForTextView:self.feedbackDetail];
     
     self.feedbackDetail.delegate = self;

@@ -7,11 +7,11 @@
 //
 
 #import "TutMasterViewController.h"
-#import "TutChildViewController.h"
 
 @interface TutMasterViewController ()
 @property (strong,nonatomic) UIStoryboard *mainStoryboard;
 @property (nonatomic) NSUInteger numberOfPages;
+@property (nonatomic) NSUInteger currentPage;
 @end
 
 @implementation TutMasterViewController
@@ -21,6 +21,7 @@
     [super viewDidLoad];
     //set number of pages in the tutorial
     self.numberOfPages=6;
+    self.currentPage = 0;
 
     self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.dataSource=self;
@@ -42,6 +43,7 @@
     
     TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
     childViewController.index=index;
+    childViewController.masterVC = self;
     return childViewController;
 }
 
@@ -71,7 +73,7 @@
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
     // The selected item reflected in the page indicator.
-    return 0;
+    return self.currentPage;
 }
 
 // For the tutorial, only allow portrait mode
@@ -101,4 +103,20 @@
         [super viewDidLayoutSubviews];
     }
 }
+
+-(void)pageFoward:(TutChildViewController*)previousViewController {
+    
+    NSUInteger index = [(TutChildViewController *)previousViewController index];
+    self.currentPage = ++index;
+    if (index == self.numberOfPages)
+        return;
+
+    NSArray *theViewControllers = [NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil];
+    
+    //add page view
+    [self setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    
+}
+
+
 @end

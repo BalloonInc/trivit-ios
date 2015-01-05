@@ -27,6 +27,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LgL-C0-svf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LNM-0z-EO9" appends="YES" id="hUc-6D-WUI"/>
+                                </connections>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiI-xk-2f7">
                                 <rect key="frame" x="94" y="456" width="132" height="68"/>
@@ -74,6 +78,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwG-LR-kK3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="LNM-0z-EO9"/>
             </objects>
             <point key="canvasLocation" x="2053" y="-473"/>
         </scene>
@@ -154,7 +159,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Do-sB-vao">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0000_remove_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -187,7 +192,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIa-SN-Rif">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0001_color_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -220,7 +225,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlN-Uj-KWj">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0002_tutorial_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -253,7 +258,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STI-Gs-rfR">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0003_reset_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -286,7 +291,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnG-gH-fAp">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0003_reset_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -319,7 +324,7 @@
                                         <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywH-EQ-CLU">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" image="settings_rd_0003_reset_icon">
+                                            <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -412,11 +417,11 @@
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrt-Dp-vQe">
-                                        <rect key="frame" x="0.0" y="29" width="63.5" height="48"/>
+                                        <rect key="frame" x="0.0" y="29" width="63" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="NLq-gf-oca"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="score_1">
+                                        <state key="normal" image="score_1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -424,11 +429,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nx-t7-2cH">
-                                        <rect key="frame" x="193" y="29" width="63" height="48"/>
+                                        <rect key="frame" x="194" y="29" width="63" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="gek-Qm-tbT"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="score_4">
+                                        <state key="normal" image="score_4">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -437,7 +442,7 @@
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
                                         <rect key="frame" x="126" y="29" width="63" height="48"/>
-                                        <state key="normal" backgroundImage="score_3">
+                                        <state key="normal" image="score_3">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -445,11 +450,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bS7-2c-a5D">
-                                        <rect key="frame" x="256" y="29" width="63.5" height="48"/>
+                                        <rect key="frame" x="257" y="29" width="63" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="qFc-uS-eAL"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="score_5">
+                                        <state key="normal" image="score_5">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -457,11 +462,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="247" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-Yg-Y1X">
-                                        <rect key="frame" x="63" y="29" width="63" height="48"/>
+                                        <rect key="frame" x="63" y="29" width="63.5" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="BN6-Fx-Unc"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="score_2">
+                                        <state key="normal" image="score_2">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -541,7 +546,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="About Trivit" id="aNY-hB-Hrp">
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="xtv-69-KAK">
+                        <barButtonItem key="rightBarButtonItem" image="settings_rd_0004_send_icon" id="xtv-69-KAK">
                             <connections>
                                 <action selector="barButtonPressed:" destination="iLb-YV-FG3" id="IME-CA-0ha"/>
                             </connections>
@@ -588,16 +593,13 @@
     </scenes>
     <resources>
         <image name="add_button" width="25" height="25"/>
-        <image name="score_1" width="64" height="64"/>
-        <image name="score_2" width="64" height="64"/>
-        <image name="score_3" width="64" height="64"/>
-        <image name="score_4" width="64" height="64"/>
-        <image name="score_5" width="64" height="64"/>
+        <image name="score_1" width="63" height="48"/>
+        <image name="score_2" width="63" height="48"/>
+        <image name="score_3" width="63" height="48"/>
+        <image name="score_4" width="63" height="48"/>
+        <image name="score_5" width="63" height="48"/>
         <image name="settings_button" width="25" height="25"/>
-        <image name="settings_rd_0000_remove_icon" width="45" height="51"/>
-        <image name="settings_rd_0001_color_icon" width="49" height="43"/>
-        <image name="settings_rd_0002_tutorial_icon" width="51" height="36"/>
-        <image name="settings_rd_0003_reset_icon" width="47" height="36"/>
+        <image name="settings_rd_0004_send_icon" width="25" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

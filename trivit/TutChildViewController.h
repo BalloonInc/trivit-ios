@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TutMasterViewController;
 
 @interface TutChildViewController : UIViewController
 
 @property (strong,nonatomic) NSString *tutorialText;
 @property (nonatomic) NSUInteger index;
+@property (strong, nonatomic) TutMasterViewController *masterVC;
 @end
