@@ -22,7 +22,7 @@
     // Initialize Record
     Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     [dataObject setFeedbackMessage:message];
-    [dataObject setScaleValue:[NSNumber numberWithInt:rating]];
+    [dataObject setScaleValue:[NSNumber numberWithInteger:rating]];
     [dataObject setSoftwareIdentifier:software];
     [dataObject setDeviceIdentifier:device];
     [dataObject setName:name];

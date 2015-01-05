@@ -37,7 +37,7 @@ int const NUMBEROFCELLS = 6;
 
 #pragma mark - Lazy instantiators
 
--(NSInteger) cellTypeForIndex: (int) index{
+-(NSInteger) cellTypeForIndex: (NSInteger) index{
     NSArray *cellIndexes;
     if(UIInterfaceOrientationIsPortrait(self.currentOrientation))
         cellIndexes = @[@0,@1,@2,@3,@4,@5];
@@ -222,7 +222,7 @@ int const NUMBEROFCELLS = 6;
 
  
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%i",indexPath.item+1] forIndexPath:indexPath];
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%i",(int)indexPath.item+1] forIndexPath:indexPath];
     
     // Configure the cell
 

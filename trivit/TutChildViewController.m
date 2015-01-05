@@ -32,7 +32,7 @@
             self.tutorialText = NSLocalizedString(@"Give your trivit a name", @"tutorial");
             break;
         case 2:
-            self.tutorialText = NSLocalizedString(@"Open your new trivit by a single tap", @"tutorial");
+            self.tutorialText = NSLocalizedString(@"Open or close your new trivit with a single tap", @"tutorial");
             break;
         case 3:
             self.tutorialText = NSLocalizedString(@"Tap to increase the count", @"tutorial");
