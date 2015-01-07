@@ -47,7 +47,6 @@ int const OUTSIDE_TAP = 3;
 }
 -(NSInteger) imagesPerRow{
     return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_HORIZONTAL_SPACING));
-    
 }
 
 @synthesize appSettings=_appSettings;
@@ -85,8 +84,9 @@ int const OUTSIDE_TAP = 3;
         return;
     }
     
+    TallyModel *lastResult = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL] objectAtIndex:self.trivitCount-1];
     // add consequent identifier to tallies
-    [self addItemWithTitle:[self trivitExampleNameAtIndex:self.trivitCount]];
+    [self addItemWithTitle:[self trivitExampleNameAtIndex:lastResult.color.integerValue+1]];
     self.trivitRecentlyAdded=true;
     [self performSelector:@selector(setTrivitRecentlyAdded:) withObject:false afterDelay:0.5];
     
