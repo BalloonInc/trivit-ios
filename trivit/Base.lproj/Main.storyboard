@@ -31,7 +31,6 @@
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiI-xk-2f7">
                                 <rect key="frame" x="94" y="456" width="132" height="68"/>
-                                <color key="backgroundColor" red="1" green="0.50758289334207696" blue="0.41088538780547279" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="F8Q-99-cvo"/>
                                     <constraint firstAttribute="height" constant="68" id="WWF-fi-JHy"/>
@@ -41,9 +40,6 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="getStartedButtonPressed:" destination="2C2-vc-B0N" eventType="touchUpInside" id="88M-OU-odp"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-lp-UYK">
                                 <rect key="frame" x="0.0" y="456" width="320" height="68"/>

@@ -108,8 +108,14 @@
     
     NSUInteger index = [(TutChildViewController *)previousViewController index];
     self.currentPage = ++index;
-    if (index == self.numberOfPages)
-        return;
+    if (index == self.numberOfPages){
+        [self dismissViewControllerAnimated:YES completion:^{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
+        }];
+
+    }
+        
 
     NSArray *theViewControllers = [NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil];
     

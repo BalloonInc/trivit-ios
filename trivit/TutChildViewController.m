@@ -22,7 +22,7 @@
     
     self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
     [self.tutorialImage setContentMode:UIViewContentModeScaleAspectFit];
-    self.view.backgroundColor = [UIColor colorWithRed:76./256 green:170./256 blue:138./256 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:48./256 green:108./256 blue:87./256 alpha:1];
 
     switch (self.index) {
         case 0:
@@ -63,13 +63,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (IBAction)getStartedButtonPressed:(id)sender {
-    //dismiss, on completion set boolean tutorialShown to 0 so it is not shown anymore next time
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
-}];
 }
 
 @end
