@@ -75,9 +75,21 @@
     self.nameField.delegate = self;
     self.emailField.delegate = self;
     
+    // inset for textfields
+    [self setInset:5 forTextView:self.nameField];
+    [self setInset:5 forTextView:self.emailField];
+    
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void) setInset: (NSInteger)inset forTextView: (UITextField *) textField
+{
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, inset, textField.frame.size.height)];
+    leftView.backgroundColor = textField.backgroundColor;
+    textField.leftView = leftView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
 
