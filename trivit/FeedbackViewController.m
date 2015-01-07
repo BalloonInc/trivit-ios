@@ -146,12 +146,7 @@
     [textField resignFirstResponder];
     return NO;
 }
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 10 , 10 );
-}
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 10 , 10 );
-}
+
 -(void) setPlaceHolderTextForTextView: (UITextView *)textView
 {
     textView.textColor=[UIColor grayColor];

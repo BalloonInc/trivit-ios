@@ -84,9 +84,8 @@ int const OUTSIDE_TAP = 3;
         return;
     }
     
-    TallyModel *lastResult = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL] objectAtIndex:self.trivitCount-1];
     // add consequent identifier to tallies
-    [self addItemWithTitle:[self trivitExampleNameAtIndex:lastResult.color.integerValue+1]];
+    [self addItemWithTitle:[self trivitExampleNameAtIndex:[self nextPropertyIndexForNewTally]]];
     self.trivitRecentlyAdded=true;
     [self performSelector:@selector(setTrivitRecentlyAdded:) withObject:false afterDelay:0.5];
     
@@ -125,14 +124,7 @@ int const OUTSIDE_TAP = 3;
 -(void) addItemWithTitle: (NSString*)title andCount: (NSInteger)count
 {
     // Color index: last tally in the aray +1
-    NSInteger colorIndex;
-    
-    if (self.trivitCount==0)
-        colorIndex=0;
-    else{
-        TallyModel *lastResult = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL] objectAtIndex:self.trivitCount-1];
-        colorIndex = lastResult.color.integerValue+1;
-    }
+    NSInteger colorIndex = [self nextPropertyIndexForNewTally];
     
     // Create Entity
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
@@ -155,6 +147,17 @@ int const OUTSIDE_TAP = 3;
             NSLog(@"Unable to save record.");
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
+    }
+}
+
+// function to return the next index to use for new trivit color/tirivit title placeholder
+- (NSInteger) nextPropertyIndexForNewTally
+{
+    if (self.trivitCount==0)
+        return 0;
+    else{
+        TallyModel *lastResult = [[self.managedObjectContext executeFetchRequest:self.fetchRequest error:NULL] objectAtIndex:self.trivitCount-1];
+        return lastResult.color.integerValue+1;
     }
 }
 

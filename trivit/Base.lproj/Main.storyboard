@@ -468,6 +468,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="178" id="Xqt-52-yQd"/>
                                         </constraints>
+                                        <color key="textColor" red="0.79616113320000004" green="0.79940489950000004" blue="0.80764678030000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textView>
