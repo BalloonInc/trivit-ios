@@ -51,7 +51,7 @@
     }
     self.textLabel.text = self.tutorialText;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    
+    tap.numberOfTapsRequired=1;
     [self.view addGestureRecognizer:tap];
 
 }

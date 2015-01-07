@@ -68,8 +68,6 @@
 {
     [super viewDidLoad];
     self.score=0;
-
-    [self layoutViews];
     
     [self setPlaceHolderTextForTextView:self.feedbackDetail];
     
@@ -82,19 +80,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
 }
 
-
--(void) layoutViews
-{
-    // Add shadow
-    [self.feedbackDetail.layer setBorderColor: [[UIColor grayColor] CGColor]];
-    [self.feedbackDetail.layer setBorderWidth: 0.25];
-    [self.feedbackDetail.layer setMasksToBounds:NO];
-    [self.feedbackDetail.layer setShadowRadius:1.0f];
-    self.feedbackDetail.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.feedbackDetail.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-    self.feedbackDetail.layer.shadowOpacity = 1.0f;
-    self.feedbackDetail.layer.shadowRadius = 1.0f;
-}
 
 #pragma mark bar button behavior
 - (IBAction)barButtonPressed:(id)sender
