@@ -28,19 +28,31 @@
             colorSetArray = [Colors flatDesignColorsDark];
             break;
         case 2:
-            colorSetArray = [Colors iOSColorsLight];
+            colorSetArray = [Colors greenColorsLight];
             break;
         case 3:
-            colorSetArray = [Colors iOSColorsDark];
+            colorSetArray = [Colors greenColorsDark];
             break;
         case 4:
-            colorSetArray = [Colors trivitColorsLight];
+            colorSetArray = [Colors blueColorsLight];
             break;
         case 5:
+            colorSetArray = [Colors blueColorsDark];
+            break;
+        case 6:
+            colorSetArray = [Colors redColorsLight];
+            break;
+        case 7:
+            colorSetArray = [Colors redColorsDark];
+            break;
+        case 8:
+            colorSetArray = [Colors trivitColorsLight];
+            break;
+        case 9:
             colorSetArray = [Colors trivitColorsDark];
             break;
         default:
-            colorSetArray = [Colors iOSColorsLight];
+            colorSetArray = [Colors greenColorsLight];
     }
     return colorSetArray;
 }
@@ -69,31 +81,83 @@
           ];
 }
 
-+(NSArray *)iOSColorsLight
++(NSArray *)greenColorsLight
 {
     return @[
-             @"FC2C34", // Red
-             @"51BA26", // Green
-             @"46ADDB", // Blue
-             @"FC2F70", // Heavy pink
-             @"FF6933", // Orange
-             @"BB33DB", // Purple
-             //@"2521DE", // Dark blue
-             @"2D1CB3"  // Very dark blue
+             @"57A30D", // Green
+             @"63A912", // Green
+             @"6FB016", // Green
+             @"7DB51C", // Green
+             @"87BD21", // Green
+             @"94C325", // Green
+             @"A1CB2B", // Green
+             @"ADCF30"  // Green
              ];
 }
 
-+(NSArray *)iOSColorsDark
++(NSArray *)greenColorsDark
 {
     return @[
-             @"E0272E", // Red
-             @"459E20", // Green
-             @"3D96BE", // Blue
-             @"E12A64", // Heavy pink
-             @"E65F2E", // Orange
-             @"A22CBE", // Purple
-             //@"201DC2", // Dark blue
-             @"221587"  // Very dark blue
+             @"3B891F", // Blue
+             @"448E24", // Blue
+             @"4E9529", // Blue
+             @"59992E", // Blue
+             @"61A133", // Blue
+             @"6BA637", // Blue
+             @"76AE3E", // Blue
+             @"80B242"  // Blue
+             ];
+}
+
++(NSArray *)blueColorsLight
+{
+    return @[
+             @"0693FB", // Blue
+             @"109EFB", // Blue
+             @"1AA9FB", // Blue
+             @"21B4FB", // Blue
+             @"28BEFC", // Blue
+             @"2EC6FA", // Blue
+             @"36CFFA", // Blue
+             ];
+}
+
++(NSArray *)blueColorsDark
+{
+    return @[
+             @"245FD2", // Green
+             @"2668D9", // Green
+             @"2E73DA", // Green
+             @"347EDB", // Green
+             @"3A87DD", // Green
+             @"3F8FDC", // Green
+             @"4689DD", // Green
+             ];
+}
+
++(NSArray *)redColorsLight
+{
+    return @[
+             @"8A0017", // Red
+             @"A2001B", // Red
+             @"B6001D", // Red
+             @"C90025", // Red
+             @"E20026", // Red
+             @"F7002A", // Red
+             @"FF0026", // Red
+             ];
+}
+
++(NSArray *)redColorsDark
+{
+    return @[
+             @"5F011A", // Red
+             @"6D0420", // Red
+             @"7C0725", // Red
+             @"8A0C2B", // Red
+             @"9B0F30", // Red
+             @"AB1436", // Red
+             @"B91736", // Red
              ];
 }
 
@@ -122,8 +186,10 @@
 +(NSArray *)colorSetNames
 {
     return @[
-             @"Flat",
-             @"iOS",
+             @"Default",
+             @"Green",
+             @"Blue",
+             @"Red",
              @"Trivit"
              ];
 }
@@ -179,7 +245,7 @@
 {
     //By Default, use iOSColors
     if (!colorSet)
-        colorSet = [self iOSColorsLight];
+        colorSet = [self greenColorsLight];
     
     index = (int)index % [colorSet count];
     NSString* hexColorString = colorSet[index];
