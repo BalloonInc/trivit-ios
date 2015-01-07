@@ -42,9 +42,9 @@
 -(NSArray *)feedbackTexts
 {
     return @[NSLocalizedString(@"Let us know how you feel:", @"feedback message"),
-             NSLocalizedString(@"How is this even approved by Apple?", @"feedback message"),
-             NSLocalizedString(@"Well, at least you tried...", @"feedback message"),
-             NSLocalizedString(@"I've seen better, I've seen worse", @"feedback message"),
+             NSLocalizedString(@"I don't get it.", @"feedback message"),
+             NSLocalizedString(@"I am missing some things...", @"feedback message"),
+             NSLocalizedString(@"I've seen better, I've seen worse.", @"feedback message"),
              NSLocalizedString(@"I like what I see.", @"feedback message"),
              NSLocalizedString(@"This is the best app ever!", @"feedback message"),
              ];
@@ -149,7 +149,7 @@
 
 -(void) setPlaceHolderTextForTextView: (UITextView *)textView
 {
-    textView.textColor=[UIColor grayColor];
+    textView.textColor=[UIColor colorWithRed:187./256 green:186./256 blue:194/256. alpha:1];
     textView.text=NSLocalizedString(@"Your feedback (optional)", @"Placeholder text for feedback text");
 }
 
