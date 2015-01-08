@@ -124,6 +124,7 @@
 		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
 		6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingButtonCell.h; sourceTree = "<group>"; };
 		6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingButtonCell.m; sourceTree = "<group>"; };
+		6C8263AC1A5F2453002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		6C89B0D21A0ABD7E00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C89B0D31A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C89B0D41A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -704,6 +705,7 @@
 				6C92EC221A09A50500D2A8DC /* nl */,
 				6C89B0D41A0ABD7F00CCE22C /* ru */,
 				6C0A91531A0CE92F006F2F87 /* zh-CN */,
+				6C8263AC1A5F2453002A9941 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

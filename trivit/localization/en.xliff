@@ -49,8 +49,8 @@
     </header>
     <body>
       <trans-unit id="8DX-1G-Gff.text">
-        <source>Help!</source>
-        <note>Class = "UILabel"; text = "Help!"; ObjectID = "8DX-1G-Gff";</note>
+        <source>Feedback</source>
+        <note>Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
       </trans-unit>
       <trans-unit id="38J-UG-1gr.text">
         <source>Feedback (optional)</source>
@@ -73,16 +73,16 @@
         <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
-        <source>Show tutorial</source>
-        <note>Class = "UILabel"; text = "Show tutorial"; ObjectID = "Txb-zc-zGA";</note>
+        <source>Tutorial</source>
+        <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
         <source>About Trivit</source>
         <note>Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
-        <source>Color - Flat</source>
-        <note>Class = "UILabel"; text = "Color - Flat"; ObjectID = "bqM-wM-ulW";</note>
+        <source>Color - Default</source>
+        <note>Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
       </trans-unit>
       <trans-unit id="c8x-yf-RaW.text">
         <source>Visit us: www.trivit.be</source>

@@ -1,0 +1,42 @@
+
+/* Class = "UITextView"; text = "Feedback (optional)"; ObjectID = "38J-UG-1gr"; */
+"38J-UG-1gr.text" = "Feedback (optional)";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff"; */
+"8DX-1G-Gff.text" = "Feedback";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp"; */
+"JYG-xs-cHp.title" = "Settings";
+
+/* Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f"; */
+"Ksw-o9-V7f.text" = "Vibration - Off";
+
+/* Class = "UILabel"; text = "Give us a score:"; ObjectID = "M3c-5J-iQi"; */
+"M3c-5J-iQi.text" = "Give us a score:";
+
+/* Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
+"Obg-Ql-Sqf.title" = "Trivit";
+
+/* Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA"; */
+"Txb-zc-zGA.text" = "Tutorial";
+
+/* Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp"; */
+"aNY-hB-Hrp.title" = "About Trivit";
+
+/* Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW"; */
+"bqM-wM-ulW.text" = "Color - Default";
+
+/* Class = "UITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW"; */
+"c8x-yf-RaW.text" = "Visit us: www.trivit.be";
+
+/* Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
+"f6g-ir-zuT.placeholder" = "Your name (optional)";
+
+/* Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5"; */
+"kib-6f-LI5.placeholder" = "Your e-mail (optional)";
+
+/* Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe"; */
+"mzT-GO-pIe.text" = "Reset all";
+
+/* Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw"; */
+"yln-wJ-3Cw.text" = "Remove all";
