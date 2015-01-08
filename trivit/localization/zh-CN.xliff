@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="trivit Watch App/Info.plist" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit Watch App/Info.plist" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -16,7 +16,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit WatchKit Extension/Info.plist" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit WatchKit Extension/Info.plist" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -32,7 +32,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit WatchKit Extension/Localizable.strings" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit WatchKit Extension/Localizable.strings" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -43,7 +43,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
         <source>About Trivit</source>
-        <target>Over Trivit</target>
+        <target>关于 Trivit</target>
         <note>Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
@@ -104,7 +104,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/Info.plist" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit/Info.plist" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -119,24 +119,21 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
     <body>
       <trans-unit id="Are you sure you want to delete all trivits?">
         <source>Are you sure you want to delete all trivits?</source>
-        <target>Bent u zeker dat u alle trivits wilt verwijderen?</target>
         <note>Message box content</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to reset '%@'?">
         <source>Are you sure you want to reset '%@'?</source>
-        <target>Bent u zeker dat u de teller van '%@' op 0 wilt zetten ?</target>
         <note>messagebox text, parameter is title of tally</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to reset all counts to 0?">
         <source>Are you sure you want to reset all counts to 0?</source>
-        <target>Bent u zeker dat u alle tellers naar 0 wilt resetten?</target>
         <note>Message box content</note>
       </trans-unit>
       <trans-unit id="Cannot add">
@@ -153,17 +150,14 @@
       </trans-unit>
       <trans-unit id="Days without smoking">
         <source>Days without smoking</source>
-        <target>Dagen zonder roken</target>
         <note>Tally example</note>
       </trans-unit>
       <trans-unit id="Delete all Trivits">
         <source>Delete all Trivits</source>
-        <target>Verwijder alle Trivits</target>
         <note>Message box title</note>
       </trans-unit>
       <trans-unit id="Drinks">
         <source>Drinks</source>
-        <target>Drankjes</target>
         <note>Tally example</note>
       </trans-unit>
       <trans-unit id="Feedback">
@@ -204,7 +198,6 @@
       </trans-unit>
       <trans-unit id="No">
         <source>No</source>
-        <target>Nee</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Off">
@@ -229,7 +222,6 @@
       </trans-unit>
       <trans-unit id="Reset Trivit">
         <source>Reset Trivit</source>
-        <target>Reset Trivit</target>
         <note>messagebox title</note>
       </trans-unit>
       <trans-unit id="Reset all">
@@ -238,7 +230,6 @@
       </trans-unit>
       <trans-unit id="Reset all Trivits">
         <source>Reset all Trivits</source>
-        <target>Reset alle Trivits</target>
         <note>Message box title</note>
       </trans-unit>
       <trans-unit id="Show tutorial">
@@ -267,12 +258,10 @@
       </trans-unit>
       <trans-unit id="Went swimming this year">
         <source>Went swimming this year</source>
-        <target>Zwemmen dit jaar</target>
         <note>Tally example</note>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
-        <target>Ja</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Your feedback (optional)">
@@ -281,7 +270,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivitTests/Info.plist" source-language="en" datatype="plaintext" target-language="nl">
+  <file original="trivitTests/Info.plist" source-language="en" datatype="plaintext" target-language="zh-CN">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>

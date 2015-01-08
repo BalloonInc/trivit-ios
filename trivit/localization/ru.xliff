@@ -1,115 +1,155 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="trivit/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="ru">
+  <file original="trivit Watch App/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
     <body>
-      <trans-unit id="0oe-9h-6Ea.normalTitle">
-        <source>Show tutorial</source>
-        <target>Показать вступление</target>
-        <note>Class = "IBUIButton"; normalTitle = "Show tutorial"; ObjectID = "0oe-9h-6Ea";</note>
+      <trans-unit id="CFBundleDisplayName">
+        <source>trivit</source>
       </trans-unit>
-      <trans-unit id="798-Ww-cFl.title">
-        <source>Settings</source>
-        <target>Настройки</target>
-        <note>Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "798-Ww-cFl";</note>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
       </trans-unit>
-      <trans-unit id="DO0-kr-C6k.normalTitle">
-        <source>Reset all trivits</source>
-        <target>Сбросить все тривиты</target>
-        <note>Class = "IBUIButton"; normalTitle = "Reset all trivits"; ObjectID = "DO0-kr-C6k";</note>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>1.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit WatchKit Extension/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+        <source>trivit WatchKit Extension</source>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>1.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit WatchKit Extension/Localizable.strings" source-language="en" datatype="plaintext" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
+    </header>
+    <body>
+      <trans-unit id="Trivit">
+        <source>Trivit</source>
+        <note>Trivit title for Watch app</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="ru">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
+    </header>
+    <body>
+      <trans-unit id="8DX-1G-Gff.text">
+        <source>Help!</source>
+        <note>Class = "UILabel"; text = "Help!"; ObjectID = "8DX-1G-Gff";</note>
+      </trans-unit>
+      <trans-unit id="38J-UG-1gr.text">
+        <source>Feedback (optional)</source>
+        <note>Class = "UITextView"; text = "Feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
+      </trans-unit>
+      <trans-unit id="Ksw-o9-V7f.text">
+        <source>Vibration - Off</source>
+        <note>Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
+      </trans-unit>
+      <trans-unit id="M3c-5J-iQi.text">
+        <source>Give us a score:</source>
+        <note>Class = "UILabel"; text = "Give us a score:"; ObjectID = "M3c-5J-iQi";</note>
       </trans-unit>
       <trans-unit id="Obg-Ql-Sqf.title">
         <source>Trivit</source>
         <target>Тривит</target>
-        <note>Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
+        <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
-      <trans-unit id="OtX-4S-3Hp.text">
-        <source>Brought to you by Balloon.Inc</source>
-        <note>Class = "IBUILabel"; text = "Brought to you by Balloon.Inc"; ObjectID = "OtX-4S-3Hp";</note>
-      </trans-unit>
-      <trans-unit id="TSn-QR-jwc.text">
-        <source>Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose.</source>
-        <note>Class = "IBUITextView"; text = "Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose."; ObjectID = "TSn-QR-jwc";</note>
-      </trans-unit>
-      <trans-unit id="UQ0-IB-Nat.text">
-        <source>Color Set</source>
-        <target>Настройки цвета</target>
-        <note>Class = "IBUILabel"; text = "Color Set"; ObjectID = "UQ0-IB-Nat";</note>
-      </trans-unit>
-      <trans-unit id="VwX-bd-ZzG.segmentTitles[0]">
-        <source>Flat</source>
-        <note>Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[0] = "Flat"; ObjectID = "VwX-bd-ZzG";</note>
-      </trans-unit>
-      <trans-unit id="VwX-bd-ZzG.segmentTitles[1]">
-        <source>iOS</source>
-        <note>Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[1] = "iOS"; ObjectID = "VwX-bd-ZzG";</note>
-      </trans-unit>
-      <trans-unit id="VwX-bd-ZzG.segmentTitles[2]">
-        <source>Trivit</source>
-        <target>Тривит</target>
-        <note>Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[2] = "Trivit"; ObjectID = "VwX-bd-ZzG";</note>
+      <trans-unit id="Txb-zc-zGA.text">
+        <source>Show tutorial</source>
+        <note>Class = "UILabel"; text = "Show tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
         <source>About Trivit</source>
         <target>О программе</target>
-        <note>Class = "IBUINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
+        <note>Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
-      <trans-unit id="g6q-aW-cpu.normalTitle">
-        <source>Delete all trivits</source>
-        <target>Удалить все тривиты</target>
-        <note>Class = "IBUIButton"; normalTitle = "Delete all trivits"; ObjectID = "g6q-aW-cpu";</note>
+      <trans-unit id="bqM-wM-ulW.text">
+        <source>Color - Flat</source>
+        <note>Class = "UILabel"; text = "Color - Flat"; ObjectID = "bqM-wM-ulW";</note>
       </trans-unit>
-      <trans-unit id="jiI-xk-2f7.normalTitle">
-        <source>Get started!</source>
-        <target>Начать!</target>
-        <note>Class = "IBUIButton"; normalTitle = "Get started!"; ObjectID = "jiI-xk-2f7";</note>
+      <trans-unit id="c8x-yf-RaW.text">
+        <source>Visit us: www.trivit.be</source>
+        <note>Class = "UITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW";</note>
       </trans-unit>
-      <trans-unit id="zIL-Af-Scs.text">
-        <source>Vibration Feedback</source>
-        <target>Вибрация</target>
-        <note>Class = "IBUILabel"; text = "Vibration Feedback"; ObjectID = "zIL-Af-Scs";</note>
+      <trans-unit id="f6g-ir-zuT.placeholder">
+        <source>Your name (optional)</source>
+        <note>Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT";</note>
       </trans-unit>
-      <trans-unit id="zos-oM-Mq1.text">
-        <source>http://en.wikipedia.org/wiki/Tally_marks</source>
-        <note>Class = "IBUILabel"; text = "http://en.wikipedia.org/wiki/Tally_marks"; ObjectID = "zos-oM-Mq1";</note>
+      <trans-unit id="kib-6f-LI5.placeholder">
+        <source>Your e-mail (optional)</source>
+        <note>Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5";</note>
+      </trans-unit>
+      <trans-unit id="mzT-GO-pIe.text">
+        <source>Reset all</source>
+        <note>Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
+      </trans-unit>
+      <trans-unit id="yln-wJ-3Cw.text">
+        <source>Remove all</source>
+        <note>Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
       </trans-unit>
     </body>
   </file>
   <file original="trivit/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>${PRODUCT_NAME}</source>
+        <target>Тривит</target>
       </trans-unit>
       <trans-unit id="CFBundleShortVersionString">
-        <source>0.1</source>
-        <target>C</target>
+        <source>0.2</source>
+        <target>Тривит</target>
       </trans-unit>
     </body>
   </file>
   <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
     <body>
-      <trans-unit id="?">
-        <source>Are you sure you want to reset \</source>
-        <target>Вы уверены, что вы хотите сбросить \</target>
-        <note>messagebox text, parameter is title of tally</note>
-      </trans-unit>
       <trans-unit id="Are you sure you want to delete all trivits?">
         <source>Are you sure you want to delete all trivits?</source>
-        <target>Вы уверены, что вы хотите удалить все тривиты?</target>
+        <target>Вы уверены, что Вы хотите удалить все тривиты?</target>
         <note>Message box content</note>
+      </trans-unit>
+      <trans-unit id="Are you sure you want to reset '%@'?">
+        <source>Are you sure you want to reset '%@'?</source>
+        <target>Вы уверены, что Вы хотите сбросить '%@'?</target>
+        <note>messagebox text, parameter is title of tally</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to reset all counts to 0?">
         <source>Are you sure you want to reset all counts to 0?</source>
-        <target>Вы уверены, что вы хотите сбросить все подсчеты до 0?</target>
+        <target>Вы уверены, что Вы хотите сбросить все подсчеты до 0?</target>
         <note>Message box content</note>
+      </trans-unit>
+      <trans-unit id="Cannot add">
+        <source>Cannot add</source>
+        <note>messagebox title</note>
+      </trans-unit>
+      <trans-unit id="Color - %@">
+        <source>Color - %@</source>
+        <note>label for vibration setting</note>
+      </trans-unit>
+      <trans-unit id="Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release">
+        <source>Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release</source>
+        <note>Placeholder texts for newly added trivits</note>
       </trans-unit>
       <trans-unit id="Days without smoking">
         <source>Days without smoking</source>
@@ -126,35 +166,104 @@
         <target>Напитки</target>
         <note>Tally example</note>
       </trans-unit>
+      <trans-unit id="Feedback">
+        <source>Feedback</source>
+        <note>send feedback button in settings</note>
+      </trans-unit>
+      <trans-unit id="Get started!">
+        <source>Get started!</source>
+        <note>tutorial</note>
+      </trans-unit>
+      <trans-unit id="Give your Trivit a name">
+        <source>Give your Trivit a name</source>
+        <note>tutorial</note>
+      </trans-unit>
+      <trans-unit id="Got it.">
+        <source>Got it.</source>
+        <note>OK button</note>
+      </trans-unit>
+      <trans-unit id="I am missing some things...">
+        <source>I am missing some things...</source>
+        <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="I don't get it.">
+        <source>I don't get it.</source>
+        <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="I like what I see.">
+        <source>I like what I see.</source>
+        <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="I've seen better, I've seen worse.">
+        <source>I've seen better, I've seen worse.</source>
+        <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="Let us know how you feel:">
+        <source>Let us know how you feel:</source>
+        <note>feedback message</note>
+      </trans-unit>
       <trans-unit id="No">
         <source>No</source>
         <target>Нет</target>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Off">
+        <source>Off</source>
+        <note>Setting: off</note>
+      </trans-unit>
+      <trans-unit id="On">
+        <source>On</source>
+        <note>Setting: on</note>
+      </trans-unit>
+      <trans-unit id="Open or close your new Trivit with a single tap">
+        <source>Open or close your new Trivit with a single tap</source>
+        <note>tutorial</note>
+      </trans-unit>
+      <trans-unit id="Please finish editing the title first">
+        <source>Please finish editing the title first</source>
+        <note>messagebox text, adding a trivit not possible since you are editing the title of another trivit</note>
+      </trans-unit>
+      <trans-unit id="Remove all">
+        <source>Remove all</source>
+        <note>remove all trivits button in settings</note>
       </trans-unit>
       <trans-unit id="Reset Trivit">
         <source>Reset Trivit</source>
         <target>Сбросить тривит</target>
         <note>messagebox title</note>
       </trans-unit>
+      <trans-unit id="Reset all">
+        <source>Reset all</source>
+        <note>reset all trivits button in settings</note>
+      </trans-unit>
       <trans-unit id="Reset all Trivits">
         <source>Reset all Trivits</source>
         <target>Сбросить все тривиты</target>
         <note>Message box title</note>
       </trans-unit>
-      <trans-unit id="Swipe left to remove">
-        <source>Swipe left to remove</source>
-        <target>Проведите влево для удаления</target>
+      <trans-unit id="Show tutorial">
+        <source>Show tutorial</source>
+        <note>show tutorial button in settings</note>
+      </trans-unit>
+      <trans-unit id="Tap the minus to decrease the count, hold long to reset">
+        <source>Tap the minus to decrease the count, hold long to reset</source>
         <note>tutorial</note>
       </trans-unit>
-      <trans-unit id="Tap and hold to edit title">
-        <source>Tap and hold to edit title</source>
-        <target>Нажмите и удерживайте для редактирования заголовка</target>
+      <trans-unit id="Tap the pen to add a new Trivit">
+        <source>Tap the pen to add a new Trivit</source>
         <note>tutorial</note>
       </trans-unit>
-      <trans-unit id="Tap to add tallies">
-        <source>Tap to add tallies</source>
-        <target>Нажмите чтобы добавить новый символ</target>
+      <trans-unit id="Tap to increase the count">
+        <source>Tap to increase the count</source>
         <note>tutorial</note>
+      </trans-unit>
+      <trans-unit id="This is the best app ever!">
+        <source>This is the best app ever!</source>
+        <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="Vibration - %@">
+        <source>Vibration - %@</source>
+        <note>label for vibration setting</note>
       </trans-unit>
       <trans-unit id="Went swimming this year">
         <source>Went swimming this year</source>
@@ -166,11 +275,15 @@
         <target>Да</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Your feedback (optional)">
+        <source>Your feedback (optional)</source>
+        <note>Placeholder text for feedback text</note>
+      </trans-unit>
     </body>
   </file>
   <file original="trivitTests/Info.plist" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1" build-num="6A1052d"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
@@ -179,6 +292,7 @@
       </trans-unit>
       <trans-unit id="CFBundleShortVersionString">
         <source>1.0</source>
+        <target>Тривит</target>
       </trans-unit>
     </body>
   </file>

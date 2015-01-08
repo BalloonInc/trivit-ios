@@ -10,7 +10,6 @@
 #import "TutMasterViewController.h"
 @interface TutChildViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
-@property (weak, nonatomic) IBOutlet UIButton *getStartedButton;
 @property (weak, nonatomic) IBOutlet UIImageView *tutorialImage;
 
 @end
@@ -41,9 +40,9 @@
             self.tutorialText = NSLocalizedString(@"Tap the minus to decrease the count, hold long to reset", @"tutorial");
             break;
         case 5:
-            self.tutorialText = @"";
+            self.tutorialText = NSLocalizedString(@"Get started!", @"tutorial");
+
             // last page: show done button
-            self.getStartedButton.hidden = false;
             break;
         default:
             self.tutorialText = @"Oops, that went wrong!";

@@ -29,19 +29,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiI-xk-2f7">
-                                <rect key="frame" x="94" y="456" width="132" height="68"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="132" id="F8Q-99-cvo"/>
-                                    <constraint firstAttribute="height" constant="68" id="WWF-fi-JHy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Get started!">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-lp-UYK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-lp-UYK">
                                 <rect key="frame" x="0.0" y="456" width="320" height="68"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,20 +40,15 @@
                         <constraints>
                             <constraint firstItem="LgL-C0-svf" firstAttribute="top" secondItem="Chl-jJ-tJ9" secondAttribute="top" id="0PL-8L-wed"/>
                             <constraint firstAttribute="trailing" secondItem="LgL-C0-svf" secondAttribute="trailing" id="74b-2Y-tsd"/>
-                            <constraint firstAttribute="centerX" secondItem="jiI-xk-2f7" secondAttribute="centerX" id="DbF-US-7uj"/>
                             <constraint firstItem="Nmf-lp-UYK" firstAttribute="leading" secondItem="LgL-C0-svf" secondAttribute="leading" id="Jxm-P4-2f3"/>
                             <constraint firstItem="Nmf-lp-UYK" firstAttribute="trailing" secondItem="LgL-C0-svf" secondAttribute="trailing" id="KHV-i3-8g1"/>
-                            <constraint firstItem="Nmf-lp-UYK" firstAttribute="top" secondItem="jiI-xk-2f7" secondAttribute="top" id="Z6e-gk-SoI"/>
                             <constraint firstItem="LgL-C0-svf" firstAttribute="leading" secondItem="Chl-jJ-tJ9" secondAttribute="leading" id="lRI-b2-P2s"/>
-                            <constraint firstItem="ho4-CK-BpZ" firstAttribute="top" secondItem="jiI-xk-2f7" secondAttribute="bottom" constant="44" id="qhp-Nl-T6F"/>
                             <constraint firstItem="ho4-CK-BpZ" firstAttribute="top" secondItem="LgL-C0-svf" secondAttribute="bottom" id="ts2-ea-has"/>
-                            <constraint firstItem="Nmf-lp-UYK" firstAttribute="bottom" secondItem="jiI-xk-2f7" secondAttribute="bottom" id="vLy-wE-ciS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wdv-A6-boC"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="getStartedButton" destination="jiI-xk-2f7" id="j5m-Cz-0lc"/>
                         <outlet property="textLabel" destination="Nmf-lp-UYK" id="BLR-nC-flv"/>
                         <outlet property="tutorialImage" destination="LgL-C0-svf" id="huZ-w8-iQD"/>
                     </connections>
