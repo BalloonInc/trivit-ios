@@ -240,7 +240,7 @@ int const NUMBEROFCELLS = 6;
             break;
         case TUTORIALCELL:
             cell.buttonImage = [SettingsIcons imageOfTutorial];
-            cell.buttonText = NSLocalizedString(@"Show tutorial",@"show tutorial button in settings");
+            cell.buttonText = NSLocalizedString(@"Tutorial",@"show tutorial button in settings");
             break;
         case RESETCELL:
             cell.buttonImage = [SettingsIcons imageOfReset];
