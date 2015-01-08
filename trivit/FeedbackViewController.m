@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 
+@property (strong,nonatomic) UIColor *placeholderTextColor;
 @end
 
 @implementation FeedbackViewController
@@ -41,13 +42,18 @@
 
 -(NSArray *)feedbackTexts
 {
-    return @[NSLocalizedString(@"Let us know how you feel:", @"feedback message"),
+    return @[NSLocalizedString(@"Tap an image to rate:", @"feedback message"),
              NSLocalizedString(@"I don't get it.", @"feedback message"),
              NSLocalizedString(@"I am missing some things...", @"feedback message"),
              NSLocalizedString(@"I've seen better, I've seen worse.", @"feedback message"),
              NSLocalizedString(@"I like what I see.", @"feedback message"),
              NSLocalizedString(@"This is the best app ever!", @"feedback message"),
              ];
+}
+
+-(UIColor *)placeholderTextColor{
+    if (!_placeholderTextColor) _placeholderTextColor = [UIColor colorWithRed:187./256 green:186./256 blue:194/256. alpha:1];
+    return _placeholderTextColor;
 }
 
 -(void) setScore:(NSInteger)score
@@ -130,7 +136,7 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if(textView.textColor==[UIColor grayColor]){
+    if(textView.textColor==self.placeholderTextColor){
         textView.textColor=[UIColor blackColor];
         textView.text=@"";
     }
@@ -149,7 +155,7 @@
 
 -(void) setPlaceHolderTextForTextView: (UITextView *)textView
 {
-    textView.textColor=[UIColor colorWithRed:187./256 green:186./256 blue:194/256. alpha:1];
+    textView.textColor=self.placeholderTextColor;
     textView.text=NSLocalizedString(@"Your feedback (optional)", @"Placeholder text for feedback text");
 }
 
