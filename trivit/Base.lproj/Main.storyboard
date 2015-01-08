@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="1638" y="139"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="OTy-mc-esq">
             <objects>
                 <collectionViewController id="fou-ke-AL6" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -328,7 +328,7 @@
                             <outlet property="delegate" destination="fou-ke-AL6" id="a4m-Mx-eG0"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="JYG-xs-cHp"/>
+                    <navigationItem key="navigationItem" title="Settings" id="JYG-xs-cHp"/>
                     <connections>
                         <segue destination="iLb-YV-FG3" kind="push" identifier="ShowFeedbackScreen" id="uID-TY-K2S"/>
                     </connections>

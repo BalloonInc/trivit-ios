@@ -76,7 +76,7 @@ int const OUTSIDE_TAP = 3;
     if(self.keyboardShown||self.trivitRecentlyAdded){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add",@"messagebox title")
                                                         message:
-                               NSLocalizedString(@"Please finish editing the title first", @"messagebox text, adding a trivit not possible since you are editing the title of another trivit")
+                               NSLocalizedString(@"Please finish editing the title first.", @"messagebox text, adding a trivit not possible since you are editing the title of another trivit")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Got it.",@"OK button")
                                               otherButtonTitles:nil];
