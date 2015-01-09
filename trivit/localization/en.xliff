@@ -117,7 +117,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/en.lproj/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
