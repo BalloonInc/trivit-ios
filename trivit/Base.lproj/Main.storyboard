@@ -8,7 +8,9 @@
         <!--Tut Master View Controller-->
         <scene sceneID="BvL-RZ-vnC">
             <objects>
-                <pageViewController storyboardIdentifier="tutorialMasterViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="QPx-gX-bu6" customClass="TutMasterViewController" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="tutorialMasterViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="QPx-gX-bu6" customClass="TutMasterViewController" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Dn-2C-trm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1644" y="-468"/>
@@ -47,6 +49,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wdv-A6-boC"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="textLabel" destination="Nmf-lp-UYK" id="BLR-nC-flv"/>
@@ -578,5 +581,5 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

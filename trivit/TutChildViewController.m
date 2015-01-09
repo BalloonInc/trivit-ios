@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
     [self.tutorialImage setContentMode:UIViewContentModeScaleAspectFit];
     self.view.backgroundColor = [UIColor colorWithRed:48./256 green:108./256 blue:87./256 alpha:1];
@@ -52,6 +52,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tap.numberOfTapsRequired=1;
     [self.view addGestureRecognizer:tap];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
 }
 

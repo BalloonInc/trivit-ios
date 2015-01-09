@@ -1,0 +1,120 @@
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "Вы уверены, что Вы хотите удалить все тривиты?";
+
+/* messagebox text, parameter is title of tally */
+"Are you sure you want to reset '%@'?" = "Вы уверены, что Вы хотите сбросить '%@'?";
+
+/* Message box content */
+"Are you sure you want to reset all counts to 0?" = "Вы уверены, что Вы хотите сбросить все подсчеты до 0?";
+
+/* Color set name */
+"Blue" = "Синий";
+
+/* messagebox title */
+"Cannot add" = "Не может быть добавлен";
+
+/* label for vibration setting */
+"Color - %@" = "%@";
+
+/* Placeholder texts for newly added trivits */
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Дней в тюрьме, Спортивные автомобили, принадлежащие, дней без отдыха, чашки кофе в этом году, Tequilla выстрелы сегодня, красивые девушки в баре, дней работы оставил для нашего приложения, дней без проклятий, люди преследуют, Незаконченные фильмы Netflix, подсчитывает добавил, IPhones собственности, ошибки в наше программное обеспечение, пиво, пар обуви принадлежащих, дождливые дни в 2015 году, стаканов воды, Звезды в небе, дней, ожидая Apple Наблюдать выпуска";
+
+/* Tally example */
+"Days without smoking" = "Дни без сигарет";
+
+/* Color set name */
+"Default" = "Стандарт";
+
+/* Message box title */
+"Delete all Trivits" = "Удалить все тривиты";
+
+/* Tally example */
+"Drinks" = "Напитки";
+
+/* send feedback button in settings */
+"Feedback" = "Связаться";
+
+/* tutorial */
+"Get started!" = "Начать!";
+
+/* tutorial */
+"Give your Trivit a name" = "Дайте имя вашему Тривиту";
+
+/* OK button */
+"Got it." = "Понятно.";
+
+/* Color set name */
+"Green" = "Зеленый";
+
+/* feedback message */
+"I am missing some things..." = "Я что-то упустил.";
+
+/* feedback message */
+"I don't get it." = "Это не для меня.";
+
+/* feedback message */
+"I like what I see." = "Мне нравится что я вижу.";
+
+/* feedback message */
+"I've seen better, I've seen worse." = "Я видел как худшие так и лучшие.";
+
+/* No comment provided by engineer. */
+"No" = "Нет";
+
+/* Setting: off */
+"Off" = "Нет";
+
+/* Setting: on */
+"On" = "Да";
+
+/* tutorial */
+"Open or close your new Trivit with a single tap" = "Откройте или закройте Ваш Тривит одним нажатием.";
+
+/* messagebox text, adding a trivit not possible since you are editing the title of another trivit */
+"Please finish editing the title first." = "Сначала закончите редактирование заголовка.";
+
+/* Color set name */
+"Red" = "Красный";
+
+/* remove all trivits button in settings */
+"Remove all" = "Удалить все";
+
+/* messagebox title */
+"Reset Trivit" = "Сбросить тривит";
+
+/* reset all trivits button in settings */
+"Reset all" = "Сбросить все";
+
+/* Message box title */
+"Reset all Trivits" = "Сбросить все тривиты";
+
+/* feedback message */
+"Tap an image to rate:" = "Нажмите на символ для оценки:";
+
+/* tutorial */
+"Tap the minus to decrease the count, hold long to reset" = "Нажмите минус чтобы уменьшить количество, или удерживайте чтобы сбросить Тривит\n";
+
+/* tutorial */
+"Tap the pen to add a new Trivit" = "Коснитесь 'ручки' чтобы добавить новый Тривит";
+
+/* tutorial */
+"Tap to increase the count" = "Нажмите чтобы увеличить количество";
+
+/* feedback message */
+"This is the best app ever!" = "Это самое лучшее приложение!";
+
+/* show tutorial button in settings */
+"Tutorial" = "Приветствие";
+
+/* label for vibration setting */
+"Vibration - %@" = "Вибро - %@";
+
+/* Tally example */
+"Went swimming this year" = "Плавал в этом году";
+
+/* No comment provided by engineer. */
+"Yes" = "Да";
+
+/* Placeholder text for feedback text */
+"Your feedback (optional)" = "Ваше мнение (опционально)";
+

@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+
     //set number of pages in the tutorial
     self.numberOfPages=6;
     self.currentPage = 0;
@@ -31,6 +32,7 @@
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
     
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (void)didReceiveMemoryWarning {

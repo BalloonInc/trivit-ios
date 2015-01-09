@@ -1,0 +1,120 @@
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "Bent u zeker dat u alle trivits wilt verwijderen?";
+
+/* messagebox text, parameter is title of tally */
+"Are you sure you want to reset '%@'?" = "Bent u zeker dat u de teller van '%@' op 0 wilt zetten ?";
+
+/* Message box content */
+"Are you sure you want to reset all counts to 0?" = "Bent u zeker dat u alle tellers naar 0 wilt resetten?";
+
+/* Color set name */
+"Blue" = "Blauw";
+
+/* messagebox title */
+"Cannot add" = "Kan niet toevoegen";
+
+/* label for vibration setting */
+"Color - %@" = "Kleur - %@";
+
+/* Placeholder texts for newly added trivits */
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens";
+
+/* Tally example */
+"Days without smoking" = "Dagen zonder roken";
+
+/* Color set name */
+"Default" = "Standaard";
+
+/* Message box title */
+"Delete all Trivits" = "Verwijder alle Trivits";
+
+/* Tally example */
+"Drinks" = "Drankjes";
+
+/* send feedback button in settings */
+"Feedback" = "Feedback";
+
+/* tutorial */
+"Get started!" = "Aan de slag!";
+
+/* tutorial */
+"Give your Trivit a name" = "Geef je Trivit een naam";
+
+/* OK button */
+"Got it." = "Ah zo.";
+
+/* Color set name */
+"Green" = "Groen";
+
+/* feedback message */
+"I am missing some things..." = "Ik mis het een en ander...";
+
+/* feedback message */
+"I don't get it." = "Ik versta het niet.";
+
+/* feedback message */
+"I like what I see." = "Ik hou er van.";
+
+/* feedback message */
+"I've seen better, I've seen worse." = "Meh.";
+
+/* No comment provided by engineer. */
+"No" = "Nee";
+
+/* Setting: off */
+"Off" = "Uit";
+
+/* Setting: on */
+"On" = "Aan";
+
+/* tutorial */
+"Open or close your new Trivit with a single tap" = "Open of sluit je Trivit met een enkele tik";
+
+/* messagebox text, adding a trivit not possible since you are editing the title of another trivit */
+"Please finish editing the title first." = "De huidige titel wordt nog bewerkt.";
+
+/* Color set name */
+"Red" = "Rood";
+
+/* remove all trivits button in settings */
+"Remove all" = "Verwijder alles";
+
+/* messagebox title */
+"Reset Trivit" = "Reset Trivit";
+
+/* reset all trivits button in settings */
+"Reset all" = "Reset alles";
+
+/* Message box title */
+"Reset all Trivits" = "Reset alle Trivits";
+
+/* feedback message */
+"Tap an image to rate:" = "Tik op een score:";
+
+/* tutorial */
+"Tap the minus to decrease the count, hold long to reset" = "Tik de min om de teller te verminderen, druk lang om te resetten";
+
+/* tutorial */
+"Tap the pen to add a new Trivit" = "Tik de pen om een nieuwe Trivit toe te voegen";
+
+/* tutorial */
+"Tap to increase the count" = "Tik om te turven";
+
+/* feedback message */
+"This is the best app ever!" = "Dit is de beste app ooit!";
+
+/* show tutorial button in settings */
+"Tutorial" = "Tutorial";
+
+/* label for vibration setting */
+"Vibration - %@" = "Trillen - %@";
+
+/* Tally example */
+"Went swimming this year" = "Zwemmen dit jaar";
+
+/* No comment provided by engineer. */
+"Yes" = "Ja";
+
+/* Placeholder text for feedback text */
+"Your feedback (optional)" = "Feedback (optioneel)";
+

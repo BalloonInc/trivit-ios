@@ -1,42 +1,12 @@
-/* Class = "IBUIButton"; normalTitle = "Show tutorial"; ObjectID = "0oe-9h-6Ea"; */
-"0oe-9h-6Ea.normalTitle" = "导航";
-
-/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "798-Ww-cFl"; */
+/* (No Commment) */
 "798-Ww-cFl.title" = "设置";
 
-/* Class = "IBUIButton"; normalTitle = "Reset all trivits"; ObjectID = "DO0-kr-C6k"; */
-"DO0-kr-C6k.normalTitle" = "清零";
-
-/* Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
+/* Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
 "Obg-Ql-Sqf.title" = "Trivit";
 
-/* Class = "IBUITextView"; text = "Tally marks, also called hash marks, are a unary numeral system. They are a form of numeral used for counting. They are most useful in counting or tallying ongoing results, such as the score in a game or sport, as no intermediate results need to be erased or discarded. However, because of the length of large numbers, tallies are not commonly used for static text. Notched sticks, known as tally sticks, were also historically used for this purpose."; ObjectID = "TSn-QR-jwc"; */
-"TSn-QR-jwc.text" = "计数符号是在统计中常用的一种符号。\n\n在欧洲和美国，计数符号写成五个一组的线条。前面四个是竖的，第五个与前四个交叉。\n\n在阿根廷、巴西、智利，计数符号用口字表示前四个，第五个是由左上至右下的斜線。\n\n在漢字文化圈地區中国、日本、韩国、台灣等，计数符号用正字表示。「正」字由於筆劃恰為5劃，而且皆為清晰易辨的直筆，所以在一些使用漢字的國家或地區也被用來作為計數之用，特別是需要一筆一筆計算的情況。例如在投票開票時，某項每得一票便在該項的對應欄位中計上一筆，每5筆成一個「正」字，開票結束時只要計算有幾個「正」字和殘筆即能迅速算出得票數。5劃的「正」字計數法除了有能迎合10進制的方便外，也有便於稽查核對、減少人為疏漏的好處，因為計數過程中只要少了一筆劃，「正」字就不完整，容易喚起漢字使用者的注意。";
-
-/* Class = "IBUILabel"; text = "Color Set"; ObjectID = "UQ0-IB-Nat"; */
-"UQ0-IB-Nat.text" = "标记颜色";
-
-/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[0] = "Flat"; ObjectID = "VwX-bd-ZzG"; */
-"VwX-bd-ZzG.segmentTitles[0]" = "默认颜色";
-
-/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[1] = "iOS"; ObjectID = "VwX-bd-ZzG"; */
-"VwX-bd-ZzG.segmentTitles[1]" = "iOS 颜色";
-
-/* Class = "IBUISegmentedControl"; VwX-bd-ZzG.segmentTitles[2] = "Trivit"; ObjectID = "VwX-bd-ZzG"; */
-"VwX-bd-ZzG.segmentTitles[2]" = "Trivit 颜色";
-
-/* Class = "IBUINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp"; */
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp"; */
 "aNY-hB-Hrp.title" = "关于 Trivit";
 
-/* Class = "IBUIButton"; normalTitle = "Delete all trivits"; ObjectID = "g6q-aW-cpu"; */
-"g6q-aW-cpu.normalTitle" = "清空所有";
-
-/* Class = "IBUIButton"; normalTitle = "Get started!"; ObjectID = "jiI-xk-2f7"; */
+/* (No Commment) */
 "jiI-xk-2f7.normalTitle" = "开始";
-
-/* Class = "IBUILabel"; text = "Vibration Feedback"; ObjectID = "zIL-Af-Scs"; */
-"zIL-Af-Scs.text" = "输入时振动提示";
-
-/* Class = "IBUILabel"; text = "http://en.wikipedia.org/wiki/Tally_marks"; ObjectID = "zos-oM-Mq1"; */
-"zos-oM-Mq1.text" = "http://zh.wikipedia.org/wiki/计数符号";
 
