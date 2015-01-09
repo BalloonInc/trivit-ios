@@ -32,7 +32,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit WatchKit Extension/Localizable.strings" source-language="en" datatype="plaintext" target-language="fr">
+  <file original="trivit WatchKit Extension/en.lproj/Localizable.strings" source-language="en" datatype="plaintext" target-language="fr">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -49,20 +49,28 @@
     </header>
     <body>
       <trans-unit id="8DX-1G-Gff.text">
-        <source>Help!</source>
-        <note>Class = "UILabel"; text = "Help!"; ObjectID = "8DX-1G-Gff";</note>
+        <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
       </trans-unit>
       <trans-unit id="38J-UG-1gr.text">
-        <source>Feedback (optional)</source>
-        <note>Class = "UITextView"; text = "Feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
+        <source>NO TRANSLATION</source>
+        <note>Class = "UITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
+      </trans-unit>
+      <trans-unit id="798-Ww-cFl.title">
+        <source>Settings</source>
+        <target>Šéţţţîñĝĝš</target>
+      </trans-unit>
+      <trans-unit id="JYG-xs-cHp.title">
+        <source>Settings</source>
+        <note>Class = "UINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp";</note>
       </trans-unit>
       <trans-unit id="Ksw-o9-V7f.text">
-        <source>Vibration - Off</source>
+        <source>NO TRANSLATION</source>
         <note>Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
       </trans-unit>
       <trans-unit id="M3c-5J-iQi.text">
-        <source>Give us a score:</source>
-        <note>Class = "UILabel"; text = "Give us a score:"; ObjectID = "M3c-5J-iQi";</note>
+        <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Tap an image to rate Trivit:"; ObjectID = "M3c-5J-iQi";</note>
       </trans-unit>
       <trans-unit id="Obg-Ql-Sqf.title">
         <source>Trivit</source>
@@ -70,17 +78,17 @@
         <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
-        <source>Show tutorial</source>
-        <note>Class = "UILabel"; text = "Show tutorial"; ObjectID = "Txb-zc-zGA";</note>
+        <source>Trivit</source>
+        <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
-        <source>About Trivit</source>
+        <source>NO TRANSLATION</source>
         <target>Àƀôûûţ ŢŢŕîṽṽîţ</target>
-        <note>Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
+        <note>Class = "UINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
-        <source>Color - Flat</source>
-        <note>Class = "UILabel"; text = "Color - Flat"; ObjectID = "bqM-wM-ulW";</note>
+        <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
       </trans-unit>
       <trans-unit id="c8x-yf-RaW.text">
         <source>Visit us: www.trivit.be</source>
@@ -89,6 +97,10 @@
       <trans-unit id="f6g-ir-zuT.placeholder">
         <source>Your name (optional)</source>
         <note>Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT";</note>
+      </trans-unit>
+      <trans-unit id="jiI-xk-2f7.normalTitle">
+        <source>Get started!</source>
+        <target>Ĝéţ  šţààŕţééð¡</target>
       </trans-unit>
       <trans-unit id="kib-6f-LI5.placeholder">
         <source>Your e-mail (optional)</source>
@@ -110,11 +122,11 @@
     </header>
     <body>
       <trans-unit id="CFBundleName">
-        <source>${PRODUCT_NAME}</source>
+        <source>Trivit</source>
         <target>${PRODUCT_NAME}</target>
       </trans-unit>
       <trans-unit id="CFBundleShortVersionString">
-        <source>0.2</source>
+        <source>1.0</source>
         <target>ⓞ·①</target>
       </trans-unit>
     </body>
@@ -126,7 +138,6 @@
     <body>
       <trans-unit id="Are you sure you want to delete all trivits?">
         <source>Are you sure you want to delete all trivits?</source>
-        <target>Àŕé  ýôûû šûûŕé ýýôû  ŵàññţ ţôô ðééļéţţé àļļļ ţţŕîṽṽîţš¿¿</target>
         <note>Message box content</note>
       </trans-unit>
       <trans-unit id="Are you sure you want to reset '%@'?">
@@ -135,8 +146,11 @@
       </trans-unit>
       <trans-unit id="Are you sure you want to reset all counts to 0?">
         <source>Are you sure you want to reset all counts to 0?</source>
-        <target>Àŕé  ýôûû šûûŕé ýýôû  ŵàññţ ţôô ŕééšéţţ àļļļ çôôûñţţš ţôô ⓞ¿¿</target>
         <note>Message box content</note>
+      </trans-unit>
+      <trans-unit id="Blue">
+        <source>Blue</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="Cannot add">
         <source>Cannot add</source>
@@ -152,17 +166,18 @@
       </trans-unit>
       <trans-unit id="Days without smoking">
         <source>Days without smoking</source>
-        <target>Ðàýšš ŵîîţĥôôûţ ššɱôķķîñĝĝ</target>
         <note>Tally example</note>
+      </trans-unit>
+      <trans-unit id="Default">
+        <source>Default</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="Delete all Trivits">
         <source>Delete all Trivits</source>
-        <target>Ðéļééţé  àļļļ Ţŕîîṽîţţš</target>
         <note>Message box title</note>
       </trans-unit>
       <trans-unit id="Drinks">
         <source>Drinks</source>
-        <target>Ðŕîññķš</target>
         <note>Tally example</note>
       </trans-unit>
       <trans-unit id="Feedback">
@@ -171,7 +186,6 @@
       </trans-unit>
       <trans-unit id="Get started!">
         <source>Get started!</source>
-        <target>Ĝéţ  šţààŕţééð¡</target>
         <note>tutorial</note>
       </trans-unit>
       <trans-unit id="Give your Trivit a name">
@@ -181,6 +195,10 @@
       <trans-unit id="Got it.">
         <source>Got it.</source>
         <note>OK button</note>
+      </trans-unit>
+      <trans-unit id="Green">
+        <source>Green</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="I am missing some things...">
         <source>I am missing some things...</source>
@@ -198,13 +216,8 @@
         <source>I've seen better, I've seen worse.</source>
         <note>feedback message</note>
       </trans-unit>
-      <trans-unit id="Let us know how you feel:">
-        <source>Let us know how you feel:</source>
-        <note>feedback message</note>
-      </trans-unit>
       <trans-unit id="No">
         <source>No</source>
-        <target>Ñô</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Off">
@@ -219,9 +232,13 @@
         <source>Open or close your new Trivit with a single tap</source>
         <note>tutorial</note>
       </trans-unit>
-      <trans-unit id="Please finish editing the title first">
-        <source>Please finish editing the title first</source>
+      <trans-unit id="Please finish editing the title first.">
+        <source>Please finish editing the title first.</source>
         <note>messagebox text, adding a trivit not possible since you are editing the title of another trivit</note>
+      </trans-unit>
+      <trans-unit id="Red">
+        <source>Red</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="Remove all">
         <source>Remove all</source>
@@ -229,7 +246,6 @@
       </trans-unit>
       <trans-unit id="Reset Trivit">
         <source>Reset Trivit</source>
-        <target>Ŕéšééţ ŢŢŕîṽṽîţ</target>
         <note>messagebox title</note>
       </trans-unit>
       <trans-unit id="Reset all">
@@ -238,12 +254,11 @@
       </trans-unit>
       <trans-unit id="Reset all Trivits">
         <source>Reset all Trivits</source>
-        <target>Ŕéšééţ ààļļ  Ţŕîṽṽîţšš</target>
         <note>Message box title</note>
       </trans-unit>
-      <trans-unit id="Show tutorial">
-        <source>Show tutorial</source>
-        <note>show tutorial button in settings</note>
+      <trans-unit id="Tap an image to rate:">
+        <source>Tap an image to rate:</source>
+        <note>feedback message</note>
       </trans-unit>
       <trans-unit id="Tap the minus to decrease the count, hold long to reset">
         <source>Tap the minus to decrease the count, hold long to reset</source>
@@ -261,18 +276,24 @@
         <source>This is the best app ever!</source>
         <note>feedback message</note>
       </trans-unit>
+      <trans-unit id="Trivit">
+        <source>Trivit</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="Tutorial">
+        <source>Tutorial</source>
+        <note>show tutorial button in settings</note>
+      </trans-unit>
       <trans-unit id="Vibration - %@">
         <source>Vibration - %@</source>
         <note>label for vibration setting</note>
       </trans-unit>
       <trans-unit id="Went swimming this year">
         <source>Went swimming this year</source>
-        <target>Ŵéñţţ šŵŵîɱɱɱîñĝ  ţĥîîš ýýéàŕ</target>
         <note>Tally example</note>
       </trans-unit>
       <trans-unit id="Yes">
         <source>Yes</source>
-        <target>Ýéš</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Your feedback (optional)">

@@ -186,11 +186,11 @@
 +(NSArray *)colorSetNames
 {
     return @[
-             @"Default",
-             @"Green",
-             @"Blue",
-             @"Red",
-             @"Trivit"
+             NSLocalizedString(@"Default",@"Color set name"),
+             NSLocalizedString(@"Green",@"Color set name"),
+             NSLocalizedString(@"Blue",@"Color set name"),
+             NSLocalizedString(@"Red",@"Color set name"),
+             NSLocalizedString(@"Trivit",@"Color set name")
              ];
 }
 

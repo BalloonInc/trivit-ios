@@ -50,9 +50,11 @@
     <body>
       <trans-unit id="8DX-1G-Gff.text">
         <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
       </trans-unit>
       <trans-unit id="38J-UG-1gr.text">
         <source>NO TRANSLATION</source>
+        <note>Class = "UITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
       </trans-unit>
       <trans-unit id="798-Ww-cFl.title">
         <source>Settings</source>
@@ -63,6 +65,7 @@
       </trans-unit>
       <trans-unit id="Ksw-o9-V7f.text">
         <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
       </trans-unit>
       <trans-unit id="M3c-5J-iQi.text">
         <source>NO TRANSLATION</source>
@@ -73,6 +76,7 @@
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
         <source>Trivit</source>
+        <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
         <source>NO TRANSLATION</source>
@@ -80,6 +84,7 @@
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
         <source>NO TRANSLATION</source>
+        <note>Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
       </trans-unit>
       <trans-unit id="c8x-yf-RaW.text">
         <source>Visit us: www.trivit.be</source>
@@ -98,9 +103,11 @@
       </trans-unit>
       <trans-unit id="mzT-GO-pIe.text">
         <source>Reset all</source>
+        <note>Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
       </trans-unit>
       <trans-unit id="yln-wJ-3Cw.text">
         <source>Remove all</source>
+        <note>Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
       </trans-unit>
     </body>
   </file>
@@ -134,6 +141,10 @@
         <source>Are you sure you want to reset all counts to 0?</source>
         <note>Message box content</note>
       </trans-unit>
+      <trans-unit id="Blue">
+        <source>Blue</source>
+        <note>Color set name</note>
+      </trans-unit>
       <trans-unit id="Cannot add">
         <source>Cannot add</source>
         <note>messagebox title</note>
@@ -149,6 +160,10 @@
       <trans-unit id="Days without smoking">
         <source>Days without smoking</source>
         <note>Tally example</note>
+      </trans-unit>
+      <trans-unit id="Default">
+        <source>Default</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="Delete all Trivits">
         <source>Delete all Trivits</source>
@@ -173,6 +188,10 @@
       <trans-unit id="Got it.">
         <source>Got it.</source>
         <note>OK button</note>
+      </trans-unit>
+      <trans-unit id="Green">
+        <source>Green</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="I am missing some things...">
         <source>I am missing some things...</source>
@@ -209,6 +228,10 @@
       <trans-unit id="Please finish editing the title first.">
         <source>Please finish editing the title first.</source>
         <note>messagebox text, adding a trivit not possible since you are editing the title of another trivit</note>
+      </trans-unit>
+      <trans-unit id="Red">
+        <source>Red</source>
+        <note>Color set name</note>
       </trans-unit>
       <trans-unit id="Remove all">
         <source>Remove all</source>
