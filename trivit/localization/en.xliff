@@ -32,7 +32,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit WatchKit Extension/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="trivit WatchKit Extension/en.lproj/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -49,40 +49,37 @@
     </header>
     <body>
       <trans-unit id="8DX-1G-Gff.text">
-        <source>Feedback</source>
-        <note>Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
+        <source>NO TRANSLATION</source>
       </trans-unit>
       <trans-unit id="38J-UG-1gr.text">
-        <source>Feedback (optional)</source>
-        <note>Class = "UITextView"; text = "Feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
+        <source>NO TRANSLATION</source>
+      </trans-unit>
+      <trans-unit id="798-Ww-cFl.title">
+        <source>Settings</source>
       </trans-unit>
       <trans-unit id="JYG-xs-cHp.title">
         <source>Settings</source>
         <note>Class = "UINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp";</note>
       </trans-unit>
       <trans-unit id="Ksw-o9-V7f.text">
-        <source>Vibration - Off</source>
-        <note>Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
+        <source>NO TRANSLATION</source>
       </trans-unit>
       <trans-unit id="M3c-5J-iQi.text">
-        <source>Give us a score:</source>
-        <note>Class = "UILabel"; text = "Give us a score:"; ObjectID = "M3c-5J-iQi";</note>
+        <source>NO TRANSLATION</source>
       </trans-unit>
       <trans-unit id="Obg-Ql-Sqf.title">
         <source>Trivit</source>
         <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
-        <source>Tutorial</source>
-        <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
+        <source>Trivit</source>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
-        <source>About Trivit</source>
+        <source>NO TRANSLATION</source>
         <note>Class = "UINavigationItem"; title = "About Trivit"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
-        <source>Color - Default</source>
-        <note>Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
+        <source>NO TRANSLATION</source>
       </trans-unit>
       <trans-unit id="c8x-yf-RaW.text">
         <source>Visit us: www.trivit.be</source>
@@ -92,17 +89,18 @@
         <source>Your name (optional)</source>
         <note>Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT";</note>
       </trans-unit>
+      <trans-unit id="jiI-xk-2f7.normalTitle">
+        <source>Get started!</source>
+      </trans-unit>
       <trans-unit id="kib-6f-LI5.placeholder">
         <source>Your e-mail (optional)</source>
         <note>Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5";</note>
       </trans-unit>
       <trans-unit id="mzT-GO-pIe.text">
         <source>Reset all</source>
-        <note>Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
       </trans-unit>
       <trans-unit id="yln-wJ-3Cw.text">
         <source>Remove all</source>
-        <note>Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
       </trans-unit>
     </body>
   </file>
@@ -112,14 +110,14 @@
     </header>
     <body>
       <trans-unit id="CFBundleName">
-        <source>${PRODUCT_NAME}</source>
+        <source>Trivit</source>
       </trans-unit>
       <trans-unit id="CFBundleShortVersionString">
-        <source>0.2</source>
+        <source>1.0</source>
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="trivit/en.lproj/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
