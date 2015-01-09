@@ -337,7 +337,7 @@
             </objects>
             <point key="canvasLocation" x="2061" y="95"/>
         </scene>
-        <!--About Trivit-->
+        <!--Feedback-->
         <scene sceneID="3Rq-kr-EYf">
             <objects>
                 <viewController id="iLb-YV-FG3" customClass="FeedbackViewController" sceneMemberID="viewController">
@@ -517,7 +517,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="About Trivit" id="aNY-hB-Hrp">
+                    <navigationItem key="navigationItem" title="Feedback" id="aNY-hB-Hrp">
                         <barButtonItem key="rightBarButtonItem" image="settings_rd_0004_send_icon" id="xtv-69-KAK">
                             <connections>
                                 <action selector="barButtonPressed:" destination="iLb-YV-FG3" id="IME-CA-0ha"/>
