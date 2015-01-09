@@ -26,6 +26,9 @@
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
 		6C7CE6361A4F6889004EE27D /* SettingButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */; };
+		6C8263AF1A5F29AC002A9941 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B11A5F29AC002A9941 /* InfoPlist.strings */; };
+		6C8263B41A5F29AC002A9941 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B61A5F29AC002A9941 /* Localizable.strings */; };
+		6C8263B91A5F29AC002A9941 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263BB1A5F29AC002A9941 /* InfoPlist.strings */; };
 		6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB4F1978610400C1D381 /* MainListViewController.m */; };
 		6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */; };
 		6C9025BC1984588300BB11FC /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9025BB1984588300BB11FC /* Settings.m */; };
@@ -125,6 +128,15 @@
 		6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingButtonCell.h; sourceTree = "<group>"; };
 		6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingButtonCell.m; sourceTree = "<group>"; };
 		6C8263AC1A5F2453002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6C8263B01A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8263B51A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C8263BA1A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8263BC1A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8263BD1A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C8263BE1A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8263BF1A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C8263C01A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C8263C11A5F29B9002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C89B0D21A0ABD7E00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C89B0D31A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C89B0D41A0ABD7F00CCE22C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -366,6 +378,8 @@
 		6CE4BBD51A1D609C005E9BCD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C8263BB1A5F29AC002A9941 /* InfoPlist.strings */,
+				6C8263B61A5F29AC002A9941 /* Localizable.strings */,
 				6CE4BBD61A1D609C005E9BCD /* Info.plist */,
 				6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */,
 			);
@@ -385,6 +399,7 @@
 		6CE4BBE71A1D609D005E9BCD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C8263B11A5F29AC002A9941 /* InfoPlist.strings */,
 				6CE4BBE81A1D609D005E9BCD /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -571,6 +586,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */,
+				6C8263B91A5F29AC002A9941 /* InfoPlist.strings in Resources */,
+				6C8263B41A5F29AC002A9941 /* Localizable.strings in Resources */,
 				6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */,
+				6C8263AF1A5F29AC002A9941 /* InfoPlist.strings in Resources */,
 				6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,6 +728,33 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		6C8263B11A5F29AC002A9941 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C8263B01A5F29AC002A9941 /* nl */,
+				6C8263BC1A5F29B8002A9941 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6C8263B61A5F29AC002A9941 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C8263B51A5F29AC002A9941 /* nl */,
+				6C8263BD1A5F29B8002A9941 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6C8263BB1A5F29AC002A9941 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C8263BA1A5F29AC002A9941 /* nl */,
+				6C8263BE1A5F29B8002A9941 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		6C92EC0E1A07629E00D2A8DC /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -717,6 +762,7 @@
 				6C92EC201A09A50500D2A8DC /* nl */,
 				6C89B0D21A0ABD7E00CCE22C /* ru */,
 				6C0A91511A0CE92E006F2F87 /* zh-CN */,
+				6C8263C01A5F29B8002A9941 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -728,6 +774,7 @@
 				6C92EC211A09A50500D2A8DC /* nl */,
 				6C89B0D31A0ABD7F00CCE22C /* ru */,
 				6C0A91521A0CE92F006F2F87 /* zh-CN */,
+				6C8263C11A5F29B9002A9941 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -739,6 +786,7 @@
 				6C92EC231A09A50600D2A8DC /* nl */,
 				6C89B0D51A0ABD7F00CCE22C /* ru */,
 				6C0A91541A0CE92F006F2F87 /* zh-CN */,
+				6C8263BF1A5F29B8002A9941 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

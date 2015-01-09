@@ -1,5 +1,5 @@
 /* (No Commment) */
-"CFBundleName" = "Trivit";
+"CFBundleName" = "${PRODUCT_NAME}";
 
 /* (No Commment) */
 "CFBundleShortVersionString" = "1.0";

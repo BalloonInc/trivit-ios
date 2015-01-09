@@ -37,20 +37,6 @@ int const NUMBEROFCELLS = 6;
 
 #pragma mark - Lazy instantiators
 
--(NSInteger) cellTypeForIndex: (NSInteger) index{
-    NSArray *cellIndexes;
-    if(UIInterfaceOrientationIsPortrait(self.currentOrientation))
-        cellIndexes = @[@0,@1,@2,@3,@4,@5];
-    else if (self.currentOrientation == UIInterfaceOrientationLandscapeRight)
-        cellIndexes = @[@1,@3,@5,@0,@2,@4];
-    else if(self.currentOrientation == UIInterfaceOrientationLandscapeLeft)
-        cellIndexes = @[@4,@2,@0,@5,@3,@1];
-    else // error!
-        cellIndexes = @[@-1,@-1,@-1,@-1,@-1,@-1];
-    NSNumber *res = (NSNumber*) cellIndexes[index];
-        return [res integerValue];
-}
-
 -(NSString*) sureToDeleteTitle{
     return NSLocalizedString(@"Delete all Trivits",@"Message box title");
 }
@@ -227,7 +213,7 @@ int const NUMBEROFCELLS = 6;
     // Configure the cell
 
     cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
-    cell.buttonID = [self cellTypeForIndex:indexPath.item];
+    cell.buttonID = indexPath.item;
 
     switch (cell.buttonID) {
         case TRASHCELL:

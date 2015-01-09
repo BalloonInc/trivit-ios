@@ -1,0 +1,108 @@
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "Are you sure you want to delete all trivits?";
+
+/* messagebox text, parameter is title of tally */
+"Are you sure you want to reset '%@'?" = "Are you sure you want to reset '%@'?";
+
+/* Message box content */
+"Are you sure you want to reset all counts to 0?" = "Are you sure you want to reset all counts to 0?";
+
+/* messagebox title */
+"Cannot add" = "Cannot add";
+
+/* label for vibration setting */
+"Color - %@" = "Color - %@";
+
+/* Placeholder texts for newly added trivits */
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release";
+
+/* Tally example */
+"Days without smoking" = "Days without smoking";
+
+/* Message box title */
+"Delete all Trivits" = "Delete all Trivits";
+
+/* Tally example */
+"Drinks" = "Drinks";
+
+/* send feedback button in settings */
+"Feedback" = "Feedback";
+
+/* tutorial */
+"Get started!" = "Get started!";
+
+/* tutorial */
+"Give your Trivit a name" = "Give your Trivit a name";
+
+/* OK button */
+"Got it." = "Got it.";
+
+/* feedback message */
+"I am missing some things..." = "I am missing some things...";
+
+/* feedback message */
+"I don't get it." = "I don't get it.";
+
+/* feedback message */
+"I like what I see." = "I like what I see.";
+
+/* feedback message */
+"I've seen better, I've seen worse." = "I've seen better, I've seen worse.";
+
+/* No comment provided by engineer. */
+"No" = "No";
+
+/* Setting: off */
+"Off" = "Off";
+
+/* Setting: on */
+"On" = "On";
+
+/* tutorial */
+"Open or close your new Trivit with a single tap" = "Open or close your new Trivit with a single tap";
+
+/* messagebox text, adding a trivit not possible since you are editing the title of another trivit */
+"Please finish editing the title first." = "Please finish editing the title first.";
+
+/* remove all trivits button in settings */
+"Remove all" = "Remove all";
+
+/* messagebox title */
+"Reset Trivit" = "Reset Trivit";
+
+/* reset all trivits button in settings */
+"Reset all" = "Reset all";
+
+/* Message box title */
+"Reset all Trivits" = "Reset all Trivits";
+
+/* feedback message */
+"Tap an image to rate:" = "Tap an image to rate:";
+
+/* tutorial */
+"Tap the minus to decrease the count, hold long to reset" = "Tap the minus to decrease the count, hold long to reset";
+
+/* tutorial */
+"Tap the pen to add a new Trivit" = "Tap the pen to add a new Trivit";
+
+/* tutorial */
+"Tap to increase the count" = "Tap to increase the count";
+
+/* feedback message */
+"This is the best app ever!" = "This is the best app ever!";
+
+/* show tutorial button in settings */
+"Tutorial" = "Tutorial";
+
+/* label for vibration setting */
+"Vibration - %@" = "Vibration - %@";
+
+/* Tally example */
+"Went swimming this year" = "Went swimming this year";
+
+/* No comment provided by engineer. */
+"Yes" = "Yes";
+
+/* Placeholder text for feedback text */
+"Your feedback (optional)" = "Your feedback (optional)";
+

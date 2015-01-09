@@ -71,7 +71,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-AppleLanguages"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ru\)"
@@ -87,7 +87,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(nl\)"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
