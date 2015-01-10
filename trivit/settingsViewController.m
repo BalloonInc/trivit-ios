@@ -170,7 +170,7 @@ int const NUMBEROFCELLS = 6;
 
 - (void)showTutorial {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
+    UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
     [self presentViewController:tutorialVC animated:YES completion:^{}];
 
 }
