@@ -41,8 +41,6 @@
             break;
         case 5:
             self.tutorialText = NSLocalizedString(@"Get started!", @"tutorial");
-
-            // last page: show done button
             break;
         default:
             self.tutorialText = @"Oops, that went wrong!";

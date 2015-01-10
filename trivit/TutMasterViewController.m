@@ -32,7 +32,7 @@
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
     
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,20 +111,20 @@
     NSUInteger index = [(TutChildViewController *)previousViewController index];
     self.currentPage = ++index;
     if (index == self.numberOfPages){
-        [self dismissViewControllerAnimated:YES completion:^{
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
-        }];
-
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-        
-
-    NSArray *theViewControllers = [NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil];
+    else{
+        NSArray *newVCs = [NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil];
     
-    //add page view
-    [self setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-    
+        //add page view
+        [self setViewControllers:newVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    }
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

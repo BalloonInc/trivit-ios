@@ -562,16 +562,12 @@ int const OUTSIDE_TAP = 3;
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
-    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
-        [self presentViewController:tutorialVC animated:YES completion:^{}];
-        // if empty: add some trivits
-        if (self.trivitCount == 0){
+    // if empty and first run: add some trivits
+
+    if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
             [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
             [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:550];
             [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
-        }
     }
     else
     {
@@ -588,6 +584,17 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    // show tutorial if needed
+    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
+        [self presentViewController:tutorialVC animated:YES completion:^{}];
+    }
 }
 
 -(void) resendUnsentFeedback{
