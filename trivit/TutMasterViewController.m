@@ -35,12 +35,6 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (TutChildViewController *)viewControllerAtIndex:(NSUInteger)index {
     
     TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];

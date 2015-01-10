@@ -29,7 +29,6 @@
 @property (nonatomic) NSInteger imagesPerRow;
 @end
 
-
 @implementation MainListViewController
 
 #pragma mark - Constants
@@ -49,16 +48,9 @@ int const OUTSIDE_TAP = 3;
     return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION+COLLECTIONVIEW_HORIZONTAL_SPACING));
 }
 
-@synthesize appSettings=_appSettings;
-
 -(Settings*) appSettings{
     if(!_appSettings){_appSettings=[[Settings alloc ] init];}
     return _appSettings;
-}
-
--(void) setAppSettings:(Settings *)appSettings
-{
-    _appSettings=appSettings;
 }
 
 -(NSString *) trivitExampleNameAtIndex: (NSInteger)index{
@@ -75,8 +67,7 @@ int const OUTSIDE_TAP = 3;
 {
     if(self.keyboardShown||self.trivitRecentlyAdded){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add",@"messagebox title")
-                                                        message:
-                               NSLocalizedString(@"Please finish editing the title first.", @"messagebox text, adding a trivit not possible since you are editing the title of another trivit")
+                                                        message:NSLocalizedString(@"Please finish editing the title first.", @"messagebox, adding trivit not possible while editing other trivit")
                                                        delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"Got it.",@"OK button")
                                               otherButtonTitles:nil];
@@ -91,9 +82,7 @@ int const OUTSIDE_TAP = 3;
     
     // decide on delay: if there are not enough cells to fill the view, add a 0.1 seconds delay
     // (this is to make sure editTrivitTitleAtIndexPath always works when adding a trivit)
-    // note to future self: sorry for the fucked up logic, but it works for now
-    // if it breaks, good luck figuring this stuff below out again (maybe next time try to code a bit cleaner from the beginning...)
-
+    
     NSArray * visibleRows =[self.tableView indexPathsForVisibleRows];
     
     NSInteger rowIndexOfFirstVisibleCell = visibleRows?[[visibleRows objectAtIndex:0] row]:0;
@@ -138,10 +127,9 @@ int const OUTSIDE_TAP = 3;
     record.color = [NSNumber numberWithInteger:colorIndex];
     record.type = [[title substringFromIndex:1] isEqualToString:@"_"]?@"ch_":@"";
     record.createdAt = [NSDate date];
-
+    
     // Save Record
     NSError *error = nil;
-    
     if (![self.managedObjectContext save:&error]) {
         if (error) {
             NSLog(@"Unable to save record.");
@@ -197,9 +185,9 @@ int const OUTSIDE_TAP = 3;
     {
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         record.counter = [NSNumber numberWithInt:0];
-
-        [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay];
-        }
+        
+        [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay]; // update cell
+    }
 }
 
 -(void) handleTallyIncrease: (UIGestureRecognizer *)singletapRecognizer
@@ -210,11 +198,10 @@ int const OUTSIDE_TAP = 3;
     increasedCell.loadAnimation = NO;
     
     if(!increasedCell.isCollapsed){
-        
         [increasedCell increaseTallyCounter];
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
         NSInteger currentCount = [record.counter integerValue]+1;
-
+        
         record.counter = [NSNumber numberWithInteger:currentCount];
         [self buzzIt];
         // if new image ==> redraw cell height
@@ -226,7 +213,7 @@ int const OUTSIDE_TAP = 3;
             [UIView animateWithDuration:0.2  delay:0.0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionAllowAnimatedContent animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
-            } completion:^(BOOL finished){}];
+            } completion:nil];
         }
     }
 }
@@ -243,8 +230,7 @@ int const OUTSIDE_TAP = 3;
     
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:tapRecognizer];
     swipedCell.loadAnimation = NO;
-
-   
+    
     if(!swipedCell.isCollapsed && (tappedViewIdentifier==CELL_TAP||tappedViewIdentifier==MINUSBUTTON_TAP)){
         [swipedCell decreaseTallyCounter];
         
@@ -280,7 +266,6 @@ int const OUTSIDE_TAP = 3;
         
         AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
     }
-
 }
 
 -(void) handleTallyCollapse: (UIGestureRecognizer *)recognizer
@@ -313,7 +298,7 @@ int const OUTSIDE_TAP = 3;
         [self handleTallyCollapse:singletapRecognizer];
     else if (tappedViewIdentifier==MINUSBUTTON_TAP)
         [self handleTallyDecrease:singletapRecognizer];
-
+    
 }
 
 -(NSInteger)tappedViewforGestureRecognizer: (UIGestureRecognizer *)gestureRecognizer
@@ -351,7 +336,6 @@ int const OUTSIDE_TAP = 3;
     
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == MINUSBUTTON_TAP)
         [self handleTallyReset:recognizer];
-
     
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP)
         [self editTrivitTitleAtIndexPath:indexPath];
@@ -396,7 +380,7 @@ int const OUTSIDE_TAP = 3;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
+    
     if (![record.isCollapsed boolValue])
         return MAX(CELL_HEIGHT_SECTION1 + CELL_HEIGHT_SECTION2,CELL_HEIGHT_SECTION1+[self cellHeigthForTallyCount:[record.counter integerValue]]); // Full
     else
@@ -406,9 +390,7 @@ int const OUTSIDE_TAP = 3;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TrivitTableViewCell *cell = [[TrivitTableViewCell alloc] init];
-
     [self configureCell:cell atIndexPath:indexPath];
-    
     return cell;
 }
 
@@ -431,7 +413,6 @@ int const OUTSIDE_TAP = 3;
     cell.cellIdentifier = (int)indexPath.row;
     if (!cell.titleTextField.delegate)
         cell.titleTextField.delegate = self;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -504,7 +485,7 @@ int const OUTSIDE_TAP = 3;
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {
-                [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
         case NSFetchedResultsChangeDelete: {
@@ -563,11 +544,11 @@ int const OUTSIDE_TAP = 3;
     }
     
     // if empty and first run: add some trivits
-
+    
     if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
-            [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
-            [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:550];
-            [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
+        [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
+        [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:550];
+        [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
     }
     else
     {
@@ -599,13 +580,15 @@ int const OUTSIDE_TAP = 3;
 
 -(void) resendUnsentFeedback{
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Feedback"];
-
+    
     // Add Sort Descriptors
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"scaleValue" ascending:YES]]];
     
     // Initialize Fetched Results Controller
-    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                               managedObjectContext:self.managedObjectContext
+                                                                                                 sectionNameKeyPath:nil
+                                                                                                          cacheName:nil];
     // Configure Fetched Results Controller
     [fetchedResultsController setDelegate:self];
     
@@ -614,17 +597,13 @@ int const OUTSIDE_TAP = 3;
     [fetchedResultsController performFetch:&error];
     
     if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
+        NSLog(@"Unable to perform fetch.\n%@, %@", error, error.localizedDescription);
         return;
     }
-    
-    for (Feedback *f in [fetchedResultsController fetchedObjects]) {
+    for (Feedback *f in [fetchedResultsController fetchedObjects])
         [[FeedbackManager alloc] feedbackWithObject:f managedObjectContext:self.managedObjectContext];
-
-    }
-
 }
+
 - (void) configureTableView{
     // add gestures
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -710,7 +689,7 @@ int const OUTSIDE_TAP = 3;
     
     // restore the insets
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, 0, self.tableView.contentInset.right);
-
+    
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
     

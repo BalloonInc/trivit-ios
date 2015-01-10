@@ -11,7 +11,6 @@
 @interface TutChildViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *tutorialImage;
-
 @end
 
 @implementation TutChildViewController
@@ -52,7 +51,6 @@
     tap.numberOfTapsRequired=1;
     [self.view addGestureRecognizer:tap];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -62,11 +60,6 @@
 
 -(void) handleTap:(UIGestureRecognizer*) tapRecognizer{
     [self.masterVC pageFoward:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

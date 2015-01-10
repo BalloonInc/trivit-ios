@@ -57,8 +57,7 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      allowLocationSimulation = "YES"
-      notificationPayloadFile = "trivit WatchKit Extension/PushNotificationPayload.json">
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
@@ -76,7 +75,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ru\)"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ch\)"
@@ -88,7 +87,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(nl\)"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

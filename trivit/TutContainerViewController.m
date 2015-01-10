@@ -22,6 +22,7 @@
         self.tutMasterVC.skipButton=self.skipButton; // set reference to self in tutmasterVC
     }
 }
+
 - (IBAction)skipTutorialButtonPressed:(id)sender {
     if(self.tutMasterVC)
         [self.tutMasterVC dismissTutorial];

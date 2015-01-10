@@ -893,6 +893,8 @@
 					"$(PROJECT_DIR)/trivit",
 				);
 				GCC_PREFIX_HEADER = "";
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
@@ -928,6 +930,8 @@
 					"$(PROJECT_DIR)/trivit",
 				);
 				GCC_PREFIX_HEADER = "";
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",

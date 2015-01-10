@@ -52,7 +52,7 @@
             colorSetArray = [Colors trivitColorsDark];
             break;
         default:
-            colorSetArray = [Colors greenColorsLight];
+            colorSetArray = [Colors flatDesignColorsLight];
     }
     return colorSetArray;
 }

@@ -27,15 +27,11 @@
     [dataObject setDeviceIdentifier:device];
     [dataObject setName:name];
     [dataObject setEmail:email];
-
+    
     [self feedbackWithObject: dataObject managedObjectContext:managedObjectContext];
 }
 
-
 -(void)feedbackWithObject:(Feedback *) dataObject managedObjectContext:(NSManagedObjectContext *)managedObjectContext{
-    
-    {
-    
     [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
     
     NSURL *baseURL = [NSURL URLWithString:@"http://ballooninc.be/api/"];
@@ -53,12 +49,14 @@
     RKObjectMapping *responseMapping = [Feedback defineLoginRequestMapping];
     
     [objectManager addResponseDescriptor:[RKResponseDescriptor
-                                          responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:@"feedback" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)
-                                          
-                                          ]];
-        [objectManager setRequestSerializationMIMEType:RKMIMETypeJSON];
-        
-        [objectManager postObject:dataObject path:@"feedback"
+                                          responseDescriptorWithMapping:responseMapping
+                                          method:RKRequestMethodAny
+                                          pathPattern:@"feedback"
+                                          keyPath:nil
+                                          statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)]];
+    [objectManager setRequestSerializationMIMEType:RKMIMETypeJSON];
+    
+    [objectManager postObject:dataObject path:@"feedback"
                    parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
                        [managedObjectContext deleteObject:dataObject];
                        [managedObjectContext save:nil];
@@ -66,7 +64,6 @@
                    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                        [managedObjectContext save:nil];
                    }];
-    }
 }
 
 @end
