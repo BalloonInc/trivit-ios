@@ -103,11 +103,17 @@
 /* feedback message */
 "This is the best app ever!" = "Это самое лучшее приложение!";
 
+/* Color set name */
+"Trivit" = "Тривит";
+
 /* show tutorial button in settings */
 "Tutorial" = "Приветствие";
 
 /* label for vibration setting */
 "Vibration - %@" = "Вибро - %@";
+
+/* website to visit */
+"Visit us: www.trivit.be" = "Наша страница: www.trivit.be";
 
 /* Tally example */
 "Went swimming this year" = "Плавал в этом году";

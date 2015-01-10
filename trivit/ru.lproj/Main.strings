@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff"; */
-"8DX-1G-Gff.text" = "Feedback";
+"8DX-1G-Gff.text" = "NO TRANSLATION";
 
 /* Class = "UITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr"; */
 "38J-UG-1gr.text" = "NO TRANSLATION";
@@ -29,7 +29,7 @@
 "bqM-wM-ulW.text" = "NO TRANSLATION";
 
 /* Class = "UITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW"; */
-"c8x-yf-RaW.text" = "Наша страница: www.trivit.be";
+"c8x-yf-RaW.text" = "NO TRANSLATION";
 
 /* Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
 "f6g-ir-zuT.placeholder" = "Ваше имя (опционально)";
