@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TutChildViewController.h"
+#import "TutContainerViewController.h"
 
 @interface TutMasterViewController : UIPageViewController <UIPageViewControllerDataSource>
-
+@property (strong,nonatomic) TutContainerViewController* tutContainerVC;
 -(void)pageFoward:(TutChildViewController*)previousViewController;
+-(void) dismissTutorial;
+
 @end

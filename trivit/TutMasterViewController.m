@@ -46,6 +46,9 @@
     TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
     childViewController.index=index;
     childViewController.masterVC = self;
+
+    [self.tutContainerVC showSkipButton:(index==self.numberOfPages-1)?false:true];
+    
     return childViewController;
 }
 
@@ -106,21 +109,24 @@
     }
 }
 
+-(void) dismissTutorial{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)pageFoward:(TutChildViewController*)previousViewController {
     
     NSUInteger index = [(TutChildViewController *)previousViewController index];
     self.currentPage = ++index;
-    if (index == self.numberOfPages){
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else{
-        NSArray *newVCs = [NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil];
     
-        //add page view
-        [self setViewControllers:newVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
-    }
+    if (index == self.numberOfPages)
+        [self dismissTutorial];
+    else //add page view
+        [self setViewControllers:[NSArray arrayWithObjects:[self viewControllerAtIndex:index], nil]
+                       direction:UIPageViewControllerNavigationDirectionForward
+                        animated:YES
+                      completion:NULL];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

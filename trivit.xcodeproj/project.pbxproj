@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C2AF5C61A5B5B25CD7983 /* libPods.a */; };
+		6C02C88F1A616DBE00547584 /* TutContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C02C88E1A616DBE00547584 /* TutContainerViewController.m */; };
 		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
@@ -91,6 +92,8 @@
 
 /* Begin PBXFileReference section */
 		4D6C2AF5C61A5B5B25CD7983 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
+		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
 		6C0A91541A0CE92F006F2F87 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = trivit/NewRelicAgent.framework; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -233,6 +236,8 @@
 				6C1C91B419FEF2DF00447874 /* TutChildViewController.m */,
 				6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */,
 				6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */,
+				6C02C88D1A616DBE00547584 /* TutContainerViewController.h */,
+				6C02C88E1A616DBE00547584 /* TutContainerViewController.m */,
 			);
 			name = tutorial;
 			sourceTree = "<group>";
@@ -675,6 +680,7 @@
 				6C41254D1A435FB800C2D4CA /* TallyModel.m in Sources */,
 				6C9025BC1984588300BB11FC /* Settings.m in Sources */,
 				6C11D3671A521F490024AAAA /* SettingsIcons.m in Sources */,
+				6C02C88F1A616DBE00547584 /* TutContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

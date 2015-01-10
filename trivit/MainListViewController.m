@@ -592,7 +592,7 @@ int const OUTSIDE_TAP = 3;
     // show tutorial if needed
     if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialMasterViewController"];
+        UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
         [self presentViewController:tutorialVC animated:YES completion:^{}];
     }
 }

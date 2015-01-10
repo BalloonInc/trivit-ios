@@ -9,11 +9,63 @@
         <scene sceneID="BvL-RZ-vnC">
             <objects>
                 <pageViewController storyboardIdentifier="tutorialMasterViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="QPx-gX-bu6" customClass="TutMasterViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7dH-et-TUN"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Dn-2C-trm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="-468"/>
+            <point key="canvasLocation" x="1646" y="-473"/>
+        </scene>
+        <!--Tut Container View Controller-->
+        <scene sceneID="oxe-go-4If">
+            <objects>
+                <viewController storyboardIdentifier="tutorialContainer" id="SnL-eC-TLQ" customClass="TutContainerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1db-Rv-68x"/>
+                        <viewControllerLayoutGuide type="bottom" id="eGj-RL-4AG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9UC-cc-CAI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXU-8K-5C6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <connections>
+                                    <segue destination="QPx-gX-bu6" kind="embed" identifier="TutMasterSegue" id="heQ-ix-65D"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-4d-I4A">
+                                <rect key="frame" x="235" y="434" width="69" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="8QB-JM-mae"/>
+                                    <constraint firstAttribute="width" constant="69" id="aby-H7-jgF"/>
+                                </constraints>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipTutorialButtonPressed:" destination="SnL-eC-TLQ" eventType="touchUpInside" id="ZwK-Ub-S21"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AXU-8K-5C6" firstAttribute="bottom" secondItem="eGj-RL-4AG" secondAttribute="top" id="Ce7-16-CgW"/>
+                            <constraint firstItem="AXU-8K-5C6" firstAttribute="leading" secondItem="9UC-cc-CAI" secondAttribute="leading" id="TGZ-a2-eTa"/>
+                            <constraint firstItem="AXU-8K-5C6" firstAttribute="top" secondItem="9UC-cc-CAI" secondAttribute="top" id="cIj-b0-Xs7"/>
+                            <constraint firstAttribute="trailing" secondItem="AXU-8K-5C6" secondAttribute="trailing" id="g9d-2V-5Lu"/>
+                            <constraint firstItem="eGj-RL-4AG" firstAttribute="top" secondItem="hfq-4d-I4A" secondAttribute="bottom" constant="8" symbolic="YES" id="kCI-0c-ofy"/>
+                            <constraint firstItem="hfq-4d-I4A" firstAttribute="trailing" secondItem="9UC-cc-CAI" secondAttribute="trailingMargin" id="mXu-Cd-ZKc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="skipButton" destination="hfq-4d-I4A" id="8GJ-C9-X62"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BST-f1-8lk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209" y="-473"/>
         </scene>
         <!--Tut Child View Controller-->
         <scene sceneID="AlD-d0-K6k">
@@ -62,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwG-LR-kK3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053" y="-473"/>
+            <point key="canvasLocation" x="2076" y="-517"/>
         </scene>
         <!--Trivit-->
         <scene sceneID="F8e-gv-cta">
