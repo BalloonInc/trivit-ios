@@ -19,16 +19,12 @@
 {
     if ([segue.destinationViewController isKindOfClass:[TutMasterViewController class]]){
         self.tutMasterVC = (TutMasterViewController *) segue.destinationViewController;
-        self.tutMasterVC.tutContainerVC=self; // set reference to self in tutmasterVC
+        self.tutMasterVC.skipButton=self.skipButton; // set reference to self in tutmasterVC
     }
 }
 - (IBAction)skipTutorialButtonPressed:(id)sender {
     if(self.tutMasterVC)
         [self.tutMasterVC dismissTutorial];
-}
-
--(void) showSkipButton:(BOOL)visible{
-    self.skipButton.hidden=!visible;
 }
 
 @end

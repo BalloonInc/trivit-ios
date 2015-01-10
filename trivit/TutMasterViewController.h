@@ -11,7 +11,7 @@
 #import "TutContainerViewController.h"
 
 @interface TutMasterViewController : UIPageViewController <UIPageViewControllerDataSource>
-@property (strong,nonatomic) TutContainerViewController* tutContainerVC;
+@property (strong,nonatomic) UIButton* skipButton;
 -(void)pageFoward:(TutChildViewController*)previousViewController;
 -(void) dismissTutorial;
 

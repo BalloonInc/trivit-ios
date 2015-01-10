@@ -46,8 +46,7 @@
     TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
     childViewController.index=index;
     childViewController.masterVC = self;
-
-    [self.tutContainerVC showSkipButton:(index==self.numberOfPages-1)?false:true];
+    childViewController.skipButton=self.skipButton;
     
     return childViewController;
 }

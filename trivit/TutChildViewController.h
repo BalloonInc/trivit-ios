@@ -14,4 +14,5 @@
 @property (strong,nonatomic) NSString *tutorialText;
 @property (nonatomic) NSUInteger index;
 @property (strong, nonatomic) TutMasterViewController *masterVC;
+@property (strong,nonatomic) UIButton* skipButton;
 @end

@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface TutContainerViewController : UIViewController
--(void) showSkipButton:(BOOL)visible;
 @end

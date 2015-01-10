@@ -46,12 +46,18 @@
             self.tutorialText = @"Oops, that went wrong!";
             break;
     }
+
     self.textLabel.text = self.tutorialText;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tap.numberOfTapsRequired=1;
     [self.view addGestureRecognizer:tap];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.skipButton.hidden=(self.index==5);
 }
 
 -(void) handleTap:(UIGestureRecognizer*) tapRecognizer{
