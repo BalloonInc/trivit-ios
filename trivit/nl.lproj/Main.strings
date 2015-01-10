@@ -34,6 +34,9 @@
 /* Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
 "f6g-ir-zuT.placeholder" = "Naam (optioneel)";
 
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A"; */
+"hfq-4d-I4A.normalTitle" = "Sla over";
+
 /* (No Commment) */
 "jiI-xk-2f7.normalTitle" = "Aan de slag!";
 
