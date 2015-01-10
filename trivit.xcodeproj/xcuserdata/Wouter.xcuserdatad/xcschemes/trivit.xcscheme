@@ -76,7 +76,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ru\)"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ch\)"
@@ -88,7 +88,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(nl\)"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

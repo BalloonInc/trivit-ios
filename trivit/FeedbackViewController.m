@@ -32,8 +32,11 @@
 @property (weak, nonatomic) IBOutlet UITextView *feedbackDetail;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextView *websiteLabel;
 
 @property (strong,nonatomic) UIColor *placeholderTextColor;
+
+@property (strong,nonatomic) NSTimer *beginAnimationTimer;
 @end
 
 @implementation FeedbackViewController
@@ -75,6 +78,10 @@
     [super viewDidLoad];
     self.score=0;
     
+    // localization in label with link does not work without this:
+    
+    self.websiteLabel.text = NSLocalizedString(@"Visit us: www.trivit.be", @"website to visit");
+    
     [self setPlaceHolderTextForTextView:self.feedbackDetail];
     
     self.feedbackDetail.delegate = self;
@@ -88,6 +95,24 @@
     // subscribe to notifications for keyboard show and hide, used for changing view size
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [self incrementScoreAnimation:nil];
+    self.beginAnimationTimer = [NSTimer scheduledTimerWithTimeInterval: .2 target: self
+                                                              selector: @selector(incrementScoreAnimation:) userInfo: nil repeats: YES];
+    [super viewDidAppear:animated];
+}
+
+
+-(void) incrementScoreAnimation: (NSTimer*) timer{
+    if(self.score==5){
+        [self.beginAnimationTimer invalidate];
+        self.beginAnimationTimer=nil;
+        self.score=0;
+    }
+    else
+        self.score++;
 }
 
 -(void) setInset: (NSInteger)inset forTextView: (UITextField *) textField

@@ -76,11 +76,11 @@
         <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
-        <source>Trivit</source>
+        <source>NO TRANSLATION</source>
         <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
-        <source>NO TRANSLATION</source>
+        <source>Feedback</source>
         <note>Class = "UINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
@@ -103,11 +103,11 @@
         <note>Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5";</note>
       </trans-unit>
       <trans-unit id="mzT-GO-pIe.text">
-        <source>Reset all</source>
+        <source>NO TRANSLATION</source>
         <note>Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
       </trans-unit>
       <trans-unit id="yln-wJ-3Cw.text">
-        <source>Remove all</source>
+        <source>NO TRANSLATION</source>
         <note>Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
       </trans-unit>
     </body>
@@ -125,7 +125,7 @@
       </trans-unit>
     </body>
   </file>
-  <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="trivit/en.lproj/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.2" build-num="6C101"/>
     </header>
@@ -281,6 +281,10 @@
       <trans-unit id="Vibration - %@">
         <source>Vibration - %@</source>
         <note>label for vibration setting</note>
+      </trans-unit>
+      <trans-unit id="Visit us: www.trivit.be">
+        <source>Visit us: www.trivit.be</source>
+        <note>website to visit</note>
       </trans-unit>
       <trans-unit id="Went swimming this year">
         <source>Went swimming this year</source>

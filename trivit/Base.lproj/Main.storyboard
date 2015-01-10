@@ -27,12 +27,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LgL-C0-svf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tut_page_0" translatesAutoresizingMaskIntoConstraints="NO" id="LgL-C0-svf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-lp-UYK">
-                                <rect key="frame" x="0.0" y="456" width="320" height="68"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-lp-UYK">
+                                <rect key="frame" x="0.0" y="452" width="320" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="Jvh-fo-5bw"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -40,12 +43,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="LgL-C0-svf" firstAttribute="top" secondItem="Chl-jJ-tJ9" secondAttribute="top" id="0PL-8L-wed"/>
-                            <constraint firstAttribute="trailing" secondItem="LgL-C0-svf" secondAttribute="trailing" id="74b-2Y-tsd"/>
-                            <constraint firstItem="Nmf-lp-UYK" firstAttribute="leading" secondItem="LgL-C0-svf" secondAttribute="leading" id="Jxm-P4-2f3"/>
-                            <constraint firstItem="Nmf-lp-UYK" firstAttribute="trailing" secondItem="LgL-C0-svf" secondAttribute="trailing" id="KHV-i3-8g1"/>
-                            <constraint firstItem="LgL-C0-svf" firstAttribute="leading" secondItem="Chl-jJ-tJ9" secondAttribute="leading" id="lRI-b2-P2s"/>
-                            <constraint firstItem="ho4-CK-BpZ" firstAttribute="top" secondItem="LgL-C0-svf" secondAttribute="bottom" id="ts2-ea-has"/>
+                            <constraint firstItem="LgL-C0-svf" firstAttribute="trailing" secondItem="Nmf-lp-UYK" secondAttribute="trailing" id="0yo-Ko-XlK"/>
+                            <constraint firstItem="Nmf-lp-UYK" firstAttribute="leading" secondItem="LgL-C0-svf" secondAttribute="leading" id="UCz-Xi-pwP"/>
+                            <constraint firstAttribute="trailing" secondItem="LgL-C0-svf" secondAttribute="trailing" id="XFO-Ft-Bre"/>
+                            <constraint firstItem="LgL-C0-svf" firstAttribute="top" secondItem="Chl-jJ-tJ9" secondAttribute="top" id="XNx-hd-xmw"/>
+                            <constraint firstItem="LgL-C0-svf" firstAttribute="bottom" secondItem="ho4-CK-BpZ" secondAttribute="top" id="oi1-KW-Vn2"/>
+                            <constraint firstItem="LgL-C0-svf" firstAttribute="leading" secondItem="Chl-jJ-tJ9" secondAttribute="leading" id="s5g-cQ-V71"/>
+                            <constraint firstAttribute="bottom" secondItem="Nmf-lp-UYK" secondAttribute="bottom" constant="48" id="sBe-JW-SZy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wdv-A6-boC"/>
@@ -541,6 +545,7 @@
                         <outlet property="nameField" destination="f6g-ir-zuT" id="VVa-lM-XM8"/>
                         <outlet property="rightBarButton" destination="xtv-69-KAK" id="U5V-1Q-XLV"/>
                         <outlet property="scrollView" destination="mIS-Xk-AW8" id="Omy-Nv-f6G"/>
+                        <outlet property="websiteLabel" destination="c8x-yf-RaW" id="iWP-zd-WWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3U-jv-DCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -575,6 +580,7 @@
         <image name="score_5" width="63" height="48"/>
         <image name="settings_button" width="25" height="25"/>
         <image name="settings_rd_0004_send_icon" width="25" height="24"/>
+        <image name="tut_page_0" width="414" height="736"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
