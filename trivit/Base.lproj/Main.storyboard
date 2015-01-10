@@ -35,10 +35,10 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfq-4d-I4A">
-                                <rect key="frame" x="235" y="434" width="69" height="38"/>
+                                <rect key="frame" x="212" y="434" width="92" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="8QB-JM-mae"/>
-                                    <constraint firstAttribute="width" constant="69" id="aby-H7-jgF"/>
+                                    <constraint firstAttribute="width" constant="92" id="aby-H7-jgF"/>
                                 </constraints>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
