@@ -121,9 +121,6 @@
 		6C5C4B9F1A61579F00C87401 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C5C4BA01A61579F00C87401 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		6C5C4BA11A61579F00C87401 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6C5C4BA21A615D2E00C87401 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6C5C4BA31A615D2E00C87401 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		6C5C4BA41A615D2E00C87401 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C5C4BA51A61605000C87401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C5C4BA61A61605700C87401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -725,7 +722,6 @@
 			children = (
 				6C5C4B971A61579300C87401 /* ru */,
 				6C5C4B9F1A61579F00C87401 /* nl */,
-				6C5C4BA21A615D2E00C87401 /* en */,
 				6C5C4BA51A61605000C87401 /* Base */,
 			);
 			name = Localizable.strings;
@@ -736,7 +732,6 @@
 			children = (
 				6C5C4B9D1A61579400C87401 /* ru */,
 				6C5C4BA11A61579F00C87401 /* nl */,
-				6C5C4BA41A615D2E00C87401 /* en */,
 				6C5C4BA61A61605700C87401 /* Base */,
 			);
 			name = InfoPlist.strings;
@@ -748,7 +743,6 @@
 				6C69C0A7195B6F4E002A3F53 /* Base */,
 				6C5C4B991A61579300C87401 /* ru */,
 				6C5C4BA01A61579F00C87401 /* nl */,
-				6C5C4BA31A615D2E00C87401 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
