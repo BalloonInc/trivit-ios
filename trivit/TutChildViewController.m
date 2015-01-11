@@ -8,9 +8,10 @@
 
 #import "TutChildViewController.h"
 #import "TutMasterViewController.h"
+
 @interface TutChildViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *tutorialImage;
+@property(weak, nonatomic) IBOutlet UILabel *textLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *tutorialImage;
 @end
 
 @implementation TutChildViewController
@@ -18,9 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu",(unsigned long)self.index]];
+    self.tutorialImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"tut_page_%lu", (unsigned long) self.index]];
     [self.tutorialImage setContentMode:UIViewContentModeScaleAspectFit];
-    self.view.backgroundColor = [UIColor colorWithRed:48./256 green:108./256 blue:87./256 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:48. / 256 green:108. / 256 blue:87. / 256 alpha:1];
 
     switch (self.index) {
         case 0:
@@ -48,17 +49,17 @@
 
     self.textLabel.text = self.tutorialText;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    tap.numberOfTapsRequired=1;
+    tap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:tap];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
--(void) viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.skipButton.hidden=(self.index==5);
+    self.skipButton.hidden = (self.index == 5);
 }
 
--(void) handleTap:(UIGestureRecognizer*) tapRecognizer{
+- (void)handleTap:(UIGestureRecognizer *)tapRecognizer {
     [self.masterVC pageFoward:self];
 }
 

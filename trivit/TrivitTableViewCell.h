@@ -22,29 +22,31 @@ extern float const COLLECTIONVIEW_VERTICAL_SPACING;
 extern float const COLLECTIONVIEW_HORIZONTAL_SPACING;
 extern NSString const *TALLY_TYPE;
 
-@property (nonatomic, strong) Tally *tally;
-@property (nonatomic) int cellIdentifier;
-@property (nonatomic) BOOL isCollapsed;
-@property (strong, nonatomic) Settings *appSettings;
-@property (nonatomic,strong) UIColor *cellBackColor;
-@property (nonatomic,strong) UIColor *cellBackColorDark;
+@property(nonatomic, strong) Tally *tally;
+@property(nonatomic) int cellIdentifier;
+@property(nonatomic) BOOL isCollapsed;
+@property(strong, nonatomic) Settings *appSettings;
+@property(nonatomic, strong) UIColor *cellBackColor;
+@property(nonatomic, strong) UIColor *cellBackColorDark;
 
-@property (nonatomic,strong) UICollectionView *images;
-@property (nonatomic) BOOL loadAnimation;
-@property (nonatomic) BOOL reloadCompleteCell;
+@property(nonatomic, strong) UICollectionView *images;
+@property(nonatomic) BOOL loadAnimation;
+@property(nonatomic) BOOL reloadCompleteCell;
 
-@property (strong,nonatomic) UIView *backgroundViewForTitle;
-@property (strong, nonatomic) UITextField *titleTextField;
-@property (strong, nonatomic) UILabel *tallyImageZone;
-@property (strong, nonatomic) UILabel *countLabel;
-@property (strong, nonatomic) UITextField *minusButton;
-@property (nonatomic) float cellHeigth;
+@property(strong, nonatomic) UIView *backgroundViewForTitle;
+@property(strong, nonatomic) UITextField *titleTextField;
+@property(strong, nonatomic) UILabel *tallyImageZone;
+@property(strong, nonatomic) UILabel *countLabel;
+@property(strong, nonatomic) UITextField *minusButton;
+@property(nonatomic) float cellHeigth;
 
-@property (weak, nonatomic) UIView *parentView;
+@property(weak, nonatomic) UIView *parentView;
 
 
-- (void) decreaseTallyCounter;
-- (void) increaseTallyCounter;
-- (void) showTalliesWithDelay;
+- (void)decreaseTallyCounter;
+
+- (void)increaseTallyCounter;
+
+- (void)showTalliesWithDelay;
 
 @end

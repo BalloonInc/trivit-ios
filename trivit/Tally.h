@@ -10,14 +10,16 @@
 
 @interface Tally : NSObject
 
-@property (nonatomic, strong) NSString* title;
-@property (nonatomic) NSInteger counter;
-@property (nonatomic) bool isCollapsed;
-@property (nonatomic) NSInteger colorIndex;
-@property (nonatomic,strong) NSString *type;
+@property(nonatomic, strong) NSString *title;
+@property(nonatomic) NSInteger counter;
+@property(nonatomic) bool isCollapsed;
+@property(nonatomic) NSInteger colorIndex;
+@property(nonatomic, strong) NSString *type;
 
--(void) addTally;
--(void) decreaseTally;
--(void) resetTally;
+- (void)addTally;
+
+- (void)decreaseTally;
+
+- (void)resetTally;
 
 @end

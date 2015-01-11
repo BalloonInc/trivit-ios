@@ -15,30 +15,42 @@
 @interface SettingsIcons : NSObject
 
 // iOS Controls Customization Outlets
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* feedback2Targets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* resetTargets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* trashTargets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* tutorialsTargets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* feedback1Targets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* vibrateTargets;
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* color9Targets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *feedback2Targets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *resetTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *trashTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *tutorialsTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *feedback1Targets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *vibrateTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray *color9Targets;
 
 // Drawing Methods
 + (void)drawFeedback2;
+
 + (void)drawReset;
+
 + (void)drawTrash;
+
 + (void)drawTutorials;
+
 + (void)drawFeedback1;
+
 + (void)drawVibrate;
+
 + (void)drawColor9;
 
 // Generated Images
-+ (UIImage*)imageOfFeedback2;
-+ (UIImage*)imageOfReset;
-+ (UIImage*)imageOfTrash;
-+ (UIImage*)imageOfTutorial;
-+ (UIImage*)imageOfFeedback;
-+ (UIImage*)imageOfVibrate;
-+ (UIImage*)imageOfColor;
++ (UIImage *)imageOfFeedback2;
+
++ (UIImage *)imageOfReset;
+
++ (UIImage *)imageOfTrash;
+
++ (UIImage *)imageOfTutorial;
+
++ (UIImage *)imageOfFeedback;
+
++ (UIImage *)imageOfVibrate;
+
++ (UIImage *)imageOfColor;
 
 @end

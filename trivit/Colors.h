@@ -8,36 +8,53 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 @interface Colors : NSObject
 
 // predefined colorsets
-+(NSArray*) greenColorsLight;
-+(NSArray*) greenColorsDark;
-+(NSArray*) redColorsLight;
-+(NSArray*) redColorsDark;
-+(NSArray*) blueColorsLight;
-+(NSArray*) blueColorsDark;
-+(NSArray*) pinkishColorsLight;
-+(NSArray*) pinkishColorsDark;
-+(NSArray*) trivitColorsLight;
-+(NSArray*) trivitColorsDark;
-+(NSArray*) flatDesignColorsLight;
-+(NSArray*) flatDesignColorsDark;
++ (NSArray *)greenColorsLight;
 
-+(NSArray*) colorSetNames;
++ (NSArray *)greenColorsDark;
+
++ (NSArray *)redColorsLight;
+
++ (NSArray *)redColorsDark;
+
++ (NSArray *)blueColorsLight;
+
++ (NSArray *)blueColorsDark;
+
++ (NSArray *)pinkishColorsLight;
+
++ (NSArray *)pinkishColorsDark;
+
++ (NSArray *)trivitColorsLight;
+
++ (NSArray *)trivitColorsDark;
+
++ (NSArray *)flatDesignColorsLight;
+
++ (NSArray *)flatDesignColorsDark;
+
++ (NSArray *)colorSetNames;
 
 //takes as input a hex formatted color and returns UIColor
-+(UIColor*) colorWithHexString:(NSString*)hex;
++ (UIColor *)colorWithHexString:(NSString *)hex;
+
 //returns random color using default colorset;
-+(UIColor*) randomColor;
++ (UIColor *)randomColor;
+
 //returns color with certain index using default colorset
-+(UIColor*) colorWithIndex:(NSInteger)index;
++ (UIColor *)colorWithIndex:(NSInteger)index;
+
 //returns random color from a certain colorset
-+(UIColor*) randomColorUsingColorSet:(NSArray*)colorSet;
++ (UIColor *)randomColorUsingColorSet:(NSArray *)colorSet;
+
 //returns a color with certain index with certain colorset
-+(UIColor*) colorWithIndex:(NSInteger)index
-             usingColorSet:(NSArray*)colorSet;
++ (UIColor *)colorWithIndex:(NSInteger)index
+              usingColorSet:(NSArray *)colorSet;
+
 //returns a colorset, based on an index
 //TODO: make a dictionary instead, so we can return based on name
-+(NSArray*) colorsetWithIndex:(NSInteger)index;
++ (NSArray *)colorsetWithIndex:(NSInteger)index;
 @end

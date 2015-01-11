@@ -9,44 +9,44 @@
 #import "TutMasterViewController.h"
 
 @interface TutMasterViewController ()
-@property (strong,nonatomic) UIStoryboard *mainStoryboard;
-@property (nonatomic) NSUInteger numberOfPages;
-@property (nonatomic) NSUInteger currentPage;
+@property(strong, nonatomic) UIStoryboard *mainStoryboard;
+@property(nonatomic) NSUInteger numberOfPages;
+@property(nonatomic) NSUInteger currentPage;
 @end
 
 @implementation TutMasterViewController
 
 - (void)viewDidLoad {
-    
+
     [super viewDidLoad];
 
     //set number of pages in the tutorial
-    self.numberOfPages=6;
+    self.numberOfPages = 6;
     self.currentPage = 0;
 
-    self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    self.dataSource=self;
+    self.mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.dataSource = self;
     [[self view] setFrame:[[self view] bounds]];
-    
+
     TutChildViewController *initialViewController = [self viewControllerAtIndex:0];
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
-    
+
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (TutChildViewController *)viewControllerAtIndex:(NSUInteger)index {
-    
-    TutChildViewController *childViewController = (TutChildViewController *)[self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
-    childViewController.index=index;
+
+    TutChildViewController *childViewController = (TutChildViewController *) [self.mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialChildViewController"];
+    childViewController.index = index;
     childViewController.masterVC = self;
-    childViewController.skipButton=self.skipButton;
-    
+    childViewController.skipButton = self.skipButton;
+
     return childViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    
-    NSUInteger index = [(TutChildViewController *)viewController index];
+
+    NSUInteger index = [(TutChildViewController *) viewController index];
     if (index == 0)
         return nil;
     // Decrease the index by 1 to return
@@ -55,8 +55,8 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    
-    NSUInteger index = [(TutChildViewController *)viewController index];
+
+    NSUInteger index = [(TutChildViewController *) viewController index];
     index++;
     if (index == self.numberOfPages)
         return nil;
@@ -74,23 +74,23 @@
 }
 
 // For the tutorial, only allow portrait mode
--(NSUInteger)supportedInterfaceOrientations {
+- (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 
 //Function to make the bottom bar transparent
--(void)viewDidLayoutSubviews {
-    
-    if( [self.view.subviews count] == 2 ) {
-        UIScrollView* scrollView = nil;
-        UIPageControl* pageControl = nil;
-        for( UIView* subView in self.view.subviews ) {
-            if( [subView isKindOfClass:[UIScrollView class]])
-                scrollView = (UIScrollView*)subView;
-            else if( [subView isKindOfClass:[UIPageControl class]] )
-                pageControl = (UIPageControl*)subView;
-                
-            if( scrollView != nil && pageControl != nil ) {
+- (void)viewDidLayoutSubviews {
+
+    if ([self.view.subviews count] == 2) {
+        UIScrollView *scrollView = nil;
+        UIPageControl *pageControl = nil;
+        for (UIView *subView in self.view.subviews) {
+            if ([subView isKindOfClass:[UIScrollView class]])
+                scrollView = (UIScrollView *) subView;
+            else if ([subView isKindOfClass:[UIPageControl class]])
+                pageControl = (UIPageControl *) subView;
+
+            if (scrollView != nil && pageControl != nil) {
                 // expand scroll view to fit entire view
                 scrollView.frame = self.view.bounds;
                 // put page control in front
@@ -101,17 +101,17 @@
     }
 }
 
--(void) dismissTutorial{
+- (void)dismissTutorial {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)pageFoward:(TutChildViewController*)previousViewController {
-    
-    NSUInteger index = [(TutChildViewController *)previousViewController index];
+- (void)pageFoward:(TutChildViewController *)previousViewController {
+
+    NSUInteger index = [(TutChildViewController *) previousViewController index];
     self.currentPage = ++index;
-    
+
     if (index == self.numberOfPages)
         [self dismissTutorial];
     else //add page view

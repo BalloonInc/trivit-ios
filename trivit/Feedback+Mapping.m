@@ -10,18 +10,18 @@
 
 @implementation Feedback (Mapping)
 
-+(RKObjectMapping*)defineLoginRequestMapping {
-    
++ (RKObjectMapping *)defineLoginRequestMapping {
+
     RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[Feedback class]];
-    
+
     [mapping addAttributeMappingsFromDictionary:@{
-                                                  @"feedbackMessage":   @"feedbackMessage",
-                                                  @"deviceIdentifier":   @"deviceIdentifier",
-                                                  @"softwareIdentifier":   @"softwareIdentifier",
-                                                  @"scaleValue":   @"scaleValue",
-                                                  @"name":   @"name",
-                                                  @"email":   @"email"
-                                                  }];
+            @"feedbackMessage" : @"feedbackMessage",
+            @"deviceIdentifier" : @"deviceIdentifier",
+            @"softwareIdentifier" : @"softwareIdentifier",
+            @"scaleValue" : @"scaleValue",
+            @"name" : @"name",
+            @"email" : @"email"
+    }];
     return mapping;
 }
 

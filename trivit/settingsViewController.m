@@ -9,19 +9,18 @@
 #import "SettingsViewController.h"
 #import "TallyModel.h"
 #import "SettingButtonCell.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "Colors.h"
 #import "FeedbackViewController.h"
 #import "SettingsIcons.h"
 
 @interface SettingsViewController () <UIAlertViewDelegate>
-@property (strong, nonatomic, readonly) NSString *sureToDeleteTitle;
-@property (strong,nonatomic, readonly) NSString *sureToResetTitle;
-@property (nonatomic) int cellHeight;
-@property (nonatomic) int cellWidth;
-@property (nonatomic) int spacing;
+@property(strong, nonatomic, readonly) NSString *sureToDeleteTitle;
+@property(strong, nonatomic, readonly) NSString *sureToResetTitle;
+@property(nonatomic) int cellHeight;
+@property(nonatomic) int cellWidth;
+@property(nonatomic) int spacing;
 
-@property (nonatomic) UIDeviceOrientation currentOrientation;
+@property(nonatomic) UIDeviceOrientation currentOrientation;
 @end
 
 @implementation SettingsViewController
@@ -37,44 +36,39 @@ int const NUMBEROFCELLS = 6;
 
 #pragma mark - Lazy instantiators
 
--(NSString*) sureToDeleteTitle{
-    return NSLocalizedString(@"Delete all Trivits",@"Message box title");
+- (NSString *)sureToDeleteTitle {
+    return NSLocalizedString(@"Delete all Trivits", @"Message box title");
 }
 
--(NSString*) sureToResetTitle{
+- (NSString *)sureToResetTitle {
     return NSLocalizedString(@"Reset all Trivits", @"Message box title");
 }
 
-- (NSString *) vibrationString:(BOOL)on{
-    NSString *yesOrNo = on?NSLocalizedString(@"On", @"Setting: on"):NSLocalizedString(@"Off", @"Setting: off");
-    ;
-    return [NSString stringWithFormat:NSLocalizedString(@"Vibration - %@", @"label for vibration setting"),yesOrNo];
+- (NSString *)vibrationString:(BOOL)on {
+    NSString *yesOrNo = on ? NSLocalizedString(@"On", @"Setting: on") : NSLocalizedString(@"Off", @"Setting: off");;
+    return [NSString stringWithFormat:NSLocalizedString(@"Vibration - %@", @"label for vibration setting"), yesOrNo];
 }
 
-- (NSString *) colorStringforIndex:(NSInteger)index{
-    NSString *color = [[Colors colorSetNames] objectAtIndex:index];
-    ;
-    return [NSString stringWithFormat:NSLocalizedString(@"Color - %@", @"label for vibration setting"),color];
+- (NSString *)colorStringforIndex:(NSInteger)index {
+    NSString *color = [[Colors colorSetNames] objectAtIndex:index];;
+    return [NSString stringWithFormat:NSLocalizedString(@"Color - %@", @"label for vibration setting"), color];
 }
 
--(void) viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+
     [defaults setObject:[NSNumber numberWithBool:self.appSettings.vibrationFeedback] forKey:@"vibrationFeedback"];
     [defaults setObject:[NSNumber numberWithInteger:self.appSettings.selectedColorSet] forKey:@"selectedColorSet"];
-    
+
     [defaults synchronize];
     [super viewWillDisappear:animated];
 }
 
--(void) updateBackgroundColor
-{
-    self.collectionView.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet]];
+- (void)updateBackgroundColor {
+    self.collectionView.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2 * self.appSettings.selectedColorSet]];
 }
 
--(void) viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self updateBackgroundColor];
     // subscribe to device rotation
@@ -84,13 +78,12 @@ int const NUMBEROFCELLS = 6;
                                                object:nil];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self redoLayout:nil];
 }
 
-- (IBAction)buttonPressed:(UIButton *)sender
-{
+- (IBAction)buttonPressed:(UIButton *)sender {
     switch (sender.tag) {
         case TRASHCELL:
             [self deleteAllTrivits];
@@ -115,14 +108,13 @@ int const NUMBEROFCELLS = 6;
     }
 }
 
--(void)segueToFeedbackFromButton:(id)sender{
+- (void)segueToFeedbackFromButton:(id)sender {
     [self performSegueWithIdentifier:@"ShowFeedbackScreen" sender:sender];
 }
 
-- (void)colorButtonPressed
-{
-    self.appSettings.selectedColorSet=(self.appSettings.selectedColorSet+1)%[[Colors colorSetNames] count];
-    
+- (void)colorButtonPressed {
+    self.appSettings.selectedColorSet = (self.appSettings.selectedColorSet + 1) % [[Colors colorSetNames] count];
+
     [self updateBackgroundColor];
     [self.collectionView reloadData];
 }
@@ -130,20 +122,20 @@ int const NUMBEROFCELLS = 6;
 
 - (void)vibrationButtonPressed {
     self.appSettings.vibrationFeedback = !self.appSettings.vibrationFeedback;
-    if(self.appSettings.vibrationFeedback){
-        NSMutableArray* arr = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:YES],
-                               [NSNumber numberWithInt:500], nil];
-        
-        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              arr,@"VibePattern",
-                              [NSNumber numberWithFloat:1.],@"Intensity",nil];
-        
+    if (self.appSettings.vibrationFeedback) {
+        NSMutableArray *arr = [NSMutableArray arrayWithObjects:
+                [NSNumber numberWithBool:YES],
+                [NSNumber numberWithInt:500], nil];
+
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                arr, @"VibePattern",
+                [NSNumber numberWithFloat:1.], @"Intensity", nil];
+
         //declare function before usage
         int AudioServicesPlaySystemSoundWithVibration();
-        
-        AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
-        
+
+        AudioServicesPlaySystemSoundWithVibration(4095, nil, dict);
+
     }
 
     [self.collectionView reloadData];
@@ -151,44 +143,44 @@ int const NUMBEROFCELLS = 6;
 
 - (void)deleteAllTrivits {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToDeleteTitle
-                                                    message:NSLocalizedString(@"Are you sure you want to delete all trivits?",@"Message box content")
+                                                    message:NSLocalizedString(@"Are you sure you want to delete all trivits?", @"Message box content")
                                                    delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"No",@"")
-                                          otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];
+                                          cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
     [alert show];
 
 }
+
 - (void)resetAllTrivits {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.sureToResetTitle
                                                     message:NSLocalizedString(@"Are you sure you want to reset all counts to 0?", @"Message box content")
                                                    delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"No",@"")
-                                          otherButtonTitles:NSLocalizedString(@"Yes",@""), nil];
+                                          cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
     [alert show];
 
 }
 
 - (void)showTutorial {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    UINavigationController *tutorialVC = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
-    [self presentViewController:tutorialVC animated:YES completion:^{}];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *tutorialVC = (UINavigationController *) [mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
+    [self presentViewController:tutorialVC animated:YES completion:^{
+    }];
 
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 1)
-    {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
         [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-        
+
         NSError *error;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if([alertView.title isEqualToString:self.sureToDeleteTitle]){
+        if ([alertView.title isEqualToString:self.sureToDeleteTitle]) {
             for (NSManagedObject *record in fetchedObjects)
                 [self.managedObjectContext deleteObject:record];
         }
-        if([alertView.title isEqualToString:self.sureToResetTitle])
+        if ([alertView.title isEqualToString:self.sureToResetTitle])
             for (TallyModel *record in fetchedObjects)
                 record.counter = [NSNumber numberWithInteger:0];
 
@@ -206,19 +198,19 @@ int const NUMBEROFCELLS = 6;
     return NUMBEROFCELLS;
 }
 
- 
+
 - (SettingButtonCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%i",(int)indexPath.item+1] forIndexPath:indexPath];
-    
+    SettingButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[NSString stringWithFormat:@"cell_%i", (int) indexPath.item + 1] forIndexPath:indexPath];
+
     // Configure the cell
 
-    cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2*self.appSettings.selectedColorSet+1]];
+    cell.backgroundColor = [Colors colorWithIndex:0 usingColorSet:[Colors colorsetWithIndex:2 * self.appSettings.selectedColorSet + 1]];
     cell.buttonID = indexPath.item;
 
     switch (cell.buttonID) {
         case TRASHCELL:
             cell.buttonImage = [SettingsIcons imageOfTrash];
-            cell.buttonText = NSLocalizedString(@"Remove all",@"remove all trivits button in settings");
+            cell.buttonText = NSLocalizedString(@"Remove all", @"remove all trivits button in settings");
             break;
         case COLORCELL:
             cell.buttonImage = [SettingsIcons imageOfColor];
@@ -226,15 +218,15 @@ int const NUMBEROFCELLS = 6;
             break;
         case TUTORIALCELL:
             cell.buttonImage = [SettingsIcons imageOfTutorial];
-            cell.buttonText = NSLocalizedString(@"Tutorial",@"show tutorial button in settings");
+            cell.buttonText = NSLocalizedString(@"Tutorial", @"show tutorial button in settings");
             break;
         case RESETCELL:
             cell.buttonImage = [SettingsIcons imageOfReset];
-            cell.buttonText = NSLocalizedString(@"Reset all",@"reset all trivits button in settings");
+            cell.buttonText = NSLocalizedString(@"Reset all", @"reset all trivits button in settings");
             break;
         case FEEDBACKCELL:
             cell.buttonImage = [SettingsIcons imageOfFeedback];
-            cell.buttonText = NSLocalizedString(@"Feedback",@"send feedback button in settings");
+            cell.buttonText = NSLocalizedString(@"Feedback", @"send feedback button in settings");
             break;
         case VIBRATIONCELL:
             cell.buttonText = [self vibrationString:self.appSettings.vibrationFeedback];
@@ -247,61 +239,59 @@ int const NUMBEROFCELLS = 6;
 }
 
 #pragma mark Collection view layout things
+
 // Layout: Set cell size
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGSize mElementSize = CGSizeMake(self.cellWidth,self.cellHeight);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    CGSize mElementSize = CGSizeMake(self.cellWidth, self.cellHeight);
     return mElementSize;
 }
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return self.spacing;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return self.spacing;
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"ShowFeedbackScreen"])
-    {
-        if ([segue.destinationViewController isKindOfClass:[FeedbackViewController class]])
-        {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowFeedbackScreen"]) {
+        if ([segue.destinationViewController isKindOfClass:[FeedbackViewController class]]) {
             SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
             [svc setManagedObjectContext:self.managedObjectContext];
         }
     }
 }
 
--(void) redoLayout: (NSNotification *)notification
-{
+- (void)redoLayout:(NSNotification *)notification {
     self.currentOrientation = [[UIDevice currentDevice] orientation];
     UIInterfaceOrientation cachedOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
+
     if (self.currentOrientation == UIDeviceOrientationUnknown ||
-        self.currentOrientation == UIDeviceOrientationFaceUp ||
-        self.currentOrientation == UIDeviceOrientationFaceDown ||
-        self.currentOrientation == UIDeviceOrientationPortraitUpsideDown)
-        self.currentOrientation = (UIDeviceOrientation)cachedOrientation;
-    
+            self.currentOrientation == UIDeviceOrientationFaceUp ||
+            self.currentOrientation == UIDeviceOrientationFaceDown ||
+            self.currentOrientation == UIDeviceOrientationPortraitUpsideDown)
+        self.currentOrientation = (UIDeviceOrientation) cachedOrientation;
+
     if (UIInterfaceOrientationIsLandscape(self.currentOrientation))
         self.cellHeight = 128;
-    
-    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)){
-        if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone &&
-           MAX([[UIScreen mainScreen] bounds].size.height,[[UIScreen mainScreen] bounds].size.width) < 567.9f)
+
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone &&
+                MAX([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width) < 567.9f)
             // for iPhone 4S, smaller tiles in portrait
             self.cellHeight = 124;
         else
             self.cellHeight = 136;
 
     }
-    
+
     self.cellWidth = 136;
     self.spacing = 10;
-    
-    if(notification){
+
+    if (notification) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self.collectionView reloadData];
     }

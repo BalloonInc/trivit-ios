@@ -11,7 +11,7 @@
 #import <CoreData/CoreData.h>
 
 @interface SettingsViewController : UICollectionViewController
-@property (strong, nonatomic) Settings *appSettings;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
- 
+@property(strong, nonatomic) Settings *appSettings;
+@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @end

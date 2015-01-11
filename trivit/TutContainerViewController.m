@@ -10,29 +10,30 @@
 #import "TutMasterViewController.h"
 
 @interface TutContainerViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *skipButton;
-@property (strong, nonatomic) TutMasterViewController* tutMasterVC;
+@property(weak, nonatomic) IBOutlet UIButton *skipButton;
+@property(strong, nonatomic) TutMasterViewController *tutMasterVC;
 @end
+
 @implementation TutContainerViewController
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[TutMasterViewController class]]){
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[TutMasterViewController class]]) {
         self.tutMasterVC = (TutMasterViewController *) segue.destinationViewController;
-        self.tutMasterVC.skipButton=self.skipButton; // set reference to self in tutmasterVC
+        self.tutMasterVC.skipButton = self.skipButton; // set reference to self in tutmasterVC
     }
 }
 
 - (IBAction)skipTutorialButtonPressed:(id)sender {
-    if(self.tutMasterVC)
+    if (self.tutMasterVC)
         [self.tutMasterVC dismissTutorial];
 }
 
--(void) viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];
 }
--(UIStatusBarStyle)preferredStatusBarStyle{
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 

@@ -18,7 +18,7 @@ extern "C" {
 #ifndef NanosToMillis
 #define NanosToMillis(x) \
 x / 1000000
-#endif  
+#endif
 
 #ifndef NanosToSeconds
 #define NanosToSeconds(x) \
@@ -31,17 +31,24 @@ x / 1000000000
  */
 @interface NRTimer : NSObject
 
-@property (nonatomic, readonly) double startTimeMillis;
-@property (nonatomic, readonly) double endTimeMillis;
+@property(nonatomic, readonly) double startTimeMillis;
+@property(nonatomic, readonly) double endTimeMillis;
+
 //Absolute time isn't useful from this timer.
 //it uses relative time since last reboot.
-- (double) startTimeInMillis;
-- (double) endTimeInMillis;
-- (void) restartTimer;
-- (void) stopTimer;
-- (BOOL) hasRunAndFinished;
-- (double) timeElapsedInSeconds;
-- (double) timeElapsedInMilliSeconds;
+- (double)startTimeInMillis;
+
+- (double)endTimeInMillis;
+
+- (void)restartTimer;
+
+- (void)stopTimer;
+
+- (BOOL)hasRunAndFinished;
+
+- (double)timeElapsedInSeconds;
+
+- (double)timeElapsedInMilliSeconds;
 
 @end
 

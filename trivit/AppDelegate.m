@@ -1,4 +1,3 @@
-
 //
 //  AppDelegate.m
 //  trivit
@@ -9,15 +8,14 @@
 
 #import "AppDelegate.h"
 #import "MainListViewController.h"
-#import "TutMasterViewController.h"
 #import <CoreData/CoreData.h>
 #import <NewRelicAgent/NewRelic.h>
 
 @interface AppDelegate ()
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property(strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
@@ -27,22 +25,22 @@
     //New Relic analytics
     //temporary disable NewRelic Crash reporting
     //[NewRelic enableCrashReporting:NO];
-    
+
     [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 
     // Fetch Main Storyboard
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
     // Instantiate Root Navigation Controller
-    UINavigationController *rootNavigationController = (UINavigationController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
+    UINavigationController *rootNavigationController = (UINavigationController *) [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNavigationController"];
 
     // Configure View Controller
-    MainListViewController *mainViewController = (MainListViewController *)[rootNavigationController topViewController];
-    
+    MainListViewController *mainViewController = (MainListViewController *) [rootNavigationController topViewController];
+
     if ([mainViewController isKindOfClass:[MainListViewController class]]) {
         [mainViewController setManagedObjectContext:self.managedObjectContext];
     }
-    
+
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
 
@@ -77,14 +75,14 @@
     if (_managedObjectContext) {
         return _managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    
+
     if (coordinator) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
-    
+
     return _managedObjectContext;
 }
 
@@ -92,11 +90,11 @@
     if (_managedObjectModel) {
         return _managedObjectModel;
     }
-    
+
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"trivits" withExtension:@"momd"];
-    
+
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    
+
     return _managedObjectModel;
 }
 
@@ -106,10 +104,10 @@
     }
     NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"trivits.sqlite"];
-    
+
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    
+
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
@@ -118,9 +116,10 @@
 }
 
 #pragma mark Helper Methods
+
 - (void)saveManagedObjectContext {
     NSError *error = nil;
-    
+
     if (![self.managedObjectContext save:&error]) {
         if (error) {
             NSLog(@"Unable to save changes.");

@@ -10,18 +10,15 @@
 
 @implementation Tally
 
--(void) addTally
-{
+- (void)addTally {
     self.counter++; // add extra tally mark
 }
 
--(void) decreaseTally
-{
-    if (self.counter>0) self.counter--; // remove a tally mark
+- (void)decreaseTally {
+    if (self.counter > 0) self.counter--; // remove a tally mark
 }
 
--(void) resetTally
-{
+- (void)resetTally {
     self.counter = 0; // reset tally marks
 }
 

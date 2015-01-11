@@ -10,6 +10,6 @@
 #import "RKObjectMapping.h"
 
 @interface Feedback (Mapping)
-+(RKObjectMapping*)defineLoginRequestMapping;
++ (RKObjectMapping *)defineLoginRequestMapping;
 
 @end

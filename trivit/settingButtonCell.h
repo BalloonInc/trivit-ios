@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingButtonCell : UICollectionViewCell
-@property (strong, nonatomic) NSString * buttonText;
-@property (strong, nonatomic) UIImage* buttonImage;
-@property (nonatomic) NSInteger buttonID;
-@property (nonatomic) float imageAplha;
+@property(strong, nonatomic) NSString *buttonText;
+@property(strong, nonatomic) UIImage *buttonImage;
+@property(nonatomic) NSInteger buttonID;
+@property(nonatomic) float imageAplha;
 
 @end

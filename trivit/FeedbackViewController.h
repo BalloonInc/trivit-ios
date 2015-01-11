@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedbackViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
