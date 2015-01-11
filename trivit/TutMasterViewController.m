@@ -32,7 +32,6 @@
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
     
     [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (TutChildViewController *)viewControllerAtIndex:(NSUInteger)index {
@@ -120,10 +119,6 @@
                        direction:UIPageViewControllerNavigationDirectionForward
                         animated:YES
                       completion:NULL];
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
 }
 
 @end

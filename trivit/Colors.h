@@ -17,6 +17,8 @@
 +(NSArray*) redColorsDark;
 +(NSArray*) blueColorsLight;
 +(NSArray*) blueColorsDark;
++(NSArray*) pinkishColorsLight;
++(NSArray*) pinkishColorsDark;
 +(NSArray*) trivitColorsLight;
 +(NSArray*) trivitColorsDark;
 +(NSArray*) flatDesignColorsLight;

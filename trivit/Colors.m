@@ -28,28 +28,34 @@
             colorSetArray = [Colors flatDesignColorsDark];
             break;
         case 2:
-            colorSetArray = [Colors greenColorsLight];
-            break;
-        case 3:
-            colorSetArray = [Colors greenColorsDark];
-            break;
-        case 4:
-            colorSetArray = [Colors blueColorsLight];
-            break;
-        case 5:
-            colorSetArray = [Colors blueColorsDark];
-            break;
-        case 6:
-            colorSetArray = [Colors redColorsLight];
-            break;
-        case 7:
-            colorSetArray = [Colors redColorsDark];
-            break;
-        case 8:
             colorSetArray = [Colors trivitColorsLight];
             break;
-        case 9:
+        case 3:
             colorSetArray = [Colors trivitColorsDark];
+            break;
+        case 4:
+            colorSetArray = [Colors pinkishColorsLight];
+            break;
+        case 5:
+            colorSetArray = [Colors pinkishColorsDark];
+            break;
+        case 6:
+            colorSetArray = [Colors blueColorsLight];
+            break;
+        case 7:
+            colorSetArray = [Colors blueColorsDark];
+            break;
+        case 8:
+            colorSetArray = [Colors redColorsLight];
+            break;
+        case 9:
+            colorSetArray = [Colors redColorsDark];
+            break;
+        case 10:
+            colorSetArray = [Colors greenColorsLight];
+            break;
+        case 11:
+            colorSetArray = [Colors greenColorsDark];
             break;
         default:
             colorSetArray = [Colors flatDesignColorsLight];
@@ -79,6 +85,54 @@
           @"D35400", // Pumpkin
           @"C0392B"  // Pomegranate
           ];
+}
+
++(NSArray *)trivitColorsLight
+{
+    return @[
+             @"88E8D9", // AppleBlueSeaGreen
+             @"FFB736", // Orangish
+             @"FF7075", // Non-flashing Pink
+             @"54D3FF", // Gay Blue
+             @"43D487"  // Green
+             ];
+}
+
++(NSArray *)trivitColorsDark
+{
+    return @[
+             @"77CBBE", // AppleBlueSeaGreen
+             @"FBAB1B", // Orangish
+             @"F05F64", // Non-flashing Pink
+             @"45C5F2", // Gay Blue
+             @"3AB775"  // Green
+             ];
+}
+
++(NSArray *)pinkishColorsLight
+{
+    return @[
+             @"EF2D72",
+             @"A6122E",
+             @"75081D",
+             @"A6122E",
+             @"EF2D72",
+             @"F05FA2",
+             @"F1D4C3"
+             ];
+}
+
++(NSArray *)pinkishColorsDark
+{
+    return @[
+             @"D42865",
+             @"8A0F26",
+             @"580616",
+             @"8A0F26",
+             @"D42865",
+             @"D4548F",
+             @"D6BCAD"
+             ];
 }
 
 +(NSArray *)greenColorsLight
@@ -161,36 +215,15 @@
              ];
 }
 
-+(NSArray *)trivitColorsLight
-{
-    return @[
-             @"88E8D9", // AppleBlueSeaGreen
-             @"FFB736", // Orangish
-             @"FF7075", // Non-flashing Pink
-             @"54D3FF", // Gay Blue
-             @"43D487"  // Green
-             ];
-}
-
-+(NSArray *)trivitColorsDark
-{
-    return @[
-             @"77CBBE", // AppleBlueSeaGreen
-             @"FBAB1B", // Orangish
-             @"F05F64", // Non-flashing Pink
-             @"45C5F2", // Gay Blue
-             @"3AB775"  // Green
-             ];
-}
-
 +(NSArray *)colorSetNames
 {
     return @[
              NSLocalizedString(@"Default",@"Color set name"),
-             NSLocalizedString(@"Green",@"Color set name"),
-             NSLocalizedString(@"Blue",@"Color set name"),
-             NSLocalizedString(@"Red",@"Color set name"),
-             NSLocalizedString(@"Trivit",@"Color set name")
+             NSLocalizedString(@"Trivit",@"Color set name"),
+             NSLocalizedString(@"Pink", @"Color set name"),
+             //NSLocalizedString(@"Blue",@"Color set name"),
+             //NSLocalizedString(@"Red",@"Color set name"),
+             //NSLocalizedString(@"Green",@"Color set name")
              ];
 }
 

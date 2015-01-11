@@ -28,4 +28,12 @@
         [self.tutMasterVC dismissTutorial];
 }
 
+-(void) viewDidLoad{
+    [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 @end

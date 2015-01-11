@@ -547,8 +547,8 @@ int const OUTSIDE_TAP = 3;
     
     if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]){
         [self addItemWithTitle:NSLocalizedString(@"Drinks",@"Tally example")];
-        [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:550];
-        [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:44];
+        [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:24];
+        [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:8];
     }
     else
     {
