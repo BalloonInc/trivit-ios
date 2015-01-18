@@ -8,9 +8,11 @@
 
 #import "TrivitTableViewCell.h"
 #import "Colors.h"
+#import "cellBackground.h"
 
 @interface TrivitTableViewCell ()
-@property int cellAddRemove;
+@property (nonatomic) int cellAddRemove;
+@property (strong, nonatomic) cellBackground *cellBackground;
 @end
 
 @implementation TrivitTableViewCell
@@ -91,7 +93,6 @@ float const COUNTLABEL_WIDTH = 40.;
             self.countLabel.alpha = 1.0;
             [UIView commitAnimations];
         }
-
         [self setAccessoryView:self.countLabel];
     }
     else {
@@ -122,9 +123,7 @@ float const COUNTLABEL_WIDTH = 40.;
             self.minusButton.alpha = 1.0;
             [UIView commitAnimations];
         }
-
         [self setAccessoryView:self.minusButton];
-
     }
 }
 
@@ -139,6 +138,11 @@ float const COUNTLABEL_WIDTH = 40.;
         [self addSubview:self.backgroundViewForTitle];
     }
     self.backgroundViewForTitle.frame = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
+    
+    CGRect boundsFirstSection = CGRectMake(0, 0, self.frame.size.width*10, CELL_HEIGHT_SECTION1);
+    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:boundsFirstSection];
+    [[self cellBackColor] setFill];
+    [recta fill];
 
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField]) {
@@ -168,8 +172,16 @@ float const COUNTLABEL_WIDTH = 40.;
     [self configureCountLabelWithInteger:(int) self.tally.counter forCollapsedTrivit:self.isCollapsed];
     self.backgroundColor = self.cellBackColorDark;
 
-    if (self.isCollapsed)
+    [self.cellBackground removeFromSuperview];
+    self.cellBackground = [[cellBackground alloc] initWithFrame:self.bounds];
+    self.cellBackground.cellBackColor = self.cellBackColor;
+    [self.cellBackground setNeedsDisplay];
+    self.cellBackground.opaque=NO;
+    [self addSubview:self.cellBackground];
+
+    if (self.isCollapsed){
         [self.images removeFromSuperview];
+    }
 
     else {
         CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height - CELL_HEIGHT_SECTION1);
@@ -177,14 +189,6 @@ float const COUNTLABEL_WIDTH = 40.;
         [[self cellBackColorDark] setFill];
         [recta2 fill];
 
-
-        UIBezierPath *trianglePath = [UIBezierPath bezierPath];
-        [trianglePath moveToPoint:CGPointMake(10.0, 0.0 + CELL_HEIGHT_SECTION1)];
-        [trianglePath addLineToPoint:CGPointMake(20.0, 10.0 + CELL_HEIGHT_SECTION1)];
-        [trianglePath addLineToPoint:CGPointMake(30.0, 0.0 + CELL_HEIGHT_SECTION1)];
-        [trianglePath closePath];
-        [[self cellBackColor] setFill];
-        [trianglePath fill];
 
         // Image tally marks
         if (![self.subviews containsObject:self.images]) {
