@@ -19,7 +19,7 @@
     [self.itemNameLabel setText:[NSString stringWithFormat:@" %@", text ]];
 }
 - (void)setBackgroundColorButton:(UIColor *)color{
-    [self.itemCountButton setColor:color];
+    [self.itemCountButton setBackgroundColor:color];
 }
 - (void)setBackgroundColorCell:(UIColor *)color{
     [self.completeCell setBackgroundColor:color];
