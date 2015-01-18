@@ -139,11 +139,6 @@ float const COUNTLABEL_WIDTH = 40.;
     }
     self.backgroundViewForTitle.frame = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
     
-    CGRect boundsFirstSection = CGRectMake(0, 0, self.frame.size.width*10, CELL_HEIGHT_SECTION1);
-    UIBezierPath *recta = [UIBezierPath bezierPathWithRect:boundsFirstSection];
-    [[self cellBackColor] setFill];
-    [recta fill];
-
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField]) {
 
@@ -207,9 +202,8 @@ float const COUNTLABEL_WIDTH = 40.;
         //update images
         [self updateGridCells];
 
-        if (self.loadAnimation) {
+        if (self.loadAnimation)
             [self showTalliesWithDelay];
-        }
 
         if (![self.subviews containsObject:self.tallyImageZone]) {
             self.tallyImageZone = [[UILabel alloc] init];
