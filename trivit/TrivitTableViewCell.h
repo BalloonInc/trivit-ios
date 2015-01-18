@@ -32,6 +32,7 @@ extern NSString const *TALLY_TYPE;
 @property(nonatomic, strong) UICollectionView *images;
 @property(nonatomic) BOOL loadAnimation;
 @property(nonatomic) BOOL reloadCompleteCell;
+@property(nonatomic) BOOL cellWillRotate;
 
 @property(strong, nonatomic) UIView *backgroundViewForTitle;
 @property(strong, nonatomic) UITextField *titleTextField;

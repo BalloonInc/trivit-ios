@@ -485,6 +485,7 @@ int const OUTSIDE_TAP = 3;
     for (TrivitTableViewCell *cell in [self.tableView visibleCells]) {
         if (!cell.isCollapsed)
             cell.reloadCompleteCell = true;
+        cell.cellWillRotate=YES;
     }
 }
 

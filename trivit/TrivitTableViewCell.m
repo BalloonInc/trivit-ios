@@ -138,6 +138,17 @@ float const COUNTLABEL_WIDTH = 40.;
         [self addSubview:self.backgroundViewForTitle];
     }
     self.backgroundViewForTitle.frame = CGRectMake(0, 0, self.frame.size.width, CELL_HEIGHT_SECTION1);
+<<<<<<< HEAD
+=======
+
+    if(self.cellWillRotate){
+        CGRect boundsFirstSection = CGRectMake(0, 0, self.frame.size.width*10, CELL_HEIGHT_SECTION1);
+        UIBezierPath *recta = [UIBezierPath bezierPathWithRect:boundsFirstSection];
+        [[self cellBackColor] setFill];
+        [recta fill];
+        self.cellWillRotate=NO;
+    }
+>>>>>>> a52f6b9... but now it is fixed
     
     // only re-add if it is not yet there
     if (![self.subviews containsObject:self.titleTextField]) {
