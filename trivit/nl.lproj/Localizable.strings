@@ -17,13 +17,13 @@
 "Color - %@" = "Kleur - %@";
 
 /* Placeholder texts for newly added trivits */
-"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens";
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens,Dagen sinds vakantie,Kopjes koffie dit jaar,Mooie meisjes in de bar,Dagen nodig om app af te werken,Dagen zonder vloeken,Onafgewerkte Netflix films,Getrokken streepjes in Trivit,Bugs in onze software,Bier,Aantal schoenen,Regendagen in 2015,Glazen water,Sterren aan de hemel, Dagen tot Apple Watch release";
 
 /* Tally example */
 "Days without smoking" = "Dagen zonder roken";
 
 /* Color set name */
-"Default" = "Standaard";
+"Default" = "Default";
 
 /* Message box title */
 "Delete all Trivits" = "Verwijder alle Trivits";
@@ -70,7 +70,7 @@
 /* tutorial */
 "Open or close your new Trivit with a single tap" = "Open of sluit je Trivit met een enkele tik";
 
-/* messagebox text, adding a trivit not possible since you are editing the title of another trivit */
+/* messagebox, adding trivit not possible while editing other trivit */
 "Please finish editing the title first." = "De huidige titel wordt nog bewerkt.";
 
 /* Color set name */
