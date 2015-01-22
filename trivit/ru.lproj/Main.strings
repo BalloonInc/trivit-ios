@@ -41,7 +41,7 @@
 "jiI-xk-2f7.normalTitle" = "Начать!";
 
 /* Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5"; */
-"kib-6f-LI5.placeholder" = "Ваше имя (опционально)";
+"kib-6f-LI5.placeholder" = "Ваше e-mail (опционально)";
 
 /* Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe"; */
 "mzT-GO-pIe.text" = "NO TRANSLATION";
