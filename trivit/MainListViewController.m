@@ -240,6 +240,8 @@ int const OUTSIDE_TAP = 3;
 
 - (void)buzzIt {
     if (self.appSettings.vibrationFeedback) {
+        // use of private API not allowed .......................................
+        /*
         NSMutableArray *arr = [NSMutableArray arrayWithObjects:
                 [NSNumber numberWithBool:YES],
                 [NSNumber numberWithInt:50], nil];
@@ -252,6 +254,9 @@ int const OUTSIDE_TAP = 3;
         int AudioServicesPlaySystemSoundWithVibration();
 
         AudioServicesPlaySystemSoundWithVibration(4095, nil, dict);
+        */
+         AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+
     }
 }
 
