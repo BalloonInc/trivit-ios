@@ -12,6 +12,7 @@
 #import "Colors.h"
 #import "FeedbackViewController.h"
 #import "SettingsIcons.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface SettingsViewController () <UIAlertViewDelegate>
 @property(strong, nonatomic, readonly) NSString *sureToDeleteTitle;
@@ -123,19 +124,7 @@ int const NUMBEROFCELLS = 6;
 - (void)vibrationButtonPressed {
     self.appSettings.vibrationFeedback = !self.appSettings.vibrationFeedback;
     if (self.appSettings.vibrationFeedback) {
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:
-                [NSNumber numberWithBool:YES],
-                [NSNumber numberWithInt:500], nil];
-
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                arr, @"VibePattern",
-                [NSNumber numberWithFloat:1.], @"Intensity", nil];
-
-        //declare function before usage
-        int AudioServicesPlaySystemSoundWithVibration();
-
-        AudioServicesPlaySystemSoundWithVibration(4095, nil, dict);
-
+        AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     }
 
     [self.collectionView reloadData];
