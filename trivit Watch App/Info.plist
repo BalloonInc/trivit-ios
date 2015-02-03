@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>ballooninc.trivit</string>
+	<string>be.ballooninc.trivit</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
