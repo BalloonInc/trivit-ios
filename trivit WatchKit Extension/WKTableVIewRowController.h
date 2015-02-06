@@ -14,5 +14,6 @@
 - (void)setBackgroundColorButton:(UIColor *)color;
 - (void)setBackgroundColorCell:(UIColor *)color;
 - (void)setCounter:(NSInteger)count;
+- (void)hideCounter:(Boolean)hide;
 
 @end

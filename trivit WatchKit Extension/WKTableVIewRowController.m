@@ -27,5 +27,8 @@
 - (void)setCounter:(NSInteger)count{
     [self.itemCountButton setTitle:[NSString stringWithFormat:@"%ld",(long)count ]];
 }
+-(void)hideCounter:(Boolean)hide{
+    [self.itemCountButton setHidden:hide];
+}
 
 @end

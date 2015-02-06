@@ -12,11 +12,20 @@
 
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
-
+@property (strong, nonatomic) NSArray *sampleDataTitles;
+@property (strong, nonatomic) NSArray *sampleDataCounts;
 @end
 
 
 @implementation InterfaceController
+
+-(NSArray *)sampleDataTitles{
+    return @[@"Days in jail",@"Birds",@"Drinks",@"Cars",@"Holidays",@"Tallies",@"Candies",@"Snowy days"];
+}
+-(NSArray *)sampleDataCounts{
+    return @[@7,@13,@9,@2,@23,@89,@4,@3];
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init {
@@ -36,13 +45,26 @@
 }
 
 - (void)loadTableData {
-    [self.interfaceTable setNumberOfRows:2 withRowType:@"TrivitWKCel"];
-    [self configureRowControllerAtIndex:0];
-    [self configureRowControllerAtIndex:1];
+    [self.interfaceTable setNumberOfRows:[[self sampleDataCounts] count] withRowType:@"TrivitWKCel"];
+    
+    for (int i = 0; i<[[self sampleDataCounts] count];i++) {
+        [self configureRowControllerAtIndex:i];
+    }
     
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+    
+     NSString *title = self.sampleDataTitles[rowIndex];
+
+    
+    [self pushControllerWithName:@"detailController"
+                         context:[NSDictionary dictionaryWithObjectsAndKeys:
+                                  self.sampleDataCounts[rowIndex],@"count",
+                                  title, @"title",
+                                  [self colorWithIndex:rowIndex usingColorSet:[self flatDesignColorsLight]], @"lightColor",
+                                  [self colorWithIndex:rowIndex usingColorSet:[self flatDesignColorsDark]], @"darkColor",
+                                  nil]];
 }
 
 - (void)willActivate {
@@ -58,11 +80,11 @@
 - (void)configureRowControllerAtIndex:(NSInteger)index {
     WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
 
-    [listItemRowController setCounter:5+6*index];
+    [listItemRowController setCounter:[self.sampleDataCounts[index] integerValue]];
     [listItemRowController setBackgroundColorButton:[self colorWithIndex:index usingColorSet:[self flatDesignColorsDark]]];
     [listItemRowController setBackgroundColorCell:[self colorWithIndex:index usingColorSet:[self flatDesignColorsLight]]];
 
-    [listItemRowController setItemName:index==0?@"Days in jail":@"Drinks"];
+    [listItemRowController setItemName:self.sampleDataTitles[index]];
     
 }
 #pragma mark - TEMP color stuff
@@ -172,6 +194,7 @@
     NSString* hexColorString = colorSet[index];
     return [self colorWithHexString:hexColorString];
 }
+
 
 @end
 

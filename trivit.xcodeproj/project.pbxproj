@@ -29,6 +29,7 @@
 		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
+		6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C727E411A840E4A001B9A4E /* DetailInterfaceController.m */; };
 		6C7CE6361A4F6889004EE27D /* SettingButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */; };
 		6C8263AF1A5F29AC002A9941 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B11A5F29AC002A9941 /* InfoPlist.strings */; };
 		6C8263B41A5F29AC002A9941 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B61A5F29AC002A9941 /* Localizable.strings */; };
@@ -138,6 +139,8 @@
 		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C0B4195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C69C0B5195B6F4E002A3F53 /* trivitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = trivitTests.m; sourceTree = "<group>"; };
+		6C727E401A840E4A001B9A4E /* DetailInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInterfaceController.h; sourceTree = "<group>"; };
+		6C727E411A840E4A001B9A4E /* DetailInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInterfaceController.m; sourceTree = "<group>"; };
 		6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingButtonCell.h; sourceTree = "<group>"; };
 		6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingButtonCell.m; sourceTree = "<group>"; };
 		6C8263B01A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 			children = (
 				6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */,
 				6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */,
+				6C727E401A840E4A001B9A4E /* DetailInterfaceController.h */,
+				6C727E411A840E4A001B9A4E /* DetailInterfaceController.m */,
 				6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */,
 				6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */,
 				6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */,
@@ -702,6 +707,7 @@
 			files = (
 				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
 				6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */,
+				6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */,
 				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
