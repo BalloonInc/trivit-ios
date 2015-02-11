@@ -277,9 +277,19 @@ float const COUNTLABEL_WIDTH = 40.;
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    CGRect accessoryViewFrame = self.accessoryView.frame;
-    accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
-    self.accessoryView.frame = accessoryViewFrame;
+    if(self.loadAnimation){
+    [UIView performWithoutAnimation:^{
+        CGRect accessoryViewFrame = self.accessoryView.frame;
+        accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
+        self.accessoryView.frame = accessoryViewFrame;
+    }];
+    }
+    else{
+        CGRect accessoryViewFrame = self.accessoryView.frame;
+        accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
+        self.accessoryView.frame = accessoryViewFrame;
+
+    }
 }
 
 
