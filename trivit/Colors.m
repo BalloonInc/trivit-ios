@@ -124,8 +124,7 @@
             @"8A0F26",
             @"D42865",
             @"D4548F",
-            @"D6BCAD"
-    ];
+            @"D6BCAD"    ];
 }
 
 + (NSArray *)blueColorsLight {
