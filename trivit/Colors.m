@@ -195,7 +195,7 @@
             NSLocalizedString(@"Pink", @"Color set name"),
             NSLocalizedString(@"Blue",@"Color set name"),
             NSLocalizedString(@"M",@"Color set name"),
-            NSLocalizedString(@"J",@"Color set name")
+            NSLocalizedString(@"J",@"Color set name"),
             NSLocalizedString(@"Red",@"Color set name"),
             NSLocalizedString(@"Green",@"Color set name")
     ];
