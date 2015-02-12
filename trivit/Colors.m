@@ -45,16 +45,16 @@
             colorSetArray = [Colors blueColorsDark];
             break;
         case 8:
-            colorSetArray = [Colors redColorsLight];
+            colorSetArray = [Colors mSeriesColorsLight];
             break;
         case 9:
-            colorSetArray = [Colors redColorsDark];
+            colorSetArray = [Colors mSeriesColorsDark];
             break;
         case 10:
-            colorSetArray = [Colors greenColorsLight];
+            colorSetArray = [Colors jSeriesColorsLight];
             break;
         case 11:
-            colorSetArray = [Colors greenColorsDark];
+            colorSetArray = [Colors jSeriesColorsDark];
             break;
         default:
             colorSetArray = [Colors flatDesignColorsLight];
@@ -128,32 +128,6 @@
     ];
 }
 
-+ (NSArray *)greenColorsLight {
-    return @[
-            @"57A30D", // Green
-            @"63A912", // Green
-            @"6FB016", // Green
-            @"7DB51C", // Green
-            @"87BD21", // Green
-            @"94C325", // Green
-            @"A1CB2B", // Green
-            @"ADCF30"  // Green
-    ];
-}
-
-+ (NSArray *)greenColorsDark {
-    return @[
-            @"3B891F", // Blue
-            @"448E24", // Blue
-            @"4E9529", // Blue
-            @"59992E", // Blue
-            @"61A133", // Blue
-            @"6BA637", // Blue
-            @"76AE3E", // Blue
-            @"80B242"  // Blue
-    ];
-}
-
 + (NSArray *)blueColorsLight {
     return @[
             @"0693FB", // Blue
@@ -178,28 +152,40 @@
     ];
 }
 
-+ (NSArray *)redColorsLight {
++ (NSArray *)mSeriesColorsLight {
     return @[
-            @"8A0017", // Red
-            @"A2001B", // Red
-            @"B6001D", // Red
-            @"C90025", // Red
-            @"E20026", // Red
-            @"F7002A", // Red
-            @"FF0026", // Red
-    ];
+             @"E8C614", // Mieke
+             @"28BBCC", // Mieke
+             @"AC149A", // Mieke
+             @"E83871", // Mieke
+             ];
 }
 
-+ (NSArray *)redColorsDark {
++ (NSArray *)mSeriesColorsDark {
     return @[
-            @"5F011A", // Red
-            @"6D0420", // Red
-            @"7C0725", // Red
-            @"8A0C2B", // Red
-            @"9B0F30", // Red
-            @"AB1436", // Red
-            @"B91736", // Red
-    ];
+             @"97810D", // Mieke
+             @"1A7984", // Mieke
+             @"700D64", // Mieke
+             @"97244F", // Mieke
+             ];
+}
+
++ (NSArray *)jSeriesColorsLight {
+    return @[
+             @"E616AD", // Jolien
+             @"15CFBD", // Jolien
+             @"FE113A", // Jolien
+             @"4BED04", // Jolien
+             ];
+}
+
++ (NSArray *)jSeriesColorsDark {
+    return @[
+             @"950E70", // Jolien
+             @"0D867A", // Jolien
+             @"A50B26", // Jolien
+             @"309903", // Jolien
+             ];
 }
 
 + (NSArray *)colorSetNames {
@@ -207,9 +193,9 @@
             NSLocalizedString(@"Default", @"Color set name"),
             NSLocalizedString(@"Trivit", @"Color set name"),
             NSLocalizedString(@"Pink", @"Color set name"),
-            //NSLocalizedString(@"Blue",@"Color set name"),
-            //NSLocalizedString(@"Red",@"Color set name"),
-            //NSLocalizedString(@"Green",@"Color set name")
+            NSLocalizedString(@"Blue",@"Color set name"),
+            NSLocalizedString(@"M",@"Color set name"),
+            NSLocalizedString(@"J",@"Color set name")
     ];
 }
 
@@ -259,7 +245,7 @@
 + (UIColor *)colorWithIndex:(NSInteger)index usingColorSet:(NSArray *)colorSet {
     //By Default, use iOSColors
     if (!colorSet)
-        colorSet = [self greenColorsLight];
+        colorSet = [self flatDesignColorsLight];
 
     index = (int) index % [colorSet count];
     NSString *hexColorString = colorSet[index];

@@ -12,13 +12,6 @@
 @interface Colors : NSObject
 
 // predefined colorsets
-+ (NSArray *)greenColorsLight;
-
-+ (NSArray *)greenColorsDark;
-
-+ (NSArray *)redColorsLight;
-
-+ (NSArray *)redColorsDark;
 
 + (NSArray *)blueColorsLight;
 
@@ -35,6 +28,14 @@
 + (NSArray *)flatDesignColorsLight;
 
 + (NSArray *)flatDesignColorsDark;
+
++ (NSArray *)jSeriesColorsLight;
+
++ (NSArray *)jSeriesColorsDark;
+
++ (NSArray *)mSeriesColorsLight;
+
++ (NSArray *)mSeriesColorsDark;
 
 + (NSArray *)colorSetNames;
 
