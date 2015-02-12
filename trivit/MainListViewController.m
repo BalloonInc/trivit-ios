@@ -53,7 +53,7 @@ int const OUTSIDE_TAP = 3;
 
 - (NSString *)trivitExampleNameAtIndex:(NSInteger)index {
     if (!self.placeholderTrivitTitles) {
-        NSString *fruits = NSLocalizedString(@"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release", @"Placeholder texts for newly added trivits");
+        NSString *fruits = NSLocalizedString(@"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release", @"Placeholder texts for newly added trivits");
         self.placeholderTrivitTitles = [fruits componentsSeparatedByString:@","];
     }
     return self.placeholderTrivitTitles[index % self.placeholderTrivitTitles.count];
@@ -540,7 +540,7 @@ int const OUTSIDE_TAP = 3;
 
     if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
         [self addItemWithTitle:NSLocalizedString(@"Drinks", @"Tally example")];
-        [self addItemWithTitle:NSLocalizedString(@"Days without smoking", @"Tally example") andCount:24];
+        [self addItemWithTitle:NSLocalizedString(@"Days in prison", @"Tally example") andCount:24];
         [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:8];
     }
     else {

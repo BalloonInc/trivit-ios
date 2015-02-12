@@ -20,7 +20,7 @@
 "Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens,Dagen sinds vakantie,Kopjes koffie dit jaar,Mooie meisjes in de bar,Dagen nodig om app af te werken,Dagen zonder vloeken,Onafgewerkte Netflix films,Getrokken streepjes in Trivit,Bugs in onze software,Bier,Aantal schoenen,Regendagen in 2015,Glazen water,Sterren aan de hemel, Dagen tot Apple Watch release";
 
 /* Tally example */
-"Days without smoking" = "Dagen zonder roken";
+"Days in prison" = "Dagen in de gevangenis";
 
 /* Color set name */
 "Default" = "Default";
@@ -92,10 +92,10 @@
 "Tap an image to rate:" = "Tik op een score:";
 
 /* tutorial */
-"Tap the minus to decrease the count, hold long to reset" = "Tik de min om de teller te verminderen, druk lang om te resetten";
+"Tap the minus to decrease the count, hold long to reset" = "Tik op de min om de teller te verminderen, druk lang om te resetten";
 
 /* tutorial */
-"Tap the pen to add a new Trivit" = "Tik de pen om een nieuwe Trivit toe te voegen";
+"Tap the pen to add a new Trivit" = "Tik op de pen om een nieuwe Trivit toe te voegen";
 
 /* tutorial */
 "Tap to increase the count" = "Tik om te turven";
