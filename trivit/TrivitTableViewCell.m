@@ -85,7 +85,9 @@ float const COUNTLABEL_WIDTH = 40.;
         self.countLabel.text = @(integer).stringValue;
 
         //Animation only when accessoryView changes type is set (e.g. when expanding)
-        if (!self.accessoryView || self.accessoryView.class == [UITextField class]) {
+        //if (!self.accessoryView || self.accessoryView.class == [UITextField class]) {
+        if (self.loadAnimation) {
+            [self.minusButton removeFromSuperview];
             self.countLabel.alpha = 0;
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:1.0];
@@ -93,7 +95,14 @@ float const COUNTLABEL_WIDTH = 40.;
             self.countLabel.alpha = 1.0;
             [UIView commitAnimations];
         }
-        [self setAccessoryView:self.countLabel];
+        
+        //[self setAccessoryView:self.countLabel];
+        [self addSubview:self.countLabel];
+        CGRect countLabelFrame = self.countLabel.frame;
+        countLabelFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
+        countLabelFrame.origin.x = self.frame.size.width -56.;
+        self.countLabel.frame = countLabelFrame;
+
     }
     else {
         if (!self.minusButton) {
@@ -115,7 +124,9 @@ float const COUNTLABEL_WIDTH = 40.;
         }
 
         //Animation only when accessoryView changes type is set (e.g. when expanding)
-        if (!self.accessoryView || self.accessoryView.class == [UILabel class]) {
+        //if (!self.accessoryView || self.accessoryView.class == [UILabel class]) {
+        if (self.loadAnimation) {
+            [self.countLabel removeFromSuperview];
             self.minusButton.alpha = 0;
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:1.0];
@@ -123,7 +134,14 @@ float const COUNTLABEL_WIDTH = 40.;
             self.minusButton.alpha = 1.0;
             [UIView commitAnimations];
         }
-        [self setAccessoryView:self.minusButton];
+        //[self setAccessoryView:self.minusButton];
+        [self addSubview:self.minusButton];
+        CGRect minusButtonFrame = self.minusButton.frame;
+        minusButtonFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
+        minusButtonFrame.origin.x = self.frame.size.width -56.;
+
+        self.minusButton.frame = minusButtonFrame;
+
     }
 }
 
@@ -273,12 +291,12 @@ float const COUNTLABEL_WIDTH = 40.;
     }
     return YES;
 }
-
+/*
 - (void)layoutSubviews {
     [super layoutSubviews];
 
     if(self.loadAnimation){
-    [UIView performWithoutAnimation:^{
+    [UIView :^{
         CGRect accessoryViewFrame = self.accessoryView.frame;
         accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
         self.accessoryView.frame = accessoryViewFrame;
@@ -290,7 +308,7 @@ float const COUNTLABEL_WIDTH = 40.;
         self.accessoryView.frame = accessoryViewFrame;
 
     }
-}
+}*/
 
 
 #pragma mark - Magic to make the UICollectionview datasource work

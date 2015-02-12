@@ -42,7 +42,8 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (NSInteger)imagesPerRow {
-    return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_HORIZONTAL_SPACING));
+    
+    return (int) floor((self.view.frame.size.width-COLLECTIONVIEW_HORIZONTAL_SPACING) / (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_HORIZONTAL_SPACING));
 }
 
 - (Settings *)appSettings {
