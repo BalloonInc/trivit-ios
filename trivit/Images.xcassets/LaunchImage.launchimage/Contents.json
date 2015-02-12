@@ -4,7 +4,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "iphone6p_portrait.png",
+      "filename" : "iphone6p2_portrait.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -32,14 +32,14 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "iphone5_portrait.png",
+      "filename" : "iphone4.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "iphone4.png",
+      "filename" : "iphone5_portrait-1.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"

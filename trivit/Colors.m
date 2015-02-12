@@ -162,7 +162,7 @@
 
 + (NSArray *)mSeriesColorsDark {
     return @[
-             @"97810D", // Mieke
+             @"F8810D", // Mieke
              @"1A7984", // Mieke
              @"700D64", // Mieke
              @"97244F", // Mieke
