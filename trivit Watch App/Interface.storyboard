@@ -16,7 +16,7 @@
                                     <group key="rootItem" width="1" height="25" alignment="left" id="VHl-xC-eiI">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Item" id="N4y-6s-G30"/>
-                                            <button width="39" height="0.90000000000000002" alignment="right" verticalAlignment="center" title="999" enabled="NO" id="T79-Rk-X5c">
+                                            <button width="39" height="0.90000000000000002" alignment="right" verticalAlignment="center" title="999" id="T79-Rk-X5c">
                                                 <color key="backgroundColor" red="1" green="0.67027779834760315" blue="0.083833395028077851" alpha="1" colorSpace="calibratedRGB"/>
                                             </button>
                                             <label width="3" alignment="right" id="jpo-aw-i1B"/>
@@ -46,16 +46,24 @@
                     <items>
                         <table alignment="left" id="77q-yV-AAk">
                             <items>
-                                <tableRow identifier="detailHeader" id="Z2g-Rn-2CA" customClass="WKTableVIewRowController">
+                                <tableRow identifier="detailHeader" selectable="NO" id="Z2g-Rn-2CA" customClass="WKTableVIewRowController">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" id="hy1-0r-ryx">
                                         <items>
                                             <label height="30" alignment="left" verticalAlignment="center" text="Item" id="Zwr-an-cDQ"/>
+                                            <button width="39" height="27" alignment="right" verticalAlignment="center" title="-" id="C9A-5k-YtV">
+                                                <color key="backgroundColor" red="1" green="0.67027779830000001" blue="0.083833395029999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" type="system" pointSize="20"/>
+                                                <connections>
+                                                    <action selector="minusButtonPressed" destination="HZg-mk-xyX" id="iqH-mu-cmw"/>
+                                                </connections>
+                                            </button>
                                             <label width="3" alignment="right" id="O3A-eP-k1S"/>
                                         </items>
                                         <color key="backgroundColor" red="1" green="0.83371687829999996" blue="0.00099119386939999993" alpha="1" colorSpace="calibratedRGB"/>
                                     </group>
                                     <connections>
                                         <outlet property="completeCell" destination="hy1-0r-ryx" id="mqt-z2-TPA"/>
+                                        <outlet property="itemCountButton" destination="C9A-5k-YtV" id="bwQ-Za-4Je"/>
                                         <outlet property="itemNameLabel" destination="Zwr-an-cDQ" id="aqm-rk-OmC"/>
                                     </connections>
                                 </tableRow>
@@ -63,7 +71,7 @@
                                     <group key="rootItem" width="1" height="100" alignment="left" id="5bU-dW-YNH">
                                         <items>
                                             <label width="3" alignment="right" id="Iow-bj-7Mj"/>
-                                            <label height="1" alignment="center" verticalAlignment="center" text="0" id="ZfE-V6-HH9">
+                                            <label height="1" alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="ZfE-V6-HH9">
                                                 <fontDescription key="font" type="system" pointSize="50"/>
                                             </label>
                                         </items>

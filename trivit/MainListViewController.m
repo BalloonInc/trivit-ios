@@ -42,7 +42,8 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (NSInteger)imagesPerRow {
-    return (int) floor(self.view.frame.size.width / (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_HORIZONTAL_SPACING));
+    
+    return (int) floor((self.view.frame.size.width-COLLECTIONVIEW_HORIZONTAL_SPACING) / (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_HORIZONTAL_SPACING));
 }
 
 - (Settings *)appSettings {
@@ -61,7 +62,7 @@ int const OUTSIDE_TAP = 3;
 #pragma mark - add item
 
 - (IBAction)addButtonPressed {
-    if (self.keyboardShown || self.trivitRecentlyAdded) {
+    if (self.keyboardShown) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add", @"messagebox title")
                                                         message:NSLocalizedString(@"Please finish editing the title first.", @"messagebox, adding trivit not possible while editing other trivit")
                                                        delegate:self
@@ -70,11 +71,10 @@ int const OUTSIDE_TAP = 3;
         [alert show];
         return;
     }
-
+    self.keyboardShown = true;
     // add consequent identifier to tallies
     [self addItemWithTitle:[self trivitExampleNameAtIndex:[self nextPropertyIndexForNewTally]]];
-    self.trivitRecentlyAdded = true;
-    [self performSelector:@selector(setTrivitRecentlyAdded:) withObject:false afterDelay:0.5];
+    //[self performSelector:@selector(setKeyboardWillBeShown:) withObject:false afterDelay:0.5];
 
     // decide on delay: if there are not enough cells to fill the view, add a 0.1 seconds delay
     // (this is to make sure editTrivitTitleAtIndexPath always works when adding a trivit)
@@ -147,7 +147,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)handleTallyReset:(UIGestureRecognizer *)tapRecognizer {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown || self.trivitRecentlyAdded)
+    if (self.keyboardShown)
         return;
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:tapRecognizer];
     if (tappedViewIdentifier != OUTSIDE_TAP) {
@@ -209,7 +209,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)handleTallyDecrease:(UIGestureRecognizer *)tapRecognizer {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown || self.trivitRecentlyAdded)
+    if (self.keyboardShown)
         return;
 
     CGPoint swipeLocation = [tapRecognizer locationInView:self.tableView];
@@ -278,7 +278,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)handleTap:(UIGestureRecognizer *)singletapRecognizer {
     // if a cell title is being edited don't process taps
-    if (self.keyboardShown | self.trivitRecentlyAdded)
+    if (self.keyboardShown)
         return;
 
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:singletapRecognizer];
@@ -324,8 +324,10 @@ int const OUTSIDE_TAP = 3;
     if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == MINUSBUTTON_TAP)
         [self handleTallyReset:recognizer];
 
-    if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP)
+    if (recognizer.state == UIGestureRecognizerStateBegan && tappedViewIdentifier == TITLE_TAP){
         [self editTrivitTitleAtIndexPath:indexPath];
+        self.keyboardShown = true;
+    }
 }
 
 - (void)editTrivitTitleAtIndexPath:(NSIndexPath *)indexPath {
@@ -409,9 +411,19 @@ int const OUTSIDE_TAP = 3;
 // remove logic
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // row can be deleted if tally is collapsed
-    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    return !self.keyboardShown;
+}
 
-    return [record.isCollapsed boolValue] && !self.keyboardShown;
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    TrivitTableViewCell *cell = (TrivitTableViewCell*) [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.loadAnimation=true;
+
+}
+
+-(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    TrivitTableViewCell *cell = (TrivitTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.loadAnimation=true;
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -624,7 +636,7 @@ int const OUTSIDE_TAP = 3;
 #pragma mark - view resize on keyboard show
 
 - (void)keyboardWasShown:(NSNotification *)aNotification {
-    self.keyboardShown = true;
+
     NSDictionary *info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
@@ -643,14 +655,8 @@ int const OUTSIDE_TAP = 3;
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
+    
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
-
-    //Set dev device or not
-    if ([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsADevDevice"])
-        [self.defaults setObject:[NSNumber numberWithBool:true] forKey:@"DevDevice"];
-
-    else if ([self.cellBeingEdited.titleTextField.text isEqualToString:@"ThisIsNoDevDeviceNoMore"])
-        [self.defaults setObject:[NSNumber numberWithBool:false] forKey:@"DevDevice"];
 
     if (self.cellBeingEdited.titleTextField != nil) {
         record.title = self.cellBeingEdited.titleTextField.text;
@@ -670,7 +676,6 @@ int const OUTSIDE_TAP = 3;
 
     //keyboard is no longer shown
     self.keyboardShown = false;
-    self.trivitRecentlyAdded = false;
 }
 
 // Do not hide status bar

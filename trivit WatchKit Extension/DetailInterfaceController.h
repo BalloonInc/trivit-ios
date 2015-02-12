@@ -9,6 +9,11 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
+@class DetailInterfaceController;
+@protocol DetailInterfaceController <NSObject>
+- (void)addItemViewControllerDelegate:(DetailInterfaceController *)controller didFinishEnteringItem:(NSString *)item;
+@end
+
 @interface DetailInterfaceController : WKInterfaceController
 
 @property (strong, nonatomic) NSString *title;

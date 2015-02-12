@@ -8,6 +8,7 @@
 
 #import "DetailInterfaceController.h"
 #import "WKTableVIewRowController.h"
+#import "InterfaceController.h"
 
 @interface DetailInterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
@@ -41,21 +42,26 @@
     NSLog(@"detail de-activated");
 
 }
+- (IBAction)minusButtonPressed {
+    self.count--;
+    [self reloadCounter];
+}
 
 - (void)configureRowControllerAtIndex:(NSInteger)index {
     WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
-    [listItemRowController hideCounter:true];
 
     if(index==0){
 
-    [listItemRowController setBackgroundColorCell:[self lightColor]];
-    [listItemRowController hideCounter:true];
-    [listItemRowController setItemName:self.title];
+        [listItemRowController setBackgroundColorCell:[self lightColor]];
+        [listItemRowController setItemName:self.title];
+        [listItemRowController setCounter:-1];
+        [listItemRowController setBackgroundColorButton:[self darkColor]];
 
     }
     else{
-    [listItemRowController setBackgroundColorCell:[self darkColor]];
-    [listItemRowController setItemName:[NSString stringWithFormat:@"%ld",(long)self.count]];
+        [listItemRowController hideCounter:true];
+        [listItemRowController setBackgroundColorCell:[self darkColor]];
+        [listItemRowController setItemName:[NSString stringWithFormat:@"%ld",(long)self.count]];
     }
     
 }
@@ -66,6 +72,19 @@
     [self configureRowControllerAtIndex:0];
     [self configureRowControllerAtIndex:1];
     
+}
+
+- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+    
+    if(rowIndex==1){
+        self.count++;
+        [self reloadCounter];
+    }
+}
+
+
+-(void) reloadCounter{
+    [self configureRowControllerAtIndex:1];
 }
 
 @end

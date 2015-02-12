@@ -12,18 +12,18 @@
 
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
-@property (strong, nonatomic) NSArray *sampleDataTitles;
-@property (strong, nonatomic) NSArray *sampleDataCounts;
 @end
 
 
 @implementation InterfaceController
 
--(NSArray *)sampleDataTitles{
-    return @[@"Days in jail",@"Birds",@"Drinks",@"Cars",@"Holidays",@"Tallies",@"Candies",@"Snowy days"];
+-(NSMutableArray *)sampleDataTitles{
+    if (!_sampleDataTitles) _sampleDataTitles = [NSMutableArray arrayWithArray: @[@"Days in jail",@"Birds",@"Drinks",@"Cars",@"Holidays",@"Tallies",@"Candies",@"Snowy days"]];
+    return _sampleDataTitles;
 }
--(NSArray *)sampleDataCounts{
-    return @[@7,@13,@9,@2,@23,@89,@4,@3];
+-(NSMutableArray *)sampleDataCounts{
+    if (!_sampleDataCounts) _sampleDataCounts = [NSMutableArray arrayWithArray: @[@7,@13,@9,@2,@23,@89,@4,@3]];
+    return _sampleDataCounts;
 }
 
 #pragma mark - Initialization

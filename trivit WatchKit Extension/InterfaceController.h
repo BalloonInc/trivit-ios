@@ -10,5 +10,7 @@
 #import <Foundation/Foundation.h>
 
 @interface InterfaceController : WKInterfaceController
+@property (strong, nonatomic) NSMutableArray *sampleDataTitles;
+@property (strong, nonatomic) NSMutableArray *sampleDataCounts;
 
 @end
