@@ -484,6 +484,8 @@ int const OUTSIDE_TAP = 3;
         }
         case NSFetchedResultsChangeDelete: {
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            if(indexPath.row<self.activeCellIndexPath.row)
+                self.activeCellIndexPath = [NSIndexPath indexPathForRow:self.activeCellIndexPath.row-1 inSection:0];
             break;
         }
         case NSFetchedResultsChangeUpdate: {
