@@ -12,6 +12,7 @@
 
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
+@property (nonatomic) NSInteger selectedIndex;
 @end
 
 
@@ -64,6 +65,7 @@
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
     
+    self.selectedIndex = rowIndex;
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithInteger:rowIndex], @"selectedRow",
@@ -78,6 +80,8 @@
     // This method is called when watch view controller is about to be visible to user
     //[self reloadCounters];
     //[self loadTableData];
+    [self updateCounterAtIndex:self.selectedIndex];
+
     NSLog(@"%@ will activate", self);
 }
 

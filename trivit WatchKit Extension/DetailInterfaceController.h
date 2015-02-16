@@ -9,10 +9,6 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
-@class DetailInterfaceController;
-@protocol DetailInterfaceController <NSObject>
-- (void)addItemViewControllerDelegate:(DetailInterfaceController *)controller didFinishEnteringItem:(NSString *)item withCount:(NSInteger)count;
-@end
 
 @interface DetailInterfaceController : WKInterfaceController
 
