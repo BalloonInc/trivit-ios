@@ -11,7 +11,7 @@
 
 @class DetailInterfaceController;
 @protocol DetailInterfaceController <NSObject>
-- (void)addItemViewControllerDelegate:(DetailInterfaceController *)controller didFinishEnteringItem:(NSString *)item;
+- (void)addItemViewControllerDelegate:(DetailInterfaceController *)controller didFinishEnteringItem:(NSString *)item withCount:(NSInteger)count;
 @end
 
 @interface DetailInterfaceController : WKInterfaceController

@@ -12,7 +12,9 @@
 
 @interface DetailInterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
-
+@property (strong, nonatomic) NSMutableArray *titles;
+@property (strong, nonatomic) NSMutableArray *counts;
+@property (nonatomic) NSInteger selectedRow;
 @end
 
 
@@ -21,11 +23,14 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     
-    self.title = [context objectForKey:@"title"];
+    self.counts = [context objectForKey:@"counts"];
+    self.titles = [context objectForKey:@"titles"];
+    self.selectedRow = [[context objectForKey:@"selectedRow"] integerValue];
+    self.title = self.titles[self.selectedRow];
     self.lightColor = [context objectForKey:@"lightColor"];
     self.darkColor = [context objectForKey:@"darkColor"];
     
-    self.count = [[context objectForKey:@"count"] integerValue];
+    self.count = [self.counts[self.selectedRow] integerValue];
 
     [self loadTableData];
 }
@@ -38,6 +43,7 @@
 
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
+    [self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
     [super didDeactivate];
     NSLog(@"detail de-activated");
 
@@ -75,11 +81,8 @@
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-    
-    if(rowIndex==1){
-        self.count++;
-        [self reloadCounter];
-    }
+    self.count += (rowIndex==1)?1:-1;
+    [self reloadCounter];
 }
 
 

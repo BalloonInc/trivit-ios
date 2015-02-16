@@ -53,15 +53,22 @@
     
 }
 
-- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+- (void)reloadCounters {
+    [self.interfaceTable setNumberOfRows:[[self sampleDataCounts] count] withRowType:@"TrivitWKCel"];
     
-     NSString *title = self.sampleDataTitles[rowIndex];
+    for (int i = 0; i<[[self sampleDataCounts] count];i++) {
+        [self updateCounterAtIndex:i];
+    }
+    
+}
 
+- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
     
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
-                                  self.sampleDataCounts[rowIndex],@"count",
-                                  title, @"title",
+                                  [NSNumber numberWithInteger:rowIndex], @"selectedRow",
+                                  self.sampleDataCounts,@"counts",
+                                  self.sampleDataTitles, @"titles",
                                   [self colorWithIndex:rowIndex usingColorSet:[self flatDesignColorsLight]], @"lightColor",
                                   [self colorWithIndex:rowIndex usingColorSet:[self flatDesignColorsDark]], @"darkColor",
                                   nil]];
@@ -69,6 +76,8 @@
 
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
+    //[self reloadCounters];
+    //[self loadTableData];
     NSLog(@"%@ will activate", self);
 }
 
@@ -87,6 +96,12 @@
     [listItemRowController setItemName:self.sampleDataTitles[index]];
     
 }
+
+- (void)updateCounterAtIndex:(NSInteger)index {
+    WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
+    [listItemRowController setCounter:[self.sampleDataCounts[index] integerValue]];
+}
+
 #pragma mark - TEMP color stuff
 
 // All colors are defined below
