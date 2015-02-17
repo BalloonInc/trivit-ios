@@ -41,9 +41,10 @@
     NSLog(@"detail activated");
 }
 
+
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
-    [self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
+    //[self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
     [super didDeactivate];
     NSLog(@"detail de-activated");
 
@@ -83,6 +84,8 @@
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
     self.count += (rowIndex==1)?1:-1;
     [self reloadCounter];
+    [self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
+
 }
 
 

@@ -54,6 +54,7 @@
     
 }
 
+
 - (void)reloadCounters {
     [self.interfaceTable setNumberOfRows:[[self sampleDataCounts] count] withRowType:@"TrivitWKCel"];
     
