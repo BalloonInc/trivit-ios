@@ -82,7 +82,8 @@
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-    self.count += (rowIndex==1)?1:-1;
+
+    self.count = MAX(self.count+((rowIndex==1)?1:-1),0);
     [self reloadCounter];
     [self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
 
