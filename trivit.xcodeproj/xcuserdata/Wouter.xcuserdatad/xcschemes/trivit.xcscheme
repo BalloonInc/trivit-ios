@@ -20,6 +20,20 @@
                ReferencedContainer = "container:trivit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6CCA04B11A93CCC4000BBDE9"
+               BuildableName = "DataKitTests.xctest"
+               BlueprintName = "DataKitTests"
+               ReferencedContainer = "container:trivit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -35,6 +49,16 @@
                BlueprintIdentifier = "6C69C0AE195B6F4E002A3F53"
                BuildableName = "trivitTests.xctest"
                BlueprintName = "trivitTests"
+               ReferencedContainer = "container:trivit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6CCA04B11A93CCC4000BBDE9"
+               BuildableName = "DataKitTests.xctest"
+               BlueprintName = "DataKitTests"
                ReferencedContainer = "container:trivit.xcodeproj">
             </BuildableReference>
          </TestableReference>

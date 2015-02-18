@@ -44,7 +44,8 @@ public class var sharedInstance : DataAccess {
 }
 
 - (NSArray*) getData{
-
+    NSArray *results = nil;
+    
     AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = appDelegate.managedObjectContext;
     if(context){
@@ -55,7 +56,7 @@ public class var sharedInstance : DataAccess {
         //[sortDescriptor release];
         [request setEntity:entity];
         NSError *error = nil;
-        NSArray *results = [context executeFetchRequest:request error:&error];
+        results = [context executeFetchRequest:request error:&error];
         //[request release];
         
         if (error) {
