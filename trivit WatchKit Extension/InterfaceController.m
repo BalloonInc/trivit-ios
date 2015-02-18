@@ -8,11 +8,14 @@
 
 #import "InterfaceController.h"
 #import "WKTableVIewRowController.h"
+#import "DataKit.h"
+#import "DataAccess.h"
 //#import "Colors.h"
 
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
 @property (nonatomic) NSInteger selectedIndex;
+
 @end
 
 
@@ -31,6 +34,9 @@
 
 - (instancetype)init {
     self = [super init];
+    
+    DataAccess *da = [[DataAccess alloc] init];
+    NSArray *data = [da getData];
     
     if (self) {
         //NSAssert([context isKindOfClass:[AAPLListInfo class]], @"Expected class of `context` is AAPLListInfo.");
@@ -78,9 +84,7 @@
 }
 
 - (void)willActivate {
-    // This method is called when watch view controller is about to be visible to user
-    //[self reloadCounters];
-    //[self loadTableData];
+
     [self updateCounterAtIndex:self.selectedIndex];
 
     NSLog(@"%@ will activate", self);

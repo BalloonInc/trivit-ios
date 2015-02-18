@@ -42,6 +42,13 @@
 		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6C98EEB01A4771A500E12E25 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
+		6CCA04AD1A93CCC4000BBDE9 /* DataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04AC1A93CCC4000BBDE9 /* DataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6CCA04B31A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
+		6CCA04BC1A93CCC4000BBDE9 /* DataKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04BB1A93CCC4000BBDE9 /* DataKitTests.m */; };
+		6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
+		6CCA04C01A93CCC4000BBDE9 /* DataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6CCA04CA1A93CD44000BBDE9 /* DataAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04C81A93CD44000BBDE9 /* DataAccess.h */; };
+		6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04C91A93CD44000BBDE9 /* DataAccess.m */; };
 		6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */; };
 		6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */; };
 		6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */; };
@@ -62,6 +69,27 @@
 			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
 			remoteInfo = trivit;
 		};
+		6CCA04B41A93CCC4000BBDE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CCA04A71A93CCC4000BBDE9;
+			remoteInfo = DataKit;
+		};
+		6CCA04B61A93CCC4000BBDE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
+			remoteInfo = trivit;
+		};
+		6CCA04BD1A93CCC4000BBDE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CCA04A71A93CCC4000BBDE9;
+			remoteInfo = DataKit;
+		};
 		6CE4BBE41A1D609D005E9BCD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
@@ -79,6 +107,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6CCA04C61A93CCC5000BBDE9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6CCA04C01A93CCC4000BBDE9 /* DataKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +204,14 @@
 		6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CCA04AB1A93CCC4000BBDE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CCA04AC1A93CCC4000BBDE9 /* DataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataKit.h; sourceTree = "<group>"; };
+		6CCA04B21A93CCC4000BBDE9 /* DataKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CCA04BA1A93CCC4000BBDE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CCA04BB1A93CCC4000BBDE9 /* DataKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataKitTests.m; sourceTree = "<group>"; };
+		6CCA04C81A93CD44000BBDE9 /* DataAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccess.h; sourceTree = "<group>"; };
+		6CCA04C91A93CD44000BBDE9 /* DataAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccess.m; sourceTree = "<group>"; };
 		6CCA7B941A60244000115A74 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6CCA7B951A60244000115A74 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6CCA7B961A60244000115A74 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -199,6 +246,7 @@
 			files = (
 				6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */,
 				6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */,
+				6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */,
 				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
 				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
 				6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */,
@@ -210,6 +258,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CCA04A41A93CCC4000BBDE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CCA04AF1A93CCC4000BBDE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CCA04B31A93CCC4000BBDE9 /* DataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +316,8 @@
 				6C69C0B2195B6F4E002A3F53 /* trivitTests */,
 				6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */,
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
+				6CCA04A91A93CCC4000BBDE9 /* DataKit */,
+				6CCA04B81A93CCC4000BBDE9 /* DataKitTests */,
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
 				6C69C09A195B6F4E002A3F53 /* Products */,
 				7917BB946B05BB8BB619F87F /* Pods */,
@@ -266,6 +331,8 @@
 				6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */,
 				6CE4BBD01A1D609B005E9BCD /* trivit WatchKit Extension.appex */,
 				6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */,
+				6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */,
+				6CCA04B21A93CCC4000BBDE9 /* DataKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -356,6 +423,42 @@
 				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		6CCA04A91A93CCC4000BBDE9 /* DataKit */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA04AC1A93CCC4000BBDE9 /* DataKit.h */,
+				6CCA04AA1A93CCC4000BBDE9 /* Supporting Files */,
+				6CCA04C81A93CD44000BBDE9 /* DataAccess.h */,
+				6CCA04C91A93CD44000BBDE9 /* DataAccess.m */,
+			);
+			path = DataKit;
+			sourceTree = "<group>";
+		};
+		6CCA04AA1A93CCC4000BBDE9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA04AB1A93CCC4000BBDE9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CCA04B81A93CCC4000BBDE9 /* DataKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA04BB1A93CCC4000BBDE9 /* DataKitTests.m */,
+				6CCA04B91A93CCC4000BBDE9 /* Supporting Files */,
+			);
+			path = DataKitTests;
+			sourceTree = "<group>";
+		};
+		6CCA04B91A93CCC4000BBDE9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CCA04BA1A93CCC4000BBDE9 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6CE4BBD11A1D609C005E9BCD /* Frameworks */ = {
@@ -453,6 +556,18 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		6CCA04A51A93CCC4000BBDE9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CCA04CA1A93CD44000BBDE9 /* DataAccess.h in Headers */,
+				6CCA04AD1A93CCC4000BBDE9 /* DataKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		6C69C098195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXNativeTarget;
@@ -465,11 +580,13 @@
 				6C0A91631A0D193D006F2F87 /* ShellScript */,
 				6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */,
 				60A83E13815D5585EFF94F48 /* Copy Pods Resources */,
+				6CCA04C61A93CCC5000BBDE9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				6CE4BBEE1A1D609D005E9BCD /* PBXTargetDependency */,
+				6CCA04BE1A93CCC4000BBDE9 /* PBXTargetDependency */,
 			);
 			name = trivit;
 			productName = trivit;
@@ -492,6 +609,43 @@
 			name = trivitTests;
 			productName = trivitTests;
 			productReference = 6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6CCA04A71A93CCC4000BBDE9 /* DataKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CCA04C51A93CCC5000BBDE9 /* Build configuration list for PBXNativeTarget "DataKit" */;
+			buildPhases = (
+				6CCA04A31A93CCC4000BBDE9 /* Sources */,
+				6CCA04A41A93CCC4000BBDE9 /* Frameworks */,
+				6CCA04A51A93CCC4000BBDE9 /* Headers */,
+				6CCA04A61A93CCC4000BBDE9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DataKit;
+			productName = DataKit;
+			productReference = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6CCA04B11A93CCC4000BBDE9 /* DataKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CCA04C71A93CCC5000BBDE9 /* Build configuration list for PBXNativeTarget "DataKitTests" */;
+			buildPhases = (
+				6CCA04AE1A93CCC4000BBDE9 /* Sources */,
+				6CCA04AF1A93CCC4000BBDE9 /* Frameworks */,
+				6CCA04B01A93CCC4000BBDE9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CCA04B51A93CCC4000BBDE9 /* PBXTargetDependency */,
+				6CCA04B71A93CCC4000BBDE9 /* PBXTargetDependency */,
+			);
+			name = DataKitTests;
+			productName = DataKitTests;
+			productReference = 6CCA04B21A93CCC4000BBDE9 /* DataKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */ = {
@@ -545,6 +699,14 @@
 						DevelopmentTeam = FM9J48C757;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
+					6CCA04A71A93CCC4000BBDE9 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = JRS568U6JT;
+					};
+					6CCA04B11A93CCC4000BBDE9 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 6C69C098195B6F4E002A3F53;
+					};
 					6CE4BBCF1A1D609B005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = JRS568U6JT;
@@ -572,6 +734,8 @@
 				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
 				6CE4BBCF1A1D609B005E9BCD /* trivit WatchKit Extension */,
 				6CE4BBE11A1D609D005E9BCD /* trivit Watch App */,
+				6CCA04A71A93CCC4000BBDE9 /* DataKit */,
+				6CCA04B11A93CCC4000BBDE9 /* DataKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -593,6 +757,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CCA04A61A93CCC4000BBDE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CCA04B01A93CCC4000BBDE9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +879,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6CCA04A31A93CCC4000BBDE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6CCA04AE1A93CCC4000BBDE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CCA04BC1A93CCC4000BBDE9 /* DataKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CE4BBCC1A1D609B005E9BCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,6 +913,21 @@
 			isa = PBXTargetDependency;
 			target = 6C69C098195B6F4E002A3F53 /* trivit */;
 			targetProxy = 6C69C0B0195B6F4E002A3F53 /* PBXContainerItemProxy */;
+		};
+		6CCA04B51A93CCC4000BBDE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CCA04A71A93CCC4000BBDE9 /* DataKit */;
+			targetProxy = 6CCA04B41A93CCC4000BBDE9 /* PBXContainerItemProxy */;
+		};
+		6CCA04B71A93CCC4000BBDE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C69C098195B6F4E002A3F53 /* trivit */;
+			targetProxy = 6CCA04B61A93CCC4000BBDE9 /* PBXContainerItemProxy */;
+		};
+		6CCA04BE1A93CCC4000BBDE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CCA04A71A93CCC4000BBDE9 /* DataKit */;
+			targetProxy = 6CCA04BD1A93CCC4000BBDE9 /* PBXContainerItemProxy */;
 		};
 		6CE4BBE51A1D609D005E9BCD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -998,6 +1207,94 @@
 			};
 			name = Release;
 		};
+		6CCA04C11A93CCC5000BBDE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DataKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6CCA04C21A93CCC5000BBDE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DataKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6CCA04C31A93CCC5000BBDE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DataKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trivit.app/trivit";
+			};
+			name = Debug;
+		};
+		6CCA04C41A93CCC5000BBDE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DataKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/trivit.app/trivit";
+			};
+			name = Release;
+		};
 		6CE4BBF11A1D609E005E9BCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1095,6 +1392,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6CCA04C51A93CCC5000BBDE9 /* Build configuration list for PBXNativeTarget "DataKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CCA04C11A93CCC5000BBDE9 /* Debug */,
+				6CCA04C21A93CCC5000BBDE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6CCA04C71A93CCC5000BBDE9 /* Build configuration list for PBXNativeTarget "DataKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CCA04C31A93CCC5000BBDE9 /* Debug */,
+				6CCA04C41A93CCC5000BBDE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
 			isa = XCConfigurationList;
