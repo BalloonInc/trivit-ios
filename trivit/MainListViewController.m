@@ -541,8 +541,8 @@ int const OUTSIDE_TAP = 3;
     // if empty and first run: add some trivits
 
     if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
-        [self addItemWithTitle:NSLocalizedString(@"Drinks", @"Tally example")];
-        [self addItemWithTitle:NSLocalizedString(@"Days in prison", @"Tally example") andCount:24];
+        [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete me", @"Tally example")];
+        [self addItemWithTitle:NSLocalizedString(@"Days without cookies", @"Tally example") andCount:24];
         [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:8];
     }
     else {
