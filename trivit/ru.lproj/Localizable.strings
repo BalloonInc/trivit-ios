@@ -17,19 +17,16 @@
 "Color - %@" = "%@";
 
 /* Placeholder texts for newly added trivits */
-"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Дни в тюрьме,Мои спортивные автомобили,Дни без отпуска,Чашек кофе в этом году,Стопок текилы на сегодня,Красивых девушек в баре,Дни без мата,Людей достал,Незаконченные фильмы Вконтакте,Подсчитывает добавил,Мои айфоны,Ошибки в моем коде,Выпитое пиво,Мои пары обуви, Дождливых дней в 2015 году,Стаканов воды за сегодня,Звезд в небе, Дней до нового Apple Watch";
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Дни в тюрьме,Мои спортивные автомобили,Дни без отпуска,Чашек кофе в этом году,Стопок текилы на сегодня,Красивых девушек в баре,Дни без мата,Людей достал,Незаконченные фильмы Вконтакте,Подсчитывает добавил,Мои айфоны,Ошибки в моем коде,Выпитое пиво,Мои пары обуви, Дождливых дней в 2015 году,Стаканов воды за сегодня,Звезд в небе, Дней до нового Apple Watch";
 
 /* Tally example */
-"Days in prison" = "Дни в тюрьме";
+"Days without cookies" = "Дней без печенья";
 
 /* Color set name */
 "Default" = "Стандартная";
 
 /* Message box title */
 "Delete all Trivits" = "Удалить все тривиты";
-
-/* Tally example */
-"Drinks" = "Напитки";
 
 /* send feedback button in settings */
 "Feedback" = "Отзыв";
@@ -43,7 +40,7 @@
 /* OK button */
 "Got it." = "Понятно.";
 
-/* Color set name */
+/* (No Commment) */
 "Green" = "Зеленая";
 
 /* feedback message */
@@ -58,6 +55,12 @@
 /* feedback message */
 "I've seen better, I've seen worse." = "Я видел хуже, я видел лучше.";
 
+/* Color set name */
+"J" = "J";
+
+/* Color set name */
+"M" = "M";
+
 /* No comment provided by engineer. */
 "No" = "Нет";
 
@@ -70,14 +73,14 @@
 /* tutorial */
 "Open or close your new Trivit with a single tap" = "Откройте или закройте Ваш Тривит одним нажатием.";
 
+/* Color set name */
+"Pink" = "розовый";
+
 /* messagebox, adding trivit not possible while editing other trivit */
 "Please finish editing the title first." = "Сначала закончите редактирование заголовка.";
 
-/* Color set name */
+/* (No Commment) */
 "Red" = "Красная";
-
-/* Color set name */
-"Pink" = "Розовая";
 
 /* remove all trivits button in settings */
 "Remove all" = "Удалить все";
@@ -90,6 +93,9 @@
 
 /* Message box title */
 "Reset all Trivits" = "Сбросить все тривиты";
+
+/* (No Commment) */
+"Swipe left to delete" = "Проведите вышло удалить";
 
 /* feedback message */
 "Tap an image to rate:" = "Нажмите на символ для оценки:";

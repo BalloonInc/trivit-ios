@@ -5,10 +5,10 @@
 "38J-UG-1gr.text" = "NO TRANSLATION";
 
 /* (No Commment) */
-"798-Ww-cFl.title" = "Instellingen";
+"798-Ww-cFl.title" = "Paramètres";
 
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp"; */
-"JYG-xs-cHp.title" = "Instellingen";
+"JYG-xs-cHp.title" = "Paramètres";
 
 /* Class = "IBUILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f"; */
 "Ksw-o9-V7f.text" = "NO TRANSLATION";
@@ -20,32 +20,32 @@
 "Obg-Ql-Sqf.title" = "Trivit";
 
 /* Class = "IBUILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA"; */
-"Txb-zc-zGA.text" = "Trivit";
+"Txb-zc-zGA.text" = "NO TRANSLATION";
 
 /* Class = "IBUINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp"; */
-"aNY-hB-Hrp.title" = "Feedback";
+"aNY-hB-Hrp.title" = "Commentaires";
 
 /* Class = "IBUILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW"; */
 "bqM-wM-ulW.text" = "NO TRANSLATION";
 
 /* Class = "IBUITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW"; */
-"c8x-yf-RaW.text" = "Bezoek ons: www.trivit.be";
+"c8x-yf-RaW.text" = "NO TRANSLATION";
 
 /* Class = "IBUITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
-"f6g-ir-zuT.placeholder" = "Naam (optioneel)";
+"f6g-ir-zuT.placeholder" = "Votre nom (facultatif)";
 
 /* Class = "IBUIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A"; */
-"hfq-4d-I4A.normalTitle" = "Sla over";
+"hfq-4d-I4A.normalTitle" = "Passer";
 
 /* (No Commment) */
-"jiI-xk-2f7.normalTitle" = "Aan de slag!";
+"jiI-xk-2f7.normalTitle" = "Commencez!";
 
 /* Class = "IBUITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5"; */
-"kib-6f-LI5.placeholder" = "e-mail (optioneel)";
+"kib-6f-LI5.placeholder" = "Votre courriel (facultatif)";
 
 /* Class = "IBUILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe"; */
 "mzT-GO-pIe.text" = "NO TRANSLATION";
 
 /* Class = "IBUILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw"; */
-"yln-wJ-3Cw.text" = "yln-wJ-3Cw.text";
+"yln-wJ-3Cw.text" = "NO TRANSLATION";
 

@@ -541,9 +541,11 @@ int const OUTSIDE_TAP = 3;
     // if empty and first run: add some trivits
 
     if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
-        [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete me", @"Tally example")];
+        [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete", @"Tally example")];
         [self addItemWithTitle:NSLocalizedString(@"Days without cookies", @"Tally example") andCount:24];
         [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:8];
+        TrivitTableViewCell *cell = (TrivitTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        cell.isCollapsed = false;
     }
     else {
         self.appSettings.vibrationFeedback = [[self.defaults objectForKey:@"vibrationFeedback"] boolValue];

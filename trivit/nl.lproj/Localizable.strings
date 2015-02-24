@@ -17,19 +17,16 @@
 "Color - %@" = "Kleur - %@";
 
 /* Placeholder texts for newly added trivits */
-"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Tequilla shots today,Pretty girls in the bar,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens,Dagen sinds vakantie,Kopjes koffie dit jaar,Mooie meisjes in de bar,Dagen nodig om app af te werken,Dagen zonder vloeken,Onafgewerkte Netflix films,Getrokken streepjes in Trivit,Bugs in onze software,Bier,Aantal schoenen,Regendagen in 2015,Glazen water,Sterren aan de hemel, Dagen tot Apple Watch release";
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Dagen in de gevangenis,Sport wagens,Dagen sinds vakantie,Kopjes koffie dit jaar,Mooie meisjes in de bar,Dagen nodig om app af te werken,Dagen zonder vloeken,Onafgewerkte Netflix films,Getrokken streepjes in Trivit,Bugs in onze software,Bier,Aantal schoenen,Regendagen in 2015,Glazen water,Sterren aan de hemel, Dagen tot Apple Watch release";
 
 /* Tally example */
-"Days in prison" = "Dagen in de gevangenis";
+"Days without cookies" = "Dagen zonder koekjes";
 
 /* Color set name */
-"Default" = "Default";
+"Default" = "Standaard";
 
 /* Message box title */
 "Delete all Trivits" = "Verwijder alle Trivits";
-
-/* Tally example */
-"Drinks" = "Drankjes";
 
 /* send feedback button in settings */
 "Feedback" = "Feedback";
@@ -43,7 +40,7 @@
 /* OK button */
 "Got it." = "Ah zo.";
 
-/* Color set name */
+/* (No Commment) */
 "Green" = "Groen";
 
 /* feedback message */
@@ -58,6 +55,12 @@
 /* feedback message */
 "I've seen better, I've seen worse." = "Meh.";
 
+/* Color set name */
+"J" = "J";
+
+/* Color set name */
+"M" = "M";
+
 /* No comment provided by engineer. */
 "No" = "Nee";
 
@@ -70,10 +73,13 @@
 /* tutorial */
 "Open or close your new Trivit with a single tap" = "Open of sluit je Trivit met een enkele tik";
 
+/* Color set name */
+"Pink" = "Pink";
+
 /* messagebox, adding trivit not possible while editing other trivit */
 "Please finish editing the title first." = "De huidige titel wordt nog bewerkt.";
 
-/* Color set name */
+/* (No Commment) */
 "Red" = "Rood";
 
 /* remove all trivits button in settings */
@@ -87,6 +93,9 @@
 
 /* Message box title */
 "Reset all Trivits" = "Reset alle Trivits";
+
+/* (No Commment) */
+"Swipe left to delete" = "Veeg mij links om te verwijderen";
 
 /* feedback message */
 "Tap an image to rate:" = "Tik op een score:";
