@@ -35,6 +35,21 @@ int const FEEDBACKCELL = 4;
 int const VIBRATIONCELL = 5;
 int const NUMBEROFCELLS = 6;
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+
 #pragma mark - Lazy instantiators
 
 - (NSString *)sureToDeleteTitle {
@@ -256,30 +271,31 @@ int const NUMBEROFCELLS = 6;
 
 - (void)redoLayout:(NSNotification *)notification {
     self.currentOrientation = [[UIDevice currentDevice] orientation];
-    UIInterfaceOrientation cachedOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-    if (self.currentOrientation == UIDeviceOrientationUnknown ||
-            self.currentOrientation == UIDeviceOrientationFaceUp ||
-            self.currentOrientation == UIDeviceOrientationFaceDown ||
-            self.currentOrientation == UIDeviceOrientationPortraitUpsideDown)
-        self.currentOrientation = (UIDeviceOrientation) cachedOrientation;
-
-    if (UIInterfaceOrientationIsLandscape(self.currentOrientation))
-        self.cellHeight = 128;
-
-    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone &&
-                MAX([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width) < 567.9f)
-            // for iPhone 4S, smaller tiles in portrait
-            self.cellHeight = 124;
-        else
-            self.cellHeight = 136;
-
+    if (IS_IPHONE_4_OR_LESS){
+        // for iPhone 4S, smaller tiles in portrait
+        self.cellHeight = 124;
+        self.cellWidth = 136;
     }
-
-    self.cellWidth = 136;
+    else if (IS_IPHONE_5){
+        self.cellHeight = 136;
+        self.cellWidth = 136;
+    }
+    else if (IS_IPHONE_6){
+        self.cellHeight = 164;
+        self.cellWidth = 164;
+        
+    }
+    else if (IS_IPHONE_6P){
+        self.cellHeight = 178;
+        self.cellWidth = 178;
+    }
+    else{
+        self.cellHeight = 124;
+        self.cellWidth = 136;
+    }
+    
     self.spacing = 10;
-
+    
     if (notification) {
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self.collectionView reloadData];
