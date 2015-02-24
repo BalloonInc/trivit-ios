@@ -704,7 +704,7 @@
 				TargetAttributes = {
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = FM9J48C757;
+						DevelopmentTeam = JRS568U6JT;
 					};
 					6C69C0AE195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
@@ -717,6 +717,7 @@
 					};
 					6CCA04B11A93CCC4000BBDE9 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = JRS568U6JT;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
 					6CE4BBCF1A1D609B005E9BCD = {
@@ -1424,6 +1425,7 @@
 				6CCA04C21A93CCC5000BBDE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6CCA04C71A93CCC5000BBDE9 /* Build configuration list for PBXNativeTarget "DataKitTests" */ = {
 			isa = XCConfigurationList;
@@ -1432,6 +1434,7 @@
 				6CCA04C41A93CCC5000BBDE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6CE4BBF01A1D609E005E9BCD /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
 			isa = XCConfigurationList;

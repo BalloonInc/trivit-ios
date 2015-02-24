@@ -132,12 +132,12 @@
 
     // Initialize Record
     Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-    dataObject.FeedbackMessage = self.feedbackDetail.text;
-    dataObject.ScaleValue = [NSNumber numberWithInteger:self.score];
-    dataObject.SoftwareIdentifier = [[UIDevice currentDevice] systemVersion];
-    dataObject.DeviceIdentifier = UIDevice.currentDevice.model;
-    dataObject.Name = self.nameField.text;
-    dataObject.Email = self.emailField.text;
+    dataObject.feedbackMessage = self.feedbackDetail.text;
+    dataObject.scaleValue = [NSNumber numberWithInteger:self.score];
+    dataObject.softwareIdentifier = [[UIDevice currentDevice] systemVersion];
+    dataObject.deviceIdentifier = UIDevice.currentDevice.model;
+    dataObject.name = self.nameField.text;
+    dataObject.email = self.emailField.text;
 
 
     [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:self.managedObjectContext];
