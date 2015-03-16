@@ -21,6 +21,7 @@
 		6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */; };
 		6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */; };
 		6C41254D1A435FB800C2D4CA /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
+		6C54FA821AABCA5300C517A5 /* trivits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivits.xcdatamodeld */; };
 		6C5742831A6C140700F2B72D /* cellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5742821A6C140700F2B72D /* cellBackground.m */; };
 		6C5C4B961A61579300C87401 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C4B981A61579300C87401 /* Localizable.strings */; };
 		6C5C4B9C1A61579400C87401 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C4B9E1A61579400C87401 /* InfoPlist.strings */; };
@@ -41,13 +42,15 @@
 		6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivits.xcdatamodeld */; };
 		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6C98EEB01A4771A500E12E25 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */; };
+		6CA1B1CA1AAC6EAB00F08D73 /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
+		6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CCA04AD1A93CCC4000BBDE9 /* DataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04AC1A93CCC4000BBDE9 /* DataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CCA04B31A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
 		6CCA04BC1A93CCC4000BBDE9 /* DataKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04BB1A93CCC4000BBDE9 /* DataKitTests.m */; };
 		6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
 		6CCA04C01A93CCC4000BBDE9 /* DataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6CCA04CA1A93CD44000BBDE9 /* DataAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04C81A93CD44000BBDE9 /* DataAccess.h */; };
+		6CCA04CA1A93CD44000BBDE9 /* DataAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04C81A93CD44000BBDE9 /* DataAccess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04C91A93CD44000BBDE9 /* DataAccess.m */; };
 		6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */; };
 		6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */; };
@@ -159,6 +162,8 @@
 		6C11D3631A5200FD0024AAAA /* Feedback+Mapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feedback+Mapping.m"; sourceTree = "<group>"; };
 		6C11D3651A521F490024AAAA /* SettingsIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsIcons.h; sourceTree = "<group>"; };
 		6C11D3661A521F490024AAAA /* SettingsIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsIcons.m; sourceTree = "<group>"; };
+		6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = trivit.entitlements; sourceTree = "<group>"; };
+		6C17594F1AA3BAA700A0CE0D /* trivit WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "trivit WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
 		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
 		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
@@ -352,6 +357,7 @@
 		6C69C09B195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXGroup;
 			children = (
+				6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */,
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
 				6C8E3C231A01AE5E0001616E /* Cells: TableView */,
@@ -491,6 +497,7 @@
 		6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6C17594F1AA3BAA700A0CE0D /* trivit WatchKit Extension.entitlements */,
 				6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */,
 				6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */,
 				6C727E401A840E4A001B9A4E /* DetailInterfaceController.h */,
@@ -705,6 +712,11 @@
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = JRS568U6JT;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6C69C0AE195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
@@ -723,6 +735,11 @@
 					6CE4BBCF1A1D609B005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = JRS568U6JT;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					6CE4BBE11A1D609D005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
@@ -914,8 +931,11 @@
 			files = (
 				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
 				6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */,
+				6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */,
 				6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */,
 				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
+				6CA1B1CA1AAC6EAB00F08D73 /* TallyModel.m in Sources */,
+				6C54FA821AABCA5300C517A5 /* trivits.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,6 +1148,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1165,6 +1186,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1359,6 +1381,7 @@
 		6CE4BBF41A1D609E005E9BCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1370,6 +1393,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1377,6 +1401,7 @@
 		6CE4BBF51A1D609E005E9BCD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
@@ -1384,6 +1409,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

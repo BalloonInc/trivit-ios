@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface DataAccess : NSObject
-- (NSArray*) getData;
+
+@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+- (void)saveManagedObjectContext;
+- (void)migrateStore;
++ (DataAccess*) sharedInstance;
 
 @end

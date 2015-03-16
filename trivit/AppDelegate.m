@@ -8,24 +8,14 @@
 
 #import "AppDelegate.h"
 #import "MainListViewController.h"
-#import <CoreData/CoreData.h>
 #import <NewRelicAgent/NewRelic.h>
-
-@interface AppDelegate ()
-
-@property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property(strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-@end
+#import "DataKit.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //New Relic analytics
-    //temporary disable NewRelic Crash reporting
-    //[NewRelic enableCrashReporting:NO];
-
-    [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
+    //[NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 
     // Fetch Main Storyboard
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -35,8 +25,12 @@
 
     // Configure View Controller
     MainListViewController *mainViewController = (MainListViewController *) [rootNavigationController topViewController];
+    // migrate store if needed
+    
+    //[DataAccess.sharedInstance migrateStore];
 
     if ([mainViewController isKindOfClass:[MainListViewController class]]) {
+        self.managedObjectContext = DataAccess.sharedInstance.managedObjectContext;
         [mainViewController setManagedObjectContext:self.managedObjectContext];
     }
 
@@ -54,7 +48,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [self saveManagedObjectContext];
+    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -67,64 +61,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [self saveManagedObjectContext];
+    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
-- (NSManagedObjectContext *)managedObjectContext {
-    if (_managedObjectContext) {
-        return _managedObjectContext;
-    }
-
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-
-    if (coordinator) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-
-    return _managedObjectContext;
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    if (_managedObjectModel) {
-        return _managedObjectModel;
-    }
-
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"trivits" withExtension:@"momd"];
-
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (_persistentStoreCoordinator) {
-        return _persistentStoreCoordinator;
-    }
-    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"trivits.sqlite"];
-
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    return _persistentStoreCoordinator;
-}
-
-#pragma mark Helper Methods
-
-- (void)saveManagedObjectContext {
-    NSError *error = nil;
-
-    if (![self.managedObjectContext save:&error]) {
-        if (error) {
-            NSLog(@"Unable to save changes.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
-    }
-}
 
 @end

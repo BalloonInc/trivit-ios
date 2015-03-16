@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DataAccess.h"
 //! Project version number for DataKit.
 FOUNDATION_EXPORT double DataKitVersionNumber;
 

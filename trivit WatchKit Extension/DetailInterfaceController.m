@@ -9,11 +9,11 @@
 #import "DetailInterfaceController.h"
 #import "WKTableVIewRowController.h"
 #import "InterfaceController.h"
+#import "TallyModel.h"
 
 @interface DetailInterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
-@property (strong, nonatomic) NSMutableArray *titles;
-@property (strong, nonatomic) NSMutableArray *counts;
+@property (strong, nonatomic) NSMutableArray *data;
 @property (nonatomic) NSInteger selectedRow;
 @end
 
@@ -23,14 +23,13 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     
-    self.counts = [context objectForKey:@"counts"];
-    self.titles = [context objectForKey:@"titles"];
+    self.data = [context objectForKey:@"data"];
     self.selectedRow = [[context objectForKey:@"selectedRow"] integerValue];
-    self.title = self.titles[self.selectedRow];
+    self.title = [self.data[self.selectedRow] title];
     self.lightColor = [context objectForKey:@"lightColor"];
     self.darkColor = [context objectForKey:@"darkColor"];
     
-    self.count = [self.counts[self.selectedRow] integerValue];
+    self.count = [[self.data[self.selectedRow] counter] integerValue];
 
     [self loadTableData];
 }
@@ -85,7 +84,9 @@
 
     self.count = MAX(self.count+((rowIndex==1)?1:-1),0);
     [self reloadCounter];
-    [self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
+    TallyModel *tally = self.data[self.selectedRow];
+    tally.counter = [NSNumber numberWithInteger:self.count];
+    [self.data replaceObjectAtIndex:self.selectedRow withObject:tally];
 
 }
 
