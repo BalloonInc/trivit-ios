@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *internalGroup;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *countButton;
 @property (nonatomic) NSInteger selectedRow;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *minusButtonGroup;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *trivitButtonGroup;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *resetButtonGroup;
 @end
 
 
@@ -68,11 +71,12 @@
 }
 
 - (void)loadTableData {
-
-    
     [self.titleLabel setText:[self.data[self.selectedRow] title]];
     //[self.titleLabel setTextColor:self.lightColor];
     [self.internalGroup setBackgroundColor:self.darkColor];
+    [self.minusButtonGroup setBackgroundColor:self.darkColor];
+    [self.trivitButtonGroup setBackgroundColor:self.darkColor];
+    [self.resetButtonGroup setBackgroundColor:self.darkColor];
     [self reloadCounter];
     
 }

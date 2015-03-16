@@ -44,9 +44,9 @@
             <objects>
                 <controller identifier="detailController" id="HZg-mk-xyX" customClass="DetailInterfaceController">
                     <items>
-                        <group width="80" height="80" alignment="center" backgroundImage="mask" radius="38" id="sCs-qD-5Is">
+                        <group width="70" height="70" alignment="center" backgroundImage="mask" radius="33" id="sCs-qD-5Is">
                             <items>
-                                <button width="1" height="81" alignment="left" title="0" id="JaI-eC-wg7">
+                                <button width="1" height="1" alignment="left" title="0" id="JaI-eC-wg7">
                                     <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                     <fontDescription key="font" type="boldSystem" pointSize="24"/>
                                     <connections>
@@ -55,35 +55,52 @@
                                 </button>
                             </items>
                             <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <variation key="device=watch38mm" height="70" radius="33" width="70"/>
+                            <variation key="device=watch42mm" height="80" radius="38" width="80"/>
                         </group>
-                        <label width="136" alignment="center" text="Went swimming" textAlignment="center" id="2Rp-uA-QGm"/>
-                        <group width="134" alignment="left" id="4aV-V2-F84">
+                        <label width="136" alignment="center" text="Went swimming this year" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.90000000000000002" id="2Rp-uA-QGm">
+                            <variation key="device=watch38mm" minimumScaleFactor="0.90000000000000002"/>
+                            <variation key="device=watch42mm" minimumScaleFactor="1"/>
+                        </label>
+                        <group alignment="left" id="4aV-V2-F84">
                             <items>
+                                <group width="3" alignment="left" id="dzq-DR-o4E">
+                                    <variation key="device=watch38mm" width="3"/>
+                                    <variation key="device=watch42mm" width="16"/>
+                                </group>
                                 <group alignment="left" radius="17" id="OKa-vo-ci1">
                                     <items>
                                         <button alignment="center" backgroundImage="delete" id="7VI-j3-VD4">
                                             <connections>
-                                                <action selector="minusButtonPressed" destination="HZg-mk-xyX" id="9gf-qO-GkW"/>
+                                                <action selector="minusButtonPressed" destination="HZg-mk-xyX" id="1Ff-XL-gO6"/>
                                             </connections>
                                         </button>
                                     </items>
                                     <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group width="6" alignment="left" id="3EZ-01-0bj">
+                                    <variation key="device=watch38mm" width="6"/>
+                                    <variation key="device=watch42mm" width="16"/>
                                 </group>
                                 <group alignment="left" radius="17" id="SWJ-Jm-h0h">
                                     <items>
                                         <button alignment="center" backgroundImage="trivit" id="uJG-Jq-k1c">
                                             <connections>
-                                                <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="bvA-AD-DQD"/>
+                                                <action selector="plusButtonPressed" destination="HZg-mk-xyX" id="udi-j7-Ozi"/>
                                             </connections>
                                         </button>
                                     </items>
                                     <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </group>
+                                <group width="6" alignment="left" id="Pjj-zn-4sB">
+                                    <variation key="device=watch38mm" width="6"/>
+                                    <variation key="device=watch42mm" width="16"/>
+                                </group>
                                 <group alignment="left" radius="17" id="jPT-HY-0Pg">
                                     <items>
                                         <button alignment="center" backgroundImage="reset" id="B95-k0-4NX">
                                             <connections>
-                                                <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="eCC-Lg-W33"/>
+                                                <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="9Tb-lh-VQl"/>
                                             </connections>
                                         </button>
                                     </items>
@@ -95,7 +112,10 @@
                     <connections>
                         <outlet property="countButton" destination="JaI-eC-wg7" id="WGO-a2-GBr"/>
                         <outlet property="internalGroup" destination="sCs-qD-5Is" id="QFb-xO-iWb"/>
+                        <outlet property="minusButtonGroup" destination="OKa-vo-ci1" id="23Y-ex-6C1"/>
+                        <outlet property="resetButtonGroup" destination="jPT-HY-0Pg" id="ZXY-lR-v4Y"/>
                         <outlet property="titleLabel" destination="2Rp-uA-QGm" id="v22-Z7-nJk"/>
+                        <outlet property="trivitButtonGroup" destination="SWJ-Jm-h0h" id="xew-T5-lyA"/>
                     </connections>
                 </controller>
             </objects>
