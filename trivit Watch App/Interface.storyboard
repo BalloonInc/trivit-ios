@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14D72i" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7525" systemVersion="14D98g" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7516"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -44,49 +44,58 @@
             <objects>
                 <controller identifier="detailController" id="HZg-mk-xyX" customClass="DetailInterfaceController">
                     <items>
-                        <table alignment="left" id="77q-yV-AAk">
+                        <group width="80" height="80" alignment="center" backgroundImage="mask" radius="38" id="sCs-qD-5Is">
                             <items>
-                                <tableRow identifier="detailHeader" id="Z2g-Rn-2CA" customClass="WKTableVIewRowController">
-                                    <group key="rootItem" width="1" height="37" alignment="left" id="hy1-0r-ryx">
-                                        <items>
-                                            <label height="30" alignment="left" verticalAlignment="center" text="Item" id="Zwr-an-cDQ"/>
-                                            <button width="39" height="30" alignment="right" verticalAlignment="center" title="-" enabled="NO" id="C9A-5k-YtV">
-                                                <color key="backgroundColor" red="1" green="0.67027779830000001" blue="0.083833395029999994" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="font" type="system" pointSize="20"/>
-                                                <connections>
-                                                    <action selector="minusButtonPressed" destination="HZg-mk-xyX" id="iqH-mu-cmw"/>
-                                                </connections>
-                                            </button>
-                                            <label width="3" alignment="right" id="O3A-eP-k1S"/>
-                                        </items>
-                                        <color key="backgroundColor" red="1" green="0.83371687829999996" blue="0.00099119386939999993" alpha="1" colorSpace="calibratedRGB"/>
-                                    </group>
+                                <button width="1" height="81" alignment="left" title="0" id="JaI-eC-wg7">
+                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="24"/>
                                     <connections>
-                                        <outlet property="completeCell" destination="hy1-0r-ryx" id="mqt-z2-TPA"/>
-                                        <outlet property="itemCountButton" destination="C9A-5k-YtV" id="bwQ-Za-4Je"/>
-                                        <outlet property="itemNameLabel" destination="Zwr-an-cDQ" id="aqm-rk-OmC"/>
+                                        <action selector="plusButtonPressed" destination="HZg-mk-xyX" id="Ug8-YX-V3I"/>
                                     </connections>
-                                </tableRow>
-                                <tableRow identifier="detailCount" id="fhD-wk-TTl" customClass="WKTableVIewRowController">
-                                    <group key="rootItem" width="1" height="100" alignment="left" id="5bU-dW-YNH">
-                                        <items>
-                                            <label width="3" alignment="right" id="Iow-bj-7Mj"/>
-                                            <label height="1" alignment="center" verticalAlignment="center" text="0" textAlignment="center" id="ZfE-V6-HH9">
-                                                <fontDescription key="font" type="system" pointSize="50"/>
-                                            </label>
-                                        </items>
-                                        <color key="backgroundColor" red="0.98039215686274506" green="0.6588235294117647" blue="0.062745098039215685" alpha="1" colorSpace="calibratedRGB"/>
-                                    </group>
-                                    <connections>
-                                        <outlet property="completeCell" destination="5bU-dW-YNH" id="LZN-pe-7ib"/>
-                                        <outlet property="itemNameLabel" destination="ZfE-V6-HH9" id="wAf-Rd-Lr1"/>
-                                    </connections>
-                                </tableRow>
+                                </button>
                             </items>
-                        </table>
+                            <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <label width="136" alignment="center" text="Went swimming" textAlignment="center" id="2Rp-uA-QGm"/>
+                        <group width="134" alignment="left" id="4aV-V2-F84">
+                            <items>
+                                <group alignment="left" radius="17" id="OKa-vo-ci1">
+                                    <items>
+                                        <button alignment="center" backgroundImage="delete" id="7VI-j3-VD4">
+                                            <connections>
+                                                <action selector="minusButtonPressed" destination="HZg-mk-xyX" id="9gf-qO-GkW"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group alignment="left" radius="17" id="SWJ-Jm-h0h">
+                                    <items>
+                                        <button alignment="center" backgroundImage="trivit" id="uJG-Jq-k1c">
+                                            <connections>
+                                                <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="bvA-AD-DQD"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group alignment="left" radius="17" id="jPT-HY-0Pg">
+                                    <items>
+                                        <button alignment="center" backgroundImage="reset" id="B95-k0-4NX">
+                                            <connections>
+                                                <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="eCC-Lg-W33"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="interfaceTable" destination="77q-yV-AAk" id="e6W-AC-fba"/>
+                        <outlet property="countButton" destination="JaI-eC-wg7" id="WGO-a2-GBr"/>
+                        <outlet property="internalGroup" destination="sCs-qD-5Is" id="QFb-xO-iWb"/>
+                        <outlet property="titleLabel" destination="2Rp-uA-QGm" id="v22-Z7-nJk"/>
                     </connections>
                 </controller>
             </objects>

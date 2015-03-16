@@ -12,8 +12,12 @@
 #import "TallyModel.h"
 
 @interface DetailInterfaceController()
-@property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
+
 @property (strong, nonatomic) NSMutableArray *data;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *countLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *titleLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *internalGroup;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *countButton;
 @property (nonatomic) NSInteger selectedRow;
 @end
 
@@ -48,51 +52,45 @@
     NSLog(@"detail de-activated");
 
 }
-- (IBAction)minusButtonPressed {
-    self.count--;
+- (IBAction)plusButtonPressed {
+    self.count++;
     [self reloadCounter];
 }
 
-- (void)configureRowControllerAtIndex:(NSInteger)index {
-    WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
-
-    if(index==0){
-
-        [listItemRowController setBackgroundColorCell:[self lightColor]];
-        [listItemRowController setItemName:self.title];
-        [listItemRowController setCounter:-1];
-        [listItemRowController setBackgroundColorButton:[self darkColor]];
-
-    }
-    else{
-        [listItemRowController hideCounter:true];
-        [listItemRowController setBackgroundColorCell:[self darkColor]];
-        [listItemRowController setItemName:[NSString stringWithFormat:@"%ld",(long)self.count]];
-    }
-    
+- (IBAction)minusButtonPressed {
+    if(self.count>0) self.count--;
+    [self reloadCounter];
 }
-- (void)loadTableData {
-    [self.interfaceTable setNumberOfRows:2 withRowType:@"detailHeader"];
 
-    [self.interfaceTable setRowTypes:@[@"detailHeader",@"detailCount"]];
-    [self configureRowControllerAtIndex:0];
-    [self configureRowControllerAtIndex:1];
+- (IBAction)resetButtonPressed {
+    self.count = 0;
+    [self reloadCounter];
+}
+
+- (void)loadTableData {
+
+    
+    [self.titleLabel setText:[self.data[self.selectedRow] title]];
+    //[self.titleLabel setTextColor:self.lightColor];
+    [self.internalGroup setBackgroundColor:self.darkColor];
+    [self reloadCounter];
     
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
 
     self.count = MAX(self.count+((rowIndex==1)?1:-1),0);
-    [self reloadCounter];
+
     TallyModel *tally = self.data[self.selectedRow];
     tally.counter = [NSNumber numberWithInteger:self.count];
     [self.data replaceObjectAtIndex:self.selectedRow withObject:tally];
 
 }
 
-
 -(void) reloadCounter{
-    [self configureRowControllerAtIndex:1];
+
+    NSString *labelText = [NSString stringWithFormat:@"%ld",self.count];
+    [self.countButton setTitle:labelText];
 }
 
 @end
