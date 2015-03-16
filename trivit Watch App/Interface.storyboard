@@ -55,10 +55,11 @@
                                 </button>
                             </items>
                             <color key="backgroundColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                             <variation key="device=watch38mm" height="70" radius="33" width="70"/>
                             <variation key="device=watch42mm" height="80" radius="38" width="80"/>
                         </group>
-                        <label width="136" alignment="center" text="Went swimming this year" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.90000000000000002" id="2Rp-uA-QGm">
+                        <label width="1" alignment="center" text="Went swimming this year" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.90000000000000002" id="2Rp-uA-QGm">
                             <variation key="device=watch38mm" minimumScaleFactor="0.90000000000000002"/>
                             <variation key="device=watch42mm" minimumScaleFactor="1"/>
                         </label>
@@ -66,7 +67,7 @@
                             <items>
                                 <group width="3" alignment="left" id="dzq-DR-o4E">
                                     <variation key="device=watch38mm" width="3"/>
-                                    <variation key="device=watch42mm" width="16"/>
+                                    <variation key="device=watch42mm" width="8"/>
                                 </group>
                                 <group alignment="left" radius="17" id="OKa-vo-ci1">
                                     <items>
@@ -80,7 +81,7 @@
                                 </group>
                                 <group width="6" alignment="left" id="3EZ-01-0bj">
                                     <variation key="device=watch38mm" width="6"/>
-                                    <variation key="device=watch42mm" width="16"/>
+                                    <variation key="device=watch42mm" width="10"/>
                                 </group>
                                 <group alignment="left" radius="17" id="SWJ-Jm-h0h">
                                     <items>
@@ -94,7 +95,7 @@
                                 </group>
                                 <group width="6" alignment="left" id="Pjj-zn-4sB">
                                     <variation key="device=watch38mm" width="6"/>
-                                    <variation key="device=watch42mm" width="16"/>
+                                    <variation key="device=watch42mm" width="10"/>
                                 </group>
                                 <group alignment="left" radius="17" id="jPT-HY-0Pg">
                                     <items>
