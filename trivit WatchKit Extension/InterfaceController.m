@@ -26,6 +26,7 @@
 
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(strong, nonatomic) NSMutableArray *workingData;
+@property(nonatomic) bool newTrivitAdded;
 @end
 
 
@@ -122,8 +123,16 @@
 
         newRow.counter = [NSNumber numberWithInteger:0];
         newRow.color = [NSNumber numberWithInteger:[((TallyModel*)[self.workingData lastObject]).color integerValue]+1];
+        newRow.type = @"";
+        newRow.createdAt = [NSDate date];
+
 
         [self.workingData addObject:newRow];
+        [DataAccess.sharedInstance.managedObjectContext insertObject:newRow];
+
+        
+        // set boolean to process table next time view appears
+        self.newTrivitAdded=true;
     }
     
     
@@ -137,14 +146,19 @@
 }
 
 - (void)willActivate {
-
+    if(self.newTrivitAdded) // if new trivit is added, reload the whole list
+        [self loadTableData];
+    else
+        [self updateCounterAtIndex:self.selectedIndex];
+    self.newTrivitAdded=false;
     [super willActivate];
-    [self loadTableData];
-    [self updateCounterAtIndex:self.selectedIndex];
+    [DataAccess.sharedInstance saveManagedObjectContext];
+    
 }
 
 - (void)didDeactivate {
     [super didDeactivate];
+    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
 -(void) configureLastRow{

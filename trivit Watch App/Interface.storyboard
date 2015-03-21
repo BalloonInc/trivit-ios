@@ -8,7 +8,7 @@
         <!--tallyViewWatchBackground272x340-light-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller backgroundImage="tallyViewWatchBackground272x340-light" id="AgC-eL-Hgc" customClass="InterfaceController">
+                <controller backgroundImage="tallyViewWatchBackground272x340-light" contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
                         <table alignment="left" id="xW8-Tg-z4Z">
                             <items>

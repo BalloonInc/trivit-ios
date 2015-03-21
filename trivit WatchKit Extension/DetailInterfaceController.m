@@ -10,6 +10,7 @@
 #import "WKTableVIewRowController.h"
 #import "InterfaceController.h"
 #import "TallyModel.h"
+#import "DataKit.h"
 
 @interface DetailInterfaceController()
 
@@ -46,11 +47,10 @@
     [super willActivate];
 }
 
-
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
-    //[self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
     [super didDeactivate];
+    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 - (IBAction)plusButtonPressed {
     self.count++;
