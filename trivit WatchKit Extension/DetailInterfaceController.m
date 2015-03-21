@@ -69,7 +69,6 @@
 
 - (void)loadTableData {
     [self.titleLabel setText:[self.data[self.selectedRow] title]];
-    //[self.titleLabel setTextColor:self.lightColor];
     [self.internalGroup setBackgroundColor:self.darkColor];
     [self.minusButtonGroup setBackgroundColor:self.darkColor];
     [self.trivitButtonGroup setBackgroundColor:self.darkColor];
@@ -78,18 +77,14 @@
     
 }
 
-- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+-(void) reloadCounter{
 
-    self.count = MAX(self.count+((rowIndex==1)?1:-1),0);
-
+    // update model
     TallyModel *tally = self.data[self.selectedRow];
     tally.counter = [NSNumber numberWithInteger:self.count];
     [self.data replaceObjectAtIndex:self.selectedRow withObject:tally];
 
-}
-
--(void) reloadCounter{
-
+    // update view
     NSString *labelText = [NSString stringWithFormat:@"%ld",self.count];
     [self.countButton setTitle:labelText];
 }
