@@ -11,7 +11,7 @@
 
 @interface WKTableVIewRowController : NSObject
 - (void)setItemName:(NSString *)text;
-- (void)setBackgroundColorButton:(UIColor *)color;
+- (void)setTextColorCountLabel:(UIColor *)color;
 - (void)setBackgroundColorCell:(UIColor *)color;
 - (void)setCounter:(NSInteger)count;
 - (void)hideCounter:(Boolean)hide;

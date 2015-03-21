@@ -8,6 +8,7 @@
 
 #import "InterfaceController.h"
 #import "WKTableVIewRowController.h"
+#import "WKtableViewLastRowController.h"
 #import "DataKit.h"
 #import "TallyModel.h"
 
@@ -88,24 +89,44 @@
 
 - (void)loadTableData {
     [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
+    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
     
-    for (int i = 0; i<[[self workingData] count];i++) {
+    for (int i = 0; i<[[self workingData] count];i++)
         [self configureRowControllerAtIndex:i];
-    }
+    [self configureLastRow];
     
 }
 
 - (void)reloadCounters {
     [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
     
-    for (int i = 0; i<[[self workingData] count];i++) {
+    for (int i = 0; i<[[self workingData] count];i++)
         [self updateCounterAtIndex:i];
-    }
 }
 
 - (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
     
     self.selectedIndex = rowIndex;
+    
+    if (rowIndex==[self.workingData count]){
+        // Add another row
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
+
+        TallyModel *newRow = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
+
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
+        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        newRow.title = [NSString stringWithFormat:@"⌚️ added %@",[dateFormatter stringFromDate:[NSDate date]]];
+
+
+        newRow.counter = [NSNumber numberWithInteger:0];
+        newRow.color = [NSNumber numberWithInteger:[((TallyModel*)[self.workingData lastObject]).color integerValue]+1];
+
+        [self.workingData addObject:newRow];
+    }
+    
+    
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithInteger:rowIndex], @"selectedRow",
@@ -117,22 +138,27 @@
 
 - (void)willActivate {
 
+    [super willActivate];
+    [self loadTableData];
     [self updateCounterAtIndex:self.selectedIndex];
-
-    NSLog(@"%@ will activate", self);
 }
 
 - (void)didDeactivate {
-    // This method is called when watch view controller is no longer visible
-    NSLog(@"%@ did deactivate", self);
+    [super didDeactivate];
+}
+
+-(void) configureLastRow{
+    NSUInteger newIndex = self.workingData.count;
+    WKtableViewLastRowController* lastItemRowController = [self.interfaceTable rowControllerAtIndex:newIndex];
+    [lastItemRowController setTextColorAddTrivitLabel:[Colors colorWithIndex:newIndex usingColorSet:[Colors flatDesignColorsDark]]];
+
 }
 
 - (void)configureRowControllerAtIndex:(NSInteger)index {
     WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
 
     [listItemRowController setCounter:[[self.workingData[index] counter] integerValue]];
-    [listItemRowController setBackgroundColorButton:[Colors colorWithIndex:index usingColorSet:[Colors flatDesignColorsDark]]];
-    [listItemRowController setBackgroundColorCell:[Colors colorWithIndex:index usingColorSet:[Colors flatDesignColorsLight]]];
+    [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:index usingColorSet:[Colors flatDesignColorsDark]]];
 
     [listItemRowController setItemName:[self.workingData[index] title]];
     

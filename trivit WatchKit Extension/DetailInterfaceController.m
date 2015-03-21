@@ -44,7 +44,6 @@
 - (void)willActivate {
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
-    NSLog(@"detail activated");
 }
 
 
@@ -52,8 +51,6 @@
     // This method is called when watch view controller is no longer visible
     //[self.counts replaceObjectAtIndex:self.selectedRow withObject:[NSNumber numberWithInteger:self.count]];
     [super didDeactivate];
-    NSLog(@"detail de-activated");
-
 }
 - (IBAction)plusButtonPressed {
     self.count++;

@@ -9,7 +9,7 @@
 #import "WKTableVIewRowController.h"
 @interface WKTableVIewRowController()
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *itemNameLabel;
-@property (weak, nonatomic) IBOutlet WKInterfaceButton *itemCountButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *itemCountLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *completeCell;
 
 @end
@@ -18,20 +18,20 @@
 - (void)setItemName:(NSString *)text{
     [self.itemNameLabel setText:[NSString stringWithFormat:@" %@", text ]];
 }
-- (void)setBackgroundColorButton:(UIColor *)color{
-    [self.itemCountButton setBackgroundColor:color];
+- (void)setTextColorCountLabel:(UIColor *)color{
+    [self.itemCountLabel setTextColor:color];
 }
 - (void)setBackgroundColorCell:(UIColor *)color{
     [self.completeCell setBackgroundColor:color];
 }
 - (void)setCounter:(NSInteger)count{
     if (count>=0)
-        [self.itemCountButton setTitle:[NSString stringWithFormat:@"%ld",(long)count ]];
+        [self.itemCountLabel setText:[NSString stringWithFormat:@"%ld",(long)count ]];
     else
-        [self.itemCountButton setTitle:@"-"];
+        [self.itemCountLabel setText:@"-"];
 }
 -(void)hideCounter:(Boolean)hide{
-    [self.itemCountButton setHidden:hide];
+    [self.itemCountLabel setHidden:hide];
 }
 
 @end
