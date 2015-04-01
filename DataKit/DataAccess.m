@@ -8,14 +8,30 @@
 
 #import "DataAccess.h"
 #import "AppDelegate.h"
+#import "Version.h"
 #import <UIKit/UIKit.h>
 
 @interface DataAccess()
 @property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property(strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property(strong, nonatomic,readonly) NSString *latestVersion;
+@property(strong, nonatomic) NSUserDefaults *defaults;
 @end
 
 @implementation DataAccess
+
+-(NSString*) latestVersion{
+    // if last entry of the versions table is the current version, don't migrate
+    NSString *version = [self.defaults objectForKey:@"latestVersion"];
+    if(version)
+        return version;
+    return @"";
+}
+
+-(NSUserDefaults *) defaults{
+    if (!_defaults) _defaults = [NSUserDefaults standardUserDefaults];
+    return _defaults;
+}
 
 + (DataAccess*) sharedInstance {
     static DataAccess *sharedDataAccess = nil;
@@ -58,16 +74,22 @@
     if (_persistentStoreCoordinator) {
         return _persistentStoreCoordinator;
     }
+    NSURL *applicationDocumentsDirectory = nil;
+    if ([self.latestVersion isEqualToString:@""])
+        applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+
+    else
+        applicationDocumentsDirectory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.ballooninc.trivit.Documents"];
     
-    NSString *applicationDocumentsDirectory = [[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.ballooninc.trivit.Documents"] path];
-    
-    NSString *sqlitePath = [NSString stringWithFormat: @"%@/%@", applicationDocumentsDirectory, @"trivits.sqlite"];
-    NSURL *storeURL = [NSURL fileURLWithPath:sqlitePath];
+
+    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:[NSString stringWithFormat: @"trivits%@.sqlite", self.latestVersion]];
 
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool: YES],NSMigratePersistentStoresAutomaticallyOption,[NSNumber numberWithBool:YES],NSInferMappingModelAutomaticallyOption, nil];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -88,32 +110,85 @@
 }
 
 - (void)migrateStore {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if([[defaults valueForKey:@"migratedTo2.0"] boolValue])
-        return;
+    NSString * currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    currentVersion = [currentVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
 
+    NSArray *versions = [self getVersions];
+    // if last entry of the versions table is the current version, don't migrate
+    if(versions){
+        Version *lastVersion = (Version*) [versions lastObject];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
+        if ([lastVersion.versionNumber isEqualToString:currentVersion])
+            return;
+    }
+    
     // grab the current store
-    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *oldStoreURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"trivits.sqlite"];
+    NSURL *oldStoreURL = [self.persistentStoreCoordinator.persistentStores.lastObject URL];
     
     NSPersistentStore *oldStore = [self.persistentStoreCoordinator persistentStoreForURL:oldStoreURL];
-    
+
     if(oldStore){
         
         NSString *applicationDocumentsDirectory = [[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.ballooninc.trivit.Documents"] path];
         
-        NSString *sqlitePath = [NSString stringWithFormat: @"%@/%@", applicationDocumentsDirectory, @"trivits.sqlite"];
+        NSString *sqlitePath = [NSString stringWithFormat: @"%@/%@", applicationDocumentsDirectory, @"trivits20.sqlite"];
         NSURL *newStoreURL = [NSURL fileURLWithPath:sqlitePath];
         
         // migrate current store to new URL
-        [self.persistentStoreCoordinator migratePersistentStore:oldStore toURL:newStoreURL options:nil withType:NSSQLiteStoreType error:nil];
-    }
+        NSError *error = nil;
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool: YES],NSMigratePersistentStoresAutomaticallyOption,[NSNumber numberWithBool:YES],NSInferMappingModelAutomaticallyOption, nil];
 
+        NSPersistentStore *store = [self.persistentStoreCoordinator migratePersistentStore:oldStore toURL:newStoreURL options:options withType:NSSQLiteStoreType error:&error];
+        NSLog(@"New store location: %@", newStoreURL);
+    }
+    self.managedObjectContext=nil;
+    self.managedObjectModel=nil;
+    self.persistentStoreCoordinator=nil;
     
-    [defaults setObject:[NSNumber numberWithBool:YES] forKey:@"migratedTo2.0"];
+    [self.defaults setObject:currentVersion forKey:@"latestVersion"];
     
+    // save this upgrade in the versions table
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Version" inManagedObjectContext:self.managedObjectContext];
+    
+    Version *newRow = [[Version alloc] initWithEntity:entityDescription
+                       insertIntoManagedObjectContext:self.managedObjectContext];
+    
+    newRow.dateFirstOpened = [NSDate date];
+    newRow.versionNumber = currentVersion;
+    
+    [self.managedObjectContext save:nil];
+
+}
+
+-(NSArray*)getVersions{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Version" inManagedObjectContext:self.managedObjectContext];
+    
+    // If entityDescription is nil, we are in a version of the Core Data model that doesn't have the 'Version' entity yet. Just return nil
+    if(!entityDescription)
+        return nil;
+    
+    fetchRequest.entity = entityDescription;
+    
+    // Add Sort Descriptors
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateFirstOpened" ascending:YES]]];
+    
+    // Initialize Fetched Results Controller
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [fetchedResultsController performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+        return nil;
+    }
+    return fetchedResultsController.fetchedObjects;
+
 }
 
 

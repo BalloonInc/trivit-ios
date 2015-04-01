@@ -240,23 +240,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)buzzIt {
     if (self.appSettings.vibrationFeedback) {
-        // use of private API not allowed .......................................
-        /*
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:
-                [NSNumber numberWithBool:YES],
-                [NSNumber numberWithInt:50], nil];
-
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                arr, @"VibePattern",
-                [NSNumber numberWithFloat:.85], @"Intensity", nil];
-
-        //declare function before usage
-        int AudioServicesPlaySystemSoundWithVibration();
-
-        AudioServicesPlaySystemSoundWithVibration(4095, nil, dict);
-        */
          AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
-
     }
 }
 
@@ -500,6 +484,23 @@ int const OUTSIDE_TAP = 3;
     }
 }
 
+// auto update if NSManagedObjectContext changes
+- (void)handleDataModelChange:(NSNotification *)notification
+{
+    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
+    NSSet *deletedObjects = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
+    NSSet *insertedObjects = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+        
+        [self.tableView reloadData];
+    });
+
+    // Do something in response to this
+}
+
+
 - (void)orientationChanged:(NSNotification *)notification {
     for (TrivitTableViewCell *cell in [self.tableView visibleCells]) {
         if (!cell.isCollapsed)
@@ -561,6 +562,12 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    // subscribe to objectcontext changed notification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleDataModelChange:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:self.managedObjectContext];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {

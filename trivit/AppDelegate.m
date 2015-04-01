@@ -26,8 +26,7 @@
     // Configure View Controller
     MainListViewController *mainViewController = (MainListViewController *) [rootNavigationController topViewController];
     // migrate store if needed
-    
-    //[DataAccess.sharedInstance migrateStore];
+    [DataAccess.sharedInstance migrateStore];
 
     if ([mainViewController isKindOfClass:[MainListViewController class]]) {
         self.managedObjectContext = DataAccess.sharedInstance.managedObjectContext;

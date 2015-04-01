@@ -16,8 +16,13 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Version" representedClassName="Version" syncable="YES">
+        <attribute name="dateFirstOpened" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="versionNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Feedback" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="TallyModel" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Feedback" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TallyModel" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Version" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

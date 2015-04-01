@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C2AF5C61A5B5B25CD7983 /* libPods.a */; };
 		6C02C88F1A616DBE00547584 /* TutContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C02C88E1A616DBE00547584 /* TutContainerViewController.m */; };
+		6C0908E41ACB52B900F01033 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36CF4A1ACAB86700020384 /* Version.m */; };
 		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
@@ -139,6 +140,7 @@
 		4D6C2AF5C61A5B5B25CD7983 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
 		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
+		6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits2.xcdatamodel; sourceTree = "<group>"; };
 		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = trivit/NewRelicAgent.framework; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -171,6 +173,8 @@
 		6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutMasterViewController.m; sourceTree = "<group>"; };
 		6C24D5DB1ABDDECF002D1046 /* WKtableViewLastRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKtableViewLastRowController.h; sourceTree = "<group>"; };
 		6C24D5DC1ABDDECF002D1046 /* WKtableViewLastRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKtableViewLastRowController.m; sourceTree = "<group>"; };
+		6C36CF491ACAB86700020384 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
+		6C36CF4A1ACAB86700020384 /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
 		6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTableVIewRowController.h; sourceTree = "<group>"; };
 		6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTableVIewRowController.m; sourceTree = "<group>"; };
 		6C41254B1A435FB800C2D4CA /* TallyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TallyModel.h; sourceTree = "<group>"; };
@@ -550,6 +554,8 @@
 		6CF1A23F195B765600B83A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6C36CF491ACAB86700020384 /* Version.h */,
+				6C36CF4A1ACAB86700020384 /* Version.m */,
 				6CF1A23C195B762D00B83A6F /* Tally.h */,
 				6CF1A23D195B762D00B83A6F /* Tally.m */,
 				6CA449391980D8E00049F34D /* Colors.h */,
@@ -918,6 +924,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C0908E41ACB52B900F01033 /* Version.m in Sources */,
 				6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1492,9 +1499,10 @@
 		6C923EB3198C645D00833188 /* trivits.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */,
 				6C923EB4198C645D00833188 /* trivits.xcdatamodel */,
 			);
-			currentVersion = 6C923EB4198C645D00833188 /* trivits.xcdatamodel */;
+			currentVersion = 6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */;
 			path = trivits.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
