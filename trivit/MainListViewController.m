@@ -12,6 +12,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "TallyModel.h"
 #import "FeedbackManager.h"
+#import "DataAccess.h"
 
 @interface MainListViewController () <NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -22,6 +23,8 @@
 @property(strong, nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
 @property(nonatomic) bool shouldScrollOnTallyIncreaseOrDecrease;
 @property(strong, nonatomic) NSArray *placeholderTrivitTitles;
+
+@property(strong, nonatomic) NSArray *lastFetchedData;
 
 @property(nonatomic) NSInteger imagesPerRow;
 @end
@@ -485,20 +488,20 @@ int const OUTSIDE_TAP = 3;
 }
 
 // auto update if NSManagedObjectContext changes
-- (void)handleDataModelChange:(NSNotification *)notification
-{
-    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
-    NSSet *deletedObjects = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
-    NSSet *insertedObjects = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
-        
-        [self.tableView reloadData];
-    });
-
-    // Do something in response to this
-}
+//- (void)handleDataModelChange:(NSNotification *)notification
+//{
+//    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
+//    NSSet *deletedObjects = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
+//    NSSet *insertedObjects = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
+//    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+//        
+//        [self.tableView reloadData];
+//    });
+//
+//    // Do something in response to this
+//}
 
 
 - (void)orientationChanged:(NSNotification *)notification {
@@ -538,6 +541,8 @@ int const OUTSIDE_TAP = 3;
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
+    
+    self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
 
     // if empty and first run: add some trivits
 
@@ -563,10 +568,38 @@ int const OUTSIDE_TAP = 3;
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
     // subscribe to objectcontext changed notification
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleDataModelChange:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:self.managedObjectContext];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(handleDataModelChange:)
+//                                                 name:NSManagedObjectContextDidSaveNotification
+//                                               object:self.managedObjectContext];
+    // save every 5 seconds
+    [NSTimer scheduledTimerWithTimeInterval:5.0f
+                                     target:self selector:@selector(saveData:) userInfo:nil repeats:YES];
+}
+
+-(void) saveData:(NSTimer *)timer{
+    if(self.cellBeingEdited)
+        return;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [DataAccess.sharedInstance saveManagedObjectContext];
+        
+        //refetch
+        NSError *error = nil;
+        [self.fetchedResultsController performFetch:&error];
+        
+        if (error) {
+            NSLog(@"Unable to perform fetch.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
+        
+        NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
+        if (difference>0)
+            [self.tableView reloadData];
+        
+        // save lastfetcheddata to see if updates are needed
+        self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
+    });
 
 }
 

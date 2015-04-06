@@ -38,7 +38,7 @@
     self = [super init];
     
     self.managedObjectContext = DataAccess.sharedInstance.managedObjectContext;
-    
+    [DataAccess.sharedInstance migrateStore];
     self.fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
@@ -50,42 +50,45 @@
     // Initialize Fetched Results Controller
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
-    // Perform Fetch
-    NSError *error = nil;
-    [self.fetchedResultsController performFetch:&error];
-
-    [self fetchData];
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
+    [self getNewData:nil];
     
     if (self) {
 
         [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
         [self loadTableData];
     }
-    
+    // save every 5 seconds
+    [NSTimer scheduledTimerWithTimeInterval:5.0f
+                                     target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
+
     return self;
 }
 
-- (void) fetchData {
-    // keep a copy of the last fetched data (to calculate delta if needed)
-    NSArray *fetchedData = self.fetchedResultsController.fetchedObjects;
-    
-    // if data changed in the mean time, make a merge and save
-    if (fetchedData != self.lastFetchedData){
-        //TODO merge and save
-        [self saveData];
-    }
-        
-    self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
-    // make a working copy (mutable copy)
-    self.workingData = [self.lastFetchedData mutableCopy];
-}
+-(void) getNewData:(NSTimer *)timer{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
-- (void) saveData {
-    
+        [DataAccess.sharedInstance saveManagedObjectContext];
+        //refetch
+        NSError *error = nil;
+        [self.fetchedResultsController performFetch:&error];
+        
+        if (error) {
+            NSLog(@"Unable to perform fetch.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
+        self.workingData = [self.fetchedResultsController.fetchedObjects mutableCopy];
+        // only reload table data if not first time (that one is done in init)
+        if(timer){
+            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+            if(difference==1)
+                [self reloadCounters];
+            if(difference==2)
+                [self loadTableData];
+        }
+        // save lastfetcheddata to see if updates are needed
+        self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
+    });
+
 }
 
 - (void)loadTableData {

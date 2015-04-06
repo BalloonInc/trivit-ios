@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Version.h"
 #import <UIKit/UIKit.h>
+#import "TallyModel.h"
 
 @interface DataAccess()
 @property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -19,6 +20,31 @@
 @end
 
 @implementation DataAccess
+
+
+/*
+ Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
+ */
++(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray{
+    if(oldArray.count != newArray.count)
+        return 2;
+    
+    NSInteger res=0;
+    
+    for (int i=0; i<oldArray.count;i++){
+        TallyModel *oldTrivit = (TallyModel *) oldArray[i];
+        TallyModel *newTrivit = (TallyModel *) newArray[i];
+        
+        // if one title is different, return 2;
+        if(![oldTrivit.title isEqualToString:newTrivit.title])
+            return 2;
+        // if counters are different, set res=1. Do not return yet since later on a title can be different
+        if([oldTrivit.counter integerValue] != [newTrivit.counter integerValue])
+            res=1;
+    }
+    
+    return res;
+}
 
 -(NSString*) latestVersion{
     // if last entry of the versions table is the current version, don't migrate
@@ -99,13 +125,16 @@
 #pragma mark Helper Methods
 
 - (void)saveManagedObjectContext {
-    NSError *error = nil;
-    
-    if (![self.managedObjectContext save:&error]) {
-        if (error) {
-            NSLog(@"Unable to save changes.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
+    // if there are changes, save them
+    if([self.managedObjectContext hasChanges]){
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            if (error) {
+                NSLog(@"Unable to save changes.");
+                NSLog(@"%@, %@", error, error.localizedDescription);
+            }
         }
+        NSLog(@"managedobjectcontext: %@",self.managedObjectContext.description);
     }
 }
 
@@ -117,7 +146,6 @@
     // if last entry of the versions table is the current version, don't migrate
     if(versions){
         Version *lastVersion = (Version*) [versions lastObject];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 
         if ([lastVersion.versionNumber isEqualToString:currentVersion])
             return;
@@ -141,6 +169,9 @@
 
         NSPersistentStore *store = [self.persistentStoreCoordinator migratePersistentStore:oldStore toURL:newStoreURL options:options withType:NSSQLiteStoreType error:&error];
         NSLog(@"New store location: %@", newStoreURL);
+        if(error){
+            NSLog(@"An error occured while migrating the store: %@",error.description);
+        }
     }
     self.managedObjectContext=nil;
     self.managedObjectModel=nil;
