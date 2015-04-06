@@ -166,9 +166,8 @@ float const COUNTLABEL_WIDTH = 40.;
     }
     
     // only re-add if it is not yet there
+    CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width - 70, CELL_HEIGHT_SECTION1);
     if (![self.subviews containsObject:self.titleTextField]) {
-
-        CGRect boundsTitleLabel = CGRectMake(10, 0, self.frame.size.width - 70, CELL_HEIGHT_SECTION1);
         self.titleTextField = [[UITextField alloc] initWithFrame:boundsTitleLabel];
         self.titleTextField.textColor = [UIColor whiteColor]; // whiteColor text
         self.titleTextField.userInteractionEnabled = true;
@@ -182,6 +181,8 @@ float const COUNTLABEL_WIDTH = 40.;
 
         [self addSubview:self.titleTextField];
     }
+    self.titleTextField.frame = boundsTitleLabel;
+    
     // update title
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.firstLineHeadIndent = 10;
