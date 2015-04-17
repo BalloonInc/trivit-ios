@@ -22,4 +22,9 @@
  */
 +(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray;
 
+/*
+ Copies an array of fetchedobjects to another array (array of TallyModel of course)
+ */
++(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects;
+
 @end

@@ -34,7 +34,9 @@
     for (int i=0; i<oldArray.count;i++){
         TallyModel *oldTrivit = (TallyModel *) oldArray[i];
         TallyModel *newTrivit = (TallyModel *) newArray[i];
-        
+        NSLog(@"%@ vs %@",oldTrivit.title,newTrivit.title);
+        NSLog(@"%ld vs %ld",(long)[oldTrivit.counter integerValue],(long)[newTrivit.counter integerValue]);
+
         // if one title is different, return 2;
         if(![oldTrivit.title isEqualToString:newTrivit.title])
             return 2;
@@ -44,6 +46,18 @@
     }
     
     return res;
+}
+
++(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects{
+    NSMutableArray* lastFetchedData = [[NSMutableArray alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    for (TallyModel* tm in fetchedObjects) {
+        TallyModel *t = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
+        t.title=tm.title;
+        t.counter=tm.counter;
+        [lastFetchedData addObject:t];
+    }
+    return lastFetchedData;
 }
 
 -(NSString*) latestVersion{
@@ -169,6 +183,7 @@
 
         NSPersistentStore *store = [self.persistentStoreCoordinator migratePersistentStore:oldStore toURL:newStoreURL options:options withType:NSSQLiteStoreType error:&error];
         NSLog(@"New store location: %@", newStoreURL);
+        NSLog(@"New store location: %@", store.URL);
         if(error){
             NSLog(@"An error occured while migrating the store: %@",error.description);
         }

@@ -44,6 +44,7 @@
 		6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C923EB3198C645D00833188 /* trivits.xcdatamodeld */; };
 		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6C98EEB01A4771A500E12E25 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */; };
+		6C9DC4F41AE083CF00EE5B0A /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
 		6CA1B1CA1AAC6EAB00F08D73 /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
 		6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
@@ -925,6 +926,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C0908E41ACB52B900F01033 /* Version.m in Sources */,
+				6C9DC4F41AE083CF00EE5B0A /* TallyModel.m in Sources */,
 				6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,6 +1119,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
 		};
@@ -1152,6 +1155,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;
 		};
@@ -1372,6 +1376,7 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Debug;
 		};
@@ -1388,6 +1393,7 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Release;
 		};

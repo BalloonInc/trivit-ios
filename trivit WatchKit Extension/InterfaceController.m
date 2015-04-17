@@ -27,6 +27,7 @@
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(strong, nonatomic) NSMutableArray *workingData;
 @property(nonatomic) bool newTrivitAdded;
+@property(nonatomic) bool active;
 @end
 
 
@@ -37,18 +38,18 @@
 - (instancetype)init {
     self = [super init];
     
-    self.managedObjectContext = DataAccess.sharedInstance.managedObjectContext;
     [DataAccess.sharedInstance migrateStore];
+
     self.fetchRequest = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
     self.fetchRequest.entity = entityDescription;
     
     // Add Sort Descriptors
     [self.fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
     
     // Initialize Fetched Results Controller
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:@"cacheTally"];
     
     [self getNewData:nil];
     
@@ -58,18 +59,24 @@
         [self loadTableData];
     }
     // save every 5 seconds
-    [NSTimer scheduledTimerWithTimeInterval:5.0f
+    [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
 
     return self;
 }
 
 -(void) getNewData:(NSTimer *)timer{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    if (!self.active) return;
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
-        [DataAccess.sharedInstance saveManagedObjectContext];
+        //[DataAccess.sharedInstance saveManagedObjectContext];
         //refetch
+    
         NSError *error = nil;
+
+        DataAccess.sharedInstance.managedObjectContext=nil;
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+
         [self.fetchedResultsController performFetch:&error];
         
         if (error) {
@@ -80,15 +87,16 @@
         // only reload table data if not first time (that one is done in init)
         if(timer){
             NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+            if(difference==0)
+                difference=0;
             if(difference==1)
                 [self reloadCounters];
             if(difference==2)
                 [self loadTableData];
         }
         // save lastfetcheddata to see if updates are needed
-        self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
-    });
-
+    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
+//    });
 }
 
 - (void)loadTableData {
@@ -102,7 +110,7 @@
 }
 
 - (void)reloadCounters {
-    [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
+    //[self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
     
     for (int i = 0; i<[[self workingData] count];i++)
         [self updateCounterAtIndex:i];
@@ -114,7 +122,7 @@
     
     if (rowIndex==[self.workingData count]){
         // Add another row
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
 
         TallyModel *newRow = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
 
@@ -132,13 +140,14 @@
 
         [self.workingData addObject:newRow];
         [DataAccess.sharedInstance.managedObjectContext insertObject:newRow];
+        [DataAccess.sharedInstance saveManagedObjectContext];
 
         
         // set boolean to process table next time view appears
         self.newTrivitAdded=true;
     }
     
-    
+    self.active=false;
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithInteger:rowIndex], @"selectedRow",
@@ -153,6 +162,7 @@
         [self loadTableData];
     else
         [self updateCounterAtIndex:self.selectedIndex];
+    self.active=true;
     self.newTrivitAdded=false;
     [super willActivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
@@ -160,6 +170,7 @@
 }
 
 - (void)didDeactivate {
+    self.active=false;
     [super didDeactivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
 }
@@ -185,10 +196,12 @@
     if ([[self workingData] count] == 0)
         return;
     
-    WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
     TallyModel *tally = (TallyModel *) self.workingData[index];
+    WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
+
     NSInteger newCount = [tally.counter integerValue];
-    [listItemRowController setCounter:newCount];
+    if(newCount!=listItemRowController.count)
+        [listItemRowController setCounter:newCount];
 }
 
 @end

@@ -12,6 +12,5 @@
 @interface InterfaceController : WKInterfaceController
 @property (strong, nonatomic) NSMutableArray *sampleDataTitles;
 @property (strong, nonatomic) NSMutableArray *sampleDataCounts;
-@property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -25,6 +25,7 @@
     [self.completeCell setBackgroundColor:color];
 }
 - (void)setCounter:(NSInteger)count{
+    self.count=count;
     if (count>=0)
         [self.itemCountLabel setText:[NSString stringWithFormat:@"%ld",(long)count ]];
     else

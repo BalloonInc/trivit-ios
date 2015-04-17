@@ -433,6 +433,7 @@ int const OUTSIDE_TAP = 3;
         [self.tableView scrollToRowAtIndexPath:self.shouldScrollToCellAtIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     // on next GUI update, do not scroll anymore
     self.shouldScrollToCellAtIndexPath = nil;
+    [self saveData];
 }
 
 - (void)scrollToExpandedCell:(NSIndexPath *)indexPath {
@@ -487,7 +488,7 @@ int const OUTSIDE_TAP = 3;
     }
 }
 
-// auto update if NSManagedObjectContext changes
+ //auto update if NSManagedObjectContext changes
 //- (void)handleDataModelChange:(NSNotification *)notification
 //{
 //    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
@@ -542,7 +543,7 @@ int const OUTSIDE_TAP = 3;
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
-    self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
+    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
 
     // if empty and first run: add some trivits
 
@@ -574,16 +575,22 @@ int const OUTSIDE_TAP = 3;
 //                                               object:self.managedObjectContext];
     // save every 5 seconds
     [NSTimer scheduledTimerWithTimeInterval:5.0f
-                                     target:self selector:@selector(saveData:) userInfo:nil repeats:YES];
+                                     target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
 }
 
--(void) saveData:(NSTimer *)timer{
+-(void)saveData{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [DataAccess.sharedInstance saveManagedObjectContext];
+    });
+}
+
+
+-(void) reloadData:(NSTimer *)timer{
     if(self.cellBeingEdited)
         return;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [DataAccess.sharedInstance saveManagedObjectContext];
-        
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    
         //refetch
         NSError *error = nil;
         [self.fetchedResultsController performFetch:&error];
@@ -598,8 +605,8 @@ int const OUTSIDE_TAP = 3;
             [self.tableView reloadData];
         
         // save lastfetcheddata to see if updates are needed
-        self.lastFetchedData = self.fetchedResultsController.fetchedObjects;
-    });
+        self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
+   // });
 
 }
 

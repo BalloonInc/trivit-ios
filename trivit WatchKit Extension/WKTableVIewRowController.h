@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 
 @interface WKTableVIewRowController : NSObject
+@property (nonatomic) NSInteger count;
+
 - (void)setItemName:(NSString *)text;
 - (void)setTextColorCountLabel:(UIColor *)color;
 - (void)setBackgroundColorCell:(UIColor *)color;

@@ -85,7 +85,7 @@
     [self.data replaceObjectAtIndex:self.selectedRow withObject:tally];
 
     // update view
-    NSString *labelText = [NSString stringWithFormat:@"%ld",self.count];
+    NSString *labelText = [NSString stringWithFormat:@"%ld",(long)self.count];
     [self.countButton setTitle:labelText];
 }
 
