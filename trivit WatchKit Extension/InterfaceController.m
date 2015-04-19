@@ -98,6 +98,34 @@
 //    });
 }
 
+//-(void) loadTableRowsAsync:(NSRange)range{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        [self loadTableRows:range];
+//    });
+//}
+//
+//-(void) loadTableRows:(NSRange)range{
+//    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range] withRowType:@"AddNewTrivitCell"];
+//    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
+//    
+//    for (NSUInteger i = range.location; i<range.location+range.length;i++)
+//        [self configureRowControllerAtIndex:i];
+//    
+//    if (range.location+range.length==self.workingData.count)
+//        [self configureLastRow];
+//
+//}
+//
+//-(void) loadTableData{
+//    NSInteger datarows = self.workingData.count?self.workingData.count:0;
+//    if (datarows<=3) [self loadTableRows:NSMakeRange(0, datarows)];
+//    
+//    else{
+//        [self loadTableRows:NSMakeRange(0, 3)];
+//        [self loadTableRowsAsync:NSMakeRange(3, datarows-3)];
+//    }
+//}
+
 - (void)loadTableData {
     [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
     [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
@@ -108,14 +136,14 @@
     
 }
 
-- (void)reloadCounters {
+- (void) reloadCounters{
     //[self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
     
     for (int i = 0; i<[[self workingData] count];i++)
         [self updateCounterAtIndex:i];
 }
 
-- (void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
+- (void) table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex{
     
     self.selectedIndex = rowIndex;
     

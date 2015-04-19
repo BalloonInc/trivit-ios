@@ -57,7 +57,6 @@
 		6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04C91A93CD44000BBDE9 /* DataAccess.m */; };
 		6CE4BBD31A1D609C005E9BCD /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */; };
 		6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */; };
-		6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */; };
 		6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */; };
 		6CE4BBE31A1D609D005E9BCD /* trivit Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; };
 		6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */; };
@@ -249,8 +248,6 @@
 		6CE4BBD71A1D609C005E9BCD /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
 		6CE4BBD81A1D609C005E9BCD /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
-		6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trivit Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4BBE81A1D609D005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -510,8 +507,6 @@
 				6CE4BBD91A1D609C005E9BCD /* InterfaceController.m */,
 				6C727E401A840E4A001B9A4E /* DetailInterfaceController.h */,
 				6C727E411A840E4A001B9A4E /* DetailInterfaceController.m */,
-				6CE4BBDB1A1D609C005E9BCD /* NotificationController.h */,
-				6CE4BBDC1A1D609C005E9BCD /* NotificationController.m */,
 				6CE4BBDE1A1D609C005E9BCD /* Images.xcassets */,
 				6C3980C91A1D759700B43888 /* WKTableVIewRowController.h */,
 				6C3980CA1A1D759700B43888 /* WKTableVIewRowController.m */,
@@ -944,7 +939,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
-				6CE4BBDD1A1D609C005E9BCD /* NotificationController.m in Sources */,
 				6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */,
 				6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */,
 				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
