@@ -23,9 +23,7 @@
 @property(strong, nonatomic) NSIndexPath *shouldScrollToCellAtIndexPath;
 @property(nonatomic) bool shouldScrollOnTallyIncreaseOrDecrease;
 @property(strong, nonatomic) NSArray *placeholderTrivitTitles;
-
 @property(strong, nonatomic) NSArray *lastFetchedData;
-
 @property(nonatomic) NSInteger imagesPerRow;
 @end
 
@@ -40,12 +38,10 @@ int const OUTSIDE_TAP = 3;
 #pragma mark - lazy instantiatiors
 
 - (NSInteger)trivitCount {
-    NSError *err;
-    return [self.managedObjectContext countForFetchRequest:self.fetchRequest error:&err];
+    return [self.managedObjectContext countForFetchRequest:self.fetchRequest error:nil];
 }
 
 - (NSInteger)imagesPerRow {
-    
     return (int) floor((self.view.frame.size.width-COLLECTIONVIEW_HORIZONTAL_SPACING) / (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_HORIZONTAL_SPACING));
 }
 
@@ -76,8 +72,7 @@ int const OUTSIDE_TAP = 3;
     }
     self.keyboardShown = true;
     // add consequent identifier to tallies
-    [self addItemWithTitle:[self trivitExampleNameAtIndex:[self nextPropertyIndexForNewTally]]];
-    //[self performSelector:@selector(setKeyboardWillBeShown:) withObject:false afterDelay:0.5];
+    [self addItemWithTitle:[self trivitExampleNameAtIndex:[self nextPropertyIndexForNewTally]] andCount:0];
 
     // decide on delay: if there are not enough cells to fill the view, add a 0.1 seconds delay
     // (this is to make sure editTrivitTitleAtIndexPath always works when adding a trivit)
@@ -101,31 +96,19 @@ int const OUTSIDE_TAP = 3;
                      }];
 }
 
-- (void)addItem {
-    [self addItemWithTitle:@"newTally"];
-}
-
-- (void)addItemWithTitle:(NSString *)title {
-    [self addItemWithTitle:title andCount:0];
-}
-
 - (void)addItemWithTitle:(NSString *)title andCount:(NSInteger)count {
     // Color index: last tally in the aray +1
     NSInteger colorIndex = [self nextPropertyIndexForNewTally];
 
-    // Create Entity
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:self.managedObjectContext];
 
-    // Initialize Record
     TallyModel *record = [[TallyModel alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-
-    // Populate Record
     record.title = title;
     record.counter = [NSNumber numberWithInteger:count];
     record.color = [NSNumber numberWithInteger:colorIndex];
     record.type = [[title substringFromIndex:1] isEqualToString:@"_"] ? @"ch_" : @"";
     record.createdAt = [NSDate date];
-
+    
     // Save Record
     NSError *error = nil;
     if (![self.managedObjectContext save:&error]) {
@@ -149,7 +132,6 @@ int const OUTSIDE_TAP = 3;
 # pragma mark - selectors for gestures
 
 - (void)handleTallyReset:(UIGestureRecognizer *)tapRecognizer {
-    // if a cell title is being edited don't process taps
     if (self.keyboardShown)
         return;
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:tapRecognizer];
@@ -211,7 +193,6 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (void)handleTallyDecrease:(UIGestureRecognizer *)tapRecognizer {
-    // if a cell title is being edited don't process taps
     if (self.keyboardShown)
         return;
 
@@ -258,13 +239,11 @@ int const OUTSIDE_TAP = 3;
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
     record.isCollapsed = [NSNumber numberWithBool:collapseCell.isCollapsed];
 
-    // in case of an expansion, potentially scroll down to show expanded cell
     if (!collapseCell.isCollapsed)
         [self scrollToExpandedCell:collapseIndexPath];
 }
 
 - (void)handleTap:(UIGestureRecognizer *)singletapRecognizer {
-    // if a cell title is being edited don't process taps
     if (self.keyboardShown)
         return;
 
@@ -368,11 +347,9 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (void)configureCell:(TrivitTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    // Fetch Record
-
+    
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    // Update Cell
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.appSettings = self.appSettings;
     bool isCollapsed = [record.isCollapsed boolValue];
@@ -395,9 +372,7 @@ int const OUTSIDE_TAP = 3;
     return [sectionInfo numberOfObjects];
 }
 
-// remove logic
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // row can be deleted if tally is collapsed
     return !self.keyboardShown;
 }
 
@@ -488,23 +463,6 @@ int const OUTSIDE_TAP = 3;
     }
 }
 
- //auto update if NSManagedObjectContext changes
-//- (void)handleDataModelChange:(NSNotification *)notification
-//{
-//    NSSet *updatedObjects = [[notification userInfo] objectForKey:NSUpdatedObjectsKey];
-//    NSSet *deletedObjects = [[notification userInfo] objectForKey:NSDeletedObjectsKey];
-//    NSSet *insertedObjects = [[notification userInfo] objectForKey:NSInsertedObjectsKey];
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
-//        
-//        [self.tableView reloadData];
-//    });
-//
-//    // Do something in response to this
-//}
-
-
 - (void)orientationChanged:(NSNotification *)notification {
     for (TrivitTableViewCell *cell in [self.tableView visibleCells]) {
         if (!cell.isCollapsed)
@@ -519,22 +477,13 @@ int const OUTSIDE_TAP = 3;
     [super viewDidLoad];
     [self configureTableView];
 
-    // load Settings from NSUserDefaults
     self.defaults = [NSUserDefaults standardUserDefaults];
-
-    // Initialize Fetch Request
+    
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
-
-    // Add Sort Descriptors
     [self.fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-
-    // Initialize Fetched Results Controller
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-
-    // Configure Fetched Results Controller
     [self.fetchedResultsController setDelegate:self];
 
-    // Perform Fetch
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
 
@@ -545,10 +494,8 @@ int const OUTSIDE_TAP = 3;
     
     self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
 
-    // if empty and first run: add some trivits
-
-    if (self.trivitCount == 0 && ![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
-        [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete", @"Tally example")];
+    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
+        [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete", @"Tally example") andCount:0];
         [self addItemWithTitle:NSLocalizedString(@"Days without cookies", @"Tally example") andCount:24];
         [self addItemWithTitle:NSLocalizedString(@"Went swimming this year", @"Tally example") andCount:8];
         TrivitTableViewCell *cell = (TrivitTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
@@ -563,18 +510,11 @@ int const OUTSIDE_TAP = 3;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
 
-    // subscribe to device rotation
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    // subscribe to objectcontext changed notification
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(handleDataModelChange:)
-//                                                 name:NSManagedObjectContextDidSaveNotification
-//                                               object:self.managedObjectContext];
-    // save every 5 seconds
-    [NSTimer scheduledTimerWithTimeInterval:5.0f
+    [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
 }
 
@@ -591,6 +531,11 @@ int const OUTSIDE_TAP = 3;
     
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
     
+        DataAccess.sharedInstance.managedObjectContext=nil;
+        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
+        [self.fetchedResultsController setDelegate:self];
+
         //refetch
         NSError *error = nil;
         [self.fetchedResultsController performFetch:&error];
@@ -600,7 +545,7 @@ int const OUTSIDE_TAP = 3;
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
         
-        NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
+    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects fromApp:@"iPhone"];
         if (difference>0)
             [self.tableView reloadData];
         
@@ -624,19 +569,13 @@ int const OUTSIDE_TAP = 3;
 
 - (void)resendUnsentFeedback {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Feedback"];
-
-    // Add Sort Descriptors
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"scaleValue" ascending:YES]]];
-
-    // Initialize Fetched Results Controller
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                managedObjectContext:self.managedObjectContext
                                                                                                  sectionNameKeyPath:nil
                                                                                                           cacheName:nil];
-    // Configure Fetched Results Controller
     [fetchedResultsController setDelegate:self];
 
-    // Perform Fetch
     NSError *error = nil;
     [fetchedResultsController performFetch:&error];
 
@@ -649,7 +588,6 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (void)configureTableView {
-    // add gestures
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longTap.minimumPressDuration = 0.2;
@@ -657,7 +595,6 @@ int const OUTSIDE_TAP = 3;
     [self.tableView addGestureRecognizer:tap];
     [self.tableView addGestureRecognizer:longTap];
 
-    // add background
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]];
     imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
     self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
@@ -704,7 +641,6 @@ int const OUTSIDE_TAP = 3;
         [self.tableView scrollRectToVisible:activeCell.frame animated:YES];
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
     
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
@@ -719,19 +655,12 @@ int const OUTSIDE_TAP = 3;
     self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
 
-    // restore the insets
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, 0, self.tableView.contentInset.right);
 
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
 
-    //keyboard is no longer shown
     self.keyboardShown = false;
-}
-
-// Do not hide status bar
-- (BOOL)prefersStatusBarHidden {
-    return NO;
 }
 
 @end

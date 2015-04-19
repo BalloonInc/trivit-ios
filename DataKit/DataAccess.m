@@ -25,7 +25,7 @@
 /*
  Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
  */
-+(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray{
++(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray fromApp:(NSString*)fromApp{
     if(oldArray.count != newArray.count)
         return 2;
     
@@ -34,9 +34,10 @@
     for (int i=0; i<oldArray.count;i++){
         TallyModel *oldTrivit = (TallyModel *) oldArray[i];
         TallyModel *newTrivit = (TallyModel *) newArray[i];
-        NSLog(@"%@ vs %@",oldTrivit.title,newTrivit.title);
-        NSLog(@"%ld vs %ld",(long)[oldTrivit.counter integerValue],(long)[newTrivit.counter integerValue]);
-
+        if([fromApp isEqualToString:@"iPhone"]){
+            NSLog(@"%@ vs %@",oldTrivit.title,newTrivit.title);
+            NSLog(@"%ld vs %ld",(long)[oldTrivit.counter integerValue],(long)[newTrivit.counter integerValue]);
+        }
         // if one title is different, return 2;
         if(![oldTrivit.title isEqualToString:newTrivit.title])
             return 2;
@@ -148,7 +149,7 @@
                 NSLog(@"%@, %@", error, error.localizedDescription);
             }
         }
-        NSLog(@"managedobjectcontext: %@",self.managedObjectContext.description);
+        NSLog(@"managedobjectcontext: %@ saved",self.managedObjectContext.description);
     }
 }
 

@@ -59,7 +59,7 @@
         [self loadTableData];
     }
     // save every 5 seconds
-    [NSTimer scheduledTimerWithTimeInterval:1.0f
+    [NSTimer scheduledTimerWithTimeInterval:2.0f
                                      target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
 
     return self;
@@ -69,7 +69,6 @@
     if (!self.active) return;
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
-        //[DataAccess.sharedInstance saveManagedObjectContext];
         //refetch
     
         NSError *error = nil;
@@ -86,7 +85,7 @@
         self.workingData = [self.fetchedResultsController.fetchedObjects mutableCopy];
         // only reload table data if not first time (that one is done in init)
         if(timer){
-            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData fromApp:@"Watch"];
             if(difference==0)
                 difference=0;
             if(difference==1)
@@ -186,7 +185,8 @@
     WKTableVIewRowController *listItemRowController = [self.interfaceTable rowControllerAtIndex:index];
 
     [listItemRowController setCounter:[[self.workingData[index] counter] integerValue]];
-    [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:index usingColorSet:[Colors flatDesignColorsDark]]];
+    NSInteger color = [[((TallyModel*)self.workingData[index]) color] integerValue] ;
+    [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:color usingColorSet:[Colors flatDesignColorsDark]]];
 
     [listItemRowController setItemName:[self.workingData[index] title]];
     
