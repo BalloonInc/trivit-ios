@@ -545,7 +545,7 @@ int const OUTSIDE_TAP = 3;
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
         
-    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects fromApp:@"iPhone"];
+    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
         if (difference>0)
             [self.tableView reloadData];
         

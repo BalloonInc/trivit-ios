@@ -25,7 +25,7 @@
 /*
  Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
  */
-+(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray fromApp:(NSString*)fromApp{
++(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray{
     if(oldArray.count != newArray.count)
         return 2;
     
@@ -34,10 +34,7 @@
     for (int i=0; i<oldArray.count;i++){
         TallyModel *oldTrivit = (TallyModel *) oldArray[i];
         TallyModel *newTrivit = (TallyModel *) newArray[i];
-        if([fromApp isEqualToString:@"iPhone"]){
-            NSLog(@"%@ vs %@",oldTrivit.title,newTrivit.title);
-            NSLog(@"%ld vs %ld",(long)[oldTrivit.counter integerValue],(long)[newTrivit.counter integerValue]);
-        }
+
         // if one title is different, return 2;
         if(![oldTrivit.title isEqualToString:newTrivit.title])
             return 2;
@@ -149,7 +146,6 @@
                 NSLog(@"%@, %@", error, error.localizedDescription);
             }
         }
-        NSLog(@"managedobjectcontext: %@ saved",self.managedObjectContext.description);
     }
 }
 
@@ -183,7 +179,6 @@
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool: YES],NSMigratePersistentStoresAutomaticallyOption,[NSNumber numberWithBool:YES],NSInferMappingModelAutomaticallyOption, nil];
 
         NSPersistentStore *store = [self.persistentStoreCoordinator migratePersistentStore:oldStore toURL:newStoreURL options:options withType:NSSQLiteStoreType error:&error];
-        NSLog(@"New store location: %@", newStoreURL);
         NSLog(@"New store location: %@", store.URL);
         if(error){
             NSLog(@"An error occured while migrating the store: %@",error.description);

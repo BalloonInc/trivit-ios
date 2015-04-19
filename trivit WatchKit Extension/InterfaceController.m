@@ -85,7 +85,7 @@
         self.workingData = [self.fetchedResultsController.fetchedObjects mutableCopy];
         // only reload table data if not first time (that one is done in init)
         if(timer){
-            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData fromApp:@"Watch"];
+            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
             if(difference==0)
                 difference=0;
             if(difference==1)

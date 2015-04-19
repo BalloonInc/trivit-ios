@@ -208,6 +208,7 @@ float const COUNTLABEL_WIDTH = 40.;
     else {
         CGRect boundsSecondSection = CGRectMake(0, CELL_HEIGHT_SECTION1, self.frame.size.width, self.frame.size.height - CELL_HEIGHT_SECTION1);
         UIBezierPath *recta2 = [UIBezierPath bezierPathWithRect:boundsSecondSection];
+        
         [[self cellBackColorDark] setFill];
         [recta2 fill];
 
