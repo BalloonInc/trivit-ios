@@ -5,182 +5,68 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
-        <!--tallyViewWatchBackground312x390-->
+        <!--tallyViewWatchBackground312x390-light-->
         <scene sceneID="aou-V4-d1y">
             <objects>
                 <controller backgroundImage="tallyViewWatchBackground272x340-light" contentMode="scaleAspectFit" id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
                         <table alignment="left" id="xW8-Tg-z4Z">
                             <items>
-                                <tableRow id="GX9-tw-tfy">
-                                    <group key="rootItem" width="1" alignment="left" id="eKL-kb-HF3">
+                                <tableRow identifier="TrivitWKCel" id="eVF-kq-h6e" customClass="WKTableVIewRowController">
+                                    <group key="rootItem" width="1" height="38" alignment="left" id="VHl-xC-eiI">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 1" textAlignment="left" id="grW-SU-0A3"/>
+                                            <label width="0.82999999999999996" alignment="left" verticalAlignment="center" text="Days without smoking" numberOfLines="2" minimumScaleFactor="0.80000000000000004" id="N4y-6s-G30">
+                                                <variation key="device=watch38mm" minimumScaleFactor="0.70000000000000007"/>
+                                                <variation key="device=watch42mm" minimumScaleFactor="0.80000000000000004"/>
+                                            </label>
+                                            <label width="0.22" alignment="right" verticalAlignment="center" text="999" textAlignment="center" minimumScaleFactor="0.90000000000000002" id="jpo-aw-i1B">
+                                                <variation key="device=watch38mm" minimumScaleFactor="0.90000000000000002"/>
+                                                <variation key="device=watch42mm" minimumScaleFactor="1"/>
+                                            </label>
                                         </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="grW-SU-0A3"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="grW-SU-0A3"/>
-                                            </mask>
-                                        </variation>
+                                        <variation key="device=watch38mm" height="38"/>
+                                        <variation key="device=watch42mm" height="38"/>
                                     </group>
+                                    <connections>
+                                        <outlet property="completeCell" destination="VHl-xC-eiI" id="auX-2s-01k"/>
+                                        <outlet property="itemCountLabel" destination="jpo-aw-i1B" id="EcN-dq-0kv"/>
+                                        <outlet property="itemNameLabel" destination="N4y-6s-G30" id="jf3-Fo-FTi"/>
+                                    </connections>
                                 </tableRow>
-                                <tableRow id="Vj2-XI-oLu">
-                                    <group key="rootItem" width="1" alignment="left" id="mwt-U6-sVg">
+                                <tableRow identifier="AddNewTrivitCell" id="MPm-fq-US6" customClass="WKtableViewLastRowController">
+                                    <group key="rootItem" width="1" alignment="left" id="nBm-HV-UYg">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 2" textAlignment="left" id="dT8-Et-CbP"/>
+                                            <label alignment="center" verticalAlignment="center" text="New Trivit" textAlignment="center" numberOfLines="2" id="BU1-yB-C4B">
+                                                <color key="textColor" red="0.98039215690000003" green="0.6588235294" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                            </label>
                                         </items>
-                                        <variation key="default">
+                                        <variation key="device=watch38mm">
                                             <mask key="items">
-                                                <exclude reference="dT8-Et-CbP"/>
+                                                <include reference="BU1-yB-C4B"/>
                                             </mask>
                                         </variation>
                                         <variation key="device=watch42mm">
                                             <mask key="items">
-                                                <include reference="dT8-Et-CbP"/>
+                                                <include reference="BU1-yB-C4B"/>
                                             </mask>
                                         </variation>
                                     </group>
-                                </tableRow>
-                                <tableRow id="vIF-p3-twB">
-                                    <group key="rootItem" width="1" alignment="left" id="5ze-Yz-Uf2">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 3" textAlignment="left" id="by1-Yq-dQ5"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="by1-Yq-dQ5"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="by1-Yq-dQ5"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
-                                </tableRow>
-                                <tableRow id="Jby-0Y-XVh">
-                                    <group key="rootItem" width="1" alignment="left" id="dyN-K7-BYl">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 4" textAlignment="left" id="liZ-kh-WR8"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="liZ-kh-WR8"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="liZ-kh-WR8"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
-                                </tableRow>
-                                <tableRow id="bD2-e6-igg">
-                                    <group key="rootItem" width="1" alignment="left" id="zOH-Ck-wjU">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 5" textAlignment="left" id="8HT-TP-84e"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="8HT-TP-84e"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="8HT-TP-84e"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
-                                </tableRow>
-                                <tableRow id="DAA-eE-A33">
-                                    <group key="rootItem" width="1" alignment="left" id="a48-rU-qfK">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 6" textAlignment="left" id="D8M-ae-iPM"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="D8M-ae-iPM"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="D8M-ae-iPM"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
-                                </tableRow>
-                                <tableRow id="boA-zP-qTb">
-                                    <group key="rootItem" width="1" alignment="left" id="2C0-jP-ims">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 7" textAlignment="left" id="rva-mv-egO"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="rva-mv-egO"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="rva-mv-egO"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
-                                </tableRow>
-                                <tableRow id="rBN-Jg-OUj">
-                                    <group key="rootItem" width="1" alignment="left" id="hHD-3R-Dfi">
-                                        <items>
-                                            <label alignment="center" verticalAlignment="center" text="Row 8" textAlignment="left" id="5nX-5V-JJp"/>
-                                        </items>
-                                        <variation key="default">
-                                            <mask key="items">
-                                                <exclude reference="5nX-5V-JJp"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="device=watch42mm">
-                                            <mask key="items">
-                                                <include reference="5nX-5V-JJp"/>
-                                            </mask>
-                                        </variation>
-                                    </group>
+                                    <connections>
+                                        <outlet property="addTrivitLabel" destination="BU1-yB-C4B" id="huE-vX-Qgc"/>
+                                    </connections>
                                 </tableRow>
                             </items>
-                            <variation key="default">
-                                <mask key="items">
-                                    <exclude reference="Vj2-XI-oLu"/>
-                                    <exclude reference="vIF-p3-twB"/>
-                                    <exclude reference="Jby-0Y-XVh"/>
-                                    <exclude reference="bD2-e6-igg"/>
-                                    <exclude reference="DAA-eE-A33"/>
-                                    <exclude reference="boA-zP-qTb"/>
-                                    <exclude reference="rBN-Jg-OUj"/>
-                                </mask>
-                            </variation>
-                            <variation key="device=watch42mm">
-                                <mask key="items">
-                                    <include reference="Vj2-XI-oLu"/>
-                                    <include reference="vIF-p3-twB"/>
-                                    <include reference="Jby-0Y-XVh"/>
-                                    <include reference="bD2-e6-igg"/>
-                                    <include reference="DAA-eE-A33"/>
-                                    <include reference="boA-zP-qTb"/>
-                                    <include reference="rBN-Jg-OUj"/>
-                                </mask>
-                            </variation>
                         </table>
                     </items>
                     <variation key="device=watch38mm" backgroundImage="tallyViewWatchBackground272x340-light"/>
-                    <variation key="device=watch42mm" backgroundImage="tallyViewWatchBackground312x390"/>
+                    <variation key="device=watch42mm" backgroundImage="tallyViewWatchBackground312x390-light"/>
                     <connections>
                         <outlet property="interfaceTable" destination="xW8-Tg-z4Z" id="1sC-J4-OZ8"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="211.84615384615387" y="237.56410256410257"/>
+            <point key="canvasLocation" x="251" y="308"/>
         </scene>
         <!--detailController-->
         <scene sceneID="osE-Xa-3Tl">
