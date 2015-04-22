@@ -26,14 +26,20 @@
 
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(strong, nonatomic) NSMutableArray *workingData;
-@property(nonatomic) bool newTrivitAdded;
+
 @property(nonatomic) bool active;
+@property (strong, nonatomic) NSArray* activeColorSetLight;
+@property (strong, nonatomic) NSArray* activeColorSetDark;
 @end
 
 
 @implementation InterfaceController
 
 #pragma mark - Initialization
+
+-(NSInteger)initialLoad{
+    return 5;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -67,7 +73,7 @@
 
 -(void) getNewData:(NSTimer *)timer{
     if (!self.active) return;
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         //refetch
     
@@ -95,46 +101,64 @@
         }
         // save lastfetcheddata to see if updates are needed
     self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
-//    });
+    });
 }
 
-//-(void) loadTableRowsAsync:(NSRange)range{
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        [self loadTableRows:range];
-//    });
-//}
-//
-//-(void) loadTableRows:(NSRange)range{
-//    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range] withRowType:@"AddNewTrivitCell"];
+-(void) loadTableRowsAsync:(NSRange)range{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range] withRowType:@"TrivitWKCel"];
+        
+        for (NSUInteger i = 0; i<range.length;i++)
+            [self configureRowControllerAtIndex:range.location+i];
+        
+        if (range.location+range.length==self.workingData.count){
+            [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
+            [self configureLastRow];
+        }
+    });
+}
+
+-(void) loadInitialTableRows:(NSInteger) rows{
+    [self.interfaceTable setNumberOfRows:0 withRowType:@"TrivitWKCel"];
+    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, rows)] withRowType:@"TrivitWKCel"];
+
+    for (NSUInteger i = 0; i<rows;i++)
+        [self configureRowControllerAtIndex:i];
+    
+    
+    if (rows==self.workingData.count){
+        [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
+        [self configureLastRow];
+    }
+
+}
+
+-(void) loadTableData{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    NSInteger activeColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
+    self.activeColorSetDark = [Colors colorsetWithIndex:2*activeColorSet+1];
+    self.activeColorSetLight = [Colors colorsetWithIndex:2*activeColorSet];
+    
+    NSInteger datarows = self.workingData.count?self.workingData.count:0;
+    if (datarows<=self.initialLoad) [self loadInitialTableRows:datarows];
+    
+    else{
+        [self loadInitialTableRows:self.initialLoad];
+        [self loadTableRowsAsync:NSMakeRange(self.initialLoad, datarows-self.initialLoad)];
+    }
+}
+
+//- (void)loadTableData {
+//    [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
 //    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
 //    
-//    for (NSUInteger i = range.location; i<range.location+range.length;i++)
+//    for (int i = 0; i<[[self workingData] count];i++)
 //        [self configureRowControllerAtIndex:i];
+//    [self configureLastRow];
 //    
-//    if (range.location+range.length==self.workingData.count)
-//        [self configureLastRow];
-//
 //}
-//
-//-(void) loadTableData{
-//    NSInteger datarows = self.workingData.count?self.workingData.count:0;
-//    if (datarows<=3) [self loadTableRows:NSMakeRange(0, datarows)];
-//    
-//    else{
-//        [self loadTableRows:NSMakeRange(0, 3)];
-//        [self loadTableRowsAsync:NSMakeRange(3, datarows-3)];
-//    }
-//}
-
-- (void)loadTableData {
-    [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
-    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
-    
-    for (int i = 0; i<[[self workingData] count];i++)
-        [self configureRowControllerAtIndex:i];
-    [self configureLastRow];
-    
-}
 
 - (void) reloadCounters{
     //[self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
@@ -166,34 +190,33 @@
 
 
         [self.workingData addObject:newRow];
+        // update lastFetchedData, so no refresh is triggered when returning to this VC later
+        self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
         [DataAccess.sharedInstance.managedObjectContext insertObject:newRow];
         [DataAccess.sharedInstance saveManagedObjectContext];
 
-        
-        // set boolean to process table next time view appears
-        self.newTrivitAdded=true;
+        [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:rowIndex] withRowType:@"TrivitWKCel"];
+        [self configureRowControllerAtIndex:rowIndex];
+        [self configureLastRow];
+
     }
+    TallyModel *t = (TallyModel*) self.workingData[rowIndex];
+    NSInteger color = [[t color] integerValue];
     
     self.active=false;
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithInteger:rowIndex], @"selectedRow",
                                   self.workingData,@"data",
-                                  [Colors colorWithIndex:rowIndex usingColorSet:[Colors flatDesignColorsLight]], @"lightColor",
-                                  [Colors colorWithIndex:rowIndex usingColorSet:[Colors flatDesignColorsDark]], @"darkColor",
+                                  [Colors colorWithIndex:color usingColorSet:self.activeColorSetLight], @"lightColor",
+                                  [Colors colorWithIndex:color usingColorSet:self.activeColorSetDark], @"darkColor",
                                   nil]];
 }
 
 - (void)willActivate {
-    if(self.newTrivitAdded) // if new trivit is added, reload the whole list
-        [self loadTableData];
-    else
-        [self updateCounterAtIndex:self.selectedIndex];
+    [self updateCounterAtIndex:self.selectedIndex];
     self.active=true;
-    self.newTrivitAdded=false;
     [super willActivate];
-    [DataAccess.sharedInstance saveManagedObjectContext];
-    
 }
 
 - (void)didDeactivate {
@@ -204,9 +227,15 @@
 
 -(void) configureLastRow{
     NSUInteger newIndex = self.workingData.count;
+    
+    NSInteger color = 1;
+    if (newIndex>0){
+        TallyModel *t = (TallyModel*)self.workingData[newIndex-1];
+        color=[[t color] integerValue]+1;
+    }
+    
     WKtableViewLastRowController* lastItemRowController = [self.interfaceTable rowControllerAtIndex:newIndex];
-    [lastItemRowController setTextColorAddTrivitLabel:[Colors colorWithIndex:newIndex usingColorSet:[Colors flatDesignColorsDark]]];
-
+    [lastItemRowController setTextColorAddTrivitLabel:[Colors colorWithIndex:color usingColorSet:self.activeColorSetDark]];
 }
 
 - (void)configureRowControllerAtIndex:(NSInteger)index {
@@ -214,7 +243,7 @@
 
     [listItemRowController setCounter:[[self.workingData[index] counter] integerValue]];
     NSInteger color = [[((TallyModel*)self.workingData[index]) color] integerValue] ;
-    [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:color usingColorSet:[Colors flatDesignColorsDark]]];
+    [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:color usingColorSet:self.activeColorSetDark]];
 
     [listItemRowController setItemName:[self.workingData[index] title]];
     

@@ -36,7 +36,6 @@
     self.title = [self.data[self.selectedRow] title];
     self.lightColor = [context objectForKey:@"lightColor"];
     self.darkColor = [context objectForKey:@"darkColor"];
-    
     self.count = [[self.data[self.selectedRow] counter] integerValue];
 
     [self loadTableData];
@@ -50,7 +49,6 @@
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
-    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 - (IBAction)plusButtonPressed {
     self.count++;
@@ -83,6 +81,7 @@
     TallyModel *tally = self.data[self.selectedRow];
     tally.counter = [NSNumber numberWithInteger:self.count];
     [self.data replaceObjectAtIndex:self.selectedRow withObject:tally];
+    [DataAccess.sharedInstance saveManagedObjectContext];
 
     // update view
     NSString *labelText = [NSString stringWithFormat:@"%ld",(long)self.count];

@@ -45,7 +45,6 @@
 		6C92EC171A07629F00D2A8DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C92EC191A07629F00D2A8DC /* InfoPlist.strings */; };
 		6C98EEB01A4771A500E12E25 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */; };
 		6C9DC4F41AE083CF00EE5B0A /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
-		6CA1B1CA1AAC6EAB00F08D73 /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
 		6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CCA04AD1A93CCC4000BBDE9 /* DataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04AC1A93CCC4000BBDE9 /* DataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -942,7 +941,6 @@
 				6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */,
 				6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */,
 				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
-				6CA1B1CA1AAC6EAB00F08D73 /* TallyModel.m in Sources */,
 				6C24D5DD1ABDDECF002D1046 /* WKtableViewLastRowController.m in Sources */,
 				6C54FA821AABCA5300C517A5 /* trivits.xcdatamodeld in Sources */,
 			);

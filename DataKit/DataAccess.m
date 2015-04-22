@@ -137,16 +137,18 @@
 #pragma mark Helper Methods
 
 - (void)saveManagedObjectContext {
-    // if there are changes, save them
-    if([self.managedObjectContext hasChanges]){
-        NSError *error = nil;
-        if (![self.managedObjectContext save:&error]) {
-            if (error) {
-                NSLog(@"Unable to save changes.");
-                NSLog(@"%@, %@", error, error.localizedDescription);
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void){
+        // if there are changes, save them
+        if([self.managedObjectContext hasChanges]){
+            NSError *error = nil;
+            if (![self.managedObjectContext save:&error]) {
+                if (error) {
+                    NSLog(@"Unable to save changes.");
+                    NSLog(@"%@, %@", error, error.localizedDescription);
+                }
             }
         }
-    }
+    });
 }
 
 - (void)migrateStore {

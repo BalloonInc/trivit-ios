@@ -519,9 +519,7 @@ int const OUTSIDE_TAP = 3;
 }
 
 -(void)saveData{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [DataAccess.sharedInstance saveManagedObjectContext];
-    });
+    [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
 
@@ -529,30 +527,25 @@ int const OUTSIDE_TAP = 3;
     if(self.cellBeingEdited)
         return;
     
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    
         DataAccess.sharedInstance.managedObjectContext=nil;
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
         self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
-        [self.fetchedResultsController setDelegate:self];
 
         //refetch
         NSError *error = nil;
         [self.fetchedResultsController performFetch:&error];
-        
+            [self.fetchedResultsController setDelegate:self];
+
         if (error) {
             NSLog(@"Unable to perform fetch.");
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
         
     NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
-        if (difference>0)
-            [self.tableView reloadData];
-        
         // save lastfetcheddata to see if updates are needed
         self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
-   // });
-
+    if (difference>0)
+        [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
