@@ -118,7 +118,7 @@
                                     <items>
                                         <button alignment="center" backgroundImage="trivit" id="uJG-Jq-k1c">
                                             <connections>
-                                                <action selector="plusButtonPressed" destination="HZg-mk-xyX" id="udi-j7-Ozi"/>
+                                                <action selector="plusButtonPressed" destination="HZg-mk-xyX" id="Lk9-tS-lTG"/>
                                             </connections>
                                         </button>
                                     </items>
