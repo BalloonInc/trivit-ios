@@ -8,7 +8,7 @@
 
 #import "Tally.h"
 #import <UIKit/UIKit.h>
-
+@class MainListViewController;
 #import "Settings.h"
 
 @interface TrivitTableViewCell : UITableViewCell <UICollectionViewDataSource, UITextFieldDelegate, UICollectionViewDelegateFlowLayout>
@@ -41,7 +41,7 @@ extern NSString const *TALLY_TYPE;
 @property(strong, nonatomic) UITextField *minusButton;
 @property(nonatomic) float cellHeigth;
 
-@property(weak, nonatomic) UIView *parentView;
+@property(weak, nonatomic) MainListViewController *parentViewController;
 
 
 - (void)decreaseTallyCounter;

@@ -308,8 +308,24 @@ int const OUTSIDE_TAP = 3;
     self.cellBeingEdited = tappedCell; //Save cell being edited
     self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
     tappedCell.titleTextField.enabled = YES;
+    tappedCell.parentViewController=self;
     [tappedCell.titleTextField becomeFirstResponder];
     [tappedCell.titleTextField selectAll:nil];
+}
+
+-(void)endEditTrivitTitle{
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
+    
+    if (self.cellBeingEdited.titleTextField != nil) {
+        record.title = self.cellBeingEdited.titleTextField.text;
+        NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length > 0) && [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual:@"_"] ? @"ch_" : @"";
+        record.type = tallyType;
+    }
+    self.cellBeingEdited.titleTextField.enabled = NO;
+    self.activeCellIndexPath = nil;
+    self.cellBeingEdited = nil;
+
+    self.keyboardShown = false;
 }
 
 #pragma mark - cell height calculation
@@ -637,24 +653,13 @@ int const OUTSIDE_TAP = 3;
 
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
     
-    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
-
-    if (self.cellBeingEdited.titleTextField != nil) {
-        record.title = self.cellBeingEdited.titleTextField.text;
-        NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length > 0) && [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual:@"_"] ? @"ch_" : @"";
-        record.type = tallyType;
-    }
-
-    self.cellBeingEdited.titleTextField.enabled = NO;
-    self.activeCellIndexPath = nil;
-    self.cellBeingEdited = nil;
+    //[self endEditTrivitTitle];
 
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, 0, self.tableView.contentInset.right);
 
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
 
-    self.keyboardShown = false;
 }
 
 @end

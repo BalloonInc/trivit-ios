@@ -9,6 +9,7 @@
 #import "TrivitTableViewCell.h"
 #import "Colors.h"
 #import "cellBackground.h"
+#import "MainListViewController.h"
 
 @interface TrivitTableViewCell ()
 @property (nonatomic) int cellAddRemove;
@@ -291,27 +292,9 @@ float const COUNTLABEL_WIDTH = 40.;
         self.titleTextField.text = textField.text;
         self.titleTextField.enabled = NO;
     }
+    [self.parentViewController endEditTrivitTitle];
     return YES;
 }
-/*
-- (void)layoutSubviews {
-    [super layoutSubviews];
-
-    if(self.loadAnimation){
-    [UIView :^{
-        CGRect accessoryViewFrame = self.accessoryView.frame;
-        accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
-        self.accessoryView.frame = accessoryViewFrame;
-    }];
-    }
-    else{
-        CGRect accessoryViewFrame = self.accessoryView.frame;
-        accessoryViewFrame.origin.y = (CELL_HEIGHT_SECTION1 - COUNTLABEL_HEIGHT) / 2;
-        self.accessoryView.frame = accessoryViewFrame;
-
-    }
-}*/
-
 
 #pragma mark - Magic to make the UICollectionview datasource work
 

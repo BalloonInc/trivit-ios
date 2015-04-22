@@ -28,4 +28,6 @@
 // Core Data
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property(strong, nonatomic) NSUserDefaults *defaults;
+
+-(void)endEditTrivitTitle;
 @end
