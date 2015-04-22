@@ -102,7 +102,7 @@
 }
 
 - (void)dismissTutorial {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     [defaults setObject:[NSNumber numberWithBool:true] forKey:@"tutorialShown"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

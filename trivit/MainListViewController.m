@@ -477,7 +477,8 @@ int const OUTSIDE_TAP = 3;
     [super viewDidLoad];
     [self configureTableView];
 
-    self.defaults = [NSUserDefaults standardUserDefaults];
+    self.defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+
     
     self.fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
     [self.fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];

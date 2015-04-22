@@ -47,7 +47,7 @@
     [DataAccess.sharedInstance migrateStore];
 
     self.fetchRequest = [[NSFetchRequest alloc] init];
-    
+
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
     self.fetchRequest.entity = entityDescription;
     
@@ -95,9 +95,9 @@
             if(difference==0)
                 difference=0;
             if(difference==1)
-                [self reloadCounters];
+                dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
             if(difference==2)
-                [self loadTableData];
+                dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
         }
         // save lastfetcheddata to see if updates are needed
     self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
@@ -130,12 +130,11 @@
         [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
         [self configureLastRow];
     }
-
 }
 
 -(void) loadTableData{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
 
     NSInteger activeColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
     self.activeColorSetDark = [Colors colorsetWithIndex:2*activeColorSet+1];
