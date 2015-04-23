@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -512,8 +512,8 @@
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="PRJ-Dt-63o"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nx-t7-2cH">
-                                        <rect key="frame" x="188" y="37" width="61" height="48"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nx-t7-2cH">
+                                        <rect key="frame" x="188" y="37" width="62" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="c0R-Yu-1jZ"/>
                                         </constraints>
@@ -524,8 +524,8 @@
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="QgI-Ov-0ZE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
-                                        <rect key="frame" x="121" y="37" width="62" height="48"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
+                                        <rect key="frame" x="122" y="37" width="61" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="TC6-a2-nXU"/>
                                         </constraints>
@@ -548,8 +548,8 @@
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="7zl-MI-HBe"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="247" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-Yg-Y1X">
-                                        <rect key="frame" x="61" y="37" width="61" height="48"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="247" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-Yg-Y1X">
+                                        <rect key="frame" x="61" y="37" width="62" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="NJa-f5-Wuv"/>
                                         </constraints>

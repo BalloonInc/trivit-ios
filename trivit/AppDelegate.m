@@ -15,7 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //New Relic analytics
-    //[NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
+    [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 
     // Fetch Main Storyboard
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
