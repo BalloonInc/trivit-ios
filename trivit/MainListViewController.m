@@ -301,7 +301,7 @@ int const OUTSIDE_TAP = 3;
         indexPath = [NSIndexPath indexPathForRow:[self.tableView numberOfRowsInSection:0] - 1 inSection:0];
 
     if (self.cellBeingEdited)
-        self.cellBeingEdited.titleTextField.enabled = NO;
+       [self endEditTrivitTitle];
 
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     tappedCell.loadAnimation = NO;
@@ -536,7 +536,8 @@ int const OUTSIDE_TAP = 3;
 }
 
 -(void)saveData{
-    [DataAccess.sharedInstance saveManagedObjectContext];
+    if(!self.cellBeingEdited)
+        [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
 
@@ -653,7 +654,7 @@ int const OUTSIDE_TAP = 3;
 
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
     
-    //[self endEditTrivitTitle];
+    [self endEditTrivitTitle];
 
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, 0, self.tableView.contentInset.right);
 
