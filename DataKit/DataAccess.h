@@ -15,6 +15,8 @@
 
 - (void)saveManagedObjectContext;
 - (void)migrateStore;
+- (void)sendFeedback;
+
 + (DataAccess*) sharedInstance;
 
 /*

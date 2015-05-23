@@ -11,6 +11,7 @@
 #import "Version.h"
 #import <UIKit/UIKit.h>
 #import "TallyModel.h"
+//#import "FeedbackManager.h"
 
 @interface DataAccess()
 @property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -233,6 +234,42 @@
     }
     return fetchedResultsController.fetchedObjects;
 
+}
+
+-(void) sendFeedback{
+ NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:self.managedObjectContext];
+ 
+// // Initialize Record
+// Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:self..managedObjectContext];
+// 
+// NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+// [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+// 
+// dataObject.feedbackMessage = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
+// dataObject.scaleValue = [NSNumber numberWithInt:500];
+// dataObject.softwareIdentifier = [[UIDevice currentDevice] systemVersion];
+// dataObject.deviceIdentifier = UIDevice.currentDevice.model;
+// dataObject.name = [self getUniqueID];
+// dataObject.email = @"";
+// 
+// 
+// [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+ 
+ 
+ }
+
+-(NSString *) getUniqueID{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    
+    NSString *UUID = [defaults objectForKey:@"uniqueWatchID"];
+    
+    if(!UUID || UUID.length==0){
+        UUID = [[NSUUID UUID] UUIDString];
+        [defaults setObject:UUID forKey:@"uniqueWatchID"];
+        [defaults synchronize];
+    }
+    
+    return UUID;
 }
 
 
