@@ -32,7 +32,7 @@
 "Feedback" = "Commentaires";
 
 /* tutorial */
-"Get started!" = "Commencez!";
+"Get started!" = "Allez-y!";
 
 /* tutorial */
 "Give your Trivit a name" = "Donnez un nom à votre Trivit";
@@ -71,13 +71,13 @@
 "On" = "Oui";
 
 /* tutorial */
-"Open or close your new Trivit with a single tap" = "Ouvrir ou fermer votre nouveau Trivit avec un seul tap";
+"Open or close your new Trivit with a single tap" = "Ouvrez ou fermez votre nouveau Trivit avec un seul tap";
 
 /* Color set name */
 "Pink" = "Rose";
 
 /* messagebox, adding trivit not possible while editing other trivit */
-"Please finish editing the title first." = "S'il vous plaît terminer l'édition du premier titre.";
+"Please finish editing the title first." = "Terminez d'abord l'édition du titre courant.";
 
 /* (No Commment) */
 "Red" = "Rouge";
@@ -95,19 +95,19 @@
 "Reset all Trivits" = "Réinitialiser tous Trivits";
 
 /* (No Commment) */
-"Swipe left to delete" = "Glissez gauche pour me supprimer";
+"Swipe left to delete" = "Swipe gauche pour me supprimer";
 
 /* feedback message */
 "Tap an image to rate:" = "Appuyez sur une image pour évaluer:";
 
 /* tutorial */
-"Tap the minus to decrease the count, hold long to reset" = "Appuyez sur le moins de diminuer, maintenez appuyer pour réinitialiser";
+"Tap the minus to decrease the count, hold long to reset" = "Appuyez sur le moins pour diminuer, restez appuyer pour réinitialiser";
 
 /* tutorial */
 "Tap the pen to add a new Trivit" = "Appuyez sur le stylo pour ajouter un nouveau Trivit";
 
 /* tutorial */
-"Tap to increase the count" = "Appuyez sur pour augmenter le nombre";
+"Tap to increase the count" = "Appuyez pour augmenter le nombre";
 
 /* feedback message */
 "This is the best app ever!" = "C'est la meilleure app jamais créée!";

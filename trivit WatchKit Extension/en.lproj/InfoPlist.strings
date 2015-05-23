@@ -1,9 +1,0 @@
-/* (No Commment) */
-"CFBundleDisplayName" = "trivit WatchKit Extension";
-
-/* (No Commment) */
-"CFBundleName" = "$(PRODUCT_NAME)";
-
-/* (No Commment) */
-"CFBundleShortVersionString" = "1.0";
-

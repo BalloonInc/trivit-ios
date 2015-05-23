@@ -11,6 +11,7 @@
 #import "WKtableViewLastRowController.h"
 #import "DataKit.h"
 #import "TallyModel.h"
+//#import "FeedbackManager.h"
 
 #import "Colors.h"
 
@@ -67,9 +68,35 @@
     // save every 5 seconds
     [NSTimer scheduledTimerWithTimeInterval:2.0f
                                      target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
+    
+    // call home to let us know watch app is used:
+//    [self sendFeedback];
 
     return self;
 }
+
+/*-(void) sendFeedback{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    
+    // Initialize Record
+    Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    
+    dataObject.feedbackMessage = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
+    dataObject.scaleValue = [NSNumber numberWithInt:500];
+    dataObject.softwareIdentifier = [[UIDevice currentDevice] systemVersion];
+    dataObject.deviceIdentifier = UIDevice.currentDevice.model;
+    dataObject.name = [self getUniqueID];
+    dataObject.email = @"";
+    
+    
+    [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    
+
+}
+ */
 
 -(void) getNewData:(NSTimer *)timer{
     if (!self.active) return;
@@ -116,6 +143,20 @@
             [self configureLastRow];
         }
     });
+}
+
+-(NSString *) getUniqueID{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    
+    NSString *UUID = [defaults objectForKey:@"uniqueWatchID"];
+
+    if(!UUID || UUID.length==0){
+        UUID = [[NSUUID UUID] UUIDString];
+        [defaults setObject:UUID forKey:@"uniqueWatchID"];
+        [defaults synchronize];
+    }
+    
+    return UUID;
 }
 
 -(void) loadInitialTableRows:(NSInteger) rows{

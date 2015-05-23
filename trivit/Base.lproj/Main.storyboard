@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Qtj-af-wnL">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -213,7 +213,6 @@
                                 <constraints>
                                     <constraint firstItem="yln-wJ-3Cw" firstAttribute="leading" secondItem="zAV-Dt-eZy" secondAttribute="leadingMargin" id="2s8-Ah-CmO"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="yln-wJ-3Cw" secondAttribute="bottom" constant="10" id="CkR-Is-ZIi"/>
-                                    <constraint firstItem="yln-wJ-3Cw" firstAttribute="top" secondItem="zAV-Dt-eZy" secondAttribute="topMargin" constant="89" id="Ddr-c0-wxF"/>
                                     <constraint firstItem="5Do-sB-vao" firstAttribute="centerX" secondItem="yln-wJ-3Cw" secondAttribute="centerX" id="Ksk-Gg-hPg"/>
                                     <constraint firstAttribute="trailing" secondItem="5Do-sB-vao" secondAttribute="trailing" id="fal-cf-cWP"/>
                                     <constraint firstItem="5Do-sB-vao" firstAttribute="leading" secondItem="zAV-Dt-eZy" secondAttribute="leading" id="ipM-G2-Hn0"/>
@@ -259,7 +258,6 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="bqM-wM-ulW" secondAttribute="bottom" constant="10" id="NUR-2z-QHZ"/>
                                     <constraint firstItem="uIa-SN-Rif" firstAttribute="centerX" secondItem="bqM-wM-ulW" secondAttribute="centerX" id="dNr-Xo-LRP"/>
                                     <constraint firstAttribute="bottom" secondItem="uIa-SN-Rif" secondAttribute="bottom" id="g20-Gh-mfd"/>
-                                    <constraint firstItem="bqM-wM-ulW" firstAttribute="top" secondItem="PGp-mm-G8P" secondAttribute="topMargin" constant="89" id="jfw-vp-teu"/>
                                     <constraint firstAttribute="trailing" secondItem="uIa-SN-Rif" secondAttribute="trailing" id="v44-w1-XtO"/>
                                     <constraint firstItem="uIa-SN-Rif" firstAttribute="leading" secondItem="PGp-mm-G8P" secondAttribute="leading" id="vgk-5x-8gO"/>
                                 </constraints>
@@ -304,7 +302,6 @@
                                     <constraint firstAttribute="trailing" secondItem="rlN-Uj-KWj" secondAttribute="trailing" id="Jt0-8r-LMu"/>
                                     <constraint firstItem="rlN-Uj-KWj" firstAttribute="centerX" secondItem="Txb-zc-zGA" secondAttribute="centerX" id="KQi-Iq-UQF"/>
                                     <constraint firstItem="rlN-Uj-KWj" firstAttribute="top" secondItem="zmC-Qn-UTL" secondAttribute="top" id="YFo-ut-vLS"/>
-                                    <constraint firstItem="Txb-zc-zGA" firstAttribute="top" secondItem="zmC-Qn-UTL" secondAttribute="topMargin" constant="89" id="zSK-pW-dVR"/>
                                 </constraints>
                                 <size key="customSize" width="136" height="136"/>
                                 <connections>
@@ -341,7 +338,6 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="STI-Gs-rfR" firstAttribute="top" secondItem="w5r-az-63V" secondAttribute="top" id="Nd0-eQ-X68"/>
-                                    <constraint firstItem="mzT-GO-pIe" firstAttribute="top" secondItem="w5r-az-63V" secondAttribute="topMargin" constant="89" id="P5n-tm-Z1M"/>
                                     <constraint firstItem="mzT-GO-pIe" firstAttribute="leading" secondItem="w5r-az-63V" secondAttribute="leadingMargin" id="WVz-Wa-01f"/>
                                     <constraint firstItem="STI-Gs-rfR" firstAttribute="centerX" secondItem="mzT-GO-pIe" secondAttribute="centerX" id="oMe-Iv-BCR"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="mzT-GO-pIe" secondAttribute="bottom" constant="10" id="oTp-2d-UWW"/>
@@ -383,7 +379,6 @@
                                 </view>
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="8DX-1G-Gff" firstAttribute="top" secondItem="Wrg-Jx-HRR" secondAttribute="topMargin" constant="89" id="0EJ-yy-b5E"/>
                                     <constraint firstItem="pnG-gH-fAp" firstAttribute="leading" secondItem="Wrg-Jx-HRR" secondAttribute="leading" id="0vD-Ka-mtf"/>
                                     <constraint firstItem="8DX-1G-Gff" firstAttribute="centerX" secondItem="pnG-gH-fAp" secondAttribute="centerX" id="18a-IV-iZR"/>
                                     <constraint firstItem="8DX-1G-Gff" firstAttribute="leading" secondItem="Wrg-Jx-HRR" secondAttribute="leadingMargin" id="INx-TU-6wP"/>
@@ -427,7 +422,6 @@
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.22352941179999999" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Ksw-o9-V7f" firstAttribute="leading" secondItem="CYf-Ho-g9h" secondAttribute="leadingMargin" id="KpE-68-DE8"/>
-                                    <constraint firstItem="Ksw-o9-V7f" firstAttribute="top" secondItem="CYf-Ho-g9h" secondAttribute="topMargin" constant="89" id="L5M-n5-Dnc"/>
                                     <constraint firstItem="ywH-EQ-CLU" firstAttribute="centerX" secondItem="Ksw-o9-V7f" secondAttribute="centerX" id="Lf7-eT-03S"/>
                                     <constraint firstAttribute="trailing" secondItem="ywH-EQ-CLU" secondAttribute="trailing" id="P6U-fi-xJG"/>
                                     <constraint firstItem="ywH-EQ-CLU" firstAttribute="leading" secondItem="CYf-Ho-g9h" secondAttribute="leading" id="Ste-fY-mcV"/>
@@ -448,6 +442,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Settings" id="JYG-xs-cHp"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <segue destination="iLb-YV-FG3" kind="push" identifier="ShowFeedbackScreen" id="uID-TY-K2S"/>
                     </connections>
@@ -524,7 +519,7 @@
                                             <action selector="scoreButtonPressed:" destination="iLb-YV-FG3" eventType="touchUpInside" id="QgI-Ov-0ZE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
+                                    <button opaque="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-oI-YiF">
                                         <rect key="frame" x="122" y="37" width="61" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="TC6-a2-nXU"/>
