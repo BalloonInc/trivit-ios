@@ -173,7 +173,7 @@
         
         NSString *applicationDocumentsDirectory = [[[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.ballooninc.trivit.Documents"] path];
         
-        NSString *sqlitePath = [NSString stringWithFormat: @"%@/%@", applicationDocumentsDirectory, @"trivits20.sqlite"];
+        NSString *sqlitePath = [NSString stringWithFormat: @"%@/trivits%@.sqlite", applicationDocumentsDirectory, currentVersion];
         NSURL *newStoreURL = [NSURL fileURLWithPath:sqlitePath];
         
         // migrate current store to new URL
