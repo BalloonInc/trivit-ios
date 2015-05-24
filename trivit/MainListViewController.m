@@ -596,6 +596,26 @@ int const OUTSIDE_TAP = 3;
     }
     for (Feedback *f in [fetchedResultsController fetchedObjects])
         [[FeedbackManager alloc] feedbackWithObject:f managedObjectContext:self.managedObjectContext];
+    
+    NSArray *watchFeedback = [self.defaults objectForKey:@"WatchFeedbackArray"];
+    
+    for (NSArray *feedback in watchFeedback) {
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:self.managedObjectContext];
+        
+        // Initialize Record
+        Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+        dataObject.feedbackMessage = [feedback objectAtIndex:0];
+        dataObject.scaleValue = [NSNumber numberWithInt:500];
+        dataObject.softwareIdentifier = [feedback objectAtIndex:1];
+        dataObject.deviceIdentifier = [feedback objectAtIndex:2];
+        dataObject.name = [feedback objectAtIndex:3];
+        dataObject.email = @"";
+        
+        [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:self.managedObjectContext];
+    }
+    [self.defaults setObject:nil forKey:@"WatchFeedbackArray"];
+    [self.defaults synchronize];
+
 }
 
 - (void)configureTableView {

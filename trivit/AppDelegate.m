@@ -15,7 +15,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //New Relic analytics
+#ifdef DEBUG
+    NSLog(@"New relic not started, DEBUG mode on!");
+#else
     [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
+#endif
 
     // Fetch Main Storyboard
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

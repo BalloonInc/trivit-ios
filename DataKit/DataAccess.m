@@ -11,7 +11,6 @@
 #import "Version.h"
 #import <UIKit/UIKit.h>
 #import "TallyModel.h"
-//#import "FeedbackManager.h"
 
 @interface DataAccess()
 @property(strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -237,28 +236,37 @@
 }
 
 -(void) sendFeedback{
- NSEntityDescription *entity = [NSEntityDescription entityForName:@"Feedback" inManagedObjectContext:self.managedObjectContext];
- 
-// // Initialize Record
-// Feedback *dataObject = [[Feedback alloc] initWithEntity:entity insertIntoManagedObjectContext:self..managedObjectContext];
-// 
-// NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-// [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-// 
-// dataObject.feedbackMessage = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
-// dataObject.scaleValue = [NSNumber numberWithInt:500];
-// dataObject.softwareIdentifier = [[UIDevice currentDevice] systemVersion];
-// dataObject.deviceIdentifier = UIDevice.currentDevice.model;
-// dataObject.name = [self getUniqueID];
-// dataObject.email = @"";
-// 
-// 
-// [[FeedbackManager alloc] feedbackWithObject:dataObject managedObjectContext:DataAccess.sharedInstance.managedObjectContext];
- 
+    bool debug=false;
+    
+#ifdef DEBUG
+    NSLog(@"watch feedback not sent - debug mode on");
+    debug=true;
+#endif
+    
+    if(debug) return;
+    
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    
+    NSMutableArray *watchFeedBackArray = [defaults objectForKey:@"WatchFeedbackArray"];
+    
+    if(!watchFeedBackArray)
+        watchFeedBackArray = [[NSMutableArray alloc] init];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    NSString *message = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
+    NSString *os = [[UIDevice currentDevice] systemVersion];
+    NSString *model = UIDevice.currentDevice.model;
+    NSString *name = [self getUniqueWatchID];
+
+    [watchFeedBackArray addObject:[NSArray arrayWithObjects:message,os,model,name, nil]];
+    
+    [defaults setObject:watchFeedBackArray forKey:@"WatchFeedbackArray"];
+    [defaults synchronize];
  
  }
 
--(NSString *) getUniqueID{
+-(NSString *) getUniqueWatchID{
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     
     NSString *UUID = [defaults objectForKey:@"uniqueWatchID"];
