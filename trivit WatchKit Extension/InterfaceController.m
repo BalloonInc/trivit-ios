@@ -69,7 +69,11 @@
                                      target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
     
     // call home to let us know watch app is used:
+#if DEBUG
+    NSLog(@"Watch app tracking: not enabled (debug mode is on)");
+#else
     [DataAccess.sharedInstance sendFeedback];
+#endif
 
     return self;
 }

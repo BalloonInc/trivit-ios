@@ -236,15 +236,6 @@
 }
 
 -(void) sendFeedback{
-    bool debug=false;
-    
-#ifdef DEBUG
-    NSLog(@"watch feedback not sent - debug mode on");
-    debug=true;
-#endif
-    
-    if(debug) return;
-    
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     
     NSMutableArray *watchFeedBackArray = [defaults objectForKey:@"WatchFeedbackArray"];
@@ -263,7 +254,6 @@
     
     [defaults setObject:watchFeedBackArray forKey:@"WatchFeedbackArray"];
     [defaults synchronize];
- 
  }
 
 -(NSString *) getUniqueWatchID{
