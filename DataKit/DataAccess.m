@@ -95,7 +95,7 @@
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     [defaults setObject:[NSNumber numberWithBool:watchInterfaceActive] forKey:@"watchInterfaceActive"];
     [defaults synchronize];
-    //NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
+    NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
 }
 
 

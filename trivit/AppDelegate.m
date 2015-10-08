@@ -82,13 +82,13 @@
                                         initWithType:@"be.ballooninc.trivit.IncrementLastTrivit"
                                         localizedTitle:@"Increment Trivit:"
                                         localizedSubtitle:lastTrivit
-                                        icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeTaskCompleted]
+                                        icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypePlay]
                                         userInfo:nil];
     UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc]
                                         initWithType:@"be.ballooninc.trivit.IncrementPreviousLastTrivit"
                                         localizedTitle:@"Increment Trivit:"
                                         localizedSubtitle:previousLastTrivit
-                                        icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeTaskCompleted]
+                                        icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypePlay]
                                         userInfo:nil];
     
     // add all items to an array
