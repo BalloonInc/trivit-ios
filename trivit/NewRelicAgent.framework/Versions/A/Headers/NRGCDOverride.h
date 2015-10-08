@@ -10,7 +10,6 @@
 //
 
 #ifdef __BLOCKS__
-
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus

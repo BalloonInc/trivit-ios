@@ -23,42 +23,42 @@ extern "C" {
 /*************************************/
 
 /*******************************************************************************
-* The New Relic agent includes an internal logger called NRLogger to make your
-* life a touch easier when you want to know what's going on under the hood.
-* You can direct various levels of agent activity messages to the device
-* console through NSLog or to a file stored in the app's document directory.
-*
-* Please note that NRLogger does not send any data whatsoever to New Relic's
-* servers. You'll need to have access to the device/simulator console or dig
-* the file out yourself.
-*******************************************************************************/
+ * The New Relic agent includes an internal logger called NRLogger to make your
+ * life a touch easier when you want to know what's going on under the hood.
+ * You can direct various levels of agent activity messages to the device
+ * console through NSLog or to a file stored in the app's document directory.
+ *
+ * Please note that NRLogger does not send any data whatsoever to New Relic's
+ * servers. You'll need to have access to the device/simulator console or dig
+ * the file out yourself.
+ *******************************************************************************/
 
 
 /*******************************************************************************
-* Log levels used in the agent's internal logger
-*
-* When calling NRLogger setLogLevels: pass in a bitmask of the levels you want
-* enabled, ORed together e.g.
-*   [NRLogger setLogLevels:NRLogLevelError|NRLogLevelWarning|NRLogLevelInfo];
-*
-* NRLogLevelALL is a convenience definition.
-*
-* NRLogger's default log level is NRLogLevelError|NRLogLevelWarning
-*******************************************************************************/
+ * Log levels used in the agent's internal logger
+ *
+ * When calling NRLogger setLogLevels: pass in a bitmask of the levels you want
+ * enabled, ORed together e.g.
+ *   [NRLogger setLogLevels:NRLogLevelError|NRLogLevelWarning|NRLogLevelInfo];
+ *
+ * NRLogLevelALL is a convenience definition.
+ *
+ * NRLogger's default log level is NRLogLevelError|NRLogLevelWarning
+ *******************************************************************************/
 
 typedef enum _NRLogLevels {
-    NRLogLevelNone = 0,
-    NRLogLevelError = 1 << 0,
+    NRLogLevelNone    = 0,
+    NRLogLevelError   = 1 << 0,
     NRLogLevelWarning = 1 << 1,
-    NRLogLevelInfo = 1 << 2,
+    NRLogLevelInfo    = 1 << 2,
     NRLogLevelVerbose = 1 << 3,
-    NRLogLevelALL = 0xffff
+    NRLogLevelALL     = 0xffff
 } NRLogLevels;
 
 typedef enum _NRLogTargets {
-    NRLogTargetNone = 0,
-    NRLogTargetConsole = 1 << 0,
-    NRLogTargetFile = 1 << 1
+    NRLogTargetNone      = 0,
+    NRLogTargetConsole   = 1 << 0,
+    NRLogTargetFile      = 1 << 1
 } NRLogTargets;
 
 #define NRLogMessageLevelKey        @"level"
@@ -69,18 +69,18 @@ typedef enum _NRLogTargets {
 #define NRLogMessageMessageKey      @"message"
 
 /*******************************************************************************
-* Log targets used in the agent's internal logger
-*
-* When calling NRLogger setLogTargets: pass in a bitmask of the targets you
-* want enabled, ORed together e.g.
-*   [NRLogger setLogTargets:NRLogTargetConsole|NRLogTargetFile];
-*
-* NRLogTargetConsole uses NSLog() to output to the device console
-* NRLogTargetFile writes log messages to a file in JSON-format
-* NRLogTargetALL is a convenience definition.
-*
-*NRLogger's default target is NRLogTargetConsole
-*******************************************************************************/
+ * Log targets used in the agent's internal logger
+ *
+ * When calling NRLogger setLogTargets: pass in a bitmask of the targets you
+ * want enabled, ORed together e.g.
+ *   [NRLogger setLogTargets:NRLogTargetConsole|NRLogTargetFile];
+ *
+ * NRLogTargetConsole uses NSLog() to output to the device console
+ * NRLogTargetFile writes log messages to a file in JSON-format
+ * NRLogTargetALL is a convenience definition.
+ *
+ *NRLogger's default target is NRLogTargetConsole
+ *******************************************************************************/
 
 @interface NRLogger : NSObject {
     unsigned int logLevels;

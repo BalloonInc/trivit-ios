@@ -30,4 +30,7 @@
 @property(strong, nonatomic) NSUserDefaults *defaults;
 
 -(void)endEditTrivitTitle;
+-(void)addNewTrivitAtStartup;
+-(void)incrementTrivitAtStartup:(NSInteger)index;
+
 @end

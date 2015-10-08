@@ -11,12 +11,12 @@
 
 
 /*******************************************************************************
-* When using NSURLSession with a delegate, the delegate property of NSURLSession
-* will return an NRURLSessionTaskDelegateBase. To access the original delegate
-* use the realDelegate property on the NRURLSessionTaskDelegateBase.
-* Apologies for the inconvenience.
-*******************************************************************************/
+ * When using NSURLSession with a delegate, the delegate property of NSURLSession
+ * will return an NRURLSessionTaskDelegateBase. To access the original delegate
+ * use the realDelegate property on the NRURLSessionTaskDelegateBase.
+ * Apologies for the inconvenience.
+ *******************************************************************************/
 
-@interface NRURLSessionTaskDelegateBase : NSObject <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
-@property(nonatomic, retain, readonly) id <NSURLSessionDataDelegate> realDelegate;
+@interface NRURLSessionTaskDelegateBase : NSObject <NSURLSessionTaskDelegate,NSURLSessionDataDelegate>
+@property (nonatomic, retain, readonly) id<NSURLSessionDataDelegate> realDelegate;
 @end

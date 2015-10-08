@@ -292,7 +292,7 @@ float const COUNTLABEL_WIDTH = 40.;
         self.titleTextField.text = textField.text;
         self.titleTextField.enabled = NO;
     }
-    [self.parentViewController endEditTrivitTitle];
+    //[self.parentViewController endEditTrivitTitle];
     return YES;
 }
 

@@ -25,6 +25,9 @@
 @property(strong, nonatomic) NSArray *placeholderTrivitTitles;
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(nonatomic) NSInteger imagesPerRow;
+@property(strong,nonatomic) NSString *startupAction;
+@property(nonatomic) NSInteger indexToIncrement;
+
 @end
 
 @implementation MainListViewController
@@ -58,9 +61,73 @@ int const OUTSIDE_TAP = 3;
     return self.placeholderTrivitTitles[index % self.placeholderTrivitTitles.count];
 }
 
+#pragma mark - last edited trivits
+
+-(void) removeFromLastEditedTrivits: (NSInteger) indexOfTrivitToRemove{
+    NSMutableArray *lastUsedTrivitsIndexes = [[self.defaults objectForKey:@"lastUsedTrivitsIndexes"] mutableCopy];
+    NSMutableArray *lastUsedTrivitsTitles = [[self.defaults objectForKey:@"lastUsedTrivitsTitles"] mutableCopy];
+        
+    NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOfTrivitToRemove]];
+    NSLog(@"index to remove: %d",indexToRemove);
+    [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
+    [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
+    
+    for (int i=0; i<[lastUsedTrivitsIndexes count]; i++) {
+        if ([lastUsedTrivitsIndexes[i] integerValue]>indexOfTrivitToRemove)
+            lastUsedTrivitsIndexes[i] = [NSNumber numberWithInteger:[lastUsedTrivitsIndexes[i] integerValue]-1];
+    }
+    
+    NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
+    NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
+
+    
+    [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
+    [self.defaults setObject:lastUsedTrivitsTitles forKey:@"lastUsedTrivitsTitles"];
+}
+
+- (void) updateLastEditedTrivits: (NSInteger)indexOflatestTrivit {
+    
+    NSMutableArray *lastUsedTrivitsIndexes = [[self.defaults objectForKey:@"lastUsedTrivitsIndexes"] mutableCopy];
+    NSMutableArray *lastUsedTrivitsTitles = [[self.defaults objectForKey:@"lastUsedTrivitsTitles"] mutableCopy];
+    
+    if(!lastUsedTrivitsIndexes){
+        lastUsedTrivitsIndexes = [[NSMutableArray alloc] init];
+        lastUsedTrivitsTitles = [[NSMutableArray alloc] init];
+    }
+    
+    TrivitTableViewCell *lastCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexOflatestTrivit inSection:0]];
+    
+    NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOflatestTrivit]];
+    NSLog(@"index to remove: %d",indexToRemove);
+
+    if(indexToRemove != NSNotFound){
+        [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
+        [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
+    }
+    
+    [lastUsedTrivitsIndexes addObject:[NSNumber numberWithInteger:indexOflatestTrivit]];
+    [lastUsedTrivitsTitles addObject:lastCell.titleTextField.text];
+    
+    NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
+    NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
+    
+    [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
+    [self.defaults setObject:lastUsedTrivitsTitles forKey:@"lastUsedTrivitsTitles"];
+
+}
+
 #pragma mark - add item
 
-- (IBAction)addButtonPressed {
+-(void) addNewTrivitAtStartup{
+    self.startupAction=@"AddNewTrivit";
+}
+-(void)incrementTrivitAtStartup:(NSInteger)index{
+    self.indexToIncrement = index;
+    self.startupAction=@"IncrementTrivit";
+
+}
+
+-(void) addNewTrivit {
     if (self.keyboardShown) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot add", @"messagebox title")
                                                         message:NSLocalizedString(@"Please finish editing the title first.", @"messagebox, adding trivit not possible while editing other trivit")
@@ -73,17 +140,17 @@ int const OUTSIDE_TAP = 3;
     self.keyboardShown = true;
     // add consequent identifier to tallies
     [self addItemWithTitle:[self trivitExampleNameAtIndex:[self nextPropertyIndexForNewTally]] andCount:0];
-
+    
     // decide on delay: if there are not enough cells to fill the view, add a 0.1 seconds delay
     // (this is to make sure editTrivitTitleAtIndexPath always works when adding a trivit)
-
+    
     NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
-
+    
     NSInteger rowIndexOfFirstVisibleCell = visibleRows ? [[visibleRows objectAtIndex:0] row] : 0;
     NSInteger rowIndexOfLastVisibleCell = visibleRows ? [[visibleRows lastObject] row] : 0;
     NSInteger numberOfRows = [self.tableView numberOfRowsInSection:0];
     double delay = ((rowIndexOfFirstVisibleCell == 0 && rowIndexOfLastVisibleCell == numberOfRows - 1)) ? 0.1 : 0;
-
+    
     [UIView animateWithDuration:0.2 delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
@@ -94,6 +161,10 @@ int const OUTSIDE_TAP = 3;
                      completion:^(BOOL finished) {
                          if (finished) [self performSelector:@selector(editTrivitTitleAtIndexPath:) withObject:nil afterDelay:delay];
                      }];
+}
+
+- (IBAction)addButtonPressed {
+    [self addNewTrivit];
 }
 
 - (void)addItemWithTitle:(NSString *)title andCount:(NSInteger)count {
@@ -139,6 +210,7 @@ int const OUTSIDE_TAP = 3;
         CGPoint tapLocation = [tapRecognizer locationInView:self.tableView];
         NSIndexPath *tappedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
         TrivitTableViewCell *tappedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:tappedIndexPath];
+        [self updateLastEditedTrivits:tappedIndexPath.row];
         if (!tappedCell.isCollapsed) {
             self.activeCellIndexPath = tappedIndexPath;
             [self sureYouWantToReset:tappedCell.tally.title];
@@ -168,28 +240,35 @@ int const OUTSIDE_TAP = 3;
 - (void)handleTallyIncrease:(UIGestureRecognizer *)singletapRecognizer {
     CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitTableViewCell *increasedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:swipedIndexPath];
-    increasedCell.loadAnimation = NO;
+    [self incrementTrivitAtIndexPath:swipedIndexPath];
+}
 
+-(void) incrementTrivitAtIndexPath:(NSIndexPath *)indexPath{
+    TrivitTableViewCell *increasedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+    increasedCell.loadAnimation = NO;
+    
     if (!increasedCell.isCollapsed) {
         [increasedCell increaseTallyCounter];
-        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
+        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
         NSInteger currentCount = [record.counter integerValue] + 1;
-
+        
+        [self updateLastEditedTrivits:indexPath.row];
+        
         record.counter = [NSNumber numberWithInteger:currentCount];
         [self buzzIt];
         // if new image ==> redraw cell height
         if (currentCount % (5 * self.imagesPerRow) == 1) {
             // if new row, prepare for scrolling the cell:
-            [self scrollToExpandedCell:swipedIndexPath];
+            [self scrollToExpandedCell:indexPath];
             self.shouldScrollOnTallyIncreaseOrDecrease = true;
-
+            
             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionAllowAnimatedContent animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
             }                completion:nil];
         }
     }
+
 }
 
 - (void)handleTallyDecrease:(UIGestureRecognizer *)tapRecognizer {
@@ -200,6 +279,9 @@ int const OUTSIDE_TAP = 3;
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
     TrivitTableViewCell *swipedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:swipedIndexPath];
 
+    [self updateLastEditedTrivits:swipedIndexPath.row];
+
+    
     NSInteger tappedViewIdentifier = [self tappedViewforGestureRecognizer:tapRecognizer];
     swipedCell.loadAnimation = NO;
 
@@ -231,16 +313,19 @@ int const OUTSIDE_TAP = 3;
 - (void)handleTallyCollapse:(UIGestureRecognizer *)recognizer {
     CGPoint swipeLocation = [recognizer locationInView:self.tableView];
     NSIndexPath *collapseIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    TrivitTableViewCell *collapseCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:collapseIndexPath];
+    [self collapseTrivitAtIndexPath:collapseIndexPath];
+}
+- (void) collapseTrivitAtIndexPath: (NSIndexPath *)indexPath{
+    TrivitTableViewCell *collapseCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     // delay for showing trivits
     collapseCell.loadAnimation = YES;
-
+    
     collapseCell.isCollapsed = !collapseCell.isCollapsed;
-    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:collapseIndexPath];
+    TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     record.isCollapsed = [NSNumber numberWithBool:collapseCell.isCollapsed];
-
+    
     if (!collapseCell.isCollapsed)
-        [self scrollToExpandedCell:collapseIndexPath];
+        [self scrollToExpandedCell:indexPath];
 }
 
 - (void)handleTap:(UIGestureRecognizer *)singletapRecognizer {
@@ -304,6 +389,7 @@ int const OUTSIDE_TAP = 3;
        [self endEditTrivitTitle];
 
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+
     tappedCell.loadAnimation = NO;
     self.cellBeingEdited = tappedCell; //Save cell being edited
     self.activeCellIndexPath = indexPath;     //save indexPath to show after keyboard hides
@@ -321,6 +407,8 @@ int const OUTSIDE_TAP = 3;
         NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length > 0) && [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual:@"_"] ? @"ch_" : @"";
         record.type = tallyType;
     }
+    [self updateLastEditedTrivits:self.activeCellIndexPath.row];
+
     self.cellBeingEdited.titleTextField.enabled = NO;
     self.activeCellIndexPath = nil;
     self.cellBeingEdited = nil;
@@ -407,8 +495,10 @@ int const OUTSIDE_TAP = 3;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (record)
+        if (record){
             [self.fetchedResultsController.managedObjectContext deleteObject:record];
+            [self removeFromLastEditedTrivits: indexPath.row];
+        }
     }
 }
 
@@ -533,6 +623,8 @@ int const OUTSIDE_TAP = 3;
                                                object:nil];
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
+    
+    
 }
 
 -(void)saveData{
@@ -540,25 +632,28 @@ int const OUTSIDE_TAP = 3;
         [DataAccess.sharedInstance saveManagedObjectContext];
 }
 
-
 -(void) reloadData:(NSTimer *)timer{
     if(self.cellBeingEdited)
         return;
+    if (![self.defaults objectForKey:@"uniqueWatchID"])
+        //NSLog(@"No Watch connected");
+        return;
     
-        DataAccess.sharedInstance.managedObjectContext=nil;
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
-
-        //refetch
-        NSError *error = nil;
-        [self.fetchedResultsController performFetch:&error];
-            [self.fetchedResultsController setDelegate:self];
-
-        if (error) {
-            NSLog(@"Unable to perform fetch.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
-        
+    
+    DataAccess.sharedInstance.managedObjectContext=nil;
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
+    
+    //refetch
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    [self.fetchedResultsController setDelegate:self];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    
     NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
         // save lastfetcheddata to see if updates are needed
         self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
@@ -575,6 +670,26 @@ int const OUTSIDE_TAP = 3;
         UINavigationController *tutorialVC = (UINavigationController *) [mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
         [self presentViewController:tutorialVC animated:YES completion:^{
         }];
+    }
+    else{
+        if (self.startupAction){
+            if ([self.startupAction isEqualToString:@"AddNewTrivit"]){
+                [self addNewTrivit];
+                self.startupAction=nil;
+            }
+            else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexToIncrement inSection:0];
+                TrivitTableViewCell *collapseCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+                if (collapseCell.isCollapsed)
+                    [self collapseTrivitAtIndexPath:indexPath];
+                
+                [self incrementTrivitAtIndexPath:indexPath];
+                [self scrollToExpandedCell:indexPath];
+                self.startupAction=nil;
+                self.indexToIncrement=-1;
+
+            }
+        }
     }
 }
 

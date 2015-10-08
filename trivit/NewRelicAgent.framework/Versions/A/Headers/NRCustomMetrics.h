@@ -26,13 +26,13 @@ extern "C" {
 
 
 //set the metric name and it's category
-+ (void)recordMetricWithName:(NSString *)name
-                    category:(NSString *)category;
++ (void) recordMetricWithName:(NSString *)name
+                     category:(NSString *)category;
 
 //add a value to be recorded
-+ (void)recordMetricWithName:(NSString *)name
-                    category:(NSString *)category
-                       value:(NSNumber *)value;
++ (void) recordMetricWithName:(NSString *)name
+                     category:(NSString *)category
+                        value:(NSNumber *)value;
 
 // adds a unit for the value
 /*
@@ -45,19 +45,19 @@ extern "C" {
  * For example, use second not Sec.
  */
 
-+ (void)recordMetricWithName:(NSString *)name
-                    category:(NSString *)category
-                       value:(NSNumber *)value
-                  valueUnits:(NRMetricUnit *)valueUnits;
++ (void) recordMetricWithName:(NSString *)name
+                     category:(NSString *)category
+                        value:(NSNumber *)value
+                   valueUnits:(NRMetricUnit*)valueUnits;
 
 //adds count units default is just "sample"
 // The count is the number of times the particular metric is recorded
 // so the countUnits could be considered the units of the metric itself.
-+ (void)recordMetricWithName:(NSString *)name
-                    category:(NSString *)category
-                       value:(NSNumber *)value
-                  valueUnits:(NRMetricUnit *)valueUnits
-                  countUnits:(NRMetricUnit *)countUnits;
++ (void) recordMetricWithName:(NSString *)name
+                     category:(NSString *)category
+                        value:(NSNumber *)value
+                   valueUnits:(NRMetricUnit *)valueUnits
+                   countUnits:(NRMetricUnit *)countUnits;
 
 
 @end

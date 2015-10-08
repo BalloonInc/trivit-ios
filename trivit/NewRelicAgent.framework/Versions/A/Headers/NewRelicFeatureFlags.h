@@ -33,13 +33,12 @@
 
 
 
-typedef NS_OPTIONS(unsigned
-        long
-        long, NRMAFeatureFlags) {
-    NRFeatureFlag_InteractionTracing = 1 << 1,
-    NRFeatureFlag_SwiftInteractionTracing = 1 << 2, //disabled by default
-    NRFeatureFlag_CrashReporting = 1 << 3,
-    NRFeatureFlag_NSURLSessionInstrumentation = 1 << 4,
+typedef NS_OPTIONS(unsigned long long, NRMAFeatureFlags){
+    NRFeatureFlag_InteractionTracing                    = 1 << 1,
+    NRFeatureFlag_SwiftInteractionTracing               = 1 << 2, //disabled by default 
+    NRFeatureFlag_CrashReporting                        = 1 << 3,
+    NRFeatureFlag_NSURLSessionInstrumentation           = 1 << 4,
+    NRFeatureFlag_HttpResponseBodyCapture               = 1 << 5,
     NRFeatureFlag_ExperimentalNetworkingInstrumentation = 1 << 13, //disabled by default
-    NRFeatureFlag_AllFeatures = ~0ULL //in 32-bit land the alignment is 4bytes
+    NRFeatureFlag_AllFeatures                           = ~0ULL //in 32-bit land the alignment is 4bytes
 };
