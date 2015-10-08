@@ -17,11 +17,13 @@
 @property(strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property(strong, nonatomic,readonly) NSString *latestVersion;
 @property(strong, nonatomic) NSUserDefaults *defaults;
+
 @end
 
 @implementation DataAccess
 
-
+@synthesize watchDetailsActive = _watchDetailsActive;
+@synthesize watchInterfaceActive = _watchInterfaceActive;
 /*
  Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
  */
@@ -69,6 +71,30 @@
 -(NSUserDefaults *) defaults{
     if (!_defaults) _defaults = [NSUserDefaults standardUserDefaults];
     return _defaults;
+}
+-(BOOL) watchInterfaceAtive{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    return [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
+}
+
+-(void) setWatchInterfaceActive:(bool)watchInterfaceActive{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    [defaults setObject:[NSNumber numberWithBool:watchInterfaceActive] forKey:@"watchInterfaceActive"];
+    [defaults synchronize];
+    NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
+}
+
+
+-(BOOL) watchDetailsAtive{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    return [[defaults objectForKey:@"watchDetailsActive"] boolValue];
+}
+-(void) setWatchDetailsActive:(bool)watchDetailsActive{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    [defaults setObject:[NSNumber numberWithBool:watchDetailsActive] forKey:@"watchDetailsActive"];
+    [defaults synchronize];
+    NSLog(@"watchDetailsActive: %i",watchDetailsActive);
+
 }
 
 + (DataAccess*) sharedInstance {
@@ -255,6 +281,7 @@
     [defaults setObject:watchFeedBackArray forKey:@"WatchFeedbackArray"];
     [defaults synchronize];
  }
+
 
 -(NSString *) getUniqueWatchID{
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];

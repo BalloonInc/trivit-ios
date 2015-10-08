@@ -156,16 +156,6 @@
     }
 }
 
-//- (void)loadTableData {
-//    [self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
-//    [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:[[self workingData] count]] withRowType:@"AddNewTrivitCell"];
-//    
-//    for (int i = 0; i<[[self workingData] count];i++)
-//        [self configureRowControllerAtIndex:i];
-//    [self configureLastRow];
-//    
-//}
-
 - (void) reloadCounters{
     //[self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
     
@@ -223,12 +213,16 @@
     [self updateCounterAtIndex:self.selectedIndex];
     self.active=true;
     [super willActivate];
+    DataAccess.sharedInstance.watchInterfaceActive = true;
 }
 
 - (void)didDeactivate {
     self.active=false;
     [super didDeactivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
+    if (!DataAccess.sharedInstance.watchDetailsActive)
+        DataAccess.sharedInstance.watchInterfaceActive = false;
+
 }
 
 -(void) configureLastRow{

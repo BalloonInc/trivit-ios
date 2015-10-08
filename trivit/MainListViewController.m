@@ -635,9 +635,10 @@ int const OUTSIDE_TAP = 3;
 -(void) reloadData:(NSTimer *)timer{
     if(self.cellBeingEdited)
         return;
-    if (![self.defaults objectForKey:@"uniqueWatchID"])
-        //NSLog(@"No Watch connected");
+    if (![self.defaults objectForKey:@"uniqueWatchID"]){
+        NSLog(@"No Watch connected");
         return;
+    }
     
     
     DataAccess.sharedInstance.managedObjectContext=nil;
