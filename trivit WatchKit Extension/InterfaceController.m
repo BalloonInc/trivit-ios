@@ -64,8 +64,8 @@
         [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
         [self loadTableData];
     }
-    // save every 5 seconds
-    [NSTimer scheduledTimerWithTimeInterval:2.0f
+    // save every 3 seconds
+    [NSTimer scheduledTimerWithTimeInterval:3.0f
                                      target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
     
     // call home to let us know watch app is used:
@@ -80,6 +80,7 @@
 
 -(void) getNewData:(NSTimer *)timer{
     if (!self.active) return;
+    NSLog(@"iPhone connected - updating Watch Data");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         //refetch

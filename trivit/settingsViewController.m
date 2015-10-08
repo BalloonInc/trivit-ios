@@ -182,6 +182,11 @@ int const NUMBEROFCELLS = 6;
         if ([alertView.title isEqualToString:self.sureToDeleteTitle]) {
             for (NSManagedObject *record in fetchedObjects)
                 [self.managedObjectContext deleteObject:record];
+            
+            NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+            [defaults setObject:nil forKey:@"lastUsedTrivitsIndexes"];
+            [defaults setObject:nil forKey:@"lastUsedTrivitsTitles"];
+
         }
         if ([alertView.title isEqualToString:self.sureToResetTitle])
             for (TallyModel *record in fetchedObjects)

@@ -72,6 +72,20 @@
     if (!_defaults) _defaults = [NSUserDefaults standardUserDefaults];
     return _defaults;
 }
+
+-(BOOL) isWatchActive{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
+    
+    bool watchInterfaceActive = [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
+    bool watchDetailsActive = [[defaults objectForKey:@"watchDetailsActive"] boolValue];
+    
+    //NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
+    //NSLog(@"watchDetailsActive: %i",watchDetailsActive);
+
+    return watchInterfaceActive || watchDetailsActive;
+}
+
+
 -(BOOL) watchInterfaceAtive{
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     return [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
@@ -81,7 +95,7 @@
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     [defaults setObject:[NSNumber numberWithBool:watchInterfaceActive] forKey:@"watchInterfaceActive"];
     [defaults synchronize];
-    NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
+    //NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
 }
 
 

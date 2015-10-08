@@ -18,6 +18,7 @@
 - (void)saveManagedObjectContext;
 - (void)migrateStore;
 - (void)sendFeedback;
+- (bool) isWatchActive;
 
 + (DataAccess*) sharedInstance;
 

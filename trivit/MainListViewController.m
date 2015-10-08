@@ -68,7 +68,7 @@ int const OUTSIDE_TAP = 3;
     NSMutableArray *lastUsedTrivitsTitles = [[self.defaults objectForKey:@"lastUsedTrivitsTitles"] mutableCopy];
         
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOfTrivitToRemove]];
-    NSLog(@"index to remove: %d",indexToRemove);
+    //NSLog(@"index to remove: %d",indexToRemove);
     [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
     [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
     
@@ -77,8 +77,8 @@ int const OUTSIDE_TAP = 3;
             lastUsedTrivitsIndexes[i] = [NSNumber numberWithInteger:[lastUsedTrivitsIndexes[i] integerValue]-1];
     }
     
-    NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
-    NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
+    //NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
+    //NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
 
     
     [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
@@ -98,7 +98,7 @@ int const OUTSIDE_TAP = 3;
     TrivitTableViewCell *lastCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexOflatestTrivit inSection:0]];
     
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOflatestTrivit]];
-    NSLog(@"index to remove: %d",indexToRemove);
+    //NSLog(@"index to remove: %d",indexToRemove);
 
     if(indexToRemove != NSNotFound){
         [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
@@ -108,8 +108,8 @@ int const OUTSIDE_TAP = 3;
     [lastUsedTrivitsIndexes addObject:[NSNumber numberWithInteger:indexOflatestTrivit]];
     [lastUsedTrivitsTitles addObject:lastCell.titleTextField.text];
     
-    NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
-    NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
+    //NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
+    //NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
     
     [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
     [self.defaults setObject:lastUsedTrivitsTitles forKey:@"lastUsedTrivitsTitles"];
@@ -621,7 +621,7 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    [NSTimer scheduledTimerWithTimeInterval:1.0f
+    [NSTimer scheduledTimerWithTimeInterval:2.0f
                                      target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
     
     
@@ -635,12 +635,13 @@ int const OUTSIDE_TAP = 3;
 -(void) reloadData:(NSTimer *)timer{
     if(self.cellBeingEdited)
         return;
-    if (![self.defaults objectForKey:@"uniqueWatchID"]){
-        NSLog(@"No Watch connected");
+    if (![DataAccess.sharedInstance isWatchActive]){
+        //NSLog(@"No Watch connected");
         return;
     }
     
-    
+    //NSLog(@"Watch connected - updating iPhone Data");
+
     DataAccess.sharedInstance.managedObjectContext=nil;
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
