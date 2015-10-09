@@ -80,13 +80,13 @@
     
     UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc]
                                         initWithType:@"be.ballooninc.trivit.IncrementLastTrivit"
-                                        localizedTitle:@"Increment Trivit:"
+                                        localizedTitle:NSLocalizedString(@"Increment Trivit:",@"dynamic shortcut item")
                                         localizedSubtitle:lastTrivit
                                         icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypePlay]
                                         userInfo:nil];
     UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc]
                                         initWithType:@"be.ballooninc.trivit.IncrementPreviousLastTrivit"
-                                        localizedTitle:@"Increment Trivit:"
+                                        localizedTitle:NSLocalizedString(@"Increment Trivit:",@"dynamic shortcut item")
                                         localizedSubtitle:previousLastTrivit
                                         icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypePlay]
                                         userInfo:nil];

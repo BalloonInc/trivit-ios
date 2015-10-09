@@ -1,88 +1,175 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DataKit/Info.plist" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>3.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DataKitTests/Info.plist" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>1.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit Watch App/Info.plist" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>3.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit WatchKit Extension/Info.plist" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+        <source>trivit WatchKit Extension</source>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>3.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="trivit WatchKit Extension/en.lproj/Localizable.strings" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
+    </header>
+    <body>
+      <trans-unit id="Blue">
+        <source>Blue</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="Default">
+        <source>Default</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="J">
+        <source>J</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="M">
+        <source>M</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="Pink">
+        <source>Pink</source>
+        <note>Color set name</note>
+      </trans-unit>
+      <trans-unit id="Trivit">
+        <source>Trivit</source>
+        <note>Color set name
+   Trivit title for Watch app</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="trivit/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1.1" build-num="6A2008a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
     </header>
     <body>
       <trans-unit id="8DX-1G-Gff.text">
         <source>Feedback</source>
-        <note>Class = "IBUILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
+        <note>Class = "UILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff";</note>
       </trans-unit>
       <trans-unit id="38J-UG-1gr.text">
         <source>Your feedback (optional)</source>
-        <note>Class = "IBUITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
+        <note>Class = "UITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr";</note>
       </trans-unit>
       <trans-unit id="JYG-xs-cHp.title">
         <source>Settings</source>
-        <note>Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp";</note>
+        <note>Class = "UINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp";</note>
       </trans-unit>
       <trans-unit id="Ksw-o9-V7f.text">
         <source>Vibration - Off</source>
-        <note>Class = "IBUILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
+        <note>Class = "UILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f";</note>
       </trans-unit>
       <trans-unit id="M3c-5J-iQi.text">
         <source>Tap an image to rate Trivit:</source>
-        <note>Class = "IBUILabel"; text = "Tap an image to rate Trivit:"; ObjectID = "M3c-5J-iQi";</note>
+        <note>Class = "UILabel"; text = "Tap an image to rate Trivit:"; ObjectID = "M3c-5J-iQi";</note>
       </trans-unit>
       <trans-unit id="Obg-Ql-Sqf.title">
         <source>Trivit</source>
-        <note>Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
+        <note>Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf";</note>
       </trans-unit>
       <trans-unit id="Txb-zc-zGA.text">
         <source>Tutorial</source>
-        <note>Class = "IBUILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
+        <note>Class = "UILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA";</note>
       </trans-unit>
       <trans-unit id="aNY-hB-Hrp.title">
         <source>Feedback</source>
-        <note>Class = "IBUINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp";</note>
+        <note>Class = "UINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp";</note>
       </trans-unit>
       <trans-unit id="bqM-wM-ulW.text">
         <source>Color - Default</source>
-        <note>Class = "IBUILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
+        <note>Class = "UILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW";</note>
       </trans-unit>
       <trans-unit id="c8x-yf-RaW.text">
         <source>Visit us: www.trivit.be</source>
-        <note>Class = "IBUITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW";</note>
+        <note>Class = "UITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW";</note>
       </trans-unit>
       <trans-unit id="f6g-ir-zuT.placeholder">
         <source>Your name (optional)</source>
-        <note>Class = "IBUITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT";</note>
+        <note>Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT";</note>
       </trans-unit>
       <trans-unit id="hfq-4d-I4A.normalTitle">
         <source>Skip</source>
-        <note>Class = "IBUIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A";</note>
+        <note>Class = "UIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A";</note>
       </trans-unit>
       <trans-unit id="kib-6f-LI5.placeholder">
         <source>Your e-mail (optional)</source>
-        <note>Class = "IBUITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5";</note>
+        <note>Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5";</note>
       </trans-unit>
       <trans-unit id="mzT-GO-pIe.text">
         <source>Reset all</source>
-        <note>Class = "IBUILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
+        <note>Class = "UILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe";</note>
       </trans-unit>
       <trans-unit id="yln-wJ-3Cw.text">
         <source>Remove all</source>
-        <note>Class = "IBUILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
+        <note>Class = "UILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw";</note>
       </trans-unit>
     </body>
   </file>
   <file original="trivit/Info.plist" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1.1" build-num="6A2008a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
         <source>${PRODUCT_NAME}</source>
       </trans-unit>
       <trans-unit id="CFBundleShortVersionString">
-        <source>1.1</source>
+        <source>3.0</source>
       </trans-unit>
     </body>
   </file>
   <file original="trivit/Localizable.strings" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1.1" build-num="6A2008a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
     </header>
     <body>
       <trans-unit id="Are you sure you want to delete all trivits?">
@@ -156,6 +243,10 @@
       <trans-unit id="I've seen better, I've seen worse.">
         <source>I've seen better, I've seen worse.</source>
         <note>feedback message</note>
+      </trans-unit>
+      <trans-unit id="Increment Trivit:">
+        <source>Increment Trivit:</source>
+        <note>dynamic shortcut item</note>
       </trans-unit>
       <trans-unit id="J">
         <source>J</source>
@@ -261,7 +352,7 @@
   </file>
   <file original="trivitTests/Info.plist" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="6.1.1" build-num="6A2008a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.0.1" build-num="7A1001"/>
     </header>
     <body>
       <trans-unit id="CFBundleName">
