@@ -41,7 +41,7 @@
 			<key>UIApplicationShortcutItemSubtitle</key>
 			<string>Start a new Count</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Add new Trivit</string>
+			<string>ADD_TRIVIT_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>be.ballooninc.trivit.AddTrivit</string>
 			<key>UIApplicationShortcutItemUserInfo</key>
