@@ -39,7 +39,7 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeAdd</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Start a new Count</string>
+			<string>START_NEW_COUNT_SHORTCUT_SUBTITLE</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>ADD_TRIVIT_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>

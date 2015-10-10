@@ -98,7 +98,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-AppleLanguages"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(ja-Jp\)"
@@ -118,7 +118,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(nl\)"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
