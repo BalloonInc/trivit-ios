@@ -118,6 +118,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "\(nl\)"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "\(es\)"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

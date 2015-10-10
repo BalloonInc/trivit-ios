@@ -1,0 +1,131 @@
+/* Message box content */
+"Are you sure you want to delete all trivits?" = "¿Seguro que quieres eliminar todos Trivits?";
+
+/* messagebox text, parameter is title of tally */
+"Are you sure you want to reset '%@'?" = "¿Seguro que desea reiniciar '% @'?";
+
+/* Message box content */
+"Are you sure you want to reset all counts to 0?" = "¿Seguro que desea restablecer todos los cargos a 0?";
+
+/* Color set name */
+"Blue" = "Azul";
+
+/* messagebox title */
+"Cannot add" = "No se puede agregar";
+
+/* label for vibration setting */
+"Color - %@" = "Color - %@";
+
+/* Placeholder texts for newly added trivits */
+"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Días en la cárcel, los coches deportivos de propiedad, Días sin vacaciones, Tazas de café este año, días de trabajo fueron a nuestra aplicación, Días sin maldecir, personas acosadas, películas inacabadas de Netflix, Recuentos añadió, iPhones propiedad, Errores en nuestro software, Cervezas, Los pares de zapatos propiedad, Los días de lluvia en el año 2015, vasos de agua, estrellas en el cielo, Días de espera para el lanzamiento Apple Seguir";
+
+/* Tally example */
+"Days without cookies" = "Días sin cookies";
+
+/* Color set name */
+"Default" = "Predeterminado";
+
+/* Message box title */
+"Delete all Trivits" = "Eliminar todos Trivits";
+
+/* send feedback button in settings */
+"Feedback" = "Realimentación";
+
+/* tutorial */
+"Get started!" = "Comience!";
+
+/* tutorial */
+"Give your Trivit a name" = "Da tu trivit un nombre";
+
+/* OK button */
+"Got it." = "Lo tengo.";
+
+/* feedback message */
+"I am missing some things..." = "Me faltan algunas cosas ...";
+
+/* feedback message */
+"I don't get it." = "Yo no lo entiendo.";
+
+/* feedback message */
+"I like what I see." = "Me gusta lo que veo.";
+
+/* feedback message */
+"I've seen better, I've seen worse." = "He visto mejor, he visto peores.";
+
+/* dynamic shortcut item */
+"Increment Trivit:" = "Incremento Trivit:";
+
+/* Color set name */
+"J" = "J";
+
+/* Color set name */
+"M" = "M";
+
+/* No comment provided by engineer. */
+"No" = "No";
+
+/* Setting: off */
+"Off" = "No";
+
+/* Setting: on */
+"On" = "Sí";
+
+/* tutorial */
+"Open or close your new Trivit with a single tap" = "Abrir o cerrar el nuevo Trivit con un solo toque";
+
+/* Color set name */
+"Pink" = "Rosa";
+
+/* messagebox, adding trivit not possible while editing other trivit */
+"Please finish editing the title first." = "Por favor, terminar de editar el título de primera.";
+
+/* remove all trivits button in settings */
+"Remove all" = "Eliminar todo";
+
+/* messagebox title */
+"Reset Trivit" = "Restablecer trivit";
+
+/* reset all trivits button in settings */
+"Reset all" = "Restablecer todo";
+
+/* Message box title */
+"Reset all Trivits" = "Reajustar todos Trivits";
+
+/* feedback message */
+"Tap an image to rate:" = "Toque una imagen para evaluar:";
+
+/* tutorial */
+"Tap the minus to decrease the count, hold long to reset" = "Pulse en el signo menos para disminuir el conteo, mantenga larga para restablecer";
+
+/* tutorial */
+"Tap the pen to add a new Trivit" = "Toque la pluma para agregar una nueva Trivit";
+
+/* tutorial */
+"Tap to increase the count" = "Pulse para aumentar la cuenta";
+
+/* feedback message */
+"This is the best app ever!" = "Esta es la mejor aplicación nunca!";
+
+/* Color set name */
+"Trivit" = "Trivit";
+
+/* show tutorial button in settings */
+"Tutorial" = "Tutorial";
+
+/* label for vibration setting */
+"Vibration - %@" = "Vibración -% @";
+
+/* website to visit */
+"Visit us: www.trivit.be" = "Visítenos: www.trivit.be";
+
+/* Tally example */
+"Went swimming this year" = "Fuimos a nadar este año";
+
+/* No comment provided by engineer. */
+"Yes" = "Sí";
+
+/* Placeholder text for feedback text */
+"Your feedback (optional)" = "Tus comentarios (opcional)";
+
+/* Tally example */
+"Swipe left to delete" = "Pase a la izquierda para borrar";

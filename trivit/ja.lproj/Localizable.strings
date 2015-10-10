@@ -40,9 +40,6 @@
 /* OK button */
 "Got it." = "了解しました";
 
-/* (No Commment) */
-"Green" = "緑";
-
 /* feedback message */
 "I am missing some things..." = "見つかりません";
 
@@ -54,6 +51,9 @@
 
 /* feedback message */
 "I've seen better, I've seen worse." = "もっと良ければいいのに";
+
+/* dynamic shortcut item */
+"Increment Trivit:" = "インクリメントTrivit：";
 
 /* Color set name */
 "J" = "J";
@@ -79,9 +79,6 @@
 /* messagebox, adding trivit not possible while editing other trivit */
 "Please finish editing the title first." = "最初のタイトルの編集を完了してください。";
 
-/* (No Commment) */
-"Red" = "赤い";
-
 /* remove all trivits button in settings */
 "Remove all" = "全てを閉じる";
 
@@ -93,9 +90,6 @@
 
 /* Message box title */
 "Reset all Trivits" = "全てを消去";
-
-/* (No Commment) */
-"Swipe left to delete" = "Swipe left to delete";
 
 /* feedback message */
 "Tap an image to rate:" = "評価するには画像をタップする：";

@@ -40,9 +40,6 @@
 /* OK button */
 "Got it." = "Понятно.";
 
-/* (No Commment) */
-"Green" = "Зеленая";
-
 /* feedback message */
 "I am missing some things..." = "Я что-то упустил.";
 
@@ -55,11 +52,14 @@
 /* feedback message */
 "I've seen better, I've seen worse." = "Я видел хуже, я видел лучше.";
 
-/* Color set name */
-"J" = "J";
+/* dynamic shortcut item */
+"Increment Trivit:" = "Приращение Тривит:";
 
 /* Color set name */
-"M" = "M";
+"J" = "Й";
+
+/* Color set name */
+"M" = "М";
 
 /* No comment provided by engineer. */
 "No" = "Нет";
@@ -79,9 +79,6 @@
 /* messagebox, adding trivit not possible while editing other trivit */
 "Please finish editing the title first." = "Сначала закончите редактирование заголовка.";
 
-/* (No Commment) */
-"Red" = "Красная";
-
 /* remove all trivits button in settings */
 "Remove all" = "Удалить все";
 
@@ -94,14 +91,11 @@
 /* Message box title */
 "Reset all Trivits" = "Сбросить все тривиты";
 
-/* (No Commment) */
-"Swipe left to delete" = "Проведите вышло удалить";
-
 /* feedback message */
 "Tap an image to rate:" = "Нажмите на символ для оценки:";
 
 /* tutorial */
-"Tap the minus to decrease the count, hold long to reset" = "Нажмите минус, чтобы уменьшить количество, или удерживайте, чтобы сбросить Тривит\n";
+"Tap the minus to decrease the count, hold long to reset" = "Нажмите минус, чтобы уменьшить количество, или удерживайте, чтобы сбросить Тривит\\n";
 
 /* tutorial */
 "Tap the pen to add a new Trivit" = "Коснитесь 'пера,' чтобы добавить новый Тривит";

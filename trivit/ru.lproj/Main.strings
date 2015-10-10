@@ -1,51 +1,18 @@
-/* Class = "IBUILabel"; text = "Feedback"; ObjectID = "8DX-1G-Gff"; */
-"8DX-1G-Gff.text" = "NO TRANSLATION";
-
-/* Class = "IBUITextView"; text = "Your feedback (optional)"; ObjectID = "38J-UG-1gr"; */
-"38J-UG-1gr.text" = "NO TRANSLATION";
-
-/* (No Commment) */
-"798-Ww-cFl.title" = "Настройки";
-
-/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp"; */
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "JYG-xs-cHp"; */
 "JYG-xs-cHp.title" = "Настройки";
 
-/* Class = "IBUILabel"; text = "Vibration - Off"; ObjectID = "Ksw-o9-V7f"; */
-"Ksw-o9-V7f.text" = "NO TRANSLATION";
-
-/* Class = "IBUILabel"; text = "Tap an image to rate Trivit:"; ObjectID = "M3c-5J-iQi"; */
-"M3c-5J-iQi.text" = "NO TRANSLATION";
-
-/* Class = "IBUINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
+/* Class = "UINavigationItem"; title = "Trivit"; ObjectID = "Obg-Ql-Sqf"; */
 "Obg-Ql-Sqf.title" = "Тривит";
 
-/* Class = "IBUILabel"; text = "Tutorial"; ObjectID = "Txb-zc-zGA"; */
-"Txb-zc-zGA.text" = "NO TRANSLATION";
-
-/* Class = "IBUINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp"; */
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "aNY-hB-Hrp"; */
 "aNY-hB-Hrp.title" = "Обратная связь";
 
-/* Class = "IBUILabel"; text = "Color - Default"; ObjectID = "bqM-wM-ulW"; */
-"bqM-wM-ulW.text" = "NO TRANSLATION";
-
-/* Class = "IBUITextView"; text = "Visit us: www.trivit.be"; ObjectID = "c8x-yf-RaW"; */
-"c8x-yf-RaW.text" = "NO TRANSLATION";
-
-/* Class = "IBUITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
+/* Class = "UITextField"; placeholder = "Your name (optional)"; ObjectID = "f6g-ir-zuT"; */
 "f6g-ir-zuT.placeholder" = "Ваше имя (опционально)";
 
-/* Class = "IBUIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A"; */
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "hfq-4d-I4A"; */
 "hfq-4d-I4A.normalTitle" = "Пропустить";
 
-/* (No Commment) */
-"jiI-xk-2f7.normalTitle" = "Начать!";
-
-/* Class = "IBUITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5"; */
+/* Class = "UITextField"; placeholder = "Your e-mail (optional)"; ObjectID = "kib-6f-LI5"; */
 "kib-6f-LI5.placeholder" = "Ваше e-mail (опционально)";
-
-/* Class = "IBUILabel"; text = "Reset all"; ObjectID = "mzT-GO-pIe"; */
-"mzT-GO-pIe.text" = "NO TRANSLATION";
-
-/* Class = "IBUILabel"; text = "Remove all"; ObjectID = "yln-wJ-3Cw"; */
-"yln-wJ-3Cw.text" = "NO TRANSLATION";
 

@@ -1,1 +1,19 @@
-/* No Localized Strings */
+/* Color set name */
+"Blue" = "Синяя";
+
+/* Color set name */
+"Default" = "Стандартная";
+
+/* Color set name */
+"J" = "Й";
+
+/* Color set name */
+"M" = "М";
+
+/* Color set name */
+"Pink" = "розовый";
+
+/* Color set name
+   Trivit title for Watch app */
+"Trivit" = "Тривит";
+

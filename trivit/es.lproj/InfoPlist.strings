@@ -2,7 +2,7 @@
 "CFBundleName" = "Trivit";
 
 /* Static shortcut for 3D touch */
-ADD_TRIVIT_SHORTCUT_TITLE = "新 Trivit";
+ADD_TRIVIT_SHORTCUT_TITLE = "Nueva Trivit";
 
 /* Static shortcut subtitle for 3D touch */
-START_NEW_COUNT_SHORTCUT_SUBTITLE = "开始一个新的计数器";
+START_NEW_COUNT_SHORTCUT_SUBTITLE = "Iniciar un nuevo contador";

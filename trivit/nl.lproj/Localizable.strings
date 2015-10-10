@@ -55,6 +55,9 @@
 /* feedback message */
 "I've seen better, I've seen worse." = "Meh.";
 
+/* dynamic shortcut item */
+"Increment Trivit:" = "Verhoog Trivit:";
+
 /* Color set name */
 "J" = "J";
 
@@ -94,7 +97,7 @@
 /* Message box title */
 "Reset all Trivits" = "Reset alle Trivits";
 
-/* (No Commment) */
+/* Tally example */
 "Swipe left to delete" = "Veeg mij links om te verwijderen";
 
 /* feedback message */

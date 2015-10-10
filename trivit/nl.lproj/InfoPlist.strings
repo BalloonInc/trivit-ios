@@ -1,6 +1,9 @@
 /* (No Commment) */
 "CFBundleName" = "Trivit";
 
+/* (No Commment) */
+"CFBundleShortVersionString" = "3.0";
+
 /* Static shortcut for 3D touch */
 ADD_TRIVIT_SHORTCUT_TITLE = "Nieuwe Trivit";
 
