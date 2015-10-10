@@ -2,4 +2,7 @@
 "CFBundleName" = "Trivit";
 
 /* Static shortcut for 3D touch */
-"ADD_TRIVIT_SHORTCUT_TITLE" = "Nieuwe Trivit";
+ADD_TRIVIT_SHORTCUT_TITLE = "Nieuwe Trivit";
+
+/* Static shortcut subtitle for 3D touch */
+START_NEW_COUNT_SHORTCUT_SUBTITLE = "Start een nieuwe teller";
