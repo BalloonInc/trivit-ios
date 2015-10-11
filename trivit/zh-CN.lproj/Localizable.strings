@@ -127,3 +127,5 @@
 /* Placeholder text for feedback text */
 "Your feedback (optional)" = "您的反馈（选填）";
 
+/* Tally example */
+"Swipe left to delete" = "刷卡左删除";

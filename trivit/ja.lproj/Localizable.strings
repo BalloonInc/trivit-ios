@@ -127,3 +127,5 @@
 /* Placeholder text for feedback text */
 "Your feedback (optional)" = "あなたのフィードバック";
 
+/* Tally example */
+"Swipe left to delete" = "削除するには、左スワイプ";

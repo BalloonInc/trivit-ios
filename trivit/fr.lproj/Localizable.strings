@@ -127,3 +127,5 @@
 /* Placeholder text for feedback text */
 "Your feedback (optional)" = "Vos commentaires (facultatif)";
 
+/* Tally example */
+"Swipe left to delete" = "Glissez à gauche pour supprimer";

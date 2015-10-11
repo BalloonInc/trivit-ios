@@ -69,17 +69,15 @@ int const OUTSIDE_TAP = 3;
         
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOfTrivitToRemove]];
     //NSLog(@"index to remove: %d",indexToRemove);
-    [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
-    [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
+    if(indexToRemove != NSNotFound){
+        [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
+        [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
+    }
     
     for (int i=0; i<[lastUsedTrivitsIndexes count]; i++) {
         if ([lastUsedTrivitsIndexes[i] integerValue]>indexOfTrivitToRemove)
             lastUsedTrivitsIndexes[i] = [NSNumber numberWithInteger:[lastUsedTrivitsIndexes[i] integerValue]-1];
     }
-    
-    //NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
-    //NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
-
     
     [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
     [self.defaults setObject:lastUsedTrivitsTitles forKey:@"lastUsedTrivitsTitles"];
