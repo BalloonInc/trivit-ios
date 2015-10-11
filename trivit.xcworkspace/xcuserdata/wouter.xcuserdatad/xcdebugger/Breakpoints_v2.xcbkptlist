@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-managedObjectContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
+            startingLineNumber = "589"
+            endingLineNumber = "589"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "-migrateStore"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-migrateStore"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-migrateStore"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "622"
-            endingLineNumber = "622"
+            startingLineNumber = "620"
+            endingLineNumber = "620"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
             landmarkName = "-controllerWillChangeContent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "-saveManagedObjectContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "-saveManagedObjectContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-addButtonPressed"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "545"
-            endingLineNumber = "545"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "-scrollToExpandedCell:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "-addItemWithTitle:andCount:"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-editTrivitTitleAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,11 +858,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "-editTrivitTitleAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -874,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
             landmarkName = "-editTrivitTitleAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -890,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466030877.765117"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "789"
-            endingLineNumber = "789"
+            startingLineNumber = "787"
+            endingLineNumber = "787"
             landmarkName = "-keyboardWasShown:"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,23 +906,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "626"
-            endingLineNumber = "626"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "624"
@@ -937,12 +921,28 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            filePath = "trivit/MainListViewController.m"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "622"
+            endingLineNumber = "622"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DataKit/DataAccess.m"
+            timestampString = "466254025.778229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "-migrateStore"
             landmarkType = "5">
          </BreakpointContent>
@@ -970,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-migrateStore"
             landmarkType = "5">
          </BreakpointContent>
@@ -986,11 +986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-getVersions"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -1018,11 +1018,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-managedObjectModel"
             landmarkType = "5">
          </BreakpointContent>
@@ -1034,23 +1034,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "-managedObjectModel"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DataKit/DataAccess.m"
-            timestampString = "466031608.881938"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "144"
@@ -1065,12 +1049,28 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "trivit/MainListViewController.m"
-            timestampString = "466030877.765117"
+            filePath = "DataKit/DataAccess.m"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "678"
-            endingLineNumber = "678"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "-managedObjectModel"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trivit/MainListViewController.m"
+            timestampString = "466251444.154155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "676"
+            endingLineNumber = "676"
             landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1082,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466030877.765117"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
             landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1098,11 +1098,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-editTrivitTitleAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1114,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "-editTrivitTitleAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1130,11 +1130,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466030877.765117"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "776"
-            endingLineNumber = "776"
+            startingLineNumber = "774"
+            endingLineNumber = "774"
             landmarkName = "-keyboardWasShown:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1146,11 +1146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466000930.800291"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-updateLastEditedTrivits:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1226,11 +1226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-addNewTrivit"
             landmarkType = "5">
          </BreakpointContent>
@@ -1242,11 +1242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466001035.777623"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "-endEditTrivitTitle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1258,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466000992.70398"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "-removeFromLastEditedTrivits:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1370,13 +1370,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DataKit/DataAccess.m"
-            timestampString = "466030063.495699"
+            timestampString = "466254025.778229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "@implementation DataAccess"
-            landmarkType = "3">
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "watchDetailsActive"
+            landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1386,43 +1386,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trivit/MainListViewController.m"
-            timestampString = "466031309.782806"
+            timestampString = "466251444.154155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "634"
+            endingLineNumber = "634"
+            landmarkName = "-reloadData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trivit/MainListViewController.m"
+            timestampString = "466251444.154155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
+            landmarkName = "-reloadData:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trivit/MainListViewController.m"
+            timestampString = "466251444.154155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "636"
             endingLineNumber = "636"
-            landmarkName = "-reloadData:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trivit/MainListViewController.m"
-            timestampString = "466031349.356091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "637"
-            endingLineNumber = "637"
-            landmarkName = "-reloadData:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trivit/MainListViewController.m"
-            timestampString = "466031350.999221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
             landmarkName = "-reloadData:"
             landmarkType = "5">
          </BreakpointContent>

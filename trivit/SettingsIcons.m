@@ -1466,49 +1466,49 @@ static UIImage *_imageOfColor9 = nil;
     _feedback2Targets = feedback2Targets;
 
     for (id target in self.feedback2Targets)
-        [target setImage:SettingsIcons.imageOfFeedback2];
+        [target setImage:SettingsIcons.imageOfFeedback2.CIImage];
 }
 
 - (void)setResetTargets:(NSArray *)resetTargets {
     _resetTargets = resetTargets;
 
     for (id target in self.resetTargets)
-        [target setImage:SettingsIcons.imageOfReset];
+        [target setImage:SettingsIcons.imageOfReset.CIImage];
 }
 
 - (void)setTrashTargets:(NSArray *)trashTargets {
     _trashTargets = trashTargets;
 
     for (id target in self.trashTargets)
-        [target setImage:SettingsIcons.imageOfTrash];
+        [target setImage:SettingsIcons.imageOfTrash.CIImage];
 }
 
 - (void)setTutorialsTargets:(NSArray *)tutorialsTargets {
     _tutorialsTargets = tutorialsTargets;
 
     for (id target in self.tutorialsTargets)
-        [target setImage:SettingsIcons.imageOfTutorial];
+        [target setImage:SettingsIcons.imageOfTutorial.CIImage];
 }
 
 - (void)setFeedback1Targets:(NSArray *)feedback1Targets {
     _feedback1Targets = feedback1Targets;
 
     for (id target in self.feedback1Targets)
-        [target setImage:SettingsIcons.imageOfFeedback];
+        [target setImage:SettingsIcons.imageOfFeedback.CIImage];
 }
 
 - (void)setVibrateTargets:(NSArray *)vibrateTargets {
     _vibrateTargets = vibrateTargets;
 
     for (id target in self.vibrateTargets)
-        [target setImage:SettingsIcons.imageOfVibrate];
+        [target setImage:SettingsIcons.imageOfVibrate.CIImage];
 }
 
 - (void)setColor9Targets:(NSArray *)color9Targets {
     _color9Targets = color9Targets;
 
     for (id target in self.color9Targets)
-        [target setImage:SettingsIcons.imageOfColor];
+        [target setImage:SettingsIcons.imageOfColor.CIImage];
 }
 
 

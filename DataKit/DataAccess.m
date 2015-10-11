@@ -7,9 +7,7 @@
 //
 
 #import "DataAccess.h"
-#import "AppDelegate.h"
 #import "Version.h"
-#import <UIKit/UIKit.h>
 #import "TallyModel.h"
 
 @interface DataAccess()
@@ -73,7 +71,7 @@
     return _defaults;
 }
 
--(BOOL) isWatchActive{
+-(bool) isWatchActive{
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     
     bool watchInterfaceActive = [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
@@ -86,7 +84,7 @@
 }
 
 
--(BOOL) watchInterfaceAtive{
+-(bool) watchInterfaceAtive{
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     return [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
 }
@@ -286,8 +284,8 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *message = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
-    NSString *os = [[UIDevice currentDevice] systemVersion];
-    NSString *model = UIDevice.currentDevice.model;
+    NSString *os = @"WatchOS";
+    NSString *model = @"Apple Watch";
     NSString *name = [self getUniqueWatchID];
 
     [watchFeedBackArray addObject:[NSArray arrayWithObjects:message,os,model,name, nil]];
