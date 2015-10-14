@@ -32,5 +32,6 @@
 -(void)endEditTrivitTitle;
 -(void)addNewTrivitAtStartup;
 -(void)incrementTrivitAtStartup:(NSInteger)index;
+-(void)jumpToTrivitAtStartup:(NSInteger)index;
 
 @end

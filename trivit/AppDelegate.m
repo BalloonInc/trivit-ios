@@ -10,6 +10,9 @@
 #import "MainListViewController.h"
 #import <NewRelicAgent/NewRelic.h>
 #import "DataKit.h"
+#import "TallyModel.h"
+#import <CoreSpotlight/CoreSpotlight.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @implementation AppDelegate
 
@@ -19,6 +22,19 @@
     [self initApp];
     [self createDynamicShortcutItems];
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
+    if ([userActivity.activityType isEqualToString: CSSearchableItemActionType]) {
+        NSInteger uniqueIdentifier = [[userActivity.userInfo objectForKey:@"kCSSearchableItemActivityIdentifier"] integerValue];
+        UINavigationController* navController = (UINavigationController*) self.window.rootViewController;
+        MainListViewController *mainController = (MainListViewController*) [navController topViewController];
+        [mainController jumpToTrivitAtStartup: uniqueIdentifier];
+
+    }
+    
+    return true;
+
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
@@ -143,6 +159,50 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
+        self.bgTask = [application beginBackgroundTaskWithName:@"Trivit indexing" expirationHandler:^{
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        [application endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+        }];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithDomainIdentifiers:@[@"be.ballooninc"] completionHandler:^(NSError * _Nullable error) {
+                if(error)
+                    NSLog(@"clearing index failed");
+            }];
+            NSError *error;
+            
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
+            [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+            NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                                    initWithFetchRequest:fetchRequest
+                                                                    managedObjectContext:self.managedObjectContext
+                                                                    sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+            
+            [fetchedResultsController performFetch:&error];
+            NSMutableArray *searchableItems = [[NSMutableArray alloc] init];
+
+            for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
+                TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
+                CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:kUTTypeText];
+                attributeSet.title = [NSString stringWithFormat: @"%@: %d",tally.title, [tally.counter integerValue]];
+                attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
+                CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
+                [searchableItems addObject:item];
+            }
+            
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
+                if(error)
+                    NSLog(@"Indexing failed");
+            }];
+            [application endBackgroundTask:self.bgTask];
+            self.bgTask = UIBackgroundTaskInvalid;
+        });
+
     [DataAccess.sharedInstance saveManagedObjectContext];
     [self createDynamicShortcutItems];
 }

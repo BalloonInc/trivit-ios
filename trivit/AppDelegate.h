@@ -13,5 +13,7 @@
 
 @property(strong, nonatomic) UIWindow *window;
 @property(strong,nonatomic) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic) UIBackgroundTaskIdentifier bgTask;
+
 @end
 

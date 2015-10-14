@@ -26,8 +26,7 @@
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(nonatomic) NSInteger imagesPerRow;
 @property(strong,nonatomic) NSString *startupAction;
-@property(nonatomic) NSInteger indexToIncrement;
-
+@property(nonatomic) NSInteger indexAtStartup;
 @end
 
 @implementation MainListViewController
@@ -106,13 +105,11 @@ int const OUTSIDE_TAP = 3;
     [lastUsedTrivitsIndexes addObject:[NSNumber numberWithInteger:indexOflatestTrivit]];
     [lastUsedTrivitsTitles addObject:lastCell.titleTextField.text];
     
-    //NSLog(@"lastUsedTrivitsIndexes: %@", lastUsedTrivitsIndexes);
-    //NSLog(@"lastUsedTrivitsTitles: %@", lastUsedTrivitsTitles);
-    
     [self.defaults setObject:lastUsedTrivitsIndexes forKey:@"lastUsedTrivitsIndexes"];
     [self.defaults setObject:lastUsedTrivitsTitles forKey:@"lastUsedTrivitsTitles"];
 
 }
+
 
 #pragma mark - add item
 
@@ -120,9 +117,12 @@ int const OUTSIDE_TAP = 3;
     self.startupAction=@"AddNewTrivit";
 }
 -(void)incrementTrivitAtStartup:(NSInteger)index{
-    self.indexToIncrement = index;
+    self.indexAtStartup = index;
     self.startupAction=@"IncrementTrivit";
-
+}
+-(void)jumpToTrivitAtStartup:(NSInteger)index{
+    self.indexAtStartup = index;
+    self.startupAction=@"JumpToTrivit";
 }
 
 -(void) addNewTrivit {
@@ -543,6 +543,22 @@ int const OUTSIDE_TAP = 3;
     self.shouldScrollOnTallyIncreaseOrDecrease = false;
 }
 
+- (void) scrollAndExpandTrivitAtIndex: (NSInteger) index{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    if (!self.tableView)
+        NSLog(@"TableView does not exist");
+    TrivitTableViewCell *cell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+    if (!cell)
+        NSLog(@"Cell not found");
+
+    if (cell.isCollapsed)
+        [self collapseTrivitAtIndexPath:indexPath];
+
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
+}
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {
@@ -678,16 +694,17 @@ int const OUTSIDE_TAP = 3;
                 self.startupAction=nil;
             }
             else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexToIncrement inSection:0];
-                TrivitTableViewCell *collapseCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-                if (collapseCell.isCollapsed)
-                    [self collapseTrivitAtIndexPath:indexPath];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexAtStartup inSection:0];
                 
                 [self incrementTrivitAtIndexPath:indexPath];
-                [self scrollToExpandedCell:indexPath];
+                [self scrollAndExpandTrivitAtIndex:indexPath.row];
                 self.startupAction=nil;
-                self.indexToIncrement=-1;
-
+                self.indexAtStartup=-1;
+            }
+            else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
+                [self scrollAndExpandTrivitAtIndex:self.indexAtStartup];
+                self.startupAction=nil;
+                self.indexAtStartup=-1;
             }
         }
     }
@@ -765,6 +782,10 @@ int const OUTSIDE_TAP = 3;
     [super viewWillAppear:animated];
     [self.tableView reloadData];
     [self resendUnsentFeedback];
+}
+
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark - view resize on keyboard show
