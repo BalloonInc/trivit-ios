@@ -566,7 +566,7 @@ int const OUTSIDE_TAP = 3;
         while(!cell && i<20){
             cell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
             if (!cell){
-                NSLog(@"Cell %d not found at attempt %d, sleep .2 seconds",index,++i);
+                NSLog(@"Cell %ld not found at attempt %d, sleep .2 seconds",(long)index,++i);
                 [NSThread sleepForTimeInterval:0.2];
             }
             else{

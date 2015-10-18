@@ -187,7 +187,7 @@
         for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
             TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
             CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString*)kUTTypeText];
-            attributeSet.title = [NSString stringWithFormat: @"%@: %d",tally.title, [tally.counter integerValue]];
+            attributeSet.title = [NSString stringWithFormat: @"%@: %ld",tally.title, (long)[tally.counter integerValue]];
             attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
             CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
             [searchableItems addObject:item];
