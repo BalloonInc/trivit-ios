@@ -17,7 +17,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
     [self startNewRelic];
     [self initApp];
     [self createDynamicShortcutItems];
@@ -32,11 +32,10 @@
         [mainController jumpToTrivitAtStartup: uniqueIdentifier];
         if (mainController.viewAppeared)
             [mainController applicationDidBecomeActive:nil];
-
     }
     
     return true;
-
+    
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
@@ -46,30 +45,27 @@
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     NSMutableArray *lastUsedTrivits = [defaults objectForKey:@"lastUsedTrivitsIndexes"];
     NSInteger trivitToIncrement;
-
+    
     UINavigationController* navController = (UINavigationController*) self.window.rootViewController;
     MainListViewController *mainController = (MainListViewController*) [navController topViewController];
     if ([shortcutItem.type isEqualToString:@"be.ballooninc.trivit.AddTrivit"]) {
         [mainController addNewTrivitAtStartup];
-        NSLog(@"Pressed shortcut for adding a new trivit");
     }
     else if ([shortcutItem.type isEqualToString:@"be.ballooninc.trivit.IncrementLastTrivit"]) {
-        NSLog(@"Pressed shortcut for last trivit");
         trivitToIncrement = [[lastUsedTrivits lastObject] integerValue];
-    
+        
         [mainController incrementTrivitAtStartup: trivitToIncrement];
     }
     else if ([shortcutItem.type isEqualToString:@"be.ballooninc.trivit.IncrementPreviousLastTrivit"]) {
-        NSLog(@"Pressed shortcut for previous last trivit");
         trivitToIncrement = [[lastUsedTrivits objectAtIndex:[lastUsedTrivits count]-2] integerValue];
         [mainController incrementTrivitAtStartup: trivitToIncrement];
-
+        
     }
     else{
         NSLog( @"Unknown shortcut pressed (%@), just starting the application.",shortcutItem.type);
     }
-
-    }
+    
+}
 
 - (void)createDynamicShortcutItems {
     
@@ -94,7 +90,7 @@
             previousLastTrivit = [lastUsedTrivits objectAtIndex:[lastUsedTrivits count]-2];
             break;
     }
-
+    
     
     UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc]
                                         initWithType:@"be.ballooninc.trivit.IncrementLastTrivit"
@@ -112,7 +108,7 @@
     // add all items to an array
     NSArray *items;
     if(onlyOneTrivit)
-       items = @[item1];
+        items = @[item1];
     else
         items = @[item1,item2];
     
@@ -128,7 +124,7 @@
 #else
     [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 #endif
-
+    
 }
 
 - (void) initApp{
@@ -150,7 +146,7 @@
     
     // Configure Window
     [self.window setRootViewController:rootNavigationController];
-
+    
 }
 
 -(void) applicationUpdateIndex:(UIApplication *)application{
@@ -164,49 +160,39 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithDomainIdentifiers:@[@"be.ballooninc"] completionHandler:^(NSError * _Nullable error) {
-            if(error)
+            if(error){
                 NSLog(@"clearing index failed");
-            else
-                NSLog(@"clearing index succeeded");
-
+                return;
+            }
+            error=nil;
             
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
+            [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+            NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                                    initWithFetchRequest:fetchRequest
+                                                                    managedObjectContext:self.managedObjectContext
+                                                                    sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+            
+            [fetchedResultsController performFetch:&error];
+            NSMutableArray *searchableItems = [[NSMutableArray alloc] init];
+            
+            for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
+                TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
+                CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString*)kUTTypeText];
+                attributeSet.title = [NSString stringWithFormat: @"%@: %ld",tally.title, (long)[tally.counter integerValue]];
+                attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
+                CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
+                [searchableItems addObject:item];
+            }
+            
+            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
+                if(error)
+                    NSLog(@"Indexing failed.");
+                [application endBackgroundTask:self.bgTask];
+                self.bgTask = UIBackgroundTaskInvalid;
+            }];
         }];
-        NSError *error;
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
-        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-        NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
-                                                                initWithFetchRequest:fetchRequest
-                                                                managedObjectContext:self.managedObjectContext
-                                                                sectionNameKeyPath:nil
-                                                                cacheName:nil];
-        
-        [fetchedResultsController performFetch:&error];
-        NSMutableArray *searchableItems = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
-            TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
-            CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString*)kUTTypeText];
-            attributeSet.title = [NSString stringWithFormat: @"%@: %ld",tally.title, (long)[tally.counter integerValue]];
-            attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
-            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
-            [searchableItems addObject:item];
-        }
-        
-        // sleep to prevent conflict between removal and adding to index
-        sleep(3);
-
-        
-        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
-            if(error)
-                NSLog(@"Indexing failed");
-            else
-                NSLog(@"Indexing succeeded");
-
-        }];
-        [application endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
-        NSLog(@"backgroundtask ended");
     });
 }
 
@@ -218,10 +204,10 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-
-    [self applicationUpdateIndex: application];
+    
     [DataAccess.sharedInstance saveManagedObjectContext];
     [self createDynamicShortcutItems];
+    [self applicationUpdateIndex: application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -234,9 +220,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [self applicationUpdateIndex: application];
     [DataAccess.sharedInstance saveManagedObjectContext];
     [self createDynamicShortcutItems];
+    [self applicationUpdateIndex: application];
 }
 
 @end

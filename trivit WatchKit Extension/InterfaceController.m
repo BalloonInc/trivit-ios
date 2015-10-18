@@ -80,11 +80,8 @@
 
 -(void) getNewData:(NSTimer *)timer{
     if (!self.active) return;
-    //NSLog(@"iPhone connected - updating Watch Data");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-
         //refetch
-    
         NSError *error = nil;
 
         DataAccess.sharedInstance.managedObjectContext=nil;

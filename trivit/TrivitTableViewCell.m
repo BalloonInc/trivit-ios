@@ -301,7 +301,7 @@ float const COUNTLABEL_WIDTH = 40.;
     
     self.images.alpha = 0.0f;
     self.titleTextField.alpha = 0.0f;
-    NSLog(@"Flash started");
+
     [UIView animateWithDuration:0.17
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut |
@@ -312,30 +312,24 @@ float const COUNTLABEL_WIDTH = 40.;
                          [UIView setAnimationRepeatCount:3];
                          self.images.alpha = 1.0f;
                          self.titleTextField.alpha = 1.0f;
-                         NSLog(@"Animation of flash started");
                      }
                      completion:^(BOOL finished){
                          self.images.alpha = 1.0f;
                          self.titleTextField.alpha = 1.0f;
-                         NSLog(@"Animation of flash finished");
-                         
                      }];
 }
 -(void) flashIncrement{
     UICollectionViewCell *lastCell = [self.images cellForItemAtIndexPath:[NSIndexPath indexPathForItem:[self.images numberOfItemsInSection:0]-1 inSection:0]];
     lastCell.alpha = 0.0f;
-    NSLog(@"Flash started");
+
     [UIView transitionWithView:self duration:0.5
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
                         [UIView setAnimationRepeatCount:4];
                         lastCell.alpha = 1.0f;
-                        NSLog(@"Animation of flash started");
                     }
-
                     completion:^(BOOL finished){
                         lastCell.alpha = 1.0f;
-                        NSLog(@"Animation of flash finished");
                     }];
 }
 

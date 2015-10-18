@@ -77,9 +77,6 @@
     bool watchInterfaceActive = [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
     bool watchDetailsActive = [[defaults objectForKey:@"watchDetailsActive"] boolValue];
     
-    //NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
-    //NSLog(@"watchDetailsActive: %i",watchDetailsActive);
-
     return watchInterfaceActive || watchDetailsActive;
 }
 
@@ -93,7 +90,6 @@
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     [defaults setObject:[NSNumber numberWithBool:watchInterfaceActive] forKey:@"watchInterfaceActive"];
     [defaults synchronize];
-    NSLog(@"watchInterfaceActive: %i",watchInterfaceActive);
 }
 
 
@@ -105,8 +101,6 @@
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
     [defaults setObject:[NSNumber numberWithBool:watchDetailsActive] forKey:@"watchDetailsActive"];
     [defaults synchronize];
-    NSLog(@"watchDetailsActive: %i",watchDetailsActive);
-
 }
 
 + (DataAccess*) sharedInstance {

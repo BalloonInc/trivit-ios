@@ -67,7 +67,6 @@ int const OUTSIDE_TAP = 3;
     NSMutableArray *lastUsedTrivitsTitles = [[self.defaults objectForKey:@"lastUsedTrivitsTitles"] mutableCopy];
         
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOfTrivitToRemove]];
-    //NSLog(@"index to remove: %d",indexToRemove);
     if(indexToRemove != NSNotFound){
         [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
         [lastUsedTrivitsTitles removeObjectAtIndex:indexToRemove];
@@ -98,7 +97,6 @@ int const OUTSIDE_TAP = 3;
     if(!lastCell)
         return;
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOflatestTrivit]];
-    //NSLog(@"index to remove: %d",indexToRemove);
 
     if(indexToRemove != NSNotFound){
         [lastUsedTrivitsIndexes removeObjectAtIndex:indexToRemove];
@@ -566,7 +564,7 @@ int const OUTSIDE_TAP = 3;
         while(!cell && i<20){
             cell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
             if (!cell){
-                NSLog(@"Cell %ld not found at attempt %d, sleep .2 seconds",(long)index,++i);
+                i++;
                 [NSThread sleepForTimeInterval:0.2];
             }
             else{
@@ -726,7 +724,6 @@ int const OUTSIDE_TAP = 3;
 }
 
 -(void) applicationDidBecomeActive:(NSTimer *)timer{
-    NSLog(@"Application became active");
     if (self.startupAction){
         if ([self.startupAction isEqualToString:@"AddNewTrivit"]){
             [self addNewTrivit];
@@ -757,11 +754,8 @@ int const OUTSIDE_TAP = 3;
     if(self.cellBeingEdited)
         return;
     if (![DataAccess.sharedInstance isWatchActive]){
-        //NSLog(@"No Watch connected");
         return;
     }
-    
-    //NSLog(@"Watch connected - updating iPhone Data");
     
     DataAccess.sharedInstance.managedObjectContext=nil;
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
