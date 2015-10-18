@@ -296,6 +296,32 @@ float const COUNTLABEL_WIDTH = 40.;
     return YES;
 }
 
+#pragma mark - blinking label
+-(void) startFlashingbutton{
+
+    self.images.alpha = 0.0f;
+    self.titleTextField.alpha = 0.0f;
+    NSLog(@"Flash started");
+    [UIView animateWithDuration:0.17
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut |
+     UIViewAnimationOptionRepeat |
+     UIViewAnimationOptionAutoreverse |
+     UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         [UIView setAnimationRepeatCount:3];
+                         self.images.alpha = 1.0f;
+                         self.titleTextField.alpha = 1.0f;
+                         NSLog(@"Animation of flash started");
+                     }
+                     completion:^(BOOL finished){
+                         self.images.alpha = 1.0f;
+                         self.titleTextField.alpha = 1.0f;
+                         NSLog(@"Animation of flash finished");
+
+                     }];
+}
+
 #pragma mark - Magic to make the UICollectionview datasource work
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

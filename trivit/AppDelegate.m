@@ -30,6 +30,8 @@
         UINavigationController* navController = (UINavigationController*) self.window.rootViewController;
         MainListViewController *mainController = (MainListViewController*) [navController topViewController];
         [mainController jumpToTrivitAtStartup: uniqueIdentifier];
+        if (mainController.viewAppeared)
+            [mainController applicationDidBecomeActive:nil];
 
     }
     
@@ -151,6 +153,63 @@
 
 }
 
+-(void) applicationUpdateIndex:(UIApplication *)application{
+    self.bgTask = [application beginBackgroundTaskWithName:@"Trivit indexing" expirationHandler:^{
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        [application endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithDomainIdentifiers:@[@"be.ballooninc"] completionHandler:^(NSError * _Nullable error) {
+            if(error)
+                NSLog(@"clearing index failed");
+            else
+                NSLog(@"clearing index succeeded");
+
+            
+        }];
+        NSError *error;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
+        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
+        NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                                initWithFetchRequest:fetchRequest
+                                                                managedObjectContext:self.managedObjectContext
+                                                                sectionNameKeyPath:nil
+                                                                cacheName:nil];
+        
+        [fetchedResultsController performFetch:&error];
+        NSMutableArray *searchableItems = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
+            TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
+            CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString*)kUTTypeText];
+            attributeSet.title = [NSString stringWithFormat: @"%@: %d",tally.title, [tally.counter integerValue]];
+            attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
+            CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
+            [searchableItems addObject:item];
+        }
+        
+        // sleep to prevent conflict between removal and adding to index
+        sleep(3);
+
+        
+        [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
+            if(error)
+                NSLog(@"Indexing failed");
+            else
+                NSLog(@"Indexing succeeded");
+
+        }];
+        [application endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+        NSLog(@"backgroundtask ended");
+    });
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -160,49 +219,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
-        self.bgTask = [application beginBackgroundTaskWithName:@"Trivit indexing" expirationHandler:^{
-        // Clean up any unfinished task business by marking where you
-        // stopped or ending the task outright.
-        [application endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
-        }];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithDomainIdentifiers:@[@"be.ballooninc"] completionHandler:^(NSError * _Nullable error) {
-                if(error)
-                    NSLog(@"clearing index failed");
-            }];
-            NSError *error;
-            
-            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
-            [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-            NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
-                                                                    initWithFetchRequest:fetchRequest
-                                                                    managedObjectContext:self.managedObjectContext
-                                                                    sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-            
-            [fetchedResultsController performFetch:&error];
-            NSMutableArray *searchableItems = [[NSMutableArray alloc] init];
-
-            for (int i = 0; i<[fetchedResultsController.fetchedObjects count]; i++) {
-                TallyModel *tally = (TallyModel*) [fetchedResultsController.fetchedObjects objectAtIndex:i];
-                CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:kUTTypeText];
-                attributeSet.title = [NSString stringWithFormat: @"%@: %d",tally.title, [tally.counter integerValue]];
-                attributeSet.contentDescription = NSLocalizedString(@"Trivit count", @"string for in the search");
-                CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:[NSString stringWithFormat:@"%d",i] domainIdentifier:@"be.ballooninc" attributeSet:attributeSet];
-                [searchableItems addObject:item];
-            }
-            
-            [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
-                if(error)
-                    NSLog(@"Indexing failed");
-            }];
-            [application endBackgroundTask:self.bgTask];
-            self.bgTask = UIBackgroundTaskInvalid;
-        });
-
+    [self applicationUpdateIndex: application];
     [DataAccess.sharedInstance saveManagedObjectContext];
     [self createDynamicShortcutItems];
 }
@@ -217,9 +234,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self applicationUpdateIndex: application];
     [DataAccess.sharedInstance saveManagedObjectContext];
     [self createDynamicShortcutItems];
 }
-
 
 @end

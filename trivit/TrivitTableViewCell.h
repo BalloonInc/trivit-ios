@@ -50,4 +50,6 @@ extern NSString const *TALLY_TYPE;
 
 - (void)showTalliesWithDelay;
 
+-(void) startFlashingbutton;
+
 @end

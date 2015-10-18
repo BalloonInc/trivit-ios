@@ -19,6 +19,9 @@
 // is keyboard shown or not
 @property(nonatomic) bool keyboardShown;
 
+@property (nonatomic) bool viewAppeared;
+
+
 @property(nonatomic) UIEdgeInsets contentInset;
 @property(nonatomic) UIEdgeInsets scrollIndicatorInsets;
 
@@ -33,5 +36,6 @@
 -(void)addNewTrivitAtStartup;
 -(void)incrementTrivitAtStartup:(NSInteger)index;
 -(void)jumpToTrivitAtStartup:(NSInteger)index;
+-(void) applicationDidBecomeActive:(NSTimer *)timer;
 
 @end

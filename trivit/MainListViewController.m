@@ -94,6 +94,9 @@ int const OUTSIDE_TAP = 3;
     
     TrivitTableViewCell *lastCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexOflatestTrivit inSection:0]];
     
+    //cell may not be found, don't try to remove and insert nil
+    if(!lastCell)
+        return;
     NSUInteger indexToRemove = [lastUsedTrivitsIndexes indexOfObjectIdenticalTo:[NSNumber numberWithInteger:indexOflatestTrivit]];
     //NSLog(@"index to remove: %d",indexToRemove);
 
@@ -238,10 +241,10 @@ int const OUTSIDE_TAP = 3;
 - (void)handleTallyIncrease:(UIGestureRecognizer *)singletapRecognizer {
     CGPoint swipeLocation = [singletapRecognizer locationInView:self.tableView];
     NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-    [self incrementTrivitAtIndexPath:swipedIndexPath];
+    [self incrementTrivitAtIndexPath:swipedIndexPath withFlash:false];
 }
 
--(void) incrementTrivitAtIndexPath:(NSIndexPath *)indexPath{
+-(void) incrementTrivitAtIndexPath:(NSIndexPath *)indexPath withFlash: (BOOL) flash{
     TrivitTableViewCell *increasedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     increasedCell.loadAnimation = NO;
     
@@ -263,7 +266,11 @@ int const OUTSIDE_TAP = 3;
             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionAllowAnimatedContent animations:^{
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
-            }                completion:nil];
+            }
+           completion:^(BOOL finished) {
+
+            
+            }];
         }
     }
 
@@ -543,20 +550,36 @@ int const OUTSIDE_TAP = 3;
     self.shouldScrollOnTallyIncreaseOrDecrease = false;
 }
 
-- (void) scrollAndExpandTrivitAtIndex: (NSInteger) index{
+- (void) scrollAndExpandTrivitAtIndex: (NSInteger) index withFlash: (BOOL) flash{
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    if (!self.tableView)
-        NSLog(@"TableView does not exist");
-    TrivitTableViewCell *cell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
-    if (!cell)
-        NSLog(@"Cell not found");
-
-    if (cell.isCollapsed)
-        [self collapseTrivitAtIndexPath:indexPath];
-
+    
     [self.tableView scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionBottom
                                   animated:YES];
+    
+    if (!self.tableView)
+        NSLog(@"TableView does not exist");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        TrivitTableViewCell *cell;
+        int i = 0;
+        
+        while(!cell && i<20){
+            cell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+            if (!cell){
+                NSLog(@"Cell %d not found at attempt %d, sleep .2 seconds",index,++i);
+                [NSThread sleepForTimeInterval:0.2];
+            }
+            else{
+                if (cell.isCollapsed){
+                    [self performSelectorOnMainThread:@selector(collapseTrivitAtIndexPath:) withObject:indexPath waitUntilDone:YES];
+                    [NSThread sleepForTimeInterval:1.0]; // duration of animation of expansion
+                }
+                if(flash)
+                    [cell performSelectorOnMainThread:@selector(startFlashingbutton) withObject:nil waitUntilDone:NO];
+            }
+        }
+    });
+    
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -635,10 +658,91 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+
     [NSTimer scheduledTimerWithTimeInterval:2.0f
                                      target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
     
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    // show tutorial if needed
+    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *tutorialVC = (UINavigationController *) [mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
+        [self presentViewController:tutorialVC animated:YES completion:^{
+        }];
+    }
+    else{
+        [self applicationDidBecomeActive:nil];
+    }
+    self.viewAppeared = true;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    // reload data in case the color would have changed
+    // TODO: check if appSettings.selectedColorSet has changed and only refresh if it is true
+    // we should make a NSNumber number with boolean and pass it in the prepareforsegue (nsnumber is passed by reference)
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+    [self resendUnsentFeedback];
+}
+
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    self.viewAppeared = false;
+}
+- (void)configureTableView {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longTap.minimumPressDuration = 0.2;
+    
+    [self.tableView addGestureRecognizer:tap];
+    [self.tableView addGestureRecognizer:longTap];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]];
+    imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
+    self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
+    self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.cellBeingEdited = nil;
+    if ([segue.identifier isEqualToString:@"ShowSettingsForTrivit"]) {
+        if ([segue.destinationViewController isKindOfClass:[SettingsViewController class]]) {
+            SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
+            svc.appSettings = self.appSettings;
+            [svc setManagedObjectContext:self.managedObjectContext];
+        }
+    }
+}
+
+-(void) applicationDidBecomeActive:(NSTimer *)timer{
+    NSLog(@"Application became active");
+    if (self.startupAction){
+        if ([self.startupAction isEqualToString:@"AddNewTrivit"]){
+            [self addNewTrivit];
+            self.startupAction=nil;
+        }
+        else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexAtStartup inSection:0];
+            [self scrollAndExpandTrivitAtIndex:indexPath.row withFlash:false];
+            [self incrementTrivitAtIndexPath:indexPath withFlash:true];
+            self.startupAction=nil;
+            self.indexAtStartup=-1;
+        }
+        else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
+            [self scrollAndExpandTrivitAtIndex:self.indexAtStartup withFlash:true];
+            self.startupAction=nil;
+            self.indexAtStartup=-1;
+        }
+    }
 }
 
 -(void)saveData{
@@ -655,7 +759,7 @@ int const OUTSIDE_TAP = 3;
     }
     
     //NSLog(@"Watch connected - updating iPhone Data");
-
+    
     DataAccess.sharedInstance.managedObjectContext=nil;
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
@@ -671,43 +775,10 @@ int const OUTSIDE_TAP = 3;
     }
     
     NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
-        // save lastfetcheddata to see if updates are needed
-        self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
+    // save lastfetcheddata to see if updates are needed
+    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
     if (difference>0)
         [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    // show tutorial if needed
-    if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController *tutorialVC = (UINavigationController *) [mainStoryboard instantiateViewControllerWithIdentifier:@"tutorialContainer"];
-        [self presentViewController:tutorialVC animated:YES completion:^{
-        }];
-    }
-    else{
-        if (self.startupAction){
-            if ([self.startupAction isEqualToString:@"AddNewTrivit"]){
-                [self addNewTrivit];
-                self.startupAction=nil;
-            }
-            else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexAtStartup inSection:0];
-                
-                [self incrementTrivitAtIndexPath:indexPath];
-                [self scrollAndExpandTrivitAtIndex:indexPath.row];
-                self.startupAction=nil;
-                self.indexAtStartup=-1;
-            }
-            else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
-                [self scrollAndExpandTrivitAtIndex:self.indexAtStartup];
-                self.startupAction=nil;
-                self.indexAtStartup=-1;
-            }
-        }
-    }
 }
 
 - (void)resendUnsentFeedback {
@@ -718,10 +789,10 @@ int const OUTSIDE_TAP = 3;
                                                                                                  sectionNameKeyPath:nil
                                                                                                           cacheName:nil];
     [fetchedResultsController setDelegate:self];
-
+    
     NSError *error = nil;
     [fetchedResultsController performFetch:&error];
-
+    
     if (error) {
         NSLog(@"Unable to perform fetch.\n%@, %@", error, error.localizedDescription);
         return;
@@ -747,45 +818,7 @@ int const OUTSIDE_TAP = 3;
     }
     [self.defaults setObject:nil forKey:@"WatchFeedbackArray"];
     [self.defaults synchronize];
-
-}
-
-- (void)configureTableView {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longTap.minimumPressDuration = 0.2;
-
-    [self.tableView addGestureRecognizer:tap];
-    [self.tableView addGestureRecognizer:longTap];
-
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tableViewBackgroundTally"]];
-    imageView.contentMode = UIViewContentModeCenter; // don't allow rescaling of the image
-    self.tableView.backgroundColor = [Colors colorWithHexString:@"F5F4F4"];
-    self.tableView.backgroundView = imageView; // add UIImageView to the tableView background
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    self.cellBeingEdited = nil;
-    if ([segue.identifier isEqualToString:@"ShowSettingsForTrivit"]) {
-        if ([segue.destinationViewController isKindOfClass:[SettingsViewController class]]) {
-            SettingsViewController *svc = (SettingsViewController *) segue.destinationViewController;
-            svc.appSettings = self.appSettings;
-            [svc setManagedObjectContext:self.managedObjectContext];
-        }
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    // reload data in case the color would have changed
-    // TODO: check if appSettings.selectedColorSet has changed and only refresh if it is true
-    // we should make a NSNumber number with boolean and pass it in the prepareforsegue (nsnumber is passed by reference)
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-    [self resendUnsentFeedback];
-}
-
--(void) viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+    
 }
 
 #pragma mark - view resize on keyboard show
