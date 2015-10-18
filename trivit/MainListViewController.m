@@ -267,11 +267,11 @@ int const OUTSIDE_TAP = 3;
                 [self.tableView beginUpdates];
                 [self.tableView endUpdates];
             }
-           completion:^(BOOL finished) {
-
-            
-            }];
+           completion:nil];
         }
+        if(flash)
+            [increasedCell flashIncrement];
+
     }
 
 }
@@ -550,7 +550,7 @@ int const OUTSIDE_TAP = 3;
     self.shouldScrollOnTallyIncreaseOrDecrease = false;
 }
 
-- (void) scrollAndExpandTrivitAtIndex: (NSInteger) index withFlash: (BOOL) flash{
+- (void) scrollAndExpandTrivitAtIndex: (NSInteger) index withFlash: (BOOL) flash completion: (void (^)(void))completionblock{
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     
     [self.tableView scrollToRowAtIndexPath:indexPath
@@ -575,9 +575,11 @@ int const OUTSIDE_TAP = 3;
                     [NSThread sleepForTimeInterval:1.0]; // duration of animation of expansion
                 }
                 if(flash)
-                    [cell performSelectorOnMainThread:@selector(startFlashingbutton) withObject:nil waitUntilDone:NO];
+                    [cell performSelectorOnMainThread:@selector(flashTrivit) withObject:nil waitUntilDone:YES];
             }
         }
+        if (completionblock)
+            dispatch_async( dispatch_get_main_queue(), completionblock);
     });
     
 }
@@ -732,13 +734,14 @@ int const OUTSIDE_TAP = 3;
         }
         else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.indexAtStartup inSection:0];
-            [self scrollAndExpandTrivitAtIndex:indexPath.row withFlash:false];
-            [self incrementTrivitAtIndexPath:indexPath withFlash:true];
+            [self scrollAndExpandTrivitAtIndex:indexPath.row withFlash:false completion:^{
+                [self incrementTrivitAtIndexPath:indexPath withFlash:true];
+            }];
             self.startupAction=nil;
             self.indexAtStartup=-1;
         }
         else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
-            [self scrollAndExpandTrivitAtIndex:self.indexAtStartup withFlash:true];
+            [self scrollAndExpandTrivitAtIndex:self.indexAtStartup withFlash:true completion:nil];
             self.startupAction=nil;
             self.indexAtStartup=-1;
         }

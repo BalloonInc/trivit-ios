@@ -45,11 +45,10 @@ extern NSString const *TALLY_TYPE;
 
 
 - (void)decreaseTallyCounter;
-
 - (void)increaseTallyCounter;
-
 - (void)showTalliesWithDelay;
+- (void) flashTrivit;
+- (void) flashIncrement;
 
--(void) startFlashingbutton;
 
 @end
