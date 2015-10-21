@@ -738,7 +738,8 @@ int const OUTSIDE_TAP = 3;
             self.indexAtStartup=-1;
         }
         else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
-            [self scrollAndExpandTrivitAtIndex:self.indexAtStartup withFlash:true completion:nil];
+            if(self.indexAtStartup<self.trivitCount)
+                [self scrollAndExpandTrivitAtIndex:self.indexAtStartup withFlash:true completion:nil];
             self.startupAction=nil;
             self.indexAtStartup=-1;
         }

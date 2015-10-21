@@ -10,6 +10,7 @@
 		1E1CC032CAC5713DD485F0E3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C2AF5C61A5B5B25CD7983 /* libPods.a */; };
 		6C02C88F1A616DBE00547584 /* TutContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C02C88E1A616DBE00547584 /* TutContainerViewController.m */; };
 		6C0908E41ACB52B900F01033 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36CF4A1ACAB86700020384 /* Version.m */; };
+		6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */; };
 		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
@@ -632,6 +633,7 @@
 				6CE4BBF61A1D609E005E9BCD /* Embed App Extensions */,
 				60A83E13815D5585EFF94F48 /* Copy Pods Resources */,
 				6CCA04C61A93CCC5000BBDE9 /* Embed Frameworks */,
+				2D52CB73BE4E485AD1720923 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -771,6 +773,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 						};
 					};
 					6CE4BBE11A1D609D005E9BCD = {
@@ -808,6 +813,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */,
 				6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */,
 				6C5C4B9C1A61579400C87401 /* InfoPlist.strings in Resources */,
 				6C5C4B961A61579300C87401 /* Localizable.strings in Resources */,
@@ -863,6 +869,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2D52CB73BE4E485AD1720923 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3CB2913BF429DC23D4A713D0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1470,6 +1491,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1490,6 +1512,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

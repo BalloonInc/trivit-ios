@@ -80,7 +80,7 @@ static NSMutableDictionary *timeZonesByOffset;
 
 - (NSCalendar *)newCalendar
 {
-	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	calendar.firstWeekday = 2; //Monday
 	calendar.timeZone = self.timeZone;
     calendar.locale = self.locale;
@@ -170,7 +170,7 @@ static NSMutableDictionary *timeZonesByOffset;
 	NSDate *now = [NSDate date];
     
 	NSDateComponents *components = [[NSDateComponents alloc] init];
-	NSDateComponents *nowComponents = [self.parsingCalendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:now];
+	NSDateComponents *nowComponents = [self.parsingCalendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:now];
     
 	NSUInteger
     //Date
@@ -728,13 +728,13 @@ static NSMutableDictionary *timeZonesByOffset;
 {
 	self.unparsingCalendar.timeZone = self.timeZone;
     self.unparsingCalendar.locale = self.locale;
-	NSDateComponents *components = [self.unparsingCalendar components:NSCalendarUnitYear | NSCalendarUnitWeekday | NSCalendarUnitDay fromDate:date];
+	NSDateComponents *components = [self.unparsingCalendar components:NSYearCalendarUnit | NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:date];
     
 	//Determine the ordinal date.
-	NSDateComponents *startOfYearComponents = [self.unparsingCalendar components:NSCalendarUnitYear fromDate:date];
+	NSDateComponents *startOfYearComponents = [self.unparsingCalendar components:NSYearCalendarUnit fromDate:date];
 	startOfYearComponents.month = 1;
 	startOfYearComponents.day = 1;
-	NSDateComponents *ordinalComponents = [self.unparsingCalendar components:NSCalendarUnitDay fromDate:[self.unparsingCalendar dateFromComponents:startOfYearComponents] toDate:date options:0];
+	NSDateComponents *ordinalComponents = [self.unparsingCalendar components:NSDayCalendarUnit fromDate:[self.unparsingCalendar dateFromComponents:startOfYearComponents] toDate:date options:0];
 	ordinalComponents.day += 1;
     
 	enum {

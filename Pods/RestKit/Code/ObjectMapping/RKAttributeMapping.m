@@ -27,9 +27,6 @@
 
 @implementation RKAttributeMapping
 
-@synthesize sourceKeyPath;
-@synthesize destinationKeyPath;
-
 + (instancetype)attributeMappingFromKeyPath:(NSString *)sourceKeyPath toKeyPath:(NSString *)destinationKeyPath
 {
     NSAssert(sourceKeyPath || destinationKeyPath, @"Both the source and destination key paths cannot be nil");

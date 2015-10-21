@@ -4,55 +4,55 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
+		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Pods-RestKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Pods-SOCKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Pods-TransitionKit.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RestKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SOCKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TransitionKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>412CAD2CB1D4CC03E952ADDB</key>
+		<key>17154E5FCFAD76D5DF34A5D9A9CD850F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F0BE75CF6463C7D83609974</key>
+		<key>4034CF3BDFD74BB0DF9612C2C1DB39DE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7A18C9A68742167BBAEC5FBA</key>
+		<key>61681BF0E677683490353B846C61A129</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB179CD4B519960A0B6203F4</key>
+		<key>B585436319BE3BDCF539DE7CBD752278</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3D7BDCF46A964C948D96D2D</key>
+		<key>C74A2D8ABF120779FD3589394580FE64</key>
 		<dict>
 			<key>primary</key>
 			<true/>

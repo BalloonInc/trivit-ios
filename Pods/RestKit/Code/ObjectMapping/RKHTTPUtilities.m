@@ -340,11 +340,12 @@ static const char _httpDate_eof_actions[] = {
 };
 
 static NSDate *_parseHTTPDate(const char *buf, size_t bufLen) {
-    
     const char *p = buf, *pe = p + bufLen, *eof = pe;
     int parsed = 0, cs = 1;
     NSDate *date = NULL;
-    NSDateComponents *gdate;
+    
+    CFGregorianDate gdate;
+    memset(&gdate, 0, sizeof(CFGregorianDate));
     
     {
         int _slen, _trans;
@@ -400,10 +401,9 @@ static NSDate *_parseHTTPDate(const char *buf, size_t bufLen) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{ gmtTimeZone = CFTimeZoneCreateWithTimeIntervalFromGMT(NULL, 0.0); });
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    if(parsed == 1) { date = [calendar dateFromComponents:gdate];}
+    if(parsed == 1) { date = [NSDate dateWithTimeIntervalSinceReferenceDate:CFGregorianDateGetAbsoluteTime(gdate, gmtTimeZone)]; }
+    
     return(date);
-
 }
 
 /*
