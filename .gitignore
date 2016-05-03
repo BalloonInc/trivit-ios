@@ -1,3 +1,7 @@
 .DS_Store
 *.xcuserstate
 *.xcbkptlist
+.sonar
+compile_commands.json
+xcodebuild.log
+sonar-reports
