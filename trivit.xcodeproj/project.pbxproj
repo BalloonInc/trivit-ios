@@ -360,7 +360,7 @@
 			children = (
 				6C69C09B195B6F4E002A3F53 /* trivit */,
 				6C69C0B2195B6F4E002A3F53 /* trivitTests */,
-				6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */,
+				6CE4BBD41A1D609C005E9BCD /* trivitWatchKitExtension */,
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
 				6CCA04A91A93CCC4000BBDE9 /* DataKit */,
 				6CCA04B81A93CCC4000BBDE9 /* DataKitTests */,
@@ -525,7 +525,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6CE4BBD41A1D609C005E9BCD /* trivit WatchKit Extension */ = {
+		6CE4BBD41A1D609C005E9BCD /* trivitWatchKitExtension */ = {
 			isa = PBXGroup;
 			children = (
 				6C17594F1AA3BAA700A0CE0D /* trivit WatchKit Extension.entitlements */,
@@ -540,7 +540,7 @@
 				6C24D5DC1ABDDECF002D1046 /* WKtableViewLastRowController.m */,
 				6CE4BBD51A1D609C005E9BCD /* Supporting Files */,
 			);
-			path = "trivit WatchKit Extension";
+			path = trivitWatchKitExtension;
 			sourceTree = "<group>";
 		};
 		6CE4BBD51A1D609C005E9BCD /* Supporting Files */ = {
