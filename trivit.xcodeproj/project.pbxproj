@@ -1489,14 +1489,14 @@
 		6CE4BBF41A1D609E005E9BCD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "trivitWatchKitExtension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = trivitWatchKitExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1510,10 +1510,10 @@
 		6CE4BBF51A1D609E005E9BCD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "trivit WatchKit Extension/trivit WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "trivitWatchKitExtension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "trivit WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = trivitWatchKitExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
