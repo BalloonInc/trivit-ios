@@ -16,6 +16,9 @@
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
 		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
 		6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91601A0D10EA006F2F87 /* libz.dylib */; };
+		6C0E72D21CDA8FEA001F7EE2 /* TallyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C41254C1A435FB800C2D4CA /* TallyModel.m */; };
+		6C0E72D31CDA8FF9001F7EE2 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04C91A93CD44000BBDE9 /* DataAccess.m */; };
+		6C0E72D41CDA9018001F7EE2 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36CF4A1ACAB86700020384 /* Version.m */; };
 		6C11D35B1A5200670024AAAA /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C11D35A1A5200670024AAAA /* Feedback.m */; };
 		6C11D3641A5200FD0024AAAA /* Feedback+Mapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C11D3631A5200FD0024AAAA /* Feedback+Mapping.m */; };
 		6C11D3671A521F490024AAAA /* SettingsIcons.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C11D3661A521F490024AAAA /* SettingsIcons.m */; };
@@ -989,8 +992,11 @@
 			files = (
 				6C3980CB1A1D759700B43888 /* WKTableVIewRowController.m in Sources */,
 				6CA1B1CB1AAC6EC100F08D73 /* Colors.m in Sources */,
+				6C0E72D41CDA9018001F7EE2 /* Version.m in Sources */,
 				6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */,
+				6C0E72D31CDA8FF9001F7EE2 /* DataAccess.m in Sources */,
 				6CE4BBDA1A1D609C005E9BCD /* InterfaceController.m in Sources */,
+				6C0E72D21CDA8FEA001F7EE2 /* TallyModel.m in Sources */,
 				6C24D5DD1ABDDECF002D1046 /* WKtableViewLastRowController.m in Sources */,
 				6C54FA821AABCA5300C517A5 /* trivits.xcdatamodeld in Sources */,
 			);

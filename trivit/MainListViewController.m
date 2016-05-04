@@ -58,6 +58,7 @@ int const OUTSIDE_TAP = 3;
         self.placeholderTrivitTitles = [fruits componentsSeparatedByString:@","];
     }
     return self.placeholderTrivitTitles[index % self.placeholderTrivitTitles.count];
+    int i = 5;
 }
 
 #pragma mark - last edited trivits
