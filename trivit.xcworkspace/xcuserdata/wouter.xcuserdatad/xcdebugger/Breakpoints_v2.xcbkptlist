@@ -734,7 +734,7 @@
             startingLineNumber = "846"
             endingLineNumber = "846"
             landmarkName = "-keyboardWillBeHidden:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -878,7 +878,7 @@
             startingLineNumber = "833"
             endingLineNumber = "833"
             landmarkName = "-keyboardWasShown:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -894,7 +894,7 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "-createDynamicShortcutItems"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -910,7 +910,7 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "-createDynamicShortcutItems"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -926,7 +926,7 @@
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "-application:performActionForShortcutItem:completionHandler:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -942,7 +942,7 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-createDynamicShortcutItems"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1070,7 +1070,7 @@
             startingLineNumber = "110"
             endingLineNumber = "110"
             landmarkName = "-createDynamicShortcutItems"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1102,7 +1102,7 @@
             startingLineNumber = "24"
             endingLineNumber = "24"
             landmarkName = "shouldScrollOnTallyIncreaseOrDecrease"
-            landmarkType = "19">
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1118,7 +1118,7 @@
             startingLineNumber = "39"
             endingLineNumber = "39"
             landmarkName = "-application:continueUserActivity:restorationHandler:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1134,7 +1134,7 @@
             startingLineNumber = "38"
             endingLineNumber = "38"
             landmarkName = "-application:continueUserActivity:restorationHandler:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1150,7 +1150,7 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "-application:continueUserActivity:restorationHandler:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1166,7 +1166,7 @@
             startingLineNumber = "676"
             endingLineNumber = "676"
             landmarkName = "-viewDidAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1182,7 +1182,7 @@
             startingLineNumber = "685"
             endingLineNumber = "685"
             landmarkName = "-viewDidAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1198,7 +1198,7 @@
             startingLineNumber = "40"
             endingLineNumber = "40"
             landmarkName = "-application:continueUserActivity:restorationHandler:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1214,7 +1214,7 @@
             startingLineNumber = "555"
             endingLineNumber = "555"
             landmarkName = "-scrollAndExpandTrivitAtIndex:withFlash:completion:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1230,7 +1230,7 @@
             startingLineNumber = "696"
             endingLineNumber = "696"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1246,7 +1246,7 @@
             startingLineNumber = "695"
             endingLineNumber = "695"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1262,7 +1262,7 @@
             startingLineNumber = "97"
             endingLineNumber = "97"
             landmarkName = "-updateLastEditedTrivits:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1278,7 +1278,7 @@
             startingLineNumber = "100"
             endingLineNumber = "100"
             landmarkName = "-updateLastEditedTrivits:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1294,7 +1294,7 @@
             startingLineNumber = "686"
             endingLineNumber = "686"
             landmarkName = "-viewDidAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1310,7 +1310,7 @@
             startingLineNumber = "677"
             endingLineNumber = "677"
             landmarkName = "-viewDidAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1326,7 +1326,7 @@
             startingLineNumber = "579"
             endingLineNumber = "579"
             landmarkName = "-scrollAndExpandTrivitAtIndex:withFlash:completion:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1342,7 +1342,39 @@
             startingLineNumber = "208"
             endingLineNumber = "208"
             landmarkName = "-application:openURL:sourceApplication:annotation:"
-            landmarkType = "5">
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trivit/FeedbackManager.m"
+            timestampString = "498084601.810567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-feedbackWithObject:managedObjectContext:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "trivit/FeedbackManager.m"
+            timestampString = "498084613.139827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-feedbackWithObject:managedObjectContext:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

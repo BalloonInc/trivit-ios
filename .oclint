@@ -1,0 +1,11 @@
+rule-configurations:
+  - key: CYCLOMATIC_COMPLEXITY
+    value: 15
+  - key: NPATH_COMPLEXITY
+    value: 300
+disable-rules:
+rule-configurations:
+ - key: LONG_LINE
+   value: 140
+ - key: LONG_VARIABLE_NAME
+   value: 40
