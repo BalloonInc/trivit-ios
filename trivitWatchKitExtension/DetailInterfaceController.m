@@ -10,7 +10,7 @@
 #import "WKTableVIewRowController.h"
 #import "InterfaceController.h"
 #import "TallyModel.h"
-#import "DataKit.h"
+#import "DataAccess.h"
 
 @interface DetailInterfaceController()
 

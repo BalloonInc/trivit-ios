@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B45A56E3D869AB2803624D90554E24C8'
-               BlueprintName = 'SOCKit'
+               BlueprintIdentifier = '6AA06E887C042345F1244B3F74A6E7A2'
+               BlueprintName = 'Pods-trivit'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libSOCKit.a'>
+               BuildableName = 'libPods-trivit.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

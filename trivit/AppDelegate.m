@@ -13,7 +13,6 @@
 #import "TallyModel.h"
 #import <CoreSpotlight/CoreSpotlight.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import <GoogleAppIndexing/GoogleAppIndexing.h>
 
 @implementation AppDelegate
 
@@ -22,7 +21,6 @@
     [self startNewRelic];
     [self initApp];
     [self createDynamicShortcutItems];
-    [[GSDAppIndexing sharedInstance] registerApp:960459126];
     return YES;
 }
 
