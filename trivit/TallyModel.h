@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 
-@interface TallyModel : NSManagedObject
+@interface TallyModel : NSManagedObject <NSCoding>
 
 @property(nonatomic, retain) NSNumber *color;
 @property(nonatomic, retain) NSNumber *counter;

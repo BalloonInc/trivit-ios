@@ -13,8 +13,9 @@
 #import "TallyModel.h"
 #import "FeedbackManager.h"
 #import "DataAccess.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 
-@interface MainListViewController () <NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
+@interface MainListViewController () <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, WCSessionDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsControllerSetup;
 @property(nonatomic, readonly) NSInteger trivitCount;
@@ -269,7 +270,6 @@ int const OUTSIDE_TAP = 3;
         }
         if(flash)
             [increasedCell flashIncrement];
-
     }
 
 }
@@ -616,9 +616,21 @@ int const OUTSIDE_TAP = 3;
 
 #pragma mark - view load stuff
 
+- (void) sessionWatchStateDidChange:(WCSession *)session {
+    if (session.isPaired && session.isWatchAppInstalled){
+        [self saveData];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureTableView];
+    
+    if ([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
 
     self.defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
 
@@ -749,6 +761,36 @@ int const OUTSIDE_TAP = 3;
 -(void)saveData{
     if(!self.cellBeingEdited)
         [DataAccess.sharedInstance saveManagedObjectContext];
+    
+    WCSession *session = [WCSession defaultSession];
+    if (session != nil && session.isPaired && session.isWatchAppInstalled){
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        for (TallyModel *record in self.fetchedResultsController.fetchedObjects) {
+            NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: record];
+            NSString *timeString = [NSString stringWithFormat:@"%f", [record.createdAt timeIntervalSince1970]];
+            [dict setObject:encodedRecord forKey:timeString];
+        }
+
+        NSError *anyError;
+        if (![[WCSession defaultSession] updateApplicationContext:dict error:&anyError]) {
+            NSLog(@"updateApplicationContext failed with error %@", anyError);
+        }
+    }
+}
+
+-(void) session:(WCSession *)session didReceiveUserInfo:(NSDictionary<NSString *,id> *)userInfo {
+    for (NSString *key in userInfo) {
+        if ([key isEqual: @"updatedCount"]){
+            TallyModel *updatedTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
+            
+            for (TallyModel *record in [self.fetchedResultsController fetchedObjects] ) {
+                if ([record.title isEqualToString:updatedTally.title] && [record.createdAt compare: updatedTally.createdAt] == NSOrderedSame){
+                    record.counter = updatedTally.counter;
+                    [self.tableView reloadData];
+                }
+            }
+        }
+    }
 }
 
 -(void) reloadData:(NSTimer *)timer{

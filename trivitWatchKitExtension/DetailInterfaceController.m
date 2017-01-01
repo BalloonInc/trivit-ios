@@ -11,6 +11,7 @@
 #import "InterfaceController.h"
 #import "TallyModel.h"
 #import "DataAccess.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 
 @interface DetailInterfaceController()
 
@@ -79,7 +80,6 @@
 }
 
 -(void) reloadCounter{
-
     // update model
     TallyModel *tally = self.data[self.selectedRow];
     tally.counter = [NSNumber numberWithInteger:self.count];
@@ -89,6 +89,16 @@
     // update view
     NSString *labelText = [NSString stringWithFormat:@"%ld",(long)self.count];
     [self.countButton setTitle:labelText];
+    
+    // background transfer to iPhone
+    NSMutableDictionary *updatedCounter = [[NSMutableDictionary alloc] init];
+    
+    TallyModel *newTrivit = (TallyModel *) self.data[self.selectedRow];
+    newTrivit.counter = [[NSNumber alloc] initWithInt: self.count];
+    NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: newTrivit];
+
+    [updatedCounter setValue:encodedRecord forKey:@"updatedCount"];
+    [[WCSession defaultSession] transferUserInfo:updatedCounter];
 }
 
 @end

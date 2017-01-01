@@ -11,10 +11,11 @@
 #import "WKtableViewLastRowController.h"
 #import "DataKit.h"
 #import "TallyModel.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 
 #import "Colors.h"
 
-@interface InterfaceController()
+@interface InterfaceController() <WCSessionDelegate>
 @property (weak, nonatomic) IBOutlet WKInterfaceTable *interfaceTable;
 @property (nonatomic) NSInteger selectedIndex;
 
@@ -44,30 +45,19 @@
 - (instancetype)init {
     self = [super init];
     
-    [DataAccess.sharedInstance migrateStore];
-
-    self.fetchRequest = [[NSFetchRequest alloc] init];
-
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
-    self.fetchRequest.entity = entityDescription;
+    if ([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
     
-    // Add Sort Descriptors
-    [self.fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-    
-    // Initialize Fetched Results Controller
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:@"cacheTally"];
-    
-    [self getNewData:nil];
-    
-    if (self) {
-
-        [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
+    if (self.workingData != nil){
         [self loadTableData];
     }
-    // save every 3 seconds
-    [NSTimer scheduledTimerWithTimeInterval:3.0f
-                                     target:self selector:@selector(getNewData:) userInfo:nil repeats:YES];
-    
+    if (self) {
+        [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
+    }
+
     // call home to let us know watch app is used:
 #if DEBUG
     NSLog(@"Watch app tracking: not enabled (debug mode is on)");
@@ -78,35 +68,26 @@
     return self;
 }
 
--(void) getNewData:(NSTimer *)timer{
-    if (!self.active) return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        //refetch
-        NSError *error = nil;
+-(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
+    NSMutableArray *fetchedArray = [[NSMutableArray alloc] init];
+    for (NSData *encodedTally in applicationContext.allValues) {
+        TallyModel *tally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
+        [fetchedArray addObject:tally];
+    }
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt"
+                                                 ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    self.workingData = [[NSMutableArray alloc] initWithArray: [fetchedArray sortedArrayUsingDescriptors:sortDescriptors]];
 
-        DataAccess.sharedInstance.managedObjectContext=nil;
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+    if(difference==1)
+        dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
+    if(difference==2)
+        dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
 
-        [self.fetchedResultsController performFetch:&error];
-        
-        if (error) {
-            NSLog(@"Unable to perform fetch.");
-            NSLog(@"%@, %@", error, error.localizedDescription);
-        }
-        self.workingData = [self.fetchedResultsController.fetchedObjects mutableCopy];
-        // only reload table data if not first time (that one is done in init)
-        if(timer){
-            NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
-            if(difference==0)
-                difference=0;
-            if(difference==1)
-                dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
-            if(difference==2)
-                dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
-        }
-        // save lastfetcheddata to see if updates are needed
-    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
-    });
+    // save lastfetcheddata to see if updates are needed
+    self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
 }
 
 -(void) loadTableRowsAsync:(NSRange)range{
