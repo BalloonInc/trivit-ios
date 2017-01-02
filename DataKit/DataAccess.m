@@ -20,41 +20,7 @@
 
 @implementation DataAccess
 
-/*
- Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
- */
-+(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray{
-    if(oldArray.count != newArray.count)
-        return 2;
-    
-    NSInteger res=0;
-    
-    for (int i=0; i<oldArray.count;i++){
-        TallyModel *oldTrivit = (TallyModel *) oldArray[i];
-        TallyModel *newTrivit = (TallyModel *) newArray[i];
 
-        // if one title is different, return 2;
-        if(![oldTrivit.title isEqualToString:newTrivit.title])
-            return 2;
-        // if counters are different, set res=1. Do not return yet since later on a title can be different
-        if([oldTrivit.counter integerValue] != [newTrivit.counter integerValue])
-            res=1;
-    }
-    
-    return res;
-}
-
-+(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects{
-    NSMutableArray* lastFetchedData = [[NSMutableArray alloc] init];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
-    for (TallyModel* tm in fetchedObjects) {
-        TallyModel *t = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
-        t.title=tm.title;
-        t.counter=tm.counter;
-        [lastFetchedData addObject:t];
-    }
-    return lastFetchedData;
-}
 
 -(NSString*) latestVersion{
     // if last entry of the versions table is the current version, don't migrate
@@ -232,42 +198,5 @@
     return fetchedResultsController.fetchedObjects;
 
 }
-
--(void) sendFeedback{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    
-    NSMutableArray *watchFeedBackArray = [defaults objectForKey:@"WatchFeedbackArray"];
-    
-    if(!watchFeedBackArray)
-        watchFeedBackArray = [[NSMutableArray alloc] init];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    NSString *message = [NSString stringWithFormat:@"Watch app opened at %@",[formatter stringFromDate:[NSDate date]]];
-    NSString *os = @"WatchOS";
-    NSString *model = @"Apple Watch";
-    NSString *name = [self getUniqueWatchID];
-
-    [watchFeedBackArray addObject:[NSArray arrayWithObjects:message,os,model,name, nil]];
-    
-    [defaults setObject:watchFeedBackArray forKey:@"WatchFeedbackArray"];
-    [defaults synchronize];
- }
-
-
--(NSString *) getUniqueWatchID{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    
-    NSString *UUID = [defaults objectForKey:@"uniqueWatchID"];
-    
-    if(!UUID || UUID.length==0){
-        UUID = [[NSUUID UUID] UUIDString];
-        [defaults setObject:UUID forKey:@"uniqueWatchID"];
-        [defaults synchronize];
-    }
-    
-    return UUID;
-}
-
 
 @end

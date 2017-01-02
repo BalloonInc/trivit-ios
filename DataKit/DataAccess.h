@@ -15,18 +15,7 @@
 
 - (void)saveManagedObjectContext;
 - (void)migrateStore;
-- (void)sendFeedback;
 
 + (DataAccess*) sharedInstance;
-
-/*
- Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
- */
-+(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray;
-
-/*
- Copies an array of fetchedobjects to another array (array of TallyModel of course)
- */
-+(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects;
 
 @end

@@ -642,7 +642,7 @@ int const OUTSIDE_TAP = 3;
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
     
-    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
+    self.lastFetchedData = [self copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
 
     if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
         [self addItemWithTitle:NSLocalizedString(@"Swipe left to delete", @"Tally example") andCount:0];
@@ -782,7 +782,10 @@ int const OUTSIDE_TAP = 3;
             TallyModel *updatedTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
             
             for (TallyModel *record in [self.fetchedResultsController fetchedObjects] ) {
+
                 if ([record.title isEqualToString:updatedTally.title] && [record.createdAt compare: updatedTally.createdAt] == NSOrderedSame){
+                    NSLog(@"Got updated count for tally %@: count: %i",updatedTally.title, [updatedTally.counter intValue]);
+
                     record.counter = updatedTally.counter;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
@@ -791,9 +794,11 @@ int const OUTSIDE_TAP = 3;
             }
         }
         else if ([key isEqualToString:@"newTrivit"]){
+
             TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
             [self.managedObjectContext insertObject:newTally];
-            
+            NSLog(@"Got new trivit: %@: count: %i",newTally.title, [newTally.counter intValue]);
+
             // Save Record
             NSError *error = nil;
             if (![self.managedObjectContext save:&error]) {
@@ -884,6 +889,19 @@ int const OUTSIDE_TAP = 3;
 
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
+}
+
+
+-(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects{
+    NSMutableArray* lastFetchedData = [[NSMutableArray alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    for (TallyModel* tm in fetchedObjects) {
+        TallyModel *t = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
+        t.title=tm.title;
+        t.counter=tm.counter;
+        [lastFetchedData addObject:t];
+    }
+    return lastFetchedData;
 }
 
 @end

@@ -80,12 +80,12 @@
     [[WCSession defaultSession] sendMessage:@{@"getLatestStatus":@""} replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
 
         self.workingData = [self unencodeTrivits:replyMessage.allValues];
-        NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+        NSInteger difference = [self whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
         if(difference==1)
             dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
         if(difference==2)
             dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
-        self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
+        self.lastFetchedData = [self copyLastFetchedData:self.workingData];
 
     } errorHandler:^(NSError * _Nonnull error) {
         NSLog(@"%@", error);
@@ -95,14 +95,14 @@
 -(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
     self.workingData = [self unencodeTrivits: applicationContext.allValues];
 
-    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+    NSInteger difference = [self whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
     if(difference==1)
         dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
     if(difference==2)
         dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
 
     // save lastfetcheddata to see if updates are needed
-    self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
+    self.lastFetchedData = [self copyLastFetchedData:self.workingData];
 }
 
 -(void) loadTableRowsAsync:(NSRange)range{
@@ -178,7 +178,7 @@
 
         [self.workingData addObject:newRow];
         // update lastFetchedData, so no refresh is triggered when returning to this VC later
-        self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
+        self.lastFetchedData = [self copyLastFetchedData:self.workingData];
         
         // background transfer to iPhone
         NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: newRow];
@@ -254,6 +254,42 @@
     NSInteger newCount = [tally.counter integerValue];
     if(newCount!=listItemRowController.count)
         [listItemRowController setCounter:newCount];
+}
+
+/*
+ Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
+ */
+-(NSInteger) whatIsUpdatedForOldArray: (NSArray *)oldArray andNewArray: (NSArray *)newArray{
+    if(oldArray.count != newArray.count)
+        return 2;
+    
+    NSInteger res=0;
+    
+    for (int i=0; i<oldArray.count;i++){
+        TallyModel *oldTrivit = (TallyModel *) oldArray[i];
+        TallyModel *newTrivit = (TallyModel *) newArray[i];
+        
+        // if one title is different, return 2;
+        if(![oldTrivit.title isEqualToString:newTrivit.title])
+            return 2;
+        // if counters are different, set res=1. Do not return yet since later on a title can be different
+        if([oldTrivit.counter integerValue] != [newTrivit.counter integerValue])
+            res=1;
+    }
+    
+    return res;
+}
+
+-(NSArray*) copyLastFetchedData:(NSArray*)fetchedObjects{
+    NSMutableArray* lastFetchedData = [[NSMutableArray alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"TallyModel" inManagedObjectContext:DataAccess.sharedInstance.managedObjectContext];
+    for (TallyModel* tm in fetchedObjects) {
+        TallyModel *t = [[TallyModel alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
+        t.title=tm.title;
+        t.counter=tm.counter;
+        [lastFetchedData addObject:t];
+    }
+    return lastFetchedData;
 }
 
 @end
