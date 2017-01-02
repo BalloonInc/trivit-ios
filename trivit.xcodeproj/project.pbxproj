@@ -797,6 +797,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
 						};
 					};
 					6C69C0AE195B6F4E002A3F53 = {
