@@ -20,8 +20,6 @@
 
 @implementation DataAccess
 
-@synthesize watchDetailsActive = _watchDetailsActive;
-@synthesize watchInterfaceActive = _watchInterfaceActive;
 /*
  Shows the difference between two trivit arrays. returns 0 if identical, 1 if counts are different and 2 if titles are different
  */
@@ -71,38 +69,6 @@
     return _defaults;
 }
 
--(bool) isWatchActive{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    
-    bool watchInterfaceActive = [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
-    bool watchDetailsActive = [[defaults objectForKey:@"watchDetailsActive"] boolValue];
-    
-    return watchInterfaceActive || watchDetailsActive;
-}
-
-
--(bool) watchInterfaceAtive{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    return [[defaults objectForKey:@"watchInterfaceActive"] boolValue];
-}
-
--(void) setWatchInterfaceActive:(bool)watchInterfaceActive{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    [defaults setObject:[NSNumber numberWithBool:watchInterfaceActive] forKey:@"watchInterfaceActive"];
-    [defaults synchronize];
-}
-
-
--(BOOL) watchDetailsAtive{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    return [[defaults objectForKey:@"watchDetailsActive"] boolValue];
-}
--(void) setWatchDetailsActive:(bool)watchDetailsActive{
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
-    [defaults setObject:[NSNumber numberWithBool:watchDetailsActive] forKey:@"watchDetailsActive"];
-    [defaults synchronize];
-}
-
 + (DataAccess*) sharedInstance {
     static DataAccess *sharedDataAccess = nil;
     static dispatch_once_t onceToken;
@@ -121,7 +87,7 @@
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     
     if (coordinator) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     

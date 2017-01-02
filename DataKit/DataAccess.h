@@ -12,13 +12,10 @@
 @interface DataAccess : NSObject
 
 @property(strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic) bool watchInterfaceActive;
-@property (nonatomic) bool watchDetailsActive;
 
 - (void)saveManagedObjectContext;
 - (void)migrateStore;
 - (void)sendFeedback;
-- (bool) isWatchActive;
 
 + (DataAccess*) sharedInstance;
 

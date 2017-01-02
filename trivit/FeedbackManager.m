@@ -32,7 +32,7 @@
 - (void)feedbackWithObject:(Feedback *)dataObject managedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
 
-    NSURL *baseURL = [NSURL URLWithString:@"https://www.ballooninc.be/api/"];
+    NSURL *baseURL = [NSURL URLWithString:@"https://bi-api.ballooninc.be/trivit"];
 
     AFHTTPClient *client = [AFHTTPClient clientWithBaseURL:baseURL];
     [client setDefaultHeader:@"Accept" value:RKMIMETypeJSON];

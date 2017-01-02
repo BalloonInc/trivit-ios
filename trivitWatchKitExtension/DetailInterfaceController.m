@@ -60,18 +60,6 @@
     }
 }
 
-- (void)willActivate {
-    // This method is called when watch view controller is about to be visible to user
-    [super willActivate];
-    DataAccess.sharedInstance.watchDetailsActive = true;
-}
-
-- (void)didDeactivate {
-    // This method is called when watch view controller is no longer visible
-    [super didDeactivate];
-    DataAccess.sharedInstance.watchDetailsActive = false;
-
-}
 - (IBAction)plusButtonPressed {
     self.count++;
     [self reloadCounter];

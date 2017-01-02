@@ -188,7 +188,6 @@ int const OUTSIDE_TAP = 3;
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
     }
-    [self saveData];
 }
 
 // function to return the next index to use for new trivit color/tirivit title placeholder
@@ -233,7 +232,6 @@ int const OUTSIDE_TAP = 3;
     if (buttonIndex == 1) {
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         record.counter = [NSNumber numberWithInt:0];
-        [self saveData];
 
         [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay]; // update cell
     }
@@ -257,7 +255,6 @@ int const OUTSIDE_TAP = 3;
         [self updateLastEditedTrivits:indexPath.row];
         
         record.counter = [NSNumber numberWithInteger:currentCount];
-        [self saveData];
 
         [self buzzIt];
         // if new image ==> redraw cell height
@@ -297,10 +294,8 @@ int const OUTSIDE_TAP = 3;
 
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
         NSInteger currentCount = [record.counter integerValue] - 1;
-        if (currentCount >= 0){
+        if (currentCount >= 0)
             record.counter = [NSNumber numberWithInteger:currentCount];
-            [self saveData];  
-        }
 
         [self buzzIt];
         // if image got removed ==> redraw cell height
@@ -415,7 +410,6 @@ int const OUTSIDE_TAP = 3;
         record.title = self.cellBeingEdited.titleTextField.text;
         NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length > 0) && [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual:@"_"] ? @"ch_" : @"";
         record.type = tallyType;
-        [self saveData];
     }
     [self updateLastEditedTrivits:self.activeCellIndexPath.row];
 
@@ -597,12 +591,10 @@ int const OUTSIDE_TAP = 3;
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             if(indexPath.row<self.activeCellIndexPath.row)
                 self.activeCellIndexPath = [NSIndexPath indexPathForRow:self.activeCellIndexPath.row-1 inSection:0];
-            [self saveData];
             break;
         }
         case NSFetchedResultsChangeUpdate: {
             [self configureCell:(TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            [self saveData];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -611,6 +603,7 @@ int const OUTSIDE_TAP = 3;
             break;
         }
     }
+    [self saveData];
 }
 
 - (void)orientationChanged:(NSNotification *)notification {

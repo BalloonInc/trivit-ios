@@ -45,9 +45,7 @@
 - (instancetype)init {
     self = [super init];
     
-    if (self.workingData != nil){
-        [self loadTableData];
-    }
+    [self loadTableData];
 
     if (self) {
         [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
@@ -142,6 +140,9 @@
     self.activeColorSetDark = [Colors colorsetWithIndex:2*activeColorSet+1];
     self.activeColorSetLight = [Colors colorsetWithIndex:2*activeColorSet];
     
+    if (self.workingData == nil){
+        self.workingData = [[NSMutableArray alloc] init];
+    }
     NSInteger datarows = self.workingData.count?self.workingData.count:0;
     if (datarows<=self.initialLoad) [self loadInitialTableRows:datarows];
     
@@ -152,8 +153,6 @@
 }
 
 - (void) reloadCounters{
-    //[self.interfaceTable setNumberOfRows:[[self workingData] count] withRowType:@"TrivitWKCel"];
-    
     for (int i = 0; i<[[self workingData] count];i++)
         [self updateCounterAtIndex:i];
 }
@@ -214,14 +213,12 @@
     [self updateCounterAtIndex:self.selectedIndex];
     self.active=true;
     [super willActivate];
-    DataAccess.sharedInstance.watchInterfaceActive = true;
 }
 
 - (void)didDeactivate {
     self.active=false;
     [super didDeactivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
-    DataAccess.sharedInstance.watchInterfaceActive = false;
 }
 
 -(void) configureLastRow{
@@ -245,7 +242,6 @@
     [listItemRowController setTextColorCountLabel:[Colors colorWithIndex:color usingColorSet:self.activeColorSetDark]];
 
     [listItemRowController setItemName:[self.workingData[index] title]];
-    
 }
 
 - (void)updateCounterAtIndex:(NSInteger)index {
