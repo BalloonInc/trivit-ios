@@ -188,6 +188,7 @@ int const OUTSIDE_TAP = 3;
             NSLog(@"%@, %@", error, error.localizedDescription);
         }
     }
+    [self saveData];
 }
 
 // function to return the next index to use for new trivit color/tirivit title placeholder
@@ -232,6 +233,7 @@ int const OUTSIDE_TAP = 3;
     if (buttonIndex == 1) {
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
         record.counter = [NSNumber numberWithInt:0];
+        [self saveData];
 
         [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay]; // update cell
     }
@@ -255,6 +257,8 @@ int const OUTSIDE_TAP = 3;
         [self updateLastEditedTrivits:indexPath.row];
         
         record.counter = [NSNumber numberWithInteger:currentCount];
+        [self saveData];
+
         [self buzzIt];
         // if new image ==> redraw cell height
         if (currentCount % (5 * self.imagesPerRow) == 1) {
@@ -293,8 +297,11 @@ int const OUTSIDE_TAP = 3;
 
         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:swipedIndexPath];
         NSInteger currentCount = [record.counter integerValue] - 1;
-        if (currentCount >= 0)
+        if (currentCount >= 0){
             record.counter = [NSNumber numberWithInteger:currentCount];
+            [self saveData];  
+        }
+
         [self buzzIt];
         // if image got removed ==> redraw cell height
         if (currentCount % (5 * self.imagesPerRow) == 0) {
@@ -350,7 +357,6 @@ int const OUTSIDE_TAP = 3;
     NSIndexPath *tappedIndexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
     TrivitTableViewCell *tappedCell = (TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:tappedIndexPath];
     UIView *tappedView = [self.tableView hitTest:tapLocation withEvent:nil];
-
 
     if (tappedView == tappedCell.tallyImageZone)
         return CELL_TAP;
@@ -409,6 +415,7 @@ int const OUTSIDE_TAP = 3;
         record.title = self.cellBeingEdited.titleTextField.text;
         NSString *tallyType = (self.cellBeingEdited.titleTextField.text.length > 0) && [[self.cellBeingEdited.titleTextField.text substringToIndex:1] isEqual:@"_"] ? @"ch_" : @"";
         record.type = tallyType;
+        [self saveData];
     }
     [self updateLastEditedTrivits:self.activeCellIndexPath.row];
 
@@ -517,7 +524,6 @@ int const OUTSIDE_TAP = 3;
         [self.tableView scrollToRowAtIndexPath:self.shouldScrollToCellAtIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     // on next GUI update, do not scroll anymore
     self.shouldScrollToCellAtIndexPath = nil;
-    [self saveData];
 }
 
 - (void)scrollToExpandedCell:(NSIndexPath *)indexPath {
@@ -579,7 +585,6 @@ int const OUTSIDE_TAP = 3;
         if (completionblock)
             dispatch_async( dispatch_get_main_queue(), completionblock);
     });
-    
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -592,10 +597,12 @@ int const OUTSIDE_TAP = 3;
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             if(indexPath.row<self.activeCellIndexPath.row)
                 self.activeCellIndexPath = [NSIndexPath indexPathForRow:self.activeCellIndexPath.row-1 inSection:0];
+            [self saveData];
             break;
         }
         case NSFetchedResultsChangeUpdate: {
             [self configureCell:(TrivitTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self saveData];
             break;
         }
         case NSFetchedResultsChangeMove: {
@@ -615,12 +622,6 @@ int const OUTSIDE_TAP = 3;
 }
 
 #pragma mark - view load stuff
-
-- (void) sessionWatchStateDidChange:(WCSession *)session {
-    if (session.isPaired && session.isWatchAppInstalled){
-        [self saveData];
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -674,11 +675,6 @@ int const OUTSIDE_TAP = 3;
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-
-    [NSTimer scheduledTimerWithTimeInterval:2.0f
-                                     target:self selector:@selector(reloadData:) userInfo:nil repeats:YES];
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -695,6 +691,7 @@ int const OUTSIDE_TAP = 3;
         [self applicationDidBecomeActive:nil];
     }
     self.viewAppeared = true;
+    [self saveData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -758,25 +755,33 @@ int const OUTSIDE_TAP = 3;
     }
 }
 
--(void)saveData{
-    if(!self.cellBeingEdited)
-        [DataAccess.sharedInstance saveManagedObjectContext];
-    
-    WCSession *session = [WCSession defaultSession];
-    if (session != nil && session.isPaired && session.isWatchAppInstalled){
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        for (TallyModel *record in self.fetchedResultsController.fetchedObjects) {
-            NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: record];
-            NSString *timeString = [NSString stringWithFormat:@"%f", [record.createdAt timeIntervalSince1970]];
-            [dict setObject:encodedRecord forKey:timeString];
-        }
-
-        NSError *anyError;
-        if (![[WCSession defaultSession] updateApplicationContext:dict error:&anyError]) {
-            NSLog(@"updateApplicationContext failed with error %@", anyError);
-        }
+-(NSDictionary*) getEncodedTrivits{
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    for (TallyModel *record in self.fetchedResultsController.fetchedObjects) {
+        NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: record];
+        NSString *timeString = [NSString stringWithFormat:@"%f", [record.createdAt timeIntervalSince1970]];
+        [dict setObject:encodedRecord forKey:timeString];
     }
+    return dict;
 }
+
+-(void)saveData{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if(!self.cellBeingEdited)
+            [DataAccess.sharedInstance saveManagedObjectContext];
+        
+        WCSession *session = [WCSession defaultSession];
+        if (session != nil && session.isPaired && session.isWatchAppInstalled){
+            
+            NSError *anyError;
+            if (![[WCSession defaultSession] updateApplicationContext:[self getEncodedTrivits] error:&anyError]) {
+                NSLog(@"updateApplicationContext failed with error %@", anyError);
+            }
+        }
+    });
+}
+
+#pragma mark - Watch Connectivity
 
 -(void) session:(WCSession *)session didReceiveUserInfo:(NSDictionary<NSString *,id> *)userInfo {
     for (NSString *key in userInfo) {
@@ -786,39 +791,38 @@ int const OUTSIDE_TAP = 3;
             for (TallyModel *record in [self.fetchedResultsController fetchedObjects] ) {
                 if ([record.title isEqualToString:updatedTally.title] && [record.createdAt compare: updatedTally.createdAt] == NSOrderedSame){
                     record.counter = updatedTally.counter;
-                    [self.tableView reloadData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
                 }
             }
+        }
+        else if ([key isEqualToString:@"newTrivit"]){
+            TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
+            [self.managedObjectContext insertObject:newTally];
+            
+            // Save Record
+            NSError *error = nil;
+            if (![self.managedObjectContext save:&error]) {
+                if (error) {
+                    NSLog(@"Unable to save record.");
+                    NSLog(@"%@, %@", error, error.localizedDescription);
+                }
+            }
+            [DataAccess.sharedInstance saveManagedObjectContext];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         }
     }
 }
 
--(void) reloadData:(NSTimer *)timer{
-    if(self.cellBeingEdited)
-        return;
-    if (![DataAccess.sharedInstance isWatchActive]){
-        return;
+-(void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler {
+    for (NSString *key in message) {
+        if ([key isEqualToString:@"getLatestStatus"]) {
+            replyHandler([self getEncodedTrivits]);
+        }
     }
-    
-    DataAccess.sharedInstance.managedObjectContext=nil;
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:self.fetchRequest managedObjectContext:DataAccess.sharedInstance.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    self.managedObjectContext=DataAccess.sharedInstance.managedObjectContext;
-    
-    //refetch
-    NSError *error = nil;
-    [self.fetchedResultsController performFetch:&error];
-    [self.fetchedResultsController setDelegate:self];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
-    
-    NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.fetchedResultsController.fetchedObjects];
-    // save lastfetcheddata to see if updates are needed
-    self.lastFetchedData = [DataAccess copyLastFetchedData:self.fetchedResultsController.fetchedObjects];
-    if (difference>0)
-        [self.tableView reloadData];
 }
 
 - (void)resendUnsentFeedback {
@@ -864,7 +868,6 @@ int const OUTSIDE_TAP = 3;
 #pragma mark - view resize on keyboard show
 
 - (void)keyboardWasShown:(NSNotification *)aNotification {
-
     NSDictionary *info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
@@ -882,14 +885,12 @@ int const OUTSIDE_TAP = 3;
 }
 
 - (void)keyboardWillBeHidden:(NSNotification *)aNotification {
-    
     [self endEditTrivitTitle];
 
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, 0, self.tableView.contentInset.right);
 
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
-
 }
 
 @end

@@ -8,9 +8,10 @@
 
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
+#import <WatchConnectivity/WatchConnectivity.h>
 
 
-@interface DetailInterfaceController : WKInterfaceController
+@interface DetailInterfaceController : WKInterfaceController <WCSessionDelegate>
 
 @property (strong, nonatomic) NSString *title;
 @property (nonatomic) NSInteger count;

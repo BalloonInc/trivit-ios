@@ -45,15 +45,10 @@
 - (instancetype)init {
     self = [super init];
     
-    if ([WCSession isSupported]){
-        WCSession *session = [WCSession defaultSession];
-        session.delegate = self;
-        [session activateSession];
-    }
-    
     if (self.workingData != nil){
         [self loadTableData];
     }
+
     if (self) {
         [self setTitle:NSLocalizedString(@"Trivit", @"Trivit title for Watch app")];
     }
@@ -68,17 +63,39 @@
     return self;
 }
 
--(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
-    NSMutableArray *fetchedArray = [[NSMutableArray alloc] init];
-    for (NSData *encodedTally in applicationContext.allValues) {
+-(NSMutableArray *) unencodeTrivits: (NSArray*) encodedTrivits {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+
+    for (NSData *encodedTally in encodedTrivits) {
         TallyModel *tally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
-        [fetchedArray addObject:tally];
+        [result addObject:tally];
     }
     NSSortDescriptor *sortDescriptor;
     sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt"
                                                  ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    self.workingData = [[NSMutableArray alloc] initWithArray: [fetchedArray sortedArrayUsingDescriptors:sortDescriptors]];
+    return [[NSMutableArray alloc] initWithArray: [result sortedArrayUsingDescriptors:sortDescriptors]];
+
+}
+
+-(void) fetchDataFromPhone{
+    [[WCSession defaultSession] sendMessage:@{@"getLatestStatus":@""} replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
+
+        self.workingData = [self unencodeTrivits:replyMessage.allValues];
+        NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
+        if(difference==1)
+            dispatch_sync(dispatch_get_main_queue(), ^{[self reloadCounters];});
+        if(difference==2)
+            dispatch_sync(dispatch_get_main_queue(), ^{[self loadTableData];});
+        self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
+
+    } errorHandler:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+-(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
+    self.workingData = [self unencodeTrivits: applicationContext.allValues];
 
     NSInteger difference = [DataAccess whatIsUpdatedForOldArray:self.lastFetchedData andNewArray:self.workingData];
     if(difference==1)
@@ -119,7 +136,6 @@
 }
 
 -(void) loadTableData{
-    
     NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
 
     NSInteger activeColorSet = [[defaults objectForKey:@"selectedColorSet"] integerValue];
@@ -143,7 +159,6 @@
 }
 
 - (void) table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex{
-    
     self.selectedIndex = rowIndex;
     
     if (rowIndex==[self.workingData count]){
@@ -157,19 +172,19 @@
         [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
         newRow.title = [NSString stringWithFormat:@"⌚️ added %@",[dateFormatter stringFromDate:[NSDate date]]];
 
-
         newRow.counter = [NSNumber numberWithInteger:0];
         newRow.color = [NSNumber numberWithInteger:[((TallyModel*)[self.workingData lastObject]).color integerValue]+1];
         newRow.type = @"";
         newRow.createdAt = [NSDate date];
 
-
         [self.workingData addObject:newRow];
         // update lastFetchedData, so no refresh is triggered when returning to this VC later
         self.lastFetchedData = [DataAccess copyLastFetchedData:self.workingData];
-        [DataAccess.sharedInstance.managedObjectContext insertObject:newRow];
-        [DataAccess.sharedInstance saveManagedObjectContext];
-
+        
+        // background transfer to iPhone
+        NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: newRow];
+        [[WCSession defaultSession] transferUserInfo:@{@"newTrivit":encodedRecord}];
+        
         [self.interfaceTable insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:rowIndex] withRowType:@"TrivitWKCel"];
         [self configureRowControllerAtIndex:rowIndex];
         [self configureLastRow];
@@ -189,6 +204,13 @@
 }
 
 - (void)willActivate {
+    if ([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+    [self fetchDataFromPhone];
+
     [self updateCounterAtIndex:self.selectedIndex];
     self.active=true;
     [super willActivate];
@@ -200,7 +222,6 @@
     [super didDeactivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
     DataAccess.sharedInstance.watchInterfaceActive = false;
-
 }
 
 -(void) configureLastRow{

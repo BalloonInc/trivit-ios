@@ -11,7 +11,6 @@
 #import "InterfaceController.h"
 #import "TallyModel.h"
 #import "DataAccess.h"
-#import <WatchConnectivity/WatchConnectivity.h>
 
 @interface DetailInterfaceController()
 
@@ -30,6 +29,12 @@
 @implementation DetailInterfaceController
 
 - (void)awakeWithContext:(id)context {
+    if ([WCSession isSupported]){
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+    
     [super awakeWithContext:context];
     
     self.data = [context objectForKey:@"data"];
@@ -40,6 +45,19 @@
     self.count = [[self.data[self.selectedRow] counter] integerValue];
 
     [self loadTableData];
+}
+
+-(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
+    for (NSData *encodedTally in applicationContext.allValues) {
+        TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
+        TallyModel *selectedTally = self.data[self.selectedRow];
+        if ([newTally.createdAt compare:selectedTally.createdAt] == NSOrderedSame && [newTally.title isEqualToString:selectedTally.title]){
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.count = [newTally.counter integerValue];
+                [self reloadCounter];
+            });
+        }
+    }
 }
 
 - (void)willActivate {
@@ -57,16 +75,19 @@
 - (IBAction)plusButtonPressed {
     self.count++;
     [self reloadCounter];
+    [self sendBackgroundTransfer];
 }
 
 - (IBAction)minusButtonPressed {
     if(self.count>0) self.count--;
     [self reloadCounter];
+    [self sendBackgroundTransfer];
 }
 
 - (IBAction)resetButtonPressed {
     self.count = 0;
     [self reloadCounter];
+    [self sendBackgroundTransfer];
 }
 
 - (void)loadTableData {
@@ -76,7 +97,6 @@
     [self.trivitButtonGroup setBackgroundColor:self.darkColor];
     [self.resetButtonGroup setBackgroundColor:self.darkColor];
     [self reloadCounter];
-    
 }
 
 -(void) reloadCounter{
@@ -89,19 +109,32 @@
     // update view
     NSString *labelText = [NSString stringWithFormat:@"%ld",(long)self.count];
     [self.countButton setTitle:labelText];
-    
+}
+
+-(void) sendBackgroundTransfer {
     // background transfer to iPhone
     NSMutableDictionary *updatedCounter = [[NSMutableDictionary alloc] init];
-    
+
     TallyModel *newTrivit = (TallyModel *) self.data[self.selectedRow];
     newTrivit.counter = [[NSNumber alloc] initWithInt: self.count];
+    NSArray *outstandingTransfers = [[WCSession defaultSession] outstandingUserInfoTransfers];
+    for (WCSessionUserInfoTransfer *transfer in outstandingTransfers){
+        for (NSString *key in transfer.userInfo) {
+            if ([key isEqualToString:@"updatedCount"]){
+                TallyModel *updatedModel = [NSKeyedUnarchiver unarchiveObjectWithData:transfer.userInfo[key]];
+                
+                if ([updatedModel.createdAt compare: newTrivit.createdAt] == NSOrderedSame && [updatedModel.title isEqualToString: newTrivit.title]){
+                    [transfer cancel];
+                    break;
+                }
+            }
+        }
+    }
+    
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: newTrivit];
-
+    
     [updatedCounter setValue:encodedRecord forKey:@"updatedCount"];
     [[WCSession defaultSession] transferUserInfo:updatedCounter];
 }
 
 @end
-
-
-
