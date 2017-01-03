@@ -134,7 +134,7 @@
 }
 
 - (void) startGoogleAnalytics{
-#ifdef DEBUGG
+#ifdef DEBUG
     NSLog(@"Google Analytics not started, DEBUG mode on!");
 #else
     // Configure tracker from GoogleService-Info.plist.
