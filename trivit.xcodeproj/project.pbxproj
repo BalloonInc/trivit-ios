@@ -40,6 +40,10 @@
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C69C0B6195B6F4E002A3F53 /* trivitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C69C0B5195B6F4E002A3F53 /* trivitTests.m */; };
 		6C727E421A840E4A001B9A4E /* DetailInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C727E411A840E4A001B9A4E /* DetailInterfaceController.m */; };
+		6C79EB0A1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
+		6C79EB0B1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
+		6C79EB0C1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
+		6C79EB0D1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
 		6C7CE6361A4F6889004EE27D /* SettingButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */; };
 		6C8263AF1A5F29AC002A9941 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B11A5F29AC002A9941 /* InfoPlist.strings */; };
 		6C8263B41A5F29AC002A9941 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C8263B61A5F29AC002A9941 /* Localizable.strings */; };
@@ -176,7 +180,6 @@
 		63D6CBFD627BC17E625D5DF3 /* Pods-trivit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trivit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trivit/Pods-trivit.debug.xcconfig"; sourceTree = "<group>"; };
 		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
 		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
-		6C082B8B1DB036D1005D4C7A /* DataKit copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DataKit copy-Info.plist"; path = "/Users/wouter/Dropbox/app/trivit/DataKit copy-Info.plist"; sourceTree = "<absolute>"; };
 		6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits2.xcdatamodel; sourceTree = "<group>"; };
 		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = trivit/NewRelicAgent.framework; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -253,6 +256,7 @@
 		6C7697521BC9BBDD00C0CEDC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C7697531BC9BBDD00C0CEDC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C7697541BC9BBE500C0CEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingButtonCell.h; sourceTree = "<group>"; };
 		6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingButtonCell.m; sourceTree = "<group>"; };
 		6C8263B01A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -409,7 +413,6 @@
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
 				6C69C09A195B6F4E002A3F53 /* Products */,
 				7B88246A1B45895BE7938E27 /* Pods */,
-				6C082B8B1DB036D1005D4C7A /* DataKit copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +448,7 @@
 		6C69C09C195B6F4E002A3F53 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */,
 				6C5C4B9E1A61579400C87401 /* InfoPlist.strings */,
 				6C5C4B981A61579300C87401 /* Localizable.strings */,
 				6C69C09D195B6F4E002A3F53 /* Info.plist */,
@@ -869,6 +873,7 @@
 				6C5C4B9C1A61579400C87401 /* InfoPlist.strings in Resources */,
 				6C5C4B961A61579300C87401 /* Localizable.strings in Resources */,
 				6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */,
+				6C79EB0A1E1B13B0008350FD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +890,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C9EA3A61BC9AD47008682A0 /* InfoPlist.strings in Resources */,
+				6C79EB0D1E1B13B0008350FD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,6 +907,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CE4BBDF1A1D609C005E9BCD /* Images.xcassets in Resources */,
+				6C79EB0B1E1B13B0008350FD /* GoogleService-Info.plist in Resources */,
 				6C8263B91A5F29AC002A9941 /* InfoPlist.strings in Resources */,
 				6C8263B41A5F29AC002A9941 /* Localizable.strings in Resources */,
 			);
@@ -911,6 +918,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CE4BBEA1A1D609D005E9BCD /* Interface.storyboard in Resources */,
+				6C79EB0C1E1B13B0008350FD /* GoogleService-Info.plist in Resources */,
 				6C8263AF1A5F29AC002A9941 /* InfoPlist.strings in Resources */,
 				6CE4BBEC1A1D609D005E9BCD /* Images.xcassets in Resources */,
 			);
@@ -931,7 +939,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		340BF098AE0E86EBF5524E07 /* [CP] Embed Pods Frameworks */ = {

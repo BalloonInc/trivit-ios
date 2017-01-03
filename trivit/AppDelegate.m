@@ -13,12 +13,14 @@
 #import "TallyModel.h"
 #import <CoreSpotlight/CoreSpotlight.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <Google/Analytics.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self startNewRelic];
+    [self startGoogleAnalytics];
     [self initApp];
     [self createDynamicShortcutItems];
     return YES;
@@ -129,7 +131,22 @@
 #else
     [NewRelicAgent startWithApplicationToken:@"__NEW_RELIC_TOKEN__"];
 #endif
+}
+
+- (void) startGoogleAnalytics{
+#ifdef DEBUGG
+    NSLog(@"Google Analytics not started, DEBUG mode on!");
+#else
+    // Configure tracker from GoogleService-Info.plist.
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
     
+    // Optional: configure GAI options.
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
+    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
+#endif
 }
 
 - (void) initApp{

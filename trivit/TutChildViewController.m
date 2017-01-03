@@ -8,7 +8,7 @@
 
 #import "TutChildViewController.h"
 #import "TutMasterViewController.h"
-
+#import <Google/Analytics.h>
 @interface TutChildViewController ()
 @property(weak, nonatomic) IBOutlet UILabel *textLabel;
 @property(weak, nonatomic) IBOutlet UIImageView *tutorialImage;
@@ -57,6 +57,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.skipButton.hidden = (self.index == 5);
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"Tutorial p. %lu",(unsigned long)self.index]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)handleTap:(UIGestureRecognizer *)tapRecognizer {

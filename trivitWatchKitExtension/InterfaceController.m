@@ -12,7 +12,6 @@
 #import "DataKit.h"
 #import "TallyModel.h"
 #import <WatchConnectivity/WatchConnectivity.h>
-
 #import "Colors.h"
 
 @interface InterfaceController() <WCSessionDelegate>
@@ -238,7 +237,7 @@
 }
 
 - (void)updateCounterAtIndex:(NSInteger)index {
-    if ([[self workingData] count] == 0)
+    if ((int)[self.workingData count] < (int)index+1)
         return;
     
     TallyModel *tally = (TallyModel *) self.workingData[index];
