@@ -242,6 +242,7 @@ int const OUTSIDE_TAP = 3;
         record.counter = [NSNumber numberWithInt:0];
 
         [[self.tableView cellForRowAtIndexPath:self.activeCellIndexPath] setNeedsDisplay]; // update cell
+        [self saveData];
     }
 }
 
@@ -280,7 +281,7 @@ int const OUTSIDE_TAP = 3;
         if(flash)
             [increasedCell flashIncrement];
     }
-
+    [self saveData];
 }
 
 - (void)handleTallyDecrease:(UIGestureRecognizer *)tapRecognizer {
@@ -315,6 +316,7 @@ int const OUTSIDE_TAP = 3;
             [self.tableView endUpdates]; // necessary for the animation of the cell growth
         }
     }
+    [self saveData];
 }
 
 - (void)buzzIt {
@@ -431,6 +433,7 @@ int const OUTSIDE_TAP = 3;
     self.cellBeingEdited = nil;
 
     self.keyboardShown = false;
+    [self saveData];
 }
 
 #pragma mark - cell height calculation
@@ -446,7 +449,7 @@ int const OUTSIDE_TAP = 3;
         return CELL_HEIGHT_SECTION1 + rows * (TALLY_IMAGE_DIMENSION + COLLECTIONVIEW_VERTICAL_SPACING);
 }
 
-#pragma mark - Magic to make the tableview datasource working
+#pragma mark - UITableView datasource working
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.view.userInteractionEnabled = NO;
@@ -484,6 +487,8 @@ int const OUTSIDE_TAP = 3;
     cell.cellIdentifier = (int) indexPath.row;
     if (!cell.titleTextField.delegate)
         cell.titleTextField.delegate = self;
+    [cell setNeedsLayout];
+    [cell setNeedsDisplay];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -603,12 +608,15 @@ int const OUTSIDE_TAP = 3;
     switch (type) {
         case NSFetchedResultsChangeInsert: {
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self saveData];
             break;
         }
         case NSFetchedResultsChangeDelete: {
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
             if(indexPath.row<self.activeCellIndexPath.row)
                 self.activeCellIndexPath = [NSIndexPath indexPathForRow:self.activeCellIndexPath.row-1 inSection:0];
+            [self saveData];
             break;
         }
         case NSFetchedResultsChangeUpdate: {
@@ -621,7 +629,6 @@ int const OUTSIDE_TAP = 3;
             break;
         }
     }
-    [self saveData];
 }
 
 - (void)orientationChanged:(NSNotification *)notification {
