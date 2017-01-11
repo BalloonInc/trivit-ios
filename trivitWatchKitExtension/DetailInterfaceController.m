@@ -63,20 +63,28 @@
 - (IBAction)plusButtonPressed {
     self.count++;
     [self reloadCounter];
-    [self sendBackgroundTransfer];
+    [self sendUpdatedCount];
 }
 
 - (IBAction)minusButtonPressed {
     if(self.count>0) self.count--;
     [self reloadCounter];
-    [self sendBackgroundTransfer];
+    [self sendUpdatedCount];
 }
 
 - (IBAction)resetButtonPressed {
     self.count = 0;
     [self reloadCounter];
-    [self sendBackgroundTransfer];
+    [self sendUpdatedCount];
 }
+
+- (IBAction)deleteButtonPressed {
+    [self removeTrivit];
+    // TODO: remove from this list
+    [self.data removeObjectAtIndex:self.selectedRow];
+    [self popController];
+}
+
 
 - (void)loadTableData {
     [self.titleLabel setText:[self.data[self.selectedRow] title]];
@@ -99,7 +107,7 @@
     [self.countButton setTitle:labelText];
 }
 
--(void) sendBackgroundTransfer {
+-(void) sendUpdatedCount {
     // background transfer to iPhone
     NSMutableDictionary *updatedCounter = [[NSMutableDictionary alloc] init];
 
@@ -123,6 +131,15 @@
     
     [updatedCounter setValue:encodedRecord forKey:@"updatedCount"];
     [[WCSession defaultSession] transferUserInfo:updatedCounter];
+}
+
+-(void) removeTrivit {
+    TallyModel *trivitToRemove = (TallyModel *) self.data[self.selectedRow];
+
+    NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: trivitToRemove];
+    NSMutableDictionary *deleteDict = [[NSMutableDictionary alloc] init];
+    [deleteDict setValue:encodedRecord forKey:@"deleteTrivit"];
+    [[WCSession defaultSession] transferUserInfo:deleteDict];
 }
 
 @end

@@ -857,6 +857,36 @@ int const OUTSIDE_TAP = 3;
                 [self.tableView reloadData];
             });
         }
+        else if ([key isEqualToString:@"deleteTrivit"]){
+            
+            TallyModel *tallyToRemove = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
+
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"title == %@ AND createdAt == %@", tallyToRemove.title, tallyToRemove.createdAt]];
+            NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
+            if (results.count == 1){
+                [self.managedObjectContext deleteObject:[results objectAtIndex:0]];
+            }
+
+
+             NSLog(@"Delete from Watch: %@: count: %i",tallyToRemove.title, [tallyToRemove.counter intValue]);
+            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitRemove"
+                                                                       action:@"RemoveFromWatch"
+                                                                        label:[NSString stringWithFormat:@"'%@'",tallyToRemove.title]
+                                                                        value:@1] build]];
+            // Save Record
+            NSError *error = nil;
+            if (![self.managedObjectContext save:&error]) {
+                if (error) {
+                    NSLog(@"Unable to save record.");
+                    NSLog(@"%@, %@", error, error.localizedDescription);
+                }
+            }
+            [DataAccess.sharedInstance saveManagedObjectContext];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
     }
 }
 

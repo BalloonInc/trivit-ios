@@ -27,7 +27,6 @@
 @property(strong, nonatomic) NSArray *lastFetchedData;
 @property(strong, nonatomic) NSMutableArray *workingData;
 
-@property(nonatomic) bool active;
 @property (strong, nonatomic) NSArray* activeColorSetLight;
 @property (strong, nonatomic) NSArray* activeColorSetDark;
 @end
@@ -184,7 +183,6 @@
     TallyModel *t = (TallyModel*) self.workingData[rowIndex];
     NSInteger color = [[t color] integerValue];
     
-    self.active=false;
     [self pushControllerWithName:@"detailController"
                          context:[NSDictionary dictionaryWithObjectsAndKeys:
                                   [NSNumber numberWithInteger:rowIndex], @"selectedRow",
@@ -201,14 +199,16 @@
         [session activateSession];
     }
     [self fetchDataFromPhone];
-
-    [self updateCounterAtIndex:self.selectedIndex];
-    self.active=true;
+    
+    if (self.selectedIndex >= 0){
+        [self loadTableData];
+        [self updateCounterAtIndex:self.selectedIndex];
+        self.selectedIndex=-1;
+    }
     [super willActivate];
 }
 
 - (void)didDeactivate {
-    self.active=false;
     [super didDeactivate];
     [DataAccess.sharedInstance saveManagedObjectContext];
 }
