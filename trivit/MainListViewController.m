@@ -820,15 +820,16 @@ int const OUTSIDE_TAP = 3;
 
 -(void) session:(WCSession *)session didReceiveUserInfo:(NSDictionary<NSString *,id> *)userInfo {
     for (NSString *key in userInfo) {
-        if ([key isEqual: @"updatedCount"]){
+        if ([key isEqual: @"updatedTrivit"]){
             TallyModel *updatedTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
             
             for (TallyModel *record in [self.fetchedResultsController fetchedObjects] ) {
 
-                if ([record.title isEqualToString:updatedTally.title] && [record.createdAt compare: updatedTally.createdAt] == NSOrderedSame){
+                if ([record.createdAt compare: updatedTally.createdAt] == NSOrderedSame){
                     NSLog(@"Got updated count for tally %@: count: %i",updatedTally.title, [updatedTally.counter intValue]);
 
                     record.counter = updatedTally.counter;
+                    record.title = updatedTally.title;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                     });
@@ -862,7 +863,7 @@ int const OUTSIDE_TAP = 3;
             TallyModel *tallyToRemove = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
 
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"TallyModel"];
-            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"title == %@ AND createdAt == %@", tallyToRemove.title, tallyToRemove.createdAt]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", tallyToRemove.createdAt]];
             NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:NULL];
             if (results.count == 1){
                 [self.managedObjectContext deleteObject:[results objectAtIndex:0]];

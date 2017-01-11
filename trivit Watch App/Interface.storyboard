@@ -142,6 +142,11 @@
                                     <action selector="resetButtonPressed" destination="HZg-mk-xyX" id="svQ-P3-ggo"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Rename" icon="info" id="L04-2W-phH">
+                                <connections>
+                                    <action selector="renameTrivitButtonPressed" destination="HZg-mk-xyX" id="YJw-Nu-FsU"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>

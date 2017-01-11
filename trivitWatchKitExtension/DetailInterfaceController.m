@@ -51,9 +51,10 @@
     for (NSData *encodedTally in applicationContext.allValues) {
         TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
         TallyModel *selectedTally = self.data[self.selectedRow];
-        if ([newTally.createdAt compare:selectedTally.createdAt] == NSOrderedSame && [newTally.title isEqualToString:selectedTally.title]){
+        if ([newTally.createdAt compare:selectedTally.createdAt] == NSOrderedSame){
             dispatch_sync(dispatch_get_main_queue(), ^{
                 self.count = [newTally.counter integerValue];
+                self.title = newTally.title;
                 [self reloadCounter];
             });
         }
@@ -63,19 +64,19 @@
 - (IBAction)plusButtonPressed {
     self.count++;
     [self reloadCounter];
-    [self sendUpdatedCount];
+    [self sendUpdatedTrivit];
 }
 
 - (IBAction)minusButtonPressed {
     if(self.count>0) self.count--;
     [self reloadCounter];
-    [self sendUpdatedCount];
+    [self sendUpdatedTrivit];
 }
 
 - (IBAction)resetButtonPressed {
     self.count = 0;
     [self reloadCounter];
-    [self sendUpdatedCount];
+    [self sendUpdatedTrivit];
 }
 
 - (IBAction)deleteButtonPressed {
@@ -84,7 +85,18 @@
     [self.data removeObjectAtIndex:self.selectedRow];
     [self popController];
 }
-
+- (IBAction)renameTrivitButtonPressed {
+    [self presentTextInputControllerWithSuggestions:@[@"Days without 🍪",@"🍺 this month",@"Went 🏈",@"⏰ early"]
+                                   allowedInputMode:WKTextInputModePlain
+                                         completion:^(NSArray *array){
+        if (array != nil) {
+            NSString *title = [array objectAtIndex:0];
+            [self.data[self.selectedRow] setTitle:title];
+            [self.titleLabel setText: title];
+            [self sendUpdatedTrivit];
+        }
+    }];
+}
 
 - (void)loadTableData {
     [self.titleLabel setText:[self.data[self.selectedRow] title]];
@@ -107,7 +119,7 @@
     [self.countButton setTitle:labelText];
 }
 
--(void) sendUpdatedCount {
+-(void) sendUpdatedTrivit {
     // background transfer to iPhone
     NSMutableDictionary *updatedCounter = [[NSMutableDictionary alloc] init];
 
@@ -116,10 +128,10 @@
     NSArray *outstandingTransfers = [[WCSession defaultSession] outstandingUserInfoTransfers];
     for (WCSessionUserInfoTransfer *transfer in outstandingTransfers){
         for (NSString *key in transfer.userInfo) {
-            if ([key isEqualToString:@"updatedCount"]){
+            if ([key isEqualToString:@"updatedTrivit"]){
                 TallyModel *updatedModel = [NSKeyedUnarchiver unarchiveObjectWithData:transfer.userInfo[key]];
                 
-                if ([updatedModel.createdAt compare: newTrivit.createdAt] == NSOrderedSame && [updatedModel.title isEqualToString: newTrivit.title]){
+                if ([updatedModel.createdAt compare: newTrivit.createdAt] == NSOrderedSame){
                     [transfer cancel];
                     break;
                 }
@@ -129,7 +141,7 @@
     
     NSData *encodedRecord = [NSKeyedArchiver archivedDataWithRootObject: newTrivit];
     
-    [updatedCounter setValue:encodedRecord forKey:@"updatedCount"];
+    [updatedCounter setValue:encodedRecord forKey:@"updatedTrivit"];
     [[WCSession defaultSession] transferUserInfo:updatedCounter];
 }
 
