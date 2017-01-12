@@ -47,19 +47,6 @@
     [self loadTableData];
 }
 
--(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
-    for (NSData *encodedTally in applicationContext.allValues) {
-        TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
-        TallyModel *selectedTally = self.data[self.selectedRow];
-        if ([newTally.createdAt compare:selectedTally.createdAt] == NSOrderedSame){
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                self.count = [newTally.counter integerValue];
-                self.title = newTally.title;
-                [self reloadCounter];
-            });
-        }
-    }
-}
 
 - (IBAction)plusButtonPressed {
     self.count++;
@@ -117,6 +104,20 @@
     // update view
     NSString *labelText = [NSString stringWithFormat:@"%ld",(long)self.count];
     [self.countButton setTitle:labelText];
+}
+
+-(void) session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext{
+    for (NSData *encodedTally in applicationContext.allValues) {
+        TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:encodedTally];
+        TallyModel *selectedTally = self.data[self.selectedRow];
+        if ([newTally.createdAt compare:selectedTally.createdAt] == NSOrderedSame){
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.count = [newTally.counter integerValue];
+                self.title = newTally.title;
+                [self reloadCounter];
+            });
+        }
+    }
 }
 
 -(void) sendUpdatedTrivit {
