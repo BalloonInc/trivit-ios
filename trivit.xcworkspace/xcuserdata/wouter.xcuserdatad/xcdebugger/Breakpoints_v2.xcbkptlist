@@ -1845,7 +1845,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
             endingLineNumber = "85"
-            landmarkName = "-deleteButtonPressed"
+            landmarkName = "-renameTrivitButtonPressed"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1861,7 +1861,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
             endingLineNumber = "92"
-            landmarkName = "-renameTrivitButtonPressed"
+            landmarkName = "-loadTableData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
