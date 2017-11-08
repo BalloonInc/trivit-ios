@@ -1,0 +1,72 @@
+# More documentation about how to customize your build
+# can be found here:
+# https://docs.fastlane.tools
+fastlane_version "2.25"
+
+default_platform :ios
+
+
+lane :build do
+  begin
+    setup_jenkins
+    cocoapods
+    gym(
+      scheme: "trivit",
+      configuration: "Debug",
+      xcpretty_formatter:"fastlane/nowarn-formatter.rb",
+      clean: true
+    )
+  rescue Exception => e
+    slack(
+      message: "Trivit build failed.",
+      slack_url: "$(SLACK_URL)",
+      success:false
+    )
+    throw e
+  end
+end
+
+lane :test do 
+  begin
+    scan(
+      workspace: 'trivit.xcworkspace',
+      scheme: "trivit",
+      devices: ["iPhone 6s"],
+      formatter: "echo fastlane/nowarn-formatter.rb",
+      skip_build: true,
+      output_types: "html,junit"
+    )
+  rescue Exception => e
+    slack(
+      message: "Trivit tests failed.",
+      slack_url: "$(SLACK_URL)",
+      success:false
+    )
+    throw e
+  end
+end
+
+lane :analyze do
+    scan(
+      workspace: 'trivit.xcworkspace',
+      scheme: "trivit",
+      devices: ["iPhone 6s"],
+      formatter: "echo fastlane/nowarn-formatter.rb",
+      derived_data_path: "./DerivedData", 
+      output_directory: "./reports"
+    )
+    # to be re-enabled after https://github.com/fastlane/fastlane/issues/8812 and https://github.com/fastlane/fastlane/issues/8760 are resolved
+    # slather(
+    #   cobertura_xml: true, 
+    #   jenkins: true, 
+    #   scheme: "Whisper", 
+    #   build_directory: "./DerivedData", 
+    #   output_directory: "./reports", 
+    #   proj: "./Whisper.xcodeproj"
+    # )
+    sh("cd .. && lizard ./[SOURCE_FOLDER] -l swift --xml > ./reports/lizard-report.xml")
+    oclint(
+      report_path: "./reports/oclint.txt", 
+    )
+    sonar
+end

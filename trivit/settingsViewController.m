@@ -22,8 +22,6 @@
 @property(nonatomic) int cellWidth;
 @property(nonatomic) int spacing;
 @property(strong,nonatomic) id<GAITracker> tracker;
-
-@property(nonatomic) UIDeviceOrientation currentOrientation;
 @end
 
 @implementation SettingsViewController
@@ -36,21 +34,6 @@ int const RESETCELL = 3;
 int const FEEDBACKCELL = 4;
 int const VIBRATIONCELL = 5;
 int const NUMBEROFCELLS = 6;
-
-#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
-
-#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
-#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
-#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
-#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
-
-#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
-#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
-#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
-#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
-
 
 #pragma mark - Lazy instantiators
 
@@ -302,31 +285,20 @@ int const NUMBEROFCELLS = 6;
 }
 
 - (void)redoLayout:(NSNotification *)notification {
-    self.currentOrientation = [[UIDevice currentDevice] orientation];
-    if (IS_IPHONE_4_OR_LESS){
-        // for iPhone 4S, smaller tiles in portrait
-        self.cellHeight = 124;
-        self.cellWidth = 136;
+    int numberOfCellsPerRow = 2;
+    int numberOfCellsPerColumn = 3;
+    if ( UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
+        numberOfCellsPerRow = 3;
+        numberOfCellsPerColumn = 2;
     }
-    else if (IS_IPHONE_5){
-        self.cellHeight = 136;
-        self.cellWidth = 136;
-    }
-    else if (IS_IPHONE_6){
-        self.cellHeight = 164;
-        self.cellWidth = 164;
-        
-    }
-    else if (IS_IPHONE_6P){
-        self.cellHeight = 178;
-        self.cellWidth = 178;
-    }
-    else{
-        self.cellHeight = 124;
-        self.cellWidth = 136;
-    }
+    self.spacing = 16;
+    CGFloat barHeight = self.navigationController.navigationBar.frame.size.height;
+    self.cellWidth = (self.view.frame.size.width - ( numberOfCellsPerRow + 1 ) * self.spacing ) / numberOfCellsPerRow;
+    self.cellHeight = (self.view.frame.size.height - barHeight - ( numberOfCellsPerColumn + 2 ) * self.spacing ) / numberOfCellsPerColumn;
     
-    self.spacing = 10;
+    if (self.cellHeight > 1.1 * self.cellWidth){
+        self.cellHeight = self.cellWidth * 1.1;
+    }
     
     if (notification) {
         [self.collectionView.collectionViewLayout invalidateLayout];

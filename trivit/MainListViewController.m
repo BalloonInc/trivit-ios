@@ -30,6 +30,8 @@
 @property(strong,nonatomic) NSString *startupAction;
 @property(nonatomic) NSInteger indexAtStartup;
 @property(strong,nonatomic) id<GAITracker> tracker;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *createButton;
 @end
 
 @implementation MainListViewController
@@ -168,6 +170,18 @@ int const OUTSIDE_TAP = 3;
 - (IBAction)addButtonPressed {
     [self addNewTrivit];
 }
+
+- (IBAction)editButtonPressed:(id)sender {
+    if ([[self tableView] isEditing]){
+        [[self tableView] setEditing:false];
+        [[self editButton] setTitle:@"Edit"];
+    }
+    else {
+        [[self tableView] setEditing:true];
+        [[self editButton] setTitle:@"Done"];
+    }
+}
+
 
 - (void)addItemWithTitle:(NSString *)title andCount:(NSInteger)count {
     // Color index: last tally in the aray +1
@@ -498,6 +512,56 @@ int const OUTSIDE_TAP = 3;
     return [sectionInfo numberOfObjects];
 }
 
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *moreButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Color" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                    {
+                                        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                                        if (record){
+                                            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
+                                                                                                       action:@"ToggleColor"
+                                                                                                        label:[NSString stringWithFormat:@"'%@'",record.title]
+                                                                                                        value:@1] build]];
+                                            
+                                            record.color = [NSNumber numberWithInt:[record.color intValue] + 1];
+
+                                            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+                                        }
+                                    }];
+    moreButton.backgroundColor = [UIColor colorWithRed:0.295
+                                                      green:0.851
+                                                       blue:0.392
+                                                      alpha:1.0f];
+    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                     {
+                                         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                                         if (record){
+                                             [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
+                                                                                                        action:@"Delete"
+                                                                                                         label:[NSString stringWithFormat:@"'%@'",record.title]
+                                                                                                         value:@1] build]];
+                                             
+                                             [self.fetchedResultsController.managedObjectContext deleteObject:record];
+                                             [self removeFromLastEditedTrivits: indexPath.row];
+                                         }
+                                     }];
+    
+    return @[deleteButton, moreButton];
+}
+
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {    
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableview canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return !self.keyboardShown;
 }
@@ -511,23 +575,12 @@ int const OUTSIDE_TAP = 3;
 -(void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
     TrivitTableViewCell *cell = (TrivitTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     cell.loadAnimation=true;
-
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (record){
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
-                                                                       action:@"Delete"
-                                                                        label:[NSString stringWithFormat:@"'%@'",record.title]
-                                                                        value:@1] build]];
-
-            [self.fetchedResultsController.managedObjectContext deleteObject:record];
-            [self removeFromLastEditedTrivits: indexPath.row];
-        }
-    }
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    return;
 }
+
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
