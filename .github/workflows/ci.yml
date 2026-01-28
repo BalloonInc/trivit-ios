@@ -74,7 +74,6 @@ jobs:
 
       - name: Build
         run: |
-          set -o pipefail
           xcodebuild build-for-testing \
             -project Trivit.xcodeproj \
             -scheme Trivit \
@@ -85,7 +84,12 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             IPHONEOS_DEPLOYMENT_TARGET=18.5 \
-            | xcpretty
+            2>&1 | tee build.log
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "Build failed, showing errors:"
+            grep -E "error:|warning:" build.log | tail -50
+            exit 1
+          fi
 
       - name: Run Unit Tests
         run: |
