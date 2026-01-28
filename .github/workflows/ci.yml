@@ -130,7 +130,7 @@ jobs:
           set -o pipefail
           xcodebuild build \
             -project Trivit.xcodeproj \
-            -scheme Trivit \
+            -scheme Trivit-macOS \
             -destination "platform=macOS" \
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
