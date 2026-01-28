@@ -1,72 +1,244 @@
-# More documentation about how to customize your build
-# can be found here:
-# https://docs.fastlane.tools
-fastlane_version "2.25"
+# Fastlane configuration for Trivit Travel Tracker
 
-default_platform :ios
+default_platform(:ios)
 
+platform :ios do
+  # ============================================
+  # Screenshot Generation
+  # ============================================
 
-lane :build do
-  begin
-    setup_jenkins
-    cocoapods
-    gym(
-      scheme: "trivit",
-      configuration: "Debug",
-      xcpretty_formatter:"fastlane/nowarn-formatter.rb",
-      clean: true
+  desc "Generate App Store screenshots on all required device sizes"
+  lane :screenshots do
+    capture_screenshots(
+      project: File.expand_path("../Trivit.xcodeproj", __dir__),
+      scheme: "TrivitUITests",
+      devices: [
+        "iPhone 17 Pro Max",      # 6.9" display (required)
+        "iPhone 17 Pro",          # 6.3" display
+        "iPhone 16e",             # smaller display
+        "iPad Pro 13-inch (M5)"   # 13" iPad Pro
+      ],
+      languages: ["en-US"],
+      output_directory: "./screenshots",
+      clear_previous_screenshots: true,
+      override_status_bar: true,
+      concurrent_simulators: false,
+      stop_after_first_error: false,
+      skip_open_summary: true
     )
-  rescue Exception => e
-    slack(
-      message: "Trivit build failed.",
-      slack_url: "$(SLACK_URL)",
-      success:false
+  end
+
+  desc "Generate screenshots for iPhone only (faster)"
+  lane :screenshots_iphone do
+    capture_screenshots(
+      project: File.expand_path("../Trivit.xcodeproj", __dir__),
+      scheme: "TrivitUITests",
+      devices: ["iPhone 17 Pro Max"],
+      languages: ["en-US"],
+      output_directory: "./screenshots",
+      clear_previous_screenshots: true,
+      override_status_bar: true,
+      skip_open_summary: true
     )
-    throw e
+  end
+
+  # ============================================
+  # App Store Connect Upload
+  # ============================================
+
+  desc "Upload metadata, screenshots, and app icon to App Store Connect"
+  lane :deliver_metadata do |options|
+    api_key = get_api_key
+
+    version = options[:app_version] || ENV["APP_VERSION"] || "1.0.0"
+    should_submit = options[:submit_for_review] || false
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      app_version: version,
+      skip_binary_upload: true,
+      skip_screenshots: false,
+      skip_metadata: false,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: should_submit,
+      automatic_release: false,
+      run_precheck_before_submit: false,
+      overwrite_screenshots: true
+    )
+  end
+
+  desc "Upload everything and submit for review (creates draft)"
+  lane :submit_for_review do |options|
+    api_key = get_api_key
+
+    version = options[:app_version] || ENV["APP_VERSION"] || "1.0.0"
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      app_version: version,
+      skip_binary_upload: true,
+      skip_screenshots: false,
+      skip_metadata: false,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: true,
+      automatic_release: false,
+      run_precheck_before_submit: false,
+      overwrite_screenshots: true
+    )
+  end
+
+  desc "Upload only screenshots"
+  lane :upload_screenshots do
+    api_key = get_api_key
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_screenshots: false,
+      skip_app_version_update: true,
+      force: true,
+      run_precheck_before_submit: false,
+      overwrite_screenshots: true
+    )
+  end
+
+  desc "Upload only the app icon"
+  lane :upload_icon do
+    api_key = get_api_key
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      app_icon: "./metadata/app_icon.png",
+      force: true,
+      submit_for_review: false,
+      run_precheck_before_submit: false
+    )
+  end
+
+  desc "Upload only metadata (no screenshots)"
+  lane :upload_metadata_only do |options|
+    api_key = get_api_key
+
+    version = options[:app_version] || ENV["APP_VERSION"] || "1.0.0"
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      app_version: version,
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      force: true,
+      run_precheck_before_submit: false
+    )
+  end
+
+  desc "Download existing metadata from App Store Connect"
+  lane :download_metadata do
+    api_key = get_api_key
+
+    deliver(
+      api_key: api_key,
+      app_identifier: "com.wouterdevriendt.trivit",
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      force: true,
+      run_precheck_before_submit: false,
+      download_metadata: true
+    )
+  end
+
+  # ============================================
+  # Combined Workflows
+  # ============================================
+
+  desc "Generate screenshots and upload everything"
+  lane :prepare_and_upload do
+    screenshots
+    deliver_metadata
+  end
+
+  desc "Full App Store preparation: icons, screenshots, metadata"
+  lane :full_app_store_prep do |options|
+    # Generate icons using Python script
+    Dir.chdir("../..") do
+      sh("python3 scripts/generate_icons.py")
+    end
+
+    # Generate screenshots
+    screenshots unless options[:skip_screenshots]
+
+    # Upload everything
+    deliver_metadata
+  end
+
+  # ============================================
+  # TestFlight Build & Upload
+  # ============================================
+
+  desc "Build and upload to TestFlight"
+  lane :testflight_upload do |options|
+    api_key = get_api_key
+
+    # Increment build number
+    increment_build_number(
+      xcodeproj: File.expand_path("../Trivit.xcodeproj", __dir__)
+    )
+
+    # Build the app
+    build_app(
+      project: File.expand_path("../Trivit.xcodeproj", __dir__),
+      scheme: "Trivit",
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "Trivit.ipa"
+    )
+
+    # Upload to TestFlight
+    upload_to_testflight(
+      api_key: api_key,
+      skip_waiting_for_build_processing: true,
+      skip_submission: true
+    )
+  end
+
+  desc "Build, upload to TestFlight, and update metadata"
+  lane :release do |options|
+    version = options[:app_version] || ENV["APP_VERSION"] || "1.0.0"
+
+    # Upload to TestFlight
+    testflight_upload
+
+    # Upload metadata
+    deliver_metadata(app_version: version)
+  end
+
+  # ============================================
+  # Helpers
+  # ============================================
+
+  private_lane :get_api_key do
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_filepath: ENV["APP_STORE_CONNECT_KEY_PATH"],
+      in_house: false
+    )
   end
 end
 
-lane :test do 
-  begin
-    scan(
-      workspace: 'trivit.xcworkspace',
-      scheme: "trivit",
-      devices: ["iPhone 6s"],
-      formatter: "echo fastlane/nowarn-formatter.rb",
-      skip_build: true,
-      output_types: "html,junit"
-    )
-  rescue Exception => e
-    slack(
-      message: "Trivit tests failed.",
-      slack_url: "$(SLACK_URL)",
-      success:false
-    )
-    throw e
-  end
-end
-
-lane :analyze do
-    scan(
-      workspace: 'trivit.xcworkspace',
-      scheme: "trivit",
-      devices: ["iPhone 6s"],
-      formatter: "echo fastlane/nowarn-formatter.rb",
-      derived_data_path: "./DerivedData", 
-      output_directory: "./reports"
-    )
-    # to be re-enabled after https://github.com/fastlane/fastlane/issues/8812 and https://github.com/fastlane/fastlane/issues/8760 are resolved
-    # slather(
-    #   cobertura_xml: true, 
-    #   jenkins: true, 
-    #   scheme: "Whisper", 
-    #   build_directory: "./DerivedData", 
-    #   output_directory: "./reports", 
-    #   proj: "./Whisper.xcodeproj"
-    # )
-    sh("cd .. && lizard ./[SOURCE_FOLDER] -l swift --xml > ./reports/lizard-report.xml")
-    oclint(
-      report_path: "./reports/oclint.txt", 
-    )
-    sonar
+# Error handling
+error do |lane, exception|
+  UI.error("Error in lane '#{lane}': #{exception.message}")
 end

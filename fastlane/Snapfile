@@ -1,0 +1,56 @@
+# Snapfile for Trivit Tally Counter
+# Configuration for automated screenshot generation
+
+# A list of devices you want to take the screenshots from
+# Available simulators (iOS 18.x): iPhone 16 Pro Max, iPhone 16 Pro, iPhone 16, iPhone SE (3rd generation)
+# iPad: iPad Pro (13-inch) (6th generation), iPad Pro (11-inch) (4th generation)
+devices([
+  "iPhone 16 Pro Max",                     # 6.9" - Required for App Store
+  "iPhone 16 Pro",                         # 6.3" - Required for App Store
+  "iPhone 16",                             # 6.1" - Required for App Store
+  "iPhone SE (3rd generation)",            # Smaller iPhone
+  "iPad Pro (13-inch) (6th generation)",   # 13" iPad - Required for iPad App Store
+  "iPad Pro (11-inch) (4th generation)"    # 11" iPad - Additional iPad size
+])
+
+# Languages to generate the screenshots for
+languages([
+  "en-US"
+])
+
+# The name of the scheme which contains the UI Tests
+scheme("TrivitUITests")
+
+# Where should the resulting screenshots be stored?
+output_directory("./fastlane/screenshots")
+
+# Clear all previously generated screenshots before creating new ones
+clear_previous_screenshots(true)
+
+# Remove the '#' to clear all previously generated screenshots before creating new ones
+override_status_bar(true)
+
+# Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
+launch_arguments([
+  "-ApplePersistenceIgnoreState YES",
+  "-UITestingMode YES",
+  "-DisableAnimations YES",
+  "-SampleDataMode YES"
+])
+
+# For more information about all available options run
+# fastlane action snapshot
+
+# Remove the '#' to disable slide to type on the iOS simulator
+disable_slide_to_type(true)
+
+# Stop immediately after the first test failure
+# If you want to test all devices even if one fails, set this to false
+stop_after_first_error(false)
+
+# Configure whether or not to locale the simulator
+# If you're not localizing your app, you can set this to false
+localize_simulator(true)
+
+# Configure build configuration
+configuration("Debug")

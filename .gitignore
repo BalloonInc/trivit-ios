@@ -5,3 +5,11 @@
 compile_commands.json
 xcodebuild.log
 sonar-reports
+
+# Environment variables (contains secrets)
+.env
+
+# Fastlane build output
+fastlane/build/
+fastlane/screenshots/
+fastlane/reports/

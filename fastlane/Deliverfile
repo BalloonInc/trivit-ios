@@ -1,0 +1,15 @@
+# Deliverfile for Trivit Tally Counter
+
+# App identifier
+app_identifier "com.wouterdevriendt.trivit"
+
+# Skip binary upload (handled by TestFlight workflow)
+skip_binary_upload true
+
+# Metadata
+copyright "#{Time.now.year} Wouter Devriendt"
+primary_category "PRODUCTIVITY"
+secondary_category "UTILITIES"
+
+# Automatic release
+automatic_release false
