@@ -11,13 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_17.0.app/Contents/Developer
 
 jobs:
   # Linting job
   lint:
     name: Lint
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
   # Swift Format Check
   format:
     name: Format Check
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,27 +47,23 @@ jobs:
             exit 1
           }
 
-  # Build and Test
-  build-and-test:
-    name: Build and Test
-    runs-on: macos-14
+  # Build and Test - iOS 26
+  build-and-test-ios26:
+    name: Build and Test (iOS 26)
+    runs-on: macos-15
     needs: [lint]
-    strategy:
-      matrix:
-        destination:
-          - platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro
-        include:
-          - destination: platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro
-            scheme: Trivit
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
 
       - name: Show Xcode version
         run: xcodebuild -version
+
+      - name: List available simulators
+        run: xcrun simctl list devices available
 
       - name: Cache Swift packages
         uses: actions/cache@v4
@@ -80,7 +76,7 @@ jobs:
       - name: Resolve packages
         run: |
           if [ -f "Trivit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved" ]; then
-            xcodebuild -resolvePackageDependencies -project Trivit.xcodeproj -scheme ${{ matrix.scheme }}
+            xcodebuild -resolvePackageDependencies -project Trivit.xcodeproj -scheme Trivit
           fi
 
       - name: Build
@@ -88,8 +84,8 @@ jobs:
           set -o pipefail
           xcodebuild build-for-testing \
             -project Trivit.xcodeproj \
-            -scheme ${{ matrix.scheme }} \
-            -destination "${{ matrix.destination }}" \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=26.0,name=iPhone 16 Pro" \
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
@@ -101,11 +97,11 @@ jobs:
           set -o pipefail
           xcodebuild test \
             -project Trivit.xcodeproj \
-            -scheme ${{ matrix.scheme }} \
-            -destination "${{ matrix.destination }}" \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=26.0,name=iPhone 16 Pro" \
             -testPlan UnitTests \
             -enableCodeCoverage YES \
-            -resultBundlePath TestResults \
+            -resultBundlePath TestResults-iOS26 \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             | xcpretty --report junit
@@ -114,15 +110,15 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results
+          name: test-results-ios26
           path: |
-            TestResults
+            TestResults-iOS26
             build/reports/
 
       - name: Generate coverage report
         if: success()
         run: |
-          xcrun xccov view --report --json TestResults > coverage.json
+          xcrun xccov view --report --json TestResults-iOS26 > coverage.json
           cat coverage.json | python3 -c "
           import json, sys
           data = json.load(sys.stdin)
@@ -133,22 +129,68 @@ jobs:
               print(f'{name}: {coverage:.1f}%')
           "
 
+  # Build and Test - iOS 17 (backwards compatibility)
+  build-and-test-ios17:
+    name: Build and Test (iOS 17)
+    runs-on: macos-15
+    needs: [lint]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro" \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      - name: Run Unit Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=17.5,name=iPhone 15 Pro" \
+            -testPlan UnitTests \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults-iOS17 \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty --report junit
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-ios17
+          path: TestResults-iOS17
+
   # UI Tests (separate job for longer-running tests)
   ui-tests:
     name: UI Tests
-    runs-on: macos-14
-    needs: [build-and-test]
+    runs-on: macos-15
+    needs: [build-and-test-ios26]
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
 
       - name: Boot Simulator
         run: |
-          xcrun simctl boot "iPhone 15 Pro" || true
+          xcrun simctl boot "iPhone 16 Pro" || true
 
       - name: Run UI Tests
         run: |
@@ -156,7 +198,7 @@ jobs:
           xcodebuild test \
             -project Trivit.xcodeproj \
             -scheme Trivit \
-            -destination "platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro" \
+            -destination "platform=iOS Simulator,OS=26.0,name=iPhone 16 Pro" \
             -testPlan UITests \
             -resultBundlePath UITestResults \
             CODE_SIGN_IDENTITY="" \
@@ -174,8 +216,8 @@ jobs:
   # Build for all platforms
   build-all-platforms:
     name: Build All Platforms
-    runs-on: macos-14
-    needs: [build-and-test]
+    runs-on: macos-15
+    needs: [build-and-test-ios26]
     strategy:
       matrix:
         include:
@@ -185,12 +227,14 @@ jobs:
             destination: generic/platform=watchOS
           - platform: macOS
             destination: platform=macOS
+          - platform: visionOS
+            destination: generic/platform=visionOS
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
 
       - name: Build for ${{ matrix.platform }}
         run: |
@@ -204,19 +248,20 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
+        continue-on-error: ${{ matrix.platform == 'visionOS' }}
 
   # Documentation generation
   docs:
     name: Generate Documentation
-    runs-on: macos-14
+    runs-on: macos-15
     if: github.ref == 'refs/heads/main'
-    needs: [build-and-test]
+    needs: [build-and-test-ios26]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
 
       - name: Generate DocC documentation
         run: |
@@ -237,7 +282,7 @@ jobs:
   # Dependency audit
   security-audit:
     name: Security Audit
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout
         uses: actions/checkout@v4

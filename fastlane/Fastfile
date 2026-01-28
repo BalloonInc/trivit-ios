@@ -1,72 +1,328 @@
-# More documentation about how to customize your build
-# can be found here:
+# Fastfile for Trivit iOS
 # https://docs.fastlane.tools
-fastlane_version "2.25"
+#
+# Environment variables required (set in GitHub Secrets):
+# - APP_STORE_CONNECT_API_KEY_ID: App Store Connect API Key ID
+# - APP_STORE_CONNECT_API_ISSUER_ID: App Store Connect API Issuer ID
+# - APP_STORE_CONNECT_API_KEY_CONTENT: Base64-encoded .p8 key content
+# - MATCH_PASSWORD: Password for match certificates
+# - MATCH_GIT_BASIC_AUTHORIZATION: Base64 auth for match repo
+# - KEYCHAIN_PASSWORD: Password for CI keychain
 
-default_platform :ios
+default_platform(:ios)
 
+# Constants
+APP_IDENTIFIER = "be.ballooninc.trivit"
+SCHEME = "Trivit"
+WORKSPACE = "Trivit.xcworkspace"
+PROJECT = "Trivit.xcodeproj"
 
-lane :build do
-  begin
-    setup_jenkins
-    cocoapods
-    gym(
-      scheme: "trivit",
-      configuration: "Debug",
-      xcpretty_formatter:"fastlane/nowarn-formatter.rb",
-      clean: true
+# ==================== iOS Platform ====================
+
+platform :ios do
+  # -------------------- Setup --------------------
+
+  desc "Setup App Store Connect API key from environment"
+  private_lane :setup_api_key do
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true,
+      in_house: false
     )
-  rescue Exception => e
-    slack(
-      message: "Trivit build failed.",
-      slack_url: "$(SLACK_URL)",
-      success:false
-    )
-    throw e
   end
-end
 
-lane :test do 
-  begin
-    scan(
-      workspace: 'trivit.xcworkspace',
-      scheme: "trivit",
-      devices: ["iPhone 6s"],
-      formatter: "echo fastlane/nowarn-formatter.rb",
-      skip_build: true,
+  desc "Setup CI environment (keychain, certificates)"
+  private_lane :setup_ci_environment do
+    # Create a temporary keychain for CI
+    create_keychain(
+      name: "ci_keychain",
+      password: ENV["KEYCHAIN_PASSWORD"] || "temporary_password",
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: false
+    )
+  end
+
+  desc "Fetch and install certificates using match"
+  private_lane :fetch_certificates do |options|
+    type = options[:type] || "appstore"
+
+    match(
+      type: type,
+      app_identifier: [
+        APP_IDENTIFIER,
+        "#{APP_IDENTIFIER}.watchkitapp",
+        "#{APP_IDENTIFIER}.watchkitapp.watchkitextension",
+        "#{APP_IDENTIFIER}.widget"
+      ],
+      readonly: is_ci,
+      keychain_name: is_ci ? "ci_keychain" : nil,
+      keychain_password: is_ci ? (ENV["KEYCHAIN_PASSWORD"] || "temporary_password") : nil
+    )
+  end
+
+  # -------------------- Build Lanes --------------------
+
+  desc "Build the app for testing"
+  lane :build do
+    xcodebuild(
+      scheme: SCHEME,
+      configuration: "Debug",
+      clean: true,
+      build: true,
+      destination: "generic/platform=iOS Simulator"
+    )
+  end
+
+  desc "Run all tests"
+  lane :test do
+    run_tests(
+      scheme: SCHEME,
+      devices: ["iPhone 16 Pro"],
+      clean: true,
+      code_coverage: true,
+      output_directory: "./fastlane/test_output",
       output_types: "html,junit"
     )
-  rescue Exception => e
-    slack(
-      message: "Trivit tests failed.",
-      slack_url: "$(SLACK_URL)",
-      success:false
-    )
-    throw e
   end
-end
 
-lane :analyze do
-    scan(
-      workspace: 'trivit.xcworkspace',
-      scheme: "trivit",
-      devices: ["iPhone 6s"],
-      formatter: "echo fastlane/nowarn-formatter.rb",
-      derived_data_path: "./DerivedData", 
-      output_directory: "./reports"
+  desc "Build for App Store distribution"
+  lane :build_release do |options|
+    setup_api_key
+
+    if is_ci
+      setup_ci_environment
+      fetch_certificates(type: "appstore")
+    end
+
+    # Increment build number if specified
+    if options[:increment_build]
+      increment_build_number(
+        build_number: latest_testflight_build_number + 1
+      )
+    end
+
+    # Build the app
+    build_app(
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          APP_IDENTIFIER => "match AppStore #{APP_IDENTIFIER}",
+          "#{APP_IDENTIFIER}.watchkitapp" => "match AppStore #{APP_IDENTIFIER}.watchkitapp",
+          "#{APP_IDENTIFIER}.watchkitapp.watchkitextension" => "match AppStore #{APP_IDENTIFIER}.watchkitapp.watchkitextension",
+          "#{APP_IDENTIFIER}.widget" => "match AppStore #{APP_IDENTIFIER}.widget"
+        }
+      },
+      output_directory: "./build",
+      output_name: "Trivit.ipa"
     )
-    # to be re-enabled after https://github.com/fastlane/fastlane/issues/8812 and https://github.com/fastlane/fastlane/issues/8760 are resolved
-    # slather(
-    #   cobertura_xml: true, 
-    #   jenkins: true, 
-    #   scheme: "Whisper", 
-    #   build_directory: "./DerivedData", 
-    #   output_directory: "./reports", 
-    #   proj: "./Whisper.xcodeproj"
-    # )
-    sh("cd .. && lizard ./[SOURCE_FOLDER] -l swift --xml > ./reports/lizard-report.xml")
-    oclint(
-      report_path: "./reports/oclint.txt", 
+  end
+
+  # -------------------- Distribution Lanes --------------------
+
+  desc "Upload to TestFlight for internal testing"
+  lane :beta do |options|
+    setup_api_key
+
+    # Build if not already built
+    unless options[:skip_build]
+      build_release(increment_build: true)
+    end
+
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: options[:skip_wait] || false,
+      distribute_external: false,
+      notify_external_testers: false,
+      changelog: options[:changelog] || "Bug fixes and improvements"
     )
-    sonar
+
+    # Clean up build artifacts
+    clean_build_artifacts
+  end
+
+  desc "Upload to TestFlight for external testing"
+  lane :beta_external do |options|
+    setup_api_key
+
+    # Build if not already built
+    unless options[:skip_build]
+      build_release(increment_build: true)
+    end
+
+    # Upload to TestFlight with external distribution
+    upload_to_testflight(
+      distribute_external: true,
+      groups: options[:groups] || ["External Testers"],
+      notify_external_testers: true,
+      changelog: options[:changelog] || "Bug fixes and improvements",
+      demo_account_required: false,
+      beta_app_review_info: {
+        contact_email: "support@ballooninc.be",
+        contact_first_name: "Balloon",
+        contact_last_name: "Inc",
+        contact_phone: "+32000000000"
+      }
+    )
+
+    clean_build_artifacts
+  end
+
+  desc "Submit to App Store for review"
+  lane :release do |options|
+    setup_api_key
+
+    # Build if not already built
+    unless options[:skip_build]
+      build_release(increment_build: true)
+    end
+
+    # Upload to App Store
+    deliver(
+      submit_for_review: options[:submit] || false,
+      automatic_release: options[:auto_release] || false,
+      force: true,
+      skip_screenshots: options[:skip_screenshots] || false,
+      skip_metadata: options[:skip_metadata] || false,
+      precheck_include_in_app_purchases: false,
+      submission_information: {
+        add_id_info_uses_idfa: false
+      }
+    )
+
+    clean_build_artifacts
+  end
+
+  # -------------------- Screenshots --------------------
+
+  desc "Capture screenshots for all device sizes"
+  lane :screenshots do
+    capture_screenshots(
+      workspace: WORKSPACE,
+      scheme: "TrivitUITests",
+      devices: [
+        "iPhone 16 Pro Max",
+        "iPhone 16 Pro",
+        "iPhone 16",
+        "iPhone SE (3rd generation)",
+        "iPad Pro 13-inch (M4)",
+        "iPad Pro 11-inch (M4)"
+      ],
+      languages: ["en-US"],
+      output_directory: "./fastlane/screenshots",
+      clear_previous_screenshots: true,
+      override_status_bar: true,
+      localize_simulator: true
+    )
+  end
+
+  desc "Upload screenshots to App Store Connect"
+  lane :upload_screenshots do
+    setup_api_key
+
+    deliver(
+      skip_binary_upload: true,
+      skip_metadata: true,
+      overwrite_screenshots: true
+    )
+  end
+
+  desc "Capture and upload screenshots"
+  lane :refresh_screenshots do
+    screenshots
+    upload_screenshots
+  end
+
+  # -------------------- Metadata --------------------
+
+  desc "Download metadata from App Store Connect"
+  lane :download_metadata do
+    setup_api_key
+
+    deliver(
+      download_metadata: true,
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      force: true
+    )
+  end
+
+  desc "Upload metadata to App Store Connect"
+  lane :upload_metadata do
+    setup_api_key
+
+    deliver(
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      force: true
+    )
+  end
+
+  # -------------------- Utilities --------------------
+
+  desc "Sync certificates and profiles with match"
+  lane :sync_certificates do |options|
+    setup_api_key
+
+    type = options[:type] || "appstore"
+
+    match(
+      type: type,
+      app_identifier: [
+        APP_IDENTIFIER,
+        "#{APP_IDENTIFIER}.watchkitapp",
+        "#{APP_IDENTIFIER}.watchkitapp.watchkitextension",
+        "#{APP_IDENTIFIER}.widget"
+      ],
+      readonly: options[:readonly] || false,
+      force_for_new_devices: options[:force] || false
+    )
+  end
+
+  desc "Register new devices"
+  lane :register_devices do
+    register_devices(
+      devices_file: "./fastlane/devices.txt"
+    )
+
+    # Refresh development profiles
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+  end
+
+  desc "Increment version number"
+  lane :bump_version do |options|
+    type = options[:type] || "patch"
+
+    increment_version_number(
+      bump_type: type
+    )
+
+    version = get_version_number
+    UI.success("Version bumped to #{version}")
+  end
+
+  desc "Get current version info"
+  lane :version_info do
+    version = get_version_number
+    build = get_build_number
+
+    UI.success("Current version: #{version} (#{build})")
+  end
+
+  # -------------------- Error Handling --------------------
+
+  error do |lane, exception, options|
+    UI.error("Error in lane #{lane}: #{exception.message}")
+
+    # Clean up keychain on CI
+    if is_ci
+      delete_keychain(name: "ci_keychain") if File.exist?(File.expand_path("~/Library/Keychains/ci_keychain-db"))
+    end
+  end
 end

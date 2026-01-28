@@ -1,8 +1,28 @@
-# The Appfile can be used to specify information that's used across all fastlane
-# tools, like your username or the app's bundle identifier.
-#
-# For more details, check out the documentation at:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
+# Appfile - App Store Connect Configuration
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
 
-# app_identifier "com.your.app" # the bundle identifier of your app
-# apple_id "apple@fastlane.tools" # Your Apple ID
+# App Identifier (Bundle ID)
+app_identifier("be.ballooninc.trivit")
+
+# Apple ID email address (for legacy auth - prefer API key)
+apple_id(ENV["APPLE_ID"]) if ENV["APPLE_ID"]
+
+# iTunes Connect Team ID (from App Store Connect)
+itc_team_id(ENV["ITC_TEAM_ID"]) if ENV["ITC_TEAM_ID"]
+
+# Developer Portal Team ID
+team_id(ENV["TEAM_ID"]) if ENV["TEAM_ID"]
+
+# For all lanes, use these identifiers
+for_platform :ios do
+  app_identifier("be.ballooninc.trivit")
+
+  for_lane :watch do
+    app_identifier("be.ballooninc.trivit.watchkitapp")
+  end
+
+  for_lane :widget do
+    app_identifier("be.ballooninc.trivit.widget")
+  end
+end

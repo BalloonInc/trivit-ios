@@ -1,0 +1,176 @@
+name: App Store Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      capture_screenshots:
+        description: 'Capture new screenshots'
+        required: false
+        default: 'true'
+        type: boolean
+      upload_screenshots:
+        description: 'Upload screenshots to App Store Connect'
+        required: false
+        default: 'true'
+        type: boolean
+      upload_metadata:
+        description: 'Upload metadata to App Store Connect'
+        required: false
+        default: 'false'
+        type: boolean
+
+concurrency:
+  group: app-store-assets
+  cancel-in-progress: false
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_17.0.app/Contents/Developer
+
+jobs:
+  screenshots:
+    name: Capture Screenshots
+    runs-on: macos-15
+    if: ${{ github.event.inputs.capture_screenshots == 'true' }}
+    timeout-minutes: 120
+
+    strategy:
+      matrix:
+        include:
+          - device: "iPhone 16 Pro Max"
+            platform: "iOS Simulator"
+            os: "26.0"
+          - device: "iPhone 16 Pro"
+            platform: "iOS Simulator"
+            os: "26.0"
+          - device: "iPhone SE (3rd generation)"
+            platform: "iOS Simulator"
+            os: "26.0"
+          - device: "iPad Pro 13-inch (M4)"
+            platform: "iOS Simulator"
+            os: "26.0"
+          - device: "iPad Pro 11-inch (M4)"
+            platform: "iOS Simulator"
+            os: "26.0"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Boot Simulator
+        run: |
+          xcrun simctl boot "${{ matrix.device }}" || true
+          sleep 10
+
+      - name: Capture screenshots for ${{ matrix.device }}
+        run: |
+          bundle exec fastlane capture_screenshots \
+            devices:"${{ matrix.device }}" \
+            languages:"en-US" \
+            output_directory:"./fastlane/screenshots/${{ matrix.device }}"
+        continue-on-error: true
+
+      - name: Upload screenshot artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.device }}
+          path: fastlane/screenshots/
+          retention-days: 30
+
+  combine-screenshots:
+    name: Combine Screenshots
+    runs-on: macos-15
+    needs: [screenshots]
+    if: ${{ github.event.inputs.capture_screenshots == 'true' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all screenshot artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: screenshots-*
+          path: fastlane/screenshots/
+          merge-multiple: true
+
+      - name: Upload combined screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-screenshots
+          path: fastlane/screenshots/
+          retention-days: 90
+
+  upload-assets:
+    name: Upload to App Store Connect
+    runs-on: macos-15
+    needs: [combine-screenshots]
+    if: |
+      always() &&
+      (needs.combine-screenshots.result == 'success' || needs.combine-screenshots.result == 'skipped') &&
+      (github.event.inputs.upload_screenshots == 'true' || github.event.inputs.upload_metadata == 'true')
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Download screenshots
+        if: ${{ github.event.inputs.upload_screenshots == 'true' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: all-screenshots
+          path: fastlane/screenshots/
+
+      - name: Upload screenshots to App Store Connect
+        if: ${{ github.event.inputs.upload_screenshots == 'true' }}
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        run: |
+          bundle exec fastlane upload_screenshots
+
+      - name: Upload metadata to App Store Connect
+        if: ${{ github.event.inputs.upload_metadata == 'true' }}
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        run: |
+          bundle exec fastlane upload_metadata
+
+      - name: Post summary
+        run: |
+          echo "## 📸 App Store Assets Updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.upload_screenshots }}" == "true" ]; then
+            echo "✅ Screenshots uploaded to App Store Connect" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ "${{ github.event.inputs.upload_metadata }}" == "true" ]; then
+            echo "✅ Metadata uploaded to App Store Connect" >> $GITHUB_STEP_SUMMARY
+          fi

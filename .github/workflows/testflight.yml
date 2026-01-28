@@ -1,0 +1,168 @@
+name: TestFlight Deployment
+
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      distribute_external:
+        description: 'Distribute to external testers'
+        required: false
+        default: 'false'
+        type: boolean
+      changelog:
+        description: 'Changelog for this build'
+        required: false
+        default: 'Bug fixes and improvements'
+        type: string
+
+concurrency:
+  group: testflight-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_17.0.app/Contents/Developer
+  FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
+  FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 3
+
+jobs:
+  build-and-upload:
+    name: Build and Upload to TestFlight
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Resolve packages
+        run: |
+          if [ -f "Trivit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved" ]; then
+            xcodebuild -resolvePackageDependencies -project Trivit.xcodeproj -scheme Trivit
+          fi
+
+      - name: Create API Key file
+        env:
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+        run: |
+          echo "$APP_STORE_CONNECT_API_KEY_CONTENT" | base64 --decode > AuthKey.p8
+
+      - name: Build and Upload to TestFlight
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+        run: |
+          if [ "${{ github.event.inputs.distribute_external }}" == "true" ]; then
+            bundle exec fastlane beta_external \
+              changelog:"${{ github.event.inputs.changelog || 'Bug fixes and improvements' }}"
+          else
+            bundle exec fastlane beta \
+              changelog:"${{ github.event.inputs.changelog || 'Bug fixes and improvements' }}"
+          fi
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -f AuthKey.p8
+          security delete-keychain ci_keychain.keychain-db 2>/dev/null || true
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            build/*.ipa
+            build/*.dSYM.zip
+          retention-days: 30
+
+  notify-success:
+    name: Notify Success
+    runs-on: ubuntu-latest
+    needs: [build-and-upload]
+    if: success()
+    steps:
+      - name: Get version info
+        id: version
+        run: |
+          echo "version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ steps.version.outputs.version }}
+          body: |
+            ## What's Changed
+
+            ${{ github.event.inputs.changelog || 'Bug fixes and improvements' }}
+
+            ---
+            Build: ${{ steps.version.outputs.sha_short }}
+            Uploaded to TestFlight for internal testing.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post summary
+        run: |
+          echo "## 🚀 TestFlight Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ steps.version.outputs.sha_short }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Build has been uploaded to TestFlight for internal testing." >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.distribute_external }}" == "true" ]; then
+            echo "Build will be distributed to external testers after App Store review." >> $GITHUB_STEP_SUMMARY
+          fi
+
+  notify-failure:
+    name: Notify Failure
+    runs-on: ubuntu-latest
+    needs: [build-and-upload]
+    if: failure()
+    steps:
+      - name: Post failure summary
+        run: |
+          echo "## ❌ TestFlight Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The build or upload to TestFlight failed." >> $GITHUB_STEP_SUMMARY
+          echo "Check the workflow logs for details." >> $GITHUB_STEP_SUMMARY

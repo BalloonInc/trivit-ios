@@ -1,0 +1,41 @@
+# Matchfile - Certificate Management
+# https://docs.fastlane.tools/actions/match/
+#
+# Match stores certificates and provisioning profiles in a git repository
+# to share across team members and CI.
+
+# Git repository for certificates
+# Create a private repo like: https://github.com/BalloonInc/trivit-certificates
+git_url(ENV["MATCH_GIT_URL"] || "https://github.com/BalloonInc/trivit-certificates")
+
+# Storage mode - git is most common
+storage_mode("git")
+
+# App identifiers to manage
+app_identifier([
+  "be.ballooninc.trivit",
+  "be.ballooninc.trivit.watchkitapp",
+  "be.ballooninc.trivit.watchkitapp.watchkitextension",
+  "be.ballooninc.trivit.widget"
+])
+
+# Default type (appstore, adhoc, development, enterprise)
+type("appstore")
+
+# Team ID
+team_id(ENV["TEAM_ID"])
+
+# Username/Apple ID
+username(ENV["APPLE_ID"])
+
+# Platform
+platform("ios")
+
+# Don't prompt for input
+force(false)
+
+# Shallow clone for faster checkout
+shallow_clone(true)
+
+# Clone depth
+clone_branch_directly(true)

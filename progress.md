@@ -41,6 +41,10 @@ Comprehensive SwiftUI modernization of the Trivit counting app is well underway.
 | Add SwiftFormat | ✅ Complete | .swift-format configured |
 | Configure test runner | ✅ Complete | Unit + UI tests in CI |
 | Add build automation | ✅ Complete | Multi-platform builds |
+| Add Fastlane | ✅ Complete | TestFlight & App Store |
+| Add TestFlight workflow | ✅ Complete | testflight.yml |
+| Add Screenshots workflow | ✅ Complete | app-store-assets.yml |
+| iOS 26 support | ✅ Complete | Xcode 17, iPhone 16 Pro |
 
 ### Phase 4: Core SwiftUI Migration ✅
 | Task | Status | Notes |
@@ -206,6 +210,8 @@ When issue creation is available, create these issues:
 | 2026-01-28 | MVVM architecture | Testable, SwiftUI-friendly |
 | 2026-01-28 | iOS 17+ minimum | SwiftData requirements |
 | 2026-01-28 | Swift Testing over XCTest | Modern syntax, better assertions |
+| 2026-01-28 | Fastlane for CI/CD | Industry standard, App Store Connect API |
+| 2026-01-28 | iOS 26 target | Latest iOS, Xcode 17 |
 
 ---
 
@@ -214,3 +220,5 @@ When issue creation is available, create these issues:
 - [features.md](./features.md) - Complete feature documentation
 - [architecture.md](./architecture.md) - Architecture documentation
 - [Claude.md](./Claude.md) - Best practices for AI assistance
+- [new-features.md](./new-features.md) - Brainstormed future features
+- [SECRETS.md](./SECRETS.md) - GitHub Secrets setup guide
