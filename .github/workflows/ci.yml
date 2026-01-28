@@ -88,7 +88,7 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.5 \
             | xcpretty
 
       - name: Run Unit Tests
@@ -103,7 +103,7 @@ jobs:
             -resultBundlePath TestResults-iOS \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.5 \
             | xcpretty --report junit || echo "Tests failed or no compatible simulator found"
         continue-on-error: true
 
@@ -183,7 +183,7 @@ jobs:
             -only-testing:TrivitUITests \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.5 \
             | xcpretty
         continue-on-error: true
 
