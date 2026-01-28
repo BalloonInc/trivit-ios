@@ -1,0 +1,80 @@
+name: "0. Build"
+
+# WF0: Automatic build verification on push to master
+# Compiles the app but does NOT upload to TestFlight
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'Trivit/**'
+      - 'project.yml'
+      - '.github/workflows/0-build.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'Trivit/**'
+      - 'project.yml'
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  SCHEME: 'Trivit'
+  PROJECT_PATH: 'Trivit.xcodeproj'
+
+jobs:
+  build:
+    name: Build iOS App
+    runs-on: [self-hosted, macOS, ARM64]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Select Xcode
+      run: |
+        XCODE_PATH=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+        if [ -z "$XCODE_PATH" ]; then
+          XCODE_PATH="/Applications/Xcode.app"
+        fi
+        if [ -d "$XCODE_PATH" ]; then
+          sudo xcode-select -s "$XCODE_PATH/Contents/Developer" || true
+        fi
+        xcodebuild -version
+
+    - name: Install XcodeGen
+      run: which xcodegen || brew install xcodegen
+
+    - name: Generate Xcode project
+      run: xcodegen generate
+
+    - name: Resolve Swift Package Dependencies
+      run: |
+        xcodebuild -resolvePackageDependencies \
+          -project ${{ env.PROJECT_PATH }} \
+          -scheme ${{ env.SCHEME }}
+
+    - name: Build for Release
+      run: |
+        xcodebuild build \
+          -project ${{ env.PROJECT_PATH }} \
+          -scheme ${{ env.SCHEME }} \
+          -configuration Release \
+          -destination 'generic/platform=iOS' \
+          CODE_SIGNING_ALLOWED=NO
+
+    - name: Summary
+      run: |
+        echo "## Build Successful" >> $GITHUB_STEP_SUMMARY
+        echo "- **Scheme**: ${{ env.SCHEME }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "Run **1. TestFlight Internal** workflow to upload to TestFlight." >> $GITHUB_STEP_SUMMARY

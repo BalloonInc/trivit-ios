@@ -1,16 +1,9 @@
 name: "1. TestFlight Internal"
 
-# WF1: Automatic internal TestFlight deployment
-# Runs on every push to main, distributes to internal testers only
+# WF1: Manual internal TestFlight deployment
+# Builds, uploads, and distributes to internal testers
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'Trivit/**'
-      - 'project.yml'
-      - '.github/workflows/1-testflight-internal.yml'
   workflow_dispatch:
     inputs:
       build_increment:
@@ -20,11 +13,11 @@ on:
         type: string
 
 concurrency:
-  group: testflight-internal-${{ github.ref }}
-  cancel-in-progress: true
+  group: testflight-internal
+  cancel-in-progress: false
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 env:
@@ -266,10 +259,29 @@ jobs:
 
         echo "Internal TestFlight distribution complete!"
 
+    - name: Create Git Tag
+      run: |
+        BUILD="${{ steps.version.outputs.build }}"
+        TAG="internal_build_$BUILD"
+
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        git tag -a "$TAG" -m "Internal TestFlight build $BUILD
+
+        Version: ${{ steps.version.outputs.version }}
+        Distributed to internal testers.
+
+        Triggered by: ${{ github.actor }}"
+
+        git push origin "$TAG"
+        echo "Created tag: $TAG"
+
     - name: Summary
       run: |
         echo "## Internal TestFlight Build" >> $GITHUB_STEP_SUMMARY
         echo "- **Version**: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.build }})" >> $GITHUB_STEP_SUMMARY
+        echo "- **Git Tag**: internal_build_${{ steps.version.outputs.build }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Status**: Distributed to internal testers" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
