@@ -1,8 +1,8 @@
 /* (No Commment) */
 "CFBundleName" = "Trivit";
 
-/* Static shortcut for 3D touch */
+/* Home Screen Quick Action title */
 ADD_TRIVIT_SHORTCUT_TITLE = "Nouveau Trivit";
 
-/* Static shortcut subtitle for 3D touch */
+/* Home Screen Quick Action subtitle */
 START_NEW_COUNT_SHORTCUT_SUBTITLE = "Commencez un nouveau compteur";

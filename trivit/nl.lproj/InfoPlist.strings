@@ -4,8 +4,8 @@
 /* (No Commment) */
 "CFBundleShortVersionString" = "3.0";
 
-/* Static shortcut for 3D touch */
+/* Home Screen Quick Action title */
 ADD_TRIVIT_SHORTCUT_TITLE = "Nieuwe Trivit";
 
-/* Static shortcut subtitle for 3D touch */
+/* Home Screen Quick Action subtitle */
 START_NEW_COUNT_SHORTCUT_SUBTITLE = "Start een nieuwe teller";

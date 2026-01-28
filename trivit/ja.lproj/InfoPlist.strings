@@ -1,8 +1,8 @@
 /* (No Commment) */
 "CFBundleName" = "TRIVIT";
 
-/* Static shortcut for 3D touch */
+/* Home Screen Quick Action title */
 ADD_TRIVIT_SHORTCUT_TITLE = "新しい Trivit";
 
-/* Static shortcut subtitle for 3D touch */
+/* Home Screen Quick Action subtitle */
 START_NEW_COUNT_SHORTCUT_SUBTITLE = "新しいカウンタを開始";

@@ -1,2 +1,0 @@
-xcrun simctl spawn booted launchctl debug system/com.apple.SpringBoard --environment DYLD_INSERT_LIBRARIES=$PWD/SBShortcutMenuSimulator.dylib
-xcrun simctl spawn booted launchctl stop com.apple.SpringBoard
