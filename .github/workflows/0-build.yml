@@ -1,7 +1,7 @@
 name: "0. Build"
 
-# WF0: Automatic build verification on push to master
-# Compiles the app but does NOT upload to TestFlight
+# WF0: Automatic build on push to master
+# Creates signed IPA artifact for later deployment
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
       - master
     paths:
       - 'Trivit/**'
+      - 'trivit Watch App/**'
       - 'project.yml'
       - '.github/workflows/0-build.yml'
   pull_request:
@@ -16,7 +17,9 @@ on:
       - master
     paths:
       - 'Trivit/**'
+      - 'trivit Watch App/**'
       - 'project.yml'
+  workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
@@ -24,19 +27,27 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   SCHEME: 'Trivit'
   PROJECT_PATH: 'Trivit.xcodeproj'
+  APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
+  TEAM_ID: 'N324UX8D9M'
 
 jobs:
   build:
-    name: Build iOS App
+    name: Build & Archive
     runs-on: [self-hosted, macOS, ARM64]
+    outputs:
+      build_number: ${{ steps.version.outputs.build }}
+      version: ${{ steps.version.outputs.version }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Select Xcode
       run: |
@@ -61,7 +72,52 @@ jobs:
           -project ${{ env.PROJECT_PATH }} \
           -scheme ${{ env.SCHEME }}
 
-    - name: Build for Release
+    - name: Calculate build number
+      id: version
+      run: |
+        # Use commit count as build number for deterministic builds
+        BUILD=$(git rev-list --count HEAD)
+        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Trivit/Resources/Info.plist)
+
+        # Update plist with calculated build number
+        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" Trivit/Resources/Info.plist 2>/dev/null || \
+        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" Trivit/Resources/Info.plist
+
+        # Update watch app too
+        if [ -f "trivit Watch App/Info.plist" ]; then
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" "trivit Watch App/Info.plist" 2>/dev/null || true
+        fi
+
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "build=$BUILD" >> $GITHUB_OUTPUT
+        echo "Building version $VERSION ($BUILD)"
+
+    - name: Setup App Store Connect API Key
+      if: github.event_name != 'pull_request'
+      run: |
+        mkdir -p $RUNNER_TEMP/private_keys
+        echo "${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}" | tr -d '\r' > $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+        chmod 600 $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+
+    - name: Install certificates
+      if: github.event_name != 'pull_request'
+      env:
+        DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
+        DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      run: |
+        KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+        security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+        security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
+        echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+        security import $CERTIFICATE_PATH -P "$DISTRIBUTION_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+        security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        security list-keychain -d user -s $KEYCHAIN_PATH login.keychain-db
+
+    - name: Build (PR - no signing)
+      if: github.event_name == 'pull_request'
       run: |
         xcodebuild build \
           -project ${{ env.PROJECT_PATH }} \
@@ -70,11 +126,80 @@ jobs:
           -destination 'generic/platform=iOS' \
           CODE_SIGNING_ALLOWED=NO
 
+    - name: Archive app
+      if: github.event_name != 'pull_request'
+      run: |
+        xcodebuild archive \
+          -project ${{ env.PROJECT_PATH }} \
+          -scheme ${{ env.SCHEME }} \
+          -configuration Release \
+          -archivePath $RUNNER_TEMP/Export/Trivit.xcarchive \
+          -destination 'generic/platform=iOS' \
+          -allowProvisioningUpdates \
+          -authenticationKeyPath $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8 \
+          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_KEY_ID }} \
+          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }} \
+          CODE_SIGN_STYLE=Automatic \
+          DEVELOPMENT_TEAM=${{ env.TEAM_ID }}
+
+    - name: Create ExportOptions.plist
+      if: github.event_name != 'pull_request'
+      run: |
+        cat > /tmp/ExportOptions.plist << EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>method</key>
+            <string>app-store-connect</string>
+            <key>teamID</key>
+            <string>${{ env.TEAM_ID }}</string>
+            <key>signingStyle</key>
+            <string>automatic</string>
+            <key>uploadSymbols</key>
+            <true/>
+            <key>destination</key>
+            <string>export</string>
+        </dict>
+        </plist>
+        EOF
+
+    - name: Export IPA
+      if: github.event_name != 'pull_request'
+      run: |
+        xcodebuild -exportArchive \
+          -archivePath $RUNNER_TEMP/Export/Trivit.xcarchive \
+          -exportPath $RUNNER_TEMP/Export \
+          -exportOptionsPlist /tmp/ExportOptions.plist \
+          -allowProvisioningUpdates \
+          -authenticationKeyPath $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8 \
+          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_KEY_ID }} \
+          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+
+    - name: Upload IPA artifact
+      if: github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ipa-${{ steps.version.outputs.version }}-${{ steps.version.outputs.build }}
+        path: |
+          ${{ runner.temp }}/Export/*.ipa
+          ${{ runner.temp }}/Export/Trivit.xcarchive/dSYMs
+        retention-days: 30
+
     - name: Summary
       run: |
         echo "## Build Successful" >> $GITHUB_STEP_SUMMARY
-        echo "- **Scheme**: ${{ env.SCHEME }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.build }})" >> $GITHUB_STEP_SUMMARY
         echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ github.event_name }}" != "pull_request" ]; then
+          echo "- **Artifact**: ipa-${{ steps.version.outputs.version }}-${{ steps.version.outputs.build }}" >> $GITHUB_STEP_SUMMARY
+        fi
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
         echo "Run **1. TestFlight Internal** workflow to upload to TestFlight." >> $GITHUB_STEP_SUMMARY
+
+    - name: Cleanup
+      if: always()
+      run: |
+        rm -rf $RUNNER_TEMP/private_keys $RUNNER_TEMP/Export
+        security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true

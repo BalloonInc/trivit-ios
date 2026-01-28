@@ -1,15 +1,14 @@
 name: "1. TestFlight Internal"
 
 # WF1: Manual internal TestFlight deployment
-# Builds, uploads, and distributes to internal testers
+# Downloads IPA artifact from build workflow and uploads to TestFlight
 
 on:
   workflow_dispatch:
     inputs:
-      build_increment:
-        description: 'Build number increment'
+      run_id:
+        description: 'Build workflow run ID (leave empty for latest)'
         required: false
-        default: '1'
         type: string
 
 concurrency:
@@ -21,173 +20,104 @@ permissions:
   actions: read
 
 env:
-  SCHEME: 'Trivit'
-  PROJECT_PATH: 'Trivit.xcodeproj'
   APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
-  TEAM_ID: 'N324UX8D9M'
 
 jobs:
-  check-runner:
-    name: Check Runner
-    runs-on: ubuntu-latest
+  upload-to-testflight:
+    name: Upload to TestFlight Internal
+    runs-on: [self-hosted, macOS, ARM64]
     outputs:
-      runner: ${{ steps.format.outputs.runner }}
-    steps:
-      - name: Check for self-hosted runner
-        id: check
-        uses: mikehardy/runner-fallback-action@v1
-        with:
-          github-token: ${{ secrets.RUNNER_PAT }}
-          primary-runner: 'self-hosted,macOS,ARM64'
-          fallback-runner: 'macos-latest'
-
-      - name: Format runner output
-        id: format
-        run: |
-          RUNNER='${{ steps.check.outputs.use-runner }}'
-          if [[ "$RUNNER" == \[* ]]; then
-            JSON=$(echo "$RUNNER" | jq -c .)
-          else
-            JSON="[\"$RUNNER\"]"
-          fi
-          echo "runner=$JSON" >> $GITHUB_OUTPUT
-
-  build-and-upload:
-    name: Build & Internal TestFlight
-    needs: check-runner
-    runs-on: ${{ fromJSON(needs.check-runner.outputs.runner) }}
-    outputs:
-      build_number: ${{ steps.version.outputs.build }}
-      version: ${{ steps.version.outputs.version }}
+      build_number: ${{ steps.artifact.outputs.build }}
+      version: ${{ steps.artifact.outputs.version }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    - name: Select Xcode
+    - name: Find latest build artifact
+      id: find-artifact
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
-        XCODE_PATH=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
-        if [ -z "$XCODE_PATH" ]; then
-          XCODE_PATH="/Applications/Xcode.app"
-        fi
-        if [ -d "$XCODE_PATH" ]; then
-          sudo xcode-select -s "$XCODE_PATH/Contents/Developer" || true
-        fi
-        xcodebuild -version
-
-    - name: Install XcodeGen
-      run: which xcodegen || brew install xcodegen
-
-    - name: Generate Xcode project
-      run: xcodegen generate
-
-    - name: Resolve Swift Package Dependencies
-      run: |
-        xcodebuild -resolvePackageDependencies \
-          -project ${{ env.PROJECT_PATH }} \
-          -scheme ${{ env.SCHEME }}
-
-    - name: Increment build number
-      run: |
-        CURRENT_BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" Trivit/Resources/Info.plist 2>/dev/null || echo "0")
-        NEW_BUILD=$((CURRENT_BUILD + ${{ github.event.inputs.build_increment || 1 }}))
-        echo "Incrementing build: $CURRENT_BUILD → $NEW_BUILD"
-        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD" Trivit/Resources/Info.plist 2>/dev/null || \
-        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $NEW_BUILD" Trivit/Resources/Info.plist
-        # Update watch app too
-        if [ -f "trivit Watch App/Info.plist" ]; then
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD" "trivit Watch App/Info.plist" 2>/dev/null || true
+        if [ -n "${{ github.event.inputs.run_id }}" ]; then
+          RUN_ID="${{ github.event.inputs.run_id }}"
+        else
+          # Get latest successful build workflow run
+          RUN_ID=$(gh run list --workflow="0-build.yml" --status=success --limit=1 --json databaseId --jq '.[0].databaseId')
         fi
 
-    - name: Get version info
-      id: version
+        if [ -z "$RUN_ID" ]; then
+          echo "ERROR: No successful build found"
+          exit 1
+        fi
+
+        echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+        echo "Using build from run: $RUN_ID"
+
+    - name: Download IPA artifact
+      id: artifact
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
-        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Trivit/Resources/Info.plist)
-        BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" Trivit/Resources/Info.plist)
+        RUN_ID="${{ steps.find-artifact.outputs.run_id }}"
+        mkdir -p $RUNNER_TEMP/Download
+
+        # List artifacts from the run
+        ARTIFACT_NAME=$(gh api repos/${{ github.repository }}/actions/runs/$RUN_ID/artifacts --jq '.artifacts[] | select(.name | startswith("ipa-")) | .name' | head -1)
+
+        if [ -z "$ARTIFACT_NAME" ]; then
+          echo "ERROR: No IPA artifact found in run $RUN_ID"
+          exit 1
+        fi
+
+        echo "Downloading artifact: $ARTIFACT_NAME"
+        gh run download $RUN_ID --name "$ARTIFACT_NAME" --dir $RUNNER_TEMP/Download
+
+        # Extract version and build from artifact name (format: ipa-VERSION-BUILD)
+        VERSION=$(echo "$ARTIFACT_NAME" | sed 's/ipa-\(.*\)-[0-9]*$/\1/')
+        BUILD=$(echo "$ARTIFACT_NAME" | sed 's/ipa-.*-\([0-9]*\)$/\1/')
+
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "build=$BUILD" >> $GITHUB_OUTPUT
-        echo "Building version $VERSION ($BUILD)"
+        echo "Downloaded version $VERSION build $BUILD"
 
     - name: Setup App Store Connect API Key
       run: |
-        mkdir -p ~/.private_keys
-        echo "${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}" | tr -d '\r' > ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
-        chmod 600 ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+        mkdir -p $RUNNER_TEMP/private_keys
+        echo "${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}" | tr -d '\r' > $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+        chmod 600 $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
 
-    - name: Install certificates
-      env:
-        DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
-        DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
-        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+    - name: Upload to App Store Connect
       run: |
-        KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-        security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-        security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-        security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-        CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
-        echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-        security import $CERTIFICATE_PATH -P "$DISTRIBUTION_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-        security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-        security list-keychain -d user -s $KEYCHAIN_PATH login.keychain-db
+        IPA_PATH=$(find $RUNNER_TEMP/Download -name "*.ipa" | head -1)
 
-    - name: Archive app
-      run: |
-        xcodebuild archive \
-          -project ${{ env.PROJECT_PATH }} \
-          -scheme ${{ env.SCHEME }} \
-          -configuration Release \
-          -archivePath ~/Export/Trivit.xcarchive \
-          -destination 'generic/platform=iOS' \
-          -allowProvisioningUpdates \
-          -authenticationKeyPath ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8 \
-          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_KEY_ID }} \
-          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }} \
-          CODE_SIGN_STYLE=Automatic \
-          DEVELOPMENT_TEAM=${{ env.TEAM_ID }}
+        if [ -z "$IPA_PATH" ]; then
+          echo "ERROR: No IPA file found"
+          exit 1
+        fi
 
-    - name: Create ExportOptions.plist
-      run: |
-        cat > /tmp/ExportOptions.plist << EOF
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-        <plist version="1.0">
-        <dict>
-            <key>method</key>
-            <string>app-store-connect</string>
-            <key>teamID</key>
-            <string>${{ env.TEAM_ID }}</string>
-            <key>signingStyle</key>
-            <string>automatic</string>
-            <key>uploadSymbols</key>
-            <true/>
-            <key>destination</key>
-            <string>upload</string>
-        </dict>
-        </plist>
-        EOF
+        echo "Uploading $IPA_PATH to App Store Connect..."
 
-    - name: Export and Upload to TestFlight
-      run: |
-        xcodebuild -exportArchive \
-          -archivePath ~/Export/Trivit.xcarchive \
-          -exportPath ~/Export \
-          -exportOptionsPlist /tmp/ExportOptions.plist \
-          -allowProvisioningUpdates \
-          -authenticationKeyPath ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8 \
-          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_KEY_ID }} \
-          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        xcrun altool --upload-app \
+          --type ios \
+          --file "$IPA_PATH" \
+          --apiKey "${{ secrets.APP_STORE_CONNECT_KEY_ID }}" \
+          --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
 
     - name: Install PyJWT
       run: pip3 install --break-system-packages PyJWT cryptography
 
-    - name: Distribute to Internal Testers
+    - name: Wait for processing & distribute
       env:
         APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
         APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        RUNNER_TEMP: ${{ runner.temp }}
       run: |
-        JWT=$(python3 -c "import jwt,time,os;k=os.environ['APP_STORE_CONNECT_KEY_ID'];i=os.environ['APP_STORE_CONNECT_ISSUER_ID'];print(jwt.encode({'iss':i,'iat':int(time.time()),'exp':int(time.time())+1200,'aud':'appstoreconnect-v1'},open(os.path.expanduser(f'~/.private_keys/AuthKey_{k}.p8')).read(),algorithm='ES256',headers={'kid':k}))")
+        JWT=$(python3 -c "import jwt,time,os;k=os.environ['APP_STORE_CONNECT_KEY_ID'];i=os.environ['APP_STORE_CONNECT_ISSUER_ID'];t=os.environ['RUNNER_TEMP'];print(jwt.encode({'iss':i,'iat':int(time.time()),'exp':int(time.time())+1200,'aud':'appstoreconnect-v1'},open(f'{t}/private_keys/AuthKey_{k}.p8').read(),algorithm='ES256',headers={'kid':k}))")
 
-        BUILD="${{ steps.version.outputs.build }}"
+        BUILD="${{ steps.artifact.outputs.build }}"
 
         # Get app ID
         APP_RESPONSE=$(curl -g -s -H "Authorization: Bearer $JWT" \
@@ -261,28 +191,33 @@ jobs:
 
     - name: Create Git Tag
       run: |
-        BUILD="${{ steps.version.outputs.build }}"
+        BUILD="${{ steps.artifact.outputs.build }}"
         TAG="internal_build_$BUILD"
 
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        git tag -a "$TAG" -m "Internal TestFlight build $BUILD
+        # Check if tag already exists
+        if git rev-parse "$TAG" >/dev/null 2>&1; then
+          echo "Tag $TAG already exists, skipping"
+        else
+          git tag -a "$TAG" -m "Internal TestFlight build $BUILD
 
-        Version: ${{ steps.version.outputs.version }}
+        Version: ${{ steps.artifact.outputs.version }}
         Distributed to internal testers.
 
         Triggered by: ${{ github.actor }}"
 
-        git push origin "$TAG"
-        echo "Created tag: $TAG"
+          git push origin "$TAG"
+          echo "Created tag: $TAG"
+        fi
 
     - name: Summary
       run: |
         echo "## Internal TestFlight Build" >> $GITHUB_STEP_SUMMARY
-        echo "- **Version**: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.build }})" >> $GITHUB_STEP_SUMMARY
-        echo "- **Git Tag**: internal_build_${{ steps.version.outputs.build }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: ${{ steps.artifact.outputs.version }} (${{ steps.artifact.outputs.build }})" >> $GITHUB_STEP_SUMMARY
+        echo "- **Git Tag**: internal_build_${{ steps.artifact.outputs.build }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Source Run**: ${{ steps.find-artifact.outputs.run_id }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Status**: Distributed to internal testers" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
@@ -291,5 +226,4 @@ jobs:
     - name: Cleanup
       if: always()
       run: |
-        rm -rf ~/.private_keys ~/Export
-        security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true
+        rm -rf $RUNNER_TEMP/private_keys $RUNNER_TEMP/Download
