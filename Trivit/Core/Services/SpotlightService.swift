@@ -1,7 +1,9 @@
 import Foundation
 import CoreSpotlight
-import MobileCoreServices
 import UniformTypeIdentifiers
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Service for indexing trivits in Spotlight search.
 @MainActor
@@ -115,7 +117,6 @@ final class SpotlightService {
         let size = CGSize(width: 60, height: 60)
 
         #if canImport(UIKit)
-        import UIKit
         let renderer = UIGraphicsImageRenderer(size: size)
         let image = renderer.image { context in
             // Background
