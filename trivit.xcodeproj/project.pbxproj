@@ -799,7 +799,7 @@
 				TargetAttributes = {
 					6C69C098195B6F4E002A3F53 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = N324UX8D9M;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -821,12 +821,12 @@
 					};
 					6CCA04B11A93CCC4000BBDE9 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = N324UX8D9M;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
 					6CE4BBCF1A1D609B005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = N324UX8D9M;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -838,18 +838,24 @@
 					};
 					6CE4BBE11A1D609D005E9BCD = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = JRS568U6JT;
+						DevelopmentTeam = N324UX8D9M;
 					};
 				};
 			};
-			buildConfigurationList = 6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "trivit" */;
+			buildConfigurationList = 6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "Trivit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				es,
+				nl,
+				fr,
+				"zh-CN",
+				ru,
+				ja,
 			);
 			mainGroup = 6C69C090195B6F4E002A3F53;
 			productRefGroup = 6C69C09A195B6F4E002A3F53 /* Products */;
@@ -1332,6 +1338,7 @@
 				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1357,7 +1364,7 @@
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1372,6 +1379,7 @@
 				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1397,7 +1405,7 @@
 				INFOPLIST_FILE = trivit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1515,6 +1523,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1536,6 +1545,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				INFOPLIST_FILE = DataKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1553,6 +1563,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1565,7 +1576,7 @@
 				INFOPLIST_FILE = "trivit Watch App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1581,6 +1592,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1589,7 +1601,7 @@
 				INFOPLIST_FILE = "trivit Watch App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit.watchapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1605,6 +1617,7 @@
 				CODE_SIGN_ENTITLEMENTS = "trivitWatchKitExtension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1617,7 +1630,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit.watchapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1633,6 +1646,7 @@
 				CODE_SIGN_ENTITLEMENTS = "trivitWatchKitExtension/trivit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = N324UX8D9M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1641,7 +1655,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = be.ballooninc.trivit.watchapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1654,7 +1668,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "trivit" */ = {
+		6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "Trivit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C69C0B7195B6F4E002A3F53 /* Debug */,
