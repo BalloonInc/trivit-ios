@@ -20,7 +20,7 @@ permissions:
   contents: write
 
 env:
-  APP_BUNDLE_ID: 'be.ballooninc.trivit'
+  APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
 
 jobs:
   submit-external:

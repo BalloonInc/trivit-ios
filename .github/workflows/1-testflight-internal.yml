@@ -30,7 +30,7 @@ permissions:
 env:
   SCHEME: 'Trivit'
   PROJECT_PATH: 'Trivit.xcodeproj'
-  APP_BUNDLE_ID: 'be.ballooninc.trivit'
+  APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
   TEAM_ID: 'N324UX8D9M'
 
 jobs:
