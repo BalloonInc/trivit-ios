@@ -86,7 +86,7 @@ final class ReminderService: NSObject {
 
     /// Creates a new reminder for a trivit.
     func createReminder(_ reminder: TrivitReminder) async throws {
-        guard hasNotificationPermission else {
+        if !hasNotificationPermission {
             let granted = await requestNotificationPermission()
             guard granted else {
                 throw ReminderError.permissionDenied
