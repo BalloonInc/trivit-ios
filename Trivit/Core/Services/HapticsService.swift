@@ -7,8 +7,7 @@ import UIKit
 ///
 /// Centralizes haptic feedback to ensure consistent experience
 /// and easy enable/disable control.
-@MainActor
-final class HapticsService: Sendable {
+final class HapticsService: @unchecked Sendable {
     // MARK: - Shared Instance
 
     static let shared = HapticsService()

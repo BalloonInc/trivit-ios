@@ -18,6 +18,7 @@ struct TrivitDetailView: View {
     @State private var showingResetConfirmation = false
     @State private var isEditing = false
     @State private var editedTitle: String = ""
+    @State private var reminderService = ReminderService()
 
     // MARK: - Computed Properties
 
@@ -53,7 +54,7 @@ struct TrivitDetailView: View {
             HistoryView(trivit: trivit)
         }
         .sheet(isPresented: $showingReminders) {
-            ReminderListView(trivit: trivit)
+            ReminderListView(trivit: trivit, reminderService: reminderService)
         }
         .alert("Reset Trivit", isPresented: $showingResetConfirmation) {
             Button("Cancel", role: .cancel) {}

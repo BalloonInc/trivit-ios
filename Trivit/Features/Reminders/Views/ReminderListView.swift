@@ -14,7 +14,7 @@ struct ReminderListView: View {
 
     // MARK: - Initialization
 
-    init(trivit: Trivit, reminderService: ReminderService = ReminderService()) {
+    init(trivit: Trivit, reminderService: ReminderService) {
         self.trivit = trivit
         self._reminderService = State(initialValue: reminderService)
     }
@@ -472,13 +472,16 @@ enum ReminderTriggerType: String, CaseIterable, Identifiable {
 
 // MARK: - Preview
 
+@MainActor
+private let previewReminderService = ReminderService()
+
 #Preview("Reminder List") {
-    ReminderListView(trivit: .preview)
+    ReminderListView(trivit: .preview, reminderService: previewReminderService)
 }
 
 #Preview("Reminder Editor") {
     ReminderEditorView(
         trivit: .preview,
-        reminderService: ReminderService()
+        reminderService: previewReminderService
     )
 }
