@@ -175,9 +175,9 @@ jobs:
           name: test-results-ios17
           path: TestResults-iOS17
 
-  # UI Tests (separate job for longer-running tests)
-  ui-tests:
-    name: UI Tests
+  # UI Tests - iPhone (separate job for longer-running tests)
+  ui-tests-iphone:
+    name: UI Tests (iPhone)
     runs-on: macos-15
     needs: [build-and-test-ios26]
     if: github.event_name == 'pull_request'
@@ -192,7 +192,7 @@ jobs:
         run: |
           xcrun simctl boot "iPhone 16 Pro" || true
 
-      - name: Run UI Tests
+      - name: Run iPhone UI Tests
         run: |
           set -o pipefail
           xcodebuild test \
@@ -200,18 +200,137 @@ jobs:
             -scheme Trivit \
             -destination "platform=iOS Simulator,OS=26.0,name=iPhone 16 Pro" \
             -testPlan UITests \
-            -resultBundlePath UITestResults \
+            -resultBundlePath UITestResults-iPhone \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             | xcpretty
         continue-on-error: true
 
-      - name: Upload UI test results
+      - name: Upload iPhone UI test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ui-test-results
-          path: UITestResults
+          name: ui-test-results-iphone
+          path: UITestResults-iPhone
+
+  # UI Tests - iPad
+  ui-tests-ipad:
+    name: UI Tests (iPad)
+    runs-on: macos-15
+    needs: [build-and-test-ios26]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Boot iPad Simulator
+        run: |
+          xcrun simctl boot "iPad Pro 13-inch (M4)" || true
+
+      - name: Run iPad UI Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=26.0,name=iPad Pro 13-inch (M4)" \
+            -testPlan iPadUITests \
+            -resultBundlePath UITestResults-iPad \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty
+        continue-on-error: true
+
+      - name: Upload iPad UI test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-test-results-ipad
+          path: UITestResults-iPad
+
+  # macOS Tests
+  test-macos:
+    name: Test (macOS)
+    runs-on: macos-15
+    needs: [lint]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Build for macOS
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=macOS" \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      - name: Run macOS Unit Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=macOS" \
+            -testPlan UnitTests \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults-macOS \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty --report junit
+        continue-on-error: true
+
+      - name: Upload macOS test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-macos
+          path: TestResults-macOS
+
+  # macOS UI Tests
+  ui-tests-macos:
+    name: UI Tests (macOS)
+    runs-on: macos-15
+    needs: [test-macos]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Run macOS UI Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=macOS" \
+            -testPlan macOSUITests \
+            -resultBundlePath UITestResults-macOS \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty
+        continue-on-error: true
+
+      - name: Upload macOS UI test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-test-results-macos
+          path: UITestResults-macOS
 
   # Build for all platforms
   build-all-platforms:

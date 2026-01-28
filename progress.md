@@ -96,11 +96,15 @@ Comprehensive SwiftUI modernization of the Trivit counting app is well underway.
 | Add Easter eggs | ✅ Complete | 20+ special numbers |
 | Implement Spotlight search | ✅ Complete | SpotlightService |
 
-### Phase 9: Platform Expansion 📋
+### Phase 9: Platform Expansion ✅
 | Task | Status | Notes |
 |------|--------|-------|
-| iPad optimized UI | 📋 Pending | Multi-column layout |
-| macOS support | 📋 Pending | Catalyst/native |
+| iPad optimized UI | ✅ Complete | NavigationSplitView |
+| macOS support | ✅ Complete | Native SwiftUI |
+| iPad UI tests | ✅ Complete | iPadUITests.swift |
+| macOS UI tests | ✅ Complete | macOSUITests.swift |
+| iPad screenshots in Fastlane | ✅ Complete | Multi-device |
+| macOS screenshots in Fastlane | ✅ Complete | Native |
 | Marketing website | 📋 Pending | |
 
 ---
@@ -212,6 +216,8 @@ When issue creation is available, create these issues:
 | 2026-01-28 | Swift Testing over XCTest | Modern syntax, better assertions |
 | 2026-01-28 | Fastlane for CI/CD | Industry standard, App Store Connect API |
 | 2026-01-28 | iOS 26 target | Latest iOS, Xcode 17 |
+| 2026-01-28 | NavigationSplitView for iPad | Native multi-column layout |
+| 2026-01-28 | Native macOS (not Catalyst) | Better UX, keyboard shortcuts |
 
 ---
 

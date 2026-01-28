@@ -200,8 +200,8 @@ platform :ios do
 
   # -------------------- Screenshots --------------------
 
-  desc "Capture screenshots for all device sizes"
-  lane :screenshots do
+  desc "Capture iPhone screenshots"
+  lane :screenshots_iphone do
     capture_screenshots(
       workspace: WORKSPACE,
       scheme: "TrivitUITests",
@@ -209,16 +209,40 @@ platform :ios do
         "iPhone 16 Pro Max",
         "iPhone 16 Pro",
         "iPhone 16",
-        "iPhone SE (3rd generation)",
-        "iPad Pro 13-inch (M4)",
-        "iPad Pro 11-inch (M4)"
+        "iPhone SE (3rd generation)"
       ],
       languages: ["en-US"],
-      output_directory: "./fastlane/screenshots",
+      output_directory: "./fastlane/screenshots/iPhone",
       clear_previous_screenshots: true,
       override_status_bar: true,
       localize_simulator: true
     )
+  end
+
+  desc "Capture iPad screenshots"
+  lane :screenshots_ipad do
+    capture_screenshots(
+      workspace: WORKSPACE,
+      scheme: "TrivitUITests",
+      testplan: "iPadUITests",
+      devices: [
+        "iPad Pro 13-inch (M4)",
+        "iPad Pro 11-inch (M4)",
+        "iPad Air 13-inch (M2)",
+        "iPad mini (6th generation)"
+      ],
+      languages: ["en-US"],
+      output_directory: "./fastlane/screenshots/iPad",
+      clear_previous_screenshots: true,
+      override_status_bar: true,
+      localize_simulator: true
+    )
+  end
+
+  desc "Capture screenshots for all iOS device sizes"
+  lane :screenshots do
+    screenshots_iphone
+    screenshots_ipad
   end
 
   desc "Upload screenshots to App Store Connect"
@@ -315,6 +339,20 @@ platform :ios do
     UI.success("Current version: #{version} (#{build})")
   end
 
+  # -------------------- iPad Tests --------------------
+
+  desc "Run iPad UI tests"
+  lane :test_ipad do
+    run_tests(
+      scheme: SCHEME,
+      devices: ["iPad Pro 13-inch (M4)"],
+      testplan: "iPadUITests",
+      clean: true,
+      output_directory: "./fastlane/test_output/iPad",
+      output_types: "html,junit"
+    )
+  end
+
   # -------------------- Error Handling --------------------
 
   error do |lane, exception, options|
@@ -323,6 +361,174 @@ platform :ios do
     # Clean up keychain on CI
     if is_ci
       delete_keychain(name: "ci_keychain") if File.exist?(File.expand_path("~/Library/Keychains/ci_keychain-db"))
+    end
+  end
+end
+
+# ==================== macOS Platform ====================
+
+platform :mac do
+  # -------------------- Build Lanes --------------------
+
+  desc "Build the macOS app for testing"
+  lane :build do
+    xcodebuild(
+      scheme: SCHEME,
+      configuration: "Debug",
+      clean: true,
+      build: true,
+      destination: "platform=macOS"
+    )
+  end
+
+  desc "Run macOS tests"
+  lane :test do
+    run_tests(
+      scheme: SCHEME,
+      destination: "platform=macOS",
+      clean: true,
+      code_coverage: true,
+      output_directory: "./fastlane/test_output/macOS",
+      output_types: "html,junit"
+    )
+  end
+
+  desc "Build macOS app for App Store distribution"
+  lane :build_release do |options|
+    # Setup API key
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
+    if is_ci
+      # Create a temporary keychain for CI
+      create_keychain(
+        name: "ci_keychain_mac",
+        password: ENV["KEYCHAIN_PASSWORD"] || "temporary_password",
+        default_keychain: true,
+        unlock: true,
+        timeout: 3600,
+        lock_when_sleeps: false
+      )
+
+      # Fetch macOS certificates
+      match(
+        type: "appstore",
+        platform: "macos",
+        app_identifier: APP_IDENTIFIER,
+        readonly: true,
+        keychain_name: "ci_keychain_mac",
+        keychain_password: ENV["KEYCHAIN_PASSWORD"] || "temporary_password"
+      )
+    end
+
+    # Build the app
+    build_mac_app(
+      scheme: SCHEME,
+      configuration: "Release",
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "Trivit.app"
+    )
+  end
+
+  # -------------------- Distribution Lanes --------------------
+
+  desc "Upload macOS app to TestFlight"
+  lane :beta do |options|
+    # Setup API key
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
+    unless options[:skip_build]
+      build_release
+    end
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: options[:skip_wait] || false,
+      distribute_external: false,
+      changelog: options[:changelog] || "Bug fixes and improvements"
+    )
+
+    clean_build_artifacts
+  end
+
+  desc "Submit macOS app to Mac App Store"
+  lane :release do |options|
+    # Setup API key
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
+    unless options[:skip_build]
+      build_release
+    end
+
+    deliver(
+      platform: "osx",
+      submit_for_review: options[:submit] || false,
+      automatic_release: options[:auto_release] || false,
+      force: true,
+      skip_screenshots: options[:skip_screenshots] || false
+    )
+
+    clean_build_artifacts
+  end
+
+  # -------------------- Screenshots --------------------
+
+  desc "Capture macOS screenshots"
+  lane :screenshots do
+    capture_screenshots(
+      scheme: "TrivitUITests",
+      testplan: "macOSUITests",
+      destination: "platform=macOS",
+      languages: ["en-US"],
+      output_directory: "./fastlane/screenshots/macOS",
+      clear_previous_screenshots: true
+    )
+  end
+
+  # -------------------- Utilities --------------------
+
+  desc "Sync macOS certificates with match"
+  lane :sync_certificates do |options|
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
+      key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"],
+      is_key_content_base64: true,
+      in_house: false
+    )
+
+    match(
+      type: options[:type] || "appstore",
+      platform: "macos",
+      app_identifier: APP_IDENTIFIER,
+      readonly: options[:readonly] || false
+    )
+  end
+
+  # -------------------- Error Handling --------------------
+
+  error do |lane, exception, options|
+    UI.error("Error in macOS lane #{lane}: #{exception.message}")
+
+    if is_ci
+      delete_keychain(name: "ci_keychain_mac") if File.exist?(File.expand_path("~/Library/Keychains/ci_keychain_mac-db"))
     end
   end
 end
