@@ -338,19 +338,29 @@ Creative feature ideas to make Trivit stand out from typical counting apps.
 
 ## Implementation Priority Matrix
 
+### ✅ Already Implemented
+1. ~~Calendar Heatmap~~ - GitHub-style activity visualization
+2. ~~Reminders/Notifications~~ - Time-based and location-based
+3. ~~Location Triggers~~ - Geofence-based counting reminders
+
+### 🚀 Next Priority (Requires Backend)
+1. **Collaborative Counting** ⭐ - Multiple people on same trivit
+   - Requires: User authentication, real-time sync, CloudKit sharing
+   - Use cases: Team goals, family chores, group challenges
+2. **Accountability Partners** - Share progress with friends
+3. **Challenges & Competitions** - Time-limited group challenges
+
 ### High Impact, Low Effort
 1. Share Cards
 2. Live Activities
 3. Countdown Counters
-4. Calendar Heatmap
-5. NFC Tags
+4. NFC Tags
 
 ### High Impact, Medium Effort
-1. Collaborative Counting
-2. Yearly Wrapped
-3. Location Triggers
-4. Streak Mode
-5. Voice Counting
+1. Yearly Wrapped
+2. Streak Mode (enhanced)
+3. Voice Counting
+4. Apple Shortcuts Integration
 
 ### High Impact, High Effort
 1. AI Insights

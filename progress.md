@@ -98,6 +98,8 @@ Comprehensive SwiftUI modernization of the Trivit counting app is well underway.
 | Implement statistics view | ✅ Complete | HistoryView with stats |
 | Add Easter eggs | ✅ Complete | 20+ special numbers |
 | Implement Spotlight search | ✅ Complete | SpotlightService |
+| Calendar heatmap | ✅ Complete | GitHub-style visualization |
+| Reminders/Notifications | ✅ Complete | Time & location-based |
 
 ### Phase 9: Platform Expansion ✅
 | Task | Status | Notes |

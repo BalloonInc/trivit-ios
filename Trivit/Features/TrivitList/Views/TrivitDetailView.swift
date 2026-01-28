@@ -14,6 +14,7 @@ struct TrivitDetailView: View {
     // MARK: - State
 
     @State private var showingHistory = false
+    @State private var showingReminders = false
     @State private var showingResetConfirmation = false
     @State private var isEditing = false
     @State private var editedTitle: String = ""
@@ -50,6 +51,9 @@ struct TrivitDetailView: View {
         .toolbar { detailToolbar }
         .sheet(isPresented: $showingHistory) {
             HistoryView(trivit: trivit)
+        }
+        .sheet(isPresented: $showingReminders) {
+            ReminderListView(trivit: trivit)
         }
         .alert("Reset Trivit", isPresented: $showingResetConfirmation) {
             Button("Cancel", role: .cancel) {}
@@ -214,6 +218,15 @@ struct TrivitDetailView: View {
         }
 
         ToolbarItem(placement: .secondaryAction) {
+            Button {
+                showingReminders = true
+            } label: {
+                Image(systemName: "bell")
+            }
+            .accessibilityLabel("Reminders")
+        }
+
+        ToolbarItem(placement: .secondaryAction) {
             Menu {
                 Button {
                     startEditing()
@@ -231,6 +244,14 @@ struct TrivitDetailView: View {
                     cycleColor()
                 } label: {
                     Label("Change Color", systemImage: "paintpalette")
+                }
+
+                Divider()
+
+                Button {
+                    showingReminders = true
+                } label: {
+                    Label("Reminders", systemImage: "bell")
                 }
 
                 Divider()

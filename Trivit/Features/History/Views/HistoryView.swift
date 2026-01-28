@@ -20,6 +20,7 @@ struct HistoryView: View {
                 VStack(spacing: 24) {
                     if let viewModel, let stats = viewModel.stats {
                         summarySection(stats)
+                        heatmapSection(stats)
                         chartSection
                         statsGridSection(stats)
                         recentActivitySection
@@ -57,6 +58,38 @@ struct HistoryView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
+    }
+
+    @State private var selectedHeatmapDate: Date?
+    @State private var selectedHeatmapActivity: Int = 0
+
+    private func heatmapSection(_ stats: TrivitStats) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Activity Heatmap")
+                    .font(.headline)
+
+                Spacer()
+
+                if let date = selectedHeatmapDate {
+                    Text("\(date, style: .date): \(selectedHeatmapActivity)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            CalendarHeatmapView(
+                dailyActivity: stats.dailyActivity,
+                weeksToShow: 26,
+                colorScheme: .green
+            ) { date, count in
+                selectedHeatmapDate = date
+                selectedHeatmapActivity = count
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     private var chartSection: some View {
@@ -188,15 +221,27 @@ struct HistoryView: View {
         let calendar = Calendar.current
         let today = Date()
 
-        return (0..<30).compactMap { dayOffset -> DailyActivity? in
+        // Generate a full year of data for the heatmap
+        return (0..<365).compactMap { dayOffset -> DailyActivity? in
             guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) else {
                 return nil
             }
+            // Simulate realistic activity patterns
+            // Higher probability of activity on weekdays
+            let weekday = calendar.component(.weekday, from: date)
+            let isWeekend = weekday == 1 || weekday == 7
+            let baseChance = isWeekend ? 3 : 7
+
+            // Skip some days randomly for realistic gaps
+            if Int.random(in: 0...10) > baseChance {
+                return nil
+            }
+
             return DailyActivity(
                 date: date,
-                increments: Int.random(in: 0...10),
+                increments: Int.random(in: 1...15),
                 decrements: Int.random(in: 0...3),
-                resets: dayOffset % 7 == 0 ? 1 : 0
+                resets: dayOffset % 14 == 0 ? 1 : 0
             )
         }
     }
