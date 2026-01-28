@@ -56,9 +56,8 @@ struct TallyMarksView: View {
         let imageCount = isLastGroup ? lastGroupCount : 5
         let imageName = tallyType.imageName(for: imageCount)
 
-        Image(imageName)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
+        // Use programmatically drawn tally marks (no image assets needed)
+        TallyMarkShape(count: imageCount, style: tallyType)
             .frame(width: tallySize, height: tallySize)
             .accessibilityHidden(true)
     }
@@ -68,6 +67,97 @@ struct TallyMarksView: View {
     private func columnsCount(for width: CGFloat) -> Int {
         let availableWidth = width - (horizontalInset * 2)
         return max(1, Int(floor((availableWidth + spacing) / (tallySize + spacing))))
+    }
+}
+
+// MARK: - Tally Mark Shape
+
+/// A shape that draws tally marks programmatically
+struct TallyMarkShape: View {
+    let count: Int
+    let style: TallyType
+
+    var body: some View {
+        Canvas { context, size in
+            let strokeWidth: CGFloat = 2
+            let markSpacing: CGFloat = size.width / 6
+            let startX: CGFloat = markSpacing
+
+            if style == .chinese {
+                // Draw Chinese 正 character progressively
+                drawChineseTally(context: context, size: size, count: count, strokeWidth: strokeWidth)
+            } else {
+                // Draw Western tally marks (IIII with diagonal)
+                drawWesternTally(context: context, size: size, count: count, strokeWidth: strokeWidth, markSpacing: markSpacing, startX: startX)
+            }
+        }
+    }
+
+    private func drawWesternTally(context: GraphicsContext, size: CGSize, count: Int, strokeWidth: CGFloat, markSpacing: CGFloat, startX: CGFloat) {
+        let topY: CGFloat = size.height * 0.15
+        let bottomY: CGFloat = size.height * 0.85
+
+        // Draw vertical marks
+        for i in 0..<min(count, 4) {
+            let x = startX + CGFloat(i) * markSpacing
+            var path = Path()
+            path.move(to: CGPoint(x: x, y: topY))
+            path.addLine(to: CGPoint(x: x, y: bottomY))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+
+        // Draw diagonal for 5
+        if count >= 5 {
+            var path = Path()
+            path.move(to: CGPoint(x: startX - markSpacing * 0.3, y: bottomY))
+            path.addLine(to: CGPoint(x: startX + 3 * markSpacing + markSpacing * 0.3, y: topY))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+    }
+
+    private func drawChineseTally(context: GraphicsContext, size: CGSize, count: Int, strokeWidth: CGFloat) {
+        let padding: CGFloat = size.width * 0.1
+
+        // 正 character strokes in order
+        // 1: Top horizontal
+        if count >= 1 {
+            var path = Path()
+            path.move(to: CGPoint(x: padding, y: size.height * 0.2))
+            path.addLine(to: CGPoint(x: size.width - padding, y: size.height * 0.2))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+
+        // 2: Left vertical (top part)
+        if count >= 2 {
+            var path = Path()
+            path.move(to: CGPoint(x: size.width * 0.25, y: size.height * 0.2))
+            path.addLine(to: CGPoint(x: size.width * 0.25, y: size.height * 0.55))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+
+        // 3: Middle horizontal
+        if count >= 3 {
+            var path = Path()
+            path.move(to: CGPoint(x: padding, y: size.height * 0.55))
+            path.addLine(to: CGPoint(x: size.width - padding, y: size.height * 0.55))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+
+        // 4: Right vertical
+        if count >= 4 {
+            var path = Path()
+            path.move(to: CGPoint(x: size.width * 0.75, y: size.height * 0.2))
+            path.addLine(to: CGPoint(x: size.width * 0.75, y: size.height * 0.85))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
+
+        // 5: Bottom horizontal
+        if count >= 5 {
+            var path = Path()
+            path.move(to: CGPoint(x: padding, y: size.height * 0.85))
+            path.addLine(to: CGPoint(x: size.width - padding, y: size.height * 0.85))
+            context.stroke(path, with: .foreground, lineWidth: strokeWidth)
+        }
     }
 }
 
