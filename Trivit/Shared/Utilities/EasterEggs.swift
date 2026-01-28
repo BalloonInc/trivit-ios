@@ -129,6 +129,25 @@ struct EasterEggs {
 
     // MARK: - Detection
 
+    /// Returns a simple message for display, if this count is special.
+    /// - Parameter count: The count to check
+    /// - Returns: A short message string, or nil if not special
+    static func message(for count: Int) -> String? {
+        if let special = specialNumbers[count] {
+            return "\(special.emoji) \(special.name)"
+        }
+        if milestones.contains(count) {
+            return "🎯 Milestone!"
+        }
+        if isRepeatingDigits(count) && count >= 111 {
+            return "🔄 Repeating!"
+        }
+        if isPalindrome(count) && count >= 101 {
+            return "🪞 Palindrome!"
+        }
+        return nil
+    }
+
     /// Checks if a count is a milestone or special number.
     static func check(_ count: Int) -> CelebrationEvent? {
         // Check special numbers first

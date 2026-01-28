@@ -22,6 +22,9 @@ enum TrivitColors {
         schemeNames.count
     }
 
+    /// Number of colors per scheme
+    static let colorCount = 10
+
     // MARK: - Blue Colors
 
     private static let blueLight: [Color] = [
