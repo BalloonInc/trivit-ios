@@ -303,23 +303,3 @@ final class iPadUITests: XCTestCase {
         }
     }
 }
-
-// MARK: - XCUIElement Extension
-
-extension XCUIElement {
-    /// Clears any current text and enters new text.
-    func clearAndEnterText(_ text: String) {
-        guard let stringValue = self.value as? String else {
-            return
-        }
-
-        self.tap()
-
-        if !stringValue.isEmpty {
-            let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
-            self.typeText(deleteString)
-        }
-
-        self.typeText(text)
-    }
-}
