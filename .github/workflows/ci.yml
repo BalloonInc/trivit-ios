@@ -74,10 +74,13 @@ jobs:
       - name: Build
         run: |
           set -o pipefail
+          # Find an available iPhone simulator
+          SIMULATOR=$(xcrun simctl list devices available | grep "iPhone" | head -1 | sed 's/.*(\([^)]*\)).*/\1/')
+          echo "Using simulator: $SIMULATOR"
           xcodebuild build-for-testing \
             -project Trivit.xcodeproj \
             -scheme Trivit \
-            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
+            -destination "platform=iOS Simulator,id=$SIMULATOR" \
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
@@ -87,10 +90,13 @@ jobs:
       - name: Run Unit Tests
         run: |
           set -o pipefail
+          # Find an available iPhone simulator
+          SIMULATOR=$(xcrun simctl list devices available | grep "iPhone" | head -1 | sed 's/.*(\([^)]*\)).*/\1/')
+          echo "Using simulator: $SIMULATOR"
           xcodebuild test \
             -project Trivit.xcodeproj \
             -scheme Trivit \
-            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
+            -destination "platform=iOS Simulator,id=$SIMULATOR" \
             -enableCodeCoverage YES \
             -resultBundlePath TestResults-iOS \
             CODE_SIGN_IDENTITY="" \
@@ -160,15 +166,18 @@ jobs:
 
       - name: Boot Simulator
         run: |
-          xcrun simctl boot "iPhone 16 Pro" || true
+          SIMULATOR=$(xcrun simctl list devices available | grep "iPhone" | head -1 | sed 's/.*(\([^)]*\)).*/\1/')
+          xcrun simctl boot "$SIMULATOR" || true
 
       - name: Run iPhone UI Tests
         run: |
           set -o pipefail
+          SIMULATOR=$(xcrun simctl list devices available | grep "iPhone" | head -1 | sed 's/.*(\([^)]*\)).*/\1/')
+          echo "Using simulator: $SIMULATOR"
           xcodebuild test \
             -project Trivit.xcodeproj \
             -scheme Trivit \
-            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
+            -destination "platform=iOS Simulator,id=$SIMULATOR" \
             -resultBundlePath UITestResults-iPhone \
             -only-testing:TrivitUITests \
             CODE_SIGN_IDENTITY="" \

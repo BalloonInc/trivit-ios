@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_17.0.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_16.0.app/Contents/Developer
   FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: 120
   FASTLANE_XCODEBUILD_SETTINGS_RETRIES: 3
 
@@ -40,10 +40,16 @@ jobs:
           fetch-depth: 0
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app
 
       - name: Show Xcode version
         run: xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -64,52 +70,73 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
-      - name: Resolve packages
-        run: |
-          if [ -f "Trivit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved" ]; then
-            xcodebuild -resolvePackageDependencies -project Trivit.xcodeproj -scheme Trivit
-          fi
-
-      - name: Create API Key file
+      - name: Set up code signing
         env:
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.DISTRIBUTION_CERTIFICATE_BASE64 }}
+          DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.DISTRIBUTION_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
-          echo "$APP_STORE_CONNECT_API_KEY_CONTENT" | base64 --decode > AuthKey.p8
+          # Create temporary keychain
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # Import certificate
+          CERTIFICATE_PATH=$RUNNER_TEMP/certificate.p12
+          echo -n "$DISTRIBUTION_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          security import $CERTIFICATE_PATH -P "$DISTRIBUTION_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
 
       - name: Build and Upload to TestFlight
         env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
-          MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
-          TEAM_ID: ${{ secrets.TEAM_ID }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
         run: |
-          if [ "${{ github.event.inputs.distribute_external }}" == "true" ]; then
-            bundle exec fastlane beta_external \
-              changelog:"${{ github.event.inputs.changelog || 'Bug fixes and improvements' }}"
-          else
-            bundle exec fastlane beta \
-              changelog:"${{ github.event.inputs.changelog || 'Bug fixes and improvements' }}"
-          fi
+          # Create API key file
+          mkdir -p ~/.appstoreconnect/private_keys
+          echo "$APP_STORE_CONNECT_PRIVATE_KEY" > ~/.appstoreconnect/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8
+
+          # Build the app
+          xcodebuild -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            -archivePath $RUNNER_TEMP/Trivit.xcarchive \
+            archive \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Apple Distribution"
+
+          # Export IPA
+          xcodebuild -exportArchive \
+            -archivePath $RUNNER_TEMP/Trivit.xcarchive \
+            -exportPath $RUNNER_TEMP/export \
+            -exportOptionsPlist fastlane/ExportOptions.plist
+
+          # Upload to TestFlight
+          xcrun altool --upload-app \
+            --type ios \
+            --file "$RUNNER_TEMP/export/Trivit.ipa" \
+            --apiKey "$APP_STORE_CONNECT_KEY_ID" \
+            --apiIssuer "$APP_STORE_CONNECT_ISSUER_ID"
 
       - name: Clean up
         if: always()
         run: |
-          rm -f AuthKey.p8
-          security delete-keychain ci_keychain.keychain-db 2>/dev/null || true
+          rm -rf ~/.appstoreconnect
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: build-output
           path: |
-            build/*.ipa
-            build/*.dSYM.zip
+            ${{ runner.temp }}/export/*.ipa
+            ${{ runner.temp }}/Trivit.xcarchive/dSYMs
           retention-days: 30
 
   notify-success:
@@ -144,7 +171,7 @@ jobs:
 
       - name: Post summary
         run: |
-          echo "## 🚀 TestFlight Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "## TestFlight Deployment Successful" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ steps.version.outputs.sha_short }}" >> $GITHUB_STEP_SUMMARY
@@ -162,7 +189,7 @@ jobs:
     steps:
       - name: Post failure summary
         run: |
-          echo "## ❌ TestFlight Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "## TestFlight Deployment Failed" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "The build or upload to TestFlight failed." >> $GITHUB_STEP_SUMMARY
           echo "Check the workflow logs for details." >> $GITHUB_STEP_SUMMARY
