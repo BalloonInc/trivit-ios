@@ -339,6 +339,80 @@ platform :ios do
     UI.success("Current version: #{version} (#{build})")
   end
 
+  # -------------------- Release Notes --------------------
+
+  desc "Generate release notes from git commits"
+  lane :generate_release_notes do |options|
+    from_tag = options[:from] || sh("git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD").strip
+    to_ref = options[:to] || "HEAD"
+
+    # Generate changelog
+    changelog = changelog_from_git_commits(
+      between: [from_tag, to_ref],
+      pretty: "- %s",
+      merge_commit_filtering: "exclude_merges"
+    )
+
+    # Categorize the changelog
+    features = changelog.split("\n").select { |line| line =~ /feat|feature|add/i }.join("\n")
+    fixes = changelog.split("\n").select { |line| line =~ /fix|bug/i }.join("\n")
+    improvements = changelog.split("\n").select { |line| line =~ /improve|enhance|update|refactor/i }.join("\n")
+    other = changelog.split("\n").reject { |line| line =~ /feat|feature|add|fix|bug|improve|enhance|update|refactor/i }.join("\n")
+
+    # Build formatted notes
+    notes = ""
+    notes += "### Features\n#{features}\n\n" unless features.empty?
+    notes += "### Bug Fixes\n#{fixes}\n\n" unless fixes.empty?
+    notes += "### Improvements\n#{improvements}\n\n" unless improvements.empty?
+    notes += "### Other Changes\n#{other}\n" unless other.empty?
+
+    notes = "Bug fixes and improvements" if notes.strip.empty?
+
+    UI.message("Generated release notes:\n#{notes}")
+
+    # Save to file
+    File.write("./fastlane/release_notes.txt", notes)
+
+    notes
+  end
+
+  desc "Create a new release with auto-generated notes"
+  lane :create_release do |options|
+    setup_api_key
+
+    version = options[:version] || get_version_number
+    notes = generate_release_notes
+
+    # Update metadata with release notes
+    File.write("./fastlane/metadata/en-US/release_notes.txt", notes)
+
+    UI.success("Release notes generated for v#{version}")
+    UI.message(notes)
+
+    notes
+  end
+
+  desc "Upload to TestFlight with auto-generated release notes"
+  lane :beta_with_notes do |options|
+    notes = generate_release_notes
+    beta(changelog: notes, skip_build: options[:skip_build])
+  end
+
+  desc "Submit to App Store with auto-generated release notes"
+  lane :release_with_notes do |options|
+    notes = generate_release_notes
+
+    # Save notes to metadata
+    FileUtils.mkdir_p("./fastlane/metadata/en-US")
+    File.write("./fastlane/metadata/en-US/release_notes.txt", notes)
+
+    release(
+      skip_build: options[:skip_build],
+      submit: options[:submit],
+      auto_release: options[:auto_release]
+    )
+  end
+
   # -------------------- iPad Tests --------------------
 
   desc "Run iPad UI tests"
@@ -499,6 +573,46 @@ platform :mac do
       languages: ["en-US"],
       output_directory: "./fastlane/screenshots/macOS",
       clear_previous_screenshots: true
+    )
+  end
+
+  # -------------------- Release Notes --------------------
+
+  desc "Upload macOS to TestFlight with auto-generated notes"
+  lane :beta_with_notes do |options|
+    from_tag = options[:from] || sh("git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD").strip
+
+    changelog = changelog_from_git_commits(
+      between: [from_tag, "HEAD"],
+      pretty: "- %s",
+      merge_commit_filtering: "exclude_merges"
+    )
+
+    changelog = "Bug fixes and improvements" if changelog.strip.empty?
+
+    beta(changelog: changelog, skip_build: options[:skip_build])
+  end
+
+  desc "Submit macOS to Mac App Store with auto-generated notes"
+  lane :release_with_notes do |options|
+    from_tag = options[:from] || sh("git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD").strip
+
+    changelog = changelog_from_git_commits(
+      between: [from_tag, "HEAD"],
+      pretty: "- %s",
+      merge_commit_filtering: "exclude_merges"
+    )
+
+    changelog = "Bug fixes and improvements" if changelog.strip.empty?
+
+    # Save notes to metadata
+    FileUtils.mkdir_p("./fastlane/metadata/en-US")
+    File.write("./fastlane/metadata/en-US/release_notes.txt", changelog)
+
+    release(
+      skip_build: options[:skip_build],
+      submit: options[:submit],
+      auto_release: options[:auto_release]
     )
   end
 

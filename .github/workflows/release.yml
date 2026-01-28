@@ -1,0 +1,267 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.2.3)'
+        required: true
+        type: string
+      prerelease:
+        description: 'Mark as pre-release'
+        required: false
+        type: boolean
+        default: false
+      generate_notes:
+        description: 'Auto-generate release notes'
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_17.0.app/Contents/Developer
+
+jobs:
+  # Generate release notes from commits
+  generate-release-notes:
+    name: Generate Release Notes
+    runs-on: ubuntu-latest
+    outputs:
+      release_notes: ${{ steps.notes.outputs.notes }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            # Extract version from tag (remove 'v' prefix)
+            VERSION=${GITHUB_REF#refs/tags/v}
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get previous tag
+        id: previous_tag
+        run: |
+          # Get the previous tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -z "$PREVIOUS_TAG" ]; then
+            # If no previous tag, get first commit
+            PREVIOUS_TAG=$(git rev-list --max-parents=0 HEAD)
+          fi
+          echo "previous_tag=$PREVIOUS_TAG" >> $GITHUB_OUTPUT
+          echo "Previous tag: $PREVIOUS_TAG"
+
+      - name: Generate changelog
+        id: notes
+        run: |
+          PREVIOUS_TAG="${{ steps.previous_tag.outputs.previous_tag }}"
+          VERSION="${{ steps.version.outputs.version }}"
+
+          # Create release notes file
+          cat > release_notes.md << 'HEADER'
+          ## What's New in v$VERSION
+
+          HEADER
+
+          # Categorize commits
+          echo "### Features" >> release_notes.md
+          git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s" --grep="feat:" --grep="feature:" --grep="add:" -i | head -20 >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Bug Fixes" >> release_notes.md
+          git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s" --grep="fix:" --grep="bug:" --grep="bugfix:" -i | head -20 >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Improvements" >> release_notes.md
+          git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s" --grep="improve:" --grep="enhance:" --grep="update:" --grep="refactor:" -i | head -20 >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Other Changes" >> release_notes.md
+          # Get commits that don't match the above patterns
+          git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s" | grep -v -i -E "^- (feat|feature|add|fix|bug|bugfix|improve|enhance|update|refactor):" | head -10 >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          # Add footer
+          cat >> release_notes.md << 'FOOTER'
+
+          ---
+
+          **Full Changelog**: https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...v$VERSION
+          FOOTER
+
+          # Replace version placeholder
+          sed -i "s/\$VERSION/$VERSION/g" release_notes.md
+          sed -i "s/\$PREVIOUS_TAG/$PREVIOUS_TAG/g" release_notes.md
+
+          # Output notes (escape for GitHub Actions)
+          NOTES=$(cat release_notes.md)
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Upload release notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release_notes.md
+
+  # Build release artifacts
+  build-release:
+    name: Build Release
+    runs-on: macos-15
+    needs: [generate-release-notes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_17.0.app
+
+      - name: Build iOS Release
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "generic/platform=iOS" \
+            -archivePath build/Trivit-iOS.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      - name: Build macOS Release
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "generic/platform=macOS" \
+            -archivePath build/Trivit-macOS.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+        continue-on-error: true
+
+      - name: Upload iOS archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-archive
+          path: build/Trivit-iOS.xcarchive
+
+      - name: Upload macOS archive
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: macos-archive
+          path: build/Trivit-macOS.xcarchive
+
+  # Create GitHub Release
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [generate-release-notes, build-release]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download release notes
+        uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.generate-release-notes.outputs.version }}
+          name: Trivit v${{ needs.generate-release-notes.outputs.version }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: ${{ inputs.prerelease || false }}
+          generate_release_notes: ${{ inputs.generate_notes || true }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Update App Store metadata (optional)
+  update-app-store-metadata:
+    name: Update App Store Metadata
+    runs-on: macos-15
+    needs: [generate-release-notes, create-release]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download release notes
+        uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Fastlane
+        run: |
+          cd fastlane
+          bundle install
+
+      - name: Update release notes in metadata
+        run: |
+          VERSION="${{ needs.generate-release-notes.outputs.version }}"
+
+          # Create metadata directory if it doesn't exist
+          mkdir -p fastlane/metadata/en-US
+
+          # Convert markdown release notes to plain text for App Store
+          # Remove markdown formatting
+          sed 's/^### /\n/g; s/^## /\n/g; s/^- /• /g; s/\*\*//g; s/---//g' release_notes.md > fastlane/metadata/en-US/release_notes.txt
+
+          echo "Release notes updated for version $VERSION"
+          cat fastlane/metadata/en-US/release_notes.txt
+
+      - name: Commit metadata changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add fastlane/metadata/
+          git diff --staged --quiet || git commit -m "Update release notes for v${{ needs.generate-release-notes.outputs.version }}"
+          git push origin HEAD:main || echo "Could not push metadata changes"
+        continue-on-error: true
+
+  # Notify on completion
+  notify:
+    name: Notify
+    runs-on: ubuntu-latest
+    needs: [generate-release-notes, create-release]
+    if: always()
+    steps:
+      - name: Release Summary
+        run: |
+          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** v${{ needs.generate-release-notes.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ needs.create-release.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Release Notes" >> $GITHUB_STEP_SUMMARY
+          echo "${{ needs.generate-release-notes.outputs.release_notes }}" >> $GITHUB_STEP_SUMMARY

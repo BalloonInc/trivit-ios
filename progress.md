@@ -45,6 +45,9 @@ Comprehensive SwiftUI modernization of the Trivit counting app is well underway.
 | Add TestFlight workflow | ✅ Complete | testflight.yml |
 | Add Screenshots workflow | ✅ Complete | app-store-assets.yml |
 | iOS 26 support | ✅ Complete | Xcode 17, iPhone 16 Pro |
+| Add Release workflow | ✅ Complete | release.yml |
+| Add Metadata workflow | ✅ Complete | metadata.yml |
+| Claude AI release notes | ✅ Complete | generate_release_notes.py |
 
 ### Phase 4: Core SwiftUI Migration ✅
 | Task | Status | Notes |

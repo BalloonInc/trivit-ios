@@ -38,6 +38,12 @@ These are required for building signed IPAs.
 |-------------|-------------|---------------|
 | `KEYCHAIN_PASSWORD` | Password for temporary CI keychain | Generate any secure password |
 
+### AI-Powered Features
+
+| Secret Name | Description | How to Obtain |
+|-------------|-------------|---------------|
+| `ANTHROPIC_API_KEY` | API key for Claude AI (release notes generation) | [Anthropic Console](https://console.anthropic.com/) → API Keys |
+
 ## Setting Up Secrets
 
 ### 1. Create App Store Connect API Key
