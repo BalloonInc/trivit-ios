@@ -1,7 +1,91 @@
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
 *.xcuserstate
 *.xcbkptlist
-.sonar
+*.xccheckout
+*.xcscmblueprint
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# Generated Xcode project (using XcodeGen)
+*.xcodeproj/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods (no longer used)
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Build artifacts
+build/
+*.ipa
+*.app.dSYM.zip
+
+# Code coverage
+*.gcda
+*.gcno
+coverage/
+*.profraw
+*.profdata
+
+# Archives
+*.xcarchive
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Testing
+*.xctestplan.xcresult
+TestResults*/
+UITestResults*/
+
+# SonarQube (no longer used)
+.sonar/
+sonar-reports/
 compile_commands.json
 xcodebuild.log
-sonar-reports
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets (never commit)
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Documentation
+docs/_build/
+*.doccarchive

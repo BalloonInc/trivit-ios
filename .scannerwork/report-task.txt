@@ -1,5 +1,0 @@
-projectKey=trivit
-serverUrl=http://sonar.ballooninc.be
-dashboardUrl=http://sonar.ballooninc.be/dashboard/index/trivit
-ceTaskId=AVu2AiiiB6YMyIfxAk1G
-ceTaskUrl=http://sonar.ballooninc.be/api/ce/task?id=AVu2AiiiB6YMyIfxAk1G

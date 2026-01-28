@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "F6G25E3D-2345-5678-9012-345678901BCD",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Trivit.xcodeproj",
+      "identifier" : "TrivitUITests",
+      "name" : "TrivitUITests"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Trivit.xcodeproj",
+        "identifier" : "TrivitUITests",
+        "name" : "TrivitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

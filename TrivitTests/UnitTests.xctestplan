@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "E5F14D2C-1234-4567-8901-234567890ABC",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Trivit.xcodeproj",
+          "identifier" : "Trivit",
+          "name" : "Trivit"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Trivit.xcodeproj",
+      "identifier" : "TrivitTests",
+      "name" : "TrivitTests"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Trivit.xcodeproj",
+        "identifier" : "TrivitTests",
+        "name" : "TrivitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "G7H36F4E-3456-6789-0123-456789012CDE",
+      "name" : "iPad Configuration",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Trivit.xcodeproj",
+      "identifier" : "TrivitUITests",
+      "name" : "TrivitUITests"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "TrivitUITests"
+      ],
+      "target" : {
+        "containerPath" : "container:Trivit.xcodeproj",
+        "identifier" : "TrivitUITests",
+        "name" : "TrivitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

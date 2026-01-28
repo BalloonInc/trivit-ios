@@ -1,0 +1,33 @@
+{
+  "configurations" : [
+    {
+      "id" : "H8I47G5F-4567-7890-1234-567890123DEF",
+      "name" : "macOS Configuration",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Trivit.xcodeproj",
+      "identifier" : "TrivitUITests",
+      "name" : "TrivitUITests"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "TrivitUITests",
+        "iPadUITests"
+      ],
+      "target" : {
+        "containerPath" : "container:Trivit.xcodeproj",
+        "identifier" : "TrivitUITests",
+        "name" : "TrivitUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
