@@ -199,40 +199,56 @@ struct HistoryView: View {
     // MARK: - Setup
 
     private func setupViewModel() async {
-        // In a real implementation, this would use the actual history repository
-        let mockRepository = MockHistoryRepository()
-        mockRepository.mockStats = TrivitStats(
-            trivitId: trivit.id,
-            currentCount: trivit.count,
-            totalIncrements: trivit.count + 20,
+        let repository = SwiftDataHistoryRepository(modelContext: modelContext)
+        viewModel = HistoryViewModel(trivit: trivit, historyRepository: repository)
+        await viewModel?.load()
+    }
+}
+
+// MARK: - Preview Mock Repository
+
+#if DEBUG
+/// Mock history repository for SwiftUI previews
+@MainActor
+final class PreviewHistoryRepository: HistoryRepository {
+    nonisolated func fetchHistory(for trivitId: UUID) async throws -> [TrivitHistoryEntry] {
+        []
+    }
+
+    nonisolated func fetchHistory(for trivitId: UUID, from startDate: Date, to endDate: Date) async throws -> [TrivitHistoryEntry] {
+        []
+    }
+
+    nonisolated func record(_ entry: TrivitHistoryEntry) async throws {}
+
+    nonisolated func calculateStats(for trivitId: UUID) async throws -> TrivitStats {
+        TrivitStats(
+            trivitId: trivitId,
+            currentCount: 42,
+            totalIncrements: 62,
             totalDecrements: 20,
             resetCount: 2,
-            highestCount: trivit.count + 50,
+            highestCount: 92,
             firstActivity: Calendar.current.date(byAdding: .month, value: -1, to: Date()),
             lastActivity: Date(),
             dailyActivity: generateMockDailyActivity()
         )
-
-        viewModel = HistoryViewModel(trivit: trivit, historyRepository: mockRepository)
-        await viewModel?.load()
     }
 
-    private func generateMockDailyActivity() -> [DailyActivity] {
+    nonisolated func deleteHistory(for trivitId: UUID) async throws {}
+
+    private nonisolated func generateMockDailyActivity() -> [DailyActivity] {
         let calendar = Calendar.current
         let today = Date()
 
-        // Generate a full year of data for the heatmap
         return (0..<365).compactMap { dayOffset -> DailyActivity? in
             guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) else {
                 return nil
             }
-            // Simulate realistic activity patterns
-            // Higher probability of activity on weekdays
             let weekday = calendar.component(.weekday, from: date)
             let isWeekend = weekday == 1 || weekday == 7
             let baseChance = isWeekend ? 3 : 7
 
-            // Skip some days randomly for realistic gaps
             if Int.random(in: 0...10) > baseChance {
                 return nil
             }
@@ -246,6 +262,7 @@ struct HistoryView: View {
         }
     }
 }
+#endif
 
 // MARK: - Stat Card
 
