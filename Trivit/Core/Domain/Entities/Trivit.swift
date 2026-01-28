@@ -7,7 +7,7 @@ import SwiftData
 /// It supports visual representation through tally marks and can be collapsed
 /// to show only a count badge.
 @Model
-final class Trivit: Identifiable {
+final class Trivit: Identifiable, Equatable {
     // MARK: - Properties
 
     /// Unique identifier for the trivit
