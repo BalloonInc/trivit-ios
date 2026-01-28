@@ -13,7 +13,6 @@
 		6C082B711DB03438005D4C7A /* DataAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CCA04C81A93CD44000BBDE9 /* DataAccess.h */; };
 		6C0908E41ACB52B900F01033 /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36CF4A1ACAB86700020384 /* Version.m */; };
 		6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */; };
-		6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
 		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
@@ -55,6 +54,15 @@
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */; };
 		F83932C45B18181E9F737A4C /* libPods-trivit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E62E1FE6F0F9C1B63204746 /* libPods-trivit.a */; };
+		84E9DC656D014E6E9D28840C /* TrivitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6734FAFC868495CB79E2C28 /* TrivitApp.swift */; };
+		D7517A2AB6FD446184FF17B6 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80AFB5A5D0E40089867C69A /* Trivit.swift */; };
+		F00D2A9FF0BB41EEAEDE4341 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653E9E2B68144D9809E8CCC /* TrivitColors.swift */; };
+		DDEB85484EFB49B2A88EDEB5 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960178E687454B60B630FE7F /* TrivitRowView.swift */; };
+		2F31C97537394F14B657E399 /* TrivitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0F18442924A47886B0E41 /* TrivitListView.swift */; };
+		EB362C3CD06A446AAC4FFBDE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEC6BA344F84757A2FE226B /* SettingsView.swift */; };
+		EB3D4B137D954426A8474080 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */; };
+		2BF55E58102048ADB6F20C2A /* TrivitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D3E60F3724B27BF178183 /* TrivitRepository.swift */; };
+		A37CBBE5467442D99DC8ECDF /* EasterEggs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1257B60204E4CF2966F2FCD /* EasterEggs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +126,6 @@
 		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
 		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
 		6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits2.xcdatamodel; sourceTree = "<group>"; };
-		6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = trivit/NewRelicAgent.framework; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -261,6 +268,15 @@
 		E10547B7B77580FF964E34D5 /* Pods-trivit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trivit.release.xcconfig"; path = "Pods/Target Support Files/Pods-trivit/Pods-trivit.release.xcconfig"; sourceTree = "<group>"; };
 		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
 		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
+		D6734FAFC868495CB79E2C28 /* TrivitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitApp.swift; path = TrivitApp.swift; sourceTree = "<group>"; };
+		E80AFB5A5D0E40089867C69A /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Trivit.swift; path = Models/Trivit.swift; sourceTree = "<group>"; };
+		6653E9E2B68144D9809E8CCC /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitColors.swift; path = Theme/TrivitColors.swift; sourceTree = "<group>"; };
+		960178E687454B60B630FE7F /* TrivitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitRowView.swift; path = Views/TrivitRowView.swift; sourceTree = "<group>"; };
+		02F0F18442924A47886B0E41 /* TrivitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitListView.swift; path = Views/TrivitListView.swift; sourceTree = "<group>"; };
+		FEEC6BA344F84757A2FE226B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HapticsService.swift; path = Services/HapticsService.swift; sourceTree = "<group>"; };
+		100D3E60F3724B27BF178183 /* TrivitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitRepository.swift; path = Repositories/TrivitRepository.swift; sourceTree = "<group>"; };
+		C1257B60204E4CF2966F2FCD /* EasterEggs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasterEggs.swift; path = Utilities/EasterEggs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,7 +289,6 @@
 				6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */,
 				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
 				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
-				6C0A91571A0D0FE0006F2F87 /* NewRelicAgent.framework in Frameworks */,
 				F83932C45B18181E9F737A4C /* libPods-trivit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +371,16 @@
 		6C69C09B195B6F4E002A3F53 /* trivit */ = {
 			isa = PBXGroup;
 			children = (
+				D6734FAFC868495CB79E2C28 /* TrivitApp.swift */,
+				E80AFB5A5D0E40089867C69A /* Trivit.swift */,
+				6653E9E2B68144D9809E8CCC /* TrivitColors.swift */,
+				960178E687454B60B630FE7F /* TrivitRowView.swift */,
+				02F0F18442924A47886B0E41 /* TrivitListView.swift */,
+				FEEC6BA344F84757A2FE226B /* SettingsView.swift */,
+				6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */,
+				100D3E60F3724B27BF178183 /* TrivitRepository.swift */,
+				C1257B60204E4CF2966F2FCD /* EasterEggs.swift */,
+
 				6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */,
 				6CF1A23F195B765600B83A6F /* Model */,
 				6C1C91B219FEF2A700447874 /* tutorial */,
@@ -490,7 +515,6 @@
 				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
 				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
 				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
-				6C0A91561A0D0FE0006F2F87 /* NewRelicAgent.framework */,
 				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
 				9E62E1FE6F0F9C1B63204746 /* libPods-trivit.a */,
 			);
@@ -602,9 +626,7 @@
 				6C69C095195B6F4E002A3F53 /* Sources */,
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
-				6C0A91631A0D193D006F2F87 /* ShellScript */,
 				6CCA04C61A93CCC5000BBDE9 /* Embed Frameworks */,
-				6C082B611DB030E1005D4C7A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -834,26 +856,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */,
-				6C1C91B519FEF2DF00447874 /* TutChildViewController.m in Sources */,
-				6CF1A23E195B762D00B83A6F /* Tally.m in Sources */,
-				6C11D3641A5200FD0024AAAA /* Feedback+Mapping.m in Sources */,
-				6C923EB5198C645D00833188 /* trivits.xcdatamodeld in Sources */,
-				6C8FBB501978610400C1D381 /* MainListViewController.m in Sources */,
-				6C98EEB01A4771A500E12E25 /* FeedbackViewController.m in Sources */,
-				6CA4493B1980D8E00049F34D /* Colors.m in Sources */,
-				6C7CE6361A4F6889004EE27D /* SettingButtonCell.m in Sources */,
-				6C11D35B1A5200670024AAAA /* Feedback.m in Sources */,
-				6C9025BF198458A500BB11FC /* SettingsViewController.m in Sources */,
-				6C69C0A2195B6F4E002A3F53 /* AppDelegate.m in Sources */,
-				6C8FBB531978627F00C1D381 /* TrivitTableViewCell.m in Sources */,
-				6C1C91B819FEF2FF00447874 /* TutMasterViewController.m in Sources */,
-				6C69C09F195B6F4E002A3F53 /* main.m in Sources */,
-				6C5742831A6C140700F2B72D /* cellBackground.m in Sources */,
-				6C41254D1A435FB800C2D4CA /* TallyModel.m in Sources */,
-				6C9025BC1984588300BB11FC /* Settings.m in Sources */,
-				6C11D3671A521F490024AAAA /* SettingsIcons.m in Sources */,
-				6C02C88F1A616DBE00547584 /* TutContainerViewController.m in Sources */,
+				84E9DC656D014E6E9D28840C /* TrivitApp.swift in Sources */,
+				D7517A2AB6FD446184FF17B6 /* Trivit.swift in Sources */,
+				F00D2A9FF0BB41EEAEDE4341 /* TrivitColors.swift in Sources */,
+				DDEB85484EFB49B2A88EDEB5 /* TrivitRowView.swift in Sources */,
+				2F31C97537394F14B657E399 /* TrivitListView.swift in Sources */,
+				EB362C3CD06A446AAC4FFBDE /* SettingsView.swift in Sources */,
+				EB3D4B137D954426A8474080 /* HapticsService.swift in Sources */,
+				2BF55E58102048ADB6F20C2A /* TrivitRepository.swift in Sources */,
+				A37CBBE5467442D99DC8ECDF /* EasterEggs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,9 +880,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C0908E41ACB52B900F01033 /* Version.m in Sources */,
-				6C9DC4F41AE083CF00EE5B0A /* TallyModel.m in Sources */,
-				6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1081,10 +1089,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1126,9 +1135,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1165,7 +1175,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
 				);
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1206,7 +1216,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
 				);
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1272,7 +1282,7 @@
 				);
 				INFOPLIST_FILE = DataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1305,7 +1315,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = DataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1332,7 +1342,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = DataKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1350,7 +1360,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				INFOPLIST_FILE = DataKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";

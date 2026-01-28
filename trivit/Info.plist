@@ -22,7 +22,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>be.ballooninc.trivit</string>
+			<string>com.wouterdevriendt.trivit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>trivit</string>
@@ -43,7 +43,7 @@
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>ADD_TRIVIT_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>be.ballooninc.trivit.AddTrivit</string>
+			<string>com.wouterdevriendt.trivit.AddTrivit</string>
 			<key>UIApplicationShortcutItemUserInfo</key>
 			<dict>
 				<key>firstShorcutKey1</key>
@@ -53,8 +53,6 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array/>
 	<key>UISupportedInterfaceOrientations</key>
