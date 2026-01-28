@@ -208,6 +208,7 @@
 		6C11D3661A521F490024AAAA /* SettingsIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsIcons.m; sourceTree = "<group>"; };
 		6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = trivit.entitlements; sourceTree = "<group>"; };
 		6C17594F1AA3BAA700A0CE0D /* trivit WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "trivit WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		6C17595F1AA3BAA700A0CE0D /* TrivitWatchApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "TrivitWatchApp.entitlements"; sourceTree = "<group>"; };
 		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
 		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
 		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
@@ -607,6 +608,7 @@
 		6CE4BBE61A1D609D005E9BCD /* trivit Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				6C17595F1AA3BAA700A0CE0D /* TrivitWatchApp.entitlements */,
 				6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */,
 				6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */,
 				6CE4BBE71A1D609D005E9BCD /* Supporting Files */,
@@ -1362,7 +1364,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
 				);
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1403,7 +1405,7 @@
 					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
 				);
 				INFOPLIST_FILE = trivit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1469,7 +1471,7 @@
 				);
 				INFOPLIST_FILE = DataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1502,7 +1504,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = DataKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1529,7 +1531,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = DataKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1547,7 +1549,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				INFOPLIST_FILE = DataKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "be.ballooninc.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1576,13 +1578,14 @@
 				INFOPLIST_FILE = "trivit Watch App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				CODE_SIGN_ENTITLEMENTS = "trivit Watch App/TrivitWatchApp.entitlements";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -1601,13 +1604,14 @@
 				INFOPLIST_FILE = "trivit Watch App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				CODE_SIGN_ENTITLEMENTS = "trivit Watch App/TrivitWatchApp.entitlements";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -1627,7 +1631,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = trivitWatchKitExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp.watchkitextension;
@@ -1636,7 +1640,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -1652,7 +1656,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = trivitWatchKitExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchapp.watchkitextension;
@@ -1661,7 +1665,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
