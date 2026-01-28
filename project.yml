@@ -1,0 +1,91 @@
+name: Trivit
+options:
+  bundleIdPrefix: com.wouterdevriendt
+  deploymentTarget:
+    iOS: "17.0"
+    watchOS: "10.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: N324UX8D9M
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "4.3"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  Trivit:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: trivit
+        excludes:
+          - "**/*.framework"
+          - "**/*.xcdatamodeld"
+          - "**/wouter.developerprofile"
+          - "**/GoogleService-Info.plist"
+          - "**/NewRelicAgent.framework"
+          - "**/Main.storyboard"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wouterdevriendt.trivit
+        INFOPLIST_FILE: trivit/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_ENTITLEMENTS: trivit/trivit.entitlements
+        PRODUCT_NAME: Trivit
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: "NO"
+    info:
+      path: trivit/Info.plist
+      properties:
+        UILaunchStoryboardName: Launch Screen
+        CFBundleDisplayName: Trivit
+    entitlements:
+      path: trivit/trivit.entitlements
+    dependencies:
+      - target: TrivitWatch
+
+  TrivitWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: "trivit Watch App"
+        excludes:
+          - "*.lproj"
+      - path: trivit/Models
+        name: SharedModels
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wouterdevriendt.trivit.watchkitapp
+        INFOPLIST_FILE: "trivit Watch App/Info.plist"
+        CODE_SIGN_ENTITLEMENTS: "trivit Watch App/TrivitWatchApp.entitlements"
+        PRODUCT_NAME: "Trivit Watch App"
+        WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        SDKROOT: watchos
+        SKIP_INSTALL: "NO"
+        GENERATE_INFOPLIST_FILE: "NO"
+    info:
+      path: "trivit Watch App/Info.plist"
+    entitlements:
+      path: "trivit Watch App/TrivitWatchApp.entitlements"
+
+schemes:
+  Trivit:
+    build:
+      targets:
+        Trivit: all
+        TrivitWatch: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

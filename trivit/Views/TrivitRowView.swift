@@ -26,45 +26,44 @@ struct TrivitRowView: View {
                 trivit.increment()
                 HapticsService.shared.impact(.light)
             } label: {
-                HStack(spacing: 12) {
+                HStack(spacing: 0) {
                     // Title and tally marks
-                    VStack(alignment: .leading, spacing: 4) {
-                        if isEditing {
-                            TextField("Title", text: $trivit.title)
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundColor(.white)
-                                .focused($isTitleFocused)
-                                .onSubmit {
-                                    isEditing = false
-                                }
-                        } else {
-                            Text(trivit.title)
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundColor(.white)
-                                .onLongPressGesture {
-                                    isEditing = true
-                                    isTitleFocused = true
-                                }
+                    VStack(alignment: .leading, spacing: 6) {
+                        // Title with small triangle indicator
+                        HStack(spacing: 6) {
+                            // Small triangle indicator
+                            Triangle()
+                                .fill(Color.white.opacity(0.6))
+                                .frame(width: 8, height: 8)
+
+                            if isEditing {
+                                TextField("Title", text: $trivit.title)
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.white.opacity(0.9))
+                                    .focused($isTitleFocused)
+                                    .onSubmit {
+                                        isEditing = false
+                                    }
+                            } else {
+                                Text(trivit.title)
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.white.opacity(0.9))
+                                    .onLongPressGesture {
+                                        isEditing = true
+                                        isTitleFocused = true
+                                    }
+                            }
                         }
 
-                        // Tally marks inline
-                        if trivit.count > 0 {
-                            TallyMarksView(count: trivit.count)
-                        }
+                        // Tally marks - using text representation
+                        TallyMarksView(count: trivit.count)
+                            .padding(.leading, 4)
                     }
 
                     Spacer()
-
-                    // Count display in circle
-                    Text("\(trivit.count)")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(backgroundColor)
-                        .frame(width: 50, height: 50)
-                        .background(Color.white.opacity(0.95))
-                        .clipShape(Circle())
                 }
                 .padding(.horizontal, 16)
-                .padding(.vertical, 12)
+                .padding(.vertical, 14)
             }
             .buttonStyle(.plain)
 
@@ -119,52 +118,68 @@ struct TrivitRowView: View {
     }
 }
 
+// MARK: - Triangle Shape
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.closeSubpath()
+        return path
+    }
+}
+
 // MARK: - Tally Marks Visual
 struct TallyMarksView: View {
     let count: Int
 
+    // Unicode tally mark (正) or we can use custom text representation
+    private let tallyFive = "卌"  // Tally mark for 5
+
     var body: some View {
-        HStack(spacing: 8) {
-            let fullGroups = min(count / 5, 6) // Show max 6 groups inline
-            let remainder = count % 5
-            let showRemainder = fullGroups < 6
-
-            ForEach(0..<fullGroups, id: \.self) { _ in
-                TallyGroupView(count: 5)
-            }
-
-            if showRemainder && remainder > 0 {
-                TallyGroupView(count: remainder)
-            }
-
-            if count > 30 {
-                Text("...")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white.opacity(0.8))
-            }
+        if count == 0 {
+            // Empty state
+            Text(" ")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(.white)
+        } else {
+            // Wrap tally marks if needed
+            let tallyText = buildTallyString()
+            Text(tallyText)
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(.white)
+                .lineLimit(2)
+                .minimumScaleFactor(0.7)
         }
     }
-}
 
-struct TallyGroupView: View {
-    let count: Int
+    private func buildTallyString() -> String {
+        let fullGroups = count / 5
+        let remainder = count % 5
 
-    var body: some View {
-        HStack(spacing: 2) {
-            ForEach(0..<min(count, 4), id: \.self) { _ in
-                Rectangle()
-                    .fill(Color.white.opacity(0.9))
-                    .frame(width: 2, height: 16)
-            }
-            if count == 5 {
-                Rectangle()
-                    .fill(Color.white.opacity(0.9))
-                    .frame(width: 14, height: 2)
-                    .rotationEffect(.degrees(-65))
-                    .offset(x: -8)
+        var result = ""
+
+        // Add full groups (卌)
+        for i in 0..<fullGroups {
+            result += tallyFive
+            // Add space every few groups for readability
+            if (i + 1) % 10 == 0 && i < fullGroups - 1 {
+                result += " "
+            } else if i < fullGroups - 1 {
+                result += " "
             }
         }
-        .frame(width: count == 5 ? 20 : CGFloat(count * 4), height: 18)
+
+        // Add remainder as individual marks (|)
+        if remainder > 0 {
+            if !result.isEmpty {
+                result += " "
+            }
+            result += String(repeating: "I", count: remainder)
+        }
+
+        return result
     }
 }
 

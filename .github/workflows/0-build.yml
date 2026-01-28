@@ -8,7 +8,7 @@ on:
     branches:
       - master
     paths:
-      - 'Trivit/**'
+      - 'trivit/**'
       - 'trivit Watch App/**'
       - 'project.yml'
       - '.github/workflows/0-build.yml'
@@ -16,7 +16,7 @@ on:
     branches:
       - master
     paths:
-      - 'Trivit/**'
+      - 'trivit/**'
       - 'trivit Watch App/**'
       - 'project.yml'
   workflow_dispatch:
@@ -77,11 +77,11 @@ jobs:
       run: |
         # Use commit count as build number for deterministic builds
         BUILD=$(git rev-list --count HEAD)
-        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Trivit/Resources/Info.plist)
+        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" trivit/Info.plist)
 
         # Update plist with calculated build number
-        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" Trivit/Resources/Info.plist 2>/dev/null || \
-        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" Trivit/Resources/Info.plist
+        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" trivit/Info.plist 2>/dev/null || \
+        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" trivit/Info.plist
 
         # Update watch app too
         if [ -f "trivit Watch App/Info.plist" ]; then
