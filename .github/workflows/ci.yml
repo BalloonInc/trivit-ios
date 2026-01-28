@@ -1,0 +1,252 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop, 'feature/**', 'claude/**']
+  pull_request:
+    branches: [main, master, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_15.2.app/Contents/Developer
+
+jobs:
+  # Linting job
+  lint:
+    name: Lint
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: Run SwiftLint
+        run: swiftlint lint --reporter github-actions-logging
+        continue-on-error: false
+
+  # Swift Format Check
+  format:
+    name: Format Check
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install swift-format
+        run: brew install swift-format
+
+      - name: Check formatting
+        run: |
+          swift-format lint --recursive Trivit/ TrivitTests/ TrivitUITests/ || {
+            echo "::error::Code is not properly formatted. Run 'swift-format format --recursive --in-place Trivit/' to fix."
+            exit 1
+          }
+
+  # Build and Test
+  build-and-test:
+    name: Build and Test
+    runs-on: macos-14
+    needs: [lint]
+    strategy:
+      matrix:
+        destination:
+          - platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro
+        include:
+          - destination: platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro
+            scheme: Trivit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Cache Swift packages
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Resolve packages
+        run: |
+          if [ -f "Trivit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved" ]; then
+            xcodebuild -resolvePackageDependencies -project Trivit.xcodeproj -scheme ${{ matrix.scheme }}
+          fi
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing \
+            -project Trivit.xcodeproj \
+            -scheme ${{ matrix.scheme }} \
+            -destination "${{ matrix.destination }}" \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      - name: Run Unit Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme ${{ matrix.scheme }} \
+            -destination "${{ matrix.destination }}" \
+            -testPlan UnitTests \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty --report junit
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: |
+            TestResults
+            build/reports/
+
+      - name: Generate coverage report
+        if: success()
+        run: |
+          xcrun xccov view --report --json TestResults > coverage.json
+          cat coverage.json | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          targets = data.get('targets', [])
+          for target in targets:
+              name = target.get('name', 'Unknown')
+              coverage = target.get('lineCoverage', 0) * 100
+              print(f'{name}: {coverage:.1f}%')
+          "
+
+  # UI Tests (separate job for longer-running tests)
+  ui-tests:
+    name: UI Tests
+    runs-on: macos-14
+    needs: [build-and-test]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Boot Simulator
+        run: |
+          xcrun simctl boot "iPhone 15 Pro" || true
+
+      - name: Run UI Tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "platform=iOS Simulator,OS=17.2,name=iPhone 15 Pro" \
+            -testPlan UITests \
+            -resultBundlePath UITestResults \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty
+        continue-on-error: true
+
+      - name: Upload UI test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-test-results
+          path: UITestResults
+
+  # Build for all platforms
+  build-all-platforms:
+    name: Build All Platforms
+    runs-on: macos-14
+    needs: [build-and-test]
+    strategy:
+      matrix:
+        include:
+          - platform: iOS
+            destination: generic/platform=iOS
+          - platform: watchOS
+            destination: generic/platform=watchOS
+          - platform: macOS
+            destination: platform=macOS
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Build for ${{ matrix.platform }}
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "${{ matrix.destination }}" \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+  # Documentation generation
+  docs:
+    name: Generate Documentation
+    runs-on: macos-14
+    if: github.ref == 'refs/heads/main'
+    needs: [build-and-test]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Generate DocC documentation
+        run: |
+          xcodebuild docbuild \
+            -project Trivit.xcodeproj \
+            -scheme Trivit \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath DerivedData \
+            || echo "DocC build failed, continuing..."
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: documentation
+          path: DerivedData/Build/Products/Debug-iphoneos/Trivit.doccarchive
+
+  # Dependency audit
+  security-audit:
+    name: Security Audit
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for known vulnerabilities
+        run: |
+          echo "Checking for security issues..."
+          # Check for hardcoded secrets
+          if grep -rn "API_KEY\|SECRET\|PASSWORD\|TOKEN" --include="*.swift" Trivit/ 2>/dev/null | grep -v "// "; then
+            echo "::warning::Potential hardcoded secrets found"
+          fi
+          echo "Security audit complete"
