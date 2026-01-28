@@ -12,6 +12,7 @@ concurrency:
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_16.0.app/Contents/Developer
+  SIMULATOR_NAME: "iPhone 16 Pro"
 
 jobs:
   # Linting job
@@ -82,12 +83,12 @@ jobs:
             -project Trivit.xcodeproj \
             -scheme Trivit \
             -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,name=iPhone 15 Pro" \
+            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=17.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
             | xcpretty
 
       - name: Run Unit Tests
@@ -97,12 +98,12 @@ jobs:
             -project Trivit.xcodeproj \
             -scheme Trivit \
             -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,name=iPhone 15 Pro" \
+            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
             -enableCodeCoverage YES \
             -resultBundlePath TestResults-iOS \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=17.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
             | xcpretty --report junit || echo "Tests failed or no compatible simulator found"
         continue-on-error: true
 
@@ -168,7 +169,7 @@ jobs:
 
       - name: Boot Simulator
         run: |
-          xcrun simctl boot "iPhone 15 Pro" || true
+          xcrun simctl boot "iPhone 16 Pro" || true
 
       - name: Run iPhone UI Tests
         run: |
@@ -177,12 +178,12 @@ jobs:
             -project Trivit.xcodeproj \
             -scheme Trivit \
             -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,name=iPhone 15 Pro" \
+            -destination "platform=iOS Simulator,name=iPhone 16 Pro" \
             -resultBundlePath UITestResults-iPhone \
             -only-testing:TrivitUITests \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            IPHONEOS_DEPLOYMENT_TARGET=17.0 \
+            IPHONEOS_DEPLOYMENT_TARGET=18.0 \
             | xcpretty
         continue-on-error: true
 

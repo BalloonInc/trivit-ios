@@ -2,8 +2,8 @@ name: Trivit
 options:
   bundleIdPrefix: be.ballooninc
   deploymentTarget:
-    iOS: "17.0"
-    macOS: "14.0"
+    iOS: "18.0"
+    macOS: "15.0"
   generateEmptyDirectories: true
   groupSortPosition: top
   createIntermediateGroups: true
@@ -14,8 +14,8 @@ settings:
     CURRENT_PROJECT_VERSION: "1"
     SWIFT_VERSION: "5.10"
     ENABLE_USER_SCRIPT_SANDBOXING: false
-    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
-    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    MACOSX_DEPLOYMENT_TARGET: "15.0"
   configs:
     Debug:
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
