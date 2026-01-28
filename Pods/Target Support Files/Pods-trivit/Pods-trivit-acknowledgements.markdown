@@ -24,34 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## FirebaseAnalytics
-
-Copyright 2016 Google
-
-## FirebaseInstanceID
-
-Copyright 2016 Google
-
-## Google
-
-Copyright 2016 Google Inc.
-
-## GoogleAnalytics
-
-Copyright 2016 Google
-
-## GoogleInterchangeUtilities
-
-Copyright 2015 Google Inc.
-
-## GoogleSymbolUtilities
-
-Copyright 2015 Google Inc.
-
-## GoogleUtilities
-
-Copyright 2015 Google Inc.
-
 ## RestKit
 
 

@@ -14,7 +14,6 @@
 #import "FeedbackManager.h"
 #import "DataAccess.h"
 #import <WatchConnectivity/WatchConnectivity.h>
-#import <Google/Analytics.h>
 
 @interface MainListViewController () <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, WCSessionDelegate>
 @property(strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -29,7 +28,6 @@
 @property(nonatomic) NSInteger imagesPerRow;
 @property(strong,nonatomic) NSString *startupAction;
 @property(nonatomic) NSInteger indexAtStartup;
-@property(strong,nonatomic) id<GAITracker> tracker;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *createButton;
 @end
@@ -196,7 +194,6 @@ int const OUTSIDE_TAP = 3;
     record.type = [[title substringFromIndex:1] isEqualToString:@"_"] ? @"ch_" : @"";
     record.createdAt = [NSDate date];
     
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
                                                                action:@"Add from iOS"
                                                                 label:[NSString stringWithFormat:@"'%@'",record.title]
                                                                 value:@1] build]];
@@ -431,7 +428,6 @@ int const OUTSIDE_TAP = 3;
     TallyModel *record = [self.fetchedResultsController objectAtIndexPath:self.activeCellIndexPath];
     
     if (self.cellBeingEdited.titleTextField != nil) {
-        [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
                                                               action:@"Rename"
                                                                label:[NSString stringWithFormat:@"'%@' (was '%@')",self.cellBeingEdited.titleTextField.text,record.title]
                                                                value:@1] build]];
@@ -517,7 +513,6 @@ int const OUTSIDE_TAP = 3;
                                     {
                                         TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
                                         if (record){
-                                            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
                                                                                                        action:@"ToggleColor"
                                                                                                         label:[NSString stringWithFormat:@"'%@'",record.title]
                                                                                                         value:@1] build]];
@@ -535,7 +530,6 @@ int const OUTSIDE_TAP = 3;
                                      {
                                          TallyModel *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
                                          if (record){
-                                             [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
                                                                                                         action:@"Delete"
                                                                                                          label:[NSString stringWithFormat:@"'%@'",record.title]
                                                                                                          value:@1] build]];
@@ -750,9 +744,6 @@ int const OUTSIDE_TAP = 3;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.tracker = [[GAI sharedInstance] defaultTracker];
-    [self.tracker set:kGAIScreenName value:@"MainListVC"];
-    [self.tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 
     // show tutorial if needed
     if (![[self.defaults objectForKey:@"tutorialShown"] boolValue]) {
@@ -810,14 +801,12 @@ int const OUTSIDE_TAP = 3;
     if (self.startupAction){
         if ([self.startupAction isEqualToString:@"AddNewTrivit"]){
             [self addNewTrivit];
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Startup"
                                                                        action:@"Add"
                                                                         label:@"added from 3D Touch"
                                                                         value:@1] build]];
             self.startupAction=nil;
         }
         else if ([self.startupAction isEqualToString:@"IncrementTrivit"]){
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Startup"
                                                                        action:@"increment"
                                                                         label:@"increment from 3D Touch"
                                                                         value:@1] build]];
@@ -830,7 +819,6 @@ int const OUTSIDE_TAP = 3;
             self.indexAtStartup=-1;
         }
         else if ([self.startupAction isEqualToString:@"JumpToTrivit"]){
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Startup"
                                                                        action:@"jump"
                                                                         label:@"jump to trivit"
                                                                         value:@1] build]];
@@ -894,7 +882,6 @@ int const OUTSIDE_TAP = 3;
             TallyModel *newTally = [NSKeyedUnarchiver unarchiveObjectWithData:userInfo[key]];
             [self.managedObjectContext insertObject:newTally];
             NSLog(@"Got new trivit: %@: count: %i",newTally.title, [newTally.counter intValue]);
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitEdit"
                                                                        action:@"AddFromWatch"
                                                                         label:[NSString stringWithFormat:@"'%@'",newTally.title]
                                                                         value:@1] build]];
@@ -924,7 +911,6 @@ int const OUTSIDE_TAP = 3;
 
 
              NSLog(@"Delete from Watch: %@: count: %i",tallyToRemove.title, [tallyToRemove.counter intValue]);
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"TrivitRemove"
                                                                        action:@"RemoveFromWatch"
                                                                         label:[NSString stringWithFormat:@"'%@'",tallyToRemove.title]
                                                                         value:@1] build]];

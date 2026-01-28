@@ -2,9 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>application-identifier</key>
+	<string>N324UX8D9M.com.wouterdevriendt.trivit</string>
+	<key>com.apple.developer.team-identifier</key>
+	<string>N324UX8D9M</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.wouterdevriendt.trivit.Documents</string>
 	</array>
+	<key>get-task-allow</key>
+	<true/>
 </dict>
 </plist>

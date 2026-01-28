@@ -1,0 +1,5 @@
+ extern const unsigned char DataKitVersionString[];
+ extern const double DataKitVersionNumber;
+
+ const unsigned char DataKitVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:DataKit  PROJECT:Trivit-1" "\n";
+ const double DataKitVersionNumber __attribute__ ((used)) = (double)1.;

@@ -8,7 +8,6 @@
 
 #import "TutChildViewController.h"
 #import "TutMasterViewController.h"
-#import <Google/Analytics.h>
 @interface TutChildViewController ()
 @property(weak, nonatomic) IBOutlet UILabel *textLabel;
 @property(weak, nonatomic) IBOutlet UIImageView *tutorialImage;
@@ -61,9 +60,6 @@
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"Tutorial p. %lu",(unsigned long)self.index]];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)handleTap:(UIGestureRecognizer *)tapRecognizer {

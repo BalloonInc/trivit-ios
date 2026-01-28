@@ -13,7 +13,6 @@
 #import "FeedbackViewController.h"
 #import "SettingsIcons.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import <Google/Analytics.h>
 
 @interface SettingsViewController () <UIAlertViewDelegate>
 @property(strong, nonatomic, readonly) NSString *sureToDeleteTitle;
@@ -21,7 +20,6 @@
 @property(nonatomic) int cellHeight;
 @property(nonatomic) int cellWidth;
 @property(nonatomic) int spacing;
-@property(strong,nonatomic) id<GAITracker> tracker;
 @end
 
 @implementation SettingsViewController
@@ -85,9 +83,6 @@ int const NUMBEROFCELLS = 6;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.tracker = [[GAI sharedInstance] defaultTracker];
-    [self.tracker set:kGAIScreenName value:@"SettingsVC"];
-    [self.tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 
 }
 
@@ -163,7 +158,6 @@ int const NUMBEROFCELLS = 6;
     [self presentViewController:tutorialVC animated:YES completion:^{
     }];
     
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Settings"
                                                                action:@"Reshow tutorial"
                                                                 label:@""
                                                                 value:@1] build]];
@@ -185,7 +179,6 @@ int const NUMBEROFCELLS = 6;
             NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.ballooninc.trivit.Documents"];
             [defaults setObject:nil forKey:@"lastUsedTrivitsIndexes"];
             [defaults setObject:nil forKey:@"lastUsedTrivitsTitles"];
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Settings"
                                                                        action:@"All trivits removed"
                                                                         label:@""
                                                                         value:@1] build]];
@@ -196,7 +189,6 @@ int const NUMBEROFCELLS = 6;
             for (TallyModel *record in fetchedObjects)
                 record.counter = [NSNumber numberWithInteger:0];
 
-            [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Settings"
                                                                        action:@"All trivits reset to 0"
                                                                         label:@""
                                                                         value:@1] build]];

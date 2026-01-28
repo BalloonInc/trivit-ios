@@ -1,0 +1,251 @@
+name: "Setup App Groups Capability"
+
+# Workflow to configure App Groups capability via Apple Developer API
+# This enables the group.com.wouterdevriendt.trivit.Documents App Group
+# for the main app and watch app bundle identifiers
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_group_id:
+        description: 'App Group identifier to configure'
+        required: false
+        default: 'group.com.wouterdevriendt.trivit.Documents'
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  APP_STORE_CONNECT_KEY_ID: GA9T4G84AU
+  APP_STORE_CONNECT_ISSUER_ID: 39f22957-9a03-421a-ada6-86471b32ee9f
+  TEAM_ID: N324UX8D9M
+
+jobs:
+  setup-app-groups:
+    name: Configure App Groups Capability
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install PyJWT cryptography requests
+
+    - name: Create App Groups configuration script
+      run: |
+        cat > setup_app_groups.py << 'EOF'
+        #!/usr/bin/env python3
+        import requests
+        import jwt
+        import time
+        import os
+        import json
+
+        # Configuration
+        APP_STORE_CONNECT_KEY_ID = os.environ["APP_STORE_CONNECT_KEY_ID"]
+        APP_STORE_CONNECT_ISSUER_ID = os.environ["APP_STORE_CONNECT_ISSUER_ID"]
+        TEAM_ID = os.environ["TEAM_ID"]
+
+        # Bundle identifiers that need App Groups capability
+        BUNDLE_IDS = [
+            "com.wouterdevriendt.trivit",
+            "com.wouterdevriendt.trivit.watchapp"
+        ]
+
+        # App Group identifier
+        APP_GROUP_ID = os.environ.get("INPUT_APP_GROUP_ID", "group.com.wouterdevriendt.trivit.Documents")
+
+        def create_jwt_token(private_key):
+            headers = {
+                "kid": APP_STORE_CONNECT_KEY_ID,
+                "alg": "ES256",
+                "typ": "JWT"
+            }
+
+            payload = {
+                "iss": APP_STORE_CONNECT_ISSUER_ID,
+                "iat": int(time.time()),
+                "exp": int(time.time()) + 1200,
+                "aud": "appstoreconnect-v1"
+            }
+
+            return jwt.encode(payload, private_key, algorithm="ES256", headers=headers)
+
+        def get_bundle_id_info(token, bundle_id):
+            url = "https://api.appstoreconnect.apple.com/v1/bundleIds"
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json"
+            }
+            params = {"filter[identifier]": bundle_id}
+
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+
+            data = response.json()
+            return data["data"][0] if data.get("data") else None
+
+        def create_app_group(token, app_group_id):
+            url = "https://api.appstoreconnect.apple.com/v1/appGroups"
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json"
+            }
+
+            # Check if exists
+            list_url = f"{url}?filter[groupId]={app_group_id}"
+            response = requests.get(list_url, headers=headers)
+            response.raise_for_status()
+
+            existing = response.json()
+            if existing.get("data"):
+                print(f"✅ App Group {app_group_id} already exists")
+                return existing["data"][0]["id"]
+
+            # Create new
+            payload = {
+                "data": {
+                    "type": "appGroups",
+                    "attributes": {
+                        "groupId": app_group_id,
+                        "name": "Trivit Document Sharing"
+                    }
+                }
+            }
+
+            response = requests.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            group_data = response.json()
+            print(f"✅ Created App Group: {app_group_id}")
+            return group_data["data"]["id"]
+
+        def enable_app_groups_capability(token, bundle_id_resource_id, app_group_resource_id, bundle_id):
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json"
+            }
+
+            # Check existing capabilities
+            list_url = f"https://api.appstoreconnect.apple.com/v1/bundleIds/{bundle_id_resource_id}/bundleIdCapabilities"
+            response = requests.get(list_url, headers=headers)
+            response.raise_for_status()
+
+            existing_capabilities = response.json()
+            app_groups_capability = None
+            for cap in existing_capabilities.get("data", []):
+                if cap["attributes"]["capabilityType"] == "APP_GROUPS":
+                    app_groups_capability = cap
+                    break
+
+            if not app_groups_capability:
+                # Enable capability
+                capability_url = "https://api.appstoreconnect.apple.com/v1/bundleIdCapabilities"
+                capability_payload = {
+                    "data": {
+                        "type": "bundleIdCapabilities",
+                        "attributes": {"capabilityType": "APP_GROUPS"},
+                        "relationships": {
+                            "bundleId": {
+                                "data": {"type": "bundleIds", "id": bundle_id_resource_id}
+                            }
+                        }
+                    }
+                }
+
+                response = requests.post(capability_url, headers=headers, json=capability_payload)
+                response.raise_for_status()
+                app_groups_capability = response.json()["data"]
+                print(f"✅ Enabled App Groups capability for {bundle_id}")
+            else:
+                print(f"✅ App Groups capability already enabled for {bundle_id}")
+
+            # Assign app group
+            assignment_url = "https://api.appstoreconnect.apple.com/v1/appGroupAssignments"
+            assignment_payload = {
+                "data": {
+                    "type": "appGroupAssignments",
+                    "relationships": {
+                        "appGroup": {"data": {"type": "appGroups", "id": app_group_resource_id}},
+                        "bundleIdCapability": {"data": {"type": "bundleIdCapabilities", "id": app_groups_capability["id"]}}
+                    }
+                }
+            }
+
+            response = requests.post(assignment_url, headers=headers, json=assignment_payload)
+            if response.status_code == 409:
+                print(f"✅ App Group assignment already exists for {bundle_id}")
+            else:
+                response.raise_for_status()
+                print(f"✅ Assigned app group to {bundle_id}")
+
+        def main():
+            private_key = os.environ.get("APP_STORE_CONNECT_PRIVATE_KEY")
+            if not private_key:
+                print("❌ ERROR: APP_STORE_CONNECT_PRIVATE_KEY environment variable not set")
+                return 1
+
+            try:
+                token = create_jwt_token(private_key)
+                print("✅ Created JWT token")
+
+                app_group_resource_id = create_app_group(token, APP_GROUP_ID)
+
+                for bundle_id in BUNDLE_IDS:
+                    print(f"\n🔧 Processing bundle ID: {bundle_id}")
+
+                    bundle_info = get_bundle_id_info(token, bundle_id)
+                    if not bundle_info:
+                        print(f"❌ Bundle ID {bundle_id} not found in Apple Developer account")
+                        continue
+
+                    bundle_id_resource_id = bundle_info["id"]
+                    enable_app_groups_capability(token, bundle_id_resource_id, app_group_resource_id, bundle_id)
+
+                print("\n🎉 App Groups configuration completed successfully!")
+                return 0
+
+            except requests.RequestException as e:
+                print(f"❌ API Error: {e}")
+                if hasattr(e, 'response') and e.response:
+                    try:
+                        error_data = e.response.json()
+                        print(f"Response: {json.dumps(error_data, indent=2)}")
+                    except:
+                        print(f"Response: {e.response.text}")
+                return 1
+            except Exception as e:
+                print(f"❌ Error: {e}")
+                return 1
+
+        if __name__ == "__main__":
+            exit(main())
+        EOF
+
+    - name: Configure App Groups capability
+      env:
+        APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+        INPUT_APP_GROUP_ID: ${{ github.event.inputs.app_group_id }}
+      run: |
+        python setup_app_groups.py
+
+    - name: Summary
+      run: |
+        echo "## App Groups Configuration" >> $GITHUB_STEP_SUMMARY
+        echo "- **App Group**: ${{ github.event.inputs.app_group_id || 'group.com.wouterdevriendt.trivit.Documents' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Bundle IDs**: com.wouterdevriendt.trivit, com.wouterdevriendt.trivit.watchapp" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: Configured via Apple Developer API" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "The App Groups capability has been enabled. You can now:" >> $GITHUB_STEP_SUMMARY
+        echo "- Build the app with App Groups entitlements" >> $GITHUB_STEP_SUMMARY
+        echo "- Use shared UserDefaults and file containers between targets" >> $GITHUB_STEP_SUMMARY
+        echo "- Enable real-time sync between iPhone and Watch apps" >> $GITHUB_STEP_SUMMARY

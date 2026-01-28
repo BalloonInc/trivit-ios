@@ -9,7 +9,6 @@
 #import "FeedbackViewController.h"
 //#import <QuartzCore/QuartzCore.h>
 #import "FeedbackManager.h"
-#import <Google/Analytics.h>
 
 @interface FeedbackViewController ()
 // smiley button properties
@@ -100,9 +99,6 @@
     self.beginAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:.2 target:self
                                                               selector:@selector(incrementScoreAnimation:) userInfo:nil repeats:YES];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"FeedbackVC"];
-    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 
     [super viewDidAppear:animated];
 }
