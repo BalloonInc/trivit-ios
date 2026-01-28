@@ -17,6 +17,9 @@ struct TrivitListView: View {
         NavigationStack {
             content
                 .navigationTitle("Trivit")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarBackground(Color(.systemBackground), for: .navigationBar)
                 .toolbar { toolbarContent }
                 .sheet(isPresented: $showingSettings) {
                     SettingsView()
@@ -34,16 +37,26 @@ struct TrivitListView: View {
     }
 
     private var emptyState: some View {
-        ContentUnavailableView(
-            "No Trivits Yet",
-            systemImage: "number",
-            description: Text("Tap + to create your first tally counter")
-        )
+        VStack(spacing: 20) {
+            Image(systemName: "plus.circle.fill")
+                .font(.system(size: 60))
+                .foregroundColor(TrivitColors.color(at: 0))
+
+            Text("No Trivits Yet")
+                .font(.title2)
+                .fontWeight(.semibold)
+
+            Text("Tap + to create your first tally counter")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding()
     }
 
     private var trivitList: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            LazyVStack(spacing: 1) {
                 ForEach(trivits) { trivit in
                     TrivitRowView(
                         trivit: trivit,
@@ -51,9 +64,8 @@ struct TrivitListView: View {
                     )
                 }
             }
-            .padding()
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color(.systemGray5))
     }
 
     @ToolbarContentBuilder
@@ -62,13 +74,15 @@ struct TrivitListView: View {
             Button {
                 showingSettings = true
             } label: {
-                Image(systemName: "gear")
+                Image(systemName: "gearshape")
+                    .foregroundColor(.primary)
             }
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: addTrivit) {
                 Image(systemName: "plus")
+                    .foregroundColor(.primary)
             }
         }
     }
