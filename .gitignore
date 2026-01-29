@@ -12,4 +12,4 @@ sonar-reports
 # Fastlane build output
 fastlane/build/
 fastlane/screenshots/
-fastlane/reports/
+fastlane/reports/build/

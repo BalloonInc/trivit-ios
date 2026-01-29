@@ -46,14 +46,11 @@
 		6C9EA3AB1BC9AD48008682A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EA3AD1BC9AD48008682A0 /* InfoPlist.strings */; };
 		6CA4493B1980D8E00049F34D /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA4493A1980D8E00049F34D /* Colors.m */; };
 		6CBD73631FB0ECD700E31454 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CBD73621FB0ECD700E31454 /* Launch Screen.storyboard */; };
-		6CCA04B31A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
 		6CCA04BC1A93CCC4000BBDE9 /* DataKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04BB1A93CCC4000BBDE9 /* DataKitTests.m */; };
-		6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; };
 		6CCA04C01A93CCC4000BBDE9 /* DataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCA04A81A93CCC4000BBDE9 /* DataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CCA04CB1A93CD44000BBDE9 /* DataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCA04C91A93CD44000BBDE9 /* DataAccess.m */; };
 		6CF1A23E195B762D00B83A6F /* Tally.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1A23D195B762D00B83A6F /* Tally.m */; };
 		EC7940CF1A40A8B8003A40C9 /* FeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */; };
-		F83932C45B18181E9F737A4C /* libPods-trivit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E62E1FE6F0F9C1B63204746 /* libPods-trivit.a */; };
 		84E9DC656D014E6E9D28840C /* TrivitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6734FAFC868495CB79E2C28 /* TrivitApp.swift */; };
 		D7517A2AB6FD446184FF17B6 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80AFB5A5D0E40089867C69A /* Trivit.swift */; };
 		F00D2A9FF0BB41EEAEDE4341 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653E9E2B68144D9809E8CCC /* TrivitColors.swift */; };
@@ -122,7 +119,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		63D6CBFD627BC17E625D5DF3 /* Pods-trivit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trivit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-trivit/Pods-trivit.debug.xcconfig"; sourceTree = "<group>"; };
 		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
 		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
 		6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits2.xcdatamodel; sourceTree = "<group>"; };
@@ -264,8 +260,6 @@
 		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
 		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
-		9E62E1FE6F0F9C1B63204746 /* libPods-trivit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-trivit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E10547B7B77580FF964E34D5 /* Pods-trivit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trivit.release.xcconfig"; path = "Pods/Target Support Files/Pods-trivit/Pods-trivit.release.xcconfig"; sourceTree = "<group>"; };
 		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
 		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
 		D6734FAFC868495CB79E2C28 /* TrivitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitApp.swift; path = TrivitApp.swift; sourceTree = "<group>"; };
@@ -286,10 +280,8 @@
 			files = (
 				6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */,
 				6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */,
-				6CCA04BF1A93CCC4000BBDE9 /* DataKit.framework in Frameworks */,
 				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
 				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
-				F83932C45B18181E9F737A4C /* libPods-trivit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +303,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CCA04B31A93CCC4000BBDE9 /* DataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +507,6 @@
 				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
 				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
 				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
-				9E62E1FE6F0F9C1B63204746 /* libPods-trivit.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -597,8 +587,6 @@
 		7B88246A1B45895BE7938E27 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				63D6CBFD627BC17E625D5DF3 /* Pods-trivit.debug.xcconfig */,
-				E10547B7B77580FF964E34D5 /* Pods-trivit.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
