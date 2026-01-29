@@ -37,7 +37,7 @@
                         <constraints>
                             <constraint firstItem="pWh-EZ-Si4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" priority="999" id="5jJ-LV-UXW"/>
                             <constraint firstItem="vFG-o7-Pp3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pWh-EZ-Si4" secondAttribute="bottom" constant="40" id="G2F-dx-jQF"/>
-                            <constraint firstAttribute="bottom" secondItem="vFG-o7-Pp3" secondAttribute="bottom" constant="20" symbolic="YES" id="IgP-v5-8X2"/>
+                            <constraint firstAttribute="bottom" secondItem="vFG-o7-Pp3" secondAttribute="bottom" constant="80" symbolic="YES" id="IgP-v5-8X2"/>
                             <constraint firstItem="vFG-o7-Pp3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cSt-T2-TCW"/>
                             <constraint firstItem="pWh-EZ-Si4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" priority="999" id="nzR-rL-lsH"/>
                         </constraints>

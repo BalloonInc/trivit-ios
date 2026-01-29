@@ -11,6 +11,7 @@ import SwiftData
 struct TrivitRowView: View {
     @Bindable var trivit: Trivit
     @State private var isEditing = false
+    @State private var dragOffset: CGFloat = 0
     @FocusState private var isTitleFocused: Bool
 
     let onDelete: () -> Void
@@ -19,74 +20,91 @@ struct TrivitRowView: View {
         TrivitColors.color(at: trivit.colorIndex)
     }
 
-    var body: some View {
-        HStack(spacing: 0) {
-            // Main tappable area (increment on tap)
-            Button {
-                trivit.increment()
-                HapticsService.shared.impact(.light)
-            } label: {
-                HStack(spacing: 12) {
-                    // Title and tally marks
-                    VStack(alignment: .leading, spacing: 4) {
-                        if isEditing {
-                            TextField("Title", text: $trivit.title)
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundColor(.white)
-                                .focused($isTitleFocused)
-                                .onSubmit {
-                                    isEditing = false
-                                }
-                        } else {
-                            Text(trivit.title)
-                                .font(.system(size: 17, weight: .medium))
-                                .foregroundColor(.white)
-                                .onLongPressGesture {
-                                    isEditing = true
-                                    isTitleFocused = true
-                                }
-                        }
+    private let decrementThreshold: CGFloat = -60
 
-                        // Tally marks inline
-                        if trivit.count > 0 {
-                            TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
-                        }
+    var body: some View {
+        ZStack {
+            // Background layer showing decrement indicator when swiping
+            HStack {
+                Spacer()
+                Image(systemName: "minus")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.white)
+                    .opacity(dragOffset < decrementThreshold ? 1.0 : 0.5)
+                    .padding(.trailing, 24)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(backgroundColor.opacity(0.8))
+
+            // Main content - tappable for increment
+            HStack(spacing: 12) {
+                // Title and tally marks
+                VStack(alignment: .leading, spacing: 4) {
+                    if isEditing {
+                        TextField("Title", text: $trivit.title)
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundColor(.white)
+                            .focused($isTitleFocused)
+                            .onSubmit {
+                                isEditing = false
+                            }
+                    } else {
+                        Text(trivit.title)
+                            .font(.system(size: 17, weight: .medium))
+                            .foregroundColor(.white)
+                            .onLongPressGesture {
+                                isEditing = true
+                                isTitleFocused = true
+                            }
                     }
 
-                    Spacer()
-
-                    // Count display in circle
-                    Text("\(trivit.count)")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(backgroundColor)
-                        .frame(width: 50, height: 50)
-                        .background(Color.white.opacity(0.2))
-                        .clipShape(Circle())
+                    // Tally marks inline
+                    if trivit.count > 0 {
+                        TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
+                    }
                 }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-            }
-            .buttonStyle(.plain)
 
-            // Decrement button
-            Button {
-                if trivit.count > 0 {
-                    trivit.decrement()
-                    HapticsService.shared.impact(.light)
-                }
-            } label: {
-                Image(systemName: "minus")
-                    .font(.system(size: 20, weight: .bold))
+                Spacer()
+
+                // Count display in circle
+                Text("\(trivit.count)")
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
-                    .frame(width: 44, height: 44)
-                    .background(Color.white.opacity(0.3))
+                    .frame(width: 50, height: 50)
+                    .background(Color.white.opacity(0.2))
                     .clipShape(Circle())
             }
-            .padding(.trailing, 12)
-            .opacity(trivit.count > 0 ? 1 : 0.4)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(backgroundColor)
+            .offset(x: dragOffset)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        // Only allow left swipe (negative translation)
+                        if value.translation.width < 0 {
+                            dragOffset = value.translation.width
+                        }
+                    }
+                    .onEnded { value in
+                        if dragOffset < decrementThreshold && trivit.count > 0 {
+                            trivit.decrement()
+                            HapticsService.shared.impact(.light)
+                        }
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            dragOffset = 0
+                        }
+                    }
+            )
+            .onTapGesture {
+                guard !isEditing else { return }
+                trivit.increment()
+                HapticsService.shared.impact(.light)
+            }
         }
         .frame(minHeight: 70)
-        .background(backgroundColor)
+        .clipped()
         .contextMenu {
             Button {
                 isEditing = true
@@ -178,12 +196,12 @@ struct WesternTallyGroupView: View {
                 }
             }
 
-            // Draw the diagonal strike-through for the 5th mark
+            // Draw the diagonal strike-through for the 5th mark (bottom-left to top-right)
             if count == 5 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 2, height: 22)
-                    .rotationEffect(.degrees(-30))
+                    .rotationEffect(.degrees(30))
                     .offset(x: 7, y: 0)
             }
         }
@@ -227,33 +245,33 @@ struct ChineseTallyGroupView: View {
 
     var body: some View {
         // The character 正 is drawn stroke by stroke:
-        // 1: horizontal top
-        // 2: vertical left
-        // 3: short horizontal middle
-        // 4: vertical right
-        // 5: horizontal bottom
+        // 1: Top horizontal line
+        // 2: Left vertical line going down from the top horizontal
+        // 3: Short horizontal in the middle (extending right from vertical)
+        // 4: Right vertical line
+        // 5: Bottom horizontal line completing the character
         ZStack {
-            // Stroke 1: Top horizontal
+            // Stroke 1: Top horizontal line
             if strokes >= 1 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 14, height: 2)
-                    .offset(y: -6)
+                    .offset(y: -7)
             }
 
-            // Stroke 2: Left vertical
+            // Stroke 2: Left vertical (from top horizontal going down)
             if strokes >= 2 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
-                    .frame(width: 2, height: 14)
-                    .offset(x: -6, y: 0)
+                    .frame(width: 2, height: 16)
+                    .offset(x: -5, y: 0)
             }
 
-            // Stroke 3: Middle short horizontal
+            // Stroke 3: Middle horizontal (connecting from vertical, going right)
             if strokes >= 3 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
-                    .frame(width: 12, height: 2)
+                    .frame(width: 10, height: 2)
                     .offset(x: 0, y: 0)
             }
 
@@ -261,16 +279,16 @@ struct ChineseTallyGroupView: View {
             if strokes >= 4 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
-                    .frame(width: 2, height: 14)
-                    .offset(x: 6, y: 0)
+                    .frame(width: 2, height: 8)
+                    .offset(x: 5, y: 4)
             }
 
-            // Stroke 5: Bottom horizontal
+            // Stroke 5: Bottom horizontal (completing the character)
             if strokes >= 5 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 14, height: 2)
-                    .offset(y: 6)
+                    .offset(y: 7)
             }
         }
         .frame(width: 18, height: 18)

@@ -12,6 +12,11 @@ enum ColorScheme: String, CaseIterable, Identifiable {
     case vibrant = "Vibrant"
     case pastel = "Pastel"
     case monochrome = "Monochrome"
+    case ocean = "Ocean"
+    case sunset = "Sunset"
+    case forest = "Forest"
+    case candy = "Candy"
+    case earth = "Earth"
 
     var id: String { rawValue }
 }
@@ -148,7 +153,69 @@ struct SettingsView: View {
         case .monochrome:
             let gray = 0.3 + (Double(index) * 0.15)
             return Color(white: gray)
+        case .ocean:
+            return oceanPalette[index % oceanPalette.count]
+        case .sunset:
+            return sunsetPalette[index % sunsetPalette.count]
+        case .forest:
+            return forestPalette[index % forestPalette.count]
+        case .candy:
+            return candyPalette[index % candyPalette.count]
+        case .earth:
+            return earthPalette[index % earthPalette.count]
         }
+    }
+
+    // MARK: - Color Palettes
+
+    private var oceanPalette: [Color] {
+        [
+            Color(hex: "0077B6"), // Deep Blue
+            Color(hex: "00B4D8"), // Vivid Cyan
+            Color(hex: "48CAE4"), // Light Cyan
+            Color(hex: "023E8A"), // Navy Blue
+            Color(hex: "0096C7"), // Ocean Blue
+        ]
+    }
+
+    private var sunsetPalette: [Color] {
+        [
+            Color(hex: "FF6B35"), // Bright Orange
+            Color(hex: "F7931E"), // Golden Orange
+            Color(hex: "E84855"), // Coral Red
+            Color(hex: "FF006E"), // Hot Pink
+            Color(hex: "FFBA08"), // Amber
+        ]
+    }
+
+    private var forestPalette: [Color] {
+        [
+            Color(hex: "2D6A4F"), // Forest Green
+            Color(hex: "40916C"), // Medium Green
+            Color(hex: "74C69D"), // Light Green
+            Color(hex: "8B4513"), // Saddle Brown
+            Color(hex: "556B2F"), // Dark Olive Green
+        ]
+    }
+
+    private var candyPalette: [Color] {
+        [
+            Color(hex: "FF69B4"), // Hot Pink
+            Color(hex: "DA70D6"), // Orchid
+            Color(hex: "9B59B6"), // Amethyst
+            Color(hex: "FF1493"), // Deep Pink
+            Color(hex: "BA55D3"), // Medium Orchid
+        ]
+    }
+
+    private var earthPalette: [Color] {
+        [
+            Color(hex: "BC6C25"), // Terracotta
+            Color(hex: "606C38"), // Olive Green
+            Color(hex: "8B7355"), // Burlywood Brown
+            Color(hex: "A0522D"), // Sienna
+            Color(hex: "DDA15E"), // Tan
+        ]
     }
 }
 
