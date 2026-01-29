@@ -96,7 +96,7 @@ jobs:
   screenshots-and-upload:
     name: Screenshots & Upload
     needs: generate-assets
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: macos-15
     timeout-minutes: 60
     outputs:
       upload_success: ${{ steps.upload.outputs.success }}
