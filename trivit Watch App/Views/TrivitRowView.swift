@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import WatchKit
 
 struct TrivitRowView: View {
     let trivit: Trivit
-    @StateObject private var syncService = SyncService.shared
 
     private var backgroundColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
@@ -45,12 +43,6 @@ struct TrivitRowView: View {
         .padding(.vertical, 8)
         .background(backgroundColor)
         .cornerRadius(10)
-    }
-
-    private func incrementTrivit() {
-        trivit.count += 1
-        syncService.syncTrivitUpdate(trivit)
-        WKInterfaceDevice.current().play(.click)
     }
 }
 
