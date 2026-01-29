@@ -1,10 +1,10 @@
 # Trivit iOS - Modernization Progress
 
-## Current Status: SwiftUI Migration Complete ✅
+## Current Status: UI Polish & Feature Implementation 🚧
 
 ### Completed Tasks
 
-#### Phase 1: SwiftUI Modernization (Jan 28, 2026)
+#### Phase 1: SwiftUI Modernization (Jan 28, 2026) ✅
 - [x] Remove all Objective-C code (~40,000 lines deleted)
 - [x] Create SwiftUI App lifecycle (`TrivitApp.swift`)
 - [x] Create SwiftData model (`Trivit.swift`)
@@ -15,32 +15,69 @@
 - [x] Create color theme (`TrivitColors.swift`)
 - [x] Remove legacy dependencies (RestKit, AFNetworking, NewRelic)
 - [x] Update iOS deployment target to 17.0
-- [x] UI redesign to match original flat colored rows
+- [x] Configure App Groups for iOS/watchOS data sharing
 
-### In Progress
+### In Progress - Phase 2: UI Polish & Features
 
-#### Phase 2: Watch App & Data Sync
-- [ ] Configure App Groups for data sharing between iOS and watchOS
-- [ ] Update model container to use shared App Group storage
-- [ ] Test watch app data sync
-- [ ] Implement WatchConnectivity for real-time updates
+#### Tally Marks Fixes (Priority: HIGH)
+- [ ] Fix 5th tally mark crossing the other 4 properly (diagonal strike-through)
+- [ ] Make tally marks expand to show ALL marks (multiple rows, no ellipsis)
+- [ ] Remove "show tally marks" setting - always show them
+- [ ] Chinese tally style (正) for names starting with underscore
+- [ ] TODO: Add different tally counting styles in settings (Roman, Chinese, dots, etc.)
 
-### Pending Tasks
+#### UI Improvements (Priority: HIGH)
+- [ ] Make count circle more subtle (20% opacity white background instead of 95%)
+- [ ] Colors should cycle in order, not random pick
+- [ ] Fix dark mode appearance
 
-#### Phase 3: Polish & Features
-- [ ] Add swipe-to-delete gesture
-- [ ] Add drag-to-reorder
-- [ ] Add iCloud sync via CloudKit
-- [ ] Add widget support
-- [ ] Add Siri shortcuts
-- [ ] Localization updates for iOS 17
+#### Settings Screen (Priority: MEDIUM)
+- [ ] Add color scheme picker (bring back from old app)
+- [ ] Add sync info (device count, last sync time)
+- [ ] Remove "show tally marks" toggle
 
-#### Phase 4: Testing & Release
-- [ ] Write unit tests for Trivit model
-- [ ] Write UI tests for main flows
-- [ ] Test on various device sizes
-- [ ] TestFlight beta testing
-- [ ] App Store submission
+#### Watch App (Priority: MEDIUM)
+- [ ] Remove legacy WatchKit Extension from Xcode project
+- [ ] Improve watch app UI styling
+- [ ] Test data sync with iOS app
+
+#### Cleanup (Priority: LOW)
+- [ ] Remove any remaining Objective-C files
+- [ ] Clean up DataKit framework (legacy)
+- [ ] Remove WatchKit Extension target from project
+
+### Pending - Phase 3: Advanced Features
+
+#### Statistics
+- [ ] Total counts across all trivits
+- [ ] Daily/weekly/monthly trends
+- [ ] Most used trivits
+- [ ] History view with graphs
+- [ ] Export statistics
+
+#### Tally Style Options
+- [ ] Western tally (IIII with strike = 5)
+- [ ] Chinese tally (正 = 5)
+- [ ] Dot groups
+- [ ] Roman numerals
+- [ ] Simple numbers only
+
+#### Sharing Features
+- [ ] Share trivit as image
+- [ ] Share count via Messages/Social
+- [ ] Export to CSV
+
+#### Data & Sync
+- [ ] iCloud sync via CloudKit
+- [ ] Multi-device sync status
+- [ ] Backup/restore functionality
+
+#### Other Features
+- [ ] Swipe-to-delete gesture
+- [ ] Drag-to-reorder
+- [ ] Widget support
+- [ ] Siri shortcuts
+- [ ] Apple Watch complications
 
 ## Architecture
 
@@ -48,16 +85,22 @@ See `ARCHITECTURE.md` for detailed architecture documentation.
 
 ## Known Issues
 
-1. **Watch App Not Loading**: App Groups not configured - watch can't access shared data
-2. **App Groups Capability**: Needs to be enabled in Apple Developer Portal
+1. ~~Watch App Not Loading~~: App Groups configured - needs testing
+2. Tally marks 5th stroke not crossing properly
+3. Legacy WatchKit Extension still in Xcode project
+4. Count circle too prominent (white bg too opaque)
 
 ## Recent Changes
 
-### Jan 28, 2026
+### Jan 28, 2026 (Session 2)
+- Configured App Groups for data sharing
+- Created GitHub issues for tracking
+- Starting UI polish phase
+
+### Jan 28, 2026 (Session 1)
 - Complete SwiftUI rewrite
 - UI redesigned to match original flat design
 - Removed all Objective-C (337 files, -40,832 lines)
-- Added new Swift files (+785 lines)
 
 ## Build Commands
 
