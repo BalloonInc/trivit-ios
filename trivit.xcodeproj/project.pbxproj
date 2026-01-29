@@ -111,7 +111,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6CCA04C01A93CCC4000BBDE9 /* DataKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,7 +617,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6CCA04BE1A93CCC4000BBDE9 /* PBXTargetDependency */,
 			);
 			name = trivit;
 			productName = trivit;
