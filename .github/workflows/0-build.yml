@@ -8,7 +8,7 @@ on:
     branches:
       - master
     paths:
-      - 'Trivit/**'
+      - 'trivit/**'
       - 'trivit Watch App/**'
       - 'project.yml'
       - '.github/workflows/0-build.yml'
@@ -16,7 +16,7 @@ on:
     branches:
       - master
     paths:
-      - 'Trivit/**'
+      - 'trivit/**'
       - 'trivit Watch App/**'
       - 'project.yml'
   workflow_dispatch:
