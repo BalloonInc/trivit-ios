@@ -10,7 +10,6 @@ on:
     paths:
       - 'trivit/**'
       - 'trivit Watch App/**'
-      - 'project.yml'
       - '.github/workflows/0-build.yml'
   pull_request:
     branches:
@@ -18,7 +17,6 @@ on:
     paths:
       - 'trivit/**'
       - 'trivit Watch App/**'
-      - 'project.yml'
   workflow_dispatch:
 
 concurrency:
@@ -30,8 +28,8 @@ permissions:
   actions: read
 
 env:
-  SCHEME: 'Trivit'
-  PROJECT_PATH: 'Trivit.xcodeproj'
+  SCHEME: 'trivit'
+  WORKSPACE_PATH: 'trivit.xcworkspace'
   APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
   TEAM_ID: 'N324UX8D9M'
 
@@ -51,37 +49,25 @@ jobs:
 
     - name: Select Xcode
       run: |
-        XCODE_PATH=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
-        if [ -z "$XCODE_PATH" ]; then
-          XCODE_PATH="/Applications/Xcode.app"
-        fi
-        if [ -d "$XCODE_PATH" ]; then
-          sudo xcode-select -s "$XCODE_PATH/Contents/Developer" || true
-        fi
+        # Use latest Xcode available
+        sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
         xcodebuild -version
 
-    - name: Install XcodeGen
-      run: which xcodegen || brew install xcodegen
-
-    - name: Generate Xcode project
-      run: xcodegen generate
-
-    - name: Resolve Swift Package Dependencies
+    - name: Install CocoaPods
       run: |
-        xcodebuild -resolvePackageDependencies \
-          -project ${{ env.PROJECT_PATH }} \
-          -scheme ${{ env.SCHEME }}
+        gem install cocoapods || true
+        pod install --repo-update || true
 
     - name: Calculate build number
       id: version
       run: |
         # Use commit count as build number for deterministic builds
         BUILD=$(git rev-list --count HEAD)
-        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" Trivit/Resources/Info.plist)
+        VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" trivit/Info.plist)
 
         # Update plist with calculated build number
-        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" Trivit/Resources/Info.plist 2>/dev/null || \
-        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" Trivit/Resources/Info.plist
+        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" trivit/Info.plist 2>/dev/null || \
+        /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" trivit/Info.plist
 
         # Update watch app too
         if [ -f "trivit Watch App/Info.plist" ]; then
@@ -120,7 +106,7 @@ jobs:
       if: github.event_name == 'pull_request'
       run: |
         xcodebuild build \
-          -project ${{ env.PROJECT_PATH }} \
+          -workspace ${{ env.WORKSPACE_PATH }} \
           -scheme ${{ env.SCHEME }} \
           -configuration Release \
           -destination 'generic/platform=iOS' \
@@ -130,7 +116,7 @@ jobs:
       if: github.event_name != 'pull_request'
       run: |
         xcodebuild archive \
-          -project ${{ env.PROJECT_PATH }} \
+          -workspace ${{ env.WORKSPACE_PATH }} \
           -scheme ${{ env.SCHEME }} \
           -configuration Release \
           -archivePath $RUNNER_TEMP/Export/Trivit.xcarchive \
