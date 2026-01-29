@@ -53,11 +53,6 @@ jobs:
         sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
         xcodebuild -version
 
-    - name: Install CocoaPods
-      run: |
-        gem install cocoapods || true
-        pod install --repo-update || true
-
     - name: Calculate build number
       id: version
       run: |
