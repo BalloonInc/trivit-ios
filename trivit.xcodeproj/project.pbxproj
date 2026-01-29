@@ -1145,7 +1145,6 @@
 		};
 		6C69C0BA195B6F4E002A3F53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63D6CBFD627BC17E625D5DF3 /* Pods-trivit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
@@ -1186,7 +1185,6 @@
 		};
 		6C69C0BB195B6F4E002A3F53 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E10547B7B77580FF964E34D5 /* Pods-trivit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trivit/trivit.entitlements;
