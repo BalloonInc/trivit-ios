@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Trivit Watch App
 //
-//  Created by Claude on 28/01/26.
+//  Main view displaying the list of trivit counters
 //
 
 import SwiftUI
@@ -10,9 +10,9 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var trivits: [Trivit]
+    @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
     @StateObject private var syncService = SyncService.shared
-    
+
     var body: some View {
         NavigationStack {
             if trivits.isEmpty {
@@ -25,31 +25,46 @@ struct ContentView: View {
             syncService.startWatchConnectivity()
         }
     }
-    
+
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "tally")
-                .font(.largeTitle)
-                .foregroundColor(.secondary)
-            
-            Text("No Counters")
-                .font(.headline)
-            
-            Text("Create counters on your iPhone to see them here")
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+        VStack(spacing: 16) {
+            ZStack {
+                Circle()
+                    .fill(TrivitColors.color(at: 0).opacity(0.2))
+                    .frame(width: 60, height: 60)
+
+                Image(systemName: "tally")
+                    .font(.system(size: 28, weight: .medium))
+                    .foregroundColor(TrivitColors.color(at: 0))
+            }
+
+            VStack(spacing: 4) {
+                Text("No Counters")
+                    .font(.system(size: 16, weight: .semibold))
+
+                Text("Create counters on your iPhone")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
         .padding()
     }
-    
+
     private var trivitList: some View {
-        List(trivits) { trivit in
-            NavigationLink {
-                TrivitDetailView(trivit: trivit)
-            } label: {
-                TrivitRowView(trivit: trivit)
+        ScrollView {
+            LazyVStack(spacing: 8) {
+                ForEach(trivits) { trivit in
+                    NavigationLink {
+                        TrivitDetailView(trivit: trivit)
+                    } label: {
+                        TrivitRowView(trivit: trivit)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
+            .padding(.horizontal, 4)
+            .padding(.vertical, 8)
         }
         .navigationTitle("Trivit")
     }

@@ -49,7 +49,7 @@ struct TrivitRowView: View {
 
                         // Tally marks inline
                         if trivit.count > 0 {
-                            TallyMarksView(count: trivit.count)
+                            TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
                         }
                     }
 
@@ -60,7 +60,7 @@ struct TrivitRowView: View {
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .foregroundColor(backgroundColor)
                         .frame(width: 50, height: 50)
-                        .background(Color.white.opacity(0.95))
+                        .background(Color.white.opacity(0.2))
                         .clipShape(Circle())
                 }
                 .padding(.horizontal, 16)
@@ -122,69 +122,188 @@ struct TrivitRowView: View {
 // MARK: - Tally Marks Visual
 struct TallyMarksView: View {
     let count: Int
+    var useChinese: Bool = false
 
     var body: some View {
-        HStack(spacing: 8) {
-            let fullGroups = min(count / 5, 6) // Show max 6 groups inline
-            let remainder = count % 5
-            let showRemainder = fullGroups < 6
+        if useChinese {
+            ChineseTallyMarksView(count: count)
+        } else {
+            WesternTallyMarksView(count: count)
+        }
+    }
+}
 
-            ForEach(0..<fullGroups, id: \.self) { _ in
-                TallyGroupView(count: 5)
-            }
+// MARK: - Western Tally Marks (||||/)
+struct WesternTallyMarksView: View {
+    let count: Int
 
-            if showRemainder && remainder > 0 {
-                TallyGroupView(count: remainder)
-            }
+    private let groupsPerRow = 10
 
-            if count > 30 {
-                Text("...")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white.opacity(0.8))
+    var body: some View {
+        let fullGroups = count / 5
+        let remainder = count % 5
+        let totalGroups = fullGroups + (remainder > 0 ? 1 : 0)
+        let numberOfRows = max(1, (totalGroups + groupsPerRow - 1) / groupsPerRow)
+
+        VStack(alignment: .leading, spacing: 4) {
+            ForEach(0..<numberOfRows, id: \.self) { rowIndex in
+                HStack(spacing: 8) {
+                    let startGroup = rowIndex * groupsPerRow
+                    let endGroup = min(startGroup + groupsPerRow, totalGroups)
+
+                    ForEach(startGroup..<endGroup, id: \.self) { groupIndex in
+                        if groupIndex < fullGroups {
+                            WesternTallyGroupView(count: 5)
+                        } else if groupIndex == fullGroups && remainder > 0 {
+                            WesternTallyGroupView(count: remainder)
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-struct TallyGroupView: View {
+struct WesternTallyGroupView: View {
     let count: Int
 
     var body: some View {
-        HStack(spacing: 2) {
-            ForEach(0..<min(count, 4), id: \.self) { _ in
-                Rectangle()
-                    .fill(Color.white.opacity(0.9))
-                    .frame(width: 2, height: 16)
+        ZStack(alignment: .leading) {
+            // Draw the vertical marks (up to 4)
+            HStack(spacing: 3) {
+                ForEach(0..<min(count, 4), id: \.self) { _ in
+                    Rectangle()
+                        .fill(Color.white.opacity(0.9))
+                        .frame(width: 2, height: 16)
+                }
             }
+
+            // Draw the diagonal strike-through for the 5th mark
             if count == 5 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
-                    .frame(width: 14, height: 2)
-                    .rotationEffect(.degrees(-65))
-                    .offset(x: -8)
+                    .frame(width: 2, height: 22)
+                    .rotationEffect(.degrees(-30))
+                    .offset(x: 7, y: 0)
             }
         }
-        .frame(width: count == 5 ? 20 : CGFloat(count * 4), height: 18)
+        .frame(width: count == 5 ? 22 : CGFloat(count * 5), height: 20)
+    }
+}
+
+// MARK: - Chinese Tally Marks (正)
+struct ChineseTallyMarksView: View {
+    let count: Int
+
+    private let groupsPerRow = 10
+
+    var body: some View {
+        let fullGroups = count / 5
+        let remainder = count % 5
+        let totalGroups = fullGroups + (remainder > 0 ? 1 : 0)
+        let numberOfRows = max(1, (totalGroups + groupsPerRow - 1) / groupsPerRow)
+
+        VStack(alignment: .leading, spacing: 4) {
+            ForEach(0..<numberOfRows, id: \.self) { rowIndex in
+                HStack(spacing: 6) {
+                    let startGroup = rowIndex * groupsPerRow
+                    let endGroup = min(startGroup + groupsPerRow, totalGroups)
+
+                    ForEach(startGroup..<endGroup, id: \.self) { groupIndex in
+                        if groupIndex < fullGroups {
+                            ChineseTallyGroupView(strokes: 5)
+                        } else if groupIndex == fullGroups && remainder > 0 {
+                            ChineseTallyGroupView(strokes: remainder)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct ChineseTallyGroupView: View {
+    let strokes: Int
+
+    var body: some View {
+        // The character 正 is drawn stroke by stroke:
+        // 1: horizontal top
+        // 2: vertical left
+        // 3: short horizontal middle
+        // 4: vertical right
+        // 5: horizontal bottom
+        ZStack {
+            // Stroke 1: Top horizontal
+            if strokes >= 1 {
+                Rectangle()
+                    .fill(Color.white.opacity(0.9))
+                    .frame(width: 14, height: 2)
+                    .offset(y: -6)
+            }
+
+            // Stroke 2: Left vertical
+            if strokes >= 2 {
+                Rectangle()
+                    .fill(Color.white.opacity(0.9))
+                    .frame(width: 2, height: 14)
+                    .offset(x: -6, y: 0)
+            }
+
+            // Stroke 3: Middle short horizontal
+            if strokes >= 3 {
+                Rectangle()
+                    .fill(Color.white.opacity(0.9))
+                    .frame(width: 12, height: 2)
+                    .offset(x: 0, y: 0)
+            }
+
+            // Stroke 4: Right vertical
+            if strokes >= 4 {
+                Rectangle()
+                    .fill(Color.white.opacity(0.9))
+                    .frame(width: 2, height: 14)
+                    .offset(x: 6, y: 0)
+            }
+
+            // Stroke 5: Bottom horizontal
+            if strokes >= 5 {
+                Rectangle()
+                    .fill(Color.white.opacity(0.9))
+                    .frame(width: 14, height: 2)
+                    .offset(y: 6)
+            }
+        }
+        .frame(width: 18, height: 18)
     }
 }
 
 #Preview {
-    VStack(spacing: 0) {
-        TrivitRowView(
-            trivit: Trivit(title: "Drinks", count: 5, colorIndex: 0),
-            onDelete: {}
-        )
-        TrivitRowView(
-            trivit: Trivit(title: "Days without smoking", count: 3, colorIndex: 1),
-            onDelete: {}
-        )
-        TrivitRowView(
-            trivit: Trivit(title: "Went swimming this year", count: 8, colorIndex: 3),
-            onDelete: {}
-        )
-        TrivitRowView(
-            trivit: Trivit(title: "Cups of coffee this year", count: 13, colorIndex: 5),
-            onDelete: {}
-        )
+    ScrollView {
+        VStack(spacing: 0) {
+            TrivitRowView(
+                trivit: Trivit(title: "Drinks", count: 5, colorIndex: 0),
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "Days without smoking", count: 3, colorIndex: 1),
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "Went swimming this year", count: 8, colorIndex: 3),
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "Cups of coffee this year", count: 47, colorIndex: 5),
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "_Chinese tally test", count: 12, colorIndex: 2),
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "_Many Chinese tallies", count: 53, colorIndex: 4),
+                onDelete: {}
+            )
+        }
     }
 }

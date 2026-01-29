@@ -89,9 +89,13 @@ struct TrivitListView: View {
 
     private func addTrivit() {
         withAnimation {
+            // Find the highest colorIndex currently in use and assign the next one in sequence
+            let maxColorIndex = trivits.map(\.colorIndex).max() ?? -1
+            let nextColorIndex = (maxColorIndex + 1) % TrivitColors.colorCount
+
             let newTrivit = Trivit(
                 title: "New Trivit",
-                colorIndex: TrivitColors.randomColorIndex()
+                colorIndex: nextColorIndex
             )
             modelContext.insert(newTrivit)
             HapticsService.shared.impact(.medium)
