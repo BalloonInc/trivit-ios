@@ -64,14 +64,17 @@ jobs:
         /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" trivit/Info.plist 2>/dev/null || \
         /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" trivit/Info.plist
 
-        # Update watch app too
+        # Update watch app build number and version to match iOS app
         if [ -f "trivit Watch App/Info.plist" ]; then
-          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" "trivit Watch App/Info.plist" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" "trivit Watch App/Info.plist" 2>/dev/null || \
+          /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" "trivit Watch App/Info.plist"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "trivit Watch App/Info.plist" 2>/dev/null || \
+          /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string $VERSION" "trivit Watch App/Info.plist"
         fi
 
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "build=$BUILD" >> $GITHUB_OUTPUT
-        echo "Building version $VERSION ($BUILD)"
+        echo "Building version $VERSION ($BUILD) with watch app"
 
     - name: Setup App Store Connect API Key
       if: github.event_name != 'pull_request'
@@ -172,6 +175,7 @@ jobs:
         echo "## Build Successful" >> $GITHUB_STEP_SUMMARY
         echo "- **Version**: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.build }})" >> $GITHUB_STEP_SUMMARY
         echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Watch App**: Included" >> $GITHUB_STEP_SUMMARY
         if [ "${{ github.event_name }}" != "pull_request" ]; then
           echo "- **Artifact**: ipa-${{ steps.version.outputs.version }}-${{ steps.version.outputs.build }}" >> $GITHUB_STEP_SUMMARY
         fi

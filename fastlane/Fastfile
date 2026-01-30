@@ -191,18 +191,25 @@ platform :ios do
   lane :testflight_upload do |options|
     api_key = get_api_key
 
-    # Increment build number
+    # Increment build number for both iOS app and watch app
     increment_build_number(
-      xcodeproj: File.expand_path("../Trivit.xcodeproj", __dir__)
+      xcodeproj: File.expand_path("../trivit.xcodeproj", __dir__)
     )
 
-    # Build the app
+    # Build the app (includes watch app as dependency)
     build_app(
-      project: File.expand_path("../Trivit.xcodeproj", __dir__),
-      scheme: "Trivit",
+      workspace: File.expand_path("../trivit.xcworkspace", __dir__),
+      scheme: "trivit",
       export_method: "app-store",
       output_directory: "./build",
-      output_name: "Trivit.ipa"
+      output_name: "Trivit.ipa",
+      include_bitcode: false,
+      export_options: {
+        compileBitcode: false,
+        uploadSymbols: true,
+        signingStyle: "automatic",
+        teamID: "N324UX8D9M"
+      }
     )
 
     # Upload to TestFlight
