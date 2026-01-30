@@ -37,9 +37,21 @@ final class Trivit: Equatable {
         count += 1
     }
 
+    func increment(in context: ModelContext) {
+        count += 1
+        StatisticsService.logEvent(for: self, delta: 1, in: context)
+    }
+
     func decrement() {
         if count > 0 {
             count -= 1
+        }
+    }
+
+    func decrement(in context: ModelContext) {
+        if count > 0 {
+            count -= 1
+            StatisticsService.logEvent(for: self, delta: -1, in: context)
         }
     }
 

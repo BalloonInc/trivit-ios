@@ -10,8 +10,11 @@ import SwiftData
 
 struct TrivitRowView: View {
     @Bindable var trivit: Trivit
+    @Environment(\.modelContext) private var modelContext
     @State private var isEditing = false
     @State private var dragOffset: CGFloat = 0
+    @State private var showingStatistics = false
+    @State private var showingHistory = false
     @FocusState private var isTitleFocused: Bool
 
     let onDelete: () -> Void
@@ -89,7 +92,7 @@ struct TrivitRowView: View {
                     }
                     .onEnded { value in
                         if dragOffset < decrementThreshold && trivit.count > 0 {
-                            trivit.decrement()
+                            trivit.decrement(in: modelContext)
                             HapticsService.shared.impact(.light)
                         }
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -99,13 +102,27 @@ struct TrivitRowView: View {
             )
             .onTapGesture {
                 guard !isEditing else { return }
-                trivit.increment()
+                trivit.increment(in: modelContext)
                 HapticsService.shared.impact(.light)
             }
         }
         .frame(minHeight: 70)
         .clipped()
         .contextMenu {
+            Button {
+                showingStatistics = true
+            } label: {
+                Label("Statistics", systemImage: "chart.bar.fill")
+            }
+
+            Button {
+                showingHistory = true
+            } label: {
+                Label("History", systemImage: "clock.arrow.circlepath")
+            }
+
+            Divider()
+
             Button {
                 isEditing = true
                 isTitleFocused = true
@@ -133,6 +150,12 @@ struct TrivitRowView: View {
             } label: {
                 Label("Delete", systemImage: "trash")
             }
+        }
+        .sheet(isPresented: $showingStatistics) {
+            StatisticsView(trivit: trivit)
+        }
+        .sheet(isPresented: $showingHistory) {
+            HistoryView(trivit: trivit)
         }
     }
 }

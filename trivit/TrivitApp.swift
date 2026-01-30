@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct TrivitApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([Trivit.self])
+        let schema = Schema([Trivit.self, TallyEvent.self])
 
         // Use App Group container for shared storage with watch app
         let appGroupID = "group.com.wouterdevriendt.trivit.Documents"
