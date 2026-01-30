@@ -1,131 +1,93 @@
-/* Message box content */
-"Are you sure you want to delete all trivits?" = "Вы уверены, что Вы хотите удалить все тривиты?";
+/* App Name */
+"Trivit" = "Trivit";
 
-/* messagebox text, parameter is title of tally */
-"Are you sure you want to reset '%@'?" = "Вы уверены, что Вы хотите сбросить '%@'?";
+/* Navigation */
+"Settings" = "Настройки";
+"Done" = "Готово";
 
-/* Message box content */
-"Are you sure you want to reset all counts to 0?" = "Вы уверены, что Вы хотите сбросить все подсчеты до 0?";
+/* Empty State */
+"No Trivits Yet" = "Пока нет счётчиков";
+"Tap + to create your first tally counter" = "Нажмите + чтобы создать первый счётчик";
 
-/* Color set name */
-"Blue" = "Синяя";
+/* Trivit Actions */
+"New Trivit" = "Новый счётчик";
+"Rename" = "Переименовать";
+"Change Color" = "Изменить цвет";
+"Reset Count" = "Сбросить счёт";
+"Delete" = "Удалить";
+"Title" = "Название";
 
-/* messagebox title */
-"Cannot add" = "Не может быть добавлен";
+/* Settings - Sections */
+"General" = "Основные";
+"Color Scheme" = "Цветовая схема";
+"Sync Info" = "Информация о синхронизации";
+"About" = "О приложении";
+"Data" = "Данные";
 
-/* label for vibration setting */
-"Color - %@" = "%@";
+/* Settings - General */
+"Haptic Feedback" = "Тактильный отклик";
+"Palette" = "Палитра";
 
-/* Placeholder texts for newly added trivits */
-"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Дни в тюрьме,Мои спортивные автомобили,Дни без отпуска,Чашек кофе в этом году,Стопок текилы на сегодня,Красивых девушек в баре,Дни без мата,Людей достал,Незаконченные фильмы Вконтакте,Подсчитывает добавил,Мои айфоны,Ошибки в моем коде,Выпитое пиво,Мои пары обуви, Дождливых дней в 2015 году,Стаканов воды за сегодня,Звезд в небе, Дней до нового Apple Watch";
+/* Settings - Sync Info */
+"Trivits Synced" = "Синхронизировано счётчиков";
+"Last Sync" = "Последняя синхронизация";
+"Device" = "Устройство";
 
-/* Tally example */
-"Days without cookies" = "Дней без печенья";
+/* Settings - About */
+"Version" = "Версия";
+"Rate on App Store" = "Оценить в App Store";
+"Send Feedback" = "Отправить отзыв";
 
-/* Color set name */
-"Default" = "Стандартная";
+/* Settings - Data */
+"Reset All Trivits" = "Сбросить все счётчики";
 
-/* Message box title */
-"Delete all Trivits" = "Удалить все тривиты";
+/* Color Scheme Names */
+"Vibrant" = "Яркие";
+"Pastel" = "Пастельные";
+"Monochrome" = "Монохром";
+"Ocean" = "Океан";
+"Sunset" = "Закат";
+"Forest" = "Лес";
+"Candy" = "Конфеты";
+"Earth" = "Земля";
 
-/* send feedback button in settings */
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "Вы уверены, что хотите удалить все счётчики?";
+"Are you sure you want to reset '%@'?" = "Вы уверены, что хотите сбросить '%@'?";
+"Are you sure you want to reset all counts to 0?" = "Вы уверены, что хотите сбросить все счётчики до 0?";
+"Blue" = "Синий";
+"Cannot add" = "Невозможно добавить";
+"Color - %@" = "Цвет - %@";
+"Days in prison" = "Дней в тюрьме";
+"Default" = "По умолчанию";
+"Delete all Trivits" = "Удалить все счётчики";
+"Drinks" = "Напитки";
 "Feedback" = "Отзыв";
-
-/* tutorial */
 "Get started!" = "Начать!";
-
-/* tutorial */
-"Give your Trivit a name" = "Дайте имя вашему Тривиту";
-
-/* OK button */
-"Got it." = "Понятно.";
-
-/* feedback message */
-"I am missing some things..." = "Я что-то упустил.";
-
-/* feedback message */
-"I don't get it." = "Это не для меня.";
-
-/* feedback message */
-"I like what I see." = "Мне нравится что я вижу.";
-
-/* feedback message */
-"I've seen better, I've seen worse." = "Я видел хуже, я видел лучше.";
-
-/* dynamic shortcut item */
-"Increment Trivit:" = "Приращение Тривит:";
-
-/* Color set name */
-"J" = "Й";
-
-/* Color set name */
-"M" = "М";
-
-/* No comment provided by engineer. */
+"Give your Trivit a name" = "Дайте название счётчику";
+"Got it." = "Понял.";
+"Green" = "Зелёный";
+"I am missing some things..." = "Мне не хватает некоторых вещей...";
+"I don't get it." = "Не понимаю.";
+"I like what I see." = "Мне нравится.";
+"I've seen better, I've seen worse." = "Видел и лучше, и хуже.";
 "No" = "Нет";
-
-/* Setting: off */
-"Off" = "Нет";
-
-/* Setting: on */
-"On" = "Да";
-
-/* tutorial */
-"Open or close your new Trivit with a single tap" = "Откройте или закройте Ваш Тривит одним нажатием.";
-
-/* Color set name */
-"Pink" = "розовый";
-
-/* messagebox, adding trivit not possible while editing other trivit */
-"Please finish editing the title first." = "Сначала закончите редактирование заголовка.";
-
-/* remove all trivits button in settings */
-"Remove all" = "Удалить все";
-
-/* messagebox title */
-"Reset Trivit" = "Сбросить тривит";
-
-/* reset all trivits button in settings */
-"Reset all" = "Сбросить все";
-
-/* Message box title */
-"Reset all Trivits" = "Сбросить все тривиты";
-
-/* feedback message */
-"Tap an image to rate:" = "Нажмите на символ для оценки:";
-
-/* tutorial */
-"Tap the minus to decrease the count, hold long to reset" = "Нажмите минус, чтобы уменьшить количество, или удерживайте, чтобы сбросить Тривит\\n";
-
-/* tutorial */
-"Tap the pen to add a new Trivit" = "Коснитесь 'пера,' чтобы добавить новый Тривит";
-
-/* tutorial */
-"Tap to increase the count" = "Нажмите, чтобы увеличить количество";
-
-/* feedback message */
-"This is the best app ever!" = "Это самое лучшее приложение!";
-
-/* Color set name */
-"Trivit" = "Тривит";
-
-/* show tutorial button in settings */
-"Tutorial" = "Приветствие";
-
-/* label for vibration setting */
-"Vibration - %@" = "Вибро - %@";
-
-/* website to visit */
-"Visit us: www.trivit.be" = "Наша страница: www.trivit.be";
-
-/* Tally example */
-"Went swimming this year" = "Плавал в этом году";
-
-/* No comment provided by engineer. */
+"Off" = "Выкл";
+"On" = "Вкл";
+"Open or close your new Trivit with a single tap" = "Откройте или закройте счётчик одним касанием";
+"Please finish editing the title first." = "Сначала завершите редактирование названия.";
+"Red" = "Красный";
+"Remove all" = "Удалить всё";
+"Reset Trivit" = "Сбросить счётчик";
+"Reset all" = "Сбросить всё";
+"Reset all Trivits" = "Сбросить все счётчики";
+"Tap an image to rate:" = "Нажмите на изображение для оценки:";
+"Tap the minus to decrease the count, hold long to reset" = "Нажмите минус для уменьшения, удерживайте для сброса";
+"Tap the pen to add a new Trivit" = "Нажмите на перо для добавления счётчика";
+"Tap to increase the count" = "Нажмите для увеличения";
+"This is the best app ever!" = "Это лучшее приложение!";
+"Tutorial" = "Обучение";
+"Vibration - %@" = "Вибрация - %@";
+"Went swimming this year" = "Плавание в этом году";
 "Yes" = "Да";
-
-/* Placeholder text for feedback text */
-"Your feedback (optional)" = "Ваше мнение (опционально)";
-
-/* Tally example */
-"Swipe left to delete" = "Проведите вышло удалить";
+"Your feedback (optional)" = "Ваш отзыв (необязательно)";

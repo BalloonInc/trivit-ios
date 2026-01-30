@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "설정";
+"Done" = "완료";
+
+/* Empty State */
+"No Trivits Yet" = "아직 카운터가 없습니다";
+"Tap + to create your first tally counter" = "+를 탭하여 첫 번째 카운터를 만드세요";
+
+/* Trivit Actions */
+"New Trivit" = "새 카운터";
+"Rename" = "이름 변경";
+"Change Color" = "색상 변경";
+"Reset Count" = "카운트 초기화";
+"Delete" = "삭제";
+"Title" = "제목";
+
+/* Settings - Sections */
+"General" = "일반";
+"Color Scheme" = "색상 구성";
+"Sync Info" = "동기화 정보";
+"About" = "정보";
+"Data" = "데이터";
+
+/* Settings - General */
+"Haptic Feedback" = "햅틱 피드백";
+"Palette" = "팔레트";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "동기화된 카운터";
+"Last Sync" = "마지막 동기화";
+"Device" = "기기";
+
+/* Settings - About */
+"Version" = "버전";
+"Rate on App Store" = "App Store에서 평가";
+"Send Feedback" = "피드백 보내기";
+
+/* Settings - Data */
+"Reset All Trivits" = "모든 카운터 초기화";
+
+/* Color Scheme Names */
+"Vibrant" = "생동감";
+"Pastel" = "파스텔";
+"Monochrome" = "단색";
+"Ocean" = "바다";
+"Sunset" = "일몰";
+"Forest" = "숲";
+"Candy" = "캔디";
+"Earth" = "대지";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "모든 카운터를 삭제하시겠습니까?";
+"Are you sure you want to reset '%@'?" = "'%@'을(를) 초기화하시겠습니까?";
+"Are you sure you want to reset all counts to 0?" = "모든 카운트를 0으로 초기화하시겠습니까?";
+"Blue" = "파랑";
+"Cannot add" = "추가할 수 없음";
+"Color - %@" = "색상 - %@";
+"Days in prison" = "감옥에서 보낸 일수";
+"Default" = "기본";
+"Delete all Trivits" = "모든 카운터 삭제";
+"Drinks" = "음료";
+"Feedback" = "피드백";
+"Get started!" = "시작하기!";
+"Give your Trivit a name" = "카운터 이름 지정";
+"Got it." = "알겠습니다.";
+"Green" = "초록";
+"I am missing some things..." = "뭔가 부족한 것 같아요...";
+"I don't get it." = "이해가 안 돼요.";
+"I like what I see." = "마음에 들어요.";
+"I've seen better, I've seen worse." = "그럭저럭이에요.";
+"No" = "아니오";
+"Off" = "끔";
+"On" = "켬";
+"Open or close your new Trivit with a single tap" = "한 번 탭하여 카운터를 열거나 닫으세요";
+"Please finish editing the title first." = "먼저 제목 편집을 완료하세요.";
+"Red" = "빨강";
+"Remove all" = "모두 제거";
+"Reset Trivit" = "카운터 초기화";
+"Reset all" = "모두 초기화";
+"Reset all Trivits" = "모든 카운터 초기화";
+"Tap an image to rate:" = "이미지를 탭하여 평가:";
+"Tap the minus to decrease the count, hold long to reset" = "마이너스를 탭하여 감소, 길게 눌러 초기화";
+"Tap the pen to add a new Trivit" = "펜을 탭하여 새 카운터 추가";
+"Tap to increase the count" = "탭하여 카운트 증가";
+"This is the best app ever!" = "최고의 앱이에요!";
+"Tutorial" = "튜토리얼";
+"Vibration - %@" = "진동 - %@";
+"Went swimming this year" = "올해 수영 횟수";
+"Yes" = "예";
+"Your feedback (optional)" = "피드백 (선택사항)";

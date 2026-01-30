@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "Pengaturan";
+"Done" = "Selesai";
+
+/* Empty State */
+"No Trivits Yet" = "Belum Ada Penghitung";
+"Tap + to create your first tally counter" = "Ketuk + untuk membuat penghitung pertama Anda";
+
+/* Trivit Actions */
+"New Trivit" = "Penghitung Baru";
+"Rename" = "Ubah Nama";
+"Change Color" = "Ubah Warna";
+"Reset Count" = "Atur Ulang Hitungan";
+"Delete" = "Hapus";
+"Title" = "Judul";
+
+/* Settings - Sections */
+"General" = "Umum";
+"Color Scheme" = "Skema Warna";
+"Sync Info" = "Info Sinkronisasi";
+"About" = "Tentang";
+"Data" = "Data";
+
+/* Settings - General */
+"Haptic Feedback" = "Umpan Balik Haptik";
+"Palette" = "Palet";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "Penghitung Tersinkron";
+"Last Sync" = "Sinkronisasi Terakhir";
+"Device" = "Perangkat";
+
+/* Settings - About */
+"Version" = "Versi";
+"Rate on App Store" = "Beri Rating di App Store";
+"Send Feedback" = "Kirim Masukan";
+
+/* Settings - Data */
+"Reset All Trivits" = "Atur Ulang Semua Penghitung";
+
+/* Color Scheme Names */
+"Vibrant" = "Cerah";
+"Pastel" = "Pastel";
+"Monochrome" = "Monokrom";
+"Ocean" = "Samudra";
+"Sunset" = "Senja";
+"Forest" = "Hutan";
+"Candy" = "Permen";
+"Earth" = "Bumi";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "Apakah Anda yakin ingin menghapus semua penghitung?";
+"Are you sure you want to reset '%@'?" = "Apakah Anda yakin ingin mengatur ulang '%@'?";
+"Are you sure you want to reset all counts to 0?" = "Apakah Anda yakin ingin mengatur ulang semua hitungan ke 0?";
+"Blue" = "Biru";
+"Cannot add" = "Tidak dapat menambahkan";
+"Color - %@" = "Warna - %@";
+"Days in prison" = "Hari di penjara";
+"Default" = "Default";
+"Delete all Trivits" = "Hapus semua penghitung";
+"Drinks" = "Minuman";
+"Feedback" = "Masukan";
+"Get started!" = "Mulai!";
+"Give your Trivit a name" = "Beri nama penghitung Anda";
+"Got it." = "Mengerti.";
+"Green" = "Hijau";
+"I am missing some things..." = "Ada beberapa hal yang kurang...";
+"I don't get it." = "Saya tidak mengerti.";
+"I like what I see." = "Saya suka yang saya lihat.";
+"I've seen better, I've seen worse." = "Lumayan.";
+"No" = "Tidak";
+"Off" = "Mati";
+"On" = "Nyala";
+"Open or close your new Trivit with a single tap" = "Buka atau tutup penghitung dengan satu ketukan";
+"Please finish editing the title first." = "Harap selesaikan pengeditan judul terlebih dahulu.";
+"Red" = "Merah";
+"Remove all" = "Hapus semua";
+"Reset Trivit" = "Atur Ulang Penghitung";
+"Reset all" = "Atur ulang semua";
+"Reset all Trivits" = "Atur ulang semua penghitung";
+"Tap an image to rate:" = "Ketuk gambar untuk memberi rating:";
+"Tap the minus to decrease the count, hold long to reset" = "Ketuk minus untuk mengurangi, tahan lama untuk mengatur ulang";
+"Tap the pen to add a new Trivit" = "Ketuk pena untuk menambah penghitung baru";
+"Tap to increase the count" = "Ketuk untuk menambah hitungan";
+"This is the best app ever!" = "Ini aplikasi terbaik!";
+"Tutorial" = "Tutorial";
+"Vibration - %@" = "Getaran - %@";
+"Went swimming this year" = "Berenang tahun ini";
+"Yes" = "Ya";
+"Your feedback (optional)" = "Masukan Anda (opsional)";

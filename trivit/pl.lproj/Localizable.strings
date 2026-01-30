@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "Ustawienia";
+"Done" = "Gotowe";
+
+/* Empty State */
+"No Trivits Yet" = "Brak liczników";
+"Tap + to create your first tally counter" = "Dotknij + aby utworzyć pierwszy licznik";
+
+/* Trivit Actions */
+"New Trivit" = "Nowy licznik";
+"Rename" = "Zmień nazwę";
+"Change Color" = "Zmień kolor";
+"Reset Count" = "Wyzeruj licznik";
+"Delete" = "Usuń";
+"Title" = "Tytuł";
+
+/* Settings - Sections */
+"General" = "Ogólne";
+"Color Scheme" = "Schemat kolorów";
+"Sync Info" = "Info o synchronizacji";
+"About" = "O aplikacji";
+"Data" = "Dane";
+
+/* Settings - General */
+"Haptic Feedback" = "Wibracje dotykowe";
+"Palette" = "Paleta";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "Zsynchronizowane liczniki";
+"Last Sync" = "Ostatnia synchronizacja";
+"Device" = "Urządzenie";
+
+/* Settings - About */
+"Version" = "Wersja";
+"Rate on App Store" = "Oceń w App Store";
+"Send Feedback" = "Wyślij opinię";
+
+/* Settings - Data */
+"Reset All Trivits" = "Wyzeruj wszystkie liczniki";
+
+/* Color Scheme Names */
+"Vibrant" = "Żywe";
+"Pastel" = "Pastelowe";
+"Monochrome" = "Monochromatyczne";
+"Ocean" = "Ocean";
+"Sunset" = "Zachód słońca";
+"Forest" = "Las";
+"Candy" = "Cukierki";
+"Earth" = "Ziemia";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "Czy na pewno chcesz usunąć wszystkie liczniki?";
+"Are you sure you want to reset '%@'?" = "Czy na pewno chcesz wyzerować '%@'?";
+"Are you sure you want to reset all counts to 0?" = "Czy na pewno chcesz wyzerować wszystkie liczniki?";
+"Blue" = "Niebieski";
+"Cannot add" = "Nie można dodać";
+"Color - %@" = "Kolor - %@";
+"Days in prison" = "Dni w więzieniu";
+"Default" = "Domyślny";
+"Delete all Trivits" = "Usuń wszystkie liczniki";
+"Drinks" = "Napoje";
+"Feedback" = "Opinia";
+"Get started!" = "Zaczynaj!";
+"Give your Trivit a name" = "Nadaj nazwę licznikowi";
+"Got it." = "Rozumiem.";
+"Green" = "Zielony";
+"I am missing some things..." = "Brakuje mi niektórych rzeczy...";
+"I don't get it." = "Nie rozumiem.";
+"I like what I see." = "Podoba mi się.";
+"I've seen better, I've seen worse." = "Widziałem lepsze i gorsze.";
+"No" = "Nie";
+"Off" = "Wył.";
+"On" = "Wł.";
+"Open or close your new Trivit with a single tap" = "Otwórz lub zamknij licznik jednym dotknięciem";
+"Please finish editing the title first." = "Najpierw zakończ edycję tytułu.";
+"Red" = "Czerwony";
+"Remove all" = "Usuń wszystko";
+"Reset Trivit" = "Wyzeruj licznik";
+"Reset all" = "Wyzeruj wszystko";
+"Reset all Trivits" = "Wyzeruj wszystkie liczniki";
+"Tap an image to rate:" = "Dotknij obrazek, aby ocenić:";
+"Tap the minus to decrease the count, hold long to reset" = "Dotknij minus, aby zmniejszyć, przytrzymaj, aby wyzerować";
+"Tap the pen to add a new Trivit" = "Dotknij pióro, aby dodać nowy licznik";
+"Tap to increase the count" = "Dotknij, aby zwiększyć";
+"This is the best app ever!" = "To najlepsza aplikacja w historii!";
+"Tutorial" = "Samouczek";
+"Vibration - %@" = "Wibracje - %@";
+"Went swimming this year" = "Pływanie w tym roku";
+"Yes" = "Tak";
+"Your feedback (optional)" = "Twoja opinia (opcjonalnie)";

@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "সেটিংস";
+"Done" = "সম্পন্ন";
+
+/* Empty State */
+"No Trivits Yet" = "এখনো কোনো কাউন্টার নেই";
+"Tap + to create your first tally counter" = "আপনার প্রথম কাউন্টার তৈরি করতে + ট্যাপ করুন";
+
+/* Trivit Actions */
+"New Trivit" = "নতুন কাউন্টার";
+"Rename" = "নাম পরিবর্তন";
+"Change Color" = "রং পরিবর্তন";
+"Reset Count" = "গণনা রিসেট";
+"Delete" = "মুছুন";
+"Title" = "শিরোনাম";
+
+/* Settings - Sections */
+"General" = "সাধারণ";
+"Color Scheme" = "রঙের স্কিম";
+"Sync Info" = "সিঙ্ক তথ্য";
+"About" = "সম্পর্কে";
+"Data" = "ডেটা";
+
+/* Settings - General */
+"Haptic Feedback" = "হ্যাপটিক ফিডব্যাক";
+"Palette" = "প্যালেট";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "সিঙ্ক করা কাউন্টার";
+"Last Sync" = "শেষ সিঙ্ক";
+"Device" = "ডিভাইস";
+
+/* Settings - About */
+"Version" = "সংস্করণ";
+"Rate on App Store" = "App Store-এ রেট করুন";
+"Send Feedback" = "ফিডব্যাক পাঠান";
+
+/* Settings - Data */
+"Reset All Trivits" = "সব কাউন্টার রিসেট করুন";
+
+/* Color Scheme Names */
+"Vibrant" = "প্রাণবন্ত";
+"Pastel" = "প্যাস্টেল";
+"Monochrome" = "একরঙা";
+"Ocean" = "সমুদ্র";
+"Sunset" = "সূর্যাস্ত";
+"Forest" = "বন";
+"Candy" = "ক্যান্ডি";
+"Earth" = "পৃথিবী";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "আপনি কি সব কাউন্টার মুছতে চান?";
+"Are you sure you want to reset '%@'?" = "আপনি কি '%@' রিসেট করতে চান?";
+"Are you sure you want to reset all counts to 0?" = "আপনি কি সব গণনা 0 তে রিসেট করতে চান?";
+"Blue" = "নীল";
+"Cannot add" = "যোগ করা যাচ্ছে না";
+"Color - %@" = "রং - %@";
+"Days in prison" = "জেলে দিন";
+"Default" = "ডিফল্ট";
+"Delete all Trivits" = "সব কাউন্টার মুছুন";
+"Drinks" = "পানীয়";
+"Feedback" = "ফিডব্যাক";
+"Get started!" = "শুরু করুন!";
+"Give your Trivit a name" = "আপনার কাউন্টারের নাম দিন";
+"Got it." = "বুঝেছি।";
+"Green" = "সবুজ";
+"I am missing some things..." = "কিছু জিনিস মিসিং মনে হচ্ছে...";
+"I don't get it." = "বুঝতে পারছি না।";
+"I like what I see." = "আমার ভালো লাগছে।";
+"I've seen better, I've seen worse." = "ঠিকঠাক আছে।";
+"No" = "না";
+"Off" = "বন্ধ";
+"On" = "চালু";
+"Open or close your new Trivit with a single tap" = "একটি ট্যাপে কাউন্টার খুলুন বা বন্ধ করুন";
+"Please finish editing the title first." = "অনুগ্রহ করে আগে শিরোনাম সম্পাদনা শেষ করুন।";
+"Red" = "লাল";
+"Remove all" = "সব সরান";
+"Reset Trivit" = "কাউন্টার রিসেট";
+"Reset all" = "সব রিসেট";
+"Reset all Trivits" = "সব কাউন্টার রিসেট";
+"Tap an image to rate:" = "রেট করতে ছবিতে ট্যাপ করুন:";
+"Tap the minus to decrease the count, hold long to reset" = "গণনা কমাতে মাইনাসে ট্যাপ করুন, রিসেট করতে দীর্ঘক্ষণ চাপুন";
+"Tap the pen to add a new Trivit" = "নতুন কাউন্টার যোগ করতে পেনে ট্যাপ করুন";
+"Tap to increase the count" = "গণনা বাড়াতে ট্যাপ করুন";
+"This is the best app ever!" = "এটি সেরা অ্যাপ!";
+"Tutorial" = "টিউটোরিয়াল";
+"Vibration - %@" = "কম্পন - %@";
+"Went swimming this year" = "এই বছর সাঁতার";
+"Yes" = "হ্যাঁ";
+"Your feedback (optional)" = "আপনার মতামত (ঐচ্ছিক)";

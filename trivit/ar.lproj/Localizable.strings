@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "الإعدادات";
+"Done" = "تم";
+
+/* Empty State */
+"No Trivits Yet" = "لا توجد عدادات بعد";
+"Tap + to create your first tally counter" = "اضغط + لإنشاء أول عداد";
+
+/* Trivit Actions */
+"New Trivit" = "عداد جديد";
+"Rename" = "إعادة التسمية";
+"Change Color" = "تغيير اللون";
+"Reset Count" = "إعادة تعيين العد";
+"Delete" = "حذف";
+"Title" = "العنوان";
+
+/* Settings - Sections */
+"General" = "عام";
+"Color Scheme" = "نظام الألوان";
+"Sync Info" = "معلومات المزامنة";
+"About" = "حول";
+"Data" = "البيانات";
+
+/* Settings - General */
+"Haptic Feedback" = "الاستجابة اللمسية";
+"Palette" = "لوحة الألوان";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "العدادات المتزامنة";
+"Last Sync" = "آخر مزامنة";
+"Device" = "الجهاز";
+
+/* Settings - About */
+"Version" = "الإصدار";
+"Rate on App Store" = "قيّم على App Store";
+"Send Feedback" = "إرسال ملاحظات";
+
+/* Settings - Data */
+"Reset All Trivits" = "إعادة تعيين جميع العدادات";
+
+/* Color Scheme Names */
+"Vibrant" = "نابض بالحياة";
+"Pastel" = "باستيل";
+"Monochrome" = "أحادي اللون";
+"Ocean" = "المحيط";
+"Sunset" = "الغروب";
+"Forest" = "الغابة";
+"Candy" = "حلوى";
+"Earth" = "الأرض";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "هل أنت متأكد من حذف جميع العدادات؟";
+"Are you sure you want to reset '%@'?" = "هل أنت متأكد من إعادة تعيين '%@'؟";
+"Are you sure you want to reset all counts to 0?" = "هل أنت متأكد من إعادة تعيين جميع الأعداد إلى 0؟";
+"Blue" = "أزرق";
+"Cannot add" = "لا يمكن الإضافة";
+"Color - %@" = "اللون - %@";
+"Days in prison" = "أيام في السجن";
+"Default" = "افتراضي";
+"Delete all Trivits" = "حذف جميع العدادات";
+"Drinks" = "مشروبات";
+"Feedback" = "ملاحظات";
+"Get started!" = "ابدأ الآن!";
+"Give your Trivit a name" = "أعط عدادك اسماً";
+"Got it." = "فهمت.";
+"Green" = "أخضر";
+"I am missing some things..." = "أشعر بنقص بعض الأشياء...";
+"I don't get it." = "لم أفهم.";
+"I like what I see." = "يعجبني ما أراه.";
+"I've seen better, I've seen worse." = "رأيت أفضل ورأيت أسوأ.";
+"No" = "لا";
+"Off" = "إيقاف";
+"On" = "تشغيل";
+"Open or close your new Trivit with a single tap" = "افتح أو أغلق عدادك بنقرة واحدة";
+"Please finish editing the title first." = "يرجى إنهاء تحرير العنوان أولاً.";
+"Red" = "أحمر";
+"Remove all" = "إزالة الكل";
+"Reset Trivit" = "إعادة تعيين العداد";
+"Reset all" = "إعادة تعيين الكل";
+"Reset all Trivits" = "إعادة تعيين جميع العدادات";
+"Tap an image to rate:" = "اضغط على صورة للتقييم:";
+"Tap the minus to decrease the count, hold long to reset" = "اضغط على الناقص لتقليل العد، اضغط مطولاً للتعيين";
+"Tap the pen to add a new Trivit" = "اضغط على القلم لإضافة عداد جديد";
+"Tap to increase the count" = "اضغط لزيادة العد";
+"This is the best app ever!" = "هذا أفضل تطبيق على الإطلاق!";
+"Tutorial" = "الدليل";
+"Vibration - %@" = "الاهتزاز - %@";
+"Went swimming this year" = "السباحة هذا العام";
+"Yes" = "نعم";
+"Your feedback (optional)" = "ملاحظاتك (اختياري)";

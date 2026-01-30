@@ -1,131 +1,93 @@
-/* Message box content */
-"Are you sure you want to delete all trivits?" = "Etes-vous sûr que vous voulez supprimer tous les trivits?";
-
-/* messagebox text, parameter is title of tally */
-"Are you sure you want to reset '%@'?" = "Êtes-vous sûr de vouloir réinitialiser '%@'?";
-
-/* Message box content */
-"Are you sure you want to reset all counts to 0?" = "Êtes-vous sûr de vouloir mettre tous les conteurs à 0?";
-
-/* Color set name */
-"Blue" = "Bleu";
-
-/* messagebox title */
-"Cannot add" = "Impossible d'ajouter";
-
-/* label for vibration setting */
-"Color - %@" = "%@";
-
-/* Placeholder texts for newly added trivits */
-"Days in prison,Sport cars owned,Days without holiday,Cups of coffee this year,Days of work left for our app,Days without cursing,People stalked,Unfinished Netflix movies,Tallies added,iPhones owned,Bugs in our software,Beers,Pairs of shoes owned,Rainy days in 2015,Glasses of water,Stars in the sky,Days waiting for Apple Watch release" = "Jours de prison,Voitures de sport possédé,Jours sans vacances,Tasses de café cette année,Coups Tequilla aujourd'hui,Jours sans maudire,Personnes traquées,Films Netflix inachevés,Tallies ajouté,iPhones propriété,Bugs dans notre app,Beers,Paires de chaussures appartenant,Jours de pluie en 2015,Verres d'eau,Etoiles dans le ciel,Jours d'attente pour Apple Watch presse";
-
-/* Tally example */
-"Days without cookies" = "Jours sans cookies";
-
-/* Color set name */
-"Default" = "Défaut";
-
-/* Message box title */
-"Delete all Trivits" = "Supprimer tous Trivits";
-
-/* send feedback button in settings */
-"Feedback" = "Commentaires";
-
-/* tutorial */
-"Get started!" = "Commencez!";
-
-/* tutorial */
-"Give your Trivit a name" = "Donnez un nom à votre Trivit";
-
-/* OK button */
-"Got it." = "J'ai compris";
-
-/* feedback message */
-"I am missing some things..." = "Il me manque certaines choses ...";
-
-/* feedback message */
-"I don't get it." = "Je ne comprends pas.";
-
-/* feedback message */
-"I like what I see." = "J'aime ce que je vois.";
-
-/* feedback message */
-"I've seen better, I've seen worse." = "J'ai vu mieux, j'ai vu pire.";
-
-/* dynamic shortcut item */
-"Increment Trivit:" = "Incrément Trivit:";
-
-/* Color set name */
-"J" = "J";
-
-/* Color set name */
-"M" = "M";
-
-/* No comment provided by engineer. */
-"No" = "Non";
-
-/* Setting: off */
-"Off" = "Non";
-
-/* Setting: on */
-"On" = "Oui";
-
-/* tutorial */
-"Open or close your new Trivit with a single tap" = "Ouvrez ou fermez votre nouveau Trivit avec un seul tap";
-
-/* Color set name */
-"Pink" = "Rose";
-
-/* messagebox, adding trivit not possible while editing other trivit */
-"Please finish editing the title first." = "Terminez d'abord l'édition du titre courant.";
-
-/* remove all trivits button in settings */
-"Remove all" = "Supprimer tout";
-
-/* messagebox title */
-"Reset Trivit" = "Réinitialiser Trivit";
-
-/* reset all trivits button in settings */
-"Reset all" = "Réinitialiser tout";
-
-/* Message box title */
-"Reset all Trivits" = "Réinitialiser tous Trivits";
-
-/* feedback message */
-"Tap an image to rate:" = "Appuyez sur une image pour évaluer:";
-
-/* tutorial */
-"Tap the minus to decrease the count, hold long to reset" = "Appuyez sur le moins pour diminuer, maintenez appuyer pour réinitialiser";
-
-/* tutorial */
-"Tap the pen to add a new Trivit" = "Appuyez sur le stylo pour ajouter un nouveau Trivit";
-
-/* tutorial */
-"Tap to increase the count" = "Appuyez pour augmenter le nombre";
-
-/* feedback message */
-"This is the best app ever!" = "C'est la meilleure app créée!";
-
-/* Color set name */
+/* App Name */
 "Trivit" = "Trivit";
 
-/* show tutorial button in settings */
+/* Navigation */
+"Settings" = "Réglages";
+"Done" = "Terminé";
+
+/* Empty State */
+"No Trivits Yet" = "Aucun compteur";
+"Tap + to create your first tally counter" = "Appuyez sur + pour créer votre premier compteur";
+
+/* Trivit Actions */
+"New Trivit" = "Nouveau compteur";
+"Rename" = "Renommer";
+"Change Color" = "Changer la couleur";
+"Reset Count" = "Réinitialiser le compteur";
+"Delete" = "Supprimer";
+"Title" = "Titre";
+
+/* Settings - Sections */
+"General" = "Général";
+"Color Scheme" = "Palette de couleurs";
+"Sync Info" = "Info de synchronisation";
+"About" = "À propos";
+"Data" = "Données";
+
+/* Settings - General */
+"Haptic Feedback" = "Retour haptique";
+"Palette" = "Palette";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "Compteurs synchronisés";
+"Last Sync" = "Dernière synchronisation";
+"Device" = "Appareil";
+
+/* Settings - About */
+"Version" = "Version";
+"Rate on App Store" = "Noter sur l'App Store";
+"Send Feedback" = "Envoyer un commentaire";
+
+/* Settings - Data */
+"Reset All Trivits" = "Réinitialiser tous les compteurs";
+
+/* Color Scheme Names */
+"Vibrant" = "Vif";
+"Pastel" = "Pastel";
+"Monochrome" = "Monochrome";
+"Ocean" = "Océan";
+"Sunset" = "Coucher de soleil";
+"Forest" = "Forêt";
+"Candy" = "Bonbon";
+"Earth" = "Terre";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "Êtes-vous sûr de vouloir supprimer tous les compteurs?";
+"Are you sure you want to reset '%@'?" = "Êtes-vous sûr de vouloir réinitialiser '%@'?";
+"Are you sure you want to reset all counts to 0?" = "Êtes-vous sûr de vouloir réinitialiser tous les compteurs à 0?";
+"Blue" = "Bleu";
+"Cannot add" = "Impossible d'ajouter";
+"Color - %@" = "Couleur - %@";
+"Days in prison" = "Jours en prison";
+"Default" = "Par défaut";
+"Delete all Trivits" = "Supprimer tous les compteurs";
+"Drinks" = "Boissons";
+"Feedback" = "Commentaire";
+"Get started!" = "Commencer!";
+"Give your Trivit a name" = "Donnez un nom à votre compteur";
+"Got it." = "Compris.";
+"Green" = "Vert";
+"I am missing some things..." = "Il me manque certaines choses...";
+"I don't get it." = "Je ne comprends pas.";
+"I like what I see." = "J'aime ce que je vois.";
+"I've seen better, I've seen worse." = "J'ai vu mieux, j'ai vu pire.";
+"No" = "Non";
+"Off" = "Désactivé";
+"On" = "Activé";
+"Open or close your new Trivit with a single tap" = "Ouvrez ou fermez votre compteur d'un seul toucher";
+"Please finish editing the title first." = "Veuillez d'abord terminer la modification du titre.";
+"Red" = "Rouge";
+"Remove all" = "Tout supprimer";
+"Reset Trivit" = "Réinitialiser compteur";
+"Reset all" = "Tout réinitialiser";
+"Reset all Trivits" = "Réinitialiser tous les compteurs";
+"Tap an image to rate:" = "Appuyez sur une image pour évaluer:";
+"Tap the minus to decrease the count, hold long to reset" = "Appuyez sur moins pour diminuer, maintenez pour réinitialiser";
+"Tap the pen to add a new Trivit" = "Appuyez sur le stylo pour ajouter un compteur";
+"Tap to increase the count" = "Appuyez pour augmenter";
+"This is the best app ever!" = "C'est la meilleure application!";
 "Tutorial" = "Tutoriel";
-
-/* label for vibration setting */
 "Vibration - %@" = "Vibration - %@";
-
-/* website to visit */
-"Visit us: www.trivit.be" = "Visitez-nous: www.trivit.be";
-
-/* Tally example */
-"Went swimming this year" = "Allé(e) nager cette année";
-
-/* No comment provided by engineer. */
+"Went swimming this year" = "Nagé cette année";
 "Yes" = "Oui";
-
-/* Placeholder text for feedback text */
-"Your feedback (optional)" = "Vos commentaires (facultatif)";
-
-/* Tally example */
-"Swipe left to delete" = "Glissez à gauche pour supprimer";
+"Your feedback (optional)" = "Votre commentaire (optionnel)";
