@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "การตั้งค่า";
+"Done" = "เสร็จ";
+
+/* Empty State */
+"No Trivits Yet" = "ยังไม่มีตัวนับ";
+"Tap + to create your first tally counter" = "แตะ + เพื่อสร้างตัวนับแรกของคุณ";
+
+/* Trivit Actions */
+"New Trivit" = "ตัวนับใหม่";
+"Rename" = "เปลี่ยนชื่อ";
+"Change Color" = "เปลี่ยนสี";
+"Reset Count" = "รีเซ็ตการนับ";
+"Delete" = "ลบ";
+"Title" = "ชื่อ";
+
+/* Settings - Sections */
+"General" = "ทั่วไป";
+"Color Scheme" = "ชุดสี";
+"Sync Info" = "ข้อมูลการซิงค์";
+"About" = "เกี่ยวกับ";
+"Data" = "ข้อมูล";
+
+/* Settings - General */
+"Haptic Feedback" = "การตอบสนองสัมผัส";
+"Palette" = "จานสี";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "ตัวนับที่ซิงค์";
+"Last Sync" = "ซิงค์ล่าสุด";
+"Device" = "อุปกรณ์";
+
+/* Settings - About */
+"Version" = "เวอร์ชัน";
+"Rate on App Store" = "ให้คะแนนบน App Store";
+"Send Feedback" = "ส่งความคิดเห็น";
+
+/* Settings - Data */
+"Reset All Trivits" = "รีเซ็ตตัวนับทั้งหมด";
+
+/* Color Scheme Names */
+"Vibrant" = "สดใส";
+"Pastel" = "พาสเทล";
+"Monochrome" = "ขาวดำ";
+"Ocean" = "มหาสมุทร";
+"Sunset" = "พระอาทิตย์ตก";
+"Forest" = "ป่า";
+"Candy" = "ลูกอม";
+"Earth" = "โลก";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "คุณแน่ใจหรือว่าต้องการลบตัวนับทั้งหมด?";
+"Are you sure you want to reset '%@'?" = "คุณแน่ใจหรือว่าต้องการรีเซ็ต '%@'?";
+"Are you sure you want to reset all counts to 0?" = "คุณแน่ใจหรือว่าต้องการรีเซ็ตการนับทั้งหมดเป็น 0?";
+"Blue" = "น้ำเงิน";
+"Cannot add" = "ไม่สามารถเพิ่มได้";
+"Color - %@" = "สี - %@";
+"Days in prison" = "วันในคุก";
+"Default" = "ค่าเริ่มต้น";
+"Delete all Trivits" = "ลบตัวนับทั้งหมด";
+"Drinks" = "เครื่องดื่ม";
+"Feedback" = "ความคิดเห็น";
+"Get started!" = "เริ่มเลย!";
+"Give your Trivit a name" = "ตั้งชื่อตัวนับของคุณ";
+"Got it." = "เข้าใจแล้ว";
+"Green" = "เขียว";
+"I am missing some things..." = "รู้สึกว่าขาดบางอย่าง...";
+"I don't get it." = "ไม่เข้าใจ";
+"I like what I see." = "ชอบที่เห็น";
+"I've seen better, I've seen worse." = "พอใช้ได้";
+"No" = "ไม่";
+"Off" = "ปิด";
+"On" = "เปิด";
+"Open or close your new Trivit with a single tap" = "แตะครั้งเดียวเพื่อเปิดหรือปิดตัวนับ";
+"Please finish editing the title first." = "กรุณาแก้ไขชื่อให้เสร็จก่อน";
+"Red" = "แดง";
+"Remove all" = "ลบทั้งหมด";
+"Reset Trivit" = "รีเซ็ตตัวนับ";
+"Reset all" = "รีเซ็ตทั้งหมด";
+"Reset all Trivits" = "รีเซ็ตตัวนับทั้งหมด";
+"Tap an image to rate:" = "แตะรูปเพื่อให้คะแนน:";
+"Tap the minus to decrease the count, hold long to reset" = "แตะลบเพื่อลดจำนวน กดค้างเพื่อรีเซ็ต";
+"Tap the pen to add a new Trivit" = "แตะปากกาเพื่อเพิ่มตัวนับใหม่";
+"Tap to increase the count" = "แตะเพื่อเพิ่มจำนวน";
+"This is the best app ever!" = "แอปที่ดีที่สุดเลย!";
+"Tutorial" = "บทเรียน";
+"Vibration - %@" = "การสั่น - %@";
+"Went swimming this year" = "ว่ายน้ำปีนี้";
+"Yes" = "ใช่";
+"Your feedback (optional)" = "ความคิดเห็นของคุณ (ไม่บังคับ)";

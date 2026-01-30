@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "设置";
+"Done" = "完成";
+
+/* Empty State */
+"No Trivits Yet" = "还没有计数器";
+"Tap + to create your first tally counter" = "点击 + 创建您的第一个计数器";
+
+/* Trivit Actions */
+"New Trivit" = "新计数器";
+"Rename" = "重命名";
+"Change Color" = "更改颜色";
+"Reset Count" = "重置计数";
+"Delete" = "删除";
+"Title" = "标题";
+
+/* Settings - Sections */
+"General" = "通用";
+"Color Scheme" = "配色方案";
+"Sync Info" = "同步信息";
+"About" = "关于";
+"Data" = "数据";
+
+/* Settings - General */
+"Haptic Feedback" = "触觉反馈";
+"Palette" = "调色板";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "已同步计数器";
+"Last Sync" = "上次同步";
+"Device" = "设备";
+
+/* Settings - About */
+"Version" = "版本";
+"Rate on App Store" = "在 App Store 评分";
+"Send Feedback" = "发送反馈";
+
+/* Settings - Data */
+"Reset All Trivits" = "重置所有计数器";
+
+/* Color Scheme Names */
+"Vibrant" = "鲜艳";
+"Pastel" = "柔和";
+"Monochrome" = "单色";
+"Ocean" = "海洋";
+"Sunset" = "日落";
+"Forest" = "森林";
+"Candy" = "糖果";
+"Earth" = "大地";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "确定要删除所有计数器吗？";
+"Are you sure you want to reset '%@'?" = "确定要重置 '%@' 吗？";
+"Are you sure you want to reset all counts to 0?" = "确定要将所有计数重置为0吗？";
+"Blue" = "蓝色";
+"Cannot add" = "无法添加";
+"Color - %@" = "颜色 - %@";
+"Days in prison" = "入狱天数";
+"Default" = "默认";
+"Delete all Trivits" = "删除所有计数器";
+"Drinks" = "饮料";
+"Feedback" = "反馈";
+"Get started!" = "开始使用！";
+"Give your Trivit a name" = "给您的计数器起个名字";
+"Got it." = "明白了。";
+"Green" = "绿色";
+"I am missing some things..." = "我觉得少了些东西...";
+"I don't get it." = "我不明白。";
+"I like what I see." = "我喜欢这个。";
+"I've seen better, I've seen worse." = "一般般。";
+"No" = "否";
+"Off" = "关";
+"On" = "开";
+"Open or close your new Trivit with a single tap" = "单击打开或关闭您的计数器";
+"Please finish editing the title first." = "请先完成标题编辑。";
+"Red" = "红色";
+"Remove all" = "全部删除";
+"Reset Trivit" = "重置计数器";
+"Reset all" = "全部重置";
+"Reset all Trivits" = "重置所有计数器";
+"Tap an image to rate:" = "点击图片评分：";
+"Tap the minus to decrease the count, hold long to reset" = "点击减号减少计数，长按重置";
+"Tap the pen to add a new Trivit" = "点击笔添加新计数器";
+"Tap to increase the count" = "点击增加计数";
+"This is the best app ever!" = "这是最好的应用！";
+"Tutorial" = "教程";
+"Vibration - %@" = "振动 - %@";
+"Went swimming this year" = "今年游泳次数";
+"Yes" = "是";
+"Your feedback (optional)" = "您的反馈（可选）";

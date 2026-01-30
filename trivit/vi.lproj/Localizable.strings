@@ -1,0 +1,93 @@
+/* App Name */
+"Trivit" = "Trivit";
+
+/* Navigation */
+"Settings" = "Cài đặt";
+"Done" = "Xong";
+
+/* Empty State */
+"No Trivits Yet" = "Chưa có bộ đếm nào";
+"Tap + to create your first tally counter" = "Nhấn + để tạo bộ đếm đầu tiên";
+
+/* Trivit Actions */
+"New Trivit" = "Bộ đếm mới";
+"Rename" = "Đổi tên";
+"Change Color" = "Đổi màu";
+"Reset Count" = "Đặt lại số đếm";
+"Delete" = "Xóa";
+"Title" = "Tiêu đề";
+
+/* Settings - Sections */
+"General" = "Chung";
+"Color Scheme" = "Bảng màu";
+"Sync Info" = "Thông tin đồng bộ";
+"About" = "Giới thiệu";
+"Data" = "Dữ liệu";
+
+/* Settings - General */
+"Haptic Feedback" = "Phản hồi xúc giác";
+"Palette" = "Bảng màu";
+
+/* Settings - Sync Info */
+"Trivits Synced" = "Bộ đếm đã đồng bộ";
+"Last Sync" = "Đồng bộ lần cuối";
+"Device" = "Thiết bị";
+
+/* Settings - About */
+"Version" = "Phiên bản";
+"Rate on App Store" = "Đánh giá trên App Store";
+"Send Feedback" = "Gửi phản hồi";
+
+/* Settings - Data */
+"Reset All Trivits" = "Đặt lại tất cả bộ đếm";
+
+/* Color Scheme Names */
+"Vibrant" = "Rực rỡ";
+"Pastel" = "Pastel";
+"Monochrome" = "Đơn sắc";
+"Ocean" = "Đại dương";
+"Sunset" = "Hoàng hôn";
+"Forest" = "Rừng";
+"Candy" = "Kẹo";
+"Earth" = "Đất";
+
+/* Legacy Strings */
+"Are you sure you want to delete all trivits?" = "Bạn có chắc muốn xóa tất cả bộ đếm?";
+"Are you sure you want to reset '%@'?" = "Bạn có chắc muốn đặt lại '%@'?";
+"Are you sure you want to reset all counts to 0?" = "Bạn có chắc muốn đặt lại tất cả về 0?";
+"Blue" = "Xanh dương";
+"Cannot add" = "Không thể thêm";
+"Color - %@" = "Màu - %@";
+"Days in prison" = "Ngày trong tù";
+"Default" = "Mặc định";
+"Delete all Trivits" = "Xóa tất cả bộ đếm";
+"Drinks" = "Đồ uống";
+"Feedback" = "Phản hồi";
+"Get started!" = "Bắt đầu!";
+"Give your Trivit a name" = "Đặt tên cho bộ đếm";
+"Got it." = "Đã hiểu.";
+"Green" = "Xanh lá";
+"I am missing some things..." = "Tôi thấy thiếu một số thứ...";
+"I don't get it." = "Tôi không hiểu.";
+"I like what I see." = "Tôi thích điều tôi thấy.";
+"I've seen better, I've seen worse." = "Tạm được.";
+"No" = "Không";
+"Off" = "Tắt";
+"On" = "Bật";
+"Open or close your new Trivit with a single tap" = "Nhấn một lần để mở hoặc đóng bộ đếm";
+"Please finish editing the title first." = "Vui lòng hoàn tất chỉnh sửa tiêu đề trước.";
+"Red" = "Đỏ";
+"Remove all" = "Xóa tất cả";
+"Reset Trivit" = "Đặt lại bộ đếm";
+"Reset all" = "Đặt lại tất cả";
+"Reset all Trivits" = "Đặt lại tất cả bộ đếm";
+"Tap an image to rate:" = "Nhấn vào hình để đánh giá:";
+"Tap the minus to decrease the count, hold long to reset" = "Nhấn dấu trừ để giảm, giữ lâu để đặt lại";
+"Tap the pen to add a new Trivit" = "Nhấn vào bút để thêm bộ đếm mới";
+"Tap to increase the count" = "Nhấn để tăng số đếm";
+"This is the best app ever!" = "Đây là ứng dụng tuyệt vời nhất!";
+"Tutorial" = "Hướng dẫn";
+"Vibration - %@" = "Rung - %@";
+"Went swimming this year" = "Bơi năm nay";
+"Yes" = "Có";
+"Your feedback (optional)" = "Phản hồi của bạn (tùy chọn)";
