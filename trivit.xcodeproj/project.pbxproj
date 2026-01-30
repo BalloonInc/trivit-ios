@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2BF55E58102048ADB6F20C2A /* TrivitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D3E60F3724B27BF178183 /* TrivitRepository.swift */; };
 		2F31C97537394F14B657E399 /* TrivitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0F18442924A47886B0E41 /* TrivitListView.swift */; };
-		6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */; };
 		WATCH001001 /* TrivitWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002001 /* TrivitWatchApp.swift */; };
 		WATCH001002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002002 /* ContentView.swift */; };
 		WATCH001003 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002003 /* TrivitRowView.swift */; };
@@ -21,11 +20,8 @@
 		WATCH001008 /* trivit Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
-		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
-		6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91601A0D10EA006F2F87 /* libz.dylib */; };
 		6C5C4B961A61579300C87401 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C4B981A61579300C87401 /* Localizable.strings */; };
 		6C5C4B9C1A61579400C87401 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C4B9E1A61579400C87401 /* InfoPlist.strings */; };
-		6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A6195B6F4E002A3F53 /* Main.storyboard */; };
 		6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C69C0A9195B6F4E002A3F53 /* Images.xcassets */; };
 		6C79EB0A1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
 		6C79EB0D1E1B13B0008350FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */; };
@@ -37,6 +33,11 @@
 		EB362C3CD06A446AAC4FFBDE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEC6BA344F84757A2FE226B /* SettingsView.swift */; };
 		EB3D4B137D954426A8474080 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */; };
 		F00D2A9FF0BB41EEAEDE4341 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653E9E2B68144D9809E8CCC /* TrivitColors.swift */; };
+		TEST0001 /* TrivitModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0001 /* TrivitModelTests.swift */; };
+		TEST0002 /* TrivitColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0002 /* TrivitColorsTests.swift */; };
+		TEST0003 /* TrivitRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0003 /* TrivitRepositoryTests.swift */; };
+		TEST0004 /* EasterEggsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0004 /* EasterEggsTests.swift */; };
+		TEST0005 /* SwiftDataIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0005 /* SwiftDataIntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,14 +82,9 @@
 		WATCH002006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
 		WATCH002007 /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivit.swift; sourceTree = "<group>"; };
 		6653E9E2B68144D9809E8CCC /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitColors.swift; path = Theme/TrivitColors.swift; sourceTree = "<group>"; };
-		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
-		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
-		6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits2.xcdatamodel; sourceTree = "<group>"; };
 		6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6C0A915A1A0D10BD006F2F87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6C0A915E1A0D10DD006F2F87 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		6C0A91601A0D10EA006F2F87 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6C0B1A5E1A9D03BD00C49D77 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C0B1A5F1A9D03BD00C49D77 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C0B1A601A9D03BD00C49D77 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -98,25 +94,9 @@
 		6C0B1A661A9D03ED00C49D77 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6C0B1A671A9D03ED00C49D77 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6C0B1A681A9D03EE00C49D77 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
-		6C11D3591A5200670024AAAA /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
-		6C11D35A1A5200670024AAAA /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
-		6C11D3621A5200FD0024AAAA /* Feedback+Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feedback+Mapping.h"; sourceTree = "<group>"; };
-		6C11D3631A5200FD0024AAAA /* Feedback+Mapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feedback+Mapping.m"; sourceTree = "<group>"; };
-		6C11D3651A521F490024AAAA /* SettingsIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsIcons.h; sourceTree = "<group>"; };
-		6C11D3661A521F490024AAAA /* SettingsIcons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsIcons.m; sourceTree = "<group>"; };
 		6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = trivit.entitlements; sourceTree = "<group>"; };
 		6C17595F1AA3BAA700A0CE0D /* TrivitWatchApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrivitWatchApp.entitlements; sourceTree = "<group>"; };
-		6C1C91B319FEF2DF00447874 /* TutChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutChildViewController.h; sourceTree = "<group>"; };
-		6C1C91B419FEF2DF00447874 /* TutChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutChildViewController.m; sourceTree = "<group>"; };
-		6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutMasterViewController.h; sourceTree = "<group>"; };
-		6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutMasterViewController.m; sourceTree = "<group>"; };
-		6C36CF491ACAB86700020384 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
-		6C36CF4A1ACAB86700020384 /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
-		6C41254B1A435FB800C2D4CA /* TallyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TallyModel.h; sourceTree = "<group>"; };
-		6C41254C1A435FB800C2D4CA /* TallyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TallyModel.m; sourceTree = "<group>"; };
 		6C4171A71A60813300CBC0CD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6C5742811A6C140700F2B72D /* cellBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cellBackground.h; path = ../cellBackground.h; sourceTree = "<group>"; };
-		6C5742821A6C140700F2B72D /* cellBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cellBackground.m; path = ../cellBackground.m; sourceTree = "<group>"; };
 		6C5C4B971A61579300C87401 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C5C4B991A61579300C87401 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		6C5C4B9D1A61579400C87401 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -127,9 +107,6 @@
 		6C5C4BA61A61605700C87401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C69C099195B6F4E002A3F53 /* trivit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trivit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C69C09D195B6F4E002A3F53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C69C09E195B6F4E002A3F53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C69C0A7195B6F4E002A3F53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C69C0A9195B6F4E002A3F53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trivitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,41 +116,25 @@
 		6C76974F1BC9BBBC00C0CEDC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C7697541BC9BBE500C0CEDC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C79EB091E1B13B0008350FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingButtonCell.h; sourceTree = "<group>"; };
-		6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingButtonCell.m; sourceTree = "<group>"; };
 		6C8263B01A5F29AC002A9941 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6C8263BC1A5F29B8002A9941 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6C8FBB4E1978610400C1D381 /* MainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainListViewController.h; sourceTree = "<group>"; };
-		6C8FBB4F1978610400C1D381 /* MainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainListViewController.m; sourceTree = "<group>"; };
-		6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrivitTableViewCell.h; sourceTree = "<group>"; };
-		6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrivitTableViewCell.m; sourceTree = "<group>"; };
-		6C9025BA1984588300BB11FC /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		6C9025BB1984588300BB11FC /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		6C9025BD198458A500BB11FC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		6C9025BE198458A500BB11FC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		6C923EB4198C645D00833188 /* trivits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = trivits.xcdatamodel; sourceTree = "<group>"; };
-		6C98EEAE1A4771A500E12E25 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
-		6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		6CA449391980D8E00049F34D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
-		6CA4493A1980D8E00049F34D /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 		6CBD73621FB0ECD700E31454 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6CCA7B941A60244000115A74 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6CCA7B981A60244C00115A74 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trivit Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CE4BBE81A1D609D005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6CE4BBE91A1D609D005E9BCD /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6CF1A23C195B762D00B83A6F /* Tally.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tally.h; sourceTree = "<group>"; };
-		6CF1A23D195B762D00B83A6F /* Tally.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tally.m; sourceTree = "<group>"; };
 		6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HapticsService.swift; path = Services/HapticsService.swift; sourceTree = "<group>"; };
 		960178E687454B60B630FE7F /* TrivitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitRowView.swift; path = Views/TrivitRowView.swift; sourceTree = "<group>"; };
 		C1257B60204E4CF2966F2FCD /* EasterEggs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasterEggs.swift; path = Utilities/EasterEggs.swift; sourceTree = "<group>"; };
 		D6734FAFC868495CB79E2C28 /* TrivitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitApp.swift; sourceTree = "<group>"; };
 		E80AFB5A5D0E40089867C69A /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Trivit.swift; path = Models/Trivit.swift; sourceTree = "<group>"; };
-		EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackManager.h; sourceTree = "<group>"; };
-		EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackManager.m; sourceTree = "<group>"; };
 		FEEC6BA344F84757A2FE226B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		TESTF0001 /* TrivitModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitModelTests.swift; sourceTree = "<group>"; };
+		TESTF0002 /* TrivitColorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColorsTests.swift; sourceTree = "<group>"; };
+		TESTF0003 /* TrivitRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitRepositoryTests.swift; sourceTree = "<group>"; };
+		TESTF0004 /* EasterEggsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggsTests.swift; sourceTree = "<group>"; };
+		TESTF0005 /* SwiftDataIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,8 +142,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C0A91611A0D10EA006F2F87 /* libz.dylib in Frameworks */,
-				6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */,
 				6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */,
 				6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */,
 			);
@@ -208,8 +167,6 @@
 		6C11D3681A521F520024AAAA /* bezierImages */ = {
 			isa = PBXGroup;
 			children = (
-				6C11D3651A521F490024AAAA /* SettingsIcons.h */,
-				6C11D3661A521F490024AAAA /* SettingsIcons.m */,
 			);
 			name = bezierImages;
 			sourceTree = "<group>";
@@ -217,12 +174,6 @@
 		6C1C91B219FEF2A700447874 /* tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				6C1C91B319FEF2DF00447874 /* TutChildViewController.h */,
-				6C1C91B419FEF2DF00447874 /* TutChildViewController.m */,
-				6C1C91B619FEF2FF00447874 /* TutMasterViewController.h */,
-				6C1C91B719FEF2FF00447874 /* TutMasterViewController.m */,
-				6C02C88D1A616DBE00547584 /* TutContainerViewController.h */,
-				6C02C88E1A616DBE00547584 /* TutContainerViewController.m */,
 			);
 			name = tutorial;
 			sourceTree = "<group>";
@@ -230,6 +181,7 @@
 		6C69C090195B6F4E002A3F53 = {
 			isa = PBXGroup;
 			children = (
+				TESTG0001 /* trivitTests */,
 				6C69C09B195B6F4E002A3F53 /* trivit */,
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
@@ -280,7 +232,6 @@
 				6C5C4B9E1A61579400C87401 /* InfoPlist.strings */,
 				6C5C4B981A61579300C87401 /* Localizable.strings */,
 				6C69C09D195B6F4E002A3F53 /* Info.plist */,
-				6C69C09E195B6F4E002A3F53 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -289,12 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				6C11D3681A521F520024AAAA /* bezierImages */,
-				6C9025BD198458A500BB11FC /* SettingsViewController.h */,
-				6C9025BE198458A500BB11FC /* SettingsViewController.m */,
-				6C7CE6341A4F6889004EE27D /* SettingButtonCell.h */,
-				6C7CE6351A4F6889004EE27D /* SettingButtonCell.m */,
-				6C98EEAE1A4771A500E12E25 /* FeedbackViewController.h */,
-				6C98EEAF1A4771A500E12E25 /* FeedbackViewController.m */,
 			);
 			name = "Settings view";
 			sourceTree = "<group>";
@@ -302,8 +247,6 @@
 		6C8E3C221A01AE2C0001616E /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				6C69C0A0195B6F4E002A3F53 /* AppDelegate.h */,
-				6C69C0A1195B6F4E002A3F53 /* AppDelegate.m */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -311,10 +254,6 @@
 		6C8E3C231A01AE5E0001616E /* Cells: TableView */ = {
 			isa = PBXGroup;
 			children = (
-				6C8FBB511978627F00C1D381 /* TrivitTableViewCell.h */,
-				6C8FBB521978627F00C1D381 /* TrivitTableViewCell.m */,
-				6C5742811A6C140700F2B72D /* cellBackground.h */,
-				6C5742821A6C140700F2B72D /* cellBackground.m */,
 			);
 			name = "Cells: TableView";
 			sourceTree = "<group>";
@@ -322,9 +261,6 @@
 		6C92EC061A06D3E100D2A8DC /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				6C69C0A6195B6F4E002A3F53 /* Main.storyboard */,
-				6C8FBB4E1978610400C1D381 /* MainListViewController.h */,
-				6C8FBB4F1978610400C1D381 /* MainListViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -332,12 +268,9 @@
 		6CE4BBD11A1D609C005E9BCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6C0A91601A0D10EA006F2F87 /* libz.dylib */,
-				6C0A915E1A0D10DD006F2F87 /* libc++.dylib */,
 				6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */,
 				6C0A915A1A0D10BD006F2F87 /* UIKit.framework */,
 				6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */,
-				6CE4BBD21A1D609C005E9BCD /* WatchKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -403,25 +336,20 @@
 		6CF1A23F195B765600B83A6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C36CF491ACAB86700020384 /* Version.h */,
-				6C36CF4A1ACAB86700020384 /* Version.m */,
-				6CF1A23C195B762D00B83A6F /* Tally.h */,
-				6CF1A23D195B762D00B83A6F /* Tally.m */,
-				6CA449391980D8E00049F34D /* Colors.h */,
-				6CA4493A1980D8E00049F34D /* Colors.m */,
-				6C41254B1A435FB800C2D4CA /* TallyModel.h */,
-				6C41254C1A435FB800C2D4CA /* TallyModel.m */,
-				6C9025BA1984588300BB11FC /* Settings.h */,
-				6C9025BB1984588300BB11FC /* Settings.m */,
-				6C923EB3198C645D00833188 /* trivits.xcdatamodeld */,
-				6C11D3591A5200670024AAAA /* Feedback.h */,
-				6C11D35A1A5200670024AAAA /* Feedback.m */,
-				6C11D3621A5200FD0024AAAA /* Feedback+Mapping.h */,
-				6C11D3631A5200FD0024AAAA /* Feedback+Mapping.m */,
-				EC7940CD1A40A8B8003A40C9 /* FeedbackManager.h */,
-				EC7940CE1A40A8B8003A40C9 /* FeedbackManager.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		TESTG0001 /* trivitTests */ = {
+			isa = PBXGroup;
+			children = (
+				TESTF0001 /* TrivitModelTests.swift */,
+				TESTF0002 /* TrivitColorsTests.swift */,
+				TESTF0003 /* TrivitRepositoryTests.swift */,
+				TESTF0004 /* EasterEggsTests.swift */,
+				TESTF0005 /* SwiftDataIntegrationTests.swift */,
+			);
+			path = trivitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -554,8 +482,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */,
-				6C69C0A8195B6F4E002A3F53 /* Main.storyboard in Resources */,
 				6C5C4B9C1A61579400C87401 /* InfoPlist.strings in Resources */,
 				6C5C4B961A61579300C87401 /* Localizable.strings in Resources */,
 				6C69C0AA195B6F4E002A3F53 /* Images.xcassets in Resources */,
@@ -616,6 +542,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				TEST0001 /* TrivitModelTests.swift in Sources */,
+				TEST0002 /* TrivitColorsTests.swift in Sources */,
+				TEST0003 /* TrivitRepositoryTests.swift in Sources */,
+				TEST0004 /* EasterEggsTests.swift in Sources */,
+				TEST0005 /* SwiftDataIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,20 +592,6 @@
 				6C76974A1BC9BBBC00C0CEDC /* es */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6C69C0A6195B6F4E002A3F53 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6C69C0A7195B6F4E002A3F53 /* Base */,
-				6C5C4B991A61579300C87401 /* ru */,
-				6C5C4BA01A61579F00C87401 /* nl */,
-				6C0B1A601A9D03BD00C49D77 /* fr */,
-				6C0B1A641A9D03DA00C49D77 /* ja */,
-				6C0B1A681A9D03EE00C49D77 /* zh-CN */,
-				6C7697491BC9BBBC00C0CEDC /* es */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6C8263B11A5F29AC002A9941 /* InfoPlist.strings */ = {
@@ -1009,17 +926,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6C923EB3198C645D00833188 /* trivits.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */,
-				6C923EB4198C645D00833188 /* trivits.xcdatamodel */,
-			);
-			currentVersion = 6C0908E51ACCAEE500F01033 /* trivits2.xcdatamodel */;
-			path = trivits.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 /* End XCVersionGroup section */
 	};
 	rootObject = 6C69C091195B6F4E002A3F53 /* Project object */;
