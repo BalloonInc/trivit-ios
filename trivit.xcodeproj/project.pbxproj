@@ -21,6 +21,7 @@
 		WATCH001006 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002006 /* TrivitColors.swift */; };
 		WATCH001009 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002007 /* Trivit.swift */; };
 		WATCH001007 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
+		WATCH001010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = WATCH002008 /* GoogleService-Info.plist */; };
 		WATCH001008 /* trivit Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
@@ -86,6 +87,7 @@
 		WATCH002005 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
 		WATCH002006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
 		WATCH002007 /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivit.swift; sourceTree = "<group>"; };
+		WATCH002008 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6653E9E2B68144D9809E8CCC /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitColors.swift; path = Theme/TrivitColors.swift; sourceTree = "<group>"; };
 		STAT002001 /* TallyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TallyEvent.swift; path = Models/TallyEvent.swift; sourceTree = "<group>"; };
 		STAT002002 /* StatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatisticsService.swift; path = Services/StatisticsService.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			children = (
 				6C8263B11A5F29AC002A9941 /* InfoPlist.strings */,
 				6CE4BBE81A1D609D005E9BCD /* Info.plist */,
+				WATCH002008 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				WATCH001007 /* Images.xcassets in Resources */,
+				WATCH001010 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

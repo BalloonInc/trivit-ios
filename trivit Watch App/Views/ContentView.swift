@@ -24,6 +24,26 @@ struct ContentView: View {
         .onAppear {
             syncService.startWatchConnectivity()
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    createNewTrivit()
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+    }
+
+    private func createNewTrivit() {
+        let randomColorIndex = Int.random(in: 0..<TrivitColors.colorCount)
+        let newTrivit = Trivit(
+            title: "Counter",
+            count: 0,
+            colorIndex: randomColorIndex
+        )
+        modelContext.insert(newTrivit)
+        try? modelContext.save()
     }
 
     private var emptyState: some View {
@@ -42,7 +62,7 @@ struct ContentView: View {
                 Text("No Counters")
                     .font(.system(size: 16, weight: .semibold))
 
-                Text("Create counters on your iPhone")
+                Text("Tap + to create a counter")
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

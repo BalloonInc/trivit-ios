@@ -27,7 +27,10 @@ final class AnalyticsService {
     /// Call this in AppDelegate.didFinishLaunching or App.init
     func configure() {
         #if canImport(FirebaseCore)
-        FirebaseApp.configure()
+        // Only configure if not already configured
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
         #endif
 
         #if DEBUG
