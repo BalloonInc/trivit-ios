@@ -7,9 +7,17 @@
 
 import SwiftUI
 import SwiftData
+#if canImport(FirebaseCore)
+import FirebaseCore
+#endif
 
 @main
 struct TrivitApp: App {
+    init() {
+        // Initialize Firebase Analytics & Crashlytics
+        AnalyticsService.shared.configure()
+    }
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([Trivit.self, TallyEvent.self])
 

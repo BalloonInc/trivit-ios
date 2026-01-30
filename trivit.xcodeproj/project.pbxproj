@@ -36,6 +36,7 @@
 		DDEB85484EFB49B2A88EDEB5 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960178E687454B60B630FE7F /* TrivitRowView.swift */; };
 		EB362C3CD06A446AAC4FFBDE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEC6BA344F84757A2FE226B /* SettingsView.swift */; };
 		EB3D4B137D954426A8474080 /* HapticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */; };
+		ANLY001001 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ANLY002001 /* AnalyticsService.swift */; };
 		F00D2A9FF0BB41EEAEDE4341 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6653E9E2B68144D9809E8CCC /* TrivitColors.swift */; };
 		TEST0001 /* TrivitModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0001 /* TrivitModelTests.swift */; };
 		TEST0002 /* TrivitColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TESTF0002 /* TrivitColorsTests.swift */; };
@@ -133,6 +134,7 @@
 		6CE4BBE81A1D609D005E9BCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HapticsService.swift; path = Services/HapticsService.swift; sourceTree = "<group>"; };
+		ANLY002001 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyticsService.swift; path = Services/AnalyticsService.swift; sourceTree = "<group>"; };
 		960178E687454B60B630FE7F /* TrivitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitRowView.swift; path = Views/TrivitRowView.swift; sourceTree = "<group>"; };
 		C1257B60204E4CF2966F2FCD /* EasterEggs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EasterEggs.swift; path = Utilities/EasterEggs.swift; sourceTree = "<group>"; };
 		D6734FAFC868495CB79E2C28 /* TrivitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitApp.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				STAT002003 /* StatisticsView.swift */,
 				STAT002004 /* HistoryView.swift */,
 				6D12F4D9B5384B66BEE67F05 /* HapticsService.swift */,
+				ANLY002001 /* AnalyticsService.swift */,
 				STAT002002 /* StatisticsService.swift */,
 				100D3E60F3724B27BF178183 /* TrivitRepository.swift */,
 				C1257B60204E4CF2966F2FCD /* EasterEggs.swift */,
@@ -534,6 +537,7 @@
 				STAT001003 /* StatisticsView.swift in Sources */,
 				STAT001004 /* HistoryView.swift in Sources */,
 				EB3D4B137D954426A8474080 /* HapticsService.swift in Sources */,
+				ANLY001001 /* AnalyticsService.swift in Sources */,
 				STAT001002 /* StatisticsService.swift in Sources */,
 				2BF55E58102048ADB6F20C2A /* TrivitRepository.swift in Sources */,
 				A37CBBE5467442D99DC8ECDF /* EasterEggs.swift in Sources */,
