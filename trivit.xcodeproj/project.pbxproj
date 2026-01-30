@@ -10,14 +10,14 @@
 		2BF55E58102048ADB6F20C2A /* TrivitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D3E60F3724B27BF178183 /* TrivitRepository.swift */; };
 		2F31C97537394F14B657E399 /* TrivitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0F18442924A47886B0E41 /* TrivitListView.swift */; };
 		6C09B8EA1BD8212700CA3D7E /* trivit.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 6C17594E1AA3BA5100A0CE0D /* trivit.entitlements */; };
-		WATCH001001 /* TrivitWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002001 /* TrivitWatchApp.swift */; };
-		WATCH001002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002002 /* ContentView.swift */; };
-		WATCH001003 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002003 /* TrivitRowView.swift */; };
-		WATCH001004 /* TrivitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002004 /* TrivitDetailView.swift */; };
-		WATCH001005 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002005 /* SyncService.swift */; };
-		WATCH001006 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002006 /* TrivitColors.swift */; };
-		WATCH001007 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
-		WATCH001008 /* trivit Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1A2B3C4D5E6F701100010001 /* TrivitWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020001 /* TrivitWatchApp.swift */; };
+		1A2B3C4D5E6F701100010002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020002 /* ContentView.swift */; };
+		1A2B3C4D5E6F701100010003 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020003 /* TrivitRowView.swift */; };
+		1A2B3C4D5E6F701100010004 /* TrivitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020004 /* TrivitDetailView.swift */; };
+		1A2B3C4D5E6F701100010005 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020005 /* SyncService.swift */; };
+		1A2B3C4D5E6F701100010006 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F702200020006 /* TrivitColors.swift */; };
+		1A2B3C4D5E6F701100010007 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
+		1A2B3C4D5E6F701100010008 /* trivit Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6C0A91591A0D10B4006F2F87 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A91581A0D10B4006F2F87 /* CoreTelephony.framework */; };
 		6C0A915D1A0D10CF006F2F87 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915C1A0D10CF006F2F87 /* SystemConfiguration.framework */; };
 		6C0A915F1A0D10DD006F2F87 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0A915E1A0D10DD006F2F87 /* libc++.dylib */; };
@@ -46,11 +46,11 @@
 			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
 			remoteInfo = trivit;
 		};
-		WATCH003001 /* PBXContainerItemProxy */ = {
+		1A2B3C4D5E6F703300030001 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = WATCH004001;
+			remoteGlobalIDString = 1A2B3C4D5E6F704400040001;
 			remoteInfo = "trivit Watch App";
 		};
 		6CCA04B41A93CCC4000BBDE9 /* PBXContainerItemProxy */ = {
@@ -80,13 +80,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		WATCH005001 /* Embed Watch Content */ = {
+		1A2B3C4D5E6F705500050001 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				WATCH001008 /* trivit Watch App.app in Embed Watch Content */,
+				1A2B3C4D5E6F701100010008 /* trivit Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,12 +96,12 @@
 /* Begin PBXFileReference section */
 		02F0F18442924A47886B0E41 /* TrivitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitListView.swift; path = Views/TrivitListView.swift; sourceTree = "<group>"; };
 		100D3E60F3724B27BF178183 /* TrivitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitRepository.swift; path = Repositories/TrivitRepository.swift; sourceTree = "<group>"; };
-		WATCH002001 /* TrivitWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitWatchApp.swift; sourceTree = "<group>"; };
-		WATCH002002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		WATCH002003 /* TrivitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitRowView.swift; sourceTree = "<group>"; };
-		WATCH002004 /* TrivitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitDetailView.swift; sourceTree = "<group>"; };
-		WATCH002005 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
-		WATCH002006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020001 /* TrivitWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitWatchApp.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020003 /* TrivitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitRowView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020004 /* TrivitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitDetailView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020005 /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F702200020006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
 		6653E9E2B68144D9809E8CCC /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitColors.swift; path = Theme/TrivitColors.swift; sourceTree = "<group>"; };
 		6C02C88D1A616DBE00547584 /* TutContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutContainerViewController.h; sourceTree = "<group>"; };
 		6C02C88E1A616DBE00547584 /* TutContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutContainerViewController.m; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		WATCH006001 /* Frameworks */ = {
+		1A2B3C4D5E6F706600060001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -388,39 +388,39 @@
 		6CE4BBE61A1D609D005E9BCD /* trivit Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				WATCH002001 /* TrivitWatchApp.swift */,
+				1A2B3C4D5E6F702200020001 /* TrivitWatchApp.swift */,
 				6C17595F1AA3BAA700A0CE0D /* TrivitWatchApp.entitlements */,
-				WATCH007001 /* Views */,
-				WATCH007002 /* Services */,
-				WATCH007003 /* Theme */,
+				1A2B3C4D5E6F707700070001 /* Views */,
+				1A2B3C4D5E6F707700070002 /* Services */,
+				1A2B3C4D5E6F707700070003 /* Theme */,
 				6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */,
 				6CE4BBE71A1D609D005E9BCD /* Supporting Files */,
 			);
 			path = "trivit Watch App";
 			sourceTree = "<group>";
 		};
-		WATCH007001 /* Views */ = {
+		1A2B3C4D5E6F707700070001 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				WATCH002002 /* ContentView.swift */,
-				WATCH002003 /* TrivitRowView.swift */,
-				WATCH002004 /* TrivitDetailView.swift */,
+				1A2B3C4D5E6F702200020002 /* ContentView.swift */,
+				1A2B3C4D5E6F702200020003 /* TrivitRowView.swift */,
+				1A2B3C4D5E6F702200020004 /* TrivitDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		WATCH007002 /* Services */ = {
+		1A2B3C4D5E6F707700070002 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				WATCH002005 /* SyncService.swift */,
+				1A2B3C4D5E6F702200020005 /* SyncService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		WATCH007003 /* Theme */ = {
+		1A2B3C4D5E6F707700070003 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				WATCH002006 /* TrivitColors.swift */,
+				1A2B3C4D5E6F702200020006 /* TrivitColors.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -486,25 +486,25 @@
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
 				6CCA04C61A93CCC5000BBDE9 /* Embed Frameworks */,
-				WATCH005001 /* Embed Watch Content */,
+				1A2B3C4D5E6F705500050001 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				WATCH008001 /* PBXTargetDependency */,
+				1A2B3C4D5E6F708800080001 /* PBXTargetDependency */,
 			);
 			name = trivit;
 			productName = trivit;
 			productReference = 6C69C099195B6F4E002A3F53 /* trivit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		WATCH004001 /* trivit Watch App */ = {
+		1A2B3C4D5E6F704400040001 /* trivit Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = WATCH009001 /* Build configuration list for PBXNativeTarget "trivit Watch App" */;
+			buildConfigurationList = 1A2B3C4D5E6F709900090001 /* Build configuration list for PBXNativeTarget "trivit Watch App" */;
 			buildPhases = (
-				WATCH006002 /* Sources */,
-				WATCH006001 /* Frameworks */,
-				WATCH006003 /* Resources */,
+				1A2B3C4D5E6F706600060002 /* Sources */,
+				1A2B3C4D5E6F706600060001 /* Frameworks */,
+				1A2B3C4D5E6F706600060003 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -606,7 +606,7 @@
 						DevelopmentTeam = N324UX8D9M;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
-					WATCH004001 = {
+					1A2B3C4D5E6F704400040001 = {
 						CreatedOnToolsVersion = 15.0;
 						DevelopmentTeam = N324UX8D9M;
 						ProvisioningStyle = Automatic;
@@ -639,7 +639,7 @@
 			projectRoot = "";
 			targets = (
 				6C69C098195B6F4E002A3F53 /* trivit */,
-				WATCH004001 /* trivit Watch App */,
+				1A2B3C4D5E6F704400040001 /* trivit Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -659,11 +659,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		WATCH006003 /* Resources */ = {
+		1A2B3C4D5E6F706600060003 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				WATCH001007 /* Images.xcassets in Resources */,
+				1A2B3C4D5E6F701100010007 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,16 +708,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		WATCH006002 /* Sources */ = {
+		1A2B3C4D5E6F706600060002 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				WATCH001001 /* TrivitWatchApp.swift in Sources */,
-				WATCH001002 /* ContentView.swift in Sources */,
-				WATCH001003 /* TrivitRowView.swift in Sources */,
-				WATCH001004 /* TrivitDetailView.swift in Sources */,
-				WATCH001005 /* SyncService.swift in Sources */,
-				WATCH001006 /* TrivitColors.swift in Sources */,
+				1A2B3C4D5E6F701100010001 /* TrivitWatchApp.swift in Sources */,
+				1A2B3C4D5E6F701100010002 /* ContentView.swift in Sources */,
+				1A2B3C4D5E6F701100010003 /* TrivitRowView.swift in Sources */,
+				1A2B3C4D5E6F701100010004 /* TrivitDetailView.swift in Sources */,
+				1A2B3C4D5E6F701100010005 /* SyncService.swift in Sources */,
+				1A2B3C4D5E6F701100010006 /* TrivitColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,10 +750,10 @@
 			target = 6C69C098195B6F4E002A3F53 /* trivit */;
 			targetProxy = 6C69C0B0195B6F4E002A3F53 /* PBXContainerItemProxy */;
 		};
-		WATCH008001 /* PBXTargetDependency */ = {
+		1A2B3C4D5E6F708800080001 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = WATCH004001 /* trivit Watch App */;
-			targetProxy = WATCH003001 /* PBXContainerItemProxy */;
+			target = 1A2B3C4D5E6F704400040001 /* trivit Watch App */;
+			targetProxy = 1A2B3C4D5E6F703300030001 /* PBXContainerItemProxy */;
 		};
 		6CCA04B51A93CCC4000BBDE9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1151,7 +1151,7 @@
 			};
 			name = Release;
 		};
-		WATCH010001 /* Debug */ = {
+		1A2B3C4D5E6F710000100001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1179,7 +1179,7 @@
 			};
 			name = Debug;
 		};
-		WATCH010002 /* Release */ = {
+		1A2B3C4D5E6F710000100002 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1255,11 +1255,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		WATCH009001 /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
+		1A2B3C4D5E6F709900090001 /* Build configuration list for PBXNativeTarget "trivit Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				WATCH010001 /* Debug */,
-				WATCH010002 /* Release */,
+				1A2B3C4D5E6F710000100001 /* Debug */,
+				1A2B3C4D5E6F710000100002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "WATCH004001"
+               BlueprintIdentifier = "1A2B3C4D5E6F704400040001"
                BuildableName = "trivit Watch App.app"
                BlueprintName = "trivit Watch App"
                ReferencedContainer = "container:trivit.xcodeproj">
