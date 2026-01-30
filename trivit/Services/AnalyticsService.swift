@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FirebaseCore)
+import FirebaseCore
+#endif
 #if canImport(FirebaseAnalytics)
 import FirebaseAnalytics
 #endif

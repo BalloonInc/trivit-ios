@@ -388,6 +388,10 @@
 				WATCH008001 /* PBXTargetDependency */,
 			);
 			name = trivit;
+			packageProductDependencies = (
+				FIREBASE_ANALYTICS /* FirebaseAnalytics */,
+				FIREBASE_CRASHLYTICS /* FirebaseCrashlytics */,
+			);
 			productName = trivit;
 			productReference = 6C69C099195B6F4E002A3F53 /* trivit.app */;
 			productType = "com.apple.product-type.application";
@@ -482,6 +486,9 @@
 			);
 			mainGroup = 6C69C090195B6F4E002A3F53;
 			productRefGroup = 6C69C09A195B6F4E002A3F53 /* Products */;
+			packageReferences = (
+				FIREBASE_PKG_REF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -947,6 +954,30 @@
 
 /* Begin XCVersionGroup section */
 /* End XCVersionGroup section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FIREBASE_PKG_REF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FIREBASE_ANALYTICS /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE_PKG_REF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		FIREBASE_CRASHLYTICS /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE_PKG_REF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6C69C091195B6F4E002A3F53 /* Project object */;
 }
