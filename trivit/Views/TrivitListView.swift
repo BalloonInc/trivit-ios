@@ -12,6 +12,7 @@ struct TrivitListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
     @State private var showingSettings = false
+    @State private var scrollToBottom = false
 
     var body: some View {
         NavigationStack {
@@ -55,17 +56,33 @@ struct TrivitListView: View {
     }
 
     private var trivitList: some View {
-        ScrollView {
-            LazyVStack(spacing: 1) {
-                ForEach(trivits) { trivit in
-                    TrivitRowView(
-                        trivit: trivit,
-                        onDelete: { deleteTrivit(trivit) }
-                    )
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(spacing: 1) {
+                    ForEach(trivits) { trivit in
+                        TrivitRowView(
+                            trivit: trivit,
+                            onDelete: { deleteTrivit(trivit) }
+                        )
+                        .id(trivit.id)
+                    }
+
+                    // Bottom anchor for scrolling
+                    Color.clear
+                        .frame(height: 1)
+                        .id("bottom")
+                }
+            }
+            .background(Color(.systemGray5))
+            .onChange(of: scrollToBottom) { _, shouldScroll in
+                if shouldScroll {
+                    withAnimation {
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
+                    scrollToBottom = false
                 }
             }
         }
-        .background(Color(.systemGray5))
     }
 
     @ToolbarContentBuilder
@@ -99,6 +116,11 @@ struct TrivitListView: View {
             )
             modelContext.insert(newTrivit)
             HapticsService.shared.impact(.medium)
+
+            // Scroll to bottom after a short delay to allow the view to update
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                scrollToBottom = true
+            }
         }
     }
 
