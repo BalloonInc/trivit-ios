@@ -8,13 +8,21 @@
 import SwiftUI
 import SwiftData
 
+/// Represents events aggregated by minute
+struct MinuteAggregate: Identifiable {
+    let id = UUID()
+    let minute: Date
+    let delta: Int
+    let events: [TallyEvent]
+}
+
 struct HistoryView: View {
     let trivit: Trivit
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State private var events: [TallyEvent] = []
     @State private var showingDeleteConfirmation = false
-    @State private var eventToDelete: TallyEvent?
+    @State private var aggregateToDelete: MinuteAggregate?
 
     private var themeColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
@@ -24,13 +32,31 @@ struct HistoryView: View {
         StatisticsService(modelContext: modelContext)
     }
 
-    private var groupedEvents: [(date: Date, events: [TallyEvent])] {
+    /// Group events by day, then aggregate by minute within each day
+    private var groupedByDay: [(date: Date, aggregates: [MinuteAggregate])] {
         let calendar = Calendar.current
-        let grouped = Dictionary(grouping: events) { event in
+
+        // First group by day
+        let byDay = Dictionary(grouping: events) { event in
             calendar.startOfDay(for: event.timestamp)
         }
-        return grouped.map { (date: $0.key, events: $0.value) }
-            .sorted { $0.date > $1.date }
+
+        return byDay.map { (day, dayEvents) in
+            // Within each day, group by minute
+            let byMinute = Dictionary(grouping: dayEvents) { event in
+                calendar.date(from: calendar.dateComponents([.year, .month, .day, .hour, .minute], from: event.timestamp))!
+            }
+
+            let aggregates = byMinute.map { (minute, minuteEvents) in
+                MinuteAggregate(
+                    minute: minute,
+                    delta: minuteEvents.reduce(0) { $0 + $1.delta },
+                    events: minuteEvents.sorted { $0.timestamp > $1.timestamp }
+                )
+            }.sorted { $0.minute > $1.minute }
+
+            return (date: day, aggregates: aggregates)
+        }.sorted { $0.date > $1.date }
     }
 
     var body: some View {
@@ -56,20 +82,24 @@ struct HistoryView: View {
                 loadEvents()
             }
             .confirmationDialog(
-                "Delete Event",
+                "Delete Events",
                 isPresented: $showingDeleteConfirmation,
                 titleVisibility: .visible
             ) {
                 Button("Delete", role: .destructive) {
-                    if let event = eventToDelete {
-                        deleteEvent(event)
+                    if let aggregate = aggregateToDelete {
+                        deleteAggregate(aggregate)
                     }
                 }
                 Button("Cancel", role: .cancel) {
-                    eventToDelete = nil
+                    aggregateToDelete = nil
                 }
             } message: {
-                Text("This will also adjust the trivit count. This action cannot be undone.")
+                if let aggregate = aggregateToDelete {
+                    Text("Delete \(aggregate.events.count) event(s) (\(aggregate.delta > 0 ? "+" : "")\(aggregate.delta))? This will adjust the trivit count.")
+                } else {
+                    Text("This will also adjust the trivit count. This action cannot be undone.")
+                }
             }
         }
     }
@@ -95,13 +125,13 @@ struct HistoryView: View {
 
     private var eventList: some View {
         List {
-            ForEach(groupedEvents, id: \.date) { group in
+            ForEach(groupedByDay, id: \.date) { group in
                 Section {
-                    ForEach(group.events) { event in
-                        EventRow(event: event, color: themeColor)
+                    ForEach(group.aggregates) { aggregate in
+                        AggregateRow(aggregate: aggregate, color: themeColor)
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button(role: .destructive) {
-                                    eventToDelete = event
+                                    aggregateToDelete = aggregate
                                     showingDeleteConfirmation = true
                                 } label: {
                                     Label("Delete", systemImage: "trash")
@@ -141,12 +171,14 @@ struct HistoryView: View {
         events = statisticsService.fetchEvents(for: trivit.id)
     }
 
-    private func deleteEvent(_ event: TallyEvent) {
-        // Adjust the trivit count
-        trivit.count -= event.delta
+    private func deleteAggregate(_ aggregate: MinuteAggregate) {
+        // Adjust the trivit count by the total delta
+        trivit.count -= aggregate.delta
 
-        // Delete the event
-        statisticsService.deleteEvent(event)
+        // Delete all events in this aggregate
+        for event in aggregate.events {
+            statisticsService.deleteEvent(event)
+        }
 
         // Reload events
         loadEvents()
@@ -155,16 +187,24 @@ struct HistoryView: View {
     }
 }
 
-// MARK: - Event Row
+// MARK: - Aggregate Row
 
-struct EventRow: View {
-    let event: TallyEvent
+struct AggregateRow: View {
+    let aggregate: MinuteAggregate
     let color: Color
 
     private var timeFormatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
+        formatter.dateFormat = "HH:mm"
         return formatter
+    }
+
+    private var isPositive: Bool {
+        aggregate.delta > 0
+    }
+
+    private var isNeutral: Bool {
+        aggregate.delta == 0
     }
 
     var body: some View {
@@ -172,21 +212,21 @@ struct EventRow: View {
             // Delta indicator
             ZStack {
                 Circle()
-                    .fill(event.delta > 0 ? color : Color.gray.opacity(0.3))
+                    .fill(isNeutral ? Color.gray.opacity(0.3) : (isPositive ? color : Color.red.opacity(0.7)))
                     .frame(width: 36, height: 36)
 
-                Image(systemName: event.delta > 0 ? "plus" : "minus")
+                Image(systemName: isNeutral ? "equal" : (isPositive ? "plus" : "minus"))
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.white)
             }
 
-            // Time and delta
+            // Time and event count
             VStack(alignment: .leading, spacing: 2) {
-                Text(timeFormatter.string(from: event.timestamp))
+                Text(timeFormatter.string(from: aggregate.minute))
                     .font(.body)
                     .foregroundColor(.primary)
 
-                Text(event.delta > 0 ? "Increment" : "Decrement")
+                Text("\(aggregate.events.count) event\(aggregate.events.count == 1 ? "" : "s")")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -194,9 +234,9 @@ struct EventRow: View {
             Spacer()
 
             // Delta value
-            Text(event.delta > 0 ? "+1" : "-1")
-                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                .foregroundColor(event.delta > 0 ? color : .gray)
+            Text(aggregate.delta >= 0 ? "+\(aggregate.delta)" : "\(aggregate.delta)")
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .foregroundColor(isNeutral ? .gray : (isPositive ? color : .red))
         }
         .padding(.vertical, 4)
     }
