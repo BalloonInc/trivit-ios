@@ -18,6 +18,7 @@
 		WATCH001003 /* TrivitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002003 /* TrivitRowView.swift */; };
 		WATCH001004 /* TrivitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002004 /* TrivitDetailView.swift */; };
 		WATCH001005 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002005 /* SyncService.swift */; };
+		WATCH001011 /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002009 /* WatchSettingsView.swift */; };
 		WATCH001006 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002006 /* TrivitColors.swift */; };
 		WATCH001009 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002007 /* Trivit.swift */; };
 		WATCH001007 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4BBEB1A1D609D005E9BCD /* Images.xcassets */; };
@@ -88,6 +89,7 @@
 		WATCH002006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
 		WATCH002007 /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivit.swift; sourceTree = "<group>"; };
 		WATCH002008 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		WATCH002009 /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
 		6653E9E2B68144D9809E8CCC /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrivitColors.swift; path = Theme/TrivitColors.swift; sourceTree = "<group>"; };
 		STAT002001 /* TallyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TallyEvent.swift; path = Models/TallyEvent.swift; sourceTree = "<group>"; };
 		STAT002002 /* StatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StatisticsService.swift; path = Services/StatisticsService.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				WATCH002002 /* ContentView.swift */,
 				WATCH002003 /* TrivitRowView.swift */,
 				WATCH002004 /* TrivitDetailView.swift */,
+				WATCH002009 /* WatchSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				WATCH001004 /* TrivitDetailView.swift in Sources */,
 				WATCH001005 /* SyncService.swift in Sources */,
 				WATCH001006 /* TrivitColors.swift in Sources */,
+				WATCH001011 /* WatchSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

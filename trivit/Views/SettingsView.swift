@@ -101,6 +101,26 @@ struct SettingsView: View {
                     }
                 }
 
+                Section("Open Source") {
+                    Link(destination: URL(string: "https://github.com/BalloonInc/trivit-ios")!) {
+                        HStack {
+                            Text("Source Code")
+                            Spacer()
+                            Image(systemName: "chevron.left.forwardslash.chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    Link(destination: URL(string: "https://github.com/BalloonInc/trivit-ios/issues/new?labels=translation&title=Translation+issue")!) {
+                        HStack {
+                            Text("Report Translation Issue")
+                            Spacer()
+                            Image(systemName: "globe")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
                 Section("Data") {
                     Button(role: .destructive) {
                         // Reset all data

@@ -12,35 +12,51 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
     @StateObject private var syncService = SyncService.shared
+    @State private var showingSettings = false
 
     var body: some View {
         NavigationStack {
-            if trivits.isEmpty {
-                emptyState
-            } else {
-                trivitList
+            Group {
+                if trivits.isEmpty {
+                    emptyState
+                } else {
+                    trivitList
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showingSettings = true
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        createNewTrivit()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
             }
         }
         .onAppear {
             syncService.startWatchConnectivity()
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    createNewTrivit()
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
+        .sheet(isPresented: $showingSettings) {
+            WatchSettingsView()
         }
     }
 
     private func createNewTrivit() {
-        let randomColorIndex = Int.random(in: 0..<TrivitColors.colorCount)
+        // Use last trivit's color + 1, cycling through colors
+        let lastColorIndex = trivits.last?.colorIndex ?? -1
+        let nextColorIndex = (lastColorIndex + 1) % TrivitColors.colorCount
+
         let newTrivit = Trivit(
             title: "Counter",
             count: 0,
-            colorIndex: randomColorIndex
+            colorIndex: nextColorIndex
         )
         modelContext.insert(newTrivit)
         try? modelContext.save()

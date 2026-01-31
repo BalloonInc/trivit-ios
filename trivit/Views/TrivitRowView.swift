@@ -62,28 +62,38 @@ struct TrivitRowView: View {
                             }
                     }
 
-                    // Tally marks inline - only show when not collapsed
-                    if trivit.count > 0 && !trivit.isCollapsed {
+                    // Tally marks - always show, but limit height when collapsed
+                    if trivit.count > 0 {
                         TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
+                            .frame(maxHeight: trivit.isCollapsed ? 20 : nil)
+                            .clipped()
                     }
                 }
 
                 Spacer()
 
+                // Collapse/expand indicator when there are many tallies
+                if trivit.count > 10 {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            trivit.isCollapsed.toggle()
+                        }
+                    } label: {
+                        Image(systemName: trivit.isCollapsed ? "chevron.down" : "chevron.up")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+                    .buttonStyle(.plain)
+                }
+
                 // Count display - smaller and respects setting
                 if showTotalCount {
                     Text("\(trivit.count)")
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white.opacity(trivit.isCollapsed ? 0.5 : 1.0))
+                        .foregroundColor(.white)
                         .frame(width: 40, height: 40)
                         .background(Color.white.opacity(0.15))
                         .clipShape(Circle())
-                } else if trivit.isCollapsed {
-                    // When count is hidden but collapsed, show faint count
-                    Text("\(trivit.count)")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white.opacity(0.3))
-                        .frame(width: 40, height: 40)
                 }
             }
             .padding(.horizontal, 16)

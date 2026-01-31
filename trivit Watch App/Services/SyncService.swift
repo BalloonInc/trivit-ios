@@ -41,7 +41,21 @@ class SyncService: NSObject, ObservableObject {
     }
     
     // MARK: - Data Sync
-    
+
+    func requestSync() {
+        guard session.isReachable else {
+            print("iPhone not reachable for sync")
+            return
+        }
+
+        let message: [String: Any] = ["type": "requestSync"]
+        session.sendMessage(message, replyHandler: { response in
+            print("Sync response: \(response)")
+        }) { error in
+            print("Sync request failed: \(error.localizedDescription)")
+        }
+    }
+
     func syncTrivitUpdate(_ trivit: Trivit) {
         guard session.isReachable else {
             // Store for later sync using App Groups
