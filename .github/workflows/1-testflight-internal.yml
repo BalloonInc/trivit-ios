@@ -102,11 +102,40 @@ jobs:
 
         echo "Uploading $IPA_PATH to App Store Connect..."
 
-        xcrun altool --upload-app \
+        OUTPUT=$(xcrun altool --upload-app \
           --type ios \
           --file "$IPA_PATH" \
           --apiKey "${{ secrets.APP_STORE_CONNECT_KEY_ID }}" \
-          --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
+          --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}" 2>&1) || true
+
+        echo "$OUTPUT"
+
+        if echo "$OUTPUT" | grep -q "Cannot determine the Apple ID"; then
+          echo ""
+          echo "=========================================="
+          echo "ERROR: App not found in App Store Connect"
+          echo "=========================================="
+          echo ""
+          echo "The app 'com.wouterdevriendt.trivit' does not exist in App Store Connect."
+          echo ""
+          echo "To fix this, create the app manually:"
+          echo "1. Go to https://appstoreconnect.apple.com"
+          echo "2. Click 'My Apps' → '+' → 'New App'"
+          echo "3. Platform: iOS"
+          echo "4. Name: Trivit - Tally Counter"
+          echo "5. Bundle ID: com.wouterdevriendt.trivit"
+          echo "6. SKU: trivit-tally-counter"
+          echo "7. Save and re-run this workflow"
+          echo ""
+          exit 1
+        fi
+
+        if echo "$OUTPUT" | grep -qi "error"; then
+          echo "Upload failed with error"
+          exit 1
+        fi
+
+        echo "Upload completed successfully!"
 
     - name: Install PyJWT
       run: pip3 install --break-system-packages PyJWT cryptography
