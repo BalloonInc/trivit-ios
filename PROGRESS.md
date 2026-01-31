@@ -13,17 +13,24 @@
 - [x] Add iCloud entitlements for CloudKit container
 - [x] App runs successfully on iOS and watchOS simulators
 
-### BLOCKED: TestFlight Upload
+### BLOCKED: TestFlight Upload (User Action Required)
 **Action Required**: Create app in App Store Connect
-1. Go to https://appstoreconnect.apple.com
-2. Click "+" to create new app
-3. Select "iOS" platform
-4. Name: "Trivit - Tally Counter"
-5. Bundle ID: com.wouterdevriendt.trivit
-6. SKU: trivit-tally-counter
-7. Once created, re-run TestFlight workflow
 
-Error: `Cannot determine the Apple ID from Bundle ID 'com.wouterdevriendt.trivit'`
+The app builds successfully but cannot be uploaded to TestFlight because
+the app doesn't exist in App Store Connect yet. Create it manually:
+
+1. Go to https://appstoreconnect.apple.com
+2. Click "My Apps" → "+" → "New App"
+3. Select platform: **iOS**
+4. Name: **Trivit - Tally Counter**
+5. Bundle ID: **com.wouterdevriendt.trivit** (select from dropdown)
+6. SKU: **trivit-tally-counter**
+7. Primary Language: **English (U.S.)**
+8. Click **Create**
+
+Once created, run: `gh workflow run 227871014 --repo BalloonInc/trivit-ios`
+
+Note: Cleaned up 10 excess development certificates via API.
 
 #### Phase 1: SwiftUI Modernization (Jan 28, 2026) ✅
 - [x] Remove all Objective-C code (~40,000 lines deleted)
