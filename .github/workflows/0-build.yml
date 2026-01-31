@@ -54,7 +54,7 @@ jobs:
 
         if [ "${{ env.USE_SELF_HOSTED }}" != "true" ]; then
           echo "Self-hosted disabled"
-          echo "runner=macos-15" >> $GITHUB_OUTPUT
+          echo "runner=macos-26" >> $GITHUB_OUTPUT
           echo "runner-label=github-hosted" >> $GITHUB_OUTPUT
           exit 0
         fi
@@ -70,7 +70,7 @@ jobs:
           echo "⚠️ No self-hosted runners available"
           if [ "${{ env.ENABLE_FALLBACK }}" == "true" ]; then
             echo "Falling back to GitHub-hosted runner"
-            echo "runner=macos-15" >> $GITHUB_OUTPUT
+            echo "runner=macos-26" >> $GITHUB_OUTPUT
             echo "runner-label=github-hosted-fallback" >> $GITHUB_OUTPUT
           else
             echo "runner=self-hosted" >> $GITHUB_OUTPUT
@@ -81,7 +81,7 @@ jobs:
   build:
     name: Build & Archive (${{ needs.runner-strategy.outputs.runner-label }})
     needs: runner-strategy
-    runs-on: ${{ needs.runner-strategy.outputs.runner == 'self-hosted' && fromJSON('["self-hosted", "macOS", "ARM64"]') || 'macos-15' }}
+    runs-on: ${{ needs.runner-strategy.outputs.runner == 'self-hosted' && fromJSON('["self-hosted", "macOS", "ARM64"]') || 'macos-26' }}
     timeout-minutes: 30
     outputs:
       build_number: ${{ steps.version.outputs.build }}
