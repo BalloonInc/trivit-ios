@@ -11,7 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
-    @StateObject private var syncService = SyncService.shared
+    @EnvironmentObject var syncService: SyncService
     @State private var showingSettings = false
 
     var body: some View {
@@ -40,11 +40,9 @@ struct ContentView: View {
                 }
             }
         }
-        .onAppear {
-            syncService.startWatchConnectivity()
-        }
         .sheet(isPresented: $showingSettings) {
             WatchSettingsView()
+                .environmentObject(syncService)
         }
     }
 
@@ -53,6 +51,7 @@ struct ContentView: View {
         let lastColorIndex = trivits.last?.colorIndex ?? -1
         let nextColorIndex = (lastColorIndex + 1) % TrivitColors.colorCount
 
+        // Create locally and sync to iPhone
         let newTrivit = Trivit(
             title: "Counter",
             count: 0,
@@ -60,6 +59,9 @@ struct ContentView: View {
         )
         modelContext.insert(newTrivit)
         try? modelContext.save()
+
+        // Sync to iPhone
+        syncService.syncTrivitUpdate(newTrivit)
     }
 
     private var emptyState: some View {
@@ -93,6 +95,7 @@ struct ContentView: View {
                 ForEach(trivits) { trivit in
                     NavigationLink {
                         TrivitDetailView(trivit: trivit)
+                            .environmentObject(syncService)
                     } label: {
                         TrivitRowView(trivit: trivit)
                     }

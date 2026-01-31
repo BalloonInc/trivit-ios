@@ -10,7 +10,7 @@ import WatchKit
 
 struct TrivitDetailView: View {
     let trivit: Trivit
-    @StateObject private var syncService = SyncService.shared
+    @EnvironmentObject var syncService: SyncService
     @State private var showResetConfirmation = false
 
     private var themeColor: Color {

@@ -12,7 +12,7 @@ struct WatchSettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var trivits: [Trivit]
-    @StateObject private var syncService = SyncService.shared
+    @EnvironmentObject var syncService: SyncService
 
     var body: some View {
         NavigationStack {

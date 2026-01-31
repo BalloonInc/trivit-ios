@@ -13,6 +13,7 @@ struct TrivitListView: View {
     @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
     @State private var showingSettings = false
     @State private var scrollToBottom = false
+    @State private var expandedTrivitId: UUID? = nil
 
     var body: some View {
         NavigationStack {
@@ -62,6 +63,8 @@ struct TrivitListView: View {
                     ForEach(trivits) { trivit in
                         TrivitRowView(
                             trivit: trivit,
+                            isExpanded: expandedTrivitId == trivit.id,
+                            onExpand: { expandedTrivitId = trivit.id },
                             onDelete: { deleteTrivit(trivit) }
                         )
                         .id(trivit.id)

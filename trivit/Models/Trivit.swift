@@ -10,12 +10,12 @@ import SwiftData
 
 @Model
 final class Trivit: Equatable {
-    var id: UUID
-    var title: String
-    var count: Int
-    var colorIndex: Int
-    var isCollapsed: Bool
-    var createdAt: Date
+    var id: UUID = UUID()
+    var title: String = "New Trivit"
+    var count: Int = 0
+    var colorIndex: Int = 0
+    var isCollapsed: Bool = true
+    var createdAt: Date = Date()
 
     init(
         id: UUID = UUID(),

@@ -18,6 +18,8 @@ struct TrivitRowView: View {
     @State private var showingHistory = false
     @FocusState private var isTitleFocused: Bool
 
+    let isExpanded: Bool
+    let onExpand: () -> Void
     let onDelete: () -> Void
 
     private var backgroundColor: Color {
@@ -62,29 +64,15 @@ struct TrivitRowView: View {
                             }
                     }
 
-                    // Tally marks - always show, but limit height when collapsed
+                    // Tally marks - always show, but limit height when collapsed (top-aligned)
                     if trivit.count > 0 {
                         TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
-                            .frame(maxHeight: trivit.isCollapsed ? 20 : nil)
+                            .frame(maxHeight: isExpanded ? nil : 20, alignment: .top)
                             .clipped()
                     }
                 }
 
                 Spacer()
-
-                // Collapse/expand indicator when there are many tallies
-                if trivit.count > 10 {
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            trivit.isCollapsed.toggle()
-                        }
-                    } label: {
-                        Image(systemName: trivit.isCollapsed ? "chevron.down" : "chevron.up")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(.white.opacity(0.6))
-                    }
-                    .buttonStyle(.plain)
-                }
 
                 // Count display - smaller and respects setting
                 if showTotalCount {
@@ -126,11 +114,27 @@ struct TrivitRowView: View {
             .onTapGesture {
                 guard !isEditing else { return }
                 trivit.increment(in: modelContext)
+                onExpand()  // Expand this row when tapping to add tally
                 HapticsService.shared.impact(.light)
             }
         }
         .frame(minHeight: 70)
         .clipped()
+        .overlay(alignment: .bottomTrailing) {
+            // Triangular expand trigger that overlaps into next cell
+            if trivit.count > 10 && !isExpanded {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        onExpand()
+                    }
+                } label: {
+                    ExpandTriangleView(color: backgroundColor)
+                }
+                .buttonStyle(.plain)
+                .offset(y: 12)  // Overlap into next cell
+            }
+        }
+        .zIndex(isExpanded ? 0 : 1)  // Collapsed rows show triangle on top
         .contextMenu {
             Button {
                 showingStatistics = true
@@ -189,6 +193,39 @@ struct TrivitRowView: View {
         .sheet(isPresented: $showingHistory) {
             HistoryView(trivit: trivit)
         }
+    }
+}
+
+// MARK: - Expand Triangle
+struct ExpandTriangleView: View {
+    let color: Color
+
+    var body: some View {
+        ZStack {
+            // Triangle shape pointing down
+            Triangle()
+                .fill(color)
+                .frame(width: 40, height: 24)
+
+            // Chevron icon inside the triangle
+            Image(systemName: "chevron.down")
+                .font(.system(size: 10, weight: .bold))
+                .foregroundColor(.white.opacity(0.8))
+                .offset(y: 4)
+        }
+        .frame(width: 50, height: 30)
+        .contentShape(Rectangle())
+    }
+}
+
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
 
@@ -355,26 +392,38 @@ struct ChineseTallyGroupView: View {
         VStack(spacing: 0) {
             TrivitRowView(
                 trivit: Trivit(title: "Drinks", count: 5, colorIndex: 0),
+                isExpanded: false,
+                onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
                 trivit: Trivit(title: "Days without smoking", count: 3, colorIndex: 1),
+                isExpanded: false,
+                onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
                 trivit: Trivit(title: "Went swimming this year", count: 8, colorIndex: 3),
+                isExpanded: false,
+                onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
                 trivit: Trivit(title: "Cups of coffee this year", count: 47, colorIndex: 5),
+                isExpanded: true,
+                onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
                 trivit: Trivit(title: "_Chinese tally test", count: 12, colorIndex: 2),
+                isExpanded: false,
+                onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
                 trivit: Trivit(title: "_Many Chinese tallies", count: 53, colorIndex: 4),
+                isExpanded: false,
+                onExpand: {},
                 onDelete: {}
             )
         }

@@ -10,10 +10,10 @@ import SwiftData
 
 @Model
 final class TallyEvent {
-    var id: UUID
-    var trivitId: UUID
-    var timestamp: Date
-    var delta: Int  // +1 for increment, -1 for decrement
+    var id: UUID = UUID()
+    var trivitId: UUID = UUID()
+    var timestamp: Date = Date()
+    var delta: Int = 0  // +1 for increment, -1 for decrement
 
     init(
         id: UUID = UUID(),
