@@ -23,25 +23,78 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-  actions: read
-
+# Runner Configuration - Easy switches
 env:
+  USE_SELF_HOSTED: 'true'
+  ENABLE_FALLBACK: 'true'
   SCHEME: 'trivit'
   WORKSPACE_PATH: 'trivit.xcworkspace'
   APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
   TEAM_ID: 'N324UX8D9M'
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
+  # Check runner availability
+  runner-strategy:
+    name: Check Runner Availability
+    runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.check.outputs.runner }}
+      runner-label: ${{ steps.check.outputs.runner-label }}
+    steps:
+    - name: Check self-hosted runner availability
+      id: check
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Configuration: USE_SELF_HOSTED=${{ env.USE_SELF_HOSTED }}, ENABLE_FALLBACK=${{ env.ENABLE_FALLBACK }}"
+
+        if [ "${{ env.USE_SELF_HOSTED }}" != "true" ]; then
+          echo "Self-hosted disabled"
+          echo "runner=macos-15" >> $GITHUB_OUTPUT
+          echo "runner-label=github-hosted" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
+        echo "Checking for self-hosted runners..."
+        RUNNERS=$(gh api repos/${{ github.repository }}/actions/runners --jq '.runners[] | select(.status=="online") | select(.labels[].name=="macOS" or .labels[].name=="self-hosted") | .name' 2>/dev/null || echo "")
+
+        if [ -n "$RUNNERS" ]; then
+          echo "✅ Found online self-hosted runner(s): $RUNNERS"
+          echo "runner=self-hosted" >> $GITHUB_OUTPUT
+          echo "runner-label=self-hosted" >> $GITHUB_OUTPUT
+        else
+          echo "⚠️ No self-hosted runners available"
+          if [ "${{ env.ENABLE_FALLBACK }}" == "true" ]; then
+            echo "Falling back to GitHub-hosted runner"
+            echo "runner=macos-15" >> $GITHUB_OUTPUT
+            echo "runner-label=github-hosted-fallback" >> $GITHUB_OUTPUT
+          else
+            echo "runner=self-hosted" >> $GITHUB_OUTPUT
+            echo "runner-label=self-hosted-required" >> $GITHUB_OUTPUT
+          fi
+        fi
+
   build:
-    name: Build & Archive
-    runs-on: macos-15
+    name: Build & Archive (${{ needs.runner-strategy.outputs.runner-label }})
+    needs: runner-strategy
+    runs-on: ${{ needs.runner-strategy.outputs.runner == 'self-hosted' && fromJSON('["self-hosted", "macOS", "ARM64"]') || 'macos-15' }}
+    timeout-minutes: 30
     outputs:
       build_number: ${{ steps.version.outputs.build }}
       version: ${{ steps.version.outputs.version }}
 
     steps:
+    - name: Runner Info
+      run: |
+        echo "🖥️ Runner: ${{ needs.runner-strategy.outputs.runner-label }}"
+        echo "OS: $(uname -s) $(uname -r)"
+        echo "Arch: $(uname -m)"
+        echo "Host: $(hostname)"
+
     - name: Checkout code
       uses: actions/checkout@v4
       with:
@@ -49,22 +102,32 @@ jobs:
 
     - name: Select Xcode
       run: |
-        # Use latest Xcode available
-        sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+        # Find and select Xcode (prefer Xcode 26.x, fall back to latest)
+        XCODE_PATH=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+        if [ -z "$XCODE_PATH" ]; then
+          XCODE_PATH=$(ls -d /Applications/Xcode*.app 2>/dev/null | sort -V | tail -1)
+        fi
+        if [ -z "$XCODE_PATH" ]; then
+          XCODE_PATH="/Applications/Xcode.app"
+        fi
+
+        if [ -d "$XCODE_PATH" ]; then
+          echo "Using Xcode: $XCODE_PATH"
+          sudo xcode-select -s "$XCODE_PATH/Contents/Developer" || true
+        else
+          echo "Using default Xcode"
+        fi
         xcodebuild -version
 
     - name: Calculate build number
       id: version
       run: |
-        # Use commit count as build number for deterministic builds
         BUILD=$(git rev-list --count HEAD)
         VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" trivit/Info.plist)
 
-        # Update plist with calculated build number
         /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" trivit/Info.plist 2>/dev/null || \
         /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" trivit/Info.plist
 
-        # Update watch app build number and version to match iOS app
         if [ -f "trivit Watch App/Info.plist" ]; then
           /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD" "trivit Watch App/Info.plist" 2>/dev/null || \
           /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string $BUILD" "trivit Watch App/Info.plist"
@@ -173,6 +236,7 @@ jobs:
     - name: Summary
       run: |
         echo "## Build Successful" >> $GITHUB_STEP_SUMMARY
+        echo "- **Runner**: ${{ needs.runner-strategy.outputs.runner-label }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Version**: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.build }})" >> $GITHUB_STEP_SUMMARY
         echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Watch App**: Included" >> $GITHUB_STEP_SUMMARY
