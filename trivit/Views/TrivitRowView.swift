@@ -82,11 +82,15 @@ struct TrivitRowView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(backgroundColor)
             .offset(x: dragOffset)
-            .gesture(
-                DragGesture()
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 20, coordinateSpace: .local)
                     .onChanged { value in
-                        // Only allow left swipe (negative translation)
-                        if value.translation.width < 0 {
+                        // Only allow horizontal left swipe - ignore vertical scrolling
+                        let horizontalAmount = abs(value.translation.width)
+                        let verticalAmount = abs(value.translation.height)
+
+                        // Only activate if horizontal movement is dominant
+                        if horizontalAmount > verticalAmount && value.translation.width < 0 {
                             dragOffset = value.translation.width
                         }
                     }
