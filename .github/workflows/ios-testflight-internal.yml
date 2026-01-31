@@ -1,0 +1,19 @@
+name: TestFlight Internal
+
+# Uses shared workflow from ios-infra for TestFlight internal distribution
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Build workflow run ID (leave empty for latest)'
+        required: false
+        type: string
+
+jobs:
+  upload:
+    uses: wdvr/ios-infra/.github/workflows/ios-testflight-internal.yml@main
+    with:
+      bundle_id: com.wouterdevriendt.trivit
+      run_id: ${{ inputs.run_id }}
+    secrets: inherit
