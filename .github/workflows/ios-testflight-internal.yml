@@ -10,10 +10,15 @@ on:
         required: false
         type: string
 
+permissions:
+  actions: read
+  contents: write
+
 jobs:
   upload:
     uses: wdvr/ios-infra/.github/workflows/ios-testflight-internal.yml@main
     with:
       bundle_id: com.wouterdevriendt.trivit
       run_id: ${{ inputs.run_id }}
+      build_workflow_name: ios-build.yml
     secrets: inherit

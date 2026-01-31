@@ -15,6 +15,10 @@ on:
         type: string
         default: 'Bug fixes and improvements.'
 
+permissions:
+  actions: read
+  contents: write
+
 jobs:
   submit:
     uses: wdvr/ios-infra/.github/workflows/ios-testflight-external.yml@main

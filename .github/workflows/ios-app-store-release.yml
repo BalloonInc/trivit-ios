@@ -29,6 +29,10 @@ on:
         type: boolean
         default: false
 
+permissions:
+  actions: read
+  contents: write
+
 jobs:
   release:
     uses: wdvr/ios-infra/.github/workflows/ios-app-store-release.yml@main
