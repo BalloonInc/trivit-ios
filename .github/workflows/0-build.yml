@@ -25,7 +25,7 @@ concurrency:
 
 # Runner Configuration - Easy switches
 env:
-  USE_SELF_HOSTED: 'true'
+  USE_SELF_HOSTED: 'false'
   ENABLE_FALLBACK: 'true'
   SCHEME: 'trivit'
   WORKSPACE_PATH: 'trivit.xcworkspace'

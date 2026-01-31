@@ -1,8 +1,29 @@
 # Trivit iOS - Modernization Progress
 
-## Current Status: UI Polish & Feature Implementation 🚧
+## Current Status: CloudKit & Watch Sync Complete, TestFlight Pending 🚧
 
 ### Completed Tasks
+
+#### Phase 2.5: Sync & Device Support (Jan 30, 2026) ✅
+- [x] Enable CloudKit sync for iPhone <-> iPad data sharing
+- [x] Add WatchSyncService for iPhone <-> Watch real-time sync
+- [x] Update SwiftData models with property-level defaults for CloudKit compatibility
+- [x] Add expand triangle trigger for collapsed tallies with >10 counts
+- [x] Fix top-aligned tally display when collapsed
+- [x] Add iCloud entitlements for CloudKit container
+- [x] App runs successfully on iOS and watchOS simulators
+
+### BLOCKED: TestFlight Upload
+**Action Required**: Create app in App Store Connect
+1. Go to https://appstoreconnect.apple.com
+2. Click "+" to create new app
+3. Select "iOS" platform
+4. Name: "Trivit - Tally Counter"
+5. Bundle ID: com.wouterdevriendt.trivit
+6. SKU: trivit-tally-counter
+7. Once created, re-run TestFlight workflow
+
+Error: `Cannot determine the Apple ID from Bundle ID 'com.wouterdevriendt.trivit'`
 
 #### Phase 1: SwiftUI Modernization (Jan 28, 2026) ✅
 - [x] Remove all Objective-C code (~40,000 lines deleted)
@@ -67,9 +88,10 @@
 - [ ] Share count via Messages/Social
 - [ ] Export to CSV
 
-#### Data & Sync
-- [ ] iCloud sync via CloudKit
-- [ ] Multi-device sync status
+#### Data & Sync ✅
+- [x] iCloud sync via CloudKit (iPhone <-> iPad)
+- [x] WatchConnectivity sync (iPhone <-> Watch)
+- [ ] Multi-device sync status UI
 - [ ] Backup/restore functionality
 
 #### Other Features
