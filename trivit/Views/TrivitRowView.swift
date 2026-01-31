@@ -66,9 +66,19 @@ struct TrivitRowView: View {
 
                     // Tally marks - always show, but limit height when collapsed (top-aligned)
                     if trivit.count > 0 {
-                        TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
-                            .frame(maxHeight: isExpanded ? nil : 20, alignment: .top)
-                            .clipped()
+                        ZStack(alignment: .bottomTrailing) {
+                            TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
+                                .frame(maxHeight: isExpanded ? nil : 20, alignment: .top)
+                                .clipped()
+
+                            // Show "..." when content is truncated (more than fits in one row)
+                            if !isExpanded && trivit.count > 10 {
+                                Text("...")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(.white.opacity(0.7))
+                                    .padding(.trailing, 4)
+                            }
+                        }
                     }
                 }
 
@@ -119,7 +129,7 @@ struct TrivitRowView: View {
             }
         }
         .frame(minHeight: 70)
-        .clipped()
+        .contentShape(Rectangle())  // Ensure entire frame is tappable
         .overlay(alignment: .bottomTrailing) {
             // Triangular expand trigger that overlaps into next cell
             if trivit.count > 10 && !isExpanded {
@@ -127,14 +137,15 @@ struct TrivitRowView: View {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         onExpand()
                     }
+                    HapticsService.shared.impact(.light)
                 } label: {
                     ExpandTriangleView(color: backgroundColor)
                 }
                 .buttonStyle(.plain)
-                .offset(y: 12)  // Overlap into next cell
+                .offset(y: 20)  // Overlap more into next cell
             }
         }
-        .zIndex(isExpanded ? 0 : 1)  // Collapsed rows show triangle on top
+        .zIndex(isExpanded ? 0 : 10)  // Collapsed rows show triangle on top of next cell
         .contextMenu {
             Button {
                 showingStatistics = true
@@ -201,20 +212,11 @@ struct ExpandTriangleView: View {
     let color: Color
 
     var body: some View {
-        ZStack {
-            // Triangle shape pointing down
-            Triangle()
-                .fill(color)
-                .frame(width: 40, height: 24)
-
-            // Chevron icon inside the triangle
-            Image(systemName: "chevron.down")
-                .font(.system(size: 10, weight: .bold))
-                .foregroundColor(.white.opacity(0.8))
-                .offset(y: 4)
-        }
-        .frame(width: 50, height: 30)
-        .contentShape(Rectangle())
+        // Solid triangle pointing down - no icon inside
+        Triangle()
+            .fill(color.opacity(0.9))
+            .frame(width: 60, height: 30)
+            .contentShape(Rectangle())
     }
 }
 
