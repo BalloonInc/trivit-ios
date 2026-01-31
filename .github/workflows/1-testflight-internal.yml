@@ -1,0 +1,260 @@
+name: "1. TestFlight Internal"
+
+# WF1: Manual internal TestFlight deployment
+# Downloads IPA artifact from build workflow and uploads to TestFlight
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Build workflow run ID (leave empty for latest)'
+        required: false
+        type: string
+
+concurrency:
+  group: testflight-internal
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: read
+
+env:
+  APP_BUNDLE_ID: 'com.wouterdevriendt.trivit'
+
+jobs:
+  upload-to-testflight:
+    name: Upload to TestFlight Internal
+    runs-on: macos-26
+    outputs:
+      build_number: ${{ steps.artifact.outputs.build }}
+      version: ${{ steps.artifact.outputs.version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Find latest build artifact
+      id: find-artifact
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        if [ -n "${{ github.event.inputs.run_id }}" ]; then
+          RUN_ID="${{ github.event.inputs.run_id }}"
+        else
+          # Get latest successful build workflow run
+          RUN_ID=$(gh run list --workflow="0-build.yml" --status=success --limit=1 --json databaseId --jq '.[0].databaseId')
+        fi
+
+        if [ -z "$RUN_ID" ]; then
+          echo "ERROR: No successful build found"
+          exit 1
+        fi
+
+        echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
+        echo "Using build from run: $RUN_ID"
+
+    - name: Download IPA artifact
+      id: artifact
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        RUN_ID="${{ steps.find-artifact.outputs.run_id }}"
+        mkdir -p $RUNNER_TEMP/Download
+
+        # List artifacts from the run
+        ARTIFACT_NAME=$(gh api repos/${{ github.repository }}/actions/runs/$RUN_ID/artifacts --jq '.artifacts[] | select(.name | startswith("ipa-")) | .name' | head -1)
+
+        if [ -z "$ARTIFACT_NAME" ]; then
+          echo "ERROR: No IPA artifact found in run $RUN_ID"
+          exit 1
+        fi
+
+        echo "Downloading artifact: $ARTIFACT_NAME"
+        gh run download $RUN_ID --name "$ARTIFACT_NAME" --dir $RUNNER_TEMP/Download
+
+        # Extract version and build from artifact name (format: ipa-VERSION-BUILD)
+        VERSION=$(echo "$ARTIFACT_NAME" | sed 's/ipa-\(.*\)-[0-9]*$/\1/')
+        BUILD=$(echo "$ARTIFACT_NAME" | sed 's/ipa-.*-\([0-9]*\)$/\1/')
+
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "build=$BUILD" >> $GITHUB_OUTPUT
+        echo "Downloaded version $VERSION build $BUILD"
+
+    - name: Setup App Store Connect API Key
+      run: |
+        mkdir -p $RUNNER_TEMP/private_keys
+        echo "${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}" | tr -d '\r' > $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+        chmod 600 $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_KEY_ID }}.p8
+
+    - name: Upload to App Store Connect
+      env:
+        API_PRIVATE_KEYS_DIR: ${{ runner.temp }}/private_keys
+      run: |
+        IPA_PATH=$(find $RUNNER_TEMP/Download -name "*.ipa" | head -1)
+
+        if [ -z "$IPA_PATH" ]; then
+          echo "ERROR: No IPA file found"
+          exit 1
+        fi
+
+        echo "Uploading $IPA_PATH to App Store Connect..."
+
+        OUTPUT=$(xcrun altool --upload-app \
+          --type ios \
+          --file "$IPA_PATH" \
+          --apiKey "${{ secrets.APP_STORE_CONNECT_KEY_ID }}" \
+          --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}" 2>&1) || true
+
+        echo "$OUTPUT"
+
+        if echo "$OUTPUT" | grep -q "Cannot determine the Apple ID"; then
+          echo ""
+          echo "=========================================="
+          echo "ERROR: App not found in App Store Connect"
+          echo "=========================================="
+          echo ""
+          echo "The app 'com.wouterdevriendt.trivit' does not exist in App Store Connect."
+          echo ""
+          echo "To fix this, create the app manually:"
+          echo "1. Go to https://appstoreconnect.apple.com"
+          echo "2. Click 'My Apps' → '+' → 'New App'"
+          echo "3. Platform: iOS"
+          echo "4. Name: Trivit - Tally Counter"
+          echo "5. Bundle ID: com.wouterdevriendt.trivit"
+          echo "6. SKU: trivit-tally-counter"
+          echo "7. Save and re-run this workflow"
+          echo ""
+          exit 1
+        fi
+
+        if echo "$OUTPUT" | grep -qi "error"; then
+          echo "Upload failed with error"
+          exit 1
+        fi
+
+        echo "Upload completed successfully!"
+
+    - name: Install PyJWT
+      run: pip3 install --break-system-packages PyJWT cryptography
+
+    - name: Wait for processing & distribute
+      env:
+        APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        RUNNER_TEMP: ${{ runner.temp }}
+      run: |
+        JWT=$(python3 -c "import jwt,time,os;k=os.environ['APP_STORE_CONNECT_KEY_ID'];i=os.environ['APP_STORE_CONNECT_ISSUER_ID'];t=os.environ['RUNNER_TEMP'];print(jwt.encode({'iss':i,'iat':int(time.time()),'exp':int(time.time())+1200,'aud':'appstoreconnect-v1'},open(f'{t}/private_keys/AuthKey_{k}.p8').read(),algorithm='ES256',headers={'kid':k}))")
+
+        BUILD="${{ steps.artifact.outputs.build }}"
+
+        # Get app ID
+        APP_RESPONSE=$(curl -g -s -H "Authorization: Bearer $JWT" \
+          "https://api.appstoreconnect.apple.com/v1/apps?filter[bundleId]=${{ env.APP_BUNDLE_ID }}")
+        APP_ID=$(echo "$APP_RESPONSE" | python3 -c "import sys,json; print(json.load(sys.stdin)['data'][0]['id'])" 2>/dev/null)
+        echo "App ID: $APP_ID"
+
+        # Wait for build to be processed
+        echo "Waiting for build $BUILD to be processed..."
+        for i in {1..40}; do
+          BUILDS_RESPONSE=$(curl -g -s -H "Authorization: Bearer $JWT" \
+            "https://api.appstoreconnect.apple.com/v1/builds?filter[app]=$APP_ID&filter[version]=$BUILD")
+
+          BUILD_ID=$(echo "$BUILDS_RESPONSE" | python3 -c "
+        import sys, json
+        data = json.load(sys.stdin)
+        for build in data.get('data', []):
+          if build.get('attributes', {}).get('version') == '$BUILD':
+            print(build['id'])
+            break
+        " 2>/dev/null)
+
+          if [ -n "$BUILD_ID" ]; then
+            STATE=$(echo "$BUILDS_RESPONSE" | python3 -c "
+        import sys, json
+        for build in json.load(sys.stdin).get('data', []):
+          if build['id'] == '$BUILD_ID':
+            print(build.get('attributes', {}).get('processingState', 'UNKNOWN'))
+        " 2>/dev/null)
+
+            echo "Build $BUILD_ID state: $STATE"
+            if [ "$STATE" = "VALID" ]; then
+              break
+            fi
+          fi
+          echo "Waiting... (attempt $i/40)"
+          sleep 30
+        done
+
+        if [ -z "$BUILD_ID" ]; then
+          echo "Build not found after waiting"
+          exit 1
+        fi
+
+        # Set export compliance
+        curl -g -s -X PATCH \
+          -H "Authorization: Bearer $JWT" \
+          -H "Content-Type: application/json" \
+          -d "{\"data\":{\"type\":\"builds\",\"id\":\"$BUILD_ID\",\"attributes\":{\"usesNonExemptEncryption\":false}}}" \
+          "https://api.appstoreconnect.apple.com/v1/builds/$BUILD_ID"
+
+        # Add to internal beta groups
+        GROUPS_RESPONSE=$(curl -g -s -H "Authorization: Bearer $JWT" \
+          "https://api.appstoreconnect.apple.com/v1/apps/$APP_ID/betaGroups")
+
+        echo "$GROUPS_RESPONSE" | python3 -c "
+        import sys, json
+        for group in json.load(sys.stdin).get('data', []):
+          if group.get('attributes', {}).get('isInternalGroup', False):
+            print(group['id'])
+        " 2>/dev/null | while read -r GROUP_ID; do
+          echo "Adding build to internal group: $GROUP_ID"
+          curl -g -s -X POST \
+            -H "Authorization: Bearer $JWT" \
+            -H "Content-Type: application/json" \
+            -d "{\"data\":[{\"type\":\"builds\",\"id\":\"$BUILD_ID\"}]}" \
+            "https://api.appstoreconnect.apple.com/v1/betaGroups/$GROUP_ID/relationships/builds"
+        done
+
+        echo "Internal TestFlight distribution complete!"
+
+    - name: Create Git Tag
+      run: |
+        BUILD="${{ steps.artifact.outputs.build }}"
+        TAG="internal_build_$BUILD"
+
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Check if tag already exists
+        if git rev-parse "$TAG" >/dev/null 2>&1; then
+          echo "Tag $TAG already exists, skipping"
+        else
+          git tag -a "$TAG" -m "Internal TestFlight build $BUILD
+
+        Version: ${{ steps.artifact.outputs.version }}
+        Distributed to internal testers.
+
+        Triggered by: ${{ github.actor }}"
+
+          git push origin "$TAG"
+          echo "Created tag: $TAG"
+        fi
+
+    - name: Summary
+      run: |
+        echo "## Internal TestFlight Build" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: ${{ steps.artifact.outputs.version }} (${{ steps.artifact.outputs.build }})" >> $GITHUB_STEP_SUMMARY
+        echo "- **Git Tag**: internal_build_${{ steps.artifact.outputs.build }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Source Run**: ${{ steps.find-artifact.outputs.run_id }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: Distributed to internal testers" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "Run **2. TestFlight External** workflow to submit for external beta review." >> $GITHUB_STEP_SUMMARY
+
+    - name: Cleanup
+      if: always()
+      run: |
+        rm -rf $RUNNER_TEMP/private_keys $RUNNER_TEMP/Download
