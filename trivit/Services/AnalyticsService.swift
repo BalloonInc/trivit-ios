@@ -33,11 +33,9 @@ final class AnalyticsService {
         }
         #endif
 
-        #if DEBUG
-        // Disable analytics in debug builds
+        // Enable analytics (including debug builds for testing)
         #if canImport(FirebaseAnalytics)
-        Analytics.setAnalyticsCollectionEnabled(false)
-        #endif
+        Analytics.setAnalyticsCollectionEnabled(true)
         #endif
     }
 
