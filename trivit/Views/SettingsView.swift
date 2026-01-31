@@ -26,6 +26,7 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trivits: [Trivit]
     @AppStorage("enableHaptics") private var enableHaptics = true
+    @AppStorage("showTotalCount") private var showTotalCount = true
     @AppStorage("colorScheme") private var selectedColorScheme = ColorScheme.vibrant.rawValue
 
     var body: some View {
@@ -33,6 +34,7 @@ struct SettingsView: View {
             List {
                 Section("General") {
                     Toggle("Haptic Feedback", isOn: $enableHaptics)
+                    Toggle("Show Total Count", isOn: $showTotalCount)
                 }
 
                 Section("Color Scheme") {

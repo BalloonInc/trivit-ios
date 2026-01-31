@@ -11,6 +11,7 @@ import SwiftData
 struct TrivitRowView: View {
     @Bindable var trivit: Trivit
     @Environment(\.modelContext) private var modelContext
+    @AppStorage("showTotalCount") private var showTotalCount = true
     @State private var isEditing = false
     @State private var dragOffset: CGFloat = 0
     @State private var showingStatistics = false
@@ -61,21 +62,29 @@ struct TrivitRowView: View {
                             }
                     }
 
-                    // Tally marks inline
-                    if trivit.count > 0 {
+                    // Tally marks inline - only show when not collapsed
+                    if trivit.count > 0 && !trivit.isCollapsed {
                         TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
                     }
                 }
 
                 Spacer()
 
-                // Count display in circle
-                Text("\(trivit.count)")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .frame(width: 50, height: 50)
-                    .background(Color.white.opacity(0.2))
-                    .clipShape(Circle())
+                // Count display - smaller and respects setting
+                if showTotalCount {
+                    Text("\(trivit.count)")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(trivit.isCollapsed ? 0.5 : 1.0))
+                        .frame(width: 40, height: 40)
+                        .background(Color.white.opacity(0.15))
+                        .clipShape(Circle())
+                } else if trivit.isCollapsed {
+                    // When count is hidden but collapsed, show faint count
+                    Text("\(trivit.count)")
+                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.3))
+                        .frame(width: 40, height: 40)
+                }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
@@ -138,6 +147,15 @@ struct TrivitRowView: View {
                 trivit.colorIndex = (trivit.colorIndex + 1) % TrivitColors.colorCount
             } label: {
                 Label("Change Color", systemImage: "paintpalette")
+            }
+
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    trivit.isCollapsed.toggle()
+                }
+            } label: {
+                Label(trivit.isCollapsed ? "Show Tallies" : "Hide Tallies",
+                      systemImage: trivit.isCollapsed ? "eye" : "eye.slash")
             }
 
             Button {

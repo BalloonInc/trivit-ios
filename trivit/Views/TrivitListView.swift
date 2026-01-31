@@ -106,9 +106,9 @@ struct TrivitListView: View {
 
     private func addTrivit() {
         withAnimation {
-            // Find the highest colorIndex currently in use and assign the next one in sequence
-            let maxColorIndex = trivits.map(\.colorIndex).max() ?? -1
-            let nextColorIndex = (maxColorIndex + 1) % TrivitColors.colorCount
+            // Use the last created trivit's color + 1, cycling through colors
+            let lastColorIndex = trivits.last?.colorIndex ?? -1
+            let nextColorIndex = (lastColorIndex + 1) % TrivitColors.colorCount
 
             let newTrivit = Trivit(
                 title: "New Trivit",
