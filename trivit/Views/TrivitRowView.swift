@@ -2,7 +2,7 @@
 //  TrivitRowView.swift
 //  Trivit
 //
-//  A single tally counter row - matching original flat design
+//  A single tally counter row - matching original flat design with two-tone layout
 //
 
 import SwiftUI
@@ -11,7 +11,6 @@ import SwiftData
 struct TrivitRowView: View {
     @Bindable var trivit: Trivit
     @Environment(\.modelContext) private var modelContext
-    @AppStorage("showTotalCount") private var showTotalCount = true
     @State private var isEditing = false
     @State private var dragOffset: CGFloat = 0
     @State private var showingStatistics = false
@@ -24,6 +23,16 @@ struct TrivitRowView: View {
 
     private var backgroundColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
+    }
+
+    // Darker shade for title bar
+    private var titleBackgroundColor: Color {
+        backgroundColor.opacity(0.85)
+    }
+
+    // Lighter shade for tally area
+    private var tallyBackgroundColor: Color {
+        backgroundColor.opacity(0.65)
     }
 
     private let decrementThreshold: CGFloat = -60
@@ -42,10 +51,10 @@ struct TrivitRowView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(backgroundColor.opacity(0.8))
 
-            // Main content - tappable for increment
-            HStack(spacing: 12) {
-                // Title and tally marks
-                VStack(alignment: .leading, spacing: 4) {
+            // Main content
+            VStack(spacing: 0) {
+                // Title bar (darker) - always visible
+                HStack {
                     if isEditing {
                         TextField("Title", text: $trivit.title)
                             .font(.system(size: 17, weight: .medium))
@@ -64,49 +73,61 @@ struct TrivitRowView: View {
                             }
                     }
 
-                    // Tally marks - always show, but limit height when collapsed (top-aligned)
-                    if trivit.count > 0 {
-                        ZStack(alignment: .bottomTrailing) {
-                            TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
-                                .frame(maxHeight: isExpanded ? nil : 20, alignment: .top)
-                                .clipped()
+                    Spacer()
 
-                            // Show "..." when content is truncated (more than fits in one row)
-                            if !isExpanded && trivit.count > 10 {
-                                Text("...")
-                                    .font(.system(size: 14, weight: .bold))
-                                    .foregroundColor(.white.opacity(0.7))
-                                    .padding(.trailing, 4)
-                            }
-                        }
-                    }
-                }
-
-                Spacer()
-
-                // Count display - smaller and respects setting
-                if showTotalCount {
+                    // Count badge - always visible
                     Text("\(trivit.count)")
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.15))
-                        .clipShape(Circle())
+                        .foregroundColor(backgroundColor)
+                        .frame(width: 44, height: 32)
+                        .background(Color.white.opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(titleBackgroundColor)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard !isEditing else { return }
+                    trivit.increment(in: modelContext)
+                    HapticsService.shared.impact(.light)
+                }
+
+                // Tally area (lighter) - only when expanded and has tallies
+                if isExpanded && trivit.count > 0 {
+                    VStack(spacing: 0) {
+                        // Triangle indicator pointing down from title
+                        HStack {
+                            Spacer()
+                            Triangle()
+                                .fill(titleBackgroundColor)
+                                .frame(width: 24, height: 12)
+                            Spacer()
+                        }
+                        .background(tallyBackgroundColor)
+
+                        // Tally marks
+                        HStack {
+                            TallyMarksView(count: trivit.count, useChinese: trivit.title.hasPrefix("_"))
+                            Spacer()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                    }
+                    .background(tallyBackgroundColor)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        trivit.increment(in: modelContext)
+                        HapticsService.shared.impact(.light)
+                    }
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(backgroundColor)
             .offset(x: dragOffset)
             .simultaneousGesture(
                 DragGesture(minimumDistance: 20, coordinateSpace: .local)
                     .onChanged { value in
-                        // Only allow horizontal left swipe - ignore vertical scrolling
                         let horizontalAmount = abs(value.translation.width)
                         let verticalAmount = abs(value.translation.height)
-
-                        // Only activate if horizontal movement is dominant
                         if horizontalAmount > verticalAmount && value.translation.width < 0 {
                             dragOffset = value.translation.width
                         }
@@ -121,31 +142,8 @@ struct TrivitRowView: View {
                         }
                     }
             )
-            .onTapGesture {
-                guard !isEditing else { return }
-                trivit.increment(in: modelContext)
-                onExpand()  // Expand this row when tapping to add tally
-                HapticsService.shared.impact(.light)
-            }
         }
-        .frame(minHeight: 70)
-        .contentShape(Rectangle())  // Ensure entire frame is tappable
-        .overlay(alignment: .bottomTrailing) {
-            // Triangular expand trigger that overlaps into next cell
-            if trivit.count > 10 && !isExpanded {
-                Button {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        onExpand()
-                    }
-                    HapticsService.shared.impact(.light)
-                } label: {
-                    ExpandTriangleView(color: backgroundColor)
-                }
-                .buttonStyle(.plain)
-                .offset(y: 20)  // Overlap more into next cell
-            }
-        }
-        .zIndex(isExpanded ? 0 : 10)  // Collapsed rows show triangle on top of next cell
+        .contentShape(Rectangle())
         .contextMenu {
             Button {
                 showingStatistics = true
@@ -176,11 +174,11 @@ struct TrivitRowView: View {
 
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    trivit.isCollapsed.toggle()
+                    onExpand()
                 }
             } label: {
-                Label(trivit.isCollapsed ? "Show Tallies" : "Hide Tallies",
-                      systemImage: trivit.isCollapsed ? "eye" : "eye.slash")
+                Label(isExpanded ? "Collapse" : "Expand",
+                      systemImage: isExpanded ? "chevron.up" : "chevron.down")
             }
 
             Button {
@@ -207,19 +205,7 @@ struct TrivitRowView: View {
     }
 }
 
-// MARK: - Expand Triangle
-struct ExpandTriangleView: View {
-    let color: Color
-
-    var body: some View {
-        // Solid triangle pointing down - no icon inside
-        Triangle()
-            .fill(color.opacity(0.9))
-            .frame(width: 60, height: 30)
-            .contentShape(Rectangle())
-    }
-}
-
+// MARK: - Triangle Shape
 struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -290,7 +276,7 @@ struct WesternTallyGroupView: View {
                 }
             }
 
-            // Draw the diagonal strike-through for the 5th mark (bottom-left to top-right)
+            // Draw the diagonal strike-through for the 5th mark
             if count == 5 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
@@ -338,46 +324,31 @@ struct ChineseTallyGroupView: View {
     let strokes: Int
 
     var body: some View {
-        // The character 正 is drawn stroke by stroke:
-        // 1: Top horizontal line
-        // 2: Left vertical line going down from the top horizontal
-        // 3: Short horizontal in the middle (extending right from vertical)
-        // 4: Right vertical line
-        // 5: Bottom horizontal line completing the character
         ZStack {
-            // Stroke 1: Top horizontal line
             if strokes >= 1 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 14, height: 2)
                     .offset(y: -7)
             }
-
-            // Stroke 2: Left vertical (from top horizontal going down)
             if strokes >= 2 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 2, height: 16)
                     .offset(x: -5, y: 0)
             }
-
-            // Stroke 3: Middle horizontal (connecting from vertical, going right)
             if strokes >= 3 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 10, height: 2)
                     .offset(x: 0, y: 0)
             }
-
-            // Stroke 4: Right vertical
             if strokes >= 4 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
                     .frame(width: 2, height: 8)
                     .offset(x: 5, y: 4)
             }
-
-            // Stroke 5: Bottom horizontal (completing the character)
             if strokes >= 5 {
                 Rectangle()
                     .fill(Color.white.opacity(0.9))
@@ -393,37 +364,25 @@ struct ChineseTallyGroupView: View {
     ScrollView {
         VStack(spacing: 0) {
             TrivitRowView(
-                trivit: Trivit(title: "Drinks", count: 5, colorIndex: 0),
-                isExpanded: false,
-                onExpand: {},
-                onDelete: {}
-            )
-            TrivitRowView(
-                trivit: Trivit(title: "Days without smoking", count: 3, colorIndex: 1),
-                isExpanded: false,
-                onExpand: {},
-                onDelete: {}
-            )
-            TrivitRowView(
-                trivit: Trivit(title: "Went swimming this year", count: 8, colorIndex: 3),
-                isExpanded: false,
-                onExpand: {},
-                onDelete: {}
-            )
-            TrivitRowView(
-                trivit: Trivit(title: "Cups of coffee this year", count: 47, colorIndex: 5),
+                trivit: Trivit(title: "Days of work left", count: 13, colorIndex: 0),
                 isExpanded: true,
                 onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
-                trivit: Trivit(title: "_Chinese tally test", count: 12, colorIndex: 2),
+                trivit: Trivit(title: "Tallies added", count: 8, colorIndex: 1),
+                isExpanded: true,
+                onExpand: {},
+                onDelete: {}
+            )
+            TrivitRowView(
+                trivit: Trivit(title: "Bugs in our software", count: 5, colorIndex: 3),
                 isExpanded: false,
                 onExpand: {},
                 onDelete: {}
             )
             TrivitRowView(
-                trivit: Trivit(title: "_Many Chinese tallies", count: 53, colorIndex: 4),
+                trivit: Trivit(title: "Pairs of shoes owned", count: 3, colorIndex: 4),
                 isExpanded: false,
                 onExpand: {},
                 onDelete: {}
