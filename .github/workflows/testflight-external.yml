@@ -1,0 +1,25 @@
+name: TestFlight External
+
+# Uses shared workflow from ios-infra for external beta submission
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_number:
+        description: 'Build number to submit (leave empty for latest)'
+        required: false
+        type: string
+      whats_new:
+        description: 'What''s new in this build (for testers)'
+        required: false
+        default: 'Bug fixes and improvements.'
+        type: string
+
+jobs:
+  submit:
+    uses: wdvr/ios-infra/.github/workflows/ios-testflight-external.yml@main
+    with:
+      bundle_id: com.wouterdevriendt.trivit
+      build_number: ${{ github.event.inputs.build_number }}
+      whats_new: ${{ github.event.inputs.whats_new }}
+    secrets: inherit
