@@ -29,7 +29,8 @@ class SyncService: NSObject, ObservableObject {
 
     override init() {
         super.init()
-        logger.info("⌚ SyncService initialized")
+        logger.info("⌚ SyncService init() called")
+        print("⌚ SyncService init() called")
         // Start WatchConnectivity immediately so we're ready when iPhone becomes reachable
         setupWatchConnectivity()
     }
@@ -49,10 +50,18 @@ class SyncService: NSObject, ObservableObject {
     // MARK: - Watch Connectivity Setup
 
     private func setupWatchConnectivity() {
-        guard WCSession.isSupported() else { return }
+        guard WCSession.isSupported() else {
+            logger.error("⌚ WCSession NOT supported on this device!")
+            print("⌚ WCSession NOT supported on this device!")
+            return
+        }
 
+        logger.info("⌚ Setting up WatchConnectivity - setting delegate and activating")
+        print("⌚ Setting up WatchConnectivity - setting delegate and activating")
         session.delegate = self
         session.activate()
+        logger.info("⌚ WCSession.activate() called")
+        print("⌚ WCSession.activate() called")
     }
 
     // MARK: - Request Sync from iPhone
@@ -301,6 +310,7 @@ class SyncService: NSObject, ObservableObject {
 
 extension SyncService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("⌚ DELEGATE: activationDidCompleteWith state=\(activationState.rawValue) reachable=\(session.isReachable)")
         logger.info("⌚ WCSession activation completed - state: \(activationState.rawValue), reachable: \(session.isReachable)")
 
         if let error = error {
@@ -321,6 +331,7 @@ extension SyncService: WCSessionDelegate {
     }
 
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
+        print("⌚ DELEGATE: reachabilityDidChange reachable=\(session.isReachable)")
         logger.info("⌚ iPhone reachability changed: \(session.isReachable)")
 
         Task { @MainActor in
@@ -334,11 +345,15 @@ extension SyncService: WCSessionDelegate {
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        print("⌚ DELEGATE: didReceiveMessage keys=\(message.keys)")
+
         guard let type = message["type"] as? String else {
+            print("⌚ DELEGATE: message has no type!")
             logger.warning("⌚ Received message without type")
             return
         }
 
+        print("⌚ DELEGATE: didReceiveMessage type=\(type)")
         logger.info("⌚ Received message from iPhone: \(type)")
 
         Task { @MainActor in
