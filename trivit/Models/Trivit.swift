@@ -17,6 +17,11 @@ final class Trivit: Equatable {
     var isCollapsed: Bool = true
     var createdAt: Date = Date()
     var sortOrder: Int = 0
+    var deletedAt: Date?
+
+    var isDeleted: Bool {
+        deletedAt != nil
+    }
 
     init(
         id: UUID = UUID(),
@@ -25,7 +30,8 @@ final class Trivit: Equatable {
         colorIndex: Int = 0,
         isCollapsed: Bool = true,
         createdAt: Date = Date(),
-        sortOrder: Int = 0
+        sortOrder: Int = 0,
+        deletedAt: Date? = nil
     ) {
         self.id = id
         self.title = title
@@ -34,6 +40,15 @@ final class Trivit: Equatable {
         self.isCollapsed = isCollapsed
         self.createdAt = createdAt
         self.sortOrder = sortOrder
+        self.deletedAt = deletedAt
+    }
+
+    func softDelete() {
+        deletedAt = Date()
+    }
+
+    func restore() {
+        deletedAt = nil
     }
 
     func increment() {

@@ -11,6 +11,7 @@ import SwiftData
 struct TrivitRowView: View {
     @Bindable var trivit: Trivit
     @Environment(\.modelContext) private var modelContext
+    @AppStorage("hideCounterWhenExpanded") private var hideCounterWhenExpanded = true
     @State private var isEditing = false
     @State private var dragOffset: CGFloat = 0
     @State private var showingStatistics = false
@@ -30,6 +31,7 @@ struct TrivitRowView: View {
     }
 
     private let decrementThreshold: CGFloat = -60
+    private let deleteThreshold: CGFloat = -200
 
     var body: some View {
         ZStack {
@@ -56,14 +58,21 @@ struct TrivitRowView: View {
     private var swipeBackground: some View {
         HStack {
             Spacer()
-            Image(systemName: "minus")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(.white)
-                .opacity(dragOffset < decrementThreshold ? 1.0 : 0.4)
-                .padding(.trailing, 24)
+            if dragOffset < deleteThreshold {
+                Image(systemName: "trash.fill")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.trailing, 24)
+            } else {
+                Image(systemName: "minus")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.white)
+                    .opacity(dragOffset < decrementThreshold ? 1.0 : 0.4)
+                    .padding(.trailing, 24)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(backgroundColor.opacity(0.7))
+        .background(dragOffset < deleteThreshold ? Color.red : backgroundColor.opacity(0.7))
     }
 
     // MARK: - Main Content
@@ -97,10 +106,12 @@ struct TrivitRowView: View {
 
             Spacer()
 
-            // Count display
-            Text("\(trivit.count)")
-                .font(.system(size: 18, weight: .semibold, design: .rounded))
-                .foregroundColor(.white)
+            // Count display (hidden when expanded if setting is on)
+            if !isExpanded || !hideCounterWhenExpanded {
+                Text("\(trivit.count)")
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
@@ -161,7 +172,12 @@ struct TrivitRowView: View {
                 }
             }
             .onEnded { _ in
-                if dragOffset < decrementThreshold && trivit.count > 0 {
+                if dragOffset < deleteThreshold {
+                    // Delete
+                    HapticsService.shared.notification(.warning)
+                    onDelete()
+                } else if dragOffset < decrementThreshold && trivit.count > 0 {
+                    // Decrement
                     trivit.decrement(in: modelContext)
                     HapticsService.shared.impact(.light)
                 }

@@ -10,23 +10,61 @@ import SwiftData
 
 struct TrivitListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Trivit.sortOrder) private var trivits: [Trivit]
+    @Query(filter: #Predicate<Trivit> { $0.deletedAt == nil }, sort: \Trivit.sortOrder)
+    private var trivits: [Trivit]
     @State private var showingSettings = false
     @State private var scrollToBottom = false
     @State private var expandedTrivitIds: Set<UUID> = []
+    @State private var draggingTrivit: Trivit?
+    @State private var deletedTrivit: Trivit?
+    @State private var showUndoToast = false
 
     var body: some View {
         NavigationStack {
-            content
-                .navigationTitle("Trivit")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarBackground(Color(.systemBackground), for: .navigationBar)
-                .toolbar { toolbarContent }
-                .sheet(isPresented: $showingSettings) {
-                    SettingsView()
+            ZStack(alignment: .bottom) {
+                content
+
+                // Undo toast
+                if showUndoToast, let trivit = deletedTrivit {
+                    undoToast(for: trivit)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                        .padding(.bottom, 20)
+                        .padding(.horizontal, 16)
                 }
+            }
+            .navigationTitle("Trivit")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+            .toolbar { toolbarContent }
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
+            }
         }
+    }
+
+    private func undoToast(for trivit: Trivit) -> some View {
+        HStack {
+            Text("Deleted \"\(trivit.title)\"")
+                .foregroundColor(.white)
+                .lineLimit(1)
+
+            Spacer()
+
+            Button("Undo") {
+                undoDelete()
+            }
+            .fontWeight(.semibold)
+            .foregroundColor(.white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(Color.blue)
+            .clipShape(Capsule())
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Color(.darkGray))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     @ViewBuilder
@@ -65,15 +103,40 @@ struct TrivitListView: View {
                             trivit: trivit,
                             isExpanded: expandedTrivitIds.contains(trivit.id),
                             onToggleExpand: {
-                                if expandedTrivitIds.contains(trivit.id) {
-                                    expandedTrivitIds.remove(trivit.id)
-                                } else {
-                                    expandedTrivitIds.insert(trivit.id)
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    if expandedTrivitIds.contains(trivit.id) {
+                                        expandedTrivitIds.remove(trivit.id)
+                                    } else {
+                                        expandedTrivitIds.insert(trivit.id)
+                                    }
                                 }
                             },
                             onDelete: { deleteTrivit(trivit) }
                         )
                         .id(trivit.id)
+                        .draggable(trivit.id.uuidString) {
+                            // Drag preview
+                            TrivitRowView(
+                                trivit: trivit,
+                                isExpanded: false,
+                                onToggleExpand: {},
+                                onDelete: {}
+                            )
+                            .frame(width: 300)
+                            .opacity(0.8)
+                            .onAppear { draggingTrivit = trivit }
+                        }
+                        .dropDestination(for: String.self) { items, _ in
+                            guard let droppedId = items.first,
+                                  let fromTrivit = draggingTrivit,
+                                  fromTrivit.id.uuidString != trivit.id.uuidString else {
+                                return false
+                            }
+                            reorderTrivit(from: fromTrivit, to: trivit)
+                            return true
+                        } isTargeted: { isTargeted in
+                            // Optional: visual feedback when dragging over
+                        }
                     }
 
                     // Bottom anchor for scrolling
@@ -92,6 +155,23 @@ struct TrivitListView: View {
                 }
             }
         }
+    }
+
+    private func reorderTrivit(from source: Trivit, to destination: Trivit) {
+        let sourceIndex = trivits.firstIndex(where: { $0.id == source.id }) ?? 0
+        let destIndex = trivits.firstIndex(where: { $0.id == destination.id }) ?? 0
+
+        var reordered = trivits.map { $0 }
+        let item = reordered.remove(at: sourceIndex)
+        reordered.insert(item, at: destIndex)
+
+        // Update sort orders
+        for (index, trivit) in reordered.enumerated() {
+            trivit.sortOrder = index
+        }
+
+        HapticsService.shared.impact(.medium)
+        draggingTrivit = nil
     }
 
     @ToolbarContentBuilder
@@ -139,8 +219,30 @@ struct TrivitListView: View {
 
     private func deleteTrivit(_ trivit: Trivit) {
         withAnimation {
-            modelContext.delete(trivit)
+            trivit.softDelete()
+            deletedTrivit = trivit
+            showUndoToast = true
             HapticsService.shared.notification(.warning)
+
+            // Hide toast after 5 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if deletedTrivit?.id == trivit.id {
+                    withAnimation {
+                        showUndoToast = false
+                        deletedTrivit = nil
+                    }
+                }
+            }
+        }
+    }
+
+    private func undoDelete() {
+        guard let trivit = deletedTrivit else { return }
+        withAnimation {
+            trivit.restore()
+            showUndoToast = false
+            deletedTrivit = nil
+            HapticsService.shared.impact(.medium)
         }
     }
 }

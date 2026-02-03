@@ -27,7 +27,11 @@ struct SettingsView: View {
     @Query private var trivits: [Trivit]
     @AppStorage("enableHaptics") private var enableHaptics = true
     @AppStorage("showTotalCount") private var showTotalCount = true
+    @AppStorage("hideCounterWhenExpanded") private var hideCounterWhenExpanded = true
     @AppStorage("colorScheme") private var selectedColorScheme = ColorScheme.vibrant.rawValue
+
+    @Query(filter: #Predicate<Trivit> { $0.deletedAt != nil })
+    private var deletedTrivits: [Trivit]
 
     var body: some View {
         NavigationStack {
@@ -35,6 +39,7 @@ struct SettingsView: View {
                 Section("General") {
                     Toggle("Haptic Feedback", isOn: $enableHaptics)
                     Toggle("Show Total Count", isOn: $showTotalCount)
+                    Toggle("Hide Counter When Expanded", isOn: $hideCounterWhenExpanded)
                 }
 
                 Section("Color Scheme") {
@@ -116,6 +121,19 @@ struct SettingsView: View {
                             Text("Report Translation Issue")
                             Spacer()
                             Image(systemName: "globe")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
+                Section("Deleted Items") {
+                    NavigationLink {
+                        DeletedItemsView()
+                    } label: {
+                        HStack {
+                            Text("Recently Deleted")
+                            Spacer()
+                            Text("\(deletedTrivits.count)")
                                 .foregroundColor(.secondary)
                         }
                     }
