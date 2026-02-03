@@ -16,6 +16,7 @@ final class Trivit: Equatable {
     var colorIndex: Int = 0
     var isCollapsed: Bool = true
     var createdAt: Date = Date()
+    var sortOrder: Int = 0
 
     init(
         id: UUID = UUID(),
@@ -23,7 +24,8 @@ final class Trivit: Equatable {
         count: Int = 0,
         colorIndex: Int = 0,
         isCollapsed: Bool = true,
-        createdAt: Date = Date()
+        createdAt: Date = Date(),
+        sortOrder: Int = 0
     ) {
         self.id = id
         self.title = title
@@ -31,6 +33,7 @@ final class Trivit: Equatable {
         self.colorIndex = colorIndex
         self.isCollapsed = isCollapsed
         self.createdAt = createdAt
+        self.sortOrder = sortOrder
     }
 
     func increment() {

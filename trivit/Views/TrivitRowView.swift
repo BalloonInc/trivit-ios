@@ -73,8 +73,11 @@ struct TrivitRowView: View {
             titleBar
             if isExpanded {
                 tallyArea
+                    .transition(.opacity.combined(with: .scale(scale: 1, anchor: .top)))
             }
         }
+        .animation(.easeInOut(duration: 0.2), value: isExpanded)
+        .clipped()
     }
 
     // MARK: - Title Bar
