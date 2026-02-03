@@ -1,36 +1,29 @@
 # Trivit iOS - Modernization Progress
 
-## Current Status: CloudKit & Watch Sync Complete, TestFlight Pending 🚧
+## Current Status: UI Redesign Complete 🎨
 
 ### Completed Tasks
+
+#### Phase 2.6: UI Redesign (Feb 3, 2026) ✅
+- [x] Redesigned row layout to match original app screenshot
+- [x] Title bar: full color, slightly lighter text (cream/off-white)
+- [x] Collapsed state: just title + count number on right (no tallies)
+- [x] Expanded state: title + minus button, tally area below
+- [x] Small triangle indicator pointing from title to tally area (left-aligned)
+- [x] Tap title = toggle expand/collapse
+- [x] Tap tally area = increment count
+- [x] Multiple trivits can be expanded simultaneously
+- [x] Empty trivits show tappable area when expanded
+- [x] Increased contrast between title bar and tally area (55% opacity)
+- [x] Fixed 5th tally mark - diagonal strike-through (Issue #6)
+- [x] Chinese tally style (正) for names starting with underscore (Issue #7)
 
 #### Phase 2.5: Sync & Device Support (Jan 30, 2026) ✅
 - [x] Enable CloudKit sync for iPhone <-> iPad data sharing
 - [x] Add WatchSyncService for iPhone <-> Watch real-time sync
 - [x] Update SwiftData models with property-level defaults for CloudKit compatibility
-- [x] Add expand triangle trigger for collapsed tallies with >10 counts
-- [x] Fix top-aligned tally display when collapsed
 - [x] Add iCloud entitlements for CloudKit container
 - [x] App runs successfully on iOS and watchOS simulators
-
-### BLOCKED: TestFlight Upload (User Action Required)
-**Action Required**: Create app in App Store Connect
-
-The app builds successfully but cannot be uploaded to TestFlight because
-the app doesn't exist in App Store Connect yet. Create it manually:
-
-1. Go to https://appstoreconnect.apple.com
-2. Click "My Apps" → "+" → "New App"
-3. Select platform: **iOS**
-4. Name: **Trivit - Tally Counter**
-5. Bundle ID: **com.wouterdevriendt.trivit** (select from dropdown)
-6. SKU: **trivit-tally-counter**
-7. Primary Language: **English (U.S.)**
-8. Click **Create**
-
-Once created, run: `gh workflow run 227871014 --repo BalloonInc/trivit-ios`
-
-Note: Cleaned up 10 excess development certificates via API.
 
 #### Phase 1: SwiftUI Modernization (Jan 28, 2026) ✅
 - [x] Remove all Objective-C code (~40,000 lines deleted)
@@ -45,68 +38,36 @@ Note: Cleaned up 10 excess development certificates via API.
 - [x] Update iOS deployment target to 17.0
 - [x] Configure App Groups for iOS/watchOS data sharing
 
-### In Progress - Phase 2: UI Polish & Features
+### Open GitHub Issues
 
-#### Tally Marks Fixes (Priority: HIGH)
-- [ ] Fix 5th tally mark crossing the other 4 properly (diagonal strike-through)
-- [ ] Make tally marks expand to show ALL marks (multiple rows, no ellipsis)
-- [ ] Remove "show tally marks" setting - always show them
-- [ ] Chinese tally style (正) for names starting with underscore
-- [ ] TODO: Add different tally counting styles in settings (Roman, Chinese, dots, etc.)
+| # | Issue | Priority |
+|---|-------|----------|
+| 5 | Add iCloud sync with CloudKit | Done (needs testing) |
+| 4 | Add drag-to-reorder for trivits | Medium |
+| 3 | Add swipe-to-delete gesture | Medium |
+| 2 | Configure App Groups for iOS/watchOS data sharing | Done |
 
-#### UI Improvements (Priority: HIGH)
-- [ ] Make count circle more subtle (20% opacity white background instead of 95%)
-- [ ] Colors should cycle in order, not random pick
-- [ ] Fix dark mode appearance
+### Next Up - Potential Features
 
-#### Settings Screen (Priority: MEDIUM)
-- [ ] Add color scheme picker (bring back from old app)
-- [ ] Add sync info (device count, last sync time)
-- [ ] Remove "show tally marks" toggle
+#### UI Polish (Priority: HIGH)
+- [ ] Dark mode appearance refinements
+- [ ] Settings screen cleanup
+
+#### Gestures (Priority: MEDIUM)
+- [ ] Drag-to-reorder trivits (Issue #4)
+- [ ] Swipe-to-delete gesture (Issue #3)
 
 #### Watch App (Priority: MEDIUM)
 - [ ] Remove legacy WatchKit Extension from Xcode project
 - [ ] Improve watch app UI styling
 - [ ] Test data sync with iOS app
 
-#### Cleanup (Priority: LOW)
-- [ ] Remove any remaining Objective-C files
-- [ ] Clean up DataKit framework (legacy)
-- [ ] Remove WatchKit Extension target from project
-
-### Pending - Phase 3: Advanced Features
-
-#### Statistics
-- [ ] Total counts across all trivits
-- [ ] Daily/weekly/monthly trends
-- [ ] Most used trivits
-- [ ] History view with graphs
-- [ ] Export statistics
-
-#### Tally Style Options
-- [ ] Western tally (IIII with strike = 5)
-- [ ] Chinese tally (正 = 5)
-- [ ] Dot groups
-- [ ] Roman numerals
-- [ ] Simple numbers only
-
-#### Sharing Features
-- [ ] Share trivit as image
-- [ ] Share count via Messages/Social
-- [ ] Export to CSV
-
-#### Data & Sync ✅
-- [x] iCloud sync via CloudKit (iPhone <-> iPad)
-- [x] WatchConnectivity sync (iPhone <-> Watch)
-- [ ] Multi-device sync status UI
-- [ ] Backup/restore functionality
-
-#### Other Features
-- [ ] Swipe-to-delete gesture
-- [ ] Drag-to-reorder
+#### Advanced Features (Priority: LOW)
 - [ ] Widget support
 - [ ] Siri shortcuts
 - [ ] Apple Watch complications
+- [ ] Statistics/history view improvements
+- [ ] Export to CSV
 
 ## Architecture
 
@@ -114,19 +75,22 @@ See `ARCHITECTURE.md` for detailed architecture documentation.
 
 ## Known Issues
 
-1. ~~Watch App Not Loading~~: App Groups configured - needs testing
-2. Tally marks 5th stroke not crossing properly
-3. Legacy WatchKit Extension still in Xcode project
-4. Count circle too prominent (white bg too opaque)
+1. Watch App needs App Groups configured in Apple Developer Portal
+2. Legacy WatchKit Extension still in Xcode project
 
 ## Recent Changes
 
-### Jan 28, 2026 (Session 2)
-- Configured App Groups for data sharing
-- Created GitHub issues for tracking
-- Starting UI polish phase
+### Feb 3, 2026
+- Complete UI redesign matching original app
+- Expand/collapse now works properly (tap title to toggle)
+- Multiple items can be expanded at once
+- Closed issues #6 (tally marks) and #7 (Chinese tallies)
 
-### Jan 28, 2026 (Session 1)
+### Jan 30, 2026
+- CloudKit and WatchConnectivity sync implemented
+- App builds and runs on device
+
+### Jan 28, 2026
 - Complete SwiftUI rewrite
 - UI redesigned to match original flat design
 - Removed all Objective-C (337 files, -40,832 lines)
@@ -134,12 +98,12 @@ See `ARCHITECTURE.md` for detailed architecture documentation.
 ## Build Commands
 
 ```bash
-# Build for simulator
-xcodebuild -workspace trivit.xcworkspace -scheme trivit -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
-
 # Build for device
-xcodebuild -workspace trivit.xcworkspace -scheme trivit -destination 'platform=iOS,id=00008150-001625E20AE2401C' build
+xcodebuild -workspace trivit.xcworkspace -scheme trivit -destination 'id=00008150-001625E20AE2401C' build
 
-# Run tests
-xcodebuild test -workspace trivit.xcworkspace -scheme trivit -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
+# Install on device
+xcrun devicectl device install app --device "00008150-001625E20AE2401C" ~/Library/Developer/Xcode/DerivedData/trivit-*/Build/Products/Debug-iphoneos/trivit.app
+
+# Trigger TestFlight
+gh workflow run 227871014 --repo BalloonInc/trivit-ios
 ```

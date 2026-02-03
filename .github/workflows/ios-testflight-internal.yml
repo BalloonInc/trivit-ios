@@ -21,4 +21,7 @@ jobs:
       bundle_id: com.wouterdevriendt.trivit
       run_id: ${{ inputs.run_id }}
       build_workflow_name: ios-build.yml
-    secrets: inherit
+    secrets:
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
