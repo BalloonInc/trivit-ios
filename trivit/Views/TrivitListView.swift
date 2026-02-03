@@ -64,10 +64,12 @@ struct TrivitListView: View {
                         trivit: trivit,
                         isExpanded: expandedTrivitIds.contains(trivit.id),
                         onToggleExpand: {
-                            if expandedTrivitIds.contains(trivit.id) {
-                                expandedTrivitIds.remove(trivit.id)
-                            } else {
-                                expandedTrivitIds.insert(trivit.id)
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                if expandedTrivitIds.contains(trivit.id) {
+                                    expandedTrivitIds.remove(trivit.id)
+                                } else {
+                                    expandedTrivitIds.insert(trivit.id)
+                                }
                             }
                         },
                         onDelete: { deleteTrivit(trivit) }
