@@ -91,3 +91,62 @@
 "Went swimming this year" = "ว่ายน้ำปีนี้";
 "Yes" = "ใช่";
 "Your feedback (optional)" = "ความคิดเห็นของคุณ (ไม่บังคับ)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "แก้วน้ำที่ดื่ม";
+"Fruits eaten today" = "ผลไม้ที่กินวันนี้";
+"Vegetables conquered" = "ผักที่พิชิตได้";
+"Hours of sleep" = "ชั่วโมงนอน";
+"Steps walked" = "ก้าวที่เดิน";
+"Push-ups done" = "วิดพื้นที่ทำ";
+"Minutes exercised" = "นาทีที่ออกกำลังกาย";
+"Healthy snacks" = "ขนมสุขภาพ";
+"Deep breaths taken" = "การหายใจลึกๆ";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "ครั้งที่พูดว่า 'ว้าว'";
+"Cookies in my tummy" = "คุกกี้ในท้อง";
+"Silly dances performed" = "เต้นบ้าๆ";
+"Dad jokes survived" = "มุกพ่อที่ทน";
+"Pillows fluffed" = "หมอนที่ปรับ";
+"Socks matched" = "ถุงเท้าที่จับคู่";
+"Clouds that look like animals" = "ก้อนเมฆรูปสัตว์";
+"Times the dog wagged its tail" = "ครั้งที่หมากระดิกหาง";
+"Sneezes today" = "จามวันนี้";
+"Yawns caught from others" = "หาวติดคนอื่น";
+"High fives given" = "ไฮไฟว์ที่ให้";
+"Bubbles blown" = "ฟองสบู่ที่เป่า";
+"Puddles jumped in" = "แอ่งน้ำที่กระโดด";
+"Funny faces made" = "หน้าตลกที่ทำ";
+"Songs sung in shower" = "เพลงที่ร้องในห้องน้ำ";
+"Times I forgot why I walked into a room" = "ครั้งที่ลืมว่าเดินเข้ามาทำไม";
+"Dinosaur facts learned" = "ความรู้ไดโนเสาร์";
+"Cards stacked before falling" = "ไพ่ที่ซ้อนก่อนล้ม";
+"Grapes caught in mouth" = "องุ่นที่รับด้วยปาก";
+"Paper airplanes launched" = "เครื่องบินกระดาษที่ปล่อย";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "หนังสือที่อ่าน";
+"Pages finished" = "หน้าที่อ่านจบ";
+"Tasks completed" = "งานที่เสร็จ";
+"Ideas had" = "ไอเดียที่คิดได้";
+"Problems solved" = "ปัญหาที่แก้ได้";
+"Minutes of focus" = "นาทีที่โฟกัส";
+"Emails conquered" = "อีเมลที่จัดการ";
+"Meetings survived" = "ประชุมที่รอด";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "กอดที่ให้";
+"Thank yous said" = "ขอบคุณที่พูด";
+"Smiles shared" = "รอยยิ้มที่แบ่งปัน";
+"Compliments given" = "คำชมที่ให้";
+"Acts of kindness" = "ความดีที่ทำ";
+"Friends helped" = "เพื่อนที่ช่วย";
+"Doors held open" = "ประตูที่เปิดให้";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "คำใหม่ที่เรียนรู้";
+"Questions asked" = "คำถามที่ถาม";
+"Facts discovered" = "ข้อเท็จจริงที่ค้นพบ";
+"Languages practiced" = "ภาษาที่ฝึก";
+"Puzzles solved" = "ปริศนาที่ไข";

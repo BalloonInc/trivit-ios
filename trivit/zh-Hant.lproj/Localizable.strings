@@ -91,3 +91,62 @@
 "Went swimming this year" = "今年游泳次數";
 "Yes" = "是";
 "Your feedback (optional)" = "您的回饋（可選）";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "喝了幾杯水";
+"Fruits eaten today" = "今天吃的水果";
+"Vegetables conquered" = "征服的蔬菜";
+"Hours of sleep" = "睡眠時數";
+"Steps walked" = "走了幾步";
+"Push-ups done" = "伏地挺身次數";
+"Minutes exercised" = "運動分鐘數";
+"Healthy snacks" = "健康零食";
+"Deep breaths taken" = "深呼吸次數";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "說「哇」的次數";
+"Cookies in my tummy" = "肚子裡的餅乾";
+"Silly dances performed" = "跳了幾支搞笑舞";
+"Dad jokes survived" = "撐過的冷笑話";
+"Pillows fluffed" = "拍鬆的枕頭";
+"Socks matched" = "配對成功的襪子";
+"Clouds that look like animals" = "像動物的雲朵";
+"Times the dog wagged its tail" = "狗狗搖尾巴次數";
+"Sneezes today" = "今天打噴嚏次數";
+"Yawns caught from others" = "被傳染的哈欠";
+"High fives given" = "擊掌次數";
+"Bubbles blown" = "吹的泡泡";
+"Puddles jumped in" = "跳過的水坑";
+"Funny faces made" = "做的鬼臉";
+"Songs sung in shower" = "洗澡時唱的歌";
+"Times I forgot why I walked into a room" = "忘記為什麼走進房間的次數";
+"Dinosaur facts learned" = "學到的恐龍知識";
+"Cards stacked before falling" = "倒塌前疊的卡片";
+"Grapes caught in mouth" = "用嘴接住的葡萄";
+"Paper airplanes launched" = "發射的紙飛機";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "讀完的書";
+"Pages finished" = "看完的頁數";
+"Tasks completed" = "完成的任務";
+"Ideas had" = "想到的點子";
+"Problems solved" = "解決的問題";
+"Minutes of focus" = "專注的分鐘數";
+"Emails conquered" = "征服的電子郵件";
+"Meetings survived" = "撐過的會議";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "給出的擁抱";
+"Thank yous said" = "說謝謝的次數";
+"Smiles shared" = "分享的微笑";
+"Compliments given" = "給出的讚美";
+"Acts of kindness" = "善舉次數";
+"Friends helped" = "幫助的朋友";
+"Doors held open" = "幫忙開門次數";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "學會的新單字";
+"Questions asked" = "問的問題";
+"Facts discovered" = "發現的事實";
+"Languages practiced" = "練習的語言";
+"Puzzles solved" = "解開的謎題";

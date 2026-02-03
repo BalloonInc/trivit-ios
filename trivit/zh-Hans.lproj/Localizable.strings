@@ -121,3 +121,62 @@
 "Open Source" = "开源";
 "Source Code" = "源代码";
 "Report Translation Issue" = "报告翻译问题";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "喝了几杯水";
+"Fruits eaten today" = "今天吃的水果";
+"Vegetables conquered" = "征服的蔬菜";
+"Hours of sleep" = "睡眠小时数";
+"Steps walked" = "走的步数";
+"Push-ups done" = "做的俯卧撑";
+"Minutes exercised" = "运动的分钟数";
+"Healthy snacks" = "健康零食";
+"Deep breaths taken" = "深呼吸次数";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "说了几次「哇」";
+"Cookies in my tummy" = "肚子里的饼干";
+"Silly dances performed" = "跳的傻傻舞";
+"Dad jokes survived" = "听过的冷笑话";
+"Pillows fluffed" = "拍蓬的枕头";
+"Socks matched" = "配对的袜子";
+"Clouds that look like animals" = "像动物的云朵";
+"Times the dog wagged its tail" = "狗狗摇尾巴次数";
+"Sneezes today" = "今天打的喷嚏";
+"Yawns caught from others" = "被传染的哈欠";
+"High fives given" = "击掌次数";
+"Bubbles blown" = "吹的泡泡";
+"Puddles jumped in" = "跳过的水坑";
+"Funny faces made" = "做的鬼脸";
+"Songs sung in shower" = "洗澡时唱的歌";
+"Times I forgot why I walked into a room" = "忘记为啥进屋的次数";
+"Dinosaur facts learned" = "学到的恐龙知识";
+"Cards stacked before falling" = "叠的扑克牌";
+"Grapes caught in mouth" = "用嘴接住的葡萄";
+"Paper airplanes launched" = "放飞的纸飞机";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "读完的书";
+"Pages finished" = "看完的页数";
+"Tasks completed" = "完成的任务";
+"Ideas had" = "冒出的点子";
+"Problems solved" = "解决的问题";
+"Minutes of focus" = "专注的分钟数";
+"Emails conquered" = "处理的邮件";
+"Meetings survived" = "熬过的会议";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "给的拥抱";
+"Thank yous said" = "说的谢谢";
+"Smiles shared" = "分享的微笑";
+"Compliments given" = "给的赞美";
+"Acts of kindness" = "善举次数";
+"Friends helped" = "帮助的朋友";
+"Doors held open" = "帮人开门次数";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "学会的新词";
+"Questions asked" = "问的问题";
+"Facts discovered" = "发现的趣事";
+"Languages practiced" = "练习的语言";
+"Puzzles solved" = "解开的谜题";

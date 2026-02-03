@@ -121,3 +121,62 @@
 "Open Source" = "Código abierto";
 "Source Code" = "Código fuente";
 "Report Translation Issue" = "Reportar error de traducción";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Vasos de agua";
+"Fruits eaten today" = "Frutas comidas hoy";
+"Vegetables conquered" = "Verduras conquistadas";
+"Hours of sleep" = "Horas de sueño";
+"Steps walked" = "Pasos caminados";
+"Push-ups done" = "Flexiones hechas";
+"Minutes exercised" = "Minutos de ejercicio";
+"Healthy snacks" = "Snacks saludables";
+"Deep breaths taken" = "Respiraciones profundas";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "Veces que dije 'guau'";
+"Cookies in my tummy" = "Galletas en mi barriguita";
+"Silly dances performed" = "Bailes tontos realizados";
+"Dad jokes survived" = "Chistes de papá sobrevividos";
+"Pillows fluffed" = "Almohadas esponjadas";
+"Socks matched" = "Calcetines emparejados";
+"Clouds that look like animals" = "Nubes con forma de animal";
+"Times the dog wagged its tail" = "Veces que el perro movió la cola";
+"Sneezes today" = "Estornudos de hoy";
+"Yawns caught from others" = "Bostezos contagiados";
+"High fives given" = "Choques de mano dados";
+"Bubbles blown" = "Burbujas sopladas";
+"Puddles jumped in" = "Charcos pisados";
+"Funny faces made" = "Caras graciosas hechas";
+"Songs sung in shower" = "Canciones cantadas en la ducha";
+"Times I forgot why I walked into a room" = "Veces que olvidé por qué entré a una habitación";
+"Dinosaur facts learned" = "Datos de dinosaurios aprendidos";
+"Cards stacked before falling" = "Cartas apiladas antes de caer";
+"Grapes caught in mouth" = "Uvas atrapadas con la boca";
+"Paper airplanes launched" = "Aviones de papel lanzados";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Libros leídos";
+"Pages finished" = "Páginas terminadas";
+"Tasks completed" = "Tareas completadas";
+"Ideas had" = "Ideas tenidas";
+"Problems solved" = "Problemas resueltos";
+"Minutes of focus" = "Minutos de concentración";
+"Emails conquered" = "Correos conquistados";
+"Meetings survived" = "Reuniones sobrevividas";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Abrazos dados";
+"Thank yous said" = "Gracias dichos";
+"Smiles shared" = "Sonrisas compartidas";
+"Compliments given" = "Cumplidos dados";
+"Acts of kindness" = "Actos de bondad";
+"Friends helped" = "Amigos ayudados";
+"Doors held open" = "Puertas sostenidas";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "Palabras nuevas aprendidas";
+"Questions asked" = "Preguntas hechas";
+"Facts discovered" = "Datos descubiertos";
+"Languages practiced" = "Idiomas practicados";
+"Puzzles solved" = "Rompecabezas resueltos";

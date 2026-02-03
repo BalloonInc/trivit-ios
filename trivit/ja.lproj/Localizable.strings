@@ -121,3 +121,62 @@
 "Open Source" = "オープンソース";
 "Source Code" = "ソースコード";
 "Report Translation Issue" = "翻訳の問題を報告";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "お水を飲んだ回数";
+"Fruits eaten today" = "今日食べたフルーツ";
+"Vegetables conquered" = "やっつけた野菜";
+"Hours of sleep" = "睡眠時間";
+"Steps walked" = "歩いた歩数";
+"Push-ups done" = "腕立て伏せの回数";
+"Minutes exercised" = "運動した分数";
+"Healthy snacks" = "ヘルシーおやつ";
+"Deep breaths taken" = "深呼吸した回数";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "「わぁ！」って言った回数";
+"Cookies in my tummy" = "おなかの中のクッキー";
+"Silly dances performed" = "へんてこダンスした回数";
+"Dad jokes survived" = "パパのダジャレに耐えた回数";
+"Pillows fluffed" = "枕をふかふかにした回数";
+"Socks matched" = "そろえた靴下";
+"Clouds that look like animals" = "動物に見えた雲";
+"Times the dog wagged its tail" = "犬がしっぽを振った回数";
+"Sneezes today" = "今日のくしゃみ";
+"Yawns caught from others" = "もらいあくび";
+"High fives given" = "ハイタッチした回数";
+"Bubbles blown" = "ふいたシャボン玉";
+"Puddles jumped in" = "水たまりにジャンプした回数";
+"Funny faces made" = "変顔した回数";
+"Songs sung in shower" = "お風呂で歌った曲";
+"Times I forgot why I walked into a room" = "なんで来たか忘れた回数";
+"Dinosaur facts learned" = "覚えた恐竜の豆知識";
+"Cards stacked before falling" = "倒れる前に積めたトランプ";
+"Grapes caught in mouth" = "口でキャッチしたぶどう";
+"Paper airplanes launched" = "飛ばした紙飛行機";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "読んだ本";
+"Pages finished" = "読んだページ";
+"Tasks completed" = "終わらせたタスク";
+"Ideas had" = "ひらめいたアイデア";
+"Problems solved" = "解決した問題";
+"Minutes of focus" = "集中した分数";
+"Emails conquered" = "やっつけたメール";
+"Meetings survived" = "乗り切った会議";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "ハグした回数";
+"Thank yous said" = "ありがとうの回数";
+"Smiles shared" = "にっこり笑った回数";
+"Compliments given" = "褒めた回数";
+"Acts of kindness" = "親切にした回数";
+"Friends helped" = "助けた友達";
+"Doors held open" = "ドアを押さえてあげた回数";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "覚えた新しい言葉";
+"Questions asked" = "質問した回数";
+"Facts discovered" = "発見したこと";
+"Languages practiced" = "練習した言語";
+"Puzzles solved" = "解いたパズル";

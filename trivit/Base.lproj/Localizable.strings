@@ -81,6 +81,65 @@
 "Candy" = "Candy";
 "Earth" = "Earth";
 
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Glasses of water";
+"Fruits eaten today" = "Fruits eaten today";
+"Vegetables conquered" = "Vegetables conquered";
+"Hours of sleep" = "Hours of sleep";
+"Steps walked" = "Steps walked";
+"Push-ups done" = "Push-ups done";
+"Minutes exercised" = "Minutes exercised";
+"Healthy snacks" = "Healthy snacks";
+"Deep breaths taken" = "Deep breaths taken";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "Times I said 'wow'";
+"Cookies in my tummy" = "Cookies in my tummy";
+"Silly dances performed" = "Silly dances performed";
+"Dad jokes survived" = "Dad jokes survived";
+"Pillows fluffed" = "Pillows fluffed";
+"Socks matched" = "Socks matched";
+"Clouds that look like animals" = "Clouds that look like animals";
+"Times the dog wagged its tail" = "Times the dog wagged its tail";
+"Sneezes today" = "Sneezes today";
+"Yawns caught from others" = "Yawns caught from others";
+"High fives given" = "High fives given";
+"Bubbles blown" = "Bubbles blown";
+"Puddles jumped in" = "Puddles jumped in";
+"Funny faces made" = "Funny faces made";
+"Songs sung in shower" = "Songs sung in shower";
+"Times I forgot why I walked into a room" = "Times I forgot why I walked into a room";
+"Dinosaur facts learned" = "Dinosaur facts learned";
+"Cards stacked before falling" = "Cards stacked before falling";
+"Grapes caught in mouth" = "Grapes caught in mouth";
+"Paper airplanes launched" = "Paper airplanes launched";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Books read";
+"Pages finished" = "Pages finished";
+"Tasks completed" = "Tasks completed";
+"Ideas had" = "Ideas had";
+"Problems solved" = "Problems solved";
+"Minutes of focus" = "Minutes of focus";
+"Emails conquered" = "Emails conquered";
+"Meetings survived" = "Meetings survived";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Hugs given";
+"Thank yous said" = "Thank yous said";
+"Smiles shared" = "Smiles shared";
+"Compliments given" = "Compliments given";
+"Acts of kindness" = "Acts of kindness";
+"Friends helped" = "Friends helped";
+"Doors held open" = "Doors held open";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "New words learned";
+"Questions asked" = "Questions asked";
+"Facts discovered" = "Facts discovered";
+"Languages practiced" = "Languages practiced";
+"Puzzles solved" = "Puzzles solved";
+
 /* Legacy Strings (kept for compatibility) */
 "Are you sure you want to delete all trivits?" = "Are you sure you want to delete all trivits?";
 "Are you sure you want to reset '%@'?" = "Are you sure you want to reset '%@'?";

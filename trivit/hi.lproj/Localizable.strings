@@ -91,3 +91,62 @@
 "Went swimming this year" = "इस साल तैराकी";
 "Yes" = "हां";
 "Your feedback (optional)" = "आपकी प्रतिक्रिया (वैकल्पिक)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "पानी के गिलास";
+"Fruits eaten today" = "आज खाए गए फल";
+"Vegetables conquered" = "सब्जियां जीती गईं";
+"Hours of sleep" = "नींद के घंटे";
+"Steps walked" = "चले गए कदम";
+"Push-ups done" = "पुश-अप किए";
+"Minutes exercised" = "व्यायाम के मिनट";
+"Healthy snacks" = "स्वस्थ नाश्ते";
+"Deep breaths taken" = "गहरी सांसें ली गईं";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "जितनी बार मैंने 'वाह' कहा";
+"Cookies in my tummy" = "मेरे पेट में बिस्कुट";
+"Silly dances performed" = "मज़ेदार नाच किए";
+"Dad jokes survived" = "पापा के जोक्स झेले";
+"Pillows fluffed" = "तकिए फुलाए";
+"Socks matched" = "मोज़े मिलाए";
+"Clouds that look like animals" = "जानवरों जैसे बादल देखे";
+"Times the dog wagged its tail" = "कुत्ते ने पूंछ हिलाई";
+"Sneezes today" = "आज की छींकें";
+"Yawns caught from others" = "दूसरों से जम्हाई ली";
+"High fives given" = "हाई-फाइव दिए";
+"Bubbles blown" = "बुलबुले फुलाए";
+"Puddles jumped in" = "पानी के गड्ढों में कूदे";
+"Funny faces made" = "मज़ेदार चेहरे बनाए";
+"Songs sung in shower" = "नहाते समय गाने गाए";
+"Times I forgot why I walked into a room" = "कमरे में क्यों आया भूल गया";
+"Dinosaur facts learned" = "डायनासोर के फैक्ट्स सीखे";
+"Cards stacked before falling" = "गिरने से पहले ताश जमाए";
+"Grapes caught in mouth" = "मुंह में अंगूर पकड़े";
+"Paper airplanes launched" = "कागज़ के हवाई जहाज़ उड़ाए";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "किताबें पढ़ीं";
+"Pages finished" = "पन्ने पूरे किए";
+"Tasks completed" = "काम पूरे किए";
+"Ideas had" = "आइडिया आए";
+"Problems solved" = "समस्याएं सुलझाईं";
+"Minutes of focus" = "ध्यान के मिनट";
+"Emails conquered" = "ईमेल निपटाए";
+"Meetings survived" = "मीटिंग्स झेली";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "गले लगाए";
+"Thank yous said" = "धन्यवाद कहे";
+"Smiles shared" = "मुस्कुराहट बांटी";
+"Compliments given" = "तारीफें की";
+"Acts of kindness" = "अच्छे काम किए";
+"Friends helped" = "दोस्तों की मदद की";
+"Doors held open" = "दरवाज़े खोले रखे";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "नए शब्द सीखे";
+"Questions asked" = "सवाल पूछे";
+"Facts discovered" = "फैक्ट्स खोजे";
+"Languages practiced" = "भाषाएं प्रैक्टिस कीं";
+"Puzzles solved" = "पहेलियां सुलझाईं";

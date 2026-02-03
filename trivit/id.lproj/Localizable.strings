@@ -91,3 +91,62 @@
 "Went swimming this year" = "Berenang tahun ini";
 "Yes" = "Ya";
 "Your feedback (optional)" = "Masukan Anda (opsional)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Gelas air minum";
+"Fruits eaten today" = "Buah dimakan hari ini";
+"Vegetables conquered" = "Sayuran ditaklukkan";
+"Hours of sleep" = "Jam tidur";
+"Steps walked" = "Langkah berjalan";
+"Push-ups done" = "Push-up dilakukan";
+"Minutes exercised" = "Menit olahraga";
+"Healthy snacks" = "Camilan sehat";
+"Deep breaths taken" = "Napas dalam diambil";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "Kali aku bilang 'wow'";
+"Cookies in my tummy" = "Kue di perutku";
+"Silly dances performed" = "Tarian konyol dilakukan";
+"Dad jokes survived" = "Lelucon bapak-bapak ditahan";
+"Pillows fluffed" = "Bantal dikembangkan";
+"Socks matched" = "Kaos kaki dicocokkan";
+"Clouds that look like animals" = "Awan mirip hewan";
+"Times the dog wagged its tail" = "Kali anjing mengibas ekor";
+"Sneezes today" = "Bersin hari ini";
+"Yawns caught from others" = "Menguap ketularan";
+"High fives given" = "Tos diberikan";
+"Bubbles blown" = "Gelembung ditiup";
+"Puddles jumped in" = "Genangan dilompati";
+"Funny faces made" = "Muka lucu dibuat";
+"Songs sung in shower" = "Lagu dinyanyikan di kamar mandi";
+"Times I forgot why I walked into a room" = "Kali lupa kenapa masuk ruangan";
+"Dinosaur facts learned" = "Fakta dinosaurus dipelajari";
+"Cards stacked before falling" = "Kartu ditumpuk sebelum jatuh";
+"Grapes caught in mouth" = "Anggur ditangkap dengan mulut";
+"Paper airplanes launched" = "Pesawat kertas diluncurkan";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Buku dibaca";
+"Pages finished" = "Halaman diselesaikan";
+"Tasks completed" = "Tugas diselesaikan";
+"Ideas had" = "Ide muncul";
+"Problems solved" = "Masalah dipecahkan";
+"Minutes of focus" = "Menit fokus";
+"Emails conquered" = "Email ditaklukkan";
+"Meetings survived" = "Rapat dilewati";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Pelukan diberikan";
+"Thank yous said" = "Terima kasih diucapkan";
+"Smiles shared" = "Senyum dibagikan";
+"Compliments given" = "Pujian diberikan";
+"Acts of kindness" = "Kebaikan dilakukan";
+"Friends helped" = "Teman dibantu";
+"Doors held open" = "Pintu ditahan terbuka";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "Kata baru dipelajari";
+"Questions asked" = "Pertanyaan diajukan";
+"Facts discovered" = "Fakta ditemukan";
+"Languages practiced" = "Bahasa dilatih";
+"Puzzles solved" = "Teka-teki dipecahkan";

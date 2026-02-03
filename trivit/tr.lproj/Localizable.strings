@@ -91,3 +91,62 @@
 "Went swimming this year" = "Bu yıl yüzme";
 "Yes" = "Evet";
 "Your feedback (optional)" = "Geri bildiriminiz (isteğe bağlı)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Bardak su";
+"Fruits eaten today" = "Bugün yenen meyveler";
+"Vegetables conquered" = "Fethedilen sebzeler";
+"Hours of sleep" = "Uyku saati";
+"Steps walked" = "Atılan adımlar";
+"Push-ups done" = "Yapılan şınavlar";
+"Minutes exercised" = "Egzersiz dakikası";
+"Healthy snacks" = "Sağlıklı atıştırmalıklar";
+"Deep breaths taken" = "Alınan derin nefesler";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "'Vay be' dediğim anlar";
+"Cookies in my tummy" = "Karnımdaki kurabiyeler";
+"Silly dances performed" = "Yapılan komik danslar";
+"Dad jokes survived" = "Atlattığım baba şakaları";
+"Pillows fluffed" = "Kabartılan yastıklar";
+"Socks matched" = "Eşleştirilen çoraplar";
+"Clouds that look like animals" = "Hayvana benzeyen bulutlar";
+"Times the dog wagged its tail" = "Köpeğin kuyruk sallaması";
+"Sneezes today" = "Bugünkü hapşırıklar";
+"Yawns caught from others" = "Başkalarından kapılan esnemeler";
+"High fives given" = "Çakılan beşlikler";
+"Bubbles blown" = "Üflenen baloncuklar";
+"Puddles jumped in" = "Atlanan su birikintileri";
+"Funny faces made" = "Yapılan komik suratlar";
+"Songs sung in shower" = "Duşta söylenen şarkılar";
+"Times I forgot why I walked into a room" = "Neden odaya girdiğimi unuttuğum anlar";
+"Dinosaur facts learned" = "Öğrenilen dinozor bilgileri";
+"Cards stacked before falling" = "Düşmeden dizilen kartlar";
+"Grapes caught in mouth" = "Ağızla yakalanan üzümler";
+"Paper airplanes launched" = "Uçurulan kağıt uçaklar";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Okunan kitaplar";
+"Pages finished" = "Bitirilen sayfalar";
+"Tasks completed" = "Tamamlanan görevler";
+"Ideas had" = "Akla gelen fikirler";
+"Problems solved" = "Çözülen problemler";
+"Minutes of focus" = "Odaklanma dakikaları";
+"Emails conquered" = "Hallettilen e-postalar";
+"Meetings survived" = "Atlattığım toplantılar";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Verilen sarılmalar";
+"Thank yous said" = "Söylenen teşekkürler";
+"Smiles shared" = "Paylaşılan gülümsemeler";
+"Compliments given" = "Verilen iltifatlar";
+"Acts of kindness" = "İyilik hareketleri";
+"Friends helped" = "Yardım edilen arkadaşlar";
+"Doors held open" = "Tutulan kapılar";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "Öğrenilen yeni kelimeler";
+"Questions asked" = "Sorulan sorular";
+"Facts discovered" = "Keşfedilen gerçekler";
+"Languages practiced" = "Pratik yapılan diller";
+"Puzzles solved" = "Çözülen bulmacalar";

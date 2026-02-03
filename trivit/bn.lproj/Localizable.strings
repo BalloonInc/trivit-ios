@@ -91,3 +91,62 @@
 "Went swimming this year" = "এই বছর সাঁতার";
 "Yes" = "হ্যাঁ";
 "Your feedback (optional)" = "আপনার মতামত (ঐচ্ছিক)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "গ্লাস পানি";
+"Fruits eaten today" = "আজকে খাওয়া ফল";
+"Vegetables conquered" = "সবজি জয়";
+"Hours of sleep" = "ঘুমের ঘণ্টা";
+"Steps walked" = "হাঁটা পদক্ষেপ";
+"Push-ups done" = "পুশ-আপ করা হয়েছে";
+"Minutes exercised" = "ব্যায়ামের মিনিট";
+"Healthy snacks" = "স্বাস্থ্যকর নাস্তা";
+"Deep breaths taken" = "গভীর শ্বাস নেওয়া";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "যতবার বলেছি 'বাহ!'";
+"Cookies in my tummy" = "পেটে বিস্কুট";
+"Silly dances performed" = "মজার নাচ করা";
+"Dad jokes survived" = "বাবার জোকস সহ্য করা";
+"Pillows fluffed" = "বালিশ ঝাঁকানো";
+"Socks matched" = "মোজা মিলানো";
+"Clouds that look like animals" = "পশুর মতো দেখতে মেঘ";
+"Times the dog wagged its tail" = "কুকুর লেজ নেড়েছে";
+"Sneezes today" = "আজকের হাঁচি";
+"Yawns caught from others" = "অন্যদের কাছ থেকে হাই তোলা";
+"High fives given" = "হাই ফাইভ দেওয়া";
+"Bubbles blown" = "বুদবুদ ফোলানো";
+"Puddles jumped in" = "জলের ডোবায় লাফ";
+"Funny faces made" = "মজার মুখ বানানো";
+"Songs sung in shower" = "গোসলে গান গাওয়া";
+"Times I forgot why I walked into a room" = "ঘরে কেন এসেছি ভুলে গেছি";
+"Dinosaur facts learned" = "ডাইনোসর সম্পর্কে শেখা";
+"Cards stacked before falling" = "পড়ার আগে তাস সাজানো";
+"Grapes caught in mouth" = "মুখে আঙুর ধরা";
+"Paper airplanes launched" = "কাগজের বিমান উড়ানো";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "বই পড়া হয়েছে";
+"Pages finished" = "পাতা শেষ করা";
+"Tasks completed" = "কাজ সম্পন্ন";
+"Ideas had" = "আইডিয়া পাওয়া";
+"Problems solved" = "সমস্যা সমাধান";
+"Minutes of focus" = "মনোযোগের মিনিট";
+"Emails conquered" = "ইমেইল জয়";
+"Meetings survived" = "মিটিং সহ্য করা";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "জড়িয়ে ধরা";
+"Thank yous said" = "ধন্যবাদ বলা";
+"Smiles shared" = "হাসি ভাগাভাগি";
+"Compliments given" = "প্রশংসা করা";
+"Acts of kindness" = "দয়ার কাজ";
+"Friends helped" = "বন্ধুদের সাহায্য করা";
+"Doors held open" = "দরজা ধরে রাখা";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "নতুন শব্দ শেখা";
+"Questions asked" = "প্রশ্ন করা";
+"Facts discovered" = "তথ্য আবিষ্কার";
+"Languages practiced" = "ভাষা অনুশীলন";
+"Puzzles solved" = "ধাঁধা সমাধান";

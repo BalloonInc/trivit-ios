@@ -129,3 +129,62 @@
 
 /* Tally example */
 "Swipe left to delete" = "刷卡左删除";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "喝了几杯水";
+"Fruits eaten today" = "今天吃了几个水果";
+"Vegetables conquered" = "消灭了多少蔬菜";
+"Hours of sleep" = "睡了几小时";
+"Steps walked" = "走了多少步";
+"Push-ups done" = "做了几个俯卧撑";
+"Minutes exercised" = "运动了几分钟";
+"Healthy snacks" = "健康小零食";
+"Deep breaths taken" = "深呼吸了几次";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "说了几次哇塞";
+"Cookies in my tummy" = "肚子里的小饼干";
+"Silly dances performed" = "跳了几段搞怪舞";
+"Dad jokes survived" = "听了几个爸爸的冷笑话";
+"Pillows fluffed" = "拍了几个枕头";
+"Socks matched" = "配对了几双袜子";
+"Clouds that look like animals" = "像小动物的云朵";
+"Times the dog wagged its tail" = "狗狗摇了几次尾巴";
+"Sneezes today" = "今天打了几个喷嚏";
+"Yawns caught from others" = "被传染了几个哈欠";
+"High fives given" = "击了几次掌";
+"Bubbles blown" = "吹了几个泡泡";
+"Puddles jumped in" = "踩了几个水坑";
+"Funny faces made" = "做了几个鬼脸";
+"Songs sung in shower" = "洗澡时唱了几首歌";
+"Times I forgot why I walked into a room" = "忘了为啥进屋几次";
+"Dinosaur facts learned" = "学了几个恐龙知识";
+"Cards stacked before falling" = "叠了几张牌才倒";
+"Grapes caught in mouth" = "用嘴接住了几颗葡萄";
+"Paper airplanes launched" = "放飞了几架纸飞机";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "读了几本书";
+"Pages finished" = "读了多少页";
+"Tasks completed" = "完成了几件事";
+"Ideas had" = "冒出了几个点子";
+"Problems solved" = "解决了几个问题";
+"Minutes of focus" = "专注了几分钟";
+"Emails conquered" = "消灭了几封邮件";
+"Meetings survived" = "熬过了几个会议";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "给了几个拥抱";
+"Thank yous said" = "说了几次谢谢";
+"Smiles shared" = "分享了几个微笑";
+"Compliments given" = "夸了别人几次";
+"Acts of kindness" = "做了几件好事";
+"Friends helped" = "帮助了几个朋友";
+"Doors held open" = "帮别人开了几次门";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "学了几个新词";
+"Questions asked" = "问了几个问题";
+"Facts discovered" = "发现了几个新知识";
+"Languages practiced" = "练习了几种语言";
+"Puzzles solved" = "解开了几个谜题";

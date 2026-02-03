@@ -91,3 +91,62 @@
 "Went swimming this year" = "Bơi năm nay";
 "Yes" = "Có";
 "Your feedback (optional)" = "Phản hồi của bạn (tùy chọn)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Cốc nước đã uống";
+"Fruits eaten today" = "Trái cây ăn hôm nay";
+"Vegetables conquered" = "Rau củ chinh phục";
+"Hours of sleep" = "Giờ ngủ";
+"Steps walked" = "Bước đi";
+"Push-ups done" = "Lần chống đẩy";
+"Minutes exercised" = "Phút tập thể dục";
+"Healthy snacks" = "Đồ ăn vặt lành mạnh";
+"Deep breaths taken" = "Lần hít thở sâu";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "Lần nói 'ồ'";
+"Cookies in my tummy" = "Bánh quy trong bụng";
+"Silly dances performed" = "Điệu nhảy ngớ ngẩn";
+"Dad jokes survived" = "Chuyện cười bố kể";
+"Pillows fluffed" = "Gối đã xốp";
+"Socks matched" = "Đôi tất ghép đúng";
+"Clouds that look like animals" = "Mây giống con vật";
+"Times the dog wagged its tail" = "Lần cún vẫy đuôi";
+"Sneezes today" = "Lần hắt xì hôm nay";
+"Yawns caught from others" = "Lần ngáp lây";
+"High fives given" = "Lần đập tay";
+"Bubbles blown" = "Bong bóng thổi";
+"Puddles jumped in" = "Vũng nước nhảy qua";
+"Funny faces made" = "Mặt hài hước làm";
+"Songs sung in shower" = "Bài hát khi tắm";
+"Times I forgot why I walked into a room" = "Lần quên mình vào phòng làm gì";
+"Dinosaur facts learned" = "Sự thật về khủng long";
+"Cards stacked before falling" = "Lá bài xếp trước khi đổ";
+"Grapes caught in mouth" = "Nho bắt bằng miệng";
+"Paper airplanes launched" = "Máy bay giấy phóng";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Sách đã đọc";
+"Pages finished" = "Trang hoàn thành";
+"Tasks completed" = "Việc hoàn tất";
+"Ideas had" = "Ý tưởng nảy ra";
+"Problems solved" = "Vấn đề giải quyết";
+"Minutes of focus" = "Phút tập trung";
+"Emails conquered" = "Email xử lý xong";
+"Meetings survived" = "Cuộc họp sống sót";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Cái ôm tặng";
+"Thank yous said" = "Lời cảm ơn nói";
+"Smiles shared" = "Nụ cười chia sẻ";
+"Compliments given" = "Lời khen tặng";
+"Acts of kindness" = "Việc tốt làm";
+"Friends helped" = "Bạn bè giúp đỡ";
+"Doors held open" = "Cửa giữ mở";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "Từ mới học";
+"Questions asked" = "Câu hỏi đặt ra";
+"Facts discovered" = "Điều thú vị khám phá";
+"Languages practiced" = "Ngôn ngữ luyện tập";
+"Puzzles solved" = "Câu đố giải";

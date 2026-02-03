@@ -8,8 +8,8 @@
 import SwiftUI
 import SwiftData
 
-// Example habit/counter names for new trivits
-private let exampleTrivitNames = [
+// Example habit/counter names for new trivits (localized)
+private let exampleTrivitNameKeys = [
     // Healthy habits
     "Glasses of water",
     "Fruits eaten today",
@@ -334,8 +334,9 @@ struct TrivitListView: View {
             // Set sort order to be at the end
             let maxSortOrder = trivits.map { $0.sortOrder }.max() ?? -1
 
-            // Pick a random example name for the new trivit
-            let randomTitle = exampleTrivitNames.randomElement() ?? "New Trivit"
+            // Pick a random example name for the new trivit (localized)
+            let randomKey = exampleTrivitNameKeys.randomElement() ?? "New Trivit"
+            let randomTitle = NSLocalizedString(randomKey, comment: "Example trivit name")
 
             let newTrivit = Trivit(
                 title: randomTitle,

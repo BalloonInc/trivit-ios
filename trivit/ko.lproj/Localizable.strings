@@ -91,3 +91,62 @@
 "Went swimming this year" = "올해 수영 횟수";
 "Yes" = "예";
 "Your feedback (optional)" = "피드백 (선택사항)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "물 마신 잔 수";
+"Fruits eaten today" = "오늘 먹은 과일";
+"Vegetables conquered" = "정복한 채소";
+"Hours of sleep" = "잠잔 시간";
+"Steps walked" = "걸은 걸음 수";
+"Push-ups done" = "팔굽혀펴기 횟수";
+"Minutes exercised" = "운동한 시간(분)";
+"Healthy snacks" = "건강한 간식";
+"Deep breaths taken" = "심호흡 횟수";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "'와우' 외친 횟수";
+"Cookies in my tummy" = "내 뱃속에 들어간 쿠키";
+"Silly dances performed" = "우스꽝스러운 춤 횟수";
+"Dad jokes survived" = "아빠 개그 버틴 횟수";
+"Pillows fluffed" = "베개 두드린 횟수";
+"Socks matched" = "짝 맞춘 양말";
+"Clouds that look like animals" = "동물처럼 생긴 구름";
+"Times the dog wagged its tail" = "강아지가 꼬리 흔든 횟수";
+"Sneezes today" = "오늘 재채기 횟수";
+"Yawns caught from others" = "옮은 하품 횟수";
+"High fives given" = "하이파이브 횟수";
+"Bubbles blown" = "분 비눗방울 수";
+"Puddles jumped in" = "웅덩이 점프 횟수";
+"Funny faces made" = "재미있는 표정 횟수";
+"Songs sung in shower" = "샤워하며 부른 노래";
+"Times I forgot why I walked into a room" = "방에 왜 왔는지 잊은 횟수";
+"Dinosaur facts learned" = "배운 공룡 지식";
+"Cards stacked before falling" = "쓰러지기 전 쌓은 카드";
+"Grapes caught in mouth" = "입으로 받은 포도";
+"Paper airplanes launched" = "날린 종이비행기";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "읽은 책";
+"Pages finished" = "읽은 페이지";
+"Tasks completed" = "완료한 할 일";
+"Ideas had" = "떠오른 아이디어";
+"Problems solved" = "해결한 문제";
+"Minutes of focus" = "집중한 시간(분)";
+"Emails conquered" = "처리한 이메일";
+"Meetings survived" = "버틴 회의";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "안아준 횟수";
+"Thank yous said" = "감사 인사 횟수";
+"Smiles shared" = "나눈 미소";
+"Compliments given" = "건넨 칭찬";
+"Acts of kindness" = "친절한 행동";
+"Friends helped" = "도와준 친구";
+"Doors held open" = "문 잡아준 횟수";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "배운 새 단어";
+"Questions asked" = "질문한 횟수";
+"Facts discovered" = "발견한 사실";
+"Languages practiced" = "연습한 언어";
+"Puzzles solved" = "푼 퍼즐";

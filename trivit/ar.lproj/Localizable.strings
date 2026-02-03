@@ -91,3 +91,62 @@
 "Went swimming this year" = "السباحة هذا العام";
 "Yes" = "نعم";
 "Your feedback (optional)" = "ملاحظاتك (اختياري)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "أكواب الماء";
+"Fruits eaten today" = "فواكه أكلتها اليوم";
+"Vegetables conquered" = "خضروات تغلبت عليها";
+"Hours of sleep" = "ساعات النوم";
+"Steps walked" = "خطوات مشيتها";
+"Push-ups done" = "تمارين الضغط";
+"Minutes exercised" = "دقائق الرياضة";
+"Healthy snacks" = "وجبات صحية خفيفة";
+"Deep breaths taken" = "أنفاس عميقة";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "مرات قلت 'واو'";
+"Cookies in my tummy" = "بسكويت في بطني";
+"Silly dances performed" = "رقصات مضحكة";
+"Dad jokes survived" = "نكت أبوية تحملتها";
+"Pillows fluffed" = "وسائد نفشتها";
+"Socks matched" = "جوارب طابقتها";
+"Clouds that look like animals" = "غيوم تشبه الحيوانات";
+"Times the dog wagged its tail" = "مرات هز الكلب ذيله";
+"Sneezes today" = "عطسات اليوم";
+"Yawns caught from others" = "تثاؤبات انتقلت إلي";
+"High fives given" = "تصفيقات عالية أعطيتها";
+"Bubbles blown" = "فقاعات نفختها";
+"Puddles jumped in" = "برك قفزت فيها";
+"Funny faces made" = "وجوه مضحكة صنعتها";
+"Songs sung in shower" = "أغاني غنيتها بالحمام";
+"Times I forgot why I walked into a room" = "مرات نسيت لماذا دخلت الغرفة";
+"Dinosaur facts learned" = "معلومات عن الديناصورات تعلمتها";
+"Cards stacked before falling" = "أوراق رصصتها قبل السقوط";
+"Grapes caught in mouth" = "عنب التقطته بفمي";
+"Paper airplanes launched" = "طائرات ورقية أطلقتها";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "كتب قرأتها";
+"Pages finished" = "صفحات أنهيتها";
+"Tasks completed" = "مهام أنجزتها";
+"Ideas had" = "أفكار خطرت لي";
+"Problems solved" = "مشاكل حللتها";
+"Minutes of focus" = "دقائق التركيز";
+"Emails conquered" = "رسائل بريد تغلبت عليها";
+"Meetings survived" = "اجتماعات نجوت منها";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "أحضان أعطيتها";
+"Thank yous said" = "شكراً قلتها";
+"Smiles shared" = "ابتسامات شاركتها";
+"Compliments given" = "مجاملات قدمتها";
+"Acts of kindness" = "أعمال طيبة";
+"Friends helped" = "أصدقاء ساعدتهم";
+"Doors held open" = "أبواب أمسكتها مفتوحة";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "كلمات جديدة تعلمتها";
+"Questions asked" = "أسئلة سألتها";
+"Facts discovered" = "حقائق اكتشفتها";
+"Languages practiced" = "لغات تدربت عليها";
+"Puzzles solved" = "ألغاز حللتها";

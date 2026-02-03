@@ -91,3 +91,62 @@
 "Went swimming this year" = "Плавание в этом году";
 "Yes" = "Да";
 "Your feedback (optional)" = "Ваш отзыв (необязательно)";
+
+/* Example Trivit Names - Healthy habits */
+"Glasses of water" = "Стаканов воды";
+"Fruits eaten today" = "Фруктов съедено сегодня";
+"Vegetables conquered" = "Овощей покорено";
+"Hours of sleep" = "Часов сна";
+"Steps walked" = "Шагов пройдено";
+"Push-ups done" = "Отжиманий сделано";
+"Minutes exercised" = "Минут зарядки";
+"Healthy snacks" = "Полезных перекусов";
+"Deep breaths taken" = "Глубоких вдохов";
+
+/* Example Trivit Names - Fun & silly */
+"Times I said 'wow'" = "Раз сказал «вау»";
+"Cookies in my tummy" = "Печенек в животе";
+"Silly dances performed" = "Глупых танцев станцевано";
+"Dad jokes survived" = "Папиных шуток пережито";
+"Pillows fluffed" = "Подушек взбито";
+"Socks matched" = "Носков найдено в пару";
+"Clouds that look like animals" = "Облаков, похожих на зверей";
+"Times the dog wagged its tail" = "Раз собака виляла хвостом";
+"Sneezes today" = "Чихов сегодня";
+"Yawns caught from others" = "Зевков подхвачено от других";
+"High fives given" = "Дай пять!";
+"Bubbles blown" = "Пузырей надуто";
+"Puddles jumped in" = "Луж перепрыгнуто";
+"Funny faces made" = "Смешных рожиц скорчено";
+"Songs sung in shower" = "Песен спето в душе";
+"Times I forgot why I walked into a room" = "Раз забыл, зачем зашёл в комнату";
+"Dinosaur facts learned" = "Фактов о динозаврах узнано";
+"Cards stacked before falling" = "Карт сложено до падения";
+"Grapes caught in mouth" = "Виноградин поймано ртом";
+"Paper airplanes launched" = "Бумажных самолётиков запущено";
+
+/* Example Trivit Names - Productivity */
+"Books read" = "Книг прочитано";
+"Pages finished" = "Страниц прочитано";
+"Tasks completed" = "Задач выполнено";
+"Ideas had" = "Идей родилось";
+"Problems solved" = "Проблем решено";
+"Minutes of focus" = "Минут концентрации";
+"Emails conquered" = "Писем покорено";
+"Meetings survived" = "Совещаний пережито";
+
+/* Example Trivit Names - Kindness & gratitude */
+"Hugs given" = "Обнимашек подарено";
+"Thank yous said" = "Спасибо сказано";
+"Smiles shared" = "Улыбок подарено";
+"Compliments given" = "Комплиментов сказано";
+"Acts of kindness" = "Добрых дел";
+"Friends helped" = "Друзьям помог";
+"Doors held open" = "Дверей придержано";
+
+/* Example Trivit Names - Learning */
+"New words learned" = "Новых слов выучено";
+"Questions asked" = "Вопросов задано";
+"Facts discovered" = "Фактов открыто";
+"Languages practiced" = "Языков практиковано";
+"Puzzles solved" = "Головоломок решено";
