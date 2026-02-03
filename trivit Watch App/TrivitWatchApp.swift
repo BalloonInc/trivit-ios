@@ -25,23 +25,7 @@ struct TrivitWatchApp: App {
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            print("⌚ First ModelContainer attempt failed: \(error)")
-
-            // Delete old database and retry (handles schema migration issues)
-            let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-            if let appSupport = urls.first {
-                print("⌚ Cleaning up database at: \(appSupport)")
-                try? FileManager.default.removeItem(at: appSupport.appendingPathComponent("default.store"))
-                try? FileManager.default.removeItem(at: appSupport.appendingPathComponent("default.store-shm"))
-                try? FileManager.default.removeItem(at: appSupport.appendingPathComponent("default.store-wal"))
-            }
-
-            do {
-                print("⌚ Retrying ModelContainer creation...")
-                return try ModelContainer(for: schema, configurations: [modelConfiguration])
-            } catch {
-                fatalError("Could not create ModelContainer after cleanup: \(error)")
-            }
+            fatalError("Could not create ModelContainer: \(error)")
         }
     }()
 
