@@ -8,6 +8,9 @@
 import Foundation
 import WatchConnectivity
 import SwiftData
+import os.log
+
+private let logger = Logger(subsystem: "com.wouterdevriendt.trivit.watchkitapp", category: "WatchSync")
 
 @MainActor
 class SyncService: NSObject, ObservableObject {
@@ -22,6 +25,7 @@ class SyncService: NSObject, ObservableObject {
 
     override init() {
         super.init()
+        logger.info("⌚ SyncService initialized")
     }
 
     func configure(with modelContext: ModelContext) {
@@ -41,16 +45,18 @@ class SyncService: NSObject, ObservableObject {
     // MARK: - Request Sync from iPhone
 
     func requestSync() {
+        logger.info("⌚ requestSync called - isReachable: \(self.session.isReachable)")
+
         guard session.isReachable else {
-            print("iPhone not reachable for sync")
+            logger.warning("⌚ iPhone not reachable for sync")
             return
         }
 
         let message: [String: Any] = ["type": "requestSync"]
         session.sendMessage(message, replyHandler: { response in
-            print("Sync response: \(response)")
+            logger.info("⌚ Sync response: \(String(describing: response))")
         }) { error in
-            print("Sync request failed: \(error.localizedDescription)")
+            logger.error("⌚ Sync request failed: \(error.localizedDescription)")
         }
     }
 
@@ -118,13 +124,17 @@ class SyncService: NSObject, ObservableObject {
     // MARK: - Handle Incoming Data
 
     private func handleFullSync(trivitsData: [[String: Any]]) {
-        guard let modelContext = modelContext else { return }
+        logger.info("⌚ handleFullSync called with \(trivitsData.count) trivits")
+
+        guard let modelContext = modelContext else {
+            logger.error("⌚ No model context for full sync")
+            return
+        }
 
         do {
             // Fetch all existing trivits
             let descriptor = FetchDescriptor<Trivit>()
             let existingTrivits = try modelContext.fetch(descriptor)
-            let existingIds = Set(existingTrivits.map { $0.id })
 
             var receivedIds = Set<UUID>()
 
@@ -134,9 +144,11 @@ class SyncService: NSObject, ObservableObject {
                       let title = data["title"] as? String,
                       let count = data["count"] as? Int,
                       let colorIndex = data["colorIndex"] as? Int else {
+                    logger.warning("⌚ Skipping invalid trivit data: \(String(describing: data))")
                     continue
                 }
 
+                let sortOrder = data["sortOrder"] as? Int ?? 0
                 receivedIds.insert(id)
 
                 if let existingTrivit = existingTrivits.first(where: { $0.id == id }) {
@@ -145,6 +157,8 @@ class SyncService: NSObject, ObservableObject {
                     existingTrivit.count = count
                     existingTrivit.colorIndex = colorIndex
                     existingTrivit.isCollapsed = data["isCollapsed"] as? Bool ?? true
+                    existingTrivit.sortOrder = sortOrder
+                    logger.debug("⌚ Updated trivit: \(title) (count: \(count), order: \(sortOrder))")
                 } else {
                     // Create new trivit
                     let newTrivit = Trivit(
@@ -153,37 +167,45 @@ class SyncService: NSObject, ObservableObject {
                         count: count,
                         colorIndex: colorIndex,
                         isCollapsed: data["isCollapsed"] as? Bool ?? true,
-                        createdAt: Date(timeIntervalSince1970: data["createdAt"] as? TimeInterval ?? Date().timeIntervalSince1970)
+                        createdAt: Date(timeIntervalSince1970: data["createdAt"] as? TimeInterval ?? Date().timeIntervalSince1970),
+                        sortOrder: sortOrder
                     )
                     modelContext.insert(newTrivit)
+                    logger.debug("⌚ Created trivit: \(title) (order: \(sortOrder))")
                 }
             }
 
             // Delete trivits that no longer exist on iPhone
             for trivit in existingTrivits {
                 if !receivedIds.contains(trivit.id) {
+                    logger.debug("⌚ Deleting trivit not on phone: \(trivit.title)")
                     modelContext.delete(trivit)
                 }
             }
 
             try modelContext.save()
             lastSyncDate = Date()
-            print("Synced \(trivitsData.count) trivits from iPhone")
+            logger.info("⌚ Full sync completed: \(trivitsData.count) trivits")
 
         } catch {
-            print("Failed to handle full sync: \(error)")
+            logger.error("⌚ Failed to handle full sync: \(error)")
         }
     }
 
     private func handleSingleUpdate(data: [String: Any]) {
+        logger.info("⌚ handleSingleUpdate called")
+
         guard let modelContext = modelContext,
               let idString = data["id"] as? String,
               let id = UUID(uuidString: idString),
               let title = data["title"] as? String,
               let count = data["count"] as? Int,
               let colorIndex = data["colorIndex"] as? Int else {
+            logger.warning("⌚ Invalid data in single update")
             return
         }
+
+        let sortOrder = data["sortOrder"] as? Int ?? 0
 
         do {
             let descriptor = FetchDescriptor<Trivit>(predicate: #Predicate { $0.id == id })
@@ -194,6 +216,8 @@ class SyncService: NSObject, ObservableObject {
                 existingTrivit.count = count
                 existingTrivit.colorIndex = colorIndex
                 existingTrivit.isCollapsed = data["isCollapsed"] as? Bool ?? true
+                existingTrivit.sortOrder = sortOrder
+                logger.info("⌚ Updated trivit: \(title)")
             } else {
                 let newTrivit = Trivit(
                     id: id,
@@ -201,16 +225,18 @@ class SyncService: NSObject, ObservableObject {
                     count: count,
                     colorIndex: colorIndex,
                     isCollapsed: data["isCollapsed"] as? Bool ?? true,
-                    createdAt: Date(timeIntervalSince1970: data["createdAt"] as? TimeInterval ?? Date().timeIntervalSince1970)
+                    createdAt: Date(timeIntervalSince1970: data["createdAt"] as? TimeInterval ?? Date().timeIntervalSince1970),
+                    sortOrder: sortOrder
                 )
                 modelContext.insert(newTrivit)
+                logger.info("⌚ Created trivit: \(title)")
             }
 
             try modelContext.save()
             lastSyncDate = Date()
 
         } catch {
-            print("Failed to handle single update: \(error)")
+            logger.error("⌚ Failed to handle single update: \(error)")
         }
     }
 
@@ -238,28 +264,43 @@ class SyncService: NSObject, ObservableObject {
 
 extension SyncService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        logger.info("⌚ WCSession activation completed - state: \(activationState.rawValue), reachable: \(session.isReachable)")
+
+        if let error = error {
+            logger.error("⌚ WCSession activation error: \(error.localizedDescription)")
+        }
+
         DispatchQueue.main.async {
             self.isConnected = activationState == .activated
             self.isReachable = session.isReachable
 
             if activationState == .activated && session.isReachable {
+                logger.info("⌚ iPhone reachable, requesting sync...")
                 self.requestSync()
             }
         }
     }
 
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
+        logger.info("⌚ iPhone reachability changed: \(session.isReachable)")
+
         DispatchQueue.main.async {
             self.isReachable = session.isReachable
 
             if session.isReachable {
+                logger.info("⌚ iPhone became reachable, requesting sync...")
                 self.requestSync()
             }
         }
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        guard let type = message["type"] as? String else { return }
+        guard let type = message["type"] as? String else {
+            logger.warning("⌚ Received message without type")
+            return
+        }
+
+        logger.info("⌚ Received message from iPhone: \(type)")
 
         DispatchQueue.main.async {
             switch type {
@@ -279,7 +320,7 @@ extension SyncService: WCSessionDelegate {
                 }
 
             default:
-                break
+                logger.warning("⌚ Unknown message type: \(type)")
             }
         }
     }

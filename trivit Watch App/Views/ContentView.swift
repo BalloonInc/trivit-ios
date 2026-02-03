@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Trivit.createdAt) private var trivits: [Trivit]
+    @Query(sort: \Trivit.sortOrder) private var trivits: [Trivit]
     @EnvironmentObject var syncService: SyncService
     @State private var showingSettings = false
 
@@ -93,13 +93,7 @@ struct ContentView: View {
         ScrollView {
             LazyVStack(spacing: 8) {
                 ForEach(trivits) { trivit in
-                    NavigationLink {
-                        TrivitDetailView(trivit: trivit)
-                            .environmentObject(syncService)
-                    } label: {
-                        TrivitRowView(trivit: trivit)
-                    }
-                    .buttonStyle(.plain)
+                    TrivitRowView(trivit: trivit, syncService: syncService)
                 }
             }
             .padding(.horizontal, 4)

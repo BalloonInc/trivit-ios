@@ -8,6 +8,9 @@
 import Foundation
 import WatchConnectivity
 import SwiftData
+import os.log
+
+private let logger = Logger(subsystem: "com.wouterdevriendt.trivit", category: "WatchSync")
 
 @MainActor
 class WatchSyncService: NSObject, ObservableObject {
@@ -21,6 +24,7 @@ class WatchSyncService: NSObject, ObservableObject {
 
     override init() {
         super.init()
+        logger.info("📱 WatchSyncService initialized")
     }
 
     func configure(with modelContext: ModelContext) {
@@ -30,10 +34,11 @@ class WatchSyncService: NSObject, ObservableObject {
 
     private func setupWatchConnectivity() {
         guard WCSession.isSupported() else {
-            print("WatchConnectivity not supported on this device")
+            logger.warning("📱 WatchConnectivity not supported on this device")
             return
         }
 
+        logger.info("📱 Setting up WatchConnectivity...")
         session.delegate = self
         session.activate()
     }
@@ -41,13 +46,24 @@ class WatchSyncService: NSObject, ObservableObject {
     // MARK: - Sync All Trivits to Watch
 
     func syncAllTrivitsToWatch() {
-        guard session.isReachable, let modelContext = modelContext else {
-            print("Watch not reachable or no model context")
+        logger.info("📱 syncAllTrivitsToWatch called - isReachable: \(self.session.isReachable), hasContext: \(self.modelContext != nil)")
+
+        guard session.isReachable else {
+            logger.warning("📱 Watch not reachable, skipping sync")
+            return
+        }
+
+        guard let modelContext = modelContext else {
+            logger.error("📱 No model context available")
             return
         }
 
         do {
-            let descriptor = FetchDescriptor<Trivit>(sortBy: [SortDescriptor(\.sortOrder)])
+            // Only sync non-deleted trivits
+            let descriptor = FetchDescriptor<Trivit>(
+                predicate: #Predicate { $0.deletedAt == nil },
+                sortBy: [SortDescriptor(\.sortOrder)]
+            )
             let trivits = try modelContext.fetch(descriptor)
 
             let trivitsData = trivits.map { trivit -> [String: Any] in
@@ -67,21 +83,26 @@ class WatchSyncService: NSObject, ObservableObject {
                 "trivits": trivitsData
             ]
 
-            session.sendMessage(message, replyHandler: nil) { error in
-                print("Failed to sync all trivits to watch: \(error.localizedDescription)")
+            logger.info("📱 Sending \(trivits.count) trivits to watch...")
+
+            session.sendMessage(message, replyHandler: { response in
+                logger.info("📱 Watch acknowledged sync: \(response)")
+            }) { error in
+                logger.error("📱 Failed to sync to watch: \(error.localizedDescription)")
             }
 
-            print("Synced \(trivits.count) trivits to watch")
         } catch {
-            print("Failed to fetch trivits for sync: \(error)")
+            logger.error("📱 Failed to fetch trivits for sync: \(error)")
         }
     }
 
     // MARK: - Sync Single Trivit Update
 
     func syncTrivitToWatch(_ trivit: Trivit) {
+        logger.info("📱 syncTrivitToWatch: \(trivit.title) - isReachable: \(self.session.isReachable)")
+
         guard session.isReachable else {
-            print("Watch not reachable")
+            logger.warning("📱 Watch not reachable, skipping single sync")
             return
         }
 
@@ -101,7 +122,7 @@ class WatchSyncService: NSObject, ObservableObject {
         ]
 
         session.sendMessage(message, replyHandler: nil) { error in
-            print("Failed to sync trivit to watch: \(error.localizedDescription)")
+            logger.error("📱 Failed to sync trivit to watch: \(error.localizedDescription)")
         }
     }
 
@@ -207,30 +228,40 @@ class WatchSyncService: NSObject, ObservableObject {
 
 extension WatchSyncService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        logger.info("📱 WCSession activation completed - state: \(String(describing: activationState.rawValue)), paired: \(session.isPaired), reachable: \(session.isReachable)")
+
+        if let error = error {
+            logger.error("📱 WCSession activation error: \(error.localizedDescription)")
+        }
+
         DispatchQueue.main.async {
             self.isWatchPaired = session.isPaired
             self.isWatchReachable = session.isReachable
 
             if activationState == .activated && session.isReachable {
+                logger.info("📱 Watch is reachable, triggering initial sync...")
                 self.syncAllTrivitsToWatch()
             }
         }
     }
 
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {
-        // Handle session becoming inactive
+        logger.info("📱 WCSession became inactive")
     }
 
     nonisolated func sessionDidDeactivate(_ session: WCSession) {
-        // Reactivate session
+        logger.info("📱 WCSession deactivated, reactivating...")
         session.activate()
     }
 
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
+        logger.info("📱 Watch reachability changed: \(session.isReachable)")
+
         DispatchQueue.main.async {
             self.isWatchReachable = session.isReachable
 
             if session.isReachable {
+                logger.info("📱 Watch became reachable, triggering sync...")
                 self.syncAllTrivitsToWatch()
             }
         }
@@ -238,11 +269,11 @@ extension WatchSyncService: WCSessionDelegate {
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         guard let type = message["type"] as? String else {
-            print("⚠️ WatchSync: Received message without type: \(message)")
+            logger.warning("📱 Received message without type: \(String(describing: message))")
             return
         }
 
-        print("📱 WatchSync: Received message type: \(type)")
+        logger.info("📱 Received message from watch: \(type)")
 
         Task { @MainActor in
             switch type {

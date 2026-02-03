@@ -2,47 +2,79 @@
 //  TrivitRowView.swift
 //  Trivit Watch App
 //
-//  A colorful tally counter row - matching iOS app design
+//  A colorful tally counter row - tap to increment, chevron for detail
 //
 
 import SwiftUI
+import WatchKit
 
 struct TrivitRowView: View {
     let trivit: Trivit
+    let syncService: SyncService
 
     private var backgroundColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
     }
 
     var body: some View {
-        HStack(spacing: 8) {
-            // Title and tally marks
-            VStack(alignment: .leading, spacing: 4) {
-                Text(trivit.title)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.white)
-                    .lineLimit(1)
+        HStack(spacing: 0) {
+            // Main tappable area - increments count
+            Button {
+                incrementTrivit()
+            } label: {
+                HStack(spacing: 8) {
+                    // Title, count, and tally marks
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(trivit.title)
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.white)
+                            .lineLimit(1)
 
-                // Tally marks (simplified for watch)
-                if trivit.count > 0 {
-                    WatchTallyMarksView(count: trivit.count)
+                        // Compact tally marks
+                        if trivit.count > 0 {
+                            WatchTallyMarksView(count: trivit.count)
+                        }
+                    }
+
+                    Spacer(minLength: 4)
+
+                    // Prominent count display
+                    Text("\(trivit.count)")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(backgroundColor)
+                        .frame(width: 40, height: 40)
+                        .background(Color.white.opacity(0.95))
+                        .clipShape(Circle())
+                        .contentTransition(.numericText())
+                        .animation(.spring(response: 0.3), value: trivit.count)
                 }
+                .padding(.leading, 10)
+                .padding(.trailing, 6)
+                .padding(.vertical, 10)
             }
+            .buttonStyle(.plain)
 
-            Spacer(minLength: 4)
-
-            // Count display in circle
-            Text("\(trivit.count)")
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundColor(backgroundColor)
-                .frame(width: 32, height: 32)
-                .background(Color.white.opacity(0.95))
-                .clipShape(Circle())
+            // Navigation chevron to detail view
+            NavigationLink {
+                TrivitDetailView(trivit: trivit)
+                    .environmentObject(syncService)
+            } label: {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.white.opacity(0.7))
+                    .frame(width: 24)
+                    .frame(maxHeight: .infinity)
+            }
+            .buttonStyle(.plain)
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
         .background(backgroundColor)
-        .cornerRadius(10)
+        .cornerRadius(12)
+    }
+
+    private func incrementTrivit() {
+        trivit.count += 1
+        syncService.syncTrivitUpdate(trivit)
+        WKInterfaceDevice.current().play(.click)
     }
 }
 
@@ -97,9 +129,9 @@ struct WatchTallyGroupView: View {
 
 #Preview {
     List {
-        TrivitRowView(trivit: Trivit(title: "Push-ups", count: 42, colorIndex: 1))
-        TrivitRowView(trivit: Trivit(title: "Coffee", count: 3, colorIndex: 0))
-        TrivitRowView(trivit: Trivit(title: "Steps", count: 7, colorIndex: 3))
+        TrivitRowView(trivit: Trivit(title: "Push-ups", count: 42, colorIndex: 1), syncService: SyncService())
+        TrivitRowView(trivit: Trivit(title: "Coffee", count: 3, colorIndex: 0), syncService: SyncService())
+        TrivitRowView(trivit: Trivit(title: "Steps", count: 7, colorIndex: 3), syncService: SyncService())
     }
     .listStyle(.carousel)
 }
