@@ -113,6 +113,7 @@ struct TrivitListView: View {
                             },
                             onDelete: { deleteTrivit(trivit) }
                         )
+                        .opacity(draggingTrivit?.id == trivit.id ? 0.5 : 1.0)
                         .id(trivit.id)
                         .draggable(trivit.id.uuidString) {
                             // Drag preview
@@ -123,19 +124,20 @@ struct TrivitListView: View {
                                 onDelete: {}
                             )
                             .frame(width: 300)
-                            .opacity(0.8)
+                            .opacity(0.9)
                             .onAppear { draggingTrivit = trivit }
                         }
                         .dropDestination(for: String.self) { items, _ in
-                            guard let droppedId = items.first,
-                                  let fromTrivit = draggingTrivit,
-                                  fromTrivit.id.uuidString != trivit.id.uuidString else {
-                                return false
-                            }
-                            reorderTrivit(from: fromTrivit, to: trivit)
+                            draggingTrivit = nil
                             return true
                         } isTargeted: { isTargeted in
-                            // Optional: visual feedback when dragging over
+                            // Live reorder when dragging over this item
+                            if isTargeted, let fromTrivit = draggingTrivit,
+                               fromTrivit.id != trivit.id {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    reorderTrivit(from: fromTrivit, to: trivit)
+                                }
+                            }
                         }
                     }
 
@@ -161,6 +163,8 @@ struct TrivitListView: View {
         let sourceIndex = trivits.firstIndex(where: { $0.id == source.id }) ?? 0
         let destIndex = trivits.firstIndex(where: { $0.id == destination.id }) ?? 0
 
+        guard sourceIndex != destIndex else { return }
+
         var reordered = trivits.map { $0 }
         let item = reordered.remove(at: sourceIndex)
         reordered.insert(item, at: destIndex)
@@ -170,8 +174,7 @@ struct TrivitListView: View {
             trivit.sortOrder = index
         }
 
-        HapticsService.shared.impact(.medium)
-        draggingTrivit = nil
+        HapticsService.shared.impact(.light)
     }
 
     @ToolbarContentBuilder
