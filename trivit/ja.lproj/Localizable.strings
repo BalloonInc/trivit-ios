@@ -91,3 +91,33 @@
 "Went swimming this year" = "今年の水泳回数";
 "Yes" = "はい";
 "Your feedback (optional)" = "フィードバック（任意）";
+
+/* Settings - General (new) */
+"Hide Counter When Expanded" = "展開時にカウンターを非表示";
+
+/* Deleted Items */
+"Deleted Items" = "削除済み項目";
+"Recently Deleted" = "最近削除した項目";
+"No Deleted Items" = "削除済み項目はありません";
+"Items you delete will appear here for 30 days" = "削除した項目は30日間ここに表示されます";
+"Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently." = "30日後に完全に削除されます。右にスワイプで復元、左にスワイプで完全削除。";
+"Empty Trash" = "ゴミ箱を空にする";
+"Restore" = "復元";
+
+/* Undo Toast */
+"Deleted \"%@\"" = "「%@」を削除しました";
+"Undo" = "元に戻す";
+
+/* Tutorial */
+"Welcome to Trivit" = "Trivitへようこそ";
+"Tap + to add a new counter" = "+ をタップして新しいカウンターを追加";
+"Long press and drag to reorder" = "長押ししてドラッグで並べ替え";
+"Long press a counter for more options" = "長押しでオプションを表示";
+"Got it" = "わかりました";
+
+/* Context Menu */
+"Statistics" = "統計";
+"History" = "履歴";
+"Open Source" = "オープンソース";
+"Source Code" = "ソースコード";
+"Report Translation Issue" = "翻訳の問題を報告";

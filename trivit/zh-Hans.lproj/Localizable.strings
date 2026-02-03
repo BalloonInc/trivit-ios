@@ -91,3 +91,33 @@
 "Went swimming this year" = "今年游泳次数";
 "Yes" = "是";
 "Your feedback (optional)" = "您的反馈（可选）";
+
+/* Settings - General (new) */
+"Hide Counter When Expanded" = "展开时隐藏计数";
+
+/* Deleted Items */
+"Deleted Items" = "已删除项目";
+"Recently Deleted" = "最近删除";
+"No Deleted Items" = "没有已删除项目";
+"Items you delete will appear here for 30 days" = "您删除的项目将在此处保留30天";
+"Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently." = "项目将在30天后永久删除。向右滑动可恢复，向左滑动可永久删除。";
+"Empty Trash" = "清空回收站";
+"Restore" = "恢复";
+
+/* Undo Toast */
+"Deleted \"%@\"" = "已删除 \"%@\"";
+"Undo" = "撤销";
+
+/* Tutorial */
+"Welcome to Trivit" = "欢迎使用 Trivit";
+"Tap + to add a new counter" = "点击 + 添加新计数器";
+"Long press and drag to reorder" = "长按拖动可重新排序";
+"Long press a counter for more options" = "长按计数器查看更多选项";
+"Got it" = "知道了";
+
+/* Context Menu */
+"Statistics" = "统计";
+"History" = "历史记录";
+"Open Source" = "开源";
+"Source Code" = "源代码";
+"Report Translation Issue" = "报告翻译问题";

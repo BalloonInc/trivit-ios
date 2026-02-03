@@ -91,3 +91,33 @@
 "Went swimming this year" = "Zwemmen dit jaar";
 "Yes" = "Ja";
 "Your feedback (optional)" = "Je feedback (optioneel)";
+
+/* Settings - General (new) */
+"Hide Counter When Expanded" = "Verberg teller bij uitklappen";
+
+/* Deleted Items */
+"Deleted Items" = "Verwijderde items";
+"Recently Deleted" = "Recent verwijderd";
+"No Deleted Items" = "Geen verwijderde items";
+"Items you delete will appear here for 30 days" = "Items die je verwijdert verschijnen hier 30 dagen";
+"Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently." = "Items worden na 30 dagen definitief verwijderd. Veeg naar rechts om te herstellen, veeg naar links om definitief te verwijderen.";
+"Empty Trash" = "Prullenbak legen";
+"Restore" = "Herstellen";
+
+/* Undo Toast */
+"Deleted \"%@\"" = "\"%@\" verwijderd";
+"Undo" = "Ongedaan maken";
+
+/* Tutorial */
+"Welcome to Trivit" = "Welkom bij Trivit";
+"Tap + to add a new counter" = "Tik op + om een nieuwe teller toe te voegen";
+"Long press and drag to reorder" = "Houd ingedrukt en sleep om te herordenen";
+"Long press a counter for more options" = "Houd een teller ingedrukt voor meer opties";
+"Got it" = "Begrepen";
+
+/* Context Menu */
+"Statistics" = "Statistieken";
+"History" = "Geschiedenis";
+"Open Source" = "Open source";
+"Source Code" = "Broncode";
+"Report Translation Issue" = "Vertaalfout melden";

@@ -91,3 +91,33 @@
 "Went swimming this year" = "Schwimmen dieses Jahr";
 "Yes" = "Ja";
 "Your feedback (optional)" = "Dein Feedback (optional)";
+
+/* Settings - General (new) */
+"Hide Counter When Expanded" = "Zähler ausblenden wenn erweitert";
+
+/* Deleted Items */
+"Deleted Items" = "Gelöschte Elemente";
+"Recently Deleted" = "Zuletzt gelöscht";
+"No Deleted Items" = "Keine gelöschten Elemente";
+"Items you delete will appear here for 30 days" = "Gelöschte Elemente werden hier 30 Tage lang angezeigt";
+"Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently." = "Elemente werden nach 30 Tagen endgültig gelöscht. Wische nach rechts zum Wiederherstellen, nach links zum endgültigen Löschen.";
+"Empty Trash" = "Papierkorb leeren";
+"Restore" = "Wiederherstellen";
+
+/* Undo Toast */
+"Deleted \"%@\"" = "\"%@\" gelöscht";
+"Undo" = "Rückgängig";
+
+/* Tutorial */
+"Welcome to Trivit" = "Willkommen bei Trivit";
+"Tap + to add a new counter" = "Tippe auf + um einen neuen Zähler hinzuzufügen";
+"Long press and drag to reorder" = "Lange drücken und ziehen zum Neuordnen";
+"Long press a counter for more options" = "Lange auf einen Zähler drücken für weitere Optionen";
+"Got it" = "Verstanden";
+
+/* Context Menu */
+"Statistics" = "Statistiken";
+"History" = "Verlauf";
+"Open Source" = "Open Source";
+"Source Code" = "Quellcode";
+"Report Translation Issue" = "Übersetzungsfehler melden";
