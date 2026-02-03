@@ -16,6 +16,7 @@
 - [x] Auto-edit mode when creating new trivit
 - [x] Removed unused "Show Total Count" setting
 - [x] Removed "Expand/Collapse" from context menu
+- [x] Localized 50 example trivit names in 20 languages
 
 #### Phase 2.6: UI Redesign (Feb 3, 2026) ✅
 - [x] Redesigned row layout to match original app screenshot
