@@ -28,6 +28,7 @@ struct SettingsView: View {
     @AppStorage("enableHaptics") private var enableHaptics = true
     @AppStorage("hideCounterWhenExpanded") private var hideCounterWhenExpanded = true
     @AppStorage("colorScheme") private var selectedColorScheme = ColorScheme.vibrant.rawValue
+    @ObservedObject private var watchSync = WatchSyncService.shared
 
     @Query(filter: #Predicate<Trivit> { $0.deletedAt != nil })
     private var deletedTrivits: [Trivit]
@@ -54,18 +55,46 @@ struct SettingsView: View {
                     .labelsHidden()
                 }
 
-                Section("Sync Info") {
+                Section("Watch Sync") {
                     HStack {
-                        Text("Trivits Synced")
+                        Text("Watch Paired")
                         Spacer()
-                        Text("\(trivits.count)")
-                            .foregroundColor(.secondary)
+                        Image(systemName: watchSync.isWatchPaired ? "checkmark.circle.fill" : "xmark.circle")
+                            .foregroundColor(watchSync.isWatchPaired ? .green : .secondary)
                     }
 
                     HStack {
-                        Text("Last Sync")
+                        Text("Watch Reachable")
                         Spacer()
-                        Text("--")
+                        Image(systemName: watchSync.isWatchReachable ? "checkmark.circle.fill" : "xmark.circle")
+                            .foregroundColor(watchSync.isWatchReachable ? .green : .secondary)
+                    }
+
+                    Button {
+                        watchSync.syncAllTrivitsToWatch()
+                        HapticsService.shared.impact(.medium)
+                    } label: {
+                        HStack {
+                            Text("Sync to Watch")
+                            Spacer()
+                            if watchSync.isWatchReachable {
+                                Image(systemName: "arrow.triangle.2.circlepath")
+                                    .foregroundColor(.blue)
+                            } else {
+                                Text("Not reachable")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                    .disabled(!watchSync.isWatchReachable)
+                }
+
+                Section("Info") {
+                    HStack {
+                        Text("Trivits")
+                        Spacer()
+                        Text("\(trivits.count)")
                             .foregroundColor(.secondary)
                     }
 

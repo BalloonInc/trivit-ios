@@ -51,6 +51,8 @@ struct TrivitApp: App {
     }()
 
     init() {
+        print("📱 ======== TRIVIT APP STARTING ========")
+        print("📱 TrivitApp.init() called")
         // Initialize Firebase Analytics & Crashlytics
         AnalyticsService.shared.configure()
     }
@@ -59,9 +61,11 @@ struct TrivitApp: App {
         WindowGroup {
             TrivitListView()
                 .onAppear {
+                    print("📱 TrivitListView.onAppear - configuring watch sync")
                     // Configure watch sync with the model context
                     let context = sharedModelContainer.mainContext
                     watchSyncService.configure(with: context)
+                    print("📱 Watch sync configured - paired: \(watchSyncService.isWatchPaired), reachable: \(watchSyncService.isWatchReachable)")
                 }
         }
         .modelContainer(sharedModelContainer)
