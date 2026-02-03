@@ -345,11 +345,20 @@ extension SyncService: WCSessionDelegate {
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        print("⌚ DELEGATE: didReceiveMessage keys=\(message.keys)")
+        handleIncomingMessage(message, replyHandler: nil)
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+        handleIncomingMessage(message, replyHandler: replyHandler)
+    }
+
+    private nonisolated func handleIncomingMessage(_ message: [String: Any], replyHandler: (([String: Any]) -> Void)?) {
+        print("⌚ DELEGATE: didReceiveMessage keys=\(message.keys) hasReplyHandler=\(replyHandler != nil)")
 
         guard let type = message["type"] as? String else {
             print("⌚ DELEGATE: message has no type!")
             logger.warning("⌚ Received message without type")
+            replyHandler?(["status": "error", "message": "No type"])
             return
         }
 
@@ -363,20 +372,30 @@ extension SyncService: WCSessionDelegate {
                     self.handleFullSync(trivitsData: trivitsData)
                     self.isSyncing = false
                     self.lastSyncSuccess = true
+                    replyHandler?(["status": "ok", "count": trivitsData.count])
+                } else {
+                    replyHandler?(["status": "error", "message": "No trivits data"])
                 }
 
             case "trivitUpdate":
                 if let data = message["data"] as? [String: Any] {
                     self.handleSingleUpdate(data: data)
+                    replyHandler?(["status": "ok"])
+                } else {
+                    replyHandler?(["status": "error", "message": "No data"])
                 }
 
             case "trivitDelete":
                 if let id = message["id"] as? String {
                     self.handleDeletion(id: id)
+                    replyHandler?(["status": "ok"])
+                } else {
+                    replyHandler?(["status": "error", "message": "No id"])
                 }
 
             default:
                 logger.warning("⌚ Unknown message type: \(type)")
+                replyHandler?(["status": "error", "message": "Unknown type"])
             }
         }
     }
