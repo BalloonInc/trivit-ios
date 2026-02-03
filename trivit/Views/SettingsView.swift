@@ -173,6 +173,37 @@ struct SettingsView: View {
                         Text("Reset All Trivits")
                     }
                 }
+
+                #if DEBUG
+                Section("Debug") {
+                    Button {
+                        print("📱 DEBUG: Manual sync to watch triggered")
+                        watchSync.syncAllTrivitsToWatch()
+                        HapticsService.shared.notification(.success)
+                    } label: {
+                        HStack {
+                            Text("Force Sync to Watch")
+                            Spacer()
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .foregroundColor(.orange)
+                        }
+                    }
+
+                    HStack {
+                        Text("Session Activated")
+                        Spacer()
+                        Text(watchSync.isWatchPaired ? "Yes" : "No")
+                            .foregroundColor(.secondary)
+                    }
+
+                    HStack {
+                        Text("Watch Reachable")
+                        Spacer()
+                        Text(watchSync.isWatchReachable ? "Yes" : "No")
+                            .foregroundColor(watchSync.isWatchReachable ? .green : .red)
+                    }
+                }
+                #endif
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
