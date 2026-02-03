@@ -18,19 +18,32 @@ class SyncService: NSObject, ObservableObject {
 
     private let session = WCSession.default
     private var modelContext: ModelContext?
+    private var pendingSyncOnConfigure = false
 
     @Published var isConnected = false
     @Published var isReachable = false
     @Published var lastSyncDate: Date?
+    @Published var isSyncing = false
+    @Published var lastSyncError: String?
+    @Published var lastSyncSuccess = false
 
     override init() {
         super.init()
         logger.info("⌚ SyncService initialized")
+        // Start WatchConnectivity immediately so we're ready when iPhone becomes reachable
+        setupWatchConnectivity()
     }
 
     func configure(with modelContext: ModelContext) {
+        logger.info("⌚ SyncService configured with modelContext")
         self.modelContext = modelContext
-        setupWatchConnectivity()
+
+        // If we got a sync request before being configured, do it now
+        if pendingSyncOnConfigure {
+            logger.info("⌚ Processing pending sync request")
+            pendingSyncOnConfigure = false
+            requestSync()
+        }
     }
 
     // MARK: - Watch Connectivity Setup
@@ -45,18 +58,42 @@ class SyncService: NSObject, ObservableObject {
     // MARK: - Request Sync from iPhone
 
     func requestSync() {
-        logger.info("⌚ requestSync called - isReachable: \(self.session.isReachable)")
+        logger.info("⌚ requestSync called - isReachable: \(self.session.isReachable), hasModelContext: \(self.modelContext != nil)")
 
-        guard session.isReachable else {
-            logger.warning("⌚ iPhone not reachable for sync")
+        // If we don't have modelContext yet, defer the sync until configured
+        guard modelContext != nil else {
+            logger.warning("⌚ No modelContext yet, deferring sync")
+            pendingSyncOnConfigure = true
             return
         }
 
+        guard session.isReachable else {
+            logger.warning("⌚ iPhone not reachable for sync")
+            lastSyncError = "iPhone not reachable"
+            lastSyncSuccess = false
+            return
+        }
+
+        isSyncing = true
+        lastSyncError = nil
+        lastSyncSuccess = false
+        logger.info("⌚ Sending sync request to iPhone...")
+
         let message: [String: Any] = ["type": "requestSync"]
-        session.sendMessage(message, replyHandler: { response in
-            logger.info("⌚ Sync response: \(String(describing: response))")
-        }) { error in
+        session.sendMessage(message, replyHandler: { [weak self] response in
+            logger.info("⌚ Sync response received: \(String(describing: response))")
+            Task { @MainActor in
+                self?.isSyncing = false
+                self?.lastSyncSuccess = true
+                self?.lastSyncError = nil
+            }
+        }) { [weak self] error in
             logger.error("⌚ Sync request failed: \(error.localizedDescription)")
+            Task { @MainActor in
+                self?.isSyncing = false
+                self?.lastSyncError = error.localizedDescription
+                self?.lastSyncSuccess = false
+            }
         }
     }
 
@@ -270,13 +307,15 @@ extension SyncService: WCSessionDelegate {
             logger.error("⌚ WCSession activation error: \(error.localizedDescription)")
         }
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             self.isConnected = activationState == .activated
             self.isReachable = session.isReachable
 
             if activationState == .activated && session.isReachable {
-                logger.info("⌚ iPhone reachable, requesting sync...")
+                logger.info("⌚ iPhone reachable on activation, requesting sync...")
                 self.requestSync()
+            } else if activationState == .activated {
+                logger.info("⌚ WCSession activated but iPhone not reachable yet")
             }
         }
     }
@@ -284,7 +323,7 @@ extension SyncService: WCSessionDelegate {
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
         logger.info("⌚ iPhone reachability changed: \(session.isReachable)")
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             self.isReachable = session.isReachable
 
             if session.isReachable {
@@ -302,11 +341,13 @@ extension SyncService: WCSessionDelegate {
 
         logger.info("⌚ Received message from iPhone: \(type)")
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             switch type {
             case "trivitsSync":
                 if let trivitsData = message["trivits"] as? [[String: Any]] {
                     self.handleFullSync(trivitsData: trivitsData)
+                    self.isSyncing = false
+                    self.lastSyncSuccess = true
                 }
 
             case "trivitUpdate":

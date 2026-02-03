@@ -16,31 +16,42 @@ private let logger = Logger(subsystem: "com.wouterdevriendt.trivit", category: "
 class WatchSyncService: NSObject, ObservableObject {
     static let shared = WatchSyncService()
 
-    private let session = WCSession.default
+    private let session: WCSession
     private var modelContext: ModelContext?
+    private var isSessionActivated = false
 
     @Published var isWatchPaired = false
     @Published var isWatchReachable = false
 
     override init() {
+        // Store session reference before super.init()
+        self.session = WCSession.default
+
         super.init()
-        logger.info("📱 WatchSyncService initialized")
+
+        logger.info("WatchSyncService init() - starting immediate setup")
+
+        // Set delegate and activate IMMEDIATELY in init
+        // This ensures we're ready before the watch tries to connect
+        if WCSession.isSupported() {
+            logger.info("WatchConnectivity supported, setting delegate and activating NOW")
+            session.delegate = self
+            session.activate()
+            logger.info("WCSession.activate() called from init()")
+        } else {
+            logger.warning("WatchConnectivity not supported on this device")
+        }
     }
 
     func configure(with modelContext: ModelContext) {
+        logger.info("configure() called with modelContext")
         self.modelContext = modelContext
-        setupWatchConnectivity()
-    }
 
-    private func setupWatchConnectivity() {
-        guard WCSession.isSupported() else {
-            logger.warning("📱 WatchConnectivity not supported on this device")
-            return
+        // If already activated and watch is reachable, sync now
+        if isSessionActivated && session.isReachable {
+            logger.info("Already activated and reachable, triggering sync")
+            syncAllTrivitsToWatch()
         }
-
-        logger.info("📱 Setting up WatchConnectivity...")
-        session.delegate = self
-        session.activate()
     }
 
     // MARK: - Sync All Trivits to Watch
@@ -129,7 +140,12 @@ class WatchSyncService: NSObject, ObservableObject {
     // MARK: - Sync Trivit Deletion
 
     func syncTrivitDeletion(_ trivitId: UUID) {
-        guard session.isReachable else { return }
+        logger.info("syncTrivitDeletion: \(trivitId.uuidString) - isReachable: \(self.session.isReachable)")
+
+        guard session.isReachable else {
+            logger.warning("Watch not reachable, skipping deletion sync")
+            return
+        }
 
         let message: [String: Any] = [
             "type": "trivitDelete",
@@ -137,7 +153,7 @@ class WatchSyncService: NSObject, ObservableObject {
         ]
 
         session.sendMessage(message, replyHandler: nil) { error in
-            print("Failed to sync trivit deletion to watch: \(error.localizedDescription)")
+            logger.error("Failed to sync trivit deletion to watch: \(error.localizedDescription)")
         }
     }
 
@@ -145,7 +161,7 @@ class WatchSyncService: NSObject, ObservableObject {
 
     private func handleTrivitUpdate(from data: [String: Any]) {
         guard let modelContext = modelContext else {
-            print("⚠️ WatchSync: No modelContext available for trivit update")
+            logger.warning("handleTrivitUpdate: No modelContext available")
             return
         }
 
@@ -154,11 +170,11 @@ class WatchSyncService: NSObject, ObservableObject {
               let title = data["title"] as? String,
               let count = data["count"] as? Int,
               let colorIndex = data["colorIndex"] as? Int else {
-            print("⚠️ WatchSync: Invalid data in trivit update: \(data)")
+            logger.warning("handleTrivitUpdate: Invalid data - keys: \(data.keys)")
             return
         }
 
-        print("📱 WatchSync: Received trivit update - \(title) count: \(count)")
+        logger.info("handleTrivitUpdate: \(title) count=\(count)")
 
         // Try to find existing trivit
         let descriptor = FetchDescriptor<Trivit>(predicate: #Predicate { $0.id == id })
@@ -172,7 +188,7 @@ class WatchSyncService: NSObject, ObservableObject {
                 existingTrivit.count = count
                 existingTrivit.colorIndex = colorIndex
                 existingTrivit.isCollapsed = data["isCollapsed"] as? Bool ?? true
-                print("📱 WatchSync: Updated existing trivit")
+                logger.info("handleTrivitUpdate: Updated existing trivit")
             } else {
                 // Create new - get max sortOrder first
                 let sortDescriptor = FetchDescriptor<Trivit>(sortBy: [SortDescriptor(\.sortOrder, order: .reverse)])
@@ -188,27 +204,27 @@ class WatchSyncService: NSObject, ObservableObject {
                     sortOrder: maxSortOrder + 1
                 )
                 modelContext.insert(newTrivit)
-                print("📱 WatchSync: Created new trivit from watch update")
+                logger.info("handleTrivitUpdate: Created new trivit from watch")
             }
 
             try modelContext.save()
         } catch {
-            print("⚠️ WatchSync: Failed to handle trivit update from watch: \(error)")
+            logger.error("handleTrivitUpdate: Failed - \(error.localizedDescription)")
         }
     }
 
     private func handleTrivitDeletion(id: String) {
         guard let modelContext = modelContext else {
-            print("⚠️ WatchSync: No modelContext available for deletion")
+            logger.warning("handleTrivitDeletion: No modelContext available")
             return
         }
 
         guard let uuid = UUID(uuidString: id) else {
-            print("⚠️ WatchSync: Invalid UUID for deletion: \(id)")
+            logger.warning("handleTrivitDeletion: Invalid UUID: \(id)")
             return
         }
 
-        print("📱 WatchSync: Received deletion request for \(id)")
+        logger.info("handleTrivitDeletion: \(id)")
 
         let descriptor = FetchDescriptor<Trivit>(predicate: #Predicate { $0.id == uuid })
 
@@ -217,9 +233,12 @@ class WatchSyncService: NSObject, ObservableObject {
             if let trivitToDelete = results.first {
                 modelContext.delete(trivitToDelete)
                 try modelContext.save()
+                logger.info("handleTrivitDeletion: Deleted successfully")
+            } else {
+                logger.info("handleTrivitDeletion: Trivit not found (may already be deleted)")
             }
         } catch {
-            print("Failed to handle trivit deletion from watch: \(error)")
+            logger.error("handleTrivitDeletion: Failed - \(error.localizedDescription)")
         }
     }
 }
@@ -228,91 +247,127 @@ class WatchSyncService: NSObject, ObservableObject {
 
 extension WatchSyncService: WCSessionDelegate {
     nonisolated func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        logger.info("📱 WCSession activation completed - state: \(String(describing: activationState.rawValue)), paired: \(session.isPaired), reachable: \(session.isReachable)")
-
-        if let error = error {
-            logger.error("📱 WCSession activation error: \(error.localizedDescription)")
+        // Log immediately from nonisolated context
+        let stateStr: String
+        switch activationState {
+        case .notActivated: stateStr = "notActivated"
+        case .inactive: stateStr = "inactive"
+        case .activated: stateStr = "activated"
+        @unknown default: stateStr = "unknown(\(activationState.rawValue))"
         }
 
-        DispatchQueue.main.async {
+        logger.info("DELEGATE: activationDidCompleteWith state=\(stateStr) paired=\(session.isPaired) reachable=\(session.isReachable)")
+
+        if let error = error {
+            logger.error("DELEGATE: activation error: \(error.localizedDescription)")
+        }
+
+        Task { @MainActor in
+            self.isSessionActivated = true
             self.isWatchPaired = session.isPaired
             self.isWatchReachable = session.isReachable
 
-            if activationState == .activated && session.isReachable {
-                logger.info("📱 Watch is reachable, triggering initial sync...")
+            logger.info("MainActor: Updated state - paired=\(self.isWatchPaired) reachable=\(self.isWatchReachable) hasContext=\(self.modelContext != nil)")
+
+            if activationState == .activated && session.isReachable && self.modelContext != nil {
+                logger.info("MainActor: Watch is reachable and we have context, triggering initial sync...")
                 self.syncAllTrivitsToWatch()
+            } else if activationState == .activated && session.isReachable {
+                logger.info("MainActor: Watch is reachable but no modelContext yet - will sync when configure() is called")
             }
         }
     }
 
     nonisolated func sessionDidBecomeInactive(_ session: WCSession) {
-        logger.info("📱 WCSession became inactive")
+        logger.info("DELEGATE: sessionDidBecomeInactive")
     }
 
     nonisolated func sessionDidDeactivate(_ session: WCSession) {
-        logger.info("📱 WCSession deactivated, reactivating...")
+        logger.info("DELEGATE: sessionDidDeactivate - reactivating...")
         session.activate()
     }
 
     nonisolated func sessionReachabilityDidChange(_ session: WCSession) {
-        logger.info("📱 Watch reachability changed: \(session.isReachable)")
+        logger.info("DELEGATE: reachabilityDidChange reachable=\(session.isReachable)")
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             self.isWatchReachable = session.isReachable
 
-            if session.isReachable {
-                logger.info("📱 Watch became reachable, triggering sync...")
+            if session.isReachable && self.modelContext != nil {
+                logger.info("MainActor: Watch became reachable with context, triggering sync...")
                 self.syncAllTrivitsToWatch()
+            } else if session.isReachable {
+                logger.info("MainActor: Watch became reachable but no modelContext yet")
             }
         }
     }
 
     nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        guard let type = message["type"] as? String else {
-            logger.warning("📱 Received message without type: \(String(describing: message))")
+        handleMessage(message, replyHandler: nil)
+    }
+
+    nonisolated func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+        handleMessage(message, replyHandler: replyHandler)
+    }
+
+    private nonisolated func handleMessage(_ message: [String: Any], replyHandler: (([String: Any]) -> Void)?) {
+        let type = message["type"] as? String ?? "unknown"
+        logger.info("DELEGATE: didReceiveMessage type=\(type) hasReplyHandler=\(replyHandler != nil)")
+
+        guard type != "unknown" else {
+            logger.warning("DELEGATE: Received message without type: \(String(describing: message.keys))")
+            replyHandler?(["status": "error", "message": "Missing message type"])
             return
         }
 
-        logger.info("📱 Received message from watch: \(type)")
-
         Task { @MainActor in
+            logger.info("MainActor: Processing message type=\(type) hasContext=\(self.modelContext != nil)")
+
             switch type {
             case "requestSync":
+                logger.info("MainActor: Watch requested sync")
                 self.syncAllTrivitsToWatch()
+                replyHandler?(["status": "ok", "message": "Sync initiated"])
 
             case "trivitUpdate":
                 if let data = message["data"] as? [String: Any] {
                     self.handleTrivitUpdate(from: data)
+                    replyHandler?(["status": "ok"])
                 } else {
-                    print("⚠️ WatchSync: trivitUpdate missing data")
+                    logger.warning("MainActor: trivitUpdate missing data")
+                    replyHandler?(["status": "error", "message": "Missing data"])
                 }
 
             case "trivitDelete":
                 if let id = message["id"] as? String {
                     self.handleTrivitDeletion(id: id)
+                    replyHandler?(["status": "ok"])
                 } else {
-                    print("⚠️ WatchSync: trivitDelete missing id")
+                    logger.warning("MainActor: trivitDelete missing id")
+                    replyHandler?(["status": "error", "message": "Missing id"])
                 }
 
             case "createTrivit":
                 self.handleCreateTrivit(from: message)
+                replyHandler?(["status": "ok"])
 
             default:
-                print("⚠️ WatchSync: Unknown message type: \(type)")
+                logger.warning("MainActor: Unknown message type: \(type)")
+                replyHandler?(["status": "error", "message": "Unknown type"])
             }
         }
     }
 
     private func handleCreateTrivit(from message: [String: Any]) {
         guard let modelContext = modelContext else {
-            print("⚠️ WatchSync: No modelContext available for create")
+            logger.warning("handleCreateTrivit: No modelContext available")
             return
         }
 
         let title = message["title"] as? String ?? "New Trivit"
         let colorIndex = message["colorIndex"] as? Int ?? 0
 
-        print("📱 WatchSync: Creating trivit from watch - \(title)")
+        logger.info("handleCreateTrivit: \(title) colorIndex=\(colorIndex)")
 
         // Get max sortOrder to add at end
         let descriptor = FetchDescriptor<Trivit>(sortBy: [SortDescriptor(\.sortOrder, order: .reverse)])
@@ -327,11 +382,11 @@ extension WatchSyncService: WCSessionDelegate {
 
         do {
             try modelContext.save()
-            print("📱 WatchSync: Created trivit successfully, syncing back to watch")
+            logger.info("handleCreateTrivit: Created successfully, syncing back to watch")
             // Sync back to watch
             syncTrivitToWatch(newTrivit)
         } catch {
-            print("⚠️ WatchSync: Failed to create trivit from watch: \(error)")
+            logger.error("handleCreateTrivit: Failed - \(error.localizedDescription)")
         }
     }
 }

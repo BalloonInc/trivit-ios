@@ -13,6 +13,7 @@ struct WatchSettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trivits: [Trivit]
     @EnvironmentObject var syncService: SyncService
+    @State private var showSyncFeedback = false
 
     var body: some View {
         NavigationStack {
@@ -28,8 +29,56 @@ struct WatchSettingsView: View {
 
                     Button {
                         syncService.requestSync()
+                        showSyncFeedback = true
+                        // Hide feedback after 3 seconds
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            showSyncFeedback = false
+                        }
                     } label: {
-                        Label("Sync Now", systemImage: "arrow.triangle.2.circlepath")
+                        HStack {
+                            if syncService.isSyncing {
+                                ProgressView()
+                                    .frame(width: 16, height: 16)
+                                Text("Syncing...")
+                            } else {
+                                Image(systemName: "arrow.triangle.2.circlepath")
+                                Text("Sync Now")
+                            }
+                        }
+                    }
+                    .disabled(syncService.isSyncing || !syncService.isReachable)
+
+                    // Show sync feedback
+                    if showSyncFeedback {
+                        if syncService.lastSyncSuccess {
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                                Text("Sync complete")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.green)
+                            }
+                        } else if let error = syncService.lastSyncError {
+                            HStack {
+                                Image(systemName: "exclamationmark.circle.fill")
+                                    .foregroundColor(.red)
+                                Text(error)
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.red)
+                            }
+                        }
+                    }
+
+                    if let lastSync = syncService.lastSyncDate {
+                        HStack {
+                            Text("Last sync")
+                                .font(.system(size: 12))
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Text(lastSync, style: .relative)
+                                .font(.system(size: 12))
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 

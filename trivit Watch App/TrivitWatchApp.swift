@@ -7,6 +7,9 @@
 
 import SwiftUI
 import SwiftData
+import os.log
+
+private let logger = Logger(subsystem: "com.wouterdevriendt.trivit.watchkitapp", category: "WatchApp")
 
 @main
 struct TrivitWatchApp: App {
@@ -23,8 +26,10 @@ struct TrivitWatchApp: App {
         )
 
         do {
+            logger.info("⌚ Creating ModelContainer for watch app")
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
+            logger.error("⌚ Failed to create ModelContainer: \(error)")
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
@@ -34,6 +39,7 @@ struct TrivitWatchApp: App {
             ContentView()
                 .environmentObject(syncService)
                 .onAppear {
+                    logger.info("⌚ ContentView appeared, configuring sync service")
                     // Configure sync service with model context
                     let context = sharedModelContainer.mainContext
                     syncService.configure(with: context)

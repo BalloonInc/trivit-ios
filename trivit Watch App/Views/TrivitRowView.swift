@@ -2,7 +2,9 @@
 //  TrivitRowView.swift
 //  Trivit Watch App
 //
-//  A colorful tally counter row - tap to increment, chevron for detail
+//  A colorful tally counter row with two tap zones:
+//  - LEFT (80%): Tap to increment count
+//  - RIGHT (20%): Tap chevron to open detail view
 //
 
 import SwiftUI
@@ -17,58 +19,62 @@ struct TrivitRowView: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Main tappable area - increments count
-            Button {
-                incrementTrivit()
-            } label: {
-                HStack(spacing: 8) {
-                    // Title, count, and tally marks
-                    VStack(alignment: .leading, spacing: 4) {
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                // LEFT ZONE (80%): Tap to increment
+                Button {
+                    incrementTrivit()
+                } label: {
+                    VStack(alignment: .leading, spacing: 2) {
+                        // Title
                         Text(trivit.title)
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(.white)
                             .lineLimit(1)
 
-                        // Compact tally marks
-                        if trivit.count > 0 {
-                            WatchTallyMarksView(count: trivit.count)
+                        // Count display
+                        HStack(spacing: 6) {
+                            Text("\(trivit.count)")
+                                .font(.system(size: 24, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                                .contentTransition(.numericText())
+                                .animation(.spring(response: 0.3), value: trivit.count)
+
+                            // Compact tally preview
+                            if trivit.count > 0 {
+                                WatchTallyPreview(count: trivit.count)
+                            }
                         }
                     }
-
-                    Spacer(minLength: 4)
-
-                    // Prominent count display
-                    Text("\(trivit.count)")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
-                        .foregroundColor(backgroundColor)
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.95))
-                        .clipShape(Circle())
-                        .contentTransition(.numericText())
-                        .animation(.spring(response: 0.3), value: trivit.count)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding(.leading, 10)
+                    .padding(.vertical, 6)
                 }
-                .padding(.leading, 10)
-                .padding(.trailing, 6)
-                .padding(.vertical, 10)
-            }
-            .buttonStyle(.plain)
+                .buttonStyle(.plain)
+                .frame(width: geometry.size.width * 0.78)
 
-            // Navigation chevron to detail view
-            NavigationLink {
-                TrivitDetailView(trivit: trivit)
-                    .environmentObject(syncService)
-            } label: {
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.7))
-                    .frame(width: 24)
-                    .frame(maxHeight: .infinity)
+                // Divider line
+                Rectangle()
+                    .fill(Color.white.opacity(0.3))
+                    .frame(width: 1)
+                    .padding(.vertical, 8)
+
+                // RIGHT ZONE (20%): Tap to open details
+                NavigationLink {
+                    TrivitDetailView(trivit: trivit)
+                        .environmentObject(syncService)
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundColor(.white.opacity(0.9))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            .background(backgroundColor)
+            .cornerRadius(10)
         }
-        .background(backgroundColor)
-        .cornerRadius(12)
+        .frame(height: 52)
     }
 
     private func incrementTrivit() {
@@ -78,30 +84,27 @@ struct TrivitRowView: View {
     }
 }
 
-// MARK: - Simplified Tally Marks for Watch
-struct WatchTallyMarksView: View {
+// MARK: - Compact Tally Preview for Row
+// Shows a visual hint of tally marks, scrollable for large counts
+struct WatchTallyPreview: View {
     let count: Int
 
     var body: some View {
-        HStack(spacing: 4) {
-            let fullGroups = min(count / 5, 3) // Show max 3 groups on watch
-            let remainder = count % 5
-            let showRemainder = fullGroups < 3
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 3) {
+                let fullGroups = count / 5
+                let remainder = count % 5
 
-            ForEach(0..<fullGroups, id: \.self) { _ in
-                WatchTallyGroupView(count: 5)
-            }
+                ForEach(0..<fullGroups, id: \.self) { _ in
+                    WatchTallyGroupView(count: 5)
+                }
 
-            if showRemainder && remainder > 0 {
-                WatchTallyGroupView(count: remainder)
-            }
-
-            if count > 15 {
-                Text("+")
-                    .font(.system(size: 8, weight: .bold))
-                    .foregroundColor(.white.opacity(0.8))
+                if remainder > 0 {
+                    WatchTallyGroupView(count: remainder)
+                }
             }
         }
+        .frame(maxWidth: 80)
     }
 }
 
@@ -112,26 +115,31 @@ struct WatchTallyGroupView: View {
         HStack(spacing: 1) {
             ForEach(0..<min(count, 4), id: \.self) { _ in
                 Rectangle()
-                    .fill(Color.white.opacity(0.9))
-                    .frame(width: 1.5, height: 10)
+                    .fill(Color.white.opacity(0.85))
+                    .frame(width: 1.5, height: 12)
             }
             if count == 5 {
                 Rectangle()
-                    .fill(Color.white.opacity(0.9))
-                    .frame(width: 8, height: 1.5)
+                    .fill(Color.white.opacity(0.85))
+                    .frame(width: 9, height: 1.5)
                     .rotationEffect(.degrees(-65))
                     .offset(x: -5)
             }
         }
-        .frame(width: count == 5 ? 12 : CGFloat(count * 3), height: 12)
+        .frame(width: count == 5 ? 12 : CGFloat(count * 3), height: 14)
     }
 }
 
 #Preview {
-    List {
-        TrivitRowView(trivit: Trivit(title: "Push-ups", count: 42, colorIndex: 1), syncService: SyncService())
-        TrivitRowView(trivit: Trivit(title: "Coffee", count: 3, colorIndex: 0), syncService: SyncService())
-        TrivitRowView(trivit: Trivit(title: "Steps", count: 7, colorIndex: 3), syncService: SyncService())
+    NavigationStack {
+        ScrollView {
+            LazyVStack(spacing: 8) {
+                TrivitRowView(trivit: Trivit(title: "Push-ups", count: 42, colorIndex: 1), syncService: SyncService())
+                TrivitRowView(trivit: Trivit(title: "Coffee", count: 3, colorIndex: 0), syncService: SyncService())
+                TrivitRowView(trivit: Trivit(title: "Steps", count: 17, colorIndex: 3), syncService: SyncService())
+                TrivitRowView(trivit: Trivit(title: "Water", count: 0, colorIndex: 2), syncService: SyncService())
+            }
+            .padding(.horizontal, 4)
+        }
     }
-    .listStyle(.carousel)
 }
