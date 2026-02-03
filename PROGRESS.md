@@ -1,14 +1,27 @@
 # Trivit iOS - Modernization Progress
 
-## Current Status: UI Redesign Complete 🎨
+## Current Status: Feature Complete 🎉
 
 ### Completed Tasks
+
+#### Phase 3: UX Polish (Feb 3, 2026) ✅
+- [x] Swipe-to-delete with undo toast (5 second window)
+- [x] Soft delete with 30-day retention
+- [x] "Recently Deleted" section in Settings
+- [x] Drag-to-reorder with live visual feedback
+- [x] Smooth expand/collapse animations
+- [x] Hide counter when expanded (configurable setting)
+- [x] Tutorial overlay for first-time users
+- [x] Random example names for new trivits (50 examples)
+- [x] Auto-edit mode when creating new trivit
+- [x] Removed unused "Show Total Count" setting
+- [x] Removed "Expand/Collapse" from context menu
 
 #### Phase 2.6: UI Redesign (Feb 3, 2026) ✅
 - [x] Redesigned row layout to match original app screenshot
 - [x] Title bar: full color, slightly lighter text (cream/off-white)
 - [x] Collapsed state: just title + count number on right (no tallies)
-- [x] Expanded state: title + minus button, tally area below
+- [x] Expanded state: title bar, tally area below
 - [x] Small triangle indicator pointing from title to tally area (left-aligned)
 - [x] Tap title = toggle expand/collapse
 - [x] Tap tally area = increment count
@@ -38,36 +51,45 @@
 - [x] Update iOS deployment target to 17.0
 - [x] Configure App Groups for iOS/watchOS data sharing
 
-### Open GitHub Issues
+### Closed GitHub Issues
+- Issue #2: Configure App Groups ✅
+- Issue #3: Swipe-to-delete gesture ✅
+- Issue #4: Drag-to-reorder ✅
+- Issue #5: iCloud sync ✅
+- Issue #6: Tally mark fix ✅
+- Issue #7: Chinese tallies ✅
 
-| # | Issue | Priority |
-|---|-------|----------|
-| 5 | Add iCloud sync with CloudKit | Done (needs testing) |
-| 4 | Add drag-to-reorder for trivits | Medium |
-| 3 | Add swipe-to-delete gesture | Medium |
-| 2 | Configure App Groups for iOS/watchOS data sharing | Done |
+### Features Summary
+
+| Feature | Status |
+|---------|--------|
+| Add new trivit | ✅ Tap +, random example name, auto-edit |
+| Increment count | ✅ Tap tally area |
+| Decrement count | ✅ Short swipe left |
+| Delete trivit | ✅ Long swipe left (with undo) |
+| Reorder trivits | ✅ Long press and drag |
+| Expand/collapse | ✅ Tap title bar |
+| Edit title | ✅ Long press title |
+| Change color | ✅ Context menu |
+| Reset count | ✅ Context menu |
+| Statistics | ✅ Context menu |
+| History | ✅ Context menu |
+| Tutorial | ✅ First launch overlay |
+| Soft delete | ✅ 30-day retention |
+| Undo delete | ✅ 5-second toast |
 
 ### Next Up - Potential Features
 
-#### UI Polish (Priority: HIGH)
-- [ ] Dark mode appearance refinements
-- [ ] Settings screen cleanup
-
-#### Gestures (Priority: MEDIUM)
-- [ ] Drag-to-reorder trivits (Issue #4)
-- [ ] Swipe-to-delete gesture (Issue #3)
-
 #### Watch App (Priority: MEDIUM)
-- [ ] Remove legacy WatchKit Extension from Xcode project
+- [ ] Test watch→phone sync (logging added)
 - [ ] Improve watch app UI styling
-- [ ] Test data sync with iOS app
 
 #### Advanced Features (Priority: LOW)
 - [ ] Widget support
 - [ ] Siri shortcuts
 - [ ] Apple Watch complications
-- [ ] Statistics/history view improvements
 - [ ] Export to CSV
+- [ ] Dark mode refinements
 
 ## Architecture
 
@@ -75,16 +97,22 @@ See `ARCHITECTURE.md` for detailed architecture documentation.
 
 ## Known Issues
 
-1. Watch App needs App Groups configured in Apple Developer Portal
-2. Legacy WatchKit Extension still in Xcode project
+1. Watch→Phone sync may need debugging (logging added)
+2. Drag-to-reorder may interfere with long-press for context menu
 
 ## Recent Changes
 
-### Feb 3, 2026
-- Complete UI redesign matching original app
-- Expand/collapse now works properly (tap title to toggle)
-- Multiple items can be expanded at once
-- Closed issues #6 (tally marks) and #7 (Chinese tallies)
+### Feb 3, 2026 (Latest)
+- Added soft delete with 30-day retention and undo toast
+- Added drag-to-reorder with live visual feedback
+- Added swipe-to-delete (long swipe left)
+- Added tutorial overlay for first-time users
+- Added 50 example trivit names for new counters
+- Auto-edit mode when creating new trivit
+- Added "Hide Counter When Expanded" setting
+- Added "Recently Deleted" view in Settings
+- Removed "Show Total Count" and "Expand" context menu item
+- Smooth expand/collapse animations
 
 ### Jan 30, 2026
 - CloudKit and WatchConnectivity sync implemented
@@ -105,5 +133,5 @@ xcodebuild -workspace trivit.xcworkspace -scheme trivit -destination 'id=0000815
 xcrun devicectl device install app --device "00008150-001625E20AE2401C" ~/Library/Developer/Xcode/DerivedData/trivit-*/Build/Products/Debug-iphoneos/trivit.app
 
 # Trigger TestFlight
-gh workflow run 227871014 --repo BalloonInc/trivit-ios
+gh workflow run "TestFlight Internal" --repo BalloonInc/trivit-ios
 ```

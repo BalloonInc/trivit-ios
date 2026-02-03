@@ -41,6 +41,36 @@
 /* Settings - Data */
 "Reset All Trivits" = "Reset All Trivits";
 
+/* Settings - General (new) */
+"Hide Counter When Expanded" = "Hide Counter When Expanded";
+
+/* Deleted Items */
+"Deleted Items" = "Deleted Items";
+"Recently Deleted" = "Recently Deleted";
+"No Deleted Items" = "No Deleted Items";
+"Items you delete will appear here for 30 days" = "Items you delete will appear here for 30 days";
+"Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently." = "Items are permanently deleted after 30 days. Swipe right to restore, swipe left to delete permanently.";
+"Empty Trash" = "Empty Trash";
+"Restore" = "Restore";
+
+/* Undo Toast */
+"Deleted \"%@\"" = "Deleted \"%@\"";
+"Undo" = "Undo";
+
+/* Tutorial */
+"Welcome to Trivit" = "Welcome to Trivit";
+"Tap + to add a new counter" = "Tap + to add a new counter";
+"Long press and drag to reorder" = "Long press and drag to reorder";
+"Long press a counter for more options" = "Long press a counter for more options";
+"Got it" = "Got it";
+
+/* Context Menu */
+"Statistics" = "Statistics";
+"History" = "History";
+"Open Source" = "Open Source";
+"Source Code" = "Source Code";
+"Report Translation Issue" = "Report Translation Issue";
+
 /* Color Scheme Names */
 "Vibrant" = "Vibrant";
 "Pastel" = "Pastel";

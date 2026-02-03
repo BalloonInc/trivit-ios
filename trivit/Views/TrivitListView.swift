@@ -8,6 +8,60 @@
 import SwiftUI
 import SwiftData
 
+// Example habit/counter names for new trivits
+private let exampleTrivitNames = [
+    "Days without candy",
+    "Push-ups today",
+    "Glasses of water",
+    "Books read",
+    "Meetings attended",
+    "Miles walked",
+    "Coffees consumed",
+    "Hours of sleep",
+    "Minutes meditated",
+    "Workouts completed",
+    "Steps taken (thousands)",
+    "Fruit servings eaten",
+    "Pages read",
+    "Phone pickups",
+    "Gratitude moments",
+    "Acts of kindness",
+    "Photos taken",
+    "Songs listened to",
+    "Calories burned",
+    "Stretch sessions",
+    "Deep breaths taken",
+    "Compliments given",
+    "New words learned",
+    "Emails sent",
+    "Tasks completed",
+    "Money saved ($)",
+    "Vegetables eaten",
+    "No-spend days",
+    "Early wake-ups",
+    "Screen-free hours",
+    "Journaling sessions",
+    "Cold showers",
+    "Healthy meals",
+    "Snacks avoided",
+    "Flights of stairs",
+    "Minutes of reading",
+    "Cups of tea",
+    "Positive thoughts",
+    "Networking contacts",
+    "Creative ideas",
+    "Home workouts",
+    "Yoga sessions",
+    "Bike rides",
+    "Swimming laps",
+    "Alcohol-free days",
+    "Puzzles solved",
+    "Languages practiced",
+    "Podcast episodes",
+    "Thank you notes",
+    "Random acts of kindness"
+]
+
 struct TrivitListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(filter: #Predicate<Trivit> { $0.deletedAt == nil }, sort: \Trivit.sortOrder)
@@ -18,6 +72,8 @@ struct TrivitListView: View {
     @State private var draggingTrivit: Trivit?
     @State private var deletedTrivit: Trivit?
     @State private var showUndoToast = false
+    @State private var editingTrivitId: UUID?
+    @AppStorage("hasSeenTutorial") private var hasSeenTutorial = false
 
     var body: some View {
         NavigationStack {
@@ -40,7 +96,64 @@ struct TrivitListView: View {
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
             }
+            .overlay {
+                if !hasSeenTutorial {
+                    tutorialOverlay
+                }
+            }
         }
+    }
+
+    private var tutorialOverlay: some View {
+        ZStack {
+            // Semi-transparent dark background
+            Color.black.opacity(0.75)
+                .ignoresSafeArea()
+
+            // Tutorial content
+            VStack(spacing: 32) {
+                Text("Welcome to Trivit")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+
+                VStack(alignment: .leading, spacing: 24) {
+                    TutorialTipRow(
+                        icon: "plus.circle.fill",
+                        text: "Tap + to add a new counter"
+                    )
+
+                    TutorialTipRow(
+                        icon: "arrow.up.arrow.down",
+                        text: "Long press and drag to reorder"
+                    )
+
+                    TutorialTipRow(
+                        icon: "hand.tap.fill",
+                        text: "Long press a counter for more options"
+                    )
+                }
+
+                Button {
+                    withAnimation {
+                        hasSeenTutorial = true
+                    }
+                    HapticsService.shared.impact(.light)
+                } label: {
+                    Text("Got it")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(TrivitColors.color(at: 0))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .padding(.top, 8)
+            }
+            .padding(32)
+            .frame(maxWidth: 320)
+        }
+        .transition(.opacity)
     }
 
     private func undoToast(for trivit: Trivit) -> some View {
@@ -102,6 +215,7 @@ struct TrivitListView: View {
                         TrivitRowView(
                             trivit: trivit,
                             isExpanded: expandedTrivitIds.contains(trivit.id),
+                            startEditing: editingTrivitId == trivit.id,
                             onToggleExpand: {
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     if expandedTrivitIds.contains(trivit.id) {
@@ -111,7 +225,12 @@ struct TrivitListView: View {
                                     }
                                 }
                             },
-                            onDelete: { deleteTrivit(trivit) }
+                            onDelete: { deleteTrivit(trivit) },
+                            onEditingChanged: { isEditing in
+                                if !isEditing && editingTrivitId == trivit.id {
+                                    editingTrivitId = nil
+                                }
+                            }
                         )
                         .opacity(draggingTrivit?.id == trivit.id ? 0.5 : 1.0)
                         .id(trivit.id)
@@ -120,8 +239,10 @@ struct TrivitListView: View {
                             TrivitRowView(
                                 trivit: trivit,
                                 isExpanded: false,
+                                startEditing: false,
                                 onToggleExpand: {},
-                                onDelete: {}
+                                onDelete: {},
+                                onEditingChanged: { _ in }
                             )
                             .frame(width: 300)
                             .opacity(0.9)
@@ -205,17 +326,24 @@ struct TrivitListView: View {
             // Set sort order to be at the end
             let maxSortOrder = trivits.map { $0.sortOrder }.max() ?? -1
 
+            // Pick a random example name for the new trivit
+            let randomTitle = exampleTrivitNames.randomElement() ?? "New Trivit"
+
             let newTrivit = Trivit(
-                title: "New Trivit",
+                title: randomTitle,
                 colorIndex: nextColorIndex,
                 sortOrder: maxSortOrder + 1
             )
             modelContext.insert(newTrivit)
             HapticsService.shared.impact(.medium)
 
-            // Scroll to bottom after a short delay to allow the view to update
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            // Expand the new trivit and trigger edit mode
+            expandedTrivitIds.insert(newTrivit.id)
+
+            // Scroll to bottom and trigger edit mode after a short delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 scrollToBottom = true
+                editingTrivitId = newTrivit.id
             }
         }
     }
@@ -246,6 +374,26 @@ struct TrivitListView: View {
             showUndoToast = false
             deletedTrivit = nil
             HapticsService.shared.impact(.medium)
+        }
+    }
+}
+
+// MARK: - Tutorial Tip Row
+
+private struct TutorialTipRow: View {
+    let icon: String
+    let text: String
+
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(TrivitColors.color(at: 2))
+                .frame(width: 32)
+
+            Text(text)
+                .font(.body)
+                .foregroundColor(.white)
         }
     }
 }

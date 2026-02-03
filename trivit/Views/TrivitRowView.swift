@@ -16,11 +16,14 @@ struct TrivitRowView: View {
     @State private var dragOffset: CGFloat = 0
     @State private var showingStatistics = false
     @State private var showingHistory = false
+    @State private var hasHandledStartEditing = false
     @FocusState private var isTitleFocused: Bool
 
     let isExpanded: Bool
+    let startEditing: Bool
     let onToggleExpand: () -> Void
     let onDelete: () -> Void
+    let onEditingChanged: (Bool) -> Void
 
     private var backgroundColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
@@ -50,6 +53,29 @@ struct TrivitRowView: View {
         }
         .sheet(isPresented: $showingHistory) {
             HistoryView(trivit: trivit)
+        }
+        .onChange(of: startEditing) { _, shouldEdit in
+            if shouldEdit && !hasHandledStartEditing {
+                hasHandledStartEditing = true
+                isEditing = true
+                // Small delay to ensure the TextField is visible before focusing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isTitleFocused = true
+                }
+            }
+        }
+        .onChange(of: isEditing) { _, editing in
+            onEditingChanged(editing)
+        }
+        .onAppear {
+            // Handle initial startEditing state
+            if startEditing && !hasHandledStartEditing {
+                hasHandledStartEditing = true
+                isEditing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isTitleFocused = true
+                }
+            }
         }
     }
 
@@ -216,13 +242,6 @@ struct TrivitRowView: View {
             trivit.colorIndex = (trivit.colorIndex + 1) % TrivitColors.colorCount
         } label: {
             Label("Change Color", systemImage: "paintpalette")
-        }
-
-        Button {
-            onToggleExpand()
-        } label: {
-            Label(isExpanded ? "Collapse" : "Expand",
-                  systemImage: isExpanded ? "chevron.up" : "chevron.down")
         }
 
         Button {
@@ -413,26 +432,34 @@ struct ChineseTallyGroupView: View {
             TrivitRowView(
                 trivit: Trivit(title: "Days of work left", count: 13, colorIndex: 0),
                 isExpanded: true,
+                startEditing: false,
                 onToggleExpand: {},
-                onDelete: {}
+                onDelete: {},
+                onEditingChanged: { _ in }
             )
             TrivitRowView(
                 trivit: Trivit(title: "Tallies added", count: 8, colorIndex: 1),
                 isExpanded: true,
+                startEditing: false,
                 onToggleExpand: {},
-                onDelete: {}
+                onDelete: {},
+                onEditingChanged: { _ in }
             )
             TrivitRowView(
                 trivit: Trivit(title: "Bugs in our software", count: 5, colorIndex: 3),
                 isExpanded: false,
+                startEditing: false,
                 onToggleExpand: {},
-                onDelete: {}
+                onDelete: {},
+                onEditingChanged: { _ in }
             )
             TrivitRowView(
                 trivit: Trivit(title: "Pairs of shoes owned", count: 3, colorIndex: 4),
                 isExpanded: false,
+                startEditing: false,
                 onToggleExpand: {},
-                onDelete: {}
+                onDelete: {},
+                onEditingChanged: { _ in }
             )
         }
     }
