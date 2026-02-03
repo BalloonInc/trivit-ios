@@ -2,7 +2,11 @@
 //  TrivitDetailView.swift
 //  Trivit Watch App
 //
-//  Detail view for a single trivit with increment/decrement controls
+//  Full-screen detail view with large tally marks
+//  - Small count in top corner
+//  - Large, multi-row tally marks filling most of the screen
+//  - Tappable tally area to increment
+//  - Small decrement/reset buttons at bottom
 //
 
 import SwiftUI
@@ -18,21 +22,12 @@ struct TrivitDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                // Main count display card
-                countCard
+        VStack(spacing: 0) {
+            // Main tappable tally area
+            tallyArea
 
-                // Tally marks display
-                if trivit.count > 0 {
-                    tallyMarksSection
-                }
-
-                // Action buttons
-                actionButtons
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 12)
+            // Bottom control bar
+            controlBar
         }
         .navigationTitle(trivit.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -44,101 +39,122 @@ struct TrivitDetailView: View {
         }
     }
 
-    // MARK: - Count Card
-    private var countCard: some View {
-        VStack(spacing: 8) {
-            Text(trivit.title)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.white.opacity(0.9))
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
+    // MARK: - Tally Area (Main Content)
 
-            Text("\(trivit.count)")
-                .font(.system(size: 48, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-                .contentTransition(.numericText())
-                .animation(.spring(response: 0.3), value: trivit.count)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 20)
-        .padding(.horizontal, 12)
-        .background(themeColor)
-        .cornerRadius(16)
-    }
+    private var tallyArea: some View {
+        Button {
+            incrementTrivit()
+        } label: {
+            VStack(spacing: 0) {
+                // Top bar: Title + Count
+                HStack {
+                    Text(trivit.title)
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                        .lineLimit(1)
 
-    // MARK: - Tally Marks Section
-    private var tallyMarksSection: some View {
-        VStack(spacing: 6) {
-            Text("Tally")
-                .font(.system(size: 10, weight: .medium))
-                .foregroundColor(.secondary)
-                .textCase(.uppercase)
+                    Spacer()
 
-            DetailTallyMarksView(count: trivit.count, color: themeColor)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .padding(.horizontal, 12)
-        .background(Color.white.opacity(0.1))
-        .cornerRadius(12)
-    }
-
-    // MARK: - Action Buttons
-    private var actionButtons: some View {
-        VStack(spacing: 10) {
-            // Increment/Decrement row
-            HStack(spacing: 12) {
-                // Decrement button
-                Button {
-                    decrementTrivit()
-                } label: {
-                    Image(systemName: "minus")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(trivit.count > 0 ? .white : .gray)
-                        .frame(width: 50, height: 50)
-                        .background(trivit.count > 0 ? themeColor.opacity(0.8) : Color.gray.opacity(0.3))
-                        .clipShape(Circle())
+                    Text("\(trivit.count)")
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.9))
+                        .contentTransition(.numericText())
+                        .animation(.spring(response: 0.3), value: trivit.count)
                 }
-                .buttonStyle(.plain)
-                .disabled(trivit.count == 0)
+                .padding(.horizontal, 12)
+                .padding(.top, 8)
+                .padding(.bottom, 6)
 
-                // Increment button (larger)
-                Button {
-                    incrementTrivit()
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
-                        .frame(width: 60, height: 60)
-                        .background(themeColor)
-                        .clipShape(Circle())
+                // Large tally marks area
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        if trivit.count > 0 {
+                            WatchTallyMarksView(
+                                count: trivit.count,
+                                mode: .full,
+                                color: .white.opacity(0.9)
+                            )
+                        } else {
+                            VStack(spacing: 8) {
+                                Image(systemName: "hand.tap")
+                                    .font(.system(size: 28))
+                                    .foregroundColor(.white.opacity(0.4))
+                                Text("Tap to count")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.white.opacity(0.5))
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(.top, 20)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
                 }
-                .buttonStyle(.plain)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(themeColor)
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Control Bar
+
+    private var controlBar: some View {
+        HStack(spacing: 12) {
+            // Decrement button
+            Button {
+                decrementTrivit()
+            } label: {
+                Image(systemName: "minus")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(trivit.count > 0 ? .white : .gray)
+                    .frame(width: 36, height: 36)
+                    .background(trivit.count > 0 ? themeColor.opacity(0.8) : Color.gray.opacity(0.3))
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .disabled(trivit.count == 0)
 
             // Reset button
-            if trivit.count > 0 {
-                Button {
-                    showResetConfirmation = true
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.counterclockwise")
-                            .font(.system(size: 12, weight: .medium))
-                        Text("Reset")
-                            .font(.system(size: 12, weight: .medium))
-                    }
-                    .foregroundColor(.orange)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.orange.opacity(0.2))
-                    .cornerRadius(20)
+            Button {
+                showResetConfirmation = true
+            } label: {
+                HStack(spacing: 3) {
+                    Image(systemName: "arrow.counterclockwise")
+                        .font(.system(size: 10, weight: .medium))
+                    Text("Reset")
+                        .font(.system(size: 10, weight: .medium))
                 }
-                .buttonStyle(.plain)
+                .foregroundColor(trivit.count > 0 ? .orange : .gray)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .background(trivit.count > 0 ? Color.orange.opacity(0.2) : Color.gray.opacity(0.2))
+                .cornerRadius(18)
             }
+            .buttonStyle(.plain)
+            .disabled(trivit.count == 0)
+
+            // Increment button (smaller, since main area is tappable)
+            Button {
+                incrementTrivit()
+            } label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(width: 36, height: 36)
+                    .background(themeColor)
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
         }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background(Color.black.opacity(0.3))
     }
 
     // MARK: - Actions
+
     private func incrementTrivit() {
         trivit.count += 1
         syncService.syncTrivitUpdate(trivit)
@@ -160,59 +176,9 @@ struct TrivitDetailView: View {
     }
 }
 
-// MARK: - Detail Tally Marks View
-struct DetailTallyMarksView: View {
-    let count: Int
-    let color: Color
-
-    var body: some View {
-        let fullGroups = min(count / 5, 4) // Show max 4 groups
-        let remainder = count % 5
-        let showRemainder = fullGroups < 4
-
-        HStack(spacing: 6) {
-            ForEach(0..<fullGroups, id: \.self) { _ in
-                DetailTallyGroupView(count: 5, color: color)
-            }
-
-            if showRemainder && remainder > 0 {
-                DetailTallyGroupView(count: remainder, color: color)
-            }
-
-            if count > 20 {
-                Text("+\(count - 20)")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(color)
-            }
-        }
-    }
-}
-
-struct DetailTallyGroupView: View {
-    let count: Int
-    let color: Color
-
-    var body: some View {
-        HStack(spacing: 2) {
-            ForEach(0..<min(count, 4), id: \.self) { _ in
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 2, height: 14)
-            }
-            if count == 5 {
-                Rectangle()
-                    .fill(color)
-                    .frame(width: 10, height: 2)
-                    .rotationEffect(.degrees(-65))
-                    .offset(x: -6)
-            }
-        }
-        .frame(width: count == 5 ? 16 : CGFloat(count * 4), height: 16)
-    }
-}
-
 #Preview {
     NavigationStack {
         TrivitDetailView(trivit: Trivit(title: "Push-ups", count: 42, colorIndex: 1))
+            .environmentObject(SyncService())
     }
 }

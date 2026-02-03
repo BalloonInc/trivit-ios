@@ -2,8 +2,8 @@
 //  TrivitRowView.swift
 //  Trivit Watch App
 //
-//  A colorful tally counter row with two tap zones:
-//  - LEFT (80%): Tap to increment count
+//  A colorful tally counter row with expandable tally marks:
+//  - LEFT (80%): Tap to expand/collapse AND increment
 //  - RIGHT (20%): Tap chevron to open detail view
 //
 
@@ -14,44 +14,22 @@ struct TrivitRowView: View {
     let trivit: Trivit
     let syncService: SyncService
 
+    @State private var isExpanded = false
+
     private var backgroundColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
+    }
+
+    private var tallyBackgroundColor: Color {
+        backgroundColor.opacity(0.6)
     }
 
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
-                // LEFT ZONE (80%): Tap to increment
-                Button {
-                    incrementTrivit()
-                } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        // Title
-                        Text(trivit.title)
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(.white)
-                            .lineLimit(1)
-
-                        // Count display
-                        HStack(spacing: 6) {
-                            Text("\(trivit.count)")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                                .contentTransition(.numericText())
-                                .animation(.spring(response: 0.3), value: trivit.count)
-
-                            // Compact tally preview
-                            if trivit.count > 0 {
-                                WatchTallyPreview(count: trivit.count)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.leading, 10)
-                    .padding(.vertical, 6)
-                }
-                .buttonStyle(.plain)
-                .frame(width: geometry.size.width * 0.78)
+                // LEFT ZONE (80%): Tap to expand/collapse AND increment
+                leftZone
+                    .frame(width: geometry.size.width * 0.78)
 
                 // Divider line
                 Rectangle()
@@ -60,21 +38,148 @@ struct TrivitRowView: View {
                     .padding(.vertical, 8)
 
                 // RIGHT ZONE (20%): Tap to open details
-                NavigationLink {
-                    TrivitDetailView(trivit: trivit)
-                        .environmentObject(syncService)
-                } label: {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.white.opacity(0.9))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .buttonStyle(.plain)
+                rightZone
             }
             .background(backgroundColor)
             .cornerRadius(10)
         }
-        .frame(height: 52)
+        .frame(height: isExpanded ? expandedHeight : 52)
+        .animation(.easeInOut(duration: 0.2), value: isExpanded)
+    }
+
+    private var expandedHeight: CGFloat {
+        // Calculate height based on tally rows needed
+        let fullGroups = trivit.count / 5
+        let remainder = trivit.count % 5
+        let totalGroups = fullGroups + (remainder > 0 ? 1 : 0)
+        let rows = min(2, max(1, (totalGroups + 5) / 6)) // max 2 rows in compact mode
+        return 52 + CGFloat(rows) * 16 + 12 // base + tally rows + padding
+    }
+
+    // MARK: - Left Zone (Expand/Collapse + Increment)
+
+    private var leftZone: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Header: Title + Count (tap to toggle expand/collapse)
+            Button {
+                handleTitleTap()
+            } label: {
+                HStack(spacing: 6) {
+                    Text(trivit.title)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+
+                    Spacer()
+
+                    // Expand/collapse indicator
+                    if isExpanded {
+                        Image(systemName: "chevron.up")
+                            .font(.system(size: 10, weight: .bold))
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+
+                    Text("\(trivit.count)")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .contentTransition(.numericText())
+                        .animation(.spring(response: 0.3), value: trivit.count)
+                }
+                .padding(.leading, 10)
+                .padding(.trailing, 6)
+                .padding(.vertical, 6)
+            }
+            .buttonStyle(.plain)
+
+            // Collapsed: Single row tally preview (tap to expand)
+            if !isExpanded && trivit.count > 0 {
+                Button {
+                    isExpanded = true
+                    WKInterfaceDevice.current().play(.click)
+                } label: {
+                    WatchTallyMarksView(
+                        count: min(trivit.count, 15),
+                        mode: .compact,
+                        color: .white.opacity(0.85)
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 10)
+                    .padding(.trailing, 6)
+                    .padding(.bottom, 6)
+                }
+                .buttonStyle(.plain)
+            }
+
+            // Expanded: Multi-row tally area (tap to increment)
+            if isExpanded {
+                Button {
+                    incrementTrivit()
+                } label: {
+                    expandedTallyArea
+                        .padding(.horizontal, 6)
+                        .padding(.bottom, 6)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private var expandedTallyArea: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Small arrow indicator
+            HStack {
+                Triangle()
+                    .fill(backgroundColor)
+                    .frame(width: 10, height: 5)
+                    .padding(.leading, 4)
+                Spacer()
+            }
+
+            // Tally marks on tinted background
+            HStack {
+                if trivit.count > 0 {
+                    WatchTallyMarksView(
+                        count: trivit.count,
+                        mode: .compact,
+                        color: .white.opacity(0.9)
+                    )
+                } else {
+                    Text("Tap to count")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 6)
+            .padding(.vertical, 4)
+            .frame(maxWidth: .infinity)
+            .background(tallyBackgroundColor)
+            .cornerRadius(6)
+        }
+    }
+
+    // MARK: - Right Zone (Navigation)
+
+    private var rightZone: some View {
+        NavigationLink {
+            TrivitDetailView(trivit: trivit)
+                .environmentObject(syncService)
+        } label: {
+            Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.white.opacity(0.9))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Actions
+
+    private func handleTitleTap() {
+        // Title bar toggles expand/collapse
+        isExpanded.toggle()
+        WKInterfaceDevice.current().play(.click)
     }
 
     private func incrementTrivit() {
@@ -84,49 +189,16 @@ struct TrivitRowView: View {
     }
 }
 
-// MARK: - Compact Tally Preview for Row
-// Shows a visual hint of tally marks, scrollable for large counts
-struct WatchTallyPreview: View {
-    let count: Int
+// MARK: - Triangle Shape
 
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 3) {
-                let fullGroups = count / 5
-                let remainder = count % 5
-
-                ForEach(0..<fullGroups, id: \.self) { _ in
-                    WatchTallyGroupView(count: 5)
-                }
-
-                if remainder > 0 {
-                    WatchTallyGroupView(count: remainder)
-                }
-            }
-        }
-        .frame(maxWidth: 80)
-    }
-}
-
-struct WatchTallyGroupView: View {
-    let count: Int
-
-    var body: some View {
-        HStack(spacing: 1) {
-            ForEach(0..<min(count, 4), id: \.self) { _ in
-                Rectangle()
-                    .fill(Color.white.opacity(0.85))
-                    .frame(width: 1.5, height: 12)
-            }
-            if count == 5 {
-                Rectangle()
-                    .fill(Color.white.opacity(0.85))
-                    .frame(width: 9, height: 1.5)
-                    .rotationEffect(.degrees(-65))
-                    .offset(x: -5)
-            }
-        }
-        .frame(width: count == 5 ? 12 : CGFloat(count * 3), height: 14)
+struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.closeSubpath()
+        return path
     }
 }
 

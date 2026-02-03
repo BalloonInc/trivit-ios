@@ -48,6 +48,7 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 		WATCH001009 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002007 /* Trivit.swift */; };
 		WATCH001010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = WATCH002008 /* GoogleService-Info.plist */; };
 		WATCH001011 /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002009 /* WatchSettingsView.swift */; };
+		WATCH001012 /* WatchTallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002010 /* WatchTallyMarksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 		WATCH002007 /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivit.swift; sourceTree = "<group>"; };
 		WATCH002008 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		WATCH002009 /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
+		WATCH002010 /* WatchTallyMarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTallyMarksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				WATCH002003 /* TrivitRowView.swift */,
 				WATCH002004 /* TrivitDetailView.swift */,
 				WATCH002009 /* WatchSettingsView.swift */,
+				WATCH002010 /* WatchTallyMarksView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				WATCH001005 /* SyncService.swift in Sources */,
 				WATCH001006 /* TrivitColors.swift in Sources */,
 				WATCH001011 /* WatchSettingsView.swift in Sources */,
+				WATCH001012 /* WatchTallyMarksView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
