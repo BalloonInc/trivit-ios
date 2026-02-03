@@ -16,9 +16,15 @@ struct TrivitDetailView: View {
     let trivit: Trivit
     @EnvironmentObject var syncService: SyncService
     @State private var showResetConfirmation = false
+    @State private var showRenameSheet = false
+    @State private var newTitle = ""
 
     private var themeColor: Color {
         TrivitColors.color(at: trivit.colorIndex)
+    }
+
+    private var darkerThemeColor: Color {
+        themeColor.opacity(0.7)
     }
 
     var body: some View {
@@ -29,13 +35,35 @@ struct TrivitDetailView: View {
             // Bottom control bar
             controlBar
         }
+        .background(themeColor)
         .navigationTitle(trivit.title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(themeColor, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
         .confirmationDialog("Reset Counter?", isPresented: $showResetConfirmation) {
             Button("Reset to Zero", role: .destructive) {
                 resetTrivit()
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .sheet(isPresented: $showRenameSheet) {
+            RenameSheetView(
+                title: $newTitle,
+                themeColor: themeColor,
+                onSave: {
+                    if !newTitle.trimmingCharacters(in: .whitespaces).isEmpty {
+                        trivit.title = newTitle.trimmingCharacters(in: .whitespaces)
+                        syncService.syncTrivitUpdate(trivit)
+                    }
+                    showRenameSheet = false
+                },
+                onCancel: {
+                    showRenameSheet = false
+                }
+            )
+        }
+        .onAppear {
+            newTitle = trivit.title
         }
     }
 
@@ -101,16 +129,16 @@ struct TrivitDetailView: View {
     // MARK: - Control Bar
 
     private var controlBar: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 8) {
             // Decrement button
             Button {
                 decrementTrivit()
             } label: {
                 Image(systemName: "minus")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(trivit.count > 0 ? .white : .gray)
-                    .frame(width: 36, height: 36)
-                    .background(trivit.count > 0 ? themeColor.opacity(0.8) : Color.gray.opacity(0.3))
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(trivit.count > 0 ? .white : .white.opacity(0.4))
+                    .frame(width: 32, height: 32)
+                    .background(trivit.count > 0 ? darkerThemeColor : themeColor.opacity(0.3))
                     .clipShape(Circle())
             }
             .buttonStyle(.plain)
@@ -120,37 +148,52 @@ struct TrivitDetailView: View {
             Button {
                 showResetConfirmation = true
             } label: {
-                HStack(spacing: 3) {
-                    Image(systemName: "arrow.counterclockwise")
-                        .font(.system(size: 10, weight: .medium))
-                    Text("Reset")
-                        .font(.system(size: 10, weight: .medium))
-                }
-                .foregroundColor(trivit.count > 0 ? .orange : .gray)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 8)
-                .background(trivit.count > 0 ? Color.orange.opacity(0.2) : Color.gray.opacity(0.2))
-                .cornerRadius(18)
+                Image(systemName: "arrow.counterclockwise")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(trivit.count > 0 ? .white : .white.opacity(0.4))
+                    .frame(width: 32, height: 32)
+                    .background(trivit.count > 0 ? darkerThemeColor : themeColor.opacity(0.3))
+                    .clipShape(Circle())
             }
             .buttonStyle(.plain)
             .disabled(trivit.count == 0)
 
-            // Increment button (smaller, since main area is tappable)
+            // Rename button
+            Button {
+                newTitle = trivit.title
+                showRenameSheet = true
+            } label: {
+                Image(systemName: "pencil")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(width: 32, height: 32)
+                    .background(darkerThemeColor)
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.plain)
+
+            // Increment button
             Button {
                 incrementTrivit()
             } label: {
                 Image(systemName: "plus")
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.white)
-                    .frame(width: 36, height: 36)
-                    .background(themeColor)
+                    .frame(width: 32, height: 32)
+                    .background(darkerThemeColor)
                     .clipShape(Circle())
             }
             .buttonStyle(.plain)
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 6)
-        .background(Color.black.opacity(0.3))
+        .background(
+            LinearGradient(
+                colors: [themeColor.opacity(0.8), themeColor.opacity(0.6)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
     }
 
     // MARK: - Actions
@@ -173,6 +216,60 @@ struct TrivitDetailView: View {
         trivit.count = 0
         syncService.syncTrivitUpdate(trivit)
         WKInterfaceDevice.current().play(.notification)
+    }
+}
+
+// MARK: - Rename Sheet View
+
+struct RenameSheetView: View {
+    @Binding var title: String
+    let themeColor: Color
+    let onSave: () -> Void
+    let onCancel: () -> Void
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Text("Rename")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.white)
+
+            TextField("Title", text: $title)
+                .textFieldStyle(.plain)
+                .font(.system(size: 14))
+                .padding(8)
+                .background(Color.white.opacity(0.15))
+                .cornerRadius(8)
+
+            HStack(spacing: 12) {
+                Button {
+                    onCancel()
+                } label: {
+                    Text("Cancel")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(Color.white.opacity(0.2))
+                        .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+
+                Button {
+                    onSave()
+                } label: {
+                    Text("Save")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                        .background(themeColor)
+                        .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding()
+        .background(themeColor.opacity(0.8))
     }
 }
 

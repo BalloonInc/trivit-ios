@@ -121,7 +121,10 @@ struct TrivitRowView: View {
                 SelectAllTextField(text: $trivit.title, isFirstResponder: $isTitleFocused)
                     .font(.system(size: 17, weight: .medium))
                     .foregroundColor(.white.opacity(0.95))
-                    .onSubmit { isEditing = false }
+                    .onSubmit {
+                        isEditing = false
+                        WatchSyncService.shared.syncTrivitToWatch(trivit)
+                    }
             } else {
                 Text(trivit.title)
                     .font(.system(size: 17, weight: .medium))
@@ -182,6 +185,7 @@ struct TrivitRowView: View {
         .onTapGesture {
             trivit.increment(in: modelContext)
             HapticsService.shared.impact(.light)
+            WatchSyncService.shared.syncTrivitToWatch(trivit)
         }
     }
 
@@ -205,6 +209,7 @@ struct TrivitRowView: View {
                     // Decrement
                     trivit.decrement(in: modelContext)
                     HapticsService.shared.impact(.light)
+                    WatchSyncService.shared.syncTrivitToWatch(trivit)
                 }
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                     dragOffset = 0
@@ -239,6 +244,7 @@ struct TrivitRowView: View {
 
         Button {
             trivit.colorIndex = (trivit.colorIndex + 1) % TrivitColors.colorCount
+            WatchSyncService.shared.syncTrivitToWatch(trivit)
         } label: {
             Label("Change Color", systemImage: "paintpalette")
         }
@@ -246,6 +252,7 @@ struct TrivitRowView: View {
         Button {
             trivit.reset()
             HapticsService.shared.notification(.warning)
+            WatchSyncService.shared.syncTrivitToWatch(trivit)
         } label: {
             Label("Reset Count", systemImage: "arrow.counterclockwise")
         }

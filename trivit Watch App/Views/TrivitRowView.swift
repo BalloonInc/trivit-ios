@@ -52,7 +52,8 @@ struct TrivitRowView: View {
         let fullGroups = trivit.count / 5
         let remainder = trivit.count % 5
         let totalGroups = fullGroups + (remainder > 0 ? 1 : 0)
-        let rows = min(2, max(1, (totalGroups + 5) / 6)) // max 2 rows in compact mode
+        let groupsPerRow = 6
+        let rows = min(5, max(1, (totalGroups + groupsPerRow - 1) / groupsPerRow)) // max 5 rows in compact mode
         return 52 + CGFloat(rows) * 16 + 12 // base + tally rows + padding
     }
 

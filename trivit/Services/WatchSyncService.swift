@@ -8,6 +8,7 @@
 import Foundation
 import WatchConnectivity
 import SwiftData
+import UIKit
 import os.log
 
 private let logger = Logger(subsystem: "com.wouterdevriendt.trivit", category: "WatchSync")
@@ -19,6 +20,8 @@ class WatchSyncService: NSObject, ObservableObject {
     private let session: WCSession
     private var modelContext: ModelContext?
     private var isSessionActivated = false
+    private var periodicSyncTimer: Timer?
+    private let periodicSyncInterval: TimeInterval = 10.0
 
     @Published var isWatchPaired = false
     @Published var isWatchReachable = false
@@ -50,6 +53,64 @@ class WatchSyncService: NSObject, ObservableObject {
         // If already activated and watch is reachable, sync now
         if isSessionActivated && session.isReachable {
             logger.info("Already activated and reachable, triggering sync")
+            syncAllTrivitsToWatch()
+        }
+
+        // Start periodic sync timer
+        startPeriodicSync()
+
+        // Listen for app lifecycle notifications
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appDidEnterBackground),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(appWillEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+
+    // MARK: - Periodic Sync
+
+    private func startPeriodicSync() {
+        stopPeriodicSync()
+        logger.info("Starting periodic sync timer (every \(self.periodicSyncInterval)s)")
+        periodicSyncTimer = Timer.scheduledTimer(withTimeInterval: periodicSyncInterval, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                self?.performPeriodicSync()
+            }
+        }
+    }
+
+    private func stopPeriodicSync() {
+        periodicSyncTimer?.invalidate()
+        periodicSyncTimer = nil
+        logger.info("Stopped periodic sync timer")
+    }
+
+    private func performPeriodicSync() {
+        guard session.isReachable else {
+            // Don't log spam when watch is not reachable
+            return
+        }
+        logger.info("Periodic sync: watch is reachable, syncing all trivits")
+        syncAllTrivitsToWatch()
+    }
+
+    @objc private func appDidEnterBackground() {
+        logger.info("App entered background, stopping periodic sync")
+        stopPeriodicSync()
+    }
+
+    @objc private func appWillEnterForeground() {
+        logger.info("App entering foreground, restarting periodic sync")
+        startPeriodicSync()
+        // Also do an immediate sync if watch is reachable
+        if session.isReachable {
             syncAllTrivitsToWatch()
         }
     }

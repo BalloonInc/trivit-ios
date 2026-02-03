@@ -41,7 +41,7 @@ struct WatchTallyMarksView: View {
     }
 
     private var maxRows: Int {
-        mode == .compact ? 2 : 10
+        mode == .compact ? 5 : 10
     }
 
     var body: some View {
