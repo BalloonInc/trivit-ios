@@ -17,7 +17,7 @@ struct TrivitRowView: View {
     @State private var showingStatistics = false
     @State private var showingHistory = false
     @State private var hasHandledStartEditing = false
-    @FocusState private var isTitleFocused: Bool
+    @State private var isTitleFocused = false
 
     let isExpanded: Bool
     let startEditing: Bool
@@ -118,10 +118,9 @@ struct TrivitRowView: View {
         HStack(spacing: 12) {
             // Title text
             if isEditing {
-                TextField("Title", text: $trivit.title)
+                SelectAllTextField(text: $trivit.title, isFirstResponder: $isTitleFocused)
                     .font(.system(size: 17, weight: .medium))
                     .foregroundColor(.white.opacity(0.95))
-                    .focused($isTitleFocused)
                     .onSubmit { isEditing = false }
             } else {
                 Text(trivit.title)
@@ -423,6 +422,71 @@ struct ChineseTallyGroupView: View {
             }
         }
         .frame(width: 18, height: 18)
+    }
+}
+
+// MARK: - Select All TextField
+
+struct SelectAllTextField: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var isFirstResponder: Bool
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField()
+        textField.delegate = context.coordinator
+        textField.textColor = UIColor.white.withAlphaComponent(0.95)
+        textField.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        textField.returnKeyType = .done
+        textField.autocorrectionType = .no
+        textField.backgroundColor = .clear
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+
+        if isFirstResponder && !uiView.isFirstResponder {
+            DispatchQueue.main.async {
+                uiView.becomeFirstResponder()
+                // Select all text after becoming first responder
+                uiView.selectAll(nil)
+            }
+        } else if !isFirstResponder && uiView.isFirstResponder {
+            uiView.resignFirstResponder()
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: SelectAllTextField
+
+        init(_ parent: SelectAllTextField) {
+            self.parent = parent
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            parent.text = textField.text ?? ""
+        }
+
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            parent.isFirstResponder = false
+            textField.resignFirstResponder()
+            return true
+        }
+
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            // Select all when editing begins
+            DispatchQueue.main.async {
+                textField.selectAll(nil)
+            }
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            parent.isFirstResponder = false
+        }
     }
 }
 
