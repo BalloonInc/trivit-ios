@@ -26,4 +26,7 @@ jobs:
       bundle_id: com.wouterdevriendt.trivit
       build_number: ${{ inputs.build_number }}
       whats_new: ${{ inputs.whats_new }}
-    secrets: inherit
+    secrets:
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
