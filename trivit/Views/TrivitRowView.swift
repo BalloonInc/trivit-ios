@@ -97,22 +97,10 @@ struct TrivitRowView: View {
 
             Spacer()
 
-            // Right side: count or minus button
-            if isExpanded {
-                Button {
-                    guard trivit.count > 0 else { return }
-                    trivit.decrement(in: modelContext)
-                    HapticsService.shared.impact(.light)
-                } label: {
-                    Image(systemName: "minus.square.fill")
-                        .font(.system(size: 26))
-                        .foregroundColor(.white.opacity(0.85))
-                }
-            } else {
-                Text("\(trivit.count)")
-                    .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
-            }
+            // Count display
+            Text("\(trivit.count)")
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .foregroundColor(.white)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)

@@ -41,7 +41,7 @@ struct TrivitApp: App {
             }
 
             do {
-                print("🔄 Retrying ModelContainer creation...")
+                print("🔄 Retryincluding ng ModelContainer creation...")
                 return try ModelContainer(for: schema, configurations: [modelConfiguration])
             } catch let retryError {
                 print("❌ Second attempt failed: \(retryError)")

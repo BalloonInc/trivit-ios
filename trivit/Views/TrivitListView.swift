@@ -58,45 +58,30 @@ struct TrivitListView: View {
 
     private var trivitList: some View {
         ScrollViewReader { proxy in
-            List {
-                ForEach(trivits) { trivit in
-                    TrivitRowView(
-                        trivit: trivit,
-                        isExpanded: expandedTrivitIds.contains(trivit.id),
-                        onToggleExpand: {
-                            withAnimation(.easeInOut(duration: 0.25)) {
+            ScrollView {
+                LazyVStack(spacing: 1) {
+                    ForEach(trivits) { trivit in
+                        TrivitRowView(
+                            trivit: trivit,
+                            isExpanded: expandedTrivitIds.contains(trivit.id),
+                            onToggleExpand: {
                                 if expandedTrivitIds.contains(trivit.id) {
                                     expandedTrivitIds.remove(trivit.id)
                                 } else {
                                     expandedTrivitIds.insert(trivit.id)
                                 }
-                            }
-                        },
-                        onDelete: { deleteTrivit(trivit) }
-                    )
-                    .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color(.systemGray5))
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .destructive) {
-                            deleteTrivit(trivit)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
+                            },
+                            onDelete: { deleteTrivit(trivit) }
+                        )
+                        .id(trivit.id)
                     }
-                    .id(trivit.id)
-                }
-                .onMove(perform: moveTrivits)
 
-                // Bottom anchor for scrolling
-                Color.clear
-                    .frame(height: 1)
-                    .id("bottom")
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color(.systemGray5))
+                    // Bottom anchor for scrolling
+                    Color.clear
+                        .frame(height: 1)
+                        .id("bottom")
+                }
             }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
             .background(Color(.systemGray5))
             .onChange(of: scrollToBottom) { _, shouldScroll in
                 if shouldScroll {
@@ -107,19 +92,6 @@ struct TrivitListView: View {
                 }
             }
         }
-        .background(Color(.systemGray5))
-    }
-
-    private func moveTrivits(from source: IndexSet, to destination: Int) {
-        var reorderedTrivits = trivits.map { $0 }
-        reorderedTrivits.move(fromOffsets: source, toOffset: destination)
-
-        // Update sort order for all items
-        for (index, trivit) in reorderedTrivits.enumerated() {
-            trivit.sortOrder = index
-        }
-
-        HapticsService.shared.impact(.light)
     }
 
     @ToolbarContentBuilder
