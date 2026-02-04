@@ -420,13 +420,11 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				6C69C095195B6F4E002A3F53 /* Sources */,
 				6C69C096195B6F4E002A3F53 /* Frameworks */,
 				6C69C097195B6F4E002A3F53 /* Resources */,
-				WATCH005001 /* Embed Watch Content */,
 				CRASHLYTICS_DSYM_UPLOAD /* Upload dSYMs to Crashlytics */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				WATCH008001 /* PBXTargetDependency */,
 			);
 			name = trivit;
 			packageProductDependencies = (
@@ -558,7 +556,6 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			projectRoot = "";
 			targets = (
 				6C69C098195B6F4E002A3F53 /* trivit */,
-				WATCH004001 /* trivit Watch App */,
 				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
 				UITEST004001 /* TrivitUITests */,
 			);
