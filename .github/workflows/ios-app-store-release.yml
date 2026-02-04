@@ -38,8 +38,9 @@ jobs:
     uses: wdvr/ios-infra/.github/workflows/ios-app-store-release.yml@main
     with:
       bundle_id: com.wouterdevriendt.trivit
+      scheme: trivit
       app_name: 'Trivit'
-      app_context: 'Trivit is a tally counter app that helps users count anything - perfect for counting inventory, tracking habits, or keeping score.'
+      app_context: 'Trivit is a tally counter app that helps users count anything - perfect for counting inventory, tracking habits, or keeping score. Now with Apple Watch support!'
       app_version: ${{ inputs.app_version }}
       build_number: ${{ inputs.build_number }}
       generate_screenshots: ${{ inputs.generate_screenshots }}
