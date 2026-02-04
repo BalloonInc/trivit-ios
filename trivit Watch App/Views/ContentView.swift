@@ -51,11 +51,15 @@ struct ContentView: View {
         let lastColorIndex = trivits.last?.colorIndex ?? -1
         let nextColorIndex = (lastColorIndex + 1) % TrivitColors.colorCount
 
+        // Get max sortOrder to add at end
+        let maxSortOrder = trivits.map { $0.sortOrder }.max() ?? -1
+
         // Create locally and sync to iPhone
         let newTrivit = Trivit(
             title: "Counter",
             count: 0,
-            colorIndex: nextColorIndex
+            colorIndex: nextColorIndex,
+            sortOrder: maxSortOrder + 1
         )
         modelContext.insert(newTrivit)
         try? modelContext.save()
