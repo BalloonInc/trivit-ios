@@ -49,6 +49,7 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 		WATCH001010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = WATCH002008 /* GoogleService-Info.plist */; };
 		WATCH001011 /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002009 /* WatchSettingsView.swift */; };
 		WATCH001012 /* WatchTallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002010 /* WatchTallyMarksView.swift */; };
+		UITEST001001 /* TrivitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = UITESTF001 /* TrivitUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,13 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 			proxyType = 1;
 			remoteGlobalIDString = WATCH004001;
 			remoteInfo = "trivit Watch App";
+		};
+		UITEST003001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C69C091195B6F4E002A3F53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C69C098195B6F4E002A3F53;
+			remoteInfo = trivit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -149,6 +157,9 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 		WATCH002008 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		WATCH002009 /* WatchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSettingsView.swift; sourceTree = "<group>"; };
 		WATCH002010 /* WatchTallyMarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTallyMarksView.swift; sourceTree = "<group>"; };
+		UITESTF001 /* TrivitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitUITests.swift; sourceTree = "<group>"; };
+		UITESTF002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		UITEST_PRODUCT /* TrivitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrivitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +188,13 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		UITEST006001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -198,6 +216,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = PBXGroup;
 			children = (
 				TESTG0001 /* trivitTests */,
+				UITESTG001 /* TrivitUITests */,
 				6C69C09B195B6F4E002A3F53 /* trivit */,
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
@@ -211,6 +230,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				6C69C099195B6F4E002A3F53 /* trivit.app */,
 				6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */,
 				6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */,
+				UITEST_PRODUCT /* TrivitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,6 +362,15 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			path = trivitTests;
 			sourceTree = "<group>";
 		};
+		UITESTG001 /* TrivitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				UITESTF001 /* TrivitUITests.swift */,
+				UITESTF002 /* Info.plist */,
+			);
+			path = TrivitUITests;
+			sourceTree = "<group>";
+		};
 		WATCH007001 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +469,24 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			productReference = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		UITEST004001 /* TrivitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = UITEST009001 /* Build configuration list for PBXNativeTarget "TrivitUITests" */;
+			buildPhases = (
+				UITEST006002 /* Sources */,
+				UITEST006001 /* Frameworks */,
+				UITEST006003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				UITEST008001 /* PBXTargetDependency */,
+			);
+			name = TrivitUITests;
+			productName = TrivitUITests;
+			productReference = UITEST_PRODUCT /* TrivitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -476,6 +523,12 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 							};
 						};
 					};
+					UITEST004001 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = N324UX8D9M;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6C69C098195B6F4E002A3F53;
+					};
 				};
 			};
 			buildConfigurationList = 6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "Trivit" */;
@@ -504,6 +557,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				6C69C098195B6F4E002A3F53 /* trivit */,
 				WATCH004001 /* trivit Watch App */,
 				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
+				UITEST004001 /* TrivitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -534,6 +588,13 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			files = (
 				WATCH001007 /* Images.xcassets in Resources */,
 				WATCH001010 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		UITEST006003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +677,14 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		UITEST006002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				UITEST001001 /* TrivitUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -628,6 +697,11 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = PBXTargetDependency;
 			target = WATCH004001 /* trivit Watch App */;
 			targetProxy = WATCH003001 /* PBXContainerItemProxy */;
+		};
+		UITEST008001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6C69C098195B6F4E002A3F53 /* trivit */;
+			targetProxy = UITEST003001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -931,7 +1005,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				
@@ -963,16 +1037,64 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				
+
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		UITEST010001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N324UX8D9M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrivitUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = trivit;
+			};
+			name = Debug;
+		};
+		UITEST010002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N324UX8D9M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrivitUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = trivit;
 			};
 			name = Release;
 		};
@@ -1011,6 +1133,15 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			buildConfigurations = (
 				WATCH010001 /* Debug */,
 				WATCH010002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		UITEST009001 /* Build configuration list for PBXNativeTarget "TrivitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				UITEST010001 /* Debug */,
+				UITEST010002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

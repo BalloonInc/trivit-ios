@@ -1,0 +1,36 @@
+Trivit is a beautifully simple tally counter app that helps you track anything in your life. Whether you're counting habits, workouts, daily goals, or inventory, Trivit makes it effortless and enjoyable.
+
+SIMPLE AND INTUITIVE
+Just tap to count. No complicated setup, no learning curve. Create a new tally in seconds and start tracking immediately. The clean, distraction-free interface keeps you focused on what matters.
+
+APPLE WATCH APP
+Track your tallies right from your wrist with the all-new Apple Watch app. Your counts sync instantly between iPhone and Apple Watch, so you're always up to date no matter which device you use.
+
+BEAUTIFUL COLOR THEMES
+Choose from 8 vibrant color themes to personalize your tallies. Each counter gets its own distinctive color, making it easy to identify at a glance. The colorful, flat design is both beautiful and functional.
+
+TRACK ANYTHING
+- Daily habits and routines
+- Workout reps and sets
+- Inventory counts
+- Score keeping for games
+- Bird watching or wildlife sightings
+- Glasses of water consumed
+- Steps toward a goal
+- Anything else you need to count!
+
+SYNC ACROSS ALL DEVICES
+Your tallies automatically sync across all your devices using iCloud. Start counting on your iPhone and continue on your Apple Watch, or vice versa. Your data is always with you.
+
+PRIVACY FIRST
+Your data stays on your devices and in your personal iCloud account. We don't collect any personal information, and there are no analytics or tracking. Your counts are your business.
+
+NO ADS, NO SUBSCRIPTIONS
+Trivit is completely free with no ads, no in-app purchases, and no subscriptions. Just a great app that does what it says.
+
+OPEN SOURCE
+Trivit is open source! You can view the code, suggest improvements, or contribute on GitHub at https://github.com/BalloonInc/trivit-ios
+
+Version 5.0 is a complete rewrite using Apple's latest SwiftUI technology, delivering improved performance and a refined user experience while maintaining the simplicity that makes Trivit great.
+
+Download Trivit today and start counting what matters to you.

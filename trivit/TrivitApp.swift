@@ -15,15 +15,41 @@ import FirebaseCore
 struct TrivitApp: App {
     @StateObject private var watchSyncService = WatchSyncService.shared
 
+    // MARK: - UI Testing Detection
+
+    /// Returns true if the app is running in UI testing mode
+    private static var isUITesting: Bool {
+        CommandLine.arguments.contains("-UITestingMode")
+    }
+
+    /// Returns true if sample data should be loaded for screenshots
+    private static var shouldLoadSampleData: Bool {
+        CommandLine.arguments.contains("-SampleDataMode")
+    }
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([Trivit.self, TallyEvent.self])
 
-        // CloudKit sync for iPhone <-> iPad via iCloud
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false,
-            cloudKitDatabase: .automatic
-        )
+        // Use in-memory storage for UI testing to ensure consistent state
+        let isUITesting = CommandLine.arguments.contains("-UITestingMode")
+
+        let modelConfiguration: ModelConfiguration
+        if isUITesting {
+            // In-memory database for UI tests - no CloudKit
+            modelConfiguration = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: true,
+                cloudKitDatabase: .none
+            )
+            print("📸 UI Testing Mode: Using in-memory database")
+        } else {
+            // CloudKit sync for iPhone <-> iPad via iCloud
+            modelConfiguration = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: false,
+                cloudKitDatabase: .automatic
+            )
+        }
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -53,22 +79,38 @@ struct TrivitApp: App {
     init() {
         print("📱 ======== TRIVIT APP STARTING ========")
         print("📱 TrivitApp.init() called")
-        // Initialize Firebase Analytics & Crashlytics
-        AnalyticsService.shared.configure()
+
+        if Self.isUITesting {
+            print("📸 Running in UI Testing Mode")
+        }
+
+        // Initialize Firebase Analytics & Crashlytics (skip for UI tests)
+        if !Self.isUITesting {
+            AnalyticsService.shared.configure()
+        }
     }
 
     var body: some Scene {
         WindowGroup {
             TrivitListView()
                 .onAppear {
-                    print("📱 TrivitListView.onAppear - configuring watch sync")
-                    // Configure watch sync with the model context
                     let context = sharedModelContainer.mainContext
-                    watchSyncService.configure(with: context)
-                    print("📱 Watch sync configured - paired: \(watchSyncService.isWatchPaired), reachable: \(watchSyncService.isWatchReachable)")
 
-                    // Track session start with analytics
-                    trackSessionStart(context: context)
+                    // Load sample data for UI testing screenshots
+                    if Self.shouldLoadSampleData {
+                        print("📸 Loading sample data for screenshots")
+                        loadSampleData(context: context)
+                    }
+
+                    if !Self.isUITesting {
+                        print("📱 TrivitListView.onAppear - configuring watch sync")
+                        // Configure watch sync with the model context
+                        watchSyncService.configure(with: context)
+                        print("📱 Watch sync configured - paired: \(watchSyncService.isWatchPaired), reachable: \(watchSyncService.isWatchReachable)")
+
+                        // Track session start with analytics
+                        trackSessionStart(context: context)
+                    }
                 }
         }
         .modelContainer(sharedModelContainer)
@@ -83,5 +125,41 @@ struct TrivitApp: App {
         } catch {
             print("📱 Failed to fetch trivits for session tracking: \(error)")
         }
+    }
+
+    // MARK: - Sample Data for UI Testing
+
+    private func loadSampleData(context: ModelContext) {
+        // Sample trivits with realistic data for App Store screenshots
+        let sampleTrivits: [(title: String, count: Int, colorIndex: Int)] = [
+            ("Glasses of water", 7, 0),
+            ("Push-ups done", 42, 1),
+            ("Books read", 3, 2),
+            ("Steps walked (thousands)", 12, 3),
+            ("Meditation minutes", 15, 4),
+            ("Gratitude moments", 5, 5)
+        ]
+
+        for (index, trivit) in sampleTrivits.enumerated() {
+            let newTrivit = Trivit(
+                title: trivit.title,
+                count: trivit.count,
+                colorIndex: trivit.colorIndex,
+                isCollapsed: true,
+                sortOrder: index
+            )
+            context.insert(newTrivit)
+        }
+
+        // Save the context
+        do {
+            try context.save()
+            print("📸 Sample data loaded successfully")
+        } catch {
+            print("📸 Failed to save sample data: \(error)")
+        }
+
+        // Mark tutorial as seen for UI tests
+        UserDefaults.standard.set(true, forKey: "hasSeenTutorial")
     }
 }

@@ -1,0 +1,19 @@
+Trivit 5.0 - A Complete Reimagining
+
+This is a ground-up rewrite of Trivit using SwiftUI, Apple's modern framework for building beautiful apps.
+
+What's New:
+
+- Apple Watch App: Track your tallies right from your wrist with the all-new watchOS app
+
+- Real-Time Sync: Your counts sync instantly between iPhone and Apple Watch
+
+- 8 Color Themes: Beautiful new color palette to personalize your tallies
+
+- Faster Performance: Optimized for the latest iOS with smoother animations
+
+- Modern Design: Refined interface that's cleaner and more intuitive
+
+- Open Source: View the code and contribute at https://github.com/BalloonInc/trivit-ios
+
+Thank you for using Trivit!

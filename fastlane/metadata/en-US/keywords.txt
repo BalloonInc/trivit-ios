@@ -1,0 +1,1 @@
+tally,counter,tracker,habit,count,watch,clicker,score,inventory,goals
