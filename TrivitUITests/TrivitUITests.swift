@@ -2,7 +2,7 @@
 //  TrivitUITests.swift
 //  TrivitUITests
 //
-//  UI Tests for automated screenshot generation
+//  UI Tests for automated screenshot generation using fastlane snapshot
 //
 
 import XCTest
@@ -19,7 +19,7 @@ final class TrivitUITests: XCTestCase {
         // Configure app for UI testing with sample data
         app.launchArguments = ["-UITestingMode", "YES", "-SampleDataMode", "YES"]
 
-        // Reset app state for consistent screenshots
+        // Setup fastlane snapshot
         setupSnapshot(app)
 
         app.launch()
@@ -31,7 +31,7 @@ final class TrivitUITests: XCTestCase {
 
     // MARK: - Screenshot Tests
 
-    func testScreenshots() throws {
+    func testScreenshot01_MainList() throws {
         // Wait for app to fully load
         let mainList = app.navigationBars["Trivit"]
         XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
@@ -39,47 +39,63 @@ final class TrivitUITests: XCTestCase {
         // Dismiss tutorial if shown
         dismissTutorialIfNeeded()
 
+        // Wait for list to settle
+        Thread.sleep(forTimeInterval: 1)
+
         // Take screenshot of main list view
-        takeScreenshot(named: "01_MainList")
-
-        // Tap on first trivit to expand it (show tally marks)
-        expandFirstTrivit()
-        takeScreenshot(named: "02_Expanded")
-
-        // Open settings screen
-        openSettings()
-        takeScreenshot(named: "03_Settings")
+        snapshot("01_MainList")
     }
 
-    // MARK: - Individual Screenshot Tests
-
-    func testMainListScreenshot() throws {
-        let mainList = app.navigationBars["Trivit"]
-        XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
-
-        dismissTutorialIfNeeded()
-
-        takeScreenshot(named: "01_MainList")
-    }
-
-    func testExpandedTrivitScreenshot() throws {
+    func testScreenshot02_ExpandedTrivit() throws {
         let mainList = app.navigationBars["Trivit"]
         XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
 
         dismissTutorialIfNeeded()
         expandFirstTrivit()
 
-        takeScreenshot(named: "02_Expanded")
+        snapshot("02_ExpandedTrivit")
     }
 
-    func testSettingsScreenshot() throws {
+    func testScreenshot03_Settings() throws {
         let mainList = app.navigationBars["Trivit"]
         XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
 
         dismissTutorialIfNeeded()
         openSettings()
 
-        takeScreenshot(named: "03_Settings")
+        snapshot("03_Settings")
+    }
+
+    func testScreenshot04_Statistics() throws {
+        let mainList = app.navigationBars["Trivit"]
+        XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
+
+        dismissTutorialIfNeeded()
+        openSettings()
+
+        // Navigate to Statistics from Settings
+        let statisticsButton = app.buttons["Statistics"]
+        if statisticsButton.waitForExistence(timeout: 3) {
+            statisticsButton.tap()
+            Thread.sleep(forTimeInterval: 0.5)
+            snapshot("04_Statistics")
+        }
+    }
+
+    func testScreenshot05_History() throws {
+        let mainList = app.navigationBars["Trivit"]
+        XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
+
+        dismissTutorialIfNeeded()
+        openSettings()
+
+        // Navigate to History from Settings
+        let historyButton = app.buttons["History"]
+        if historyButton.waitForExistence(timeout: 3) {
+            historyButton.tap()
+            Thread.sleep(forTimeInterval: 0.5)
+            snapshot("05_History")
+        }
     }
 
     // MARK: - Helper Methods
@@ -123,41 +139,5 @@ final class TrivitUITests: XCTestCase {
         let settingsNavBar = app.navigationBars["Settings"]
         _ = settingsNavBar.waitForExistence(timeout: 3)
         Thread.sleep(forTimeInterval: 0.5)
-    }
-
-    private func takeScreenshot(named name: String) {
-        let screenshot = XCUIScreen.main.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
-
-    // MARK: - Snapshot Helper (for fastlane snapshot compatibility)
-
-    private func setupSnapshot(_ app: XCUIApplication) {
-        // This method provides compatibility with fastlane snapshot
-        // It sets up the app for consistent screenshot generation
-        Snapshot.setupSnapshot(app)
-    }
-}
-
-// MARK: - Snapshot Helper Class
-
-/// Helper class for fastlane snapshot compatibility
-/// This provides the setupSnapshot functionality for automated screenshot generation
-enum Snapshot {
-    static func setupSnapshot(_ app: XCUIApplication) {
-        // Add snapshot-specific launch arguments
-        app.launchArguments += ["-FASTLANE_SNAPSHOT", "YES"]
-
-        // Disable animations for consistent screenshots
-        app.launchArguments += ["-UIAnimationsDisabled", "YES"]
-
-        // Set preferred language if needed (can be configured via scheme)
-        if let language = ProcessInfo.processInfo.environment["SNAPSHOT_LANGUAGE"] {
-            app.launchArguments += ["-AppleLanguages", "(\(language))"]
-            app.launchArguments += ["-AppleLocale", "\"\(language)\""]
-        }
     }
 }
