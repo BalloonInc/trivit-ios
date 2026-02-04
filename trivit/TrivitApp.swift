@@ -2,7 +2,9 @@
 //  TrivitApp.swift
 //  Trivit
 //
-//  Main app entry point using SwiftUI App lifecycle
+//  Main app entry point using SwiftUI App lifecycle.
+//  Trivit is a simple tally counter app that helps you track anything you want to count.
+//  Features include colorful counters, Apple Watch sync, and iCloud backup.
 //
 
 import SwiftUI

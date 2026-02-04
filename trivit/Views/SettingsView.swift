@@ -132,7 +132,7 @@ struct SettingsView: View {
                         }
                     }
 
-                    Link(destination: URL(string: "mailto:support@trivit.app")!) {
+                    Link(destination: URL(string: "mailto:support@ballooninc.be")!) {
                         HStack {
                             Text("Send Feedback")
                             Spacer()

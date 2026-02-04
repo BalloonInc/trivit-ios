@@ -8,6 +8,10 @@ Trivit is an mobile application that allows to create lists of tally marks. Triv
 - Swipe left to decrease counter value
 - Tap to increase the counter value
 
+### Technical Notes ###
+
+This app has been fully rewritten in Swift/SwiftUI (iOS 17+) as of January 2026.
+
 ### Who do I talk to? ###
 
 * Wouter Devriendt (wouter@ballooninc.be)
