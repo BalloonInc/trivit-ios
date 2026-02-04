@@ -20,20 +20,6 @@
                ReferencedContainer = "container:trivit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "WATCH004001"
-               BuildableName = "trivit Watch App.app"
-               BlueprintName = "trivit Watch App"
-               ReferencedContainer = "container:trivit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -61,6 +47,16 @@
                BlueprintIdentifier = "6CCA04B11A93CCC4000BBDE9"
                BuildableName = "DataKitTests.xctest"
                BlueprintName = "DataKitTests"
+               ReferencedContainer = "container:trivit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "UITEST004001"
+               BuildableName = "TrivitUITests.xctest"
+               BlueprintName = "TrivitUITests"
                ReferencedContainer = "container:trivit.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -1,16 +1,12 @@
 # Snapfile for Trivit Tally Counter
 # Configuration for automated screenshot generation
 
-# A list of devices you want to take the screenshots from
-# Available simulators (iOS 18.x): iPhone 16 Pro Max, iPhone 16 Pro, iPhone 16, iPhone SE (3rd generation)
-# iPad: iPad Pro (13-inch) (6th generation), iPad Pro (11-inch) (4th generation)
+# A list of devices you want to take the screenshots from (Xcode 26 / iOS 19 simulators)
+# iPhone only - iPad screenshots skipped for now (see GitHub issue #88)
 devices([
-  "iPhone 16 Pro Max",                     # 6.9" - Required for App Store
-  "iPhone 16 Pro",                         # 6.3" - Required for App Store
-  "iPhone 16",                             # 6.1" - Required for App Store
-  "iPhone SE (3rd generation)",            # Smaller iPhone
-  "iPad Pro (13-inch) (6th generation)",   # 13" iPad - Required for iPad App Store
-  "iPad Pro (11-inch) (4th generation)"    # 11" iPad - Additional iPad size
+  "iPhone 17 Pro Max",   # 6.9" - Required for App Store
+  "iPhone 17 Pro",       # 6.3" - Required for App Store
+  "iPhone 17"            # 6.1" - Required for App Store
 ])
 
 # Languages to generate the screenshots for

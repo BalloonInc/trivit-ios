@@ -50,6 +50,7 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 		WATCH001011 /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002009 /* WatchSettingsView.swift */; };
 		WATCH001012 /* WatchTallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002010 /* WatchTallyMarksView.swift */; };
 		UITEST001001 /* TrivitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = UITESTF001 /* TrivitUITests.swift */; };
+		SNAPSHOT002 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = SNAPSHOT001 /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 		UITESTF001 /* TrivitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitUITests.swift; sourceTree = "<group>"; };
 		UITESTF002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		UITEST_PRODUCT /* TrivitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrivitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		SNAPSHOT001 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +368,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = PBXGroup;
 			children = (
 				UITESTF001 /* TrivitUITests.swift */,
+				SNAPSHOT001 /* SnapshotHelper.swift */,
 				UITESTF002 /* Info.plist */,
 			);
 			path = TrivitUITests;
@@ -682,6 +685,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			buildActionMask = 2147483647;
 			files = (
 				UITEST001001 /* TrivitUITests.swift in Sources */,
+				SNAPSHOT002 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,7 +895,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Debug;
 		};
@@ -936,7 +940,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Release;
 		};
@@ -1069,7 +1073,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 				TEST_TARGET_NAME = trivit;
 			};
 			name = Debug;
@@ -1093,7 +1097,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 				TEST_TARGET_NAME = trivit;
 			};
 			name = Release;

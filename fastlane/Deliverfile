@@ -13,3 +13,29 @@ secondary_category "UTILITIES"
 
 # Automatic release
 automatic_release false
+
+# Pricing - Set manually in App Store Connect (fastlane's pricing API is outdated)
+# price_tier 0
+
+# Age Rating - loaded from app_rating_config.json in metadata folder
+# Privacy - loaded from app_privacy_details.json in metadata folder
+
+# Review Information
+submission_information({
+  add_id_info_serves_ads: false,
+  add_id_info_tracks_install: false,
+  add_id_info_tracks_action: false,
+  add_id_info_limits_tracking: false,
+  add_id_info_uses_idfa: false,
+  content_rights_has_rights: true,
+  content_rights_contains_third_party_content: false,
+  export_compliance_platform: "ios",
+  export_compliance_compliance_required: false,
+  export_compliance_encryption_updated: false,
+  export_compliance_app_type: nil,
+  export_compliance_uses_encryption: false,
+  export_compliance_is_exempt: false,
+  export_compliance_contains_third_party_cryptography: false,
+  export_compliance_contains_proprietary_cryptography: false,
+  export_compliance_available_on_french_store: true
+})
