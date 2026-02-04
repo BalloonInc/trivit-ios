@@ -132,6 +132,13 @@ struct TrivitApp: App {
     // MARK: - Sample Data for UI Testing
 
     private func loadSampleData(context: ModelContext) {
+        // Check if data already exists to prevent duplicates
+        let existingCount = (try? context.fetchCount(FetchDescriptor<Trivit>())) ?? 0
+        if existingCount > 0 {
+            print("📸 Sample data already loaded, skipping")
+            return
+        }
+
         // Sample trivits with realistic data for App Store screenshots
         let sampleTrivits: [(title: String, count: Int, colorIndex: Int)] = [
             ("Glasses of water", 7, 0),
@@ -147,7 +154,7 @@ struct TrivitApp: App {
                 title: trivit.title,
                 count: trivit.count,
                 colorIndex: trivit.colorIndex,
-                isCollapsed: true,
+                isCollapsed: index > 0,  // First trivit expanded, rest collapsed
                 sortOrder: index
             )
             context.insert(newTrivit)

@@ -1,6 +1,7 @@
 name: App Store Release
 
-# Uses shared workflow from ios-infra for full App Store release preparation
+# Fully automated App Store release with AI-generated release notes
+# Uses shared workflow from ios-infra
 
 on:
   workflow_dispatch:
@@ -23,11 +24,16 @@ on:
         required: false
         type: boolean
         default: true
+      generate_release_notes:
+        description: 'Generate release notes with AI (from commits since last release)'
+        required: false
+        type: boolean
+        default: true
       submit_for_review:
         description: 'Submit to App Store review'
         required: false
         type: boolean
-        default: false
+        default: true
 
 permissions:
   actions: read
@@ -40,11 +46,12 @@ jobs:
       bundle_id: com.wouterdevriendt.trivit
       scheme: trivit
       app_name: 'Trivit'
-      app_context: 'Trivit is a tally counter app that helps users count anything - perfect for counting inventory, tracking habits, or keeping score. Now with Apple Watch support!'
+      app_context: 'Trivit is a tally counter app that helps users count anything - perfect for counting inventory, tracking habits, or keeping score. Features colorful tally marks, statistics, and Apple Watch support.'
       app_version: ${{ inputs.app_version }}
       build_number: ${{ inputs.build_number }}
       generate_screenshots: ${{ inputs.generate_screenshots }}
       generate_description: ${{ inputs.generate_description }}
+      generate_release_notes: ${{ inputs.generate_release_notes }}
       submit_for_review: ${{ inputs.submit_for_review }}
     secrets:
       APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}

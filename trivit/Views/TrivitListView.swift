@@ -109,6 +109,12 @@ struct TrivitListView: View {
                     tutorialOverlay
                 }
             }
+            .onAppear {
+                // Initialize expanded state from model (for UI testing with sample data)
+                for trivit in trivits where !trivit.isCollapsed {
+                    expandedTrivitIds.insert(trivit.id)
+                }
+            }
         }
     }
 
