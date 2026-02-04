@@ -1,52 +1,120 @@
 fastlane documentation
-================
+----
+
 # Installation
 
 Make sure you have the latest version of the Xcode command line tools installed:
 
-```
+```sh
 xcode-select --install
 ```
 
-## Choose your installation method:
-
-<table width="100%" >
-<tr>
-<th width="33%"><a href="http://brew.sh">Homebrew</a></td>
-<th width="33%">Installer Script</td>
-<th width="33%">Rubygems</td>
-</tr>
-<tr>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS</td>
-<td width="33%" align="center">macOS or Linux with Ruby 2.0.0 or above</td>
-</tr>
-<tr>
-<td width="33%"><code>brew cask install fastlane</code></td>
-<td width="33%"><a href="https://download.fastlane.tools">Download the zip file</a>. Then double click on the <code>install</code> script (or run it in a terminal window).</td>
-<td width="33%"><code>sudo gem install fastlane -NV</code></td>
-</tr>
-</table>
+For _fastlane_ installation instructions, see [Installing _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 
 # Available Actions
-### build
-```
-fastlane build
+
+## iOS
+
+### ios screenshots
+
+```sh
+[bundle exec] fastlane ios screenshots
 ```
 
-### test
-```
-fastlane test
+Generate App Store screenshots on all required device sizes
+
+### ios screenshots_iphone
+
+```sh
+[bundle exec] fastlane ios screenshots_iphone
 ```
 
-### analyze
-```
-fastlane analyze
+Generate screenshots for iPhone only (faster)
+
+### ios deliver_metadata
+
+```sh
+[bundle exec] fastlane ios deliver_metadata
 ```
 
+Upload metadata, screenshots, and app icon to App Store Connect
+
+### ios submit_for_review
+
+```sh
+[bundle exec] fastlane ios submit_for_review
+```
+
+Upload everything and submit for review (creates draft)
+
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+Upload only screenshots
+
+### ios upload_icon
+
+```sh
+[bundle exec] fastlane ios upload_icon
+```
+
+Upload only the app icon
+
+### ios upload_metadata_only
+
+```sh
+[bundle exec] fastlane ios upload_metadata_only
+```
+
+Upload only metadata (no screenshots)
+
+### ios download_metadata
+
+```sh
+[bundle exec] fastlane ios download_metadata
+```
+
+Download existing metadata from App Store Connect
+
+### ios prepare_and_upload
+
+```sh
+[bundle exec] fastlane ios prepare_and_upload
+```
+
+Generate screenshots and upload everything
+
+### ios full_app_store_prep
+
+```sh
+[bundle exec] fastlane ios full_app_store_prep
+```
+
+Full App Store preparation: icons, screenshots, metadata
+
+### ios testflight_upload
+
+```sh
+[bundle exec] fastlane ios testflight_upload
+```
+
+Build and upload to TestFlight
+
+### ios release
+
+```sh
+[bundle exec] fastlane ios release
+```
+
+Build, upload to TestFlight, and update metadata
 
 ----
 
-This README.md is auto-generated and will be re-generated every time [fastlane](https://fastlane.tools) is run.
-More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
-The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
+This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
+
+More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
+
+The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
