@@ -13,3 +13,10 @@ sonar-reports
 fastlane/build/
 fastlane/screenshots/
 fastlane/reports/build/
+
+# Build artifacts
+build/
+*.xcarchive/
+
+# Screenshots (uploaded via fastlane)
+fastlane/screenshots/*.png

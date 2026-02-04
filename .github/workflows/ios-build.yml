@@ -31,6 +31,9 @@ jobs:
       workspace_path: trivit.xcworkspace
       info_plist_path: trivit/Info.plist
       additional_info_plists: 'trivit Watch App/Info.plist'
+      # Use manual signing to prevent Xcode from creating new certificates
+      # This uses the certificate from DISTRIBUTION_CERTIFICATE_BASE64 secret
+      code_signing_identity: 'Apple Distribution'
     secrets:
       APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
