@@ -15,19 +15,41 @@ private let logger = Logger(subsystem: "com.wouterdevriendt.trivit.watchkitapp",
 struct TrivitWatchApp: App {
     @StateObject private var syncService = SyncService.shared
 
+    // Check for sample data mode (for screenshots)
+    private static var isSampleDataMode: Bool {
+        ProcessInfo.processInfo.arguments.contains("-SampleDataMode")
+    }
+
     // Watch uses its own local storage - data is synced from iPhone via WatchConnectivity
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([Trivit.self])
 
         let modelConfiguration = ModelConfiguration(
             schema: schema,
-            isStoredInMemoryOnly: false,
+            isStoredInMemoryOnly: isSampleDataMode,  // Use memory storage for screenshots
             cloudKitDatabase: .none  // Watch syncs via WatchConnectivity, not CloudKit
         )
 
         do {
             logger.info("⌚ Creating ModelContainer for watch app")
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+            // Insert sample data if in sample data mode
+            if isSampleDataMode {
+                logger.info("⌚ Sample data mode - creating sample trivits")
+                let context = container.mainContext
+                let sampleTrivits = [
+                    Trivit(title: "Coffee", count: 3, colorIndex: 0),
+                    Trivit(title: "Workouts", count: 7, colorIndex: 2),
+                    Trivit(title: "Steps", count: 5, colorIndex: 4)
+                ]
+                for trivit in sampleTrivits {
+                    context.insert(trivit)
+                }
+                try? context.save()
+            }
+
+            return container
         } catch {
             logger.error("⌚ Failed to create ModelContainer: \(error)")
             fatalError("Could not create ModelContainer: \(error)")
