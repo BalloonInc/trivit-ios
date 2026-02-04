@@ -1,0 +1,12 @@
+Trivit is a simple tally counter app for counting anything - inventory, habits, scores, or any other counting needs.
+
+No login required. All data is stored locally on device.
+
+To test:
+1. Launch the app to see the counter list
+2. Tap + to create a new counter
+3. Tap a counter to increment/decrement
+4. Swipe to delete counters
+5. Use context menus for additional options
+
+The app works fully offline and requires no special credentials.
