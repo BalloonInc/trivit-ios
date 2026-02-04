@@ -294,6 +294,14 @@ struct TrivitListView: View {
 
         guard sourceIndex != destIndex else { return }
 
+        // Track reorder analytics
+        AnalyticsService.shared.trackReorder(
+            trivitId: source.id.uuidString,
+            title: source.title,
+            fromPosition: sourceIndex,
+            toPosition: destIndex
+        )
+
         var reordered = trivits.map { $0 }
         let item = reordered.remove(at: sourceIndex)
         reordered.insert(item, at: destIndex)
@@ -346,6 +354,14 @@ struct TrivitListView: View {
             modelContext.insert(newTrivit)
             HapticsService.shared.impact(.medium)
 
+            // Track analytics
+            AnalyticsService.shared.trackTrivitCreated(
+                title: randomTitle,
+                colorIndex: nextColorIndex,
+                source: .phone,
+                totalTrivits: trivits.count + 1
+            )
+
             // Expand the new trivit and trigger edit mode
             expandedTrivitIds.insert(newTrivit.id)
 
@@ -359,6 +375,15 @@ struct TrivitListView: View {
 
     private func deleteTrivit(_ trivit: Trivit) {
         withAnimation {
+            // Track analytics before deleting
+            let ageInDays = Calendar.current.dateComponents([.day], from: trivit.createdAt, to: Date()).day ?? 0
+            AnalyticsService.shared.trackTrivitDeleted(
+                title: trivit.title,
+                finalCount: trivit.count,
+                source: .phone,
+                ageInDays: ageInDays
+            )
+
             trivit.softDelete()
             deletedTrivit = trivit
             showUndoToast = true

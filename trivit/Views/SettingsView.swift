@@ -38,7 +38,13 @@ struct SettingsView: View {
             List {
                 Section("General") {
                     Toggle("Haptic Feedback", isOn: $enableHaptics)
+                        .onChange(of: enableHaptics) { _, newValue in
+                            AnalyticsService.shared.trackSettingChanged(setting: "haptic_feedback", value: String(newValue))
+                        }
                     Toggle("Hide Counter When Expanded", isOn: $hideCounterWhenExpanded)
+                        .onChange(of: hideCounterWhenExpanded) { _, newValue in
+                            AnalyticsService.shared.trackSettingChanged(setting: "hide_counter_expanded", value: String(newValue))
+                        }
                 }
 
                 Section("Color Scheme") {
@@ -53,6 +59,9 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                    .onChange(of: selectedColorScheme) { _, newValue in
+                        AnalyticsService.shared.trackColorSchemeChanged(scheme: newValue)
+                    }
                 }
 
                 Section("Watch Sync") {

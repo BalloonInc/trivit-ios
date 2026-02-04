@@ -66,8 +66,22 @@ struct TrivitApp: App {
                     let context = sharedModelContainer.mainContext
                     watchSyncService.configure(with: context)
                     print("📱 Watch sync configured - paired: \(watchSyncService.isWatchPaired), reachable: \(watchSyncService.isWatchReachable)")
+
+                    // Track session start with analytics
+                    trackSessionStart(context: context)
                 }
         }
         .modelContainer(sharedModelContainer)
+    }
+
+    private func trackSessionStart(context: ModelContext) {
+        do {
+            let descriptor = FetchDescriptor<Trivit>(predicate: #Predicate { $0.deletedAt == nil })
+            let trivits = try context.fetch(descriptor)
+            let totalCount = trivits.reduce(0) { $0 + $1.count }
+            AnalyticsService.shared.trackSessionStart(trivitCount: trivits.count, totalCount: totalCount)
+        } catch {
+            print("📱 Failed to fetch trivits for session tracking: \(error)")
+        }
     }
 }

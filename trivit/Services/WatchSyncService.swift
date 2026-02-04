@@ -97,10 +97,15 @@ class WatchSyncService: NSObject, ObservableObject {
 
             logger.info("📱 Sending \(trivits.count) trivits to watch...")
 
+            // Track sync started
+            AnalyticsService.shared.trackWatchSyncStarted(trivitCount: trivits.count)
+
             session.sendMessage(message, replyHandler: { response in
                 logger.info("📱 Watch acknowledged sync: \(response)")
+                AnalyticsService.shared.trackWatchSyncCompleted(trivitCount: trivits.count)
             }) { error in
                 logger.error("📱 Failed to sync to watch: \(error.localizedDescription)")
+                AnalyticsService.shared.trackWatchSyncFailed(error: error.localizedDescription)
             }
 
         } catch {
@@ -184,6 +189,26 @@ class WatchSyncService: NSObject, ObservableObject {
             let results = try modelContext.fetch(descriptor)
 
             if let existingTrivit = results.first {
+                // Track if count changed (increment from watch)
+                let oldCount = existingTrivit.count
+                if count != oldCount {
+                    if count > oldCount {
+                        AnalyticsService.shared.trackIncrement(
+                            trivitId: idString,
+                            title: title,
+                            newCount: count,
+                            source: .watch
+                        )
+                    } else {
+                        AnalyticsService.shared.trackDecrement(
+                            trivitId: idString,
+                            title: title,
+                            newCount: count,
+                            source: .watch
+                        )
+                    }
+                }
+
                 // Update existing
                 existingTrivit.title = title
                 existingTrivit.count = count
@@ -294,6 +319,12 @@ extension WatchSyncService: WCSessionDelegate {
         Task { @MainActor in
             self.isWatchReachable = session.isReachable
 
+            // Track connection state change
+            AnalyticsService.shared.trackWatchConnectionChanged(
+                isReachable: session.isReachable,
+                isPaired: session.isPaired
+            )
+
             if session.isReachable && self.modelContext != nil {
                 logger.info("MainActor: Watch became reachable with context, triggering sync...")
                 self.syncAllTrivitsToWatch()
@@ -384,6 +415,18 @@ extension WatchSyncService: WCSessionDelegate {
         do {
             try modelContext.save()
             logger.info("handleCreateTrivit: Created successfully, syncing back to watch")
+
+            // Track analytics for watch-created trivit
+            let descriptor = FetchDescriptor<Trivit>(predicate: #Predicate { $0.deletedAt == nil })
+            let totalTrivits = (try? modelContext.fetch(descriptor).count) ?? 1
+
+            AnalyticsService.shared.trackTrivitCreated(
+                title: title,
+                colorIndex: colorIndex,
+                source: .watch,
+                totalTrivits: totalTrivits
+            )
+
             // Sync back to watch
             syncTrivitToWatch(newTrivit)
         } catch {

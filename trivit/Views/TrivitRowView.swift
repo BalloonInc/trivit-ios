@@ -147,8 +147,16 @@ struct TrivitRowView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             guard !isEditing else { return }
+            let willExpand = !isExpanded
             onToggleExpand()
             HapticsService.shared.impact(.light)
+
+            // Track expand/collapse
+            AnalyticsService.shared.trackExpandCollapse(
+                trivitId: trivit.id.uuidString,
+                title: trivit.title,
+                expanded: willExpand
+            )
         }
         .onLongPressGesture {
             isEditing = true
@@ -186,6 +194,14 @@ struct TrivitRowView: View {
             trivit.increment(in: modelContext)
             HapticsService.shared.impact(.light)
             WatchSyncService.shared.syncTrivitToWatch(trivit)
+
+            // Track increment
+            AnalyticsService.shared.trackIncrement(
+                trivitId: trivit.id.uuidString,
+                title: trivit.title,
+                newCount: trivit.count,
+                source: .phone
+            )
         }
     }
 
@@ -210,6 +226,14 @@ struct TrivitRowView: View {
                     trivit.decrement(in: modelContext)
                     HapticsService.shared.impact(.light)
                     WatchSyncService.shared.syncTrivitToWatch(trivit)
+
+                    // Track decrement
+                    AnalyticsService.shared.trackDecrement(
+                        trivitId: trivit.id.uuidString,
+                        title: trivit.title,
+                        newCount: trivit.count,
+                        source: .phone
+                    )
                 }
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                     dragOffset = 0
@@ -223,12 +247,23 @@ struct TrivitRowView: View {
     private var contextMenuItems: some View {
         Button {
             showingStatistics = true
+            AnalyticsService.shared.trackStatisticsViewed(
+                trivitId: trivit.id.uuidString,
+                title: trivit.title,
+                currentCount: trivit.count
+            )
         } label: {
             Label("Statistics", systemImage: "chart.bar.fill")
         }
 
         Button {
             showingHistory = true
+            // Event count will be tracked when sheet opens with actual count
+            AnalyticsService.shared.trackHistoryViewed(
+                trivitId: trivit.id.uuidString,
+                title: trivit.title,
+                eventCount: 0 // Will be updated in HistoryView
+            )
         } label: {
             Label("History", systemImage: "clock.arrow.circlepath")
         }
@@ -243,16 +278,34 @@ struct TrivitRowView: View {
         }
 
         Button {
+            let oldColorIndex = trivit.colorIndex
             trivit.colorIndex = (trivit.colorIndex + 1) % TrivitColors.colorCount
             WatchSyncService.shared.syncTrivitToWatch(trivit)
+
+            // Track color change
+            AnalyticsService.shared.trackColorChanged(
+                title: trivit.title,
+                oldColorIndex: oldColorIndex,
+                newColorIndex: trivit.colorIndex,
+                source: .phone
+            )
         } label: {
             Label("Change Color", systemImage: "paintpalette")
         }
 
         Button {
+            let previousCount = trivit.count
             trivit.reset()
             HapticsService.shared.notification(.warning)
             WatchSyncService.shared.syncTrivitToWatch(trivit)
+
+            // Track reset
+            AnalyticsService.shared.trackReset(
+                trivitId: trivit.id.uuidString,
+                title: trivit.title,
+                previousCount: previousCount,
+                source: .phone
+            )
         } label: {
             Label("Reset Count", systemImage: "arrow.counterclockwise")
         }
