@@ -132,9 +132,9 @@ struct SettingsView: View {
                         }
                     }
 
-                    Link(destination: URL(string: "mailto:support@ballooninc.be")!) {
+                    Link(destination: URL(string: "mailto:support@balooninc.be")!) {
                         HStack {
-                            Text("Send Feedback")
+                            Text("Support")
                             Spacer()
                             Image(systemName: "envelope")
                                 .foregroundColor(.secondary)
