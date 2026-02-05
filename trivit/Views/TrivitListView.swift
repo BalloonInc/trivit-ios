@@ -282,7 +282,7 @@ struct TrivitListView: View {
                         .id("bottom")
                 }
             }
-            .background(Color(.systemGray5))
+            .background(Color.red)
             .onChange(of: scrollToBottom) { _, shouldScroll in
                 if shouldScroll {
                     withAnimation {
