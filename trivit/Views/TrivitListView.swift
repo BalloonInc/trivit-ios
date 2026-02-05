@@ -99,7 +99,7 @@ struct TrivitListView: View {
             .navigationTitle("Trivit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarBackground(Color(.systemBackground), for: .navigationBar)
+            .toolbarBackground(Color.pink, for: .navigationBar)
             .toolbar { toolbarContent }
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
