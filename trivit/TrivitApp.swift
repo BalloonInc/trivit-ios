@@ -154,10 +154,13 @@ struct TrivitApp: App {
                 title: trivit.title,
                 count: trivit.count,
                 colorIndex: trivit.colorIndex,
-                isCollapsed: index > 0,  // First trivit expanded, rest collapsed
+                isCollapsed: index >= 3,  // First 3 trivits expanded, rest collapsed
                 sortOrder: index
             )
             context.insert(newTrivit)
+
+            // Generate TallyEvent records so statistics charts have data
+            generateSampleEvents(for: newTrivit, in: context)
         }
 
         // Save the context
@@ -170,5 +173,53 @@ struct TrivitApp: App {
 
         // Mark tutorial as seen for UI tests
         UserDefaults.standard.set(true, forKey: "hasSeenTutorial")
+    }
+
+    /// Generate realistic TallyEvent records spread across 90 days so statistics charts show data
+    private func generateSampleEvents(for trivit: Trivit, in context: ModelContext) {
+        let calendar = Calendar.current
+        let now = Date()
+
+        // Distribute the trivit's count across the last 90 days with realistic patterns
+        // More events on weekdays, varied hours, some days with no activity for streak gaps
+        var eventsToCreate = trivit.count
+        var day = 0
+
+        while eventsToCreate > 0 && day < 90 {
+            guard let date = calendar.date(byAdding: .day, value: -day, to: now) else {
+                day += 1
+                continue
+            }
+
+            // Skip some days randomly for realistic gaps (roughly 30% of days)
+            let dayHash = (day * 7 + trivit.colorIndex * 13) % 10
+            if dayHash < 3 && day > 0 {
+                day += 1
+                continue
+            }
+
+            // 1-3 events per active day
+            let eventsThisDay = min(eventsToCreate, ((day + trivit.colorIndex) % 3) + 1)
+
+            for i in 0..<eventsThisDay {
+                // Spread across different hours (8am-10pm) for hourly chart variety
+                let hour = 8 + ((day * 3 + i * 5 + trivit.colorIndex * 2) % 14)
+                let minute = (day * 7 + i * 17) % 60
+
+                var components = calendar.dateComponents([.year, .month, .day], from: date)
+                components.hour = hour
+                components.minute = minute
+
+                if let eventDate = calendar.date(from: components) {
+                    let event = TallyEvent(trivitId: trivit.id, timestamp: eventDate, delta: 1)
+                    context.insert(event)
+                }
+            }
+
+            eventsToCreate -= eventsThisDay
+            day += 1
+        }
+
+        print("📸 Generated \(trivit.count - eventsToCreate) events for '\(trivit.title)'")
     }
 }

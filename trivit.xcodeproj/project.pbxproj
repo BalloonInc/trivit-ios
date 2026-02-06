@@ -50,6 +50,7 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 		WATCH001011 /* WatchSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002009 /* WatchSettingsView.swift */; };
 		WATCH001012 /* WatchTallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002010 /* WatchTallyMarksView.swift */; };
 		UITEST001001 /* TrivitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = UITESTF001 /* TrivitUITests.swift */; };
+		SNAP0002000000000000002 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = SNAP0001000000000000001 /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 		UITESTF001 /* TrivitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitUITests.swift; sourceTree = "<group>"; };
 		UITESTF002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		UITEST_PRODUCT /* TrivitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrivitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		SNAP0001000000000000001 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +368,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = PBXGroup;
 			children = (
 				UITESTF001 /* TrivitUITests.swift */,
+				SNAP0001000000000000001 /* SnapshotHelper.swift */,
 				UITESTF002 /* Info.plist */,
 			);
 			path = TrivitUITests;
@@ -682,6 +685,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			buildActionMask = 2147483647;
 			files = (
 				UITEST001001 /* TrivitUITests.swift in Sources */,
+				SNAP0002000000000000002 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,7 +997,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				CODE_SIGN_ENTITLEMENTS = "trivit Watch App/TrivitWatchApp.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1005,7 +1009,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0;
+				MARKETING_VERSION = 5.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				
@@ -1025,7 +1029,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				CODE_SIGN_ENTITLEMENTS = "trivit Watch App/TrivitWatchApp.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -1037,7 +1041,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0;
+				MARKETING_VERSION = 5.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 
@@ -1054,7 +1058,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrivitUITests/Info.plist;
@@ -1078,7 +1082,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = N324UX8D9M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrivitUITests/Info.plist;

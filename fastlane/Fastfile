@@ -11,11 +11,12 @@ platform :ios do
   lane :screenshots do
     capture_screenshots(
       project: File.expand_path("../Trivit.xcodeproj", __dir__),
-      scheme: "TrivitUITests",
+      scheme: "trivit",
       devices: [
         "iPhone 17 Pro Max",      # 6.9" display (required)
         "iPhone 17 Pro",          # 6.3" display
-        "iPhone 16e"              # smaller display
+        "iPhone 16e",             # smaller display
+        "iPad Pro 13-inch (M5)"   # 13" iPad display
       ],
       languages: ["en-US"],
       output_directory: "./screenshots",
@@ -31,7 +32,7 @@ platform :ios do
   lane :screenshots_iphone do
     capture_screenshots(
       project: File.expand_path("../Trivit.xcodeproj", __dir__),
-      scheme: "TrivitUITests",
+      scheme: "trivit",
       devices: ["iPhone 17 Pro Max"],
       languages: ["en-US"],
       output_directory: "./screenshots",
@@ -39,6 +40,61 @@ platform :ios do
       override_status_bar: true,
       skip_open_summary: true
     )
+  end
+
+  desc "Generate Apple Watch screenshots via simctl"
+  lane :watch_screenshots do
+    # Simulator UDIDs (paired: iPhone 17 Pro + Apple Watch Ultra 3)
+    phone_udid = "8C97CB6A-E332-4E5A-B56C-D3871E1F68C1"
+    watch_udid = "C883FE43-B78B-40CE-A93B-015CDA33BB40"
+    output_dir = File.expand_path("../screenshots/en-US", __dir__)
+    workspace = File.expand_path("../trivit.xcworkspace", __dir__)
+
+    FileUtils.mkdir_p(output_dir)
+
+    # Boot paired simulators
+    UI.message("Booting paired simulators...")
+    sh("xcrun simctl boot #{phone_udid} 2>/dev/null || true")
+    sh("xcrun simctl boot #{watch_udid} 2>/dev/null || true")
+    sleep(5)
+
+    # Build watch app for simulator
+    UI.message("Building watch app...")
+    sh(
+      "xcodebuild build " \
+      "-workspace '#{workspace}' " \
+      "-scheme 'trivit Watch App' " \
+      "-destination 'id=#{watch_udid}' " \
+      "-configuration Debug " \
+      "ONLY_ACTIVE_ARCH=YES " \
+      "2>&1 | tail -5"
+    )
+
+    # Find and install the built watch app
+    derived_data = File.expand_path("~/Library/Developer/Xcode/DerivedData")
+    watch_app = Dir.glob("#{derived_data}/trivit-*/Build/Products/Debug-watchsimulator/trivit Watch App.app").first
+
+    if watch_app
+      UI.message("Installing watch app: #{watch_app}")
+      sh("xcrun simctl install #{watch_udid} '#{watch_app}'")
+
+      # Launch with sample data
+      bundle_id = "com.wouterdevriendt.trivit.watchkitapp"
+      sh("xcrun simctl terminate #{watch_udid} #{bundle_id} 2>/dev/null || true")
+      sh("xcrun simctl launch #{watch_udid} #{bundle_id} -SampleDataMode YES")
+      sleep(5)
+
+      # Take screenshot
+      screenshot_path = "#{output_dir}/Apple Watch Ultra 3 (49mm)-01_WatchApp.png"
+      sh("xcrun simctl io #{watch_udid} screenshot '#{screenshot_path}'")
+      UI.success("Watch screenshot saved to: #{screenshot_path}")
+    else
+      UI.error("Could not find built watch app in DerivedData")
+    end
+
+    # Shutdown simulators
+    sh("xcrun simctl shutdown #{watch_udid} 2>/dev/null || true")
+    sh("xcrun simctl shutdown #{phone_udid} 2>/dev/null || true")
   end
 
   # ============================================

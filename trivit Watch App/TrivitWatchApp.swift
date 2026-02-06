@@ -39,9 +39,10 @@ struct TrivitWatchApp: App {
                 logger.info("⌚ Sample data mode - creating sample trivits")
                 let context = container.mainContext
                 let sampleTrivits = [
-                    Trivit(title: "Coffee", count: 3, colorIndex: 0),
-                    Trivit(title: "Workouts", count: 7, colorIndex: 2),
-                    Trivit(title: "Steps", count: 5, colorIndex: 4)
+                    Trivit(title: "Glasses of water", count: 7, colorIndex: 0, isCollapsed: false, sortOrder: 0),
+                    Trivit(title: "Push-ups done", count: 42, colorIndex: 1, isCollapsed: false, sortOrder: 1),
+                    Trivit(title: "Books read", count: 3, colorIndex: 2, isCollapsed: true, sortOrder: 2),
+                    Trivit(title: "Meditation", count: 15, colorIndex: 4, isCollapsed: true, sortOrder: 3)
                 ]
                 for trivit in sampleTrivits {
                     context.insert(trivit)

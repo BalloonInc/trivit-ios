@@ -31,6 +31,14 @@ Generate App Store screenshots on all required device sizes
 
 Generate screenshots for iPhone only (faster)
 
+### ios watch_screenshots
+
+```sh
+[bundle exec] fastlane ios watch_screenshots
+```
+
+Generate Apple Watch screenshots via simctl
+
 ### ios deliver_metadata
 
 ```sh

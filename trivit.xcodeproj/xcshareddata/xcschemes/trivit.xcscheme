@@ -64,6 +64,16 @@
                ReferencedContainer = "container:trivit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "UITEST004001"
+               BuildableName = "TrivitUITests.xctest"
+               BlueprintName = "TrivitUITests"
+               ReferencedContainer = "container:trivit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

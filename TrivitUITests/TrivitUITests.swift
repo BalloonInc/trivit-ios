@@ -57,46 +57,37 @@ final class TrivitUITests: XCTestCase {
         snapshot("02_ExpandedTrivit")
     }
 
-    func testScreenshot03_Settings() throws {
+    func testScreenshot03_Statistics() throws {
         let mainList = app.navigationBars["Trivit"]
         XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
 
         dismissTutorialIfNeeded()
-        openSettings()
+        Thread.sleep(forTimeInterval: 0.5)
 
-        snapshot("03_Settings")
-    }
+        // Long-press the first trivit title to trigger context menu
+        let firstTitle = app.staticTexts["Glasses of water"]
+        XCTAssertTrue(firstTitle.waitForExistence(timeout: 3), "First trivit title should exist")
+        firstTitle.press(forDuration: 1.5)
 
-    func testScreenshot04_Statistics() throws {
-        let mainList = app.navigationBars["Trivit"]
-        XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
-
-        dismissTutorialIfNeeded()
-        openSettings()
-
-        // Navigate to Statistics from Settings
+        // Tap Statistics in context menu
         let statisticsButton = app.buttons["Statistics"]
-        if statisticsButton.waitForExistence(timeout: 3) {
-            statisticsButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            snapshot("04_Statistics")
-        }
+        XCTAssertTrue(statisticsButton.waitForExistence(timeout: 5), "Statistics menu item should appear")
+        statisticsButton.tap()
+
+        // Wait for Statistics sheet to appear
+        Thread.sleep(forTimeInterval: 1.0)
+
+        snapshot("03_Statistics")
     }
 
-    func testScreenshot05_History() throws {
+    func testScreenshot04_Settings() throws {
         let mainList = app.navigationBars["Trivit"]
         XCTAssertTrue(mainList.waitForExistence(timeout: 5), "Main list should appear")
 
         dismissTutorialIfNeeded()
         openSettings()
 
-        // Navigate to History from Settings
-        let historyButton = app.buttons["History"]
-        if historyButton.waitForExistence(timeout: 3) {
-            historyButton.tap()
-            Thread.sleep(forTimeInterval: 0.5)
-            snapshot("05_History")
-        }
+        snapshot("04_Settings")
     }
 
     // MARK: - Helper Methods
@@ -116,7 +107,6 @@ final class TrivitUITests: XCTestCase {
         Thread.sleep(forTimeInterval: 0.3)
 
         // Find and tap the first trivit row to expand it
-        // The trivit rows are in a ScrollView with LazyVStack
         let firstCell = app.scrollViews.firstMatch.otherElements.firstMatch
         if firstCell.exists {
             firstCell.tap()

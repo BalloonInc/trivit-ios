@@ -2,11 +2,11 @@
 # Configuration for automated screenshot generation
 
 # A list of devices you want to take the screenshots from (Xcode 26 / iOS 19 simulators)
-# iPhone only - iPad screenshots skipped for now (see GitHub issue #88)
 devices([
-  "iPhone 17 Pro Max",   # 6.9" - Required for App Store
-  "iPhone 17 Pro",       # 6.3" - Required for App Store
-  "iPhone 17"            # 6.1" - Required for App Store
+  "iPhone 17 Pro Max",       # 6.9" - Required for App Store
+  "iPhone 17 Pro",           # 6.3" - Required for App Store
+  "iPhone 17",               # 6.1" - Required for App Store
+  "iPad Pro 13-inch (M5)"   # 13" iPad - Required for App Store
 ])
 
 # Languages to generate the screenshots for
