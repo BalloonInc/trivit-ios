@@ -29,6 +29,7 @@ struct SettingsView: View {
     @AppStorage("hideCounterWhenExpanded") private var hideCounterWhenExpanded = true
     @AppStorage("colorScheme") private var selectedColorScheme = ColorScheme.vibrant.rawValue
     @ObservedObject private var watchSync = WatchSyncService.shared
+    @State private var showResetConfirmation = false
 
     @Query(filter: #Predicate<Trivit> { $0.deletedAt != nil })
     private var deletedTrivits: [Trivit]
@@ -177,9 +178,17 @@ struct SettingsView: View {
 
                 Section("Data") {
                     Button(role: .destructive) {
-                        // Reset all data
+                        showResetConfirmation = true
                     } label: {
                         Text("Reset All Trivits")
+                    }
+                    .alert("Reset All Trivits", isPresented: $showResetConfirmation) {
+                        Button("Cancel", role: .cancel) { }
+                        Button("Reset All", role: .destructive) {
+                            resetAllTrivits()
+                        }
+                    } message: {
+                        Text("This will reset the count of all trivits to zero. This action cannot be undone.")
                     }
                 }
 
@@ -230,6 +239,13 @@ struct SettingsView: View {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "\(version) (\(build))"
+    }
+
+    private func resetAllTrivits() {
+        for trivit in trivits where trivit.deletedAt == nil {
+            trivit.reset()
+        }
+        HapticsService.shared.notification(.warning)
     }
 
     private var deviceName: String {
