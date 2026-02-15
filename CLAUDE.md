@@ -86,3 +86,11 @@ gh workflow run 227871014 --repo BalloonInc/trivit-ios
 
 - `../footprint` - Has App Store Connect credentials
 - `../snow` - Has shared config
+
+## Available Skills
+
+Detailed instructions in `.claude/commands/`:
+
+- **`/build-test`** — Build and run unit/UI tests (workspace-based, iPhone 17 Pro simulator)
+- **`/deploy-testflight`** — Deploy to TestFlight (via GH Actions `gh workflow run` or manual xcodebuild)
+- **`/app-store-release`** — Full App Store release with AI-generated screenshots and release notes
