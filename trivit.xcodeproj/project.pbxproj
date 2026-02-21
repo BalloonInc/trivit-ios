@@ -51,6 +51,14 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 		WATCH001012 /* WatchTallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH002010 /* WatchTallyMarksView.swift */; };
 		UITEST001001 /* TrivitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = UITESTF001 /* TrivitUITests.swift */; };
 		SNAP0002000000000000002 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = SNAP0001000000000000001 /* SnapshotHelper.swift */; };
+		VISION001001 /* TrivitVisionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002001 /* TrivitVisionApp.swift */; };
+		VISION001002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002002 /* ContentView.swift */; };
+		VISION001003 /* CounterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002003 /* CounterCardView.swift */; };
+		VISION001004 /* TallyMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002004 /* TallyMarksView.swift */; };
+		VISION001005 /* AddTrivitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002005 /* AddTrivitView.swift */; };
+		VISION001006 /* TrivitColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002006 /* TrivitColors.swift */; };
+		VISION001007 /* Trivit.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION002007 /* Trivit.swift */; };
+		VISION001008 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = VISION002008 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +84,8 @@ DELETED001002 /* DeletedItemsView.swift in Sources */ = {isa = PBXBuildFile; fil
 			remoteInfo = trivit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		WATCH005001 /* Embed Watch Content */ = {
@@ -162,6 +172,17 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 		UITESTF002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		UITEST_PRODUCT /* TrivitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrivitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		SNAP0001000000000000001 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		VISION_PRODUCT /* trivit Vision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "trivit Vision.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		VISION002001 /* TrivitVisionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitVisionApp.swift; sourceTree = "<group>"; };
+		VISION002002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		VISION002003 /* CounterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCardView.swift; sourceTree = "<group>"; };
+		VISION002004 /* TallyMarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyMarksView.swift; sourceTree = "<group>"; };
+		VISION002005 /* AddTrivitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrivitView.swift; sourceTree = "<group>"; };
+		VISION002006 /* TrivitColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrivitColors.swift; sourceTree = "<group>"; };
+		VISION002007 /* Trivit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trivit.swift; sourceTree = "<group>"; };
+		VISION002008 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		VISION002009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		VISION002010 /* TrivitVisionApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrivitVisionApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +218,13 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		VISION006001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -221,6 +249,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				UITESTG001 /* TrivitUITests */,
 				6C69C09B195B6F4E002A3F53 /* trivit */,
 				6CE4BBE61A1D609D005E9BCD /* trivit Watch App */,
+				VISION007000 /* trivit Vision */,
 				6CE4BBD11A1D609C005E9BCD /* Frameworks */,
 				6C69C09A195B6F4E002A3F53 /* Products */,
 			);
@@ -233,6 +262,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 				6C69C0AF195B6F4E002A3F53 /* trivitTests.xctest */,
 				6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */,
 				UITEST_PRODUCT /* TrivitUITests.xctest */,
+				VISION_PRODUCT /* trivit Vision.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -410,6 +440,47 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			path = Models;
 			sourceTree = "<group>";
 		};
+		VISION007000 /* trivit Vision */ = {
+			isa = PBXGroup;
+			children = (
+				VISION002001 /* TrivitVisionApp.swift */,
+				VISION002010 /* TrivitVisionApp.entitlements */,
+				VISION007003 /* Models */,
+				VISION007001 /* Views */,
+				VISION007002 /* Theme */,
+				VISION002008 /* Images.xcassets */,
+				VISION002009 /* Info.plist */,
+			);
+			path = "trivit Vision";
+			sourceTree = "<group>";
+		};
+		VISION007001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				VISION002002 /* ContentView.swift */,
+				VISION002003 /* CounterCardView.swift */,
+				VISION002004 /* TallyMarksView.swift */,
+				VISION002005 /* AddTrivitView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		VISION007002 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				VISION002006 /* TrivitColors.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		VISION007003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				VISION002007 /* Trivit.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -472,6 +543,23 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			productReference = 6CE4BBE21A1D609D005E9BCD /* trivit Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		VISION004001 /* trivit Vision */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = VISION009001 /* Build configuration list for PBXNativeTarget "trivit Vision" */;
+			buildPhases = (
+				VISION006002 /* Sources */,
+				VISION006001 /* Frameworks */,
+				VISION006003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "trivit Vision";
+			productName = "trivit Vision";
+			productReference = VISION_PRODUCT /* trivit Vision.app */;
+			productType = "com.apple.product-type.application";
+		};
 		UITEST004001 /* TrivitUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = UITEST009001 /* Build configuration list for PBXNativeTarget "TrivitUITests" */;
@@ -532,6 +620,11 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6C69C098195B6F4E002A3F53;
 					};
+					VISION004001 = {
+						CreatedOnToolsVersion = 16.0;
+						DevelopmentTeam = N324UX8D9M;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 6C69C094195B6F4E002A3F53 /* Build configuration list for PBXProject "Trivit" */;
@@ -559,6 +652,7 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			targets = (
 				6C69C098195B6F4E002A3F53 /* trivit */,
 				WATCH004001 /* trivit Watch App */,
+				VISION004001 /* trivit Vision */,
 				6C69C0AE195B6F4E002A3F53 /* trivitTests */,
 				UITEST004001 /* TrivitUITests */,
 			);
@@ -598,6 +692,14 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		VISION006003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				VISION001008 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +788,20 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			files = (
 				UITEST001001 /* TrivitUITests.swift in Sources */,
 				SNAP0002000000000000002 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		VISION006002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				VISION001001 /* TrivitVisionApp.swift in Sources */,
+				VISION001007 /* Trivit.swift in Sources */,
+				VISION001002 /* ContentView.swift in Sources */,
+				VISION001003 /* CounterCardView.swift in Sources */,
+				VISION001004 /* TallyMarksView.swift in Sources */,
+				VISION001005 /* AddTrivitView.swift in Sources */,
+				VISION001006 /* TrivitColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,6 +1218,68 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			};
 			name = Release;
 		};
+		VISION010001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "trivit Vision/TrivitVisionApp.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = N324UX8D9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "trivit Vision/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Trivit;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 5.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.vision;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		VISION010002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "trivit Vision/TrivitVisionApp.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = N324UX8D9M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "trivit Vision/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Trivit;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 5.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wouterdevriendt.trivit.vision;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1146,6 +1324,15 @@ DELETED001001 /* DeletedItemsView.swift */ = {isa = PBXFileReference; lastKnownF
 			buildConfigurations = (
 				UITEST010001 /* Debug */,
 				UITEST010002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		VISION009001 /* Build configuration list for PBXNativeTarget "trivit Vision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				VISION010001 /* Debug */,
+				VISION010002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
